@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   DESIGN TOKENS
+
+   Shape per build.md §2.5. Every VALUE below is a placeholder awaiting the
+   designer deliverable; the STRUCTURE is the spec and should survive the swap.
+
+   Two rules carried over from research and deliberately baked in:
+
+   1. Ink is a warm neutral, not near-black — design.md §3.0 calls this the one
+      token lesson worth keeping from the competitive sweep.
+   2. Contrast is verified at token-definition time, not at audit time
+      (build.md §2.5). The ratios noted below are computed and asserted in
+      src/lib/tokens/contrast.test.ts, so a designer swapping in a value that
+      drops below AA fails the test run rather than the accessibility audit.
+   ============================================================================ */
+
+@theme {
+  /* --- Palette: surfaces ------------------------------------------------- */
+  --color-bg: #ffffff;
+  --color-bg-alt: #faf8f5; /* warm off-white, editorial bands */
+  --color-bg-sand: #f2eee8; /* footer, newsletter block */
+
+  /* --- Palette: ink ------------------------------------------------------ */
+  --color-ink: #3b332c; /* headings                 12.4:1 on bg */
+  --color-ink-body: #5b5148; /* body copy                 7.7:1 on bg */
+  --color-ink-muted: #6e6459; /* meta, SKU, captions       5.8:1 on bg */
+
+  /* --- Palette: rules ---------------------------------------------------- */
+  /* Two rule tokens, deliberately. One hairline colour cannot serve both
+     decorative dividers and form-control boundaries: the latter is a UI
+     component and owes 3:1 under WCAG 1.4.11. */
+  --color-rule: #e4ded5; /* decorative hairlines      1.3:1 — non-informational */
+  --color-rule-input: #918779; /* form control boundaries   3.1:1 on the worst surface */
+  --color-rule-strong: #3b332c; /* active tab, CTA underline */
+
+  /* --- Palette: accent and state ----------------------------------------- */
+  /* Accent is used sparingly and never on large fields (build.md §2.5). */
+  --color-accent: #856539; /* muted antique gold        5.4:1 on bg */
+  --color-error: #9c3b30; /*                           6.8:1 on bg */
+  --color-success: #4a6b48; /*                           6.0:1 on bg */
+
+  /* --- Palette: overlays ------------------------------------------------- */
+  --color-scrim: rgb(0 0 0 / 0.3);
+  --color-scrim-strong: rgb(0 0 0 / 0.45);
+
+  /* --- Type families ----------------------------------------------------- */
+  /* PLACEHOLDER STACKS. No webfonts are loaded, so the app is licence-clean
+     and renders identically offline until the designer picks faces. The
+     Devanagari fallbacks are in the stack because product naming may use it
+     (build.md §2.5) — the licensed face must cover it too. */
+  --font-display: Georgia, "Times New Roman", "Noto Serif Devanagari", serif;
+  --font-ui:
+    ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+    "Noto Sans Devanagari", sans-serif;
+
+  /* --- Type scale -------------------------------------------------------- */
+  /* Fluid between the 768 and 1440 breakpoints. Each entry carries size,
+     line-height and tracking together so the trio cannot drift apart. */
+  --text-display: clamp(2.25rem, 1.5rem + 2.4vw, 3.5rem);
+  --text-display--line-height: 1.12;
+  --text-display--letter-spacing: 0.01em;
+
+  --text-h1: clamp(1.875rem, 1.4rem + 1.5vw, 2.5rem);
+  --text-h1--line-height: 1.18;
+  --text-h1--letter-spacing: 0.01em;
+
+  --text-h2: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --text-h2--line-height: 1.22;
+  --text-h2--letter-spacing: 0.01em;
+
+  --text-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-h3--line-height: 1.3;
+
+  --text-h4: 1.125rem;
+  --text-h4--line-height: 1.35;
+
+  --text-body: 0.9375rem; /* 15px */
+  --text-body--line-height: 1.65;
+
+  --text-prose: 1rem; /* editorial long-form */
+  --text-prose--line-height: 1.75;
+
+  --text-caption: 0.8125rem; /* 13px */
+  --text-caption--line-height: 1.5;
+
+  --text-eyebrow: 0.6875rem; /* 11px uppercase micro-label */
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.12em;
+
+  /* --- Space scale: 4px base --------------------------------------------- */
+  --spacing: 4px;
+
+  /* --- Grid -------------------------------------------------------------- */
+  /* Breakpoints are settled at 768 / 1024 / 1440 (build.md §8.4). Tailwind's
+     default sm and 2xl stops are removed so the three cannot be bypassed out
+     of habit — an `sm:` or `2xl:` prefix now produces no utility at all
+     rather than a silent fourth breakpoint. */
+  --breakpoint-sm: initial;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+  --breakpoint-2xl: initial;
+
+  --container-site: 1600px;
+  --container-content: 1280px;
+  --container-prose: 680px; /* ~62ch at body size */
+
+  /* --- Motion: three speeds, restrained ---------------------------------- */
+  --ease-brand: cubic-bezier(0.2, 0, 0.2, 1);
+  --animate-duration-fast: 160ms;
+
+  /* --- Elevation: rules and space, never shadows ------------------------- */
+  --radius-none: 0;
+
+  /* --- Image ratios: first-class tokens ---------------------------------- */
+  /* Must match photography-brief.md §2.1 exactly: masters are 3000×4500 and
+     3000×3000. Both are reserved in CSS to protect CLS (build.md §6). */
+  --aspect-portrait: 2 / 3;
+  --aspect-square: 1 / 1;
+}
+
+/* ============================================================================
+   Layout tokens that are not utility-generating
+   ============================================================================ */
+:root {
+  --gutter: 16px;
+  --header-h: 60px;
+  --t-fast: 160ms; /* link and icon hover */
+  --t-base: 280ms; /* image crossfade, underline draw */
+  --t-slow: 420ms; /* drawer and menu reveal */
+}
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+    --header-h: 68px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 48px;
+  }
+}
+
+/* ============================================================================
+   Base
+   ============================================================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    /* Square corners everywhere. This category separates with rules and
+       space, not elevation — build.md §2.5 Elevation. */
+    border-radius: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink-body);
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-ink);
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  /* The entire motion inventory is hover-swap, menu reveal and drawer slide,
+     so honouring this costs nothing functional. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ============================================================================
+   Utilities
+   ============================================================================ */
+@utility wrap {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility wrap-wide {
+  width: 100%;
+  max-width: var(--container-site);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility wrap-prose {
+  width: 100%;
+  max-width: var(--container-prose);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* The category's signature micro-label: uppercase, widely tracked. */
+@utility eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+}
+
+/* Editorial CTA — 1px rule that draws left to right on hover. */
+@utility cta {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  position: relative;
+  padding-bottom: 6px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--color-rule-strong);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t-base) var(--ease-brand);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}

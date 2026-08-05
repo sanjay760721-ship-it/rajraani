@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "rajraani-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "rajraani-storefront", "run", "dev"],
+      "port": 3000
+    }
+  ]
+}

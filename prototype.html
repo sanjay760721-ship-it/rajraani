@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TANTU — architecture prototype</title>
+<style>
+/* ============================================================
+   DESIGN TOKENS — PLACEHOLDER ONLY
+   Shape per build.md §2.5. Values are placeholders awaiting a
+   designer. Every value here is intended to be replaced.
+   The one carried-over lesson: ink is a warm neutral, not
+   near-black (design.md §3.0).
+   ============================================================ */
+:root{
+  /* Surfaces */
+  --c-bg:#ffffff;
+  --c-bg-alt:#faf8f5;
+  --c-bg-sand:#f2eee8;
+
+  /* Ink — warm neutral, deliberately not #111 */
+  --c-ink:#3b332c;
+  --c-ink-body:#5b5148;
+  --c-ink-muted:#8d8378;
+
+  /* Lines */
+  --c-rule:#e4ded5;
+  --c-rule-strong:#3b332c;
+
+  /* Accent — used sparingly */
+  --c-accent:#8a6a3d;
+
+  /* State */
+  --c-error:#9c3b30;
+  --c-ok:#4a6b48;
+
+  /* Type — placeholder stacks, no webfonts (self-contained) */
+  --f-display:Georgia,"Times New Roman",serif;
+  --f-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+
+  /* Space — 4px base */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:80px; --s10:104px;
+
+  /* Grid — breakpoints 768/1024/1440 per build.md §8.4 */
+  --max-site:1600px;
+  --max-content:1280px;
+  --max-prose:680px;
+  --gutter:24px;
+
+  /* Motion */
+  --t-fast:160ms; --t-base:280ms; --t-slow:420ms;
+  --ease:cubic-bezier(.2,0,.2,1);
+
+  /* Image ratios — must match photography-brief.md §2.1 */
+  --ratio-portrait:2/3;
+  --ratio-square:1/1;
+
+  /* Elevation: none. Square corners, rules not shadows. */
+  --radius:0;
+}
+@media(min-width:768px){:root{--gutter:32px}}
+@media(min-width:1024px){:root{--gutter:48px}}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--c-bg);color:var(--c-ink-body);
+  font-family:var(--f-ui);font-size:15px;line-height:1.6;
+  font-weight:400;
+}
+img{display:block;max-width:100%}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0;border-radius:var(--radius)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;color:var(--c-ink);margin:0;line-height:1.2}
+:focus-visible{outline:2px solid var(--c-accent);outline-offset:3px}
+
+.wrap{max-width:var(--max-content);margin:0 auto;padding:0 var(--gutter)}
+.wrap-wide{max-width:var(--max-site);margin:0 auto;padding:0 var(--gutter)}
+.micro{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--c-ink-muted)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Skip link — build.md §9.9 */
+.skip{position:absolute;left:var(--s4);top:-60px;background:var(--c-ink);color:#fff;
+  padding:var(--s3) var(--s4);z-index:200;transition:top var(--t-fast)}
+.skip:focus{top:var(--s4)}
+
+/* Placeholder banner */
+.notice{background:var(--c-ink);color:#fff;font-size:12px;padding:var(--s3) var(--s4);text-align:center;letter-spacing:.02em}
+.notice b{font-weight:600}
+
+/* ---------- Header ---------- */
+.brandline{border-bottom:1px solid var(--c-rule);font-size:12px;color:var(--c-ink-muted);
+  padding:var(--s3) 0;font-style:italic}
+header{position:sticky;top:0;z-index:100;background:var(--c-bg);border-bottom:1px solid var(--c-rule)}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);padding:var(--s4) 0}
+.wordmark{font-family:var(--f-display);font-size:22px;letter-spacing:.22em;color:var(--c-ink);text-transform:uppercase}
+.wordmark span{font-size:9px;letter-spacing:.14em;display:block;color:var(--c-ink-muted);margin-top:2px;font-family:var(--f-ui)}
+nav.main{display:none;gap:var(--s6)}
+@media(min-width:1024px){nav.main{display:flex}}
+nav.main a{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-ink);padding-bottom:3px;border-bottom:1px solid transparent;transition:border-color var(--t-fast)}
+nav.main a:hover,nav.main a.on{border-color:var(--c-rule-strong)}
+.utils{display:flex;gap:var(--s5);align-items:center}
+.utils button{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--c-ink)}
+.badge{background:var(--c-ink);color:#fff;font-size:10px;padding:1px 6px;margin-left:5px}
+
+/* ---------- PLP ---------- */
+.plp-head{padding:var(--s8) 0 var(--s5)}
+.plp-head h1{font-size:32px;letter-spacing:.01em}
+.plp-head p{max-width:var(--max-prose);color:var(--c-ink-body);margin:var(--s4) 0 0}
+.plp{display:grid;grid-template-columns:1fr;gap:var(--s6);padding-bottom:var(--s9)}
+@media(min-width:1024px){.plp{grid-template-columns:236px 1fr;gap:var(--s7)}}
+
+.facets{border-top:1px solid var(--c-rule)}
+.fgroup{border-bottom:1px solid var(--c-rule);padding:var(--s4) 0}
+.fgroup h3{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-family:var(--f-ui);
+  color:var(--c-ink);display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.fgroup h3 .clr{font-size:10px;letter-spacing:.06em;color:var(--c-ink-muted);text-transform:none;
+  text-decoration:underline;font-style:italic}
+.fopts{margin-top:var(--s3);display:grid;gap:var(--s2)}
+.fopt{display:flex;align-items:center;gap:var(--s3);font-size:13px;cursor:pointer;color:var(--c-ink-body)}
+.fopt input{width:14px;height:14px;accent-color:var(--c-ink);border-radius:0;margin:0;cursor:pointer}
+.fopt .n{margin-left:auto;font-size:11px;color:var(--c-ink-muted);font-variant-numeric:tabular-nums}
+.fopt.zero{opacity:.35}
+.fopt.zero input{cursor:not-allowed}
+
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s4);min-height:1px}
+.chip{border:1px solid var(--c-rule);padding:5px var(--s3);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;display:inline-flex;gap:var(--s2);align-items:center;color:var(--c-ink)}
+.chip button{color:var(--c-ink-muted);font-size:14px;line-height:1}
+.chip.all{border-color:var(--c-rule-strong)}
+
+.plp-bar{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);
+  border-bottom:1px solid var(--c-rule);padding-bottom:var(--s3);margin-bottom:var(--s5);flex-wrap:wrap}
+.plp-bar select{border:0;border-bottom:1px solid var(--c-rule);background:none;padding:4px 0;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;border-radius:0}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s5) var(--s4)}
+@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1440px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+.card{position:relative;text-align:left}
+.card .shot{aspect-ratio:var(--ratio-portrait);position:relative;overflow:hidden;background:var(--c-bg-alt)}
+.card .shot .alt{position:absolute;inset:0;opacity:0;transition:opacity var(--t-base) var(--ease)}
+.card:hover .shot .alt{opacity:1}
+.card h3{font-family:var(--f-ui);font-size:13px;font-weight:400;letter-spacing:.03em;margin:var(--s3) 0 var(--s1);
+  color:var(--c-ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .price{font-size:13px;color:var(--c-ink);font-variant-numeric:tabular-nums}
+.card .flag{position:absolute;top:var(--s3);left:var(--s3);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--c-ink);background:rgba(255,255,255,.92);padding:3px var(--s2)}
+.card.gone .shot{opacity:.62}
+.wish{position:absolute;top:var(--s3);right:var(--s3);font-size:15px;color:var(--c-ink);
+  opacity:0;transition:opacity var(--t-fast)}
+.card:hover .wish,.wish:focus{opacity:1}
+
+/* Frame placeholders — stand in for photography.
+   Deliberately schematic: they demonstrate the shot template
+   from photography-brief.md §3 without using any real imagery. */
+.ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:var(--s2);text-align:center;padding:var(--s4)}
+.ph .lbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.9)}
+.ph .fr{font-family:var(--f-display);font-size:26px;color:rgba(255,255,255,.55)}
+
+.empty{padding:var(--s9) 0;text-align:center;border:1px solid var(--c-rule)}
+.empty h3{font-size:22px;margin-bottom:var(--s3)}
+
+/* ---------- PDP ---------- */
+.pdp{display:grid;grid-template-columns:1fr;gap:var(--s6);padding:var(--s5) 0 var(--s9)}
+@media(min-width:1024px){.pdp{grid-template-columns:1fr 420px;gap:var(--s8);align-items:start}}
+.gallery{display:grid;gap:var(--s3)}
+.gframe{position:relative;background:var(--c-bg-alt)}
+.gframe.p{aspect-ratio:var(--ratio-portrait)}
+.gframe.s{aspect-ratio:var(--ratio-square)}
+.gframe .tag{position:absolute;bottom:var(--s3);left:var(--s3);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;background:rgba(255,255,255,.92);padding:3px var(--s2);color:var(--c-ink)}
+@media(min-width:768px){.gallery{grid-template-columns:1fr 1fr}.gallery .gframe:first-child{grid-column:1/-1}}
+
+.buy{position:sticky;top:96px}
+.crumb{font-size:11px;color:var(--c-ink-muted);padding:var(--s4) 0;letter-spacing:.04em}
+.crumb a:hover{text-decoration:underline}
+.buy h1{font-size:26px;line-height:1.25}
+.sku{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--c-ink-muted);margin:var(--s3) 0 var(--s2)}
+.pdp-price{font-size:19px;color:var(--c-ink);font-variant-numeric:tabular-nums}
+.tax{font-size:11px;color:var(--c-ink-muted);font-style:italic;margin-top:2px}
+.poetic{font-family:var(--f-display);font-size:19px;color:var(--c-ink);margin:var(--s5) 0 var(--s3)}
+.desc{font-size:14px;line-height:1.75;max-width:52ch}
+.spec{list-style:none;padding:0;margin:var(--s5) 0;display:grid;gap:var(--s3);font-size:13px}
+.spec b{font-family:var(--f-display);font-style:italic;font-weight:400;color:var(--c-ink)}
+.disclaimer{font-size:12px;font-style:italic;color:var(--c-ink-muted);border-top:1px solid var(--c-rule);
+  padding-top:var(--s4);margin-top:var(--s5)}
+
+.btn{display:block;width:100%;text-align:center;padding:var(--s4);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--c-rule-strong);background:var(--c-ink);color:#fff;
+  transition:opacity var(--t-fast)}
+.btn:hover{opacity:.85}
+.btn.ghost{background:none;color:var(--c-ink)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+
+/* Sold-out is ~half the catalogue — build.md §9.7.
+   The notify form is a primary surface, not a fallback. */
+.notify{border:1px solid var(--c-rule);padding:var(--s5);background:var(--c-bg-alt);margin-top:var(--s5)}
+.notify h4{font-family:var(--f-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:var(--s3)}
+.notify p{font-size:13px;margin:0 0 var(--s4)}
+.notify .row{display:flex;gap:var(--s2)}
+.notify input{flex:1;border:0;border-bottom:1px solid var(--c-rule-strong);background:none;padding:var(--s2) 0;font-size:13px}
+.notify .btn{width:auto;padding:var(--s2) var(--s5)}
+
+/* Provenance — social proof without reviews, build.md §9.4 */
+.prov{border-top:1px solid var(--c-rule);margin-top:var(--s6);padding-top:var(--s5)}
+.prov h4{font-family:var(--f-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:var(--s4)}
+.prov dl{display:grid;grid-template-columns:auto 1fr;gap:var(--s3) var(--s5);margin:0;font-size:13px}
+.prov dt{color:var(--c-ink-muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.prov dd{margin:0;color:var(--c-ink)}
+
+/* Sticky buy bar — build.md §9.2 */
+.stickybar{position:fixed;left:0;right:0;bottom:0;background:var(--c-bg);border-top:1px solid var(--c-rule);
+  transform:translateY(102%);transition:transform var(--t-base) var(--ease);z-index:90}
+.stickybar.on{transform:none}
+.stickybar .in{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) 0}
+.stickybar .t{flex:1;min-width:0}
+.stickybar .t strong{display:block;font-weight:400;font-size:13px;color:var(--c-ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stickybar .t span{font-size:12px;color:var(--c-ink-muted)}
+.stickybar .btn{width:auto;padding:var(--s3) var(--s7);flex:none}
+
+/* ---------- Cart drawer — build.md §8.2 (drawer, not dropdown) ---------- */
+.scrim{position:fixed;inset:0;background:rgba(40,34,28,.32);opacity:0;pointer-events:none;
+  transition:opacity var(--t-base);z-index:110}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--c-bg);z-index:120;
+  transform:translateX(100%);transition:transform var(--t-slow) var(--ease);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.drawer header{position:static;border-bottom:1px solid var(--c-rule);padding:var(--s5);
+  display:flex;justify-content:space-between;align-items:center}
+.drawer h2{font-size:16px}
+.drawer .body{flex:1;overflow:auto;padding:var(--s5)}
+.drawer .foot{border-top:1px solid var(--c-rule);padding:var(--s5)}
+.line{display:grid;grid-template-columns:64px 1fr;gap:var(--s4);padding-bottom:var(--s4);
+  margin-bottom:var(--s4);border-bottom:1px solid var(--c-rule)}
+.line .thumb{aspect-ratio:var(--ratio-portrait);background:var(--c-bg-alt);position:relative}
+.line h4{font-family:var(--f-ui);font-size:13px;font-weight:400;margin-bottom:var(--s1)}
+.line .meta{font-size:11px;color:var(--c-ink-muted)}
+.line .rm{font-size:11px;color:var(--c-ink-muted);text-decoration:underline;margin-top:var(--s2)}
+.tot{display:flex;justify-content:space-between;font-size:14px;margin-bottom:var(--s4)}
+.ship{font-size:11px;color:var(--c-ink-muted);margin-bottom:var(--s4)}
+
+/* ---------- Search modal — grouped, build.md §8.3 ---------- */
+.modal{position:fixed;inset:0;z-index:130;display:none;padding:var(--s8) var(--s4);overflow:auto}
+.modal.on{display:block}
+.mbox{max-width:640px;margin:0 auto;background:var(--c-bg);border:1px solid var(--c-rule);padding:var(--s6)}
+.mbox h2{text-align:center;font-size:22px;margin-bottom:var(--s5)}
+.mbox input{width:100%;border:0;border-bottom:1px solid var(--c-rule-strong);background:none;
+  padding:var(--s3) 0;font-size:15px}
+.sgroup{margin-top:var(--s5)}
+.sgroup .micro{border-bottom:1px solid var(--c-rule);padding-bottom:var(--s2);margin-bottom:var(--s3)}
+.sgroup a{display:block;padding:var(--s2) 0;font-size:14px;color:var(--c-ink-body)}
+.sgroup a:hover{color:var(--c-ink);text-decoration:underline}
+.sgroup mark{background:none;color:var(--c-ink);font-weight:600}
+
+footer.site{background:var(--c-bg-sand);margin-top:var(--s9);padding:var(--s8) 0}
+footer.site .cols{display:grid;gap:var(--s6);grid-template-columns:1fr}
+@media(min-width:768px){footer.site .cols{grid-template-columns:repeat(3,1fr)}}
+footer.site h4{font-size:15px;margin-bottom:var(--s4)}
+footer.site a,footer.site p{font-size:13px;display:block;margin-bottom:var(--s2);color:var(--c-ink-body)}
+.legal{border-top:1px solid var(--c-rule);margin-top:var(--s7);padding-top:var(--s5);font-size:11px;color:var(--c-ink-muted)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="notice">
+  <b>Architecture prototype.</b> Brand name, tokens and imagery are placeholders awaiting a designer and the photography shoot.
+  Frames are schematic by design — they show the shot template, not the pictures.
+</div>
+
+<div class="brandline"><div class="wrap-wide">Woven by hand. Placeholder brand line.</div></div>
+
+<header>
+  <div class="wrap-wide">
+    <div class="hdr">
+      <nav class="main" aria-label="Main">
+        <a href="#/collection" data-nav="collection">Shop</a>
+        <a href="#/collection?weave=Kadhua">Weaves</a>
+        <a href="#/collection?fabric=Katan%20Silk">Fabrics</a>
+      </nav>
+      <a class="wordmark" href="#/collection">Tantu<span>placeholder mark</span></a>
+      <div class="utils">
+        <button id="openSearch" aria-label="Open search">Search</button>
+        <button id="openCart" aria-label="Open cart">Cart<span class="badge" id="cartN">0</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<div class="stickybar" id="sticky" aria-hidden="true">
+  <div class="wrap-wide"><div class="in">
+    <div class="t"><strong id="sbT"></strong><span id="sbP"></span></div>
+    <button class="btn" id="sbBtn">Add to cart</button>
+  </div></div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="cart" aria-label="Cart" aria-hidden="true">
+  <header><h2>Cart</h2><button id="closeCart" aria-label="Close cart">Close</button></header>
+  <div class="body" id="cartBody"></div>
+  <div class="foot">
+    <div class="tot"><span>Subtotal</span><strong id="cartTot">—</strong></div>
+    <p class="ship">Duties and taxes included on international orders. Free shipping in India.</p>
+    <button class="btn">Checkout</button>
+  </div>
+</aside>
+
+<div class="modal" id="search" role="dialog" aria-label="Search">
+  <div class="mbox">
+    <h2>Search</h2>
+    <input id="q" placeholder="Search weaves, motifs, pieces" aria-label="Search">
+    <div id="sres"></div>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="wrap-wide">
+    <div class="cols">
+      <div><h4>Here to Help</h4><p>Placeholder contact</p><p>Placeholder hours</p></div>
+      <div><h4>About</h4><a href="#/collection">Our Story</a><a href="#/collection">The Craft</a><a href="#/collection">Journal</a></div>
+      <div><h4>Stay in Touch</h4><p>Placeholder newsletter copy.</p></div>
+    </div>
+    <div class="legal">Prototype only. No competitor imagery, copy, product names or campaign names are used anywhere in this file.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   SEEDED CATALOGUE — entirely original.
+   Greenfield: no migration. Vocabulary is controlled from the
+   start (build.md §7.3) — every facet value comes from a fixed
+   list, never free text.
+   ============================================================ */
+const WEAVE  = ['Kadhua','Jaal','Jamdani','Tanchoi','Bandhej'];
+const FABRIC = ['Katan Silk','Kora Silk','Silk Georgette','Cotton','Tussar'];
+const COLOUR = ['Red','Off-White','Indigo','Moss','Saffron','Slate'];
+const MOTIF  = ['Paisley','Floral Boota','Bird','Vine','Geometric'];
+const ZARI   = ['Real Zari','Silver Zari','Resham'];
+
+/* Deterministic pseudo-random so the seed is stable across loads */
+let _s=20260805;
+const rnd=()=>{_s=(_s*1103515245+12345)%2147483648;return _s/2147483648};
+const pick=a=>a[Math.floor(rnd()*a.length)];
+
+const HUE={Red:[352,58,42],'Off-White':[38,22,80],Indigo:[228,32,38],Moss:[95,20,38],Saffron:[36,58,52],Slate:[210,10,44]};
+
+const FRAMES=[
+  ['Frame 1','Full-length, front','p'],
+  ['Frame 2','Three-quarter','p'],
+  ['Frame 3','Pallu feature','p'],
+  ['Frame 4','Movement','p'],
+  ['Frame 5','Border detail','p'],
+  ['Frame 6','Weave macro','s'],
+  ['Frame 7','Blouse piece','s']
+];
+
+const NAMES=['Aavart','Bhoomi','Chandni','Dhara','Ehsaas','Falak','Gagan','Hemant','Ira','Jhilmil',
+  'Kshitij','Lehar','Meghna','Nabh','Ojas','Prakriti','Rachna','Sahar','Tarang','Udaan',
+  'Vayu','Yamini','Nayika','Anant','Bela','Ritu'];
+
+const PRODUCTS = NAMES.map((n,i)=>{
+  const weave=pick(WEAVE), fabric=pick(FABRIC), colour=pick(COLOUR), motif=pick(MOTIF), zari=pick(ZARI);
+  const price=[28500,34500,42000,49500,58000,72000,96000,128000][Math.floor(rnd()*8)];
+  /* 49% unavailable — matches the measured reality of unique-piece
+     inventory (pre-build-gaps.md §2). Sold-out is a primary state,
+     so the prototype must show it at true density, not as an edge case.
+     Deterministic split rather than random, so the ratio is exact. */
+  const available = ((i*11) % NAMES.length) < Math.round(NAMES.length*0.51);
+  const preorder = available && (i % 5 === 0);
+  return {
+    id:'p'+(i+1),
+    /* Fulfilment state is NEVER in the title — build.md §9.8 */
+    title:`${colour} ${fabric} ${weave} Handloom Saree`,
+    poetic:n, weave, fabric, colour, motif, zari, price, available, preorder,
+    sku:'TN'+(1000+i*7),
+    weeks:[6,8,10,12,14][Math.floor(rnd()*5)],
+    loom:'Loom '+String.fromCharCode(65+Math.floor(rnd()*6))+(2+Math.floor(rnd()*7))
+  };
+});
+
+const FACETS=[
+  ['weave','Weave',WEAVE],['fabric','Fabric',FABRIC],['colour','Colour',COLOUR],
+  ['motif','Motif',MOTIF],['zari','Zari',ZARI],['availability','Availability',['Available','Sold out']]
+];
+
+const inr=n=>'₹'+n.toLocaleString('en-IN');
+
+/* Frame placeholder — schematic, never a photograph */
+function frame(p,idx){
+  const [h,s,l]=HUE[p.colour];
+  const [no,label,kind]=FRAMES[idx];
+  const bg=`linear-gradient(${140+idx*12}deg,hsl(${h} ${s}% ${l}%),hsl(${h} ${Math.max(8,s-18)}% ${Math.min(88,l+26)}%))`;
+  return `<div class="ph" style="background:${bg}">
+    <div class="fr">${no.replace('Frame ','')}</div>
+    <div class="lbl">${label}</div>
+    <div class="lbl" style="opacity:.6">${kind==='p'?'2:3':'1:1'}</div>
+  </div>`;
+}
+
+/* ---------- URL state: History API, no reload (build.md §9.1) ---------- */
+function readState(){
+  const hash=location.hash.slice(1)||'/collection';
+  const [path,qs]=hash.split('?');
+  const q=new URLSearchParams(qs||'');
+  const f={};
+  FACETS.forEach(([k])=>{const v=q.get(k);if(v)f[k]=v.split(',').filter(Boolean)});
+  return {path,filters:f,sort:q.get('sort')||'featured'};
+}
+function writeState(filters,sort,replace){
+  const q=new URLSearchParams();
+  Object.entries(filters).forEach(([k,v])=>{if(v.length)q.set(k,v.join(','))});
+  if(sort&&sort!=='featured')q.set('sort',sort);
+  const s=q.toString();
+  const url='#/collection'+(s?'?'+s:'');
+  if(replace)history.replaceState(null,'',url); else history.pushState(null,'',url);
+  render();
+}
+
+function matches(p,filters,skip){
+  return Object.entries(filters).every(([k,vals])=>{
+    if(!vals.length||k===skip)return true;
+    if(k==='availability')return vals.some(v=>v==='Available'?p.available:!p.available);
+    return vals.includes(p[k]);
+  });
+}
+
+/* ---------- Render ---------- */
+function render(){
+  const st=readState();
+  const main=document.getElementById('main');
+  if(st.path.startsWith('/product/')){renderPDP(st.path.split('/')[2]);return}
+  document.getElementById('sticky').classList.remove('on');
+
+  let list=PRODUCTS.filter(p=>matches(p,st.filters));
+  if(st.sort==='low')list=[...list].sort((a,b)=>a.price-b.price);
+  if(st.sort==='high')list=[...list].sort((a,b)=>b.price-a.price);
+  /* Available forward by default — build.md §9.7 */
+  if(st.sort==='featured')list=[...list].sort((a,b)=>(b.available-a.available));
+
+  const active=Object.entries(st.filters).flatMap(([k,v])=>v.map(x=>[k,x]));
+
+  main.innerHTML=`
+  <div class="wrap-wide">
+    <div class="plp-head">
+      <h1>Sarees</h1>
+      <p>Placeholder collection copy. Under the editorial model in build.md §7.7 this paragraph
+      is authored per collection, not generated.</p>
+    </div>
+    <div class="plp">
+      <div>
+        <div class="facets">${FACETS.map(([key,label,opts])=>{
+          const sel=st.filters[key]||[];
+          const base=PRODUCTS.filter(p=>matches(p,st.filters,key));
+          return `<div class="fgroup">
+            <h3>${label}${sel.length?`<button class="clr" data-clear="${key}">clear</button>`:''}</h3>
+            <div class="fopts">${opts.map(o=>{
+              const n=base.filter(p=>key==='availability'
+                ? (o==='Available'?p.available:!p.available)
+                : p[key]===o).length;
+              const on=sel.includes(o);
+              return `<label class="fopt${n===0&&!on?' zero':''}">
+                <input type="checkbox" data-k="${key}" data-v="${o}" ${on?'checked':''} ${n===0&&!on?'disabled':''}>
+                <span>${o}</span><span class="n">${n}</span></label>`;
+            }).join('')}</div></div>`;
+        }).join('')}</div>
+      </div>
+      <div>
+        <div class="chips">${active.map(([k,v])=>
+            `<span class="chip">${v}<button data-off="${k}|${v}" aria-label="Remove ${v}">×</button></span>`).join('')}
+          ${active.length>1?'<span class="chip all"><button data-clearall="1">Clear all</button></span>':''}
+        </div>
+        <div class="plp-bar">
+          <span class="micro">${list.length} ${list.length===1?'piece':'pieces'}</span>
+          <select id="sort" aria-label="Sort">
+            <option value="featured"${st.sort==='featured'?' selected':''}>Featured</option>
+            <option value="low"${st.sort==='low'?' selected':''}>Price, low to high</option>
+            <option value="high"${st.sort==='high'?' selected':''}>Price, high to low</option>
+          </select>
+        </div>
+        ${list.length?`<div class="grid">${list.map(cardHTML).join('')}</div>`
+          :`<div class="empty"><h3>No pieces match</h3>
+             <p>Try removing a filter.</p><button class="btn ghost" data-clearall="1"
+             style="width:auto;margin:16px auto 0;padding:12px 32px">Clear all filters</button></div>`}
+      </div>
+    </div>
+  </div>`;
+}
+
+function cardHTML(p){
+  return `<a class="card${p.available?'':' gone'}" href="#/product/${p.id}">
+    <div class="shot">
+      ${frame(p,0)}
+      <div class="alt">${frame(p,1)}</div>
+      ${!p.available?'<span class="flag">Sold out</span>':p.preorder?'<span class="flag">Pre-order</span>':''}
+      <span class="wish" aria-hidden="true">♡</span>
+    </div>
+    <h3>${p.title}</h3>
+    <div class="price">${inr(p.price)}</div>
+  </a>`;
+}
+
+function renderPDP(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p){location.hash='#/collection';return}
+  document.getElementById('main').innerHTML=`
+  <div class="wrap-wide">
+    <div class="crumb"><a href="#/collection">Shop</a> › <a href="#/collection">Sarees</a> › ${p.title}</div>
+    <div class="pdp">
+      <div class="gallery">
+        ${FRAMES.map((f,i)=>`<div class="gframe ${f[2]}">${frame(p,i)}<span class="tag">${f[1]} · ${f[2]==='p'?'2:3':'1:1'}</span></div>`).join('')}
+      </div>
+      <div class="buy" id="buybox">
+        <h1>${p.title}</h1>
+        <div class="sku">${p.sku}</div>
+        <div class="pdp-price">${inr(p.price)}</div>
+        <div class="tax">Inclusive of all taxes</div>
+        <div class="poetic">${p.poetic}</div>
+        <p class="desc">Placeholder narrative. In production this is roughly ninety words of original
+        writing per piece — the moat described in build.md §7.7, and a permanent staffing commitment
+        rather than a launch task.</p>
+        <ul class="spec">
+          <li><b>Colour</b> — ${p.colour}</li>
+          <li><b>Weave</b> — ${p.weave}</li>
+          <li><b>Fabric</b> — ${p.fabric}</li>
+          <li><b>Motif</b> — ${p.motif}</li>
+          <li><b>Zari</b> — ${p.zari}</li>
+        </ul>
+        ${p.available
+          ? `<button class="btn" data-add="${p.id}">${p.preorder?'Pre-order':'Add to cart'}</button>
+             ${p.preorder?'<p class="tax" style="margin-top:12px">Woven to order · dispatch in '+p.weeks+' weeks</p>':''}`
+          : `<button class="btn" disabled>Sold out</button>
+             <div class="notify">
+               <h4>Notify me when rewoven</h4>
+               <p>Each piece is one of one. Tell us and we will write when this design returns to the loom.</p>
+               <div class="row"><input type="email" id="notifyEmail" placeholder="Email address" aria-label="Email address">
+               <button class="btn" id="notifyBtn">Notify</button></div>
+             </div>`}
+        <div class="prov">
+          <h4>Provenance</h4>
+          <dl>
+            <dt>Woven at</dt><dd>${p.loom}, placeholder workshop</dd>
+            <dt>Time at loom</dt><dd>${p.weeks} weeks</dd>
+            <dt>Technique</dt><dd>${p.weave}</dd>
+            <dt>Zari</dt><dd>${p.zari}</dd>
+          </dl>
+        </div>
+        <p class="disclaimer">Handwoven, so slight irregularities are inherent to the piece.</p>
+      </div>
+    </div>
+  </div>`;
+  /* Sticky buy bar — build.md §9.2 */
+  const sb=document.getElementById('sticky');
+  document.getElementById('sbT').textContent=p.title;
+  document.getElementById('sbP').textContent=inr(p.price)+(p.available?'':' · Sold out');
+  const btn=document.getElementById('sbBtn');
+  btn.textContent=p.available?(p.preorder?'Pre-order':'Add to cart'):'Sold out';
+  btn.disabled=!p.available;
+  btn.onclick=()=>p.available&&addToCart(p.id);
+  const box=document.getElementById('buybox');
+  if(window._io)window._io.disconnect();
+  window._io=new IntersectionObserver(([e])=>{
+    sb.classList.toggle('on',!e.isIntersecting);
+    sb.setAttribute('aria-hidden',e.isIntersecting);
+  },{rootMargin:'-120px 0px 0px 0px'});
+  window._io.observe(box);
+  scrollTo(0,0);
+}
+
+/* ---------- Cart ---------- */
+const cart=[];
+function addToCart(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p||cart.find(c=>c.id===id))return openCart();
+  cart.push({id,...p});
+  drawCart();openCart();
+}
+function drawCart(){
+  document.getElementById('cartN').textContent=cart.length;
+  document.getElementById('cartBody').innerHTML=cart.length?cart.map(c=>`
+    <div class="line"><div class="thumb">${frame(c,0)}</div>
+      <div><h4>${c.title}</h4><div class="meta">${c.sku} · ${inr(c.price)}</div>
+      <button class="rm" data-rm="${c.id}">Remove</button></div></div>`).join('')
+    : '<p style="font-size:14px;color:var(--c-ink-muted)">Your cart is empty.</p>';
+  document.getElementById('cartTot').textContent=cart.length?inr(cart.reduce((s,c)=>s+c.price,0)):'—';
+}
+const openCart=()=>{document.getElementById('cart').classList.add('on');
+  document.getElementById('cart').setAttribute('aria-hidden','false');
+  document.getElementById('scrim').classList.add('on')};
+const closeAll=()=>{document.querySelectorAll('.drawer,.modal,.scrim').forEach(e=>e.classList.remove('on'));
+  document.getElementById('cart').setAttribute('aria-hidden','true')};
+
+/* ---------- Search — grouped results (build.md §8.3) ---------- */
+function doSearch(v){
+  const box=document.getElementById('sres');
+  if(!v.trim()){box.innerHTML='';return}
+  const t=v.toLowerCase(), hi=s=>s.replace(new RegExp('('+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>');
+  const cats=[...WEAVE,...FABRIC,...MOTIF].filter(x=>x.toLowerCase().includes(t)).slice(0,4);
+  const prods=PRODUCTS.filter(p=>(p.title+' '+p.poetic).toLowerCase().includes(t)).slice(0,5);
+  const pages=['The Craft','Journal','Our Story'].filter(x=>x.toLowerCase().includes(t)).slice(0,3);
+  const g=(label,items)=>items.length?`<div class="sgroup"><div class="micro">${label}</div>${items.join('')}</div>`:'';
+  box.innerHTML=
+    g('Categories',cats.map(c=>{
+      const k=WEAVE.includes(c)?'weave':FABRIC.includes(c)?'fabric':'motif';
+      return `<a href="#/collection?${k}=${encodeURIComponent(c)}" data-close>${hi(c)}</a>`}))+
+    g('Pages',pages.map(p=>`<a href="#/collection" data-close>${hi(p)}</a>`))+
+    g('Pieces',prods.map(p=>`<a href="#/product/${p.id}" data-close>${hi(p.title)} — ${inr(p.price)}</a>`));
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('change',e=>{
+  const st=readState();
+  if(e.target.matches('[data-k]')){
+    const {k,v}=e.target.dataset, f={...st.filters};
+    f[k]=f[k]?[...f[k]]:[];
+    f[k]=e.target.checked?[...f[k],v]:f[k].filter(x=>x!==v);
+    if(!f[k].length)delete f[k];
+    writeState(f,st.sort);
+  }
+  if(e.target.id==='sort')writeState(st.filters,e.target.value);
+});
+document.addEventListener('click',e=>{
+  const st=readState();
+  const off=e.target.closest('[data-off]');
+  if(off){const [k,v]=off.dataset.off.split('|');const f={...st.filters};
+    f[k]=f[k].filter(x=>x!==v);if(!f[k].length)delete f[k];writeState(f,st.sort);return}
+  const cl=e.target.closest('[data-clear]');
+  if(cl){const f={...st.filters};delete f[cl.dataset.clear];writeState(f,st.sort);return}
+  if(e.target.closest('[data-clearall]')){writeState({},st.sort);return}
+  const add=e.target.closest('[data-add]');
+  if(add){addToCart(add.dataset.add);return}
+  const rm=e.target.closest('[data-rm]');
+  if(rm){const i=cart.findIndex(c=>c.id===rm.dataset.rm);cart.splice(i,1);drawCart();return}
+  if(e.target.id==='notifyBtn'){
+    const em=document.getElementById('notifyEmail');
+    if(em.value.includes('@')){em.parentElement.innerHTML='<p style="font-size:13px;color:var(--c-ok);margin:0">Noted — we will write when it returns to the loom.</p>'}
+    else em.focus();
+    return}
+  if(e.target.id==='openCart'){openCart();return}
+  if(e.target.id==='closeCart'||e.target.id==='scrim'){closeAll();return}
+  if(e.target.id==='openSearch'){document.getElementById('search').classList.add('on');
+    document.getElementById('scrim').classList.add('on');document.getElementById('q').focus();return}
+  if(e.target.closest('[data-close]'))closeAll();
+});
+document.getElementById('q').addEventListener('input',e=>doSearch(e.target.value));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+addEventListener('hashchange',render);
+addEventListener('popstate',render);
+
+drawCart();
+render();
+</script>
+</body>
+</html>

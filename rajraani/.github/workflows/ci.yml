@@ -1,0 +1,38 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # The four gates below need no dependencies. They run first so a token or
+      # originality regression fails in seconds rather than after an install.
+      - name: Tokens are in sync with tokens.json
+        run: npm run tokens:check
+
+      - name: Colour contrast (WCAG 2.2)
+        run: npm run check:contrast
+
+      - name: Facet taxonomy is well-formed
+        run: npm run check:taxonomy
+
+      - name: Originality & house rules
+        run: npm run check:originality
+
+      - name: Heading order
+        run: npm run check:headings
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run build
