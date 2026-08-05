@@ -70,6 +70,11 @@ const RULES = [
     // not.
     only: [".ts", ".tsx", ".js", ".jsx"],
     skipComments: true,
+    exempt: [
+      // Asserts these exact strings are REJECTED by the database. The test has
+      // to name what it forbids, the same way this file does.
+      /^src\/lib\/db\/schema\.test\.ts$/,
+    ],
   },
   {
     /*

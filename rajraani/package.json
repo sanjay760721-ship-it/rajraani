@@ -10,6 +10,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --test \"src/**/*.test.ts\" \"sanity/**/*.test.ts\"",
     "lint:headings": "node scripts/lint-headings.mjs",
+    "db:seed": "node scripts/db-seed.mjs",
+    "db:reset": "node scripts/db-seed.mjs --fresh",
     "taxonomy": "node scripts/build-taxonomy.mjs",
     "taxonomy:check": "node scripts/build-taxonomy.mjs --check",
     "check:taxonomy": "node scripts/check-taxonomy.mjs",
@@ -24,7 +26,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24.13.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

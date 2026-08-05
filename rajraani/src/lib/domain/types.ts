@@ -15,17 +15,15 @@
  *   `alt` is required, so an image cannot be added without one.
  */
 
-/** Shopify Markets currencies, confirmed in pre-build-gaps.md §7. */
-export const CURRENCIES = [
-  "INR",
-  "USD",
-  "CAD",
-  "GBP",
-  "AUD",
-  "EUR",
-  "JPY",
-  "SGD",
-] as const;
+/**
+ * Currencies.
+ *
+ * INR only — the store is India-only and Razorpay settles in rupees. The eight
+ * markets the research measured were a Shopify Markets capability; without it
+ * there is no rate source, and an unmaintained rate prices real orders wrongly.
+ * See lib/money.ts.
+ */
+export const CURRENCIES = ["INR"] as const;
 
 export type CurrencyCode = (typeof CURRENCIES)[number];
 

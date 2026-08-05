@@ -5,7 +5,6 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CartProvider } from "@/components/cart-context";
-import { CurrencyProvider } from "@/components/currency-context";
 import { BRAND } from "@/lib/brand";
 import { IS_MOCK_CATALOGUE } from "@/lib/data/catalogue";
 
@@ -26,27 +25,25 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // transitions, where it reads as lag rather than as polish.
     <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased">
       <body className="flex min-h-full flex-col">
-        <CurrencyProvider>
-          <CartProvider>
-            {/* First tab stop. Absent entirely on the reference site
-                (pre-build-gaps.md §5). */}
-            <a
-              href="#main"
-              className="eyebrow sr-only bg-ink px-4 py-3 text-bg focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100"
-            >
-              Skip to content
-            </a>
+        <CartProvider>
+          {/* First tab stop. Absent entirely on the reference site
+              (pre-build-gaps.md §5). */}
+          <a
+            href="#main"
+            className="eyebrow sr-only bg-ink px-4 py-3 text-bg focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100"
+          >
+            Skip to content
+          </a>
 
-            {IS_MOCK_CATALOGUE ? <PlaceholderNotice /> : null}
-            <AnnouncementBar />
-            <SiteHeader />
-            <main id="main" className="flex-1">
-              {children}
-            </main>
-            <SiteFooter />
-            <CartDrawer />
-          </CartProvider>
-        </CurrencyProvider>
+          {IS_MOCK_CATALOGUE ? <PlaceholderNotice /> : null}
+          <AnnouncementBar />
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

@@ -1,69 +1,43 @@
-import {
-  BASE_CURRENCY,
-  type CurrencyCode,
-  type Money,
-} from "./domain/types.ts";
+import { BASE_CURRENCY, type CurrencyCode, type Money } from "./domain/types.ts";
 
 /**
- * Price formatting and currency conversion.
+ * Money.
  *
- * Indian lakh grouping with a ₹ prefix is the base presentation (₹1,78,000 —
- * not ₹178,000), which `Intl` gives correctly for the en-IN locale.
+ * ─────────────────────────────────────────────────────────────────────────────
+ * INDIA-ONLY, so INR is the only currency.
+ *
+ * This file previously carried eight currencies and a table of placeholder
+ * conversion rates, because Shopify Markets was going to own conversion. With
+ * Shopify dropped in favour of Razorpay, nothing in the stack has an
+ * authoritative rate source — and a hardcoded rate going quietly stale is worse
+ * than not offering the currency at all, because it prices real orders wrongly.
+ *
+ * Re-adding the other seven is contained: restore the currency list, add a
+ * rates source, put the switcher back in the header. It is all in git history.
+ * ─────────────────────────────────────────────────────────────────────────────
+ *
+ * Amounts are held in minor units (paise) so arithmetic stays in integers.
+ * Prices are whole rupees throughout — this category does not price in decimals
+ * and does not discount, so there is no strikethrough or "was/now" to build.
  */
 
-/**
- * PLACEHOLDER RATES, relative to the base currency.
- *
- * In production these come from Shopify Markets, which owns conversion,
- * rounding rules and per-market price adjustments. They exist here only so the
- * currency switcher is demonstrably wired end to end against mock data.
- */
-const PLACEHOLDER_RATES: Record<CurrencyCode, number> = {
-  INR: 1,
-  USD: 0.012,
-  CAD: 0.016,
-  GBP: 0.0094,
-  AUD: 0.018,
-  EUR: 0.011,
-  JPY: 1.79,
-  SGD: 0.016,
-};
-
-/** Currencies conventionally written without minor units. */
-const ZERO_DECIMAL: ReadonlySet<CurrencyCode> = new Set<CurrencyCode>(["JPY"]);
-
-export function money(majorUnits: number, currency: CurrencyCode = BASE_CURRENCY): Money {
-  const factor = ZERO_DECIMAL.has(currency) ? 1 : 100;
-  return { minorUnits: Math.round(majorUnits * factor), currency };
+export function money(rupees: number, currency: CurrencyCode = BASE_CURRENCY): Money {
+  return { minorUnits: Math.round(rupees * 100), currency };
 }
 
 export function toMajorUnits(value: Money): number {
-  return ZERO_DECIMAL.has(value.currency)
-    ? value.minorUnits
-    : value.minorUnits / 100;
-}
-
-export function convert(value: Money, target: CurrencyCode): Money {
-  if (value.currency === target) return value;
-  if (value.currency !== BASE_CURRENCY) {
-    throw new Error(
-      `Conversion is only defined from the base currency (${BASE_CURRENCY}), received ${value.currency}`,
-    );
-  }
-  const rate = PLACEHOLDER_RATES[target];
-  return money(toMajorUnits(value) * rate, target);
+  return value.minorUnits / 100;
 }
 
 /**
  * Format for display.
  *
- * Prices are whole units throughout — this category does not price in decimals
- * and does not discount, so there is no strikethrough or "was/now" variant to
- * build (addendum A4.5).
+ * Indian lakh grouping with a ₹ prefix — ₹1,78,000, not ₹178,000. `en-IN` gets
+ * this right and a generic locale does not; the difference is immediately
+ * visible to an Indian shopper.
  */
 export function formatMoney(value: Money): string {
-  const locale = value.currency === "INR" ? "en-IN" : "en-US";
-  return new Intl.NumberFormat(locale, {
+  return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: value.currency,
     maximumFractionDigits: 0,
@@ -71,6 +45,9 @@ export function formatMoney(value: Money): string {
   }).format(toMajorUnits(value));
 }
 
-export function formatIn(value: Money, currency: CurrencyCode): string {
-  return formatMoney(convert(value, currency));
+export function addMoney(a: Money, b: Money): Money {
+  if (a.currency !== b.currency) {
+    throw new Error(`Cannot add ${a.currency} to ${b.currency}`);
+  }
+  return { minorUnits: a.minorUnits + b.minorUnits, currency: a.currency };
 }

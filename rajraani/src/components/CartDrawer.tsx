@@ -4,10 +4,8 @@ import { useEffect, useRef } from "react";
 
 import { PLACEHOLDER_WASH, toneFor } from "./Frame";
 import { useCart } from "./cart-context";
-import { useCurrency } from "./currency-context";
 import { BASE_CURRENCY } from "@/lib/domain/types";
-import { FREE_SHIPPING_THRESHOLD_MINOR } from "@/lib/brand";
-import { formatIn } from "@/lib/money";
+import { formatMoney } from "@/lib/money";
 
 /**
  * Cart drawer.
@@ -22,7 +20,6 @@ import { formatIn } from "@/lib/money";
  */
 export function CartDrawer() {
   const { lines, isOpen, close, setQuantity, remove, subtotal } = useCart();
-  const { currency } = useCurrency();
   const panelRef = useRef<HTMLDivElement>(null);
   const restoreFocusTo = useRef<HTMLElement | null>(null);
 
@@ -66,8 +63,6 @@ export function CartDrawer() {
   }, [isOpen, close]);
 
   if (!isOpen) return null;
-
-  const remaining = FREE_SHIPPING_THRESHOLD_MINOR - subtotal.minorUnits;
 
   return (
     <div className="fixed inset-0 z-100">
@@ -118,13 +113,10 @@ export function CartDrawer() {
                     <p className="text-caption text-ink-body">{line.title}</p>
                     <p className="eyebrow mt-1 text-ink-muted">{line.sku}</p>
                     <p className="mt-2 tabular-nums text-ink">
-                      {formatIn(
-                        {
-                          minorUnits: line.priceMinorUnits * line.quantity,
-                          currency: BASE_CURRENCY,
-                        },
-                        currency,
-                      )}
+                      {formatMoney({
+                        minorUnits: line.priceMinorUnits * line.quantity,
+                        currency: BASE_CURRENCY,
+                      })}
                     </p>
                     <div className="mt-3 flex items-center gap-4">
                       <QuantityStepper
@@ -149,27 +141,24 @@ export function CartDrawer() {
             <div className="border-t border-rule px-6 py-5">
               <div className="flex items-baseline justify-between">
                 <span className="eyebrow text-ink-muted">Subtotal</span>
-                <span className="tabular-nums text-ink">
-                  {formatIn(subtotal, currency)}
-                </span>
+                <span className="tabular-nums text-ink">{formatMoney(subtotal)}</span>
               </div>
               <p className="text-caption mt-2 text-ink-muted">
-                {remaining > 0
-                  ? `${formatIn({ minorUnits: remaining, currency: BASE_CURRENCY }, currency)} more for complimentary worldwide shipping.`
-                  : "Complimentary worldwide shipping, duties paid."}
+                Complimentary shipping across India. Taxes included.
               </p>
-              {/* build.md §10: checkout is not rebuilt. It hands off to
-                  Shopify's hosted checkout, which needs a store. */}
+              {/* Checkout goes to Razorpay, which is not wired up yet. Disabled
+                  and labelled rather than hidden, so the gap is visible while
+                  the rest of the flow is testable. */}
               <button
                 type="button"
                 disabled
                 className="mt-4 w-full bg-ink px-6 py-4 text-bg opacity-40"
-                title="Checkout hands off to Shopify and needs a connected store"
+                title="Razorpay checkout is not connected yet"
               >
                 <span className="eyebrow">Checkout</span>
               </button>
               <p className="text-caption mt-2 text-center text-ink-muted">
-                Checkout hands off to Shopify. Connect a store to enable it.
+                Payment is not connected yet.
               </p>
             </div>
           </>

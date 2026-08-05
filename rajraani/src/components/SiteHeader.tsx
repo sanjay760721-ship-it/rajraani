@@ -5,10 +5,8 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import { ToneTile } from "./Frame";
 import { useCart } from "./cart-context";
-import { useCurrency } from "./currency-context";
 import { BRAND } from "@/lib/brand";
 import { NAVIGATION, type NavPanel } from "@/lib/data/navigation";
-import { CURRENCIES, type CurrencyCode } from "@/lib/domain/types";
 
 /**
  * Header, mega menu and mobile navigation.
@@ -111,7 +109,8 @@ export function SiteHeader() {
 
           {/* Right utilities */}
           <div className="flex flex-1 items-center justify-end gap-4">
-            <CurrencySwitcher />
+            {/* The currency switcher lived here. India-only, so there is
+                nothing to switch — see lib/money.ts. */}
             <button type="button" className="eyebrow text-ink" onClick={openCart}>
               Cart
               {itemCount > 0 ? (
@@ -260,27 +259,3 @@ function MobileNav({ id, onNavigate }: { id: string; onNavigate: () => void }) {
   );
 }
 
-function CurrencySwitcher() {
-  const { currency, setCurrency } = useCurrency();
-  const id = useId();
-
-  return (
-    <div className="flex items-center">
-      <label htmlFor={id} className="sr-only">
-        Currency
-      </label>
-      <select
-        id={id}
-        value={currency}
-        onChange={(event) => setCurrency(event.target.value as CurrencyCode)}
-        className="eyebrow cursor-pointer border-b border-rule-input bg-transparent py-1 text-ink"
-      >
-        {CURRENCIES.map((code) => (
-          <option key={code} value={code}>
-            {code}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}

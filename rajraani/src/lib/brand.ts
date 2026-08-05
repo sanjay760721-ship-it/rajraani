@@ -47,18 +47,23 @@ export const BRAND = {
 /**
  * The three-part announcement bar.
  *
- * Duty-paid international shipping is the single highest-value message here:
- * sweep-findings records it as the category's answer to the biggest overseas
- * objection, and it belongs above the fold, not buried in a shipping tab.
+ * ─────────────────────────────────────────────────────────────────────────────
+ * INDIA-ONLY. The duty-paid international message that used to sit here has
+ * been removed, and removing it was not optional: with Shopify Markets dropped
+ * in favour of Razorpay, nothing in the stack settles overseas customs duty.
+ * DDP is a courier contract, not a payment feature, so claiming it would have
+ * been false on the page.
+ *
+ * sweep-findings records duty-paid shipping as the category's single strongest
+ * message to overseas buyers. That advantage is deferred, not lost — it becomes
+ * available again the day a DDP courier arrangement exists.
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 export const ANNOUNCEMENTS: readonly string[] = [
   "Complimentary shipping across India",
-  "Complimentary worldwide shipping above ₹25,000",
-  "All duties paid — nothing further to pay on delivery",
+  "Woven to order in Varanasi",
+  "Each piece is woven once",
 ];
-
-/** Free international shipping threshold, in base-currency minor units. */
-export const FREE_SHIPPING_THRESHOLD_MINOR = 2_500_000;
 
 /**
  * Global PDP tab content.
@@ -73,9 +78,12 @@ export const INFO_TABS: readonly { id: string; label: string; items: readonly st
     label: "Shipping",
     items: [
       "Dispatched from Varanasi with a tracking number sent on despatch.",
-      "Within India, 3–5 working days. Internationally, 5–10 working days depending on destination.",
-      "Shipping within India is complimentary. International shipping is complimentary above ₹25,000.",
-      "International orders ship Delivery Duty Paid — customs duty is settled before despatch and there is nothing to pay on arrival.",
+      "Delivery within India takes 3–5 working days.",
+      "Shipping within India is complimentary, with no minimum.",
+      // Honest about the current limit rather than silent about it. An overseas
+      // buyer who writes in is a better outcome than one who reaches checkout
+      // and discovers we cannot ship.
+      "We ship within India only at present. For enquiries from elsewhere, please write to us.",
     ],
   },
   {
