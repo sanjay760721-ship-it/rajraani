@@ -1,20 +1,20 @@
 /**
  * Seed catalogue.
  *
- * â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+ * ─────────────────────────────────────────────────────────────────────────────
  * ALL CONTENT HERE IS ORIGINAL TO THIS PROJECT.
  *
- * build.md Â§6 Originality applies to the repository, not only to the shipped
+ * build.md §6 Originality applies to the repository, not only to the shipped
  * site: no competitor imagery, product copy, product names or campaign names
  * may appear in fixtures, seed data or test snapshots. The craft vocabulary
  * (kadhua, tanchoi, katan silk) is the domain's own technical language and is
- * not anyone's property â€” the poetic names, narratives and campaigns below are
+ * not anyone's property — the poetic names, narratives and campaigns below are
  * written for this project and are placeholders for the editorial writer's work
- * (build.md Â§7.7), not finished copy.
- * â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+ * (build.md §7.7), not finished copy.
+ * ─────────────────────────────────────────────────────────────────────────────
  *
  * Twelve pieces, and five of them are sold out. That ratio is deliberate:
- * pre-build-gaps.md Â§2 measured 49% of the reference catalogue unavailable, the
+ * pre-build-gaps.md §2 measured 49% of the reference catalogue unavailable, the
  * arithmetic consequence of inventory-of-1 pieces that stay listed after
  * selling. Building against an all-available fixture set would hide the
  * template that half of all product views actually land on.
@@ -29,7 +29,7 @@ import type {
 } from "../domain/types.ts";
 import { money } from "../money.ts";
 
-/** Master dimensions, fixed by photography-brief.md Â§2.1. */
+/** Master dimensions, fixed by photography-brief.md §2.1. */
 const PORTRAIT = { width: 3000, height: 4500 } as const;
 const SQUARE = { width: 3000, height: 3000 } as const;
 
@@ -45,10 +45,10 @@ const SHOT_DESCRIPTIONS: Record<ShotType, string> = {
 };
 
 /**
- * The shot template, locked from SKU #1 (build.md Â§9.11).
+ * The shot template, locked from SKU #1 (build.md §9.11).
  *
- * Five 2:3 on-model frames then one or two 1:1 detail frames â€” the sequence
- * measured in sweep-findings.md Â§1.3 and specified in photography-brief.md Â§3.
+ * Five 2:3 on-model frames then one or two 1:1 detail frames — the sequence
+ * measured in sweep-findings.md §1.3 and specified in photography-brief.md §3.
  * Both ratios are reserved in CSS, so a mixed sequence costs no layout shift.
  */
 function shotTemplate(input: {
@@ -76,8 +76,8 @@ function shotTemplate(input: {
       ratio: square ? "square" : "portrait",
       shot,
       /**
-       * Alt describes the FRAME â€” weave, motif, colour, shot type â€” never the
-       * product title repeated (build.md Â§9.9). Composed from attributes here
+       * Alt describes the FRAME — weave, motif, colour, shot type — never the
+       * product title repeated (build.md §9.9). Composed from attributes here
        * because there is no photography yet; once frames exist, these are
        * written per frame by the same person writing the narrative, since only
        * they can say what is actually in the picture.
@@ -96,7 +96,7 @@ export const CAMPAIGNS: readonly Campaign[] = [
     storyPageSlug: "nadi",
     collectionHandle: "nadi",
     standfirst:
-      "A river does not repeat itself. Nine pieces that follow water through the season it belongs to â€” the colour of it before rain, during, and in the days after.",
+      "A river does not repeat itself. Nine pieces that follow water through the season it belongs to — the colour of it before rain, during, and in the days after.",
   },
   {
     slug: "antaraal",
@@ -105,7 +105,7 @@ export const CAMPAIGNS: readonly Campaign[] = [
     storyPageSlug: "antaraal",
     collectionHandle: "antaraal",
     standfirst:
-      "The interval â€” the pause a loom takes between one motif and the next. A study in ground, in the space that makes the pattern legible.",
+      "The interval — the pause a loom takes between one motif and the next. A study in ground, in the space that makes the pattern legible.",
   },
 ];
 
@@ -121,7 +121,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "Named for the flower that opens the same deep blue every morning and asks nothing of anyone. The ground is undyed katan taken to indigo in a single bath, and the kadhua booti sits detached across it â€” each one entered separately, no thread carried behind, so the reverse reads as cleanly as the face. Seventy days of a weaver's attention, and the restraint is the point.",
+      "Named for the flower that opens the same deep blue every morning and asks nothing of anyone. The ground is undyed katan taken to indigo in a single bath, and the kadhua booti sits detached across it — each one entered separately, no thread carried behind, so the reverse reads as cleanly as the face. Seventy days of a weaver's attention, and the restraint is the point.",
     spec: {
       colour: "Indigo blue",
       technique: "Kadhua, with detached booti across the field",
@@ -162,7 +162,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "made_to_order",
     dispatchLeadDays: [12, 14],
     narrative:
-      "Black is difficult in this category and mostly avoided, which is the reason to attempt it. The ground is dense enough to hold light rather than reflect it, and the meenakari works against that â€” coloured resham laid inside a zari outline, so each motif carries its own small enamel. Read it at arm's length and the field is plain. Read it closer and it is not.",
+      "Black is difficult in this category and mostly avoided, which is the reason to attempt it. The ground is dense enough to hold light rather than reflect it, and the meenakari works against that — coloured resham laid inside a zari outline, so each motif carries its own small enamel. Read it at arm's length and the field is plain. Read it closer and it is not.",
     spec: {
       colour: "Black",
       technique: "Meenakari, resham within a zari outline",
@@ -178,7 +178,7 @@ export const PRODUCTS: readonly Product[] = [
       artisanCount: 3,
     },
     garmentType: "saree",
-    // Meenakari is a MOTIF in the vocabulary, not a weave — taxonomy/REVIEW.md
+    // Meenakari is a MOTIF in the vocabulary, not a weave � taxonomy/REVIEW.md
     // decision 4: it describes how a motif is coloured, not the loom
     // technique. The weave underneath it is cutwork.
     weave: "cutwork",
@@ -206,7 +206,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "Tissue carries zari right through the weft, so the cloth is metallic before a single motif is placed on it. Over that, a jangla â€” a creeping vine with no resting ground, running edge to edge without a break. Two decisions that should compete and instead settle: the vine reads as shadow on a surface that is already light. Heaviest piece we have woven this year, and it does not feel it.",
+      "Tissue carries zari right through the weft, so the cloth is metallic before a single motif is placed on it. Over that, a jangla — a creeping vine with no resting ground, running edge to edge without a break. Two decisions that should compete and instead settle: the vine reads as shadow on a surface that is already light. Heaviest piece we have woven this year, and it does not feel it.",
     spec: {
       colour: "Ivory and silver",
       technique: "Jangla, continuous vine across the full field",
@@ -252,7 +252,7 @@ export const PRODUCTS: readonly Product[] = [
       colour: "Saffron",
       technique: "Tanchoi, self-toned figuring on a satin ground",
       fabric: "Pure Katan silk",
-      speciality: "No zari at all â€” the figuring is entirely in silk",
+      speciality: "No zari at all — the figuring is entirely in silk",
       collectionNote: "From Nadi.",
     },
     provenance: {
@@ -287,7 +287,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "Kora is silk left undegummed, so it holds its own shape instead of following the body â€” the reason this reads as architecture rather than drape. The jamdani is worked in by hand against the ground, motif by motif, with no jacquard deciding anything. Where the two meet you can see straight through the cloth to the motif sitting on it, which is the whole argument for organza.",
+      "Kora is silk left undegummed, so it holds its own shape instead of following the body — the reason this reads as architecture rather than drape. The jamdani is worked in by hand against the ground, motif by motif, with no jacquard deciding anything. Where the two meet you can see straight through the cloth to the motif sitting on it, which is the whole argument for organza.",
     spec: {
       colour: "White",
       technique: "Jamdani, discontinuous supplementary weft worked by hand",
@@ -369,7 +369,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "The everyday piece in the collection, and the hardest to price honestly â€” handspun cotton takes as long on the loom as silk and sells for a fifth as much. Jamdani in resham across a pale yellow ground, light enough to wear through a Banaras summer and plain enough to wear twice in a week without anyone counting.",
+      "The everyday piece in the collection, and the hardest to price honestly — handspun cotton takes as long on the loom as silk and sells for a fifth as much. Jamdani in resham across a pale yellow ground, light enough to wear through a Banaras summer and plain enough to wear twice in a week without anyone counting.",
     spec: {
       colour: "Pale yellow",
       technique: "Jamdani, worked by hand in resham",
@@ -409,7 +409,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "made_to_order",
     dispatchLeadDays: [14, 18],
     narrative:
-      "Shikargah is the hunting field â€” animals, riders and forest worked into one continuous composition, the most openly figurative thing the Banarasi vocabulary allows. Ours is read at dusk: the ground is deep enough that the figures surface slowly, and the deer at the pallu is turned away. Six months on the loom for a composition that took longer to draw than to weave.",
+      "Shikargah is the hunting field — animals, riders and forest worked into one continuous composition, the most openly figurative thing the Banarasi vocabulary allows. Ours is read at dusk: the ground is deep enough that the figures surface slowly, and the deer at the pallu is turned away. Six months on the loom for a composition that took longer to draw than to weave.",
     spec: {
       colour: "Deep blue",
       technique: "Shikargah, continuous figurative field",
@@ -425,7 +425,7 @@ export const PRODUCTS: readonly Product[] = [
       artisanCount: 4,
     },
     garmentType: "saree",
-    // Shikargah is a MOTIF in the vocabulary — the hunting-scene composition —
+    // Shikargah is a MOTIF in the vocabulary � the hunting-scene composition �
     // and the weave carrying it here is cutwork.
     weave: "cutwork",
     fabric: "katan-silk",
@@ -453,7 +453,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "Kadiyal interlocks the wefts so body and border are genuinely different colours in one cloth, joined by structure rather than by a seam. Red body, ivory border, and the join is a hard line you can find with a fingernail. The bridal piece in the collection, and the only one we would call that â€” the rest are for the days either side.",
+      "Kadiyal interlocks the wefts so body and border are genuinely different colours in one cloth, joined by structure rather than by a seam. Red body, ivory border, and the join is a hard line you can find with a fingernail. The bridal piece in the collection, and the only one we would call that — the rest are for the days either side.",
     spec: {
       colour: "Red with an ivory border",
       technique: "Kadiyal, interlocked weft at the border",
@@ -494,7 +494,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "A silk warp against a fine wool weft â€” weight without stiffness, which is the only reason a Banarasi structure works at this scale. Tanchoi figuring in the same green as the ground, so it reads plain from across a room. Made for the six weeks in the year when Banaras is genuinely cold and nobody believes it.",
+      "A silk warp against a fine wool weft — weight without stiffness, which is the only reason a Banarasi structure works at this scale. Tanchoi figuring in the same green as the ground, so it reads plain from across a room. Made for the six weeks in the year when Banaras is genuinely cold and nobody believes it.",
     spec: {
       colour: "Moss green",
       technique: "Tanchoi, self-toned",
@@ -534,7 +534,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "Georgette is twisted hard in both directions, which gives it the grain and the fall â€” it will not hold a fold and does not try to. Kadhua booti scattered across it in gold, each one detached, which on a cloth this fine means the reverse is nearly as clean as the face. Named for the half hour when the light goes purple over the ghats and everyone stops what they are doing.",
+      "Georgette is twisted hard in both directions, which gives it the grain and the fall — it will not hold a fold and does not try to. Kadhua booti scattered across it in gold, each one detached, which on a cloth this fine means the reverse is nearly as clean as the face. Named for the half hour when the light goes purple over the ghats and everyone stops what they are doing.",
     spec: {
       colour: "Deep purple",
       technique: "Kadhua, detached booti",
@@ -574,7 +574,7 @@ export const PRODUCTS: readonly Product[] = [
     fulfilmentMode: "ready_to_ship",
     dispatchLeadDays: [10, 12],
     narrative:
-      "Off-white on off-white: a georgette ground with kadhua worked in roopa sona, which is gilded silver and reads warmer than gold without ever announcing itself. The jasmine the piece is named for behaves the same way â€” you find it by smell before you find it by looking. The most-requested and least-photographed piece we make.",
+      "Off-white on off-white: a georgette ground with kadhua worked in roopa sona, which is gilded silver and reads warmer than gold without ever announcing itself. The jasmine the piece is named for behaves the same way — you find it by smell before you find it by looking. The most-requested and least-photographed piece we make.",
     spec: {
       colour: "Off-white",
       technique: "Kadhua, detached booti and a bel border",
@@ -609,7 +609,7 @@ export const PRODUCTS: readonly Product[] = [
  * Collections.
  *
  * Every one is either a facet result or an editorially-earned campaign
- * (build.md Â§9.5). Note what is absent: no price-band collections, and no
+ * (build.md §9.5). Note what is absent: no price-band collections, and no
  * hand-made collection that merely duplicates a facet combination.
  */
 export const COLLECTIONS: readonly Collection[] = [
@@ -618,7 +618,7 @@ export const COLLECTIONS: readonly Collection[] = [
     handle: "sarees",
     title: "Sarees",
     seoIntro:
-      "Every saree here is woven by hand on a pit loom in Banaras, in silk, cotton or wool, by weavers we buy from directly. Each is a single piece â€” when it is gone, it is rewoven or it is not made again.",
+      "Every saree here is woven by hand on a pit loom in Banaras, in silk, cotton or wool, by weavers we buy from directly. Each is a single piece — when it is gone, it is rewoven or it is not made again.",
     facets: { garment: ["saree"] },
   },
   {
@@ -642,7 +642,7 @@ export const COLLECTIONS: readonly Collection[] = [
     handle: "katan-silk",
     title: "Katan Silk",
     seoIntro:
-      "Twisted-filament pure silk â€” the weight and the fall this category is built on, and the ground most of the older techniques were designed for.",
+      "Twisted-filament pure silk — the weight and the fall this category is built on, and the ground most of the older techniques were designed for.",
     facets: { fabric: ["katan-silk"] },
   },
   {
@@ -650,7 +650,7 @@ export const COLLECTIONS: readonly Collection[] = [
     handle: "nadi",
     title: "Nadi",
     seoIntro:
-      "Nine pieces that follow water through the monsoon â€” the colour of it before rain, during, and in the days after.",
+      "Nine pieces that follow water through the monsoon — the colour of it before rain, during, and in the days after.",
     campaignSlug: "nadi",
     productHandles: [
       "aparajita-blue-katan-silk-kadhua-saree",
@@ -667,7 +667,7 @@ export const COLLECTIONS: readonly Collection[] = [
     handle: "antaraal",
     title: "Antaraal",
     seoIntro:
-      "The interval â€” the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
+      "The interval — the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
     campaignSlug: "antaraal",
     productHandles: [
       "nishith-black-katan-silk-meenakari-saree",

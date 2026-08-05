@@ -1,15 +1,15 @@
 /**
  * Navigation.
  *
- * build.md Â§6 requires the mega menu be 100% CMS-driven, so changing it needs
- * zero deploys. This file is the shape that contract produces â€” in production
- * it comes from the Sanity `navigation` document (Â§2.3) and this becomes the
+ * build.md §6 requires the mega menu be 100% CMS-driven, so changing it needs
+ * zero deploys. This file is the shape that contract produces — in production
+ * it comes from the Sanity `navigation` document (§2.3) and this becomes the
  * fallback. Addendum A2 found the reference site's menu differed between two
  * page loads, so menu content is genuinely dynamic data and must never be
  * treated as a compile-time constant.
  *
  * Every panel carries at least one image tile. Those are merchandised slots,
- * not decoration â€” each is an editorially chosen link (A2).
+ * not decoration — each is an editorially chosen link (A2).
  */
 
 export type NavLink = {
@@ -27,7 +27,7 @@ export type NavColumn = {
 export type NavTile = {
   label: string;
   href: string;
-  /** Deliberately no image field yet â€” see components/Frame for why. */
+  /** Deliberately no image field yet — see components/Frame for why. */
   tone: string;
 };
 

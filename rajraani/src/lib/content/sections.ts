@@ -1,12 +1,12 @@
 /**
  * The section library.
  *
- * build.md Â§2.4 specifies a polymorphic `sections[]` â€” every page on the site
+ * build.md §2.4 specifies a polymorphic `sections[]` — every page on the site
  * is assembled from an ordered list of typed sections, so an editor can build a
- * campaign story with no engineering help (Â§6). Fifteen section types are
+ * campaign story with no engineering help (§6). Fifteen section types are
  * specified; six are implemented here, which is enough to prove the
  * architecture and to render the homepage, a campaign story and a craft page.
- * The remaining nine are Sprint 4 work and are additive â€” a new type is a new
+ * The remaining nine are Sprint 4 work and are additive — a new type is a new
  * member of this union and a new entry in the registry, nothing else.
  *
  * NOTE ON IMAGES: every image field in the spec is a desktop/mobile PAIR,
@@ -133,7 +133,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       {
         art: pair("purple"),
         title: "Antaraal",
-        body: "The interval â€” the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
+        body: "The interval — the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
         ctaLabel: "Read",
         ctaHref: "/pages/antaraal",
       },
@@ -161,7 +161,7 @@ export const PAGES: Readonly<
   nadi: {
     title: "Nadi",
     standfirst:
-      "A river does not repeat itself. Nine pieces that follow water through the season it belongs to â€” the colour of it before rain, during, and in the days after.",
+      "A river does not repeat itself. Nine pieces that follow water through the season it belongs to — the colour of it before rain, during, and in the days after.",
     sections: [
       {
         type: "hero",
@@ -178,7 +178,7 @@ export const PAGES: Readonly<
         id: "nadi-intro",
         paragraphs: [
           "The collection began with a complaint. A weaver we have bought from for years said that everything we commissioned was the colour of a wedding, and that he had not woven a grey in four years.",
-          "So we asked for water instead. Not blue â€” water, which in this city is mostly brown, sometimes silver, and only occasionally the colour anyone paints it.",
+          "So we asked for water instead. Not blue — water, which in this city is mostly brown, sometimes silver, and only occasionally the colour anyone paints it.",
         ],
       },
       {
@@ -205,7 +205,7 @@ export const PAGES: Readonly<
   antaraal: {
     title: "Antaraal",
     standfirst:
-      "The interval â€” the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
+      "The interval — the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
     sections: [
       {
         type: "hero",
