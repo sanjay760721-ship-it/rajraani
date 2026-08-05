@@ -8,7 +8,6 @@ import {
 } from "@/components/FacetSidebar";
 import { ProductCard } from "@/components/ProductCard";
 import { catalogue } from "@/lib/data/catalogue";
-import { COLLECTIONS } from "@/lib/data/fixtures";
 import {
   computeFacetCounts,
   filterProducts,
@@ -27,8 +26,10 @@ import { buildFacetHref, parseFacetUrlState } from "@/lib/facets/url";
 
 const PAGE_SIZE = 24;
 
-export function generateStaticParams() {
-  return COLLECTIONS.map((collection) => ({ handle: collection.handle }));
+/** Read through the repository so an admin-created collection gets a page. */
+export async function generateStaticParams() {
+  const collections = await catalogue.listCollections();
+  return collections.map((collection) => ({ handle: collection.handle }));
 }
 
 export async function generateMetadata(

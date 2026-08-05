@@ -7,7 +7,6 @@ import { Price } from "@/components/Price";
 import { ProductCard } from "@/components/ProductCard";
 import { BRAND, INFO_TABS } from "@/lib/brand";
 import { catalogue } from "@/lib/data/catalogue";
-import { PRODUCTS } from "@/lib/data/fixtures";
 import { COLOURS, findTerm } from "@/lib/domain/taxonomy";
 import { isAvailable, type Product } from "@/lib/domain/types";
 import { toMajorUnits } from "@/lib/money";
@@ -15,8 +14,17 @@ import { toMajorUnits } from "@/lib/money";
 /** Static, revalidating on a 300s cadence per build.md §3. */
 export const revalidate = 300;
 
-export function generateStaticParams() {
-  return PRODUCTS.map((product) => ({ handle: product.handle }));
+/**
+ * Read through the repository, not from fixtures.
+ *
+ * This used to import the fixture array directly, which worked only while the
+ * fixtures *were* the catalogue. Once a product can be added in the admin, a
+ * hardcoded list means the new product has no page generated for it — it would
+ * 404 until the next deploy.
+ */
+export async function generateStaticParams() {
+  const products = await catalogue.listProducts();
+  return products.map((product) => ({ handle: product.handle }));
 }
 
 export async function generateMetadata(props: PageProps<"/products/[handle]">) {

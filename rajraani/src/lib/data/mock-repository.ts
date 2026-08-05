@@ -1,10 +1,12 @@
 /**
  * Fixture-backed catalogue.
  *
- * Serves the seed data in fixtures.ts through the same interface the Shopify
- * adapter implements. Async throughout, deliberately — a synchronous mock lets
- * pages accidentally depend on data being available during render, and that
- * assumption breaks the day the real API arrives.
+ * Serves the seed data in fixtures.ts through the same interface the database
+ * repository implements. Used only before `npm run db:seed` has run.
+ *
+ * Async throughout, deliberately — a synchronous mock lets pages accidentally
+ * depend on data being available during render, and that assumption breaks the
+ * day a real data source arrives. It did.
  */
 
 import { filterProducts } from "../facets/engine.ts";

@@ -15,15 +15,14 @@ import { BASE_CURRENCY, type Money } from "@/lib/domain/types";
 /**
  * Cart state.
  *
- * A line carries a snapshot of the piece rather than a reference to it, which
- * is how Shopify models cart lines and the reason a cart survives a catalogue
- * change. It also keeps the whole catalogue out of the client bundle — fine at
- * twelve fixtures, wrong at three thousand products.
+ * A line carries a snapshot of the piece rather than a reference to it. That is
+ * the standard way to model a cart line and the reason a cart survives a
+ * catalogue change — a price edit must not silently re-price something already
+ * in someone's basket. It also keeps the whole catalogue out of the client
+ * bundle, which is fine at twelve products and necessary at three hundred.
  *
- * Checkout is deliberately absent. build.md §10 Non-goals is explicit that
- * checkout is not rebuilt: the cart hands off to Shopify's hosted checkout,
- * which needs a store that does not exist yet. The drawer stops at the handoff
- * and says so, rather than faking a payment step.
+ * Checkout is absent: it goes to Razorpay, which is not wired up yet. The
+ * drawer stops at that point and says so rather than faking a payment step.
  */
 
 export type CartLine = {

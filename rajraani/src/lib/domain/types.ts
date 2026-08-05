@@ -1,10 +1,10 @@
 /**
  * Domain model.
  *
- * Mirrors the Shopify metafield and metaobject definitions in build.md §2.1
- * and §2.2, but expressed as plain types so the app never depends on the shape
- * of a Storefront API response. The Shopify adapter maps into these; the mock
- * repository constructs them directly.
+ * Follows the field model in build.md §2.1 and §2.2 — which was written for
+ * Shopify metafields, but describes the domain rather than the platform, so it
+ * survived Shopify being dropped intact. The database repository maps rows into
+ * these; the fixture repository constructs them directly.
  *
  * Two structural rules from the research are encoded in the types themselves,
  * where they cannot be forgotten:

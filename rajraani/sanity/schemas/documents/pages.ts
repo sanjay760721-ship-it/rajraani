@@ -51,7 +51,7 @@ export const homepage = defineType({
  * campaign is an editorial `/pages/x` story *and* a shoppable `/collections/x`
  * grid, cross-linked.
  *
- * `shopifyCollectionHandle` is required because the relationship is **authored,
+ * `collectionHandle` is required because the relationship is **authored,
  * not inferred**. pre-build-gaps.md §4 tested this directly on the reference
  * site: of 24 campaign-looking collection handles, **zero** had a matching page.
  * Most evocative handles are ordinary merchandising collections that happen to
@@ -89,7 +89,7 @@ export const campaignStory = defineType({
       validation: (rule) => rule.required().max(400),
     }),
     defineField({
-      name: "shopifyCollectionHandle",
+      name: "collectionHandle",
       title: "Shoppable collection",
       type: "string",
       description:
@@ -204,14 +204,15 @@ export const blogPost = defineType({
 /**
  * Per-product editorial overlay.
  *
- * Products live in Shopify; *everything else* lives here, joined on the Shopify
- * product handle (build.md §1.3).
+ * The product record owns price, stock and title; the editorial layer lives
+ * here, joined on the product handle.
  *
- * Note what is deliberately absent: **there is no title field.** The title is
- * Shopify's, and a second editable title here is how a fulfilment state or a
- * campaign prefix eventually creeps into it — which is exactly the failure
- * pre-build-gaps.md §3 measured, where "Pre-Order:" ended up in 463 product
- * titles and leaked into breadcrumbs, og:title, cart lines and JSON-LD.
+ * Note what is deliberately absent: **there is no title field.** The title
+ * belongs to the product record, and a second editable one here is how a
+ * fulfilment state or a campaign prefix eventually creeps into it — exactly the
+ * failure pre-build-gaps.md §3 measured, where "Pre-Order:" reached 463 product
+ * titles and leaked into breadcrumbs, og:title, cart lines and JSON-LD. The
+ * database now refuses it outright too (src/lib/db/schema.sql).
  */
 export const productOverlay = defineType({
   name: "productOverlay",
@@ -219,10 +220,10 @@ export const productOverlay = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "shopifyHandle",
-      title: "Shopify product handle",
+      name: "productHandle",
+      title: "Product handle",
       type: "string",
-      description: "The join key. Must match the product handle in Shopify exactly.",
+      description: "The join key. Must match the product handle in the catalogue exactly.",
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -285,9 +286,9 @@ export const productOverlay = defineType({
       name: "styledWith",
       title: "Styled with",
       type: "array",
-      description: "Shopify handles of pieces shown alongside this one.",
+      description: "Product handles of pieces shown alongside this one.",
       of: [defineArrayMember({ type: "string" })],
     }),
   ],
-  preview: { select: { title: "poeticName", subtitle: "shopifyHandle" } },
+  preview: { select: { title: "poeticName", subtitle: "productHandle" } },
 });

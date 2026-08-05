@@ -132,8 +132,8 @@ describe("constraints that exist because the reference site got them wrong", () 
   });
 
   it("has no title field on the product overlay", () => {
-    // The title is Shopify's. A second editable title here is how a fulfilment
-    // state eventually creeps into it — 463 times, on the reference site.
+    // The title belongs to the product record. A second editable one here is
+    // how a fulfilment state creeps in — 463 times, on the reference site.
     const overlay = documentTypes.find((type) => type.name === "productOverlay");
     assert.ok(overlay);
     assert.ok(!overlay.fields.some((field) => field.name === "title"));
@@ -145,7 +145,7 @@ describe("constraints that exist because the reference site got them wrong", () 
     // page. The pairing cannot be inferred, so it must be stated.
     const campaign = documentTypes.find((type) => type.name === "campaignStory");
     const handle = campaign?.fields.find(
-      (field) => field.name === "shopifyCollectionHandle",
+      (field) => field.name === "collectionHandle",
     );
     assert.ok(handle?.validation, "campaign collection handle is not required");
   });

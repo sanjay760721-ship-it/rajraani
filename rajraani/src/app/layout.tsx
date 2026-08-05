@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CartProvider } from "@/components/cart-context";
 import { BRAND } from "@/lib/brand";
-import { IS_MOCK_CATALOGUE } from "@/lib/data/catalogue";
+import { IS_FIXTURE_CATALOGUE } from "@/lib/data/catalogue";
 
 import "./globals.css";
 
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             Skip to content
           </a>
 
-          {IS_MOCK_CATALOGUE ? <PlaceholderNotice /> : null}
+          {IS_FIXTURE_CATALOGUE ? <PlaceholderNotice /> : null}
           <AnnouncementBar />
           <SiteHeader />
           <main id="main" className="flex-1">

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { SectionRenderer } from "@/components/sections/SectionRenderer";
 import { PAGES } from "@/lib/content/sections";
-import { CAMPAIGNS } from "@/lib/data/fixtures";
+import { catalogue } from "@/lib/data/catalogue";
 
 /**
  * Editorial pages — campaign stories and craft pages.
@@ -32,7 +32,9 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
   const page = PAGES[slug];
   if (!page) notFound();
 
-  const campaign = CAMPAIGNS.find((entry) => entry.storyPageSlug === slug);
+  // Campaign lookup goes through the repository. The pairing is authored, so
+  // the story page has to ask for it rather than infer it from the slug.
+  const campaign = await catalogue.getCampaign(slug);
 
   // A campaign story opens on a hero, which carries the h1. A craft page opens
   // on prose and needs a title block of its own — otherwise the page ships with

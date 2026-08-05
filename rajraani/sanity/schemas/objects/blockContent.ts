@@ -74,7 +74,7 @@ export const blockContent = defineType({
                   title: "Named piece",
                   fields: [
                     {
-                      name: "shopifyHandle",
+                      name: "productHandle",
                       type: "string",
                       title: "Product handle",
                       validation: (rule: ValidationRule) => rule.required(),

@@ -1,10 +1,13 @@
 /**
  * The catalogue seam.
  *
- * Pages depend on this interface and never on a Storefront API response shape.
- * That is what makes "no Shopify credentials yet" a configuration state rather
- * than a blocker: the mock repository serves fixtures today, the Shopify
- * adapter serves the real store when the store exists, and no page changes.
+ * Pages depend on this interface and never on a concrete data source. That seam
+ * has now paid for itself twice: it absorbed the switch from fixtures to a
+ * database, and before that the removal of an entire Shopify integration,
+ * without a single page changing.
+ *
+ * Implementations: `SqliteCatalogueRepository` (live) and
+ * `MockCatalogueRepository` (fixtures, used before the database is seeded).
  */
 
 import type { Campaign, Collection, Product } from "../domain/types.ts";

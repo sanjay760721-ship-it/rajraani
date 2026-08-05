@@ -6,8 +6,6 @@
  * placeholder "Tantu" as a single edit to this file — which is the whole reason
  * everything brand-facing lives here. A test asserts no other source file
  * hardcodes the string.
- *
- * The Shopify metafield/metaobject namespace is `rajraani`.
  * ─────────────────────────────────────────────────────────────────────────────
  *
  * All copy below is original to this project. build.md §6 Originality makes
@@ -18,14 +16,6 @@
 
 export const BRAND = {
   name: "Rajraani",
-  /**
-   * Shopify metafield/metaobject namespace.
-   *
-   * build.md §2.1 was written against the reference site and uses its
-   * namespace throughout. Inheriting the structure is the point; inheriting the
-   * namespace is not. The originality gate fails on the competitor's.
-   */
-  namespace: "rajraani",
   /** Sits above the wordmark, italic (the category's brand-line convention). */
   line: "Woven in Banaras, one piece at a time.",
   /** Rendered verbatim on every handloom product, as a global constant. */
