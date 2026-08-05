@@ -11,13 +11,13 @@
 
 Decided 5 August 2026. It replaces the placeholder "Tantu" used in `prototype.html`.
 The Shopify metafield/metaobject namespace is `rajraani`, not the competitor's — set in
-`rajraani-storefront/src/lib/brand.ts` and enforced by an originality gate in CI.
+`rajraani/src/lib/brand.ts` and enforced by an originality gate in CI.
 
 The rename was a single edit to that one file, which is what isolating brand constants
 bought. A test fails if the name appears hardcoded anywhere else.
 
 **`prototype.html` still says "Tantu".** It is a superseded artefact kept for reference;
-the live build is `rajraani-storefront/`. Don't reconcile the prototype — retire it now
+the live build is `rajraani/`. Don't reconcile the prototype — retire it now
 that the real homepage renders.
 
 ---
@@ -44,89 +44,46 @@ That phrasing does real work. It means: copy the *structural* decisions that are
 | Photography brief | ✅ `photography-brief.md` — was the critical path, now unblocked |
 | Platform decision | ✅ **Settled in `build.md` §1** — Shopify headless + Next.js + Sanity |
 | Brand name | ✅ **Rajraani.** Settled 5 Aug. |
-| Design tokens | ✅ **Authored 5 Aug** — `rajraani/design/tokens.json`, full §2.5 shape, 25/25 contrast pairs verified. Sprint 1 unblocked. A designer may still refine values; the shape is fixed and code depends on it. |
-| Facet taxonomy | 🟡 **Drafted 5 Aug** — `rajraani/taxonomy/`. 8 facets, 294 terms. **11 decisions need domain review before Sprint 3.** |
+| Design tokens | ✅ **Authored 5 Aug** — `rajraani/src/app/globals.css`, full §2.5 shape, 22 contrast pairs asserted in tests. Sprint 1 unblocked. A designer may still refine values; the shape is fixed and code depends on it. |
+| Facet taxonomy | 🟡 **Drafted 5 Aug** — `rajraani/taxonomy/`. 9 facets, 63 values. **11 decisions need domain review before Sprint 3.** |
 | Catalogue and editorial content | ❌ Open — see `build.md` §7.7. Confirm the writer exists before Sprint 4. |
 | Photography commissioning | ❌ Open — fill SKU counts, send brief, collect quotes |
-| `prototype.html` — architecture prototype | ✅ Built 5 Aug. **Superseded by `rajraani/`** — kept for reference, still says "Tantu". |
+| `prototype.html` — architecture prototype | ✅ Built 5 Aug. **Superseded by the live build** — kept for reference, still says "Tantu". |
 | Catalogue origin | ✅ **Greenfield.** §7.3 is now a governance rule, not a migration workstream. |
-| **Sprint 0 — Foundations** | ✅ **Built 5 Aug.** Live code is `rajraani-storefront/` — see §2.0. |
+| **Sprint 0 — Foundations** | ✅ **Built 5 Aug.** Live code is `rajraani/` — see §2.0. |
 | **Sprints 1–2 — working slice** | ✅ **Built 5 Aug.** PLP with multi-select faceting, PDP with mixed-ratio gallery and sticky buy bar, homepage section registry, editorial pages, grouped search, cart drawer. All verified in a browser. |
 
-### 2.0 ⚠️ Two Sprint 0 builds were produced — read this before §2.1
-
-Two sessions ran concurrently on 5 August and each produced a Sprint 0. They have been
-consolidated, and **the live codebase is now `rajraani-storefront/`**.
-
-| Folder | Status |
-|---|---|
-| **`rajraani-storefront/`** | ✅ **Live.** Next 16 + Tailwind 4. Sprint 0 *and* a working slice of Sprints 1–2: PLP with faceting, PDP, homepage, editorial pages, search, cart. 170 tests. `npm run verify` green. |
-| `rajraani/` | ⛔ **Superseded — safe to delete.** Next 15 + Tailwind 3, foundations only, no components, dependencies never installed. Its best parts were ported across (below). §2.1 describes this folder. |
-
-**Ported from `rajraani/` before retiring it:** the `taxonomy/` vocabulary and `REVIEW.md`
-(9 facets, 63 values, 11 open decisions), `check-originality.mjs`, `check-taxonomy.mjs`, and
-the GitHub Actions workflow. Adopting that vocabulary reclassified `meenakari` and
-`shikargah` as motifs rather than weaves, per `REVIEW.md`.
-
-**Not ported:** `design/tokens.json` and its generator. The live build holds tokens as CSS
-custom properties with a typed contrast contract instead — 22 pairs asserted in the test
-suite. Worth revisiting if you want tokens as data for a designer handoff.
-
-Run it:
+### 2.0 There is one build, in `rajraani/`
 
 ```bash
-cd rajraani-storefront && npm install && npm run dev
+cd rajraani && npm install && npm run dev     # http://localhost:3000
+cd rajraani && npm run verify                 # the full gate
 ```
 
-### 2.1 Sprint 0 — what was built in the superseded `rajraani/` folder
+**Historical note, so the git log makes sense.** Two sessions ran concurrently on 5 August
+and each produced a Sprint 0 — one in `tantu/` (which became this build) and one in a
+second `rajraani/` folder. They were consolidated on 6 August: the working build was kept,
+the other was absorbed and then deleted. It is recoverable from commit `d88c66c` if ever
+needed.
 
-*Historical. Describes `rajraani/`, not the live build. Kept because it records what was
-ported and what was dropped.*
+**Absorbed from it before deletion:** the `taxonomy/` vocabulary and `REVIEW.md` (9 facets,
+63 values, 11 open decisions), `check-originality.mjs`, `check-taxonomy.mjs`, and the
+GitHub Actions workflow. Adopting that vocabulary reclassified `meenakari` and `shikargah`
+as motifs rather than weaves, per `REVIEW.md`.
 
-`/` renders the token specimen, which is the §5 exit criterion (*"a blank page renders with
-the real type scale and palette"*).
-
-**Design tokens — `rajraani/design/tokens.json` is the single source of truth.**
-Full §2.5 shape: type scale (7 steps × 3 breakpoints, display serif + UI sans, both with
-Devanagari coverage), palette (23 colours on a warm low-chroma ground, lac-red accent),
-space (4px base, 11 steps), grid (768/1024/1440 — the competitor's 798 is not inherited),
-motion (3 durations, collapsing to 0ms under `prefers-reduced-motion`), elevation (rules
-and space, no shadows, zero radius), image ratios (2:3 and 1:1 as first-class tokens,
-matching `photography-brief.md` §2.1 exactly).
-
-`tokens.css` and `lib/tokens.generated.ts` are generated from the JSON and CI fails if they
-drift. Tailwind's default theme is **removed**, not extended — `text-gray-500` does not
-exist, so the tokens stay load-bearing.
-
-**Facet taxonomy — `rajraani/taxonomy/`.** 8 facets, 294 terms, alias maps that resolve the
-transliteration forks `pre-build-gaps.md` §1 said no script could handle. Price is
-deliberately absent (computed per currency at query time). `REVIEW.md` is the human-readable
-review sheet.
-
-**Five CI gates, all dependency-free so they fail in seconds:** token drift, WCAG 2.2
-contrast, taxonomy well-formedness, originality (competitor names/domains/campaigns —
-including in fixtures — plus stray hexes, shadows, and fulfilment state in title strings),
-and heading order.
-
-**Also in place:** Storefront API client with ISR policy decided in one place, 8-market
-price formatting (INR groups by lakh, JPY carries no minor unit, tabular figures so the cart
-aligns), skip link, focus ring that is never removed, `lang`, and an image ladder capped at
-the true 3000px master so zooming into zari never hits an upscale.
-
-**Verified:** 25/25 contrast pairs pass; taxonomy validates with 0 errors; originality and
-heading gates pass across 20 files; `tsc --noEmit` clean under `strict`,
-`noUncheckedIndexedAccess` and `exactOptionalPropertyTypes`.
-
-*(The typecheck was run out-of-tree with stubbed `next` types, since dependencies are not
-installed in this folder. Run `npm run verify` locally for the real thing.)*
+**Deliberately not absorbed:** its `design/tokens.json` and generator, which expressed the
+token set as data. This build holds tokens as CSS custom properties with a typed contrast
+contract instead — 22 pairs asserted in the test suite, same guarantee. Worth revisiting
+only if a designer would rather exchange tokens as a JSON file than edit CSS; running both
+would mean two competing sources of truth for colour.
 
 ### 2.2 Sprint 1–2 — what was built, 5 August (evening session)
 
-All in `rajraani-storefront/`. `npm run verify` is green: **170 tests, 7 gates, exit 0.**
+All in `rajraani/`. `npm run verify` is green: **170 tests, 7 gates, exit 0.**
 
 ```bash
-cd rajraani-storefront && npm install && npm run dev     # http://localhost:3000
-cd rajraani-storefront && npm run verify                 # the full gate
+cd rajraani && npm install && npm run dev     # http://localhost:3000
+cd rajraani && npm run verify                 # the full gate
 ```
 
 **Stack:** Next 16.3 (App Router, Turbopack) · React 19.2 · Tailwind 4 · TypeScript strict
@@ -198,7 +155,7 @@ In priority order:
 2. **Get the two accounts.** A Shopify dev store unblocks metaobjects + codegen +
    `shopify-repository.ts`; a Sanity project moves navigation and sections out of
    TypeScript and closes the Sprint 1 exit criterion.
-3. **Taxonomy review** — `rajraani-storefront/taxonomy/REVIEW.md`, 11 decisions.
+3. **Taxonomy review** — `rajraani/taxonomy/REVIEW.md`, 11 decisions.
    `kadhua` vs `kadwa` is worth one phone call: it becomes a URL.
 4. The remaining 9 section types, filter drawer below 1024px, Algolia (Sprint 3).
 
@@ -241,16 +198,15 @@ that never existed in any earlier version.
 |---|---|
 | `sweep-findings.md` | Full competitive sweep of tilfi.com — imagery forensics, PDP anatomy, facets/cart/search, IA, tech and performance. All figures measured live, not estimated. |
 | `photography-brief.md` | Sendable studio brief — shot list, ratios, lighting, colour management, throughput, budget model, acceptance criteria. Needs SKU counts filled in at §1. |
-| **`rajraani-storefront/`** | **The build.** Start at `rajraani-storefront/README.md`. |
-| `rajraani-storefront/taxonomy/REVIEW.md` | The 11 open taxonomy decisions, written for a human reviewer. **The highest-value thing on this list that needs a person.** |
-| `rajraani/` | ⛔ Superseded Sprint 0 from a parallel session. Safe to delete — see §2.0. |
+| **`rajraani/`** | **The build.** Start at `rajraani/README.md`. |
+| `rajraani/taxonomy/REVIEW.md` | The 11 open taxonomy decisions, written for a human reviewer. **The highest-value thing on this list that needs a person.** |
 | `prototype.html` | Superseded. Still says "Tantu". Kept as a record; retire it. |
 | `HANDOFF.md` | This file. |
 
 Note: the research documents (`sweep-findings.md`, `pre-build-gaps.md`, `design.md`,
 `design-addendum.md`) name the competitor throughout — correctly, since they *are* the
 competitive research. The originality rule applies to the build, not the notes, and CI
-scans only `rajraani-storefront/`.
+scans only `rajraani/`.
 
 ---
 
@@ -300,7 +256,7 @@ this folder**, not from session scratch space — session outputs don't survive.
 
 ### 5.2 ~~Design tokens~~ — resolved 5 Aug
 
-Every §2.5 group present in `rajraani-storefront/src/app/globals.css`, with all 22
+Every §2.5 group present in `rajraani/src/app/globals.css`, with all 22
 ink-on-surface contrast pairs asserted in the test suite
 (`src/lib/tokens/contrast.ts`). **Sprint 1 is unblocked.**
 
@@ -310,9 +266,9 @@ palette and type. That is cheap: the *shape* is what code depends on, and it wil
 Swapping a value means editing `globals.css` and `contrast.ts` together; the test fails if
 they drift, or if a new value drops below AA.
 
-*(The superseded `rajraani/` folder held these as `design/tokens.json` with a generator.
-That approach was not carried over — see §2.0. Worth revisiting only if a designer wants
-tokens as data to hand back and forth.)*
+*(The parallel Sprint 0 held these as a `design/tokens.json` with a generator. That approach
+was not carried over — see §2.0. Worth revisiting only if a designer wants tokens as data to
+hand back and forth.)*
 
 ### 5.3 Editorial staffing — blocking Sprint 4
 
@@ -324,8 +280,8 @@ exists before building the engine that depends on them.
 
 Greenfield, so §7.3 is a governance rule rather than a migration.
 
-The facet taxonomy is **drafted** at `rajraani-storefront/taxonomy/facets.json`, with the
-human-readable review sheet at `rajraani-storefront/taxonomy/REVIEW.md`. 9 facets, 63
+The facet taxonomy is **drafted** at `rajraani/taxonomy/facets.json`, with the
+human-readable review sheet at `rajraani/taxonomy/REVIEW.md`. 9 facets, 63
 values. It is the source of truth: `src/lib/domain/taxonomy.ts` is a typed reader over it,
 and `npm run taxonomy:check` fails if the generated module drifts from the JSON.
 
@@ -370,19 +326,19 @@ The schemas can be *written* before the account exists — that is the recommend
 3. Collect line-item quotes per §14 of the brief
 4. **Confirm who writes the per-SKU editorial copy (§7.7)** — now including alt text,
    ~6 strings per SKU. This is the last unowned thing that gates a sprint.
-5. **Walk `rajraani-storefront/taxonomy/REVIEW.md` with a weaver or merchandiser** —
+5. **Walk `rajraani/taxonomy/REVIEW.md` with a weaver or merchandiser** —
    11 decisions, most of them five seconds each. `kadhua` vs `kadwa` is the one worth real
    attention.
 6. Register the domain and secure the handles for **Rajraani**
 7. **Create a Shopify dev store and a Sanity project** (§5.7) — the two things now gating
    the rest of Sprint 1
-8. Delete the superseded `rajraani/` folder once you have looked it over (§2.0)
+8. ~~Delete the superseded parallel build~~ — done 6 Aug; there is one folder now (§2.0)
 
 **For the next session:**
 
 1. Read this file's §2.0 → §2.4. That is the whole resume state.
-2. Read `rajraani-storefront/README.md` — what exists, what does not, and why
-3. `cd rajraani-storefront && npm install && npm run verify` — confirm green before
+2. Read `rajraani/README.md` — what exists, what does not, and why
+3. `cd rajraani && npm install && npm run verify` — confirm green before
    changing anything
 4. **Write the Sanity schemas** (`build.md` §2.3). No account needed to model them.
 

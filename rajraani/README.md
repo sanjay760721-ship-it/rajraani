@@ -1,102 +1,184 @@
 # Rajraani — storefront
 
-Handloom saree commerce. Shopify headless + Next.js App Router + Sanity.
-
-Architecture is specified in `../build.md`. This README covers only what you need to run
-the thing.
-
----
-
-## Run it
+Sprint 0 foundations plus a working slice of Sprints 1–2, built against the
+specifications in the parent folder (`build.md`, `design.md`,
+`design-addendum.md`, `sweep-findings.md`, `pre-build-gaps.md`,
+`photography-brief.md`).
 
 ```bash
 npm install
-cp .env.example .env.local   # fill in Shopify + Sanity credentials
 npm run dev
 ```
 
-`/` currently renders the **token specimen** — the type scale, palette, image ratios and
-price formatting for all 8 markets, read live from `design/tokens.json`. That is the
-Sprint 0 exit criterion (`build.md` §5: *"a blank page renders with the real type scale and
-palette"*). It is deleted in Sprint 5 when the real homepage lands.
-
-## Verify
-
-```bash
-npm run verify
-```
-
-Five gates run before typecheck and lint, all with zero dependencies, so a regression
-fails in seconds:
+`npm run verify` runs every gate in order:
 
 | Gate | What it catches |
 |---|---|
-| `tokens:check` | `tokens.css` drifting from `tokens.json` |
-| `check:contrast` | Any colour pair below its WCAG 2.2 threshold, and any colour with no declared pair |
-| `check:taxonomy` | Duplicate canonicals, undeclared cross-facet alias collisions, malformed slugs |
-| `check:originality` | Competitor names, domains and campaign names — including in fixtures; also stray hexes, shadows, and fulfilment state baked into title strings |
-| `check:headings` | Skipped heading levels and duplicate `h1` |
+| `taxonomy:check` | `facets.generated.ts` drifting from `taxonomy/facets.json` |
+| `check:taxonomy` | Duplicate canonicals, undeclared cross-facet alias collisions, malformed slugs — and reprints the 11 open review decisions |
+| `check:originality` | Competitor names, domains and campaign names *including in fixtures*; fulfilment state baked into title strings; shadows, radii and stray hexes |
+| `test` | 170 unit tests, including the 22-pair WCAG contrast contract |
+| `lint` · `typecheck` · `build` | The usual |
+| `lint:headings` | Skipped heading levels and duplicate `h1`, read from the prerendered HTML |
 
 ---
 
-## Design tokens
+## Consolidation note
 
-`design/tokens.json` is the **single source of truth**. Everything else is generated:
+Two Sprint 0 builds were produced by concurrent sessions on 5 August. This one
+is the survivor; the other was absorbed and deleted on 6 August, and is
+recoverable from commit `d88c66c`. Three things were ported across from it
+before it was retired, because they were better than what this build had:
 
-```
-design/tokens.json  →  design/tokens.css          (CSS custom properties, --rj-*)
-                    →  lib/tokens.generated.ts    (breakpoints, ratios, image ladder)
-```
+- `taxonomy/facets.json` + `taxonomy/REVIEW.md` — a 9-facet, 63-value controlled
+  vocabulary with all 11 open domain decisions written out for a reviewer
+- `scripts/check-originality.mjs` — the originality acceptance criterion as a CI
+  gate rather than a code-review habit
+- `scripts/check-taxonomy.mjs` and the GitHub Actions workflow
 
-Run `npm run tokens` after editing the JSON. CI regenerates and fails if the working tree
-differs, so the two can never drift.
+Adopting that vocabulary changed two fixtures: `meenakari` and `shikargah` are
+motifs there, not weaves, which is a deliberate call argued in `REVIEW.md`.
 
-**Tailwind is bound to the tokens, and the default theme is removed** — `theme`, not
-`theme.extend`. `text-gray-500` and `rounded-lg` do not exist. That is deliberate: it is
-what keeps the token set load-bearing rather than decorative.
+---
 
-Three rules the code enforces rather than documents:
+## Assumptions made
 
-- **Zero radius, zero shadow.** Elevation is rules and space (`--rj-border-bounded`,
-  `--rj-border-raised`). `box-shadow` fails CI.
-- **No literal hex outside `tokens.json`.** Fails CI.
-- **Focus is never removed.** 2px ring, 2px offset, defined once in `globals.css`.
+Two decisions were taken as defaults so work could start. Both are cheap to
+reverse. The brand name was the third and is now settled.
 
-Contrast is verified at token-definition time, not audit time — a near-white scheme is the
-standard failure mode in this category. 25/25 pairs currently pass.
+| Decision | Taken as | Reverse by |
+|---|---|---|
+| Brand name | **Rajraani**, settled 5 Aug | Edit `BRAND.name` in `src/lib/brand.ts` — a test fails if the string appears anywhere else. It was "Tantu" until today and the rename was exactly that one edit. |
+| Catalogue backend | **Fixtures**, behind the real interface | Set `SHOPIFY_STORE_DOMAIN` + `SHOPIFY_STOREFRONT_ACCESS_TOKEN`, implement `src/lib/data/shopify-repository.ts`. No page changes. |
+| Design tokens | **Placeholder values in the §2.5 shape** | Replace values in `src/app/globals.css` and `src/lib/tokens/contrast.ts`. Structure stays. |
 
-## Facet taxonomy
+Everything visual is a placeholder, and the running site says so in a banner.
 
-`taxonomy/facets.json` is the controlled vocabulary; `taxonomy/REVIEW.md` is the same
-thing written for a human reviewer.
+---
 
-**It is a draft.** 11 decisions need domain review before Sprint 3 — most importantly
-whether the canonical spelling is `kadhua` or `kadwa`, which the reference catalogue split
-exactly 50/50 across 32 tag variants. `npm run check:taxonomy` re-prints the open list.
+## What is built
 
-The rule that makes all of this worth doing: **merchandisers may never create a facet
-value.** Values are added to the JSON, reviewed, and deployed as Shopify metaobjects. The
-reference catalogue reached 1,592 tags with 44% used exactly once because nobody enforced
-that.
+**Design tokens** (`src/app/globals.css`) — the full §2.5 token shape: type
+scale, palette, space, grid, motion, elevation, image ratios. Breakpoints are
+locked to 768 / 1024 / 1440 by deleting Tailwind's `sm` and `2xl` stops, so a
+fourth breakpoint cannot appear out of habit.
 
-## Layout
+**Contrast contract** (`src/lib/tokens/contrast.ts`) — all 22 ink-on-surface
+pairs are computed and asserted against WCAG minimums. §2.5 asks for this at
+token-definition time rather than at audit time; it caught two failing
+placeholder values on first run.
 
-```
-app/          App Router. Routing map in build.md §3.
-components/   Component inventory in build.md §4. Empty until Sprint 1.
-design/       Tokens — source of truth + generated CSS.
-lib/          brand.ts (global constants), money.ts (8-market formatting),
-              shopify/ (Storefront client; typed codegen lands Sprint 1).
-scripts/      Token build + the five CI gates.
-taxonomy/     Controlled vocabulary + review sheet.
-```
+**Domain model and controlled vocabulary** (`src/lib/domain/`) — the §2.1/§2.2
+metafield and metaobject shape as plain types. `taxonomy/facets.json` is the
+source of truth and `taxonomy.ts` is a typed reader over it, so the vocabulary
+stays reviewable by someone who will never open a `.ts` file. This is the
+governance rule from §7.3 made executable: a facet value not in the vocabulary
+fails a test. Transliteration forks (`kadwa` → `kadhua`, `mina` → `meenakari`)
+resolve through aliases, so search is forgiving without the vocabulary forking.
 
-## Not yet built
+Alias resolution is **facet-scoped, never global** — `gold` is claimed by both
+`zari.gold` (the metallic thread) and `colour.gold` (the shade), both are
+correct, and resolving without naming the facet would silently pick one.
 
-Sprint 0 is foundations only. Still absent, in `build.md` order: Sanity studio and schemas
-(§2.3), metafield/metaobject definitions (§2.2), Storybook and visual regression, the
-component inventory (§4), Algolia (Sprint 3), and the editorial engine (Sprint 4).
+**Facet engine** (`src/lib/facets/`) — multi-select within a group, AND across
+groups, live counts that exclude their own group, canonical URL encoding.
+Query-string grammar for facets, sort *and* pagination alike, fixing the mixed
+grammar noted in `pre-build-gaps.md` §6.
 
-Two things gate later sprints and are **not** engineering problems: a writer for the
-per-SKU narrative and alt text (§7.7), and photography quotes against the brief in
-`../photography-brief.md`.
+**Pages** — homepage (section registry), PLP with faceting, PDP, campaign
+stories and craft pages, grouped search.
+
+**Cart** — drawer with focus trap, localStorage persistence, cross-tab sync.
+Stops at the Shopify handoff, which is a non-goal to rebuild (§10).
+
+---
+
+## Findings from building it
+
+Three things the specs did not anticipate, all now fixed:
+
+1. **Two of the placeholder token values failed AA.** Accent on the sand
+   surface measured 4.3:1 and the input rule 2.7:1. The sand surface is the
+   footer, which contains the newsletter form — so the failing pair sat on a
+   real control. Both corrected before any component used them.
+
+2. **A single hairline colour cannot serve both jobs.** Decorative dividers want
+   to be nearly invisible; form-control boundaries owe 3:1 under WCAG 1.4.11.
+   The palette now carries `--color-rule` and `--color-rule-input` separately.
+
+3. **Heading level is a property of position, not of component.** The first
+   heading-order run found the PLP grid skipping h1 → h3, and craft pages
+   shipping no h1 at all. Both are the defect measured on the reference PDP
+   (H1 → H4 → H4 → H2 → H4 → H5). Card and hero heading levels are now passed
+   in by the enclosing page.
+
+4. **Availability and dispatch mode are different questions.** A piece can be
+   sold out *and* made to order. Merging them into one facet is the modelling
+   error that put "Pre-Order:" into 463 product titles on the reference site,
+   so they are two facets here.
+
+5. **Two lookaheads in the ported originality gate were silently inert.**
+   `/box-shadow\s*:\s*(?!none)/` looks correct and is not — `\s*` backtracks to
+   zero width, the lookahead then sees a space rather than `none`, and
+   `box-shadow: none` matches its own exemption. Both rules now read the
+   declaration's value instead.
+
+---
+
+## Verified behaviour
+
+Checked in a real browser against the running app, not inferred:
+
+- Facets multi-select; counts hold in the selected group while narrowing others;
+  URL syncs without a reload; back button restores the previous selection
+- Sold-out PDP swaps add-to-cart for the notify form; JSON-LD reports
+  `OutOfStock` with all gallery images, `material`, `color` and weave/motif
+- Gallery renders 5 × 2:3 then 1:1, both ratios reserved
+- Sticky buy bar appears once the buy block leaves the viewport
+- Cart drawer traps focus, locks scroll, restores both on Escape
+- Search resolves `kadwa` → Kadhua and says so on the page
+- Indian lakh grouping (₹1,12,000), eight currencies, persisted across reloads
+- No hydration warnings
+
+---
+
+## Not built, and why
+
+| Not built | Reason |
+|---|---|
+| Real photography | Not commissioned. Frames are schematic at exact capture ratios; `Frame.tsx` switches to `next/image` when `src` is populated. |
+| Shopify adapter | No dev store. Interface and field mapping are specified in `shopify-repository.ts`. |
+| Sanity CMS | Same. Content is typed and shaped as the CMS documents will be. |
+| Checkout | Non-goal (§10) — hands off to Shopify's hosted checkout. |
+| Algolia search | Sprint 3. The grouped result shape is built; the index is not. |
+| 9 of 15 section types | Sprint 4. Adding one is a union member plus a registry case. |
+| Filter drawer below 1024px | Collapses to a disclosure instead. Same behaviour, less polish. |
+| Heading lint on dynamic routes | The lint reads prerendered HTML, so PLP and search sit outside it. Needs a browser pass in Sprint 6. |
+
+---
+
+## Still blocking, unchanged
+
+These are the specs' open items and none of them moved:
+
+1. **Design token values** — a designer deliverable (§2.5). Placeholders are in
+   place and the swap is contained.
+2. **Editorial writer** — the architecture assumes a ~90-word narrative, a
+   proper name and ~6 alt strings per SKU, permanently (§7.7). Fixture copy is
+   placeholder, written to prove the content model.
+3. **Facet taxonomy sign-off** — `taxonomy/facets.json` is a draft with **11
+   decisions open**, written up for a reviewer in `taxonomy/REVIEW.md`. The one
+   that matters most is whether the canonical spelling is `kadhua` or `kadwa`,
+   split exactly 50/50 across 32 tag variants on the reference catalogue with
+   no frequency signal to break the tie. It becomes a URL, so it is free to
+   change now and expensive after launch. `npm run check:taxonomy` reprints the
+   list.
+4. **Photography quotes** — the brief is written and unsent.
+
+---
+
+## Note on this folder
+
+`node_modules` inside OneDrive will churn the sync client and slow installs.
+Either exclude `tantu/node_modules` from OneDrive sync, or move the repo out of
+OneDrive once it is under git.

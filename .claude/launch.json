@@ -4,7 +4,7 @@
     {
       "name": "rajraani-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "rajraani-storefront", "run", "dev"],
+      "runtimeArgs": ["--prefix", "rajraani", "run", "dev"],
       "port": 3000
     }
   ]
