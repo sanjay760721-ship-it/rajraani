@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test \"src/**/*.test.ts\"",
+    "test": "node --test \"src/**/*.test.ts\" \"sanity/**/*.test.ts\"",
     "lint:headings": "node scripts/lint-headings.mjs",
     "taxonomy": "node scripts/build-taxonomy.mjs",
     "taxonomy:check": "node scripts/build-taxonomy.mjs --check",
