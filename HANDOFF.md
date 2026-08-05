@@ -42,7 +42,7 @@ That phrasing does real work. It means: copy the *structural* decisions that are
 | §8 competitive sweep | ✅ **Closed.** All seven original questions answered or retired. |
 | Deep competitive sweep | ✅ `sweep-findings.md` |
 | Photography brief | ✅ `photography-brief.md` — was the critical path, now unblocked |
-| Platform decision | ✅ **Settled in `build.md` §1** — Shopify headless + Next.js + Sanity |
+| Platform decision | ⚠️ **CHANGED 6 Aug** — Shopify and Sanity dropped. Razorpay + our own database and admin, India-only. See `rajraani/docs/architecture-change-2026-08-06.md`. This supersedes `build.md` §1.1 and §1.3. |
 | Brand name | ✅ **Rajraani.** Settled 5 Aug. |
 | Design tokens | ✅ **Authored 5 Aug** — `rajraani/src/app/globals.css`, full §2.5 shape, 22 contrast pairs asserted in tests. Sprint 1 unblocked. A designer may still refine values; the shape is fixed and code depends on it. |
 | Facet taxonomy | 🟡 **Drafted 5 Aug** — `rajraani/taxonomy/`. 9 facets, 63 values. **11 decisions need domain review before Sprint 3.** |
@@ -123,44 +123,50 @@ native TS type-stripping — **zero test dependencies**.
    `box-shadow\s*:\s*(?!none)` backtracks and matches its own exemption. Both rules now
    read the declaration value.
 
-### 2.3 Sprint 1 status — precisely
+### 2.3 Sprint 1 status — precisely, after the architecture change
 
-Not complete. The storefront half is done and past it; the backend half has not started.
+`build.md`'s sprint plan assumed Shopify and Sanity. With both dropped, the Sprint 1
+line items no longer map one-to-one. What matters now:
 
-| `build.md` §5 Sprint 1 item | Status |
+| Item | Status |
 |---|---|
 | Header · MegaMenu · MobileNavDrawer · Footer · AnnouncementBar | ✅ |
-| Currency context + Indian lakh formatting | ✅ |
-| Legacy tag → facet migration | ✅ N/A — greenfield; inverted to the governance rule, built and CI-enforced |
-| Shopify Storefront client | 🟡 Transport + ISR policy done; typed codegen needs a store |
-| Metafield + metaobject definitions **created in Shopify** | ❌ Modelled as types only |
-| Sanity schemas (§2.3) | ❌ Not started |
+| Indian lakh price formatting | ✅ (currency layer collapsed to INR) |
+| Controlled vocabulary + governance rule | ✅ Enforced by database triggers |
+| Content model | ✅ Modelled in `sanity/` — kept as the model even though Sanity is out |
+| **Database** | ✅ Schema, seed and constraint tests. **Not yet read by the site.** |
+| **Storefront reads the database** | ❌ Still serving `src/lib/data/fixtures.ts` |
+| **Admin panel** | ❌ Not started — this is what lets sanju add a saree |
+| **Razorpay checkout** | ❌ Not started |
 
-**Exit criterion NOT met:** *"navigation is fully CMS-driven"*. The mega menu is
-CMS-**shaped** — `src/lib/data/navigation.ts` returns exactly what the Sanity document will —
-but changing a link still needs a deploy, and §6 lists zero-deploy menu edits as a ship
-criterion.
+**Sprint 2** is otherwise complete (PLP, PDP, cart, sold-out flow, badging), plus the
+grouped-search shape from Sprint 3 and 8 of 15 section types from Sprint 4.
 
-**Ahead of schedule:** Sprint 2 is essentially complete (PLP, PDP, cart, sold-out flow,
-badging — all but the Shopify checkout handoff, a §10 non-goal), plus the grouped-search
-shape from Sprint 3 and the section registry from Sprint 4 (6 of 15 section types).
+The old "navigation must be CMS-driven" exit criterion still stands, but it is now the
+admin panel that satisfies it, not Sanity.
 
 ### 2.4 Pick up here
 
-In priority order:
+**The agreed sequence when the session ended:**
 
-1. **Sanity schemas (§2.3)** — the largest chunk of Sprint 1 that needs no account. Write
-   the schema definitions and content types so connecting a project later is configuration,
-   not modelling. *This was the agreed next task when the session ended.*
-2. **Get the two accounts.** A Shopify dev store unblocks metaobjects + codegen +
-   `shopify-repository.ts`; a Sanity project moves navigation and sections out of
-   TypeScript and closes the Sprint 1 exit criterion.
-3. **Taxonomy review** — `rajraani/taxonomy/REVIEW.md`, 11 decisions.
-   `kadhua` vs `kadwa` is worth one phone call: it becomes a URL.
-4. The remaining 9 section types, filter drawer below 1024px, Algolia (Sprint 3).
+1. **Point the storefront at the database.** Write `SqliteCatalogueRepository` against
+   the existing `CatalogueRepository` interface and switch `catalogue.ts` to it. No
+   visible change, but everything after depends on it.
+2. **Build the admin panel.** Login, product CRUD, image upload, page and navigation
+   editing. This is the step that ends sanju needing a developer to add a saree — it
+   is the highest-value remaining work by a distance.
+3. **Razorpay checkout.** Order tables, order creation, payment verification by
+   webhook signature, confirmation email.
+4. **Taxonomy review** — `rajraani/taxonomy/REVIEW.md`, 11 decisions, sanju + a weaver.
+5. The remaining 7 section types; Portable Text serializer if the CMS model is used
+   as-is (see `sanity/README.md` "Known mismatches").
 
-**Housekeeping not yet done:** the folder is **not under git**, and `node_modules` sits
-inside OneDrive — exclude it from sync or move the repo out once it is versioned.
+**Do not rebuild Shopify or Sanity integrations.** Both were deliberately dropped on
+6 August — read `rajraani/docs/architecture-change-2026-08-06.md` before assuming
+otherwise.
+
+**Housekeeping:** `node_modules` and `data/` sit inside OneDrive. Exclude them from
+sync, or move the repo out of OneDrive. There is no git remote — push somewhere.
 
 ### Prototype — what it proves
 
@@ -294,22 +300,18 @@ Run `npm run check:taxonomy` to re-print the open list.
 
 ### 5.5 ~~What to build first~~ — resolved. Sprint 0 built, and Sprint 2 with it
 
-See §2.2. The storefront runs. What remains of Sprint 1 is the CMS and commerce backends —
-see §5.7.
+See §2.2. The storefront runs. What remains is the database wiring, the admin panel and
+Razorpay — see §2.4.
 
-### 5.7 The two accounts — now the main blocker
+### 5.7 ~~The two accounts~~ — no longer applicable
 
-Neither is engineering work, and between them they gate everything left in Sprint 1.
+Superseded 6 August. Shopify and Sanity were both dropped, so neither account is needed.
+**Nothing external now blocks engineering** — the database, the admin and the payment
+integration are all ours to build.
 
-- **Shopify dev store.** Unblocks the metafield and metaobject definitions (§2.1, §2.2),
-  typed codegen, and writing `src/lib/data/shopify-repository.ts` against the interface
-  that already exists. Transport, auth, error handling and ISR policy are already built in
-  `src/lib/data/shopify/client.ts`. Swapping off the fixture catalogue is two env vars.
-- **Sanity project.** Moves navigation, homepage sections and campaign stories out of
-  TypeScript and closes the Sprint 1 exit criterion (zero-deploy menu edits).
-
-The schemas can be *written* before the account exists — that is the recommended next task
-(§2.4).
+What still needs sanju rather than code: **photography** (§5.6 and §6), the **editorial
+writer** (§5.3), and the **taxonomy review** (§5.4). Plus a Razorpay account when
+checkout is ready to wire up, which needs business KYC and is worth starting early.
 
 ### 5.6 Not blocking
 
@@ -330,20 +332,23 @@ The schemas can be *written* before the account exists — that is the recommend
    11 decisions, most of them five seconds each. `kadhua` vs `kadwa` is the one worth real
    attention.
 6. Register the domain and secure the handles for **Rajraani**
-7. **Create a Shopify dev store and a Sanity project** (§5.7) — the two things now gating
-   the rest of Sprint 1
+7. **Start a Razorpay account.** Business KYC takes time, so begin it well before
+   checkout is ready to wire up. (Replaces the old "create a Shopify store" item —
+   see §5.7.)
 8. ~~Delete the superseded parallel build~~ — done 6 Aug; there is one folder now (§2.0)
 
 **For the next session:**
 
 1. Read this file's §2.0 → §2.4. That is the whole resume state.
-2. Read `rajraani/README.md` — what exists, what does not, and why
-3. `cd rajraani && npm install && npm run verify` — confirm green before
-   changing anything
-4. **Write the Sanity schemas** (`build.md` §2.3). No account needed to model them.
+2. Read `rajraani/docs/architecture-change-2026-08-06.md` — **Shopify and Sanity are
+   out.** Do not rebuild either.
+3. Read `rajraani/README.md` — what exists, what does not, and why
+4. `cd rajraani && npm install && npm run db:reset && npm run verify` — confirm green
+   before changing anything
+5. **Continue at §2.4 item 1:** point the storefront at the database.
 
-Taxonomy review is *not* a prerequisite — metaobject definitions are created from the
-taxonomy's shape, and values can be seeded after review.
+Taxonomy review is *not* a prerequisite for any of it — the vocabulary's shape is
+settled, and only the canonical spellings are open.
 
 ---
 

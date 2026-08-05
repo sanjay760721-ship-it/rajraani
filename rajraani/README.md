@@ -5,8 +5,15 @@ specifications in the parent folder (`build.md`, `design.md`,
 `design-addendum.md`, `sweep-findings.md`, `pre-build-gaps.md`,
 `photography-brief.md`).
 
+> **Architecture changed on 6 August 2026.** Shopify and Sanity are out;
+> Razorpay, our own SQLite database and our own admin panel are in, and the
+> store is India-only. `docs/architecture-change-2026-08-06.md` records what
+> that costs and what it does not. It supersedes `build.md` §1.1 and §1.3 —
+> the rest of `build.md` still stands.
+
 ```bash
 npm install
+npm run db:reset   # create and seed the database
 npm run dev
 ```
 
@@ -48,8 +55,8 @@ reverse. The brand name was the third and is now settled.
 
 | Decision | Taken as | Reverse by |
 |---|---|---|
-| Brand name | **Rajraani**, settled 5 Aug | Edit `BRAND.name` in `src/lib/brand.ts` — a test fails if the string appears anywhere else. It was "Tantu" until today and the rename was exactly that one edit. |
-| Catalogue backend | **Fixtures**, behind the real interface | Set `SHOPIFY_STORE_DOMAIN` + `SHOPIFY_STOREFRONT_ACCESS_TOKEN`, implement `src/lib/data/shopify-repository.ts`. No page changes. |
+| Brand name | **Rajraani**, settled 5 Aug | Edit `BRAND.name` in `src/lib/brand.ts` — a test fails if the string appears anywhere else. It was "Tantu" until then, and the rename was exactly that one edit. |
+| Catalogue backend | **Fixtures**, behind the real interface. The database exists and is seeded but the site does not read it yet. | Implement `SqliteCatalogueRepository` against `CatalogueRepository` and switch `catalogue.ts`. No page changes. |
 | Design tokens | **Placeholder values in the §2.5 shape** | Replace values in `src/app/globals.css` and `src/lib/tokens/contrast.ts`. Structure stays. |
 
 Everything visual is a placeholder, and the running site says so in a banner.
@@ -89,7 +96,7 @@ grammar noted in `pre-build-gaps.md` §6.
 stories and craft pages, grouped search.
 
 **Cart** — drawer with focus trap, localStorage persistence, cross-tab sync.
-Stops at the Shopify handoff, which is a non-goal to rebuild (§10).
+Stops at checkout, which now goes to Razorpay and is not wired up yet.
 
 ---
 
@@ -137,7 +144,7 @@ Checked in a real browser against the running app, not inferred:
 - Sticky buy bar appears once the buy block leaves the viewport
 - Cart drawer traps focus, locks scroll, restores both on Escape
 - Search resolves `kadwa` → Kadhua and says so on the page
-- Indian lakh grouping (₹1,12,000), eight currencies, persisted across reloads
+- Indian lakh grouping (₹1,12,000)
 - No hydration warnings
 
 ---
@@ -147,10 +154,10 @@ Checked in a real browser against the running app, not inferred:
 | Not built | Reason |
 |---|---|
 | Real photography | Not commissioned. Frames are schematic at exact capture ratios; `Frame.tsx` switches to `next/image` when `src` is populated. |
-| Shopify adapter | No dev store. Interface and field mapping are specified in `shopify-repository.ts`. |
-| Sanity CMS | Same. Content is typed and shaped as the CMS documents will be. |
-| Checkout | Non-goal (§10) — hands off to Shopify's hosted checkout. |
-| Algolia search | Sprint 3. The grouped result shape is built; the index is not. |
+| Storefront reading the database | The schema, seed and constraint tests exist; the repository implementation does not. Next task. |
+| Admin panel | Not started. The step that ends needing a developer to add a saree. |
+| Razorpay checkout | Not started. Needs an account with business KYC. |
+| Algolia search | Deferred. The grouped result shape is built; at a few hundred products the SQLite scan is fine. |
 | 9 of 15 section types | Sprint 4. Adding one is a union member plus a registry case. |
 | Filter drawer below 1024px | Collapses to a disclosure instead. Same behaviour, less polish. |
 | Heading lint on dynamic routes | The lint reads prerendered HTML, so PLP and search sit outside it. Needs a browser pass in Sprint 6. |
