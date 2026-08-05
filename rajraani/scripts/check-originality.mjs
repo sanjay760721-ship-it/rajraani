@@ -98,6 +98,36 @@ const RULES = [
       "sampled elements in this category measure `border-radius: 0`.",
   },
   {
+    /*
+     * Double-encoded UTF-8, i.e. mojibake.
+     *
+     * Caught the hard way: three source files were round-tripped through
+     * PowerShell, whose `Get-Content -Raw` reads as ANSI when a file has no
+     * BOM. Every multi-byte character was decoded as Windows-1252 and
+     * re-encoded as UTF-8, so em dashes became three characters and the
+     * product narratives shipped corrupted to the browser.
+     *
+     * The signature is a Latin-1 high byte followed by a UTF-8 continuation
+     * byte — a sequence that essentially never occurs in real prose.
+     */
+    id: "double-encoded-utf8",
+    /*
+     * Written as escapes, not literals: a pattern containing the very bytes it
+     * hunts for is one careless save away from being corrupted itself, and a
+     * silently inert gate is worse than no gate.
+     *
+     * â€ is the em-dash and curly-quote family (UTF-8 E2 80 xx read as
+     * cp1252, where 0x80 maps to the euro sign). The Â and Ã branches
+     * cover two-byte sequences: section marks, non-breaking spaces, accented Latin.
+     */
+    pattern: /â€|Â[ -¿]|Ã[-¿]/,
+    why:
+      "Double-encoded UTF-8 (mojibake). A file was read as ANSI and rewritten " +
+      "as UTF-8. Do not round-trip source through PowerShell's Get-Content / " +
+      "Set-Content — use an editor or .NET ReadAllText/WriteAllText with an " +
+      "explicit UTF8Encoding($false).",
+  },
+  {
     id: "hardcoded-hex",
     pattern: /(?<![\w-])#[0-9a-fA-F]{6}(?![0-9a-fA-F])/,
     why:
