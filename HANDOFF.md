@@ -175,9 +175,11 @@ credential in git history is compromised by definition — change it before depl
 **Housekeeping:** `node_modules` and `data/` sit inside OneDrive. Exclude them from
 sync, or move the repo out of OneDrive. There is no git remote — push somewhere.
 
-### Prototype — what it proves
+### Prototype — what it proved
 
-Open `prototype.html` in any browser. No server, no install, no external requests.
+*Historical. `archive/prototype.html` predates the real build and is not maintained.*
+
+Open it in any browser. No server, no install, no external requests.
 
 It exists to pressure-test the two places the architecture could be wrong:
 
@@ -205,21 +207,32 @@ that never existed in any earlier version.
 
 ---
 
-## 3. Files in this folder
+## 3. How the folder is arranged
 
-| File | What it is |
+Reorganised 6 August. [`README.md`](README.md) at the root is the front door.
+
+```
+README.md          Front door — what is here and where to start
+HANDOFF.md         This file. Where the project stands, and what is next.
+rajraani/          The site. Everything that runs.
+docs/research/     The six analysis documents
+archive/           Superseded artefacts
+```
+
+| Path | What it is |
 |---|---|
-| `sweep-findings.md` | Full competitive sweep of tilfi.com — imagery forensics, PDP anatomy, facets/cart/search, IA, tech and performance. All figures measured live, not estimated. |
-| `photography-brief.md` | Sendable studio brief — shot list, ratios, lighting, colour management, throughput, budget model, acceptance criteria. Needs SKU counts filled in at §1. |
 | **`rajraani/`** | **The build.** Start at `rajraani/README.md`. |
 | `rajraani/taxonomy/REVIEW.md` | The 11 open taxonomy decisions, written for a human reviewer. **The highest-value thing on this list that needs a person.** |
-| `prototype.html` | Superseded. Still says "Tantu". Kept as a record; retire it. |
-| `HANDOFF.md` | This file. |
+| `rajraani/docs/architecture-change-2026-08-06.md` | Why Shopify and Sanity are out. Read before assuming otherwise. |
+| `docs/research/build.md` | Architecture, data model, sprint plan. The main one. §1.1 and §1.3 superseded. |
+| `docs/research/photography-brief.md` | Sendable studio brief. Needs SKU counts at §1. |
+| `docs/research/sweep-findings.md` | Imagery forensics, PDP anatomy, facets, cart, search, performance. Measured, not estimated. |
+| `docs/research/design.md` · `design-addendum.md` · `pre-build-gaps.md` | The rest of the research |
+| `archive/prototype.html` | Superseded. Still says "Tantu". Kept as a record. |
 
-Note: the research documents (`sweep-findings.md`, `pre-build-gaps.md`, `design.md`,
-`design-addendum.md`) name the competitor throughout — correctly, since they *are* the
-competitive research. The originality rule applies to the build, not the notes, and CI
-scans only `rajraani/`.
+Note: the research documents name the competitor throughout — correctly, since they
+*are* the competitive research. The originality rule applies to the build, not the
+notes, and CI scans only `rajraani/`.
 
 ---
 
@@ -264,8 +277,9 @@ Measured 5 Aug 2026 across 3,000 products / 4,810 images on tilfi.com.
 
 ### 5.1 ~~`build.md` is unreachable~~ — resolved
 
-The `TILFI_COPY` folder is connected. All six files are readable. **Always work from
-this folder**, not from session scratch space — session outputs don't survive.
+All research is in `docs/research/`. **Always work in this folder**, not in session
+scratch space — session outputs don't survive. Everything is under git as of 6 August,
+so nothing is lost to a crash either.
 
 ### 5.2 ~~Design tokens~~ — resolved 5 Aug
 

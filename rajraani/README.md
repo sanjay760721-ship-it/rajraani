@@ -1,9 +1,8 @@
 # Rajraani — storefront
 
 Sprint 0 foundations plus a working slice of Sprints 1–2, built against the
-specifications in the parent folder (`build.md`, `design.md`,
-`design-addendum.md`, `sweep-findings.md`, `pre-build-gaps.md`,
-`photography-brief.md`).
+research in [`../docs/research/`](../docs/research) — `build.md` is the one that
+settles the architecture.
 
 > **Architecture changed on 6 August 2026.** Shopify and Sanity are out;
 > Razorpay, our own SQLite database and our own admin panel are in, and the
