@@ -134,29 +134,32 @@ line items no longer map one-to-one. What matters now:
 | Indian lakh price formatting | ✅ (currency layer collapsed to INR) |
 | Controlled vocabulary + governance rule | ✅ Enforced by database triggers |
 | Content model | ✅ Modelled in `sanity/` — kept as the model even though Sanity is out |
-| **Database** | ✅ Schema, seed and constraint tests. **Not yet read by the site.** |
-| **Storefront reads the database** | ❌ Still serving `src/lib/data/fixtures.ts` |
-| **Admin panel** | ❌ Not started — this is what lets sanju add a saree |
+| Database | ✅ Schema, seed, 20 constraint tests |
+| Storefront reads the database | ✅ Verified by editing a row and watching the page follow |
+| **Admin — sign-in and products** | ✅ scrypt auth, opaque sessions, product list, create/edit/delete, publish/unpublish |
+| **Admin — photo upload** | ❌ **Next.** The form manages everything except images. |
+| **Admin — pages, navigation, campaigns** | ❌ Still code-edited |
 | **Razorpay checkout** | ❌ Not started |
+| Order management (orders, emails, refunds) | ❌ Not started — a consequence of dropping Shopify |
 
 **Sprint 2** is otherwise complete (PLP, PDP, cart, sold-out flow, badging), plus the
 grouped-search shape from Sprint 3 and 8 of 15 section types from Sprint 4.
 
-The old "navigation must be CMS-driven" exit criterion still stands, but it is now the
-admin panel that satisfies it, not Sanity.
+The old "navigation must be CMS-driven" exit criterion is now the admin's job, not
+Sanity's, and is **not yet met** — navigation still lives in
+`src/lib/data/navigation.ts`.
 
 ### 2.4 Pick up here
 
-**The agreed sequence when the session ended:**
-
-1. **Point the storefront at the database.** Write `SqliteCatalogueRepository` against
-   the existing `CatalogueRepository` interface and switch `catalogue.ts` to it. No
-   visible change, but everything after depends on it.
-2. **Build the admin panel.** Login, product CRUD, image upload, page and navigation
-   editing. This is the step that ends sanju needing a developer to add a saree — it
-   is the highest-value remaining work by a distance.
-3. **Razorpay checkout.** Order tables, order creation, payment verification by
-   webhook signature, confirmation email.
+1. **Photo upload in the admin.** The single most useful remaining piece: without it a
+   piece cannot be finished, and photography is about to start arriving. Needs an
+   upload handler, a store on disk, ordering, and required alt text per frame (the
+   database already refuses a frame without it).
+2. **Razorpay checkout.** Order tables, order creation, payment verification by webhook
+   signature, confirmation email. Needs a Razorpay account with business KYC — start
+   that early, it is the long pole on this item.
+3. **Admin for pages, navigation and campaigns.** Closes the zero-deploy-content
+   criterion.
 4. **Taxonomy review** — `rajraani/taxonomy/REVIEW.md`, 11 decisions, sanju + a weaver.
 5. The remaining 7 section types; Portable Text serializer if the CMS model is used
    as-is (see `sanity/README.md` "Known mismatches").
@@ -164,6 +167,10 @@ admin panel that satisfies it, not Sanity.
 **Do not rebuild Shopify or Sanity integrations.** Both were deliberately dropped on
 6 August — read `rajraani/docs/architecture-change-2026-08-06.md` before assuming
 otherwise.
+
+**Getting in:** `npm run dev` serves on **8080**. Admin at `/admin/login`. Create or
+reset a user with `node scripts/create-admin.mjs <email> <password>`. The dev
+credential in git history is compromised by definition — change it before deploying.
 
 **Housekeeping:** `node_modules` and `data/` sit inside OneDrive. Exclude them from
 sync, or move the repo out of OneDrive. There is no git remote — push somewhere.

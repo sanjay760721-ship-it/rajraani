@@ -13,9 +13,15 @@ specifications in the parent folder (`build.md`, `design.md`,
 
 ```bash
 npm install
-npm run db:reset   # create and seed the database
-npm run dev
+npm run db:reset                                          # create and seed the database
+node scripts/create-admin.mjs you@example.com a-password  # at least 12 characters
+npm run dev                                               # http://localhost:8080
 ```
+
+| | |
+|---|---|
+| Shop | http://localhost:8080 |
+| Admin | http://localhost:8080/admin |
 
 `npm run verify` runs every gate in order:
 
@@ -98,6 +104,13 @@ stories and craft pages, grouped search.
 **Cart** — drawer with focus trap, localStorage persistence, cross-tab sync.
 Stops at checkout, which now goes to Razorpay and is not wired up yet.
 
+**Admin** (`/admin`) — scrypt password hashing with the cost parameters stored
+per-hash, opaque server-side sessions so a sign-out revokes immediately, and a
+product list plus create/edit/delete/publish. Every server action re-checks the
+session: the layout guard protects what is *rendered*, not what is *callable*.
+Facet fields are dropdowns from `taxonomy/facets.json`, so a new weave cannot be
+invented by typing it.
+
 ---
 
 ## Findings from building it
@@ -154,9 +167,10 @@ Checked in a real browser against the running app, not inferred:
 | Not built | Reason |
 |---|---|
 | Real photography | Not commissioned. Frames are schematic at exact capture ratios; `Frame.tsx` switches to `next/image` when `src` is populated. |
-| Storefront reading the database | The schema, seed and constraint tests exist; the repository implementation does not. Next task. |
-| Admin panel | Not started. The step that ends needing a developer to add a saree. |
-| Razorpay checkout | Not started. Needs an account with business KYC. |
+| Photo upload in the admin | **The next piece.** The form manages everything except images. |
+| Admin for pages, navigation, campaigns | Still code-edited, so content changes need a deploy. |
+| Razorpay checkout | Needs an account with business KYC — start that early. |
+| Orders, confirmation emails, refunds | The operational half that Shopify used to provide. |
 | Algolia search | Deferred. The grouped result shape is built; at a few hundred products the SQLite scan is fine. |
 | 9 of 15 section types | Sprint 4. Adding one is a union member plus a registry case. |
 | Filter drawer below 1024px | Collapses to a disclosure instead. Same behaviour, less polish. |
