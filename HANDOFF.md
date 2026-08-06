@@ -149,15 +149,43 @@ The old "navigation must be CMS-driven" exit criterion is now the admin's job, n
 Sanity's, and is **not yet met** — navigation still lives in
 `src/lib/data/navigation.ts`.
 
+### 2.35 ⚠️ Open at the end of 6 August
+
+**1. CI is failing on GitHub, and nobody has looked at why yet.**
+
+The repo is at https://github.com/sanjay760721-ship-it/rajraani (private). The
+workflow was moved to the repository root in `a145277` — it had been nested inside
+`rajraani/` and had therefore never run at all, which looks identical to passing.
+
+Its first real run **failed** after ~15 minutes:
+https://github.com/sanjay760721-ship-it/rajraani/actions/runs/31122060757
+
+`npm run verify` passes locally on the same commit, so the likely cause is
+environmental rather than the code — but that was **not confirmed**, and it should
+not be assumed. Start with `gh run view --job=92684592152 --log-failed`. Candidates
+worth checking first: `npm ci` against a lockfile written by npm 11 on Windows, the
+Node 24 image, and whether `db:reset` behaves on a clean checkout.
+
+**2. Payment system is half built** — see §2.4 item 1.
+
+**3. Photo upload is still not built.** It was the agreed next task before payments
+were brought forward. A piece cannot be completed without it.
+
 ### 2.4 Pick up here
 
-1. **Photo upload in the admin.** The single most useful remaining piece: without it a
-   piece cannot be finished, and photography is about to start arriving. Needs an
-   upload handler, a store on disk, ordering, and required alt text per frame (the
-   database already refuses a frame without it).
-2. **Razorpay checkout.** Order tables, order creation, payment verification by webhook
-   signature, confirmation email. Needs a Razorpay account with business KYC — start
-   that early, it is the long pole on this item.
+1. **Finish the payment system.** Started 6 Aug — `src/lib/orders/orders.ts` and the
+   `customer_order` / `order_item` tables are done and pushed, including
+   server-side pricing, the stock race guard and idempotent payment recording.
+   **Still to build:** the Razorpay API calls, the checkout form, the webhook route,
+   the confirmation page, and the admin order list. Also **no tests yet** — the
+   pricing rules deserve them, particularly that a tampered cart cannot change the
+   amount.
+   Needs a **Razorpay account**: test keys arrive immediately on signup, live mode
+   needs business KYC, so start it early. Keys go in `.env.local`, never in git.
+2. **Photo upload in the admin.** Without it a piece cannot be finished, and
+   photography is the longest-lead item in the project. Needs an upload handler, a
+   store on disk, frame ordering, and alt text per frame (the database already
+   refuses a frame without it).
 3. **Admin for pages, navigation and campaigns.** Closes the zero-deploy-content
    criterion.
 4. **Taxonomy review** — `rajraani/taxonomy/REVIEW.md`, 11 decisions, sanju + a weaver.
