@@ -1,0 +1,63 @@
+name: verify
+
+# Must live at the REPOSITORY root. GitHub Actions only reads
+# .github/workflows/ at the top level — a workflow nested inside a
+# subdirectory is silently ignored, which looks identical to a passing build.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: rajraani
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Node 24, not 22. Two things depend on it: `node:sqlite`, which is
+          # experimental and flag-gated before 24, and running .ts test files
+          # directly, which relies on type stripping being on by default.
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: rajraani/package-lock.json
+
+      # These three gates need no dependencies, so a regression in the
+      # vocabulary or a competitor reference fails in seconds rather than after
+      # an install and a build.
+      - name: Taxonomy is in sync with facets.json
+        run: npm run taxonomy:check
+
+      - name: Facet taxonomy is well-formed
+        run: npm run check:taxonomy
+
+      - name: Originality & house rules
+        run: npm run check:originality
+
+      - run: npm ci
+
+      - name: Unit tests (incl. the WCAG contrast contract)
+        run: npm test
+
+      - run: npm run lint
+      - run: npm run typecheck
+
+      # The build needs a database, and data/ is deliberately not in git.
+      # Seeding here also proves the seed script still works, which is the
+      # thing a new clone depends on.
+      - name: Seed the database
+        run: npm run db:reset
+
+      - run: npm run build
+
+      # Reads the prerendered HTML that `next build` leaves behind, so it has
+      # to run after the build.
+      - name: Heading order
+        run: npm run lint:headings
