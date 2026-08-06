@@ -61,7 +61,8 @@ decision.
 | [design-addendum.md](docs/research/design-addendum.md) | Navigation, product data, PDP anatomy — all measured |
 | [sweep-findings.md](docs/research/sweep-findings.md) | Imagery forensics, facets, cart, search, performance |
 | [pre-build-gaps.md](docs/research/pre-build-gaps.md) | Data quality, availability, SEO, accessibility |
-| [photography-brief.md](docs/research/photography-brief.md) | **Sendable to studios.** Needs SKU counts filling in at §1. |
+| [photography-brief.md](docs/research/photography-brief.md) | **Sendable to studios.** Catalogue stills — template, ratios, colour, budget. Needs SKU counts at §1. |
+| [creative-direction.md](docs/research/creative-direction.md) | **Send with the above.** The look, campaign imagery, and film — which the photography brief does not cover. |
 
 Note that `build.md` §1.1 and §1.3 are **superseded** — Shopify and Sanity were
 dropped on 6 August. Everything else in it still stands.
