@@ -304,6 +304,110 @@ CREATE TABLE IF NOT EXISTS setting (
 );
 
 -- ---------------------------------------------------------------------------
+-- Orders
+--
+-- The single most important rule in this file:
+--
+--   THE AMOUNT IS COMPUTED HERE, FROM `product.price_minor`, AND NEVER
+--   ACCEPTED FROM THE BROWSER.
+--
+-- A cart lives in the customer's own localStorage and is theirs to edit. If the
+-- server trusts a posted total, anyone can buy a ₹1,48,000 saree for ₹1 by
+-- changing a number in devtools. This is the classic e-commerce hole and it is
+-- exploited constantly. Prices are read from the database at order creation and
+-- the payment gateway is told that figure, not the shopper's.
+--
+-- Line items snapshot the price and title at the moment of sale, so editing a
+-- product later does not silently rewrite what someone was charged.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS customer_order (
+  id             INTEGER PRIMARY KEY,
+
+  -- Human-facing reference, e.g. RJ-2026-0007. Never the primary key: the id is
+  -- sequential and would tell anyone how many orders the business has taken.
+  reference      TEXT NOT NULL UNIQUE,
+
+  -- Guest checkout. There is no customer account layer, and at this volume
+  -- there does not need to be — an order is identified by its reference.
+  email          TEXT NOT NULL,
+  phone          TEXT NOT NULL,
+  full_name      TEXT NOT NULL,
+
+  address_line1  TEXT NOT NULL,
+  address_line2  TEXT,
+  city           TEXT NOT NULL,
+  state          TEXT NOT NULL,
+  postcode       TEXT NOT NULL,
+  country        TEXT NOT NULL DEFAULT 'IN' CHECK (country = 'IN'),
+
+  -- Computed server-side. Shipping is free within India, so total = subtotal
+  -- for now; the column exists so adding a charge later is not a migration of
+  -- historical orders.
+  subtotal_minor INTEGER NOT NULL CHECK (subtotal_minor > 0),
+  shipping_minor INTEGER NOT NULL DEFAULT 0 CHECK (shipping_minor >= 0),
+  total_minor    INTEGER NOT NULL CHECK (total_minor > 0),
+  currency       TEXT NOT NULL DEFAULT 'INR' CHECK (currency = 'INR'),
+
+  /*
+   * State machine:
+   *
+   *   pending ──► paid ──► dispatched ──► delivered
+   *      │          │
+   *      │          └────► refunded
+   *      ├──► failed
+   *      └──► cancelled
+   *
+   * `pending` means an order record exists and the shopper has been sent to
+   * pay. It is NOT a sale. Only a verified payment signature moves it to
+   * `paid`, and only the server does that.
+   */
+  status         TEXT NOT NULL DEFAULT 'pending'
+                   CHECK (status IN ('pending', 'paid', 'failed', 'cancelled',
+                                     'dispatched', 'delivered', 'refunded')),
+
+  -- Razorpay's identifiers. payment_id is UNIQUE so a webhook delivered twice
+  -- cannot record the same payment twice — gateways retry, and they will.
+  razorpay_order_id   TEXT UNIQUE,
+  razorpay_payment_id TEXT UNIQUE,
+
+  notes          TEXT,
+  created_at     TEXT NOT NULL,
+  paid_at        TEXT,
+  dispatched_at  TEXT,
+  tracking       TEXT,
+
+  CHECK (total_minor = subtotal_minor + shipping_minor)
+);
+
+CREATE INDEX IF NOT EXISTS customer_order_status_idx ON customer_order (status);
+CREATE INDEX IF NOT EXISTS customer_order_created_idx ON customer_order (created_at);
+
+-- Line items, with everything that mattered at the time of sale copied in.
+--
+-- product_id is ON DELETE SET NULL rather than CASCADE: deleting a product must
+-- never delete the record of someone having bought it.
+CREATE TABLE IF NOT EXISTS order_item (
+  id               INTEGER PRIMARY KEY,
+  order_id         INTEGER NOT NULL REFERENCES customer_order (id) ON DELETE CASCADE,
+  product_id       INTEGER REFERENCES product (id) ON DELETE SET NULL,
+
+  -- Snapshot. If the piece is renamed or repriced later, the order still says
+  -- what was actually sold and for how much.
+  handle           TEXT NOT NULL,
+  title            TEXT NOT NULL,
+  poetic_name      TEXT NOT NULL,
+  sku              TEXT NOT NULL,
+  unit_price_minor INTEGER NOT NULL CHECK (unit_price_minor > 0),
+  quantity         INTEGER NOT NULL CHECK (quantity > 0),
+  line_total_minor INTEGER NOT NULL CHECK (line_total_minor > 0),
+
+  CHECK (line_total_minor = unit_price_minor * quantity)
+);
+
+CREATE INDEX IF NOT EXISTS order_item_order_idx ON order_item (order_id);
+
+-- ---------------------------------------------------------------------------
 -- Admin
 -- ---------------------------------------------------------------------------
 
