@@ -151,20 +151,30 @@ Sanity's, and is **not yet met** — navigation still lives in
 
 ### 2.35 ⚠️ Open at the end of 6 August
 
-**1. CI is failing on GitHub, and nobody has looked at why yet.**
+**1. ~~CI is failing~~ — diagnosed 7 August. It is not a code problem.**
 
-The repo is at https://github.com/sanjay760721-ship-it/rajraani (private). The
-workflow was moved to the repository root in `a145277` — it had been nested inside
-`rajraani/` and had therefore never run at all, which looks identical to passing.
+All four runs executed **zero steps** and ended `cancelled`, after sitting queued
+for 15–58 minutes. No runner ever picked the job up, so the workflow, the Node
+version and the code were never evaluated. Actions is enabled on the repo
+(`{"enabled":true}`); the account was created 1 August 2026.
 
-Its first real run **failed** after ~15 minutes:
-https://github.com/sanjay760721-ship-it/rajraani/actions/runs/31122060757
+**Cause: a six-day-old free account running Actions on a private repo.** GitHub
+withholds or throttles runners for new accounts, and private repos draw on a
+metered pool that is often not provisioned until the account is verified.
 
-`npm run verify` passes locally on the same commit, so the likely cause is
-environmental rather than the code — but that was **not confirmed**, and it should
-not be assumed. Start with `gh run view --job=92684592152 --log-failed`. Candidates
-worth checking first: `npm ci` against a lockfile written by npm 11 on Windows, the
-Node 24 image, and whether `db:reset` behaves on a clean checkout.
+**To fix, in a browser:** check https://github.com/settings/billing for Actions
+minutes and any prompt to verify the account or add a payment method. Free tier
+includes 2,000 minutes/month for private repos; adding a card usually releases it
+without a charge. (The billing API needs a `user` token scope, which the current
+auth does not have — hence checking by hand.)
+
+**Mitigation already in place:** a `pre-push` hook at `.githooks/pre-push` runs the
+full gate before anything reaches GitHub, so CI being unavailable does not mean
+unverified code ships. Worth keeping even after Actions works — it fails in seconds
+rather than minutes.
+
+> **After cloning, enable the hook once:** `git config core.hooksPath .githooks`
+> `core.hooksPath` is local config and cannot be committed.
 
 **2. Payment system is half built** — see §2.4 item 1.
 

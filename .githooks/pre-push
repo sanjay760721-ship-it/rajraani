@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# Run the full gate before anything reaches GitHub.
+#
+# This exists because GitHub Actions is not running for this account yet — all
+# four runs so far were cancelled in the queue without executing a single step
+# (see HANDOFF §2.35). Until that is sorted, CI is local or it is nowhere.
+#
+# It is worth keeping afterwards regardless: catching a failure here takes
+# seconds, catching it in Actions takes minutes and costs a broken commit on
+# main.
+#
+# Skip deliberately, when you know why:
+#     git push --no-verify
+
+set -e
+
+echo "Running the verify gate before push…"
+echo
+
+cd "$(dirname "$0")/../rajraani"
+
+if ! npm run verify; then
+  echo
+  echo "──────────────────────────────────────────────────────────────"
+  echo " Push aborted: the verify gate failed."
+  echo
+  echo " Fix it, or push anyway with:  git push --no-verify"
+  echo "──────────────────────────────────────────────────────────────"
+  exit 1
+fi
+
+echo
+echo "Gate passed. Pushing."

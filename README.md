@@ -14,12 +14,19 @@ Handloom Banarasi saree e-commerce. Own brand, category architecture.
 | **Know what changed on 6 Aug** | [rajraani/docs/architecture-change-2026-08-06.md](rajraani/docs/architecture-change-2026-08-06.md) |
 
 ```bash
+git config core.hooksPath .githooks   # once per clone — runs the gate before every push
+
 cd rajraani
 npm install
 npm run db:reset                                          # create and seed the database
 node scripts/create-admin.mjs you@example.com a-password  # 12 characters or more
 npm run dev                                               # http://localhost:8080
 ```
+
+> **GitHub Actions is not running yet** — the account is new and its jobs are being
+> cancelled in the queue before a runner picks them up. See `HANDOFF.md` §2.35. The
+> `pre-push` hook runs the same gate locally in the meantime, which is why the
+> `core.hooksPath` line above matters.
 
 Shop at **/**, admin at **/admin**.
 
