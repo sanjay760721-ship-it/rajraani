@@ -26,7 +26,6 @@ const SECTION_DESCRIPTIONS: Record<Section["type"], string> = {
 export function HomepageEditor() {
   const [sections, setSections] = useState<Section[]>([...HOMEPAGE_SECTIONS]);
   const [hiddenIds, setHiddenIds] = useState<Record<string, boolean>>({});
-  const [savedNotice, setSavedNotice] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const moveUp = (index: number) => {
@@ -51,11 +50,6 @@ export function HomepageEditor() {
     setHiddenIds((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const saveLayout = () => {
-    setSavedNotice(true);
-    setTimeout(() => setSavedNotice(false), 3000);
-  };
-
   return (
     <div className="space-y-8">
       {/* Top Header Bar */}
@@ -76,19 +70,31 @@ export function HomepageEditor() {
           </Link>
           <button
             type="button"
-            onClick={saveLayout}
-            className="bg-ink px-6 py-2.5 text-xs tracking-widest uppercase text-bg hover:opacity-90 transition-opacity"
+            disabled
+            title="Saving the homepage layout is not built yet — see HANDOFF §2.3"
+            className="bg-ink px-6 py-2.5 text-xs tracking-widest uppercase text-bg opacity-40 cursor-not-allowed"
           >
             Save Homepage Layout
           </button>
         </div>
       </div>
 
-      {savedNotice ? (
-        <div className="border border-success bg-bg-alt px-4 py-3 text-caption text-success">
-          Homepage layout successfully saved and deployed to live server.
-        </div>
-      ) : null}
+      {/*
+        This editor is a working prototype of the interface, not a working
+        editor. Reordering, hiding and copy edits all live in React state and
+        are discarded on navigation — the homepage still renders from
+        `src/lib/content/sections.ts`. The notice stays until there is a write
+        path behind the save button; an admin tool that quietly forgets what it
+        was told is worse than one that admits it cannot remember.
+      */}
+      <div
+        role="note"
+        className="border border-amber-700/40 bg-amber-50 px-4 py-3 text-caption text-xs text-amber-900"
+      >
+        <strong>Preview only.</strong> Changes here are not saved yet — the homepage is still
+        edited in code (<code>src/lib/content/sections.ts</code>). Use this to plan a layout, then
+        hand the order to a developer.
+      </div>
 
       {/* Sections List */}
       <div className="space-y-4">

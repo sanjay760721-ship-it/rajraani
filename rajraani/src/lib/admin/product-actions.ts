@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { requireAdmin } from "../auth/session.ts";
 import {
+  adjustStock,
   deleteProduct,
   handleTaken,
   saveProduct,
@@ -211,6 +212,44 @@ export async function deleteProductAction(form: FormData): Promise<void> {
   deleteProduct(id);
   revalidatePath("/", "layout");
   redirect("/admin?deleted=1");
+}
+
+export type AdjustStockResult =
+  | { ok: true; quantity: number }
+  | { ok: false; error: string };
+
+/**
+ * Nudge a product's stock from the dashboard's inline +/- controls.
+ *
+ * This one returns rather than redirecting: it is called from a row in a long
+ * table, and throwing the operator back to the top of the page after every
+ * click would make the control unusable. The caller reconciles its optimistic
+ * number against the `quantity` that actually landed.
+ */
+export async function adjustStockAction(
+  id: number,
+  delta: number,
+): Promise<AdjustStockResult> {
+  await requireAdmin();
+
+  if (!Number.isInteger(id) || !Number.isInteger(delta)) {
+    return { ok: false, error: "Invalid stock adjustment." };
+  }
+
+  // Bound the step. The dashboard only ever sends ±1, so anything larger is a
+  // hand-crafted POST rather than a click.
+  if (Math.abs(delta) > 100) {
+    return { ok: false, error: "Stock adjustment out of range." };
+  }
+
+  const quantity = adjustStock(id, delta);
+  if (quantity === undefined) {
+    return { ok: false, error: "That piece no longer exists." };
+  }
+
+  // Sold-out state is rendered on the storefront, so the change has to reach it.
+  revalidatePath("/", "layout");
+  return { ok: true, quantity };
 }
 
 export async function togglePublishedAction(form: FormData): Promise<void> {

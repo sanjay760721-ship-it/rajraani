@@ -99,32 +99,15 @@ const SAMPLE_MEDIA: MediaItem[] = [
 ];
 
 export function MediaManager() {
-  const [items, setItems] = useState<MediaItem[]>(SAMPLE_MEDIA);
+  // Fixed until there is a media table to read from — nothing mutates this list.
+  const items: MediaItem[] = SAMPLE_MEDIA;
   const [filter, setFilter] = useState<"all" | "image" | "video">("all");
   const [copiedPath, setCopiedPath] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
 
   const handleCopy = (path: string) => {
     navigator.clipboard?.writeText(path);
     setCopiedPath(path);
     setTimeout(() => setCopiedPath(null), 2500);
-  };
-
-  const handleSimulatedUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    setIsUploading(true);
-    setTimeout(() => {
-      const newItems: MediaItem[] = Array.from(files).map((f) => ({
-        name: f.name,
-        path: `/reference-only/${f.name}`,
-        size: `${Math.round(f.size / 1024)} KB`,
-        type: f.type.startsWith("video") ? "video" : "image",
-        ratio: f.type.startsWith("video") ? "video" : "banner",
-      }));
-      setItems((prev) => [...newItems, ...prev]);
-      setIsUploading(false);
-    }, 1200);
   };
 
   const filteredItems = items.filter((item) => {
@@ -182,26 +165,25 @@ export function MediaManager() {
         </div>
       ) : null}
 
-      {/* Drag and Drop Upload Zone */}
-      <div className="relative border-2 border-dashed border-rule bg-bg-sand/30 p-10 text-center hover:border-ink transition-colors">
-        <input
-          type="file"
-          multiple
-          accept="image/*,video/*"
-          onChange={handleSimulatedUpload}
-          className="absolute inset-0 cursor-pointer opacity-0"
-        />
-        <div className="pointer-events-none space-y-2">
-          <span className="block font-display text-xl text-ink">
-            {isUploading ? "Uploading & Optimizing Media..." : "Drag & Drop Studio Media Here"}
-          </span>
-          <p className="text-caption text-ink-muted">
-            Supports high-resolution WebP, PNG, JPEG, and MP4 video up to 3000px wide.
-          </p>
-          <span className="inline-block mt-3 bg-ink px-4 py-2 text-xs uppercase tracking-wider text-bg">
-            Browse Files
-          </span>
-        </div>
+      {/*
+        The drop zone accepted files, invented a `/reference-only/` path for
+        each and pushed them into local state — so an operator could "upload" a
+        master, see it listed, and lose it on refresh. There is no storage
+        backend and no write path yet (HANDOFF §2.3, "Admin — photo upload").
+        Until there is, the zone states that plainly rather than pretending.
+      */}
+      <div
+        role="note"
+        className="border-2 border-dashed border-rule bg-bg-sand/30 p-10 text-center space-y-2"
+      >
+        <span className="block font-display text-xl text-ink-muted">
+          Uploading is not built yet
+        </span>
+        <p className="text-caption text-ink-muted mx-auto max-w-lg">
+          Photography is still added to <code>public/</code> in the repository and referenced by
+          path. The asset list below is a catalogue of what is already committed — copy a path from
+          it to use in a product or section.
+        </p>
       </div>
 
       {/* Media Grid */}

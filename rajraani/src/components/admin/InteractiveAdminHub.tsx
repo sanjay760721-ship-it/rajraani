@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { startTransition, useState } from "react";
 
 import { BRAND } from "@/lib/brand";
+import { adjustStockAction } from "@/lib/admin/product-actions";
 import type { AdminProductRow, DashboardMetrics } from "@/lib/data/admin-queries";
 import { formatMoney } from "@/lib/money";
 
@@ -21,18 +22,46 @@ export function InteractiveAdminHub({
   const [activeTab, setActiveTab] = useState<"all" | "live" | "draft" | "soldout" | "incomplete">("all");
   const [viewMode, setViewMode] = useState<"table" | "grid">("table");
   const [previewProduct, setPreviewProduct] = useState<AdminProductRow | null>(null);
+  const [pendingStock, setPendingStock] = useState<ReadonlySet<number>>(new Set());
+  const [stockError, setStockError] = useState<string | null>(null);
 
-  // Quick stock adjustment helper
+  /**
+   * Move a piece's stock and persist it.
+   *
+   * The optimistic update keeps the control feeling immediate, but the server's
+   * returned quantity is authoritative — it wins even when it disagrees, which
+   * is how a second admin's concurrent edit surfaces here. On failure the row
+   * goes back to where it started and the reason is shown.
+   */
   const adjustStock = (productId: number, delta: number) => {
-    setProducts((prev) =>
-      prev.map((p) => {
-        if (p.id === productId) {
-          const newQty = Math.max(0, p.inventory_quantity + delta);
-          return { ...p, inventory_quantity: newQty };
-        }
-        return p;
-      }),
-    );
+    const before = products.find((p) => p.id === productId)?.inventory_quantity;
+    if (before === undefined) return;
+
+    const setQuantity = (quantity: number) =>
+      setProducts((prev) =>
+        prev.map((p) => (p.id === productId ? { ...p, inventory_quantity: quantity } : p)),
+      );
+
+    setQuantity(Math.max(0, before + delta));
+    setPendingStock((prev) => new Set(prev).add(productId));
+
+    startTransition(async () => {
+      const result = await adjustStockAction(productId, delta);
+
+      if (result.ok) {
+        setQuantity(result.quantity);
+        setStockError(null);
+      } else {
+        setQuantity(before);
+        setStockError(result.error);
+      }
+
+      setPendingStock((prev) => {
+        const next = new Set(prev);
+        next.delete(productId);
+        return next;
+      });
+    });
   };
 
   // Filter products based on active tab & search query
@@ -58,6 +87,15 @@ export function InteractiveAdminHub({
 
   return (
     <div className="space-y-8 animate-fadeIn">
+      {stockError ? (
+        <p
+          role="alert"
+          className="text-caption border border-error/40 bg-error/5 px-4 py-3 text-xs font-semibold text-error"
+        >
+          {stockError} Stock was left unchanged.
+        </p>
+      ) : null}
+
       {/* Dynamic Header with Real-Time Catalogue Readiness Health Bar */}
       <div className="bg-gradient-to-r from-bg-alt via-bg-sand/30 to-bg-alt border border-rule p-6 rounded-xs shadow-xs space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -330,22 +368,25 @@ export function InteractiveAdminHub({
                         <button
                           type="button"
                           onClick={() => adjustStock(p.id, -1)}
-                          className="w-6 h-6 border border-rule bg-bg hover:bg-bg-sand flex items-center justify-center text-ink font-bold rounded-xs cursor-pointer active:scale-95 transition-transform"
+                          disabled={pendingStock.has(p.id) || p.inventory_quantity === 0}
+                          className="w-6 h-6 border border-rule bg-bg hover:bg-bg-sand flex items-center justify-center text-ink font-bold rounded-xs cursor-pointer active:scale-95 transition-transform disabled:opacity-40 disabled:cursor-not-allowed"
                           title="Decrease Stock"
                         >
                           -
                         </button>
                         <span
+                          aria-live="polite"
                           className={`font-semibold tabular-nums px-2 min-w-[28px] text-center ${
-                            p.inventory_quantity === 0 ? "text-rose-600" : "text-ink"
-                          }`}
+                            pendingStock.has(p.id) ? "opacity-50" : ""
+                          } ${p.inventory_quantity === 0 ? "text-rose-600" : "text-ink"}`}
                         >
                           {p.inventory_quantity}
                         </span>
                         <button
                           type="button"
                           onClick={() => adjustStock(p.id, 1)}
-                          className="w-6 h-6 border border-rule bg-bg hover:bg-bg-sand flex items-center justify-center text-ink font-bold rounded-xs cursor-pointer active:scale-95 transition-transform"
+                          disabled={pendingStock.has(p.id)}
+                          className="w-6 h-6 border border-rule bg-bg hover:bg-bg-sand flex items-center justify-center text-ink font-bold rounded-xs cursor-pointer active:scale-95 transition-transform disabled:opacity-40 disabled:cursor-not-allowed"
                           title="Increase Stock"
                         >
                           +
@@ -453,15 +494,22 @@ export function InteractiveAdminHub({
                       <button
                         type="button"
                         onClick={() => adjustStock(p.id, -1)}
-                        className="w-5 h-5 border border-rule bg-bg hover:bg-bg-sand font-bold text-xs flex items-center justify-center"
+                        disabled={pendingStock.has(p.id) || p.inventory_quantity === 0}
+                        className="w-5 h-5 border border-rule bg-bg hover:bg-bg-sand font-bold text-xs flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         -
                       </button>
-                      <span className="font-bold text-ink px-1">{p.inventory_quantity}</span>
+                      <span
+                        aria-live="polite"
+                        className={`font-bold text-ink px-1 ${pendingStock.has(p.id) ? "opacity-50" : ""}`}
+                      >
+                        {p.inventory_quantity}
+                      </span>
                       <button
                         type="button"
                         onClick={() => adjustStock(p.id, 1)}
-                        className="w-5 h-5 border border-rule bg-bg hover:bg-bg-sand font-bold text-xs flex items-center justify-center"
+                        disabled={pendingStock.has(p.id)}
+                        className="w-5 h-5 border border-rule bg-bg hover:bg-bg-sand font-bold text-xs flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         +
                       </button>

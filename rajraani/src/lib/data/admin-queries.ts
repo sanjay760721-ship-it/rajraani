@@ -235,6 +235,29 @@ export function deleteProduct(id: number): void {
   db().prepare(`DELETE FROM product WHERE id = ?`).run(id);
 }
 
+/**
+ * Move a product's stock by `delta`, returning the quantity that ended up in
+ * the database.
+ *
+ * The arithmetic happens inside SQL rather than in JavaScript so two admins
+ * adjusting the same piece cannot read-modify-write over each other. `MAX(0, …)`
+ * holds the floor at zero, matching the storefront's sold-out threshold.
+ */
+export function adjustStock(id: number, delta: number): number | undefined {
+  const row = db()
+    .prepare(
+      `UPDATE product
+          SET inventory_quantity = MAX(0, inventory_quantity + ?), updated_at = ?
+        WHERE id = ?
+        RETURNING inventory_quantity`,
+    )
+    .get(delta, new Date().toISOString(), id) as
+    | { inventory_quantity: number }
+    | undefined;
+
+  return row?.inventory_quantity;
+}
+
 export function setPublished(id: number, published: boolean): void {
   db()
     .prepare(`UPDATE product SET published = ?, updated_at = ? WHERE id = ?`)
