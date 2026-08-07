@@ -17,3 +17,6 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# Reference imagery dropped here for local mockups. Never commit.
+/images/

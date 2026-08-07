@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { PLACEHOLDER_WASH, toneFor } from "../Frame";
@@ -53,25 +54,65 @@ export async function SectionRenderer({
  * two tones differ, so the art direction is visibly a pair rather than a CSS
  * resize of one asset (design.md §3.7).
  */
-function Art({ art, className = "" }: { art: ArtPair; className?: string }) {
+function Art({
+  art,
+  className = "",
+  alt = "",
+  priority = false,
+}: {
+  art: ArtPair;
+  className?: string;
+  alt?: string;
+  /** Set on the hero only — it is the LCP element. */
+  priority?: boolean;
+}) {
+  /**
+   * One crop per breakpoint, as separate elements rather than a CSS resize —
+   * the mobile frame is a recomposition, not the same photograph scaled
+   * (addendum A7).
+   *
+   * When a pair carries no `src` it falls back to the schematic colour field,
+   * so deleting the reference folder degrades to a blank rather than to a
+   * broken image icon.
+   */
+  const crop = (
+    side: ArtPair["desktop"],
+    visibility: string,
+    sizes: string,
+    priority: boolean,
+  ) =>
+    side.src ? (
+      // next/image rather than a bare <img>: these slots hold the LCP element
+      // on the homepage, and the format negotiation and srcset ladder
+      // configured in next.config.ts apply here too.
+      <div
+        className={`relative ${visibility} ${className}`}
+        style={{ backgroundColor: toneFor(side.tone) }}
+      >
+        <Image
+          src={side.src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover"
+        />
+      </div>
+    ) : (
+      <div
+        aria-hidden
+        className={`${visibility} ${className}`}
+        style={{
+          backgroundColor: toneFor(side.tone),
+          backgroundImage: PLACEHOLDER_WASH,
+        }}
+      />
+    );
+
   return (
     <>
-      <div
-        aria-hidden
-        className={`md:hidden ${className}`}
-        style={{
-          backgroundColor: toneFor(art.mobile.tone),
-          backgroundImage: PLACEHOLDER_WASH,
-        }}
-      />
-      <div
-        aria-hidden
-        className={`hidden md:block ${className}`}
-        style={{
-          backgroundColor: toneFor(art.desktop.tone),
-          backgroundImage: PLACEHOLDER_WASH,
-        }}
-      />
+      {crop(art.mobile, "md:hidden", "100vw", priority)}
+      {crop(art.desktop, "hidden md:block", "(min-width: 1440px) 1600px, 100vw", priority)}
     </>
   );
 }
@@ -86,7 +127,11 @@ function Hero({
   const Heading = isPageTitle ? "h1" : "h2";
   return (
     <section className="relative">
-      <Art art={section.art} className="h-[70vh] max-h-[820px] min-h-[440px] w-full" />
+      <Art
+        art={section.art}
+        className="h-[70vh] max-h-[820px] min-h-[440px] w-full"
+        priority
+      />
       <div className="absolute inset-0 flex items-end">
         <div className="wrap-wide pb-14">
           <div className="max-w-prose">

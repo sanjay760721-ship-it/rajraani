@@ -42,3 +42,9 @@ next-env.d.ts
 
 # Local database
 /data/
+
+# Reference imagery — local mockup only.
+# Third-party photographs used to evaluate layout. Not licensed for this site,
+# must never be committed, deployed, or published. Replace with commissioned
+# photography per docs/research/photography-brief.md.
+/public/reference-only/

@@ -18,8 +18,8 @@
  */
 
 export type ArtPair = {
-  desktop: { tone: string };
-  mobile: { tone: string };
+  desktop: { tone: string; src?: string };
+  mobile: { tone: string; src?: string };
 };
 
 export type Section =
@@ -92,12 +92,36 @@ const pair = (desktop: string, mobile = desktop): ArtPair => ({
   mobile: { tone: mobile },
 });
 
+/**
+ * A pair backed by a real image file.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * TEMPORARY. These point at `/reference-only/`, which is gitignored and holds
+ * third-party photographs used to judge layout. They are not licensed for this
+ * site and must not reach a deploy. Replace with commissioned photography per
+ * `docs/research/photography-brief.md`, at which point the paths change and
+ * nothing else does.
+ *
+ * The `tone` is kept alongside as the fallback, so removing the folder degrades
+ * to the schematic colour field rather than to a broken image.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+const imagePair = (
+  tone: string,
+  desktopSrc: string,
+  mobileSrc = desktopSrc,
+  mobileTone = tone,
+): ArtPair => ({
+  desktop: { tone, src: `/reference-only/${desktopSrc}` },
+  mobile: { tone: mobileTone, src: `/reference-only/${mobileSrc}` },
+});
+
 /** Homepage, ordered. In production this is the Sanity `homepage` document. */
 export const HOMEPAGE_SECTIONS: readonly Section[] = [
   {
     type: "hero",
     id: "hero-nadi",
-    art: pair("indigo", "blue"),
+    art: imagePair("indigo", "Small-Booti-2Banner_2000x.webp"),
     eyebrow: "Monsoon 2026",
     title: "Nadi",
     body: "A river does not repeat itself. Nine pieces that follow water through the season it belongs to.",
@@ -120,7 +144,11 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
   {
     type: "collectionTriptych",
     id: "triptych-kadhua",
-    art: [pair("maroon"), pair("gold"), pair("green")],
+    art: [
+      imagePair("maroon", "Small-Booti-Website-2000px-square_400x.webp"),
+      imagePair("gold", "Small-Booti-2Website-2000px-square_400x.webp"),
+      imagePair("green", "Small-Booti-3Website-2000px-square_400x.webp"),
+    ],
     title: "Kadhua",
     body: "Each motif entered as a separate unit, with no thread carried behind the cloth. The slowest way to weave a Banarasi, and the reason the reverse reads almost as cleanly as the face.",
     ctaLabel: "See kadhua pieces",
@@ -131,14 +159,14 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     id: "stories",
     items: [
       {
-        art: pair("purple"),
+        art: imagePair("purple", "Vanam-Leela-Banner_2000x.webp"),
         title: "Antaraal",
         body: "The interval — the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
         ctaLabel: "Read",
         ctaHref: "/pages/antaraal",
       },
       {
-        art: pair("black"),
+        art: imagePair("black", "awadhSquares_1200x.webp"),
         title: "Handloom, or not",
         body: "Four tests you can run in a shop, in under a minute, without any special knowledge. Two of them work on a photograph.",
         ctaLabel: "Read",
