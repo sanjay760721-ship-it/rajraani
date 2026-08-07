@@ -6,6 +6,7 @@ import {
   FacetSidebar,
   SortSelect,
 } from "@/components/FacetSidebar";
+import { FilterButton } from "@/components/FilterButton";
 import { ProductCard } from "@/components/ProductCard";
 import { catalogue } from "@/lib/data/catalogue";
 import {
@@ -92,14 +93,15 @@ export default async function CollectionPage(
       </header>
 
       <div className="grid gap-8 pb-20 lg:grid-cols-[236px_1fr] lg:gap-12">
-        {/* Below 1024 the sidebar collapses to a disclosure. A slide-in filter
-            drawer is the Sprint 5 refinement; the behaviour is identical. */}
-        <details className="border-t border-rule lg:hidden">
-          <summary className="eyebrow cursor-pointer py-4 text-ink">
-            Filter ({filtered.length})
-          </summary>
-          <FacetSidebar selection={selection} counts={counts} sort={sort} />
-        </details>
+        {/* Mobile filter button - opens slide-in drawer */}
+        <FilterButton
+          className="lg:hidden"
+          selection={selection}
+          counts={counts}
+          sort={sort}
+          resultCount={filtered.length}
+        />
+        {/* Desktop sidebar */}
         <div className="hidden lg:block">
           <FacetSidebar selection={selection} counts={counts} sort={sort} />
         </div>

@@ -61,6 +61,7 @@ type CartContextValue = {
   add: (line: Omit<CartLine, "quantity">, quantity?: number) => void;
   setQuantity: (handle: string, quantity: number) => void;
   remove: (handle: string) => void;
+  clear: () => void;
   open: () => void;
   close: () => void;
 };
@@ -114,6 +115,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   }, []);
 
+  const clear = useCallback(() => {
+    cartStore.write([]);
+  }, []);
+
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
 
@@ -134,10 +139,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       add,
       setQuantity,
       remove,
+      clear,
       open,
       close,
     };
-  }, [lines, isOpen, add, setQuantity, remove, open, close]);
+  }, [lines, isOpen, add, setQuantity, remove, clear, open, close]);
 
   return <CartContext value={value}>{children}</CartContext>;
 }

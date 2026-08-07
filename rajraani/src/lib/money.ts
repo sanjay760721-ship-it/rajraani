@@ -1,19 +1,11 @@
-import { BASE_CURRENCY, type CurrencyCode, type Money } from "./domain/types.ts";
+import { BASE_CURRENCY, type CurrencyCode, type Money, DISPLAY_RATES } from "./domain/types.ts";
 
 /**
  * Money.
  *
  * ─────────────────────────────────────────────────────────────────────────────
- * INDIA-ONLY, so INR is the only currency.
- *
- * This file previously carried eight currencies and a table of placeholder
- * conversion rates, because Shopify Markets was going to own conversion. With
- * Shopify dropped in favour of Razorpay, nothing in the stack has an
- * authoritative rate source — and a hardcoded rate going quietly stale is worse
- * than not offering the currency at all, because it prices real orders wrongly.
- *
- * Re-adding the other seven is contained: restore the currency list, add a
- * rates source, put the switcher back in the header. It is all in git history.
+ * INDIA-ONLY checkout (Razorpay INR), but 8 display currencies per design.md §7.
+ * Conversion rates are static placeholders — real rates need a live API source.
  * ─────────────────────────────────────────────────────────────────────────────
  *
  * Amounts are held in minor units (paise) so arithmetic stays in integers.
@@ -29,6 +21,15 @@ export function toMajorUnits(value: Money): number {
   return value.minorUnits / 100;
 }
 
+/** Convert Money from base currency (INR) to target display currency. */
+export function convertMoney(value: Money, targetCurrency: CurrencyCode): Money {
+  if (value.currency === targetCurrency) return value;
+  const fromRate = DISPLAY_RATES[value.currency] ?? 1;
+  const toRate = DISPLAY_RATES[targetCurrency] ?? 1;
+  const baseMinorUnits = Math.round(value.minorUnits / fromRate);
+  return { minorUnits: Math.round(baseMinorUnits * toRate), currency: targetCurrency };
+}
+
 /**
  * Format for display.
  *
@@ -37,11 +38,22 @@ export function toMajorUnits(value: Money): number {
  * visible to an Indian shopper.
  */
 export function formatMoney(value: Money): string {
-  return new Intl.NumberFormat("en-IN", {
+  const localeMap: Record<CurrencyCode, string> = {
+    INR: "en-IN",
+    USD: "en-US",
+    CAD: "en-CA",
+    GBP: "en-GB",
+    AUD: "en-AU",
+    EUR: "de-DE",
+    JPY: "ja-JP",
+    SGD: "en-SG",
+  };
+
+  return new Intl.NumberFormat(localeMap[value.currency] ?? "en-IN", {
     style: "currency",
     currency: value.currency,
-    maximumFractionDigits: 0,
-    minimumFractionDigits: 0,
+    maximumFractionDigits: value.currency === "JPY" ? 0 : 2,
+    minimumFractionDigits: value.currency === "JPY" ? 0 : 0,
   }).format(toMajorUnits(value));
 }
 

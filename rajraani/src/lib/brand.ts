@@ -14,8 +14,10 @@
  * appear anywhere in the repository.
  */
 
+import { BRAND_NAME } from "./brand-name.ts";
+
 export const BRAND = {
-  name: "Rajraani",
+  name: BRAND_NAME,
   /** Sits above the wordmark, italic (the category's brand-line convention). */
   line: "Woven in Banaras, one piece at a time.",
   /** Rendered verbatim on every handloom product, as a global constant. */

@@ -1,27 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "../../lib/define.ts";
 import { ctaFields } from "./artPair.ts";
 
-/**
- * The section library (build.md §2.4).
- *
- * Every page on the site is an ordered list of these, so an editor can build a
- * campaign story with no engineering help — which is a ship criterion (§6), not
- * a nicety.
- *
- * ─────────────────────────────────────────────────────────────────────────────
- * THESE NAMES AND FIELDS MUST MATCH `src/lib/content/sections.ts`.
- *
- * The CMS and the renderer are two halves of one contract: a section type the
- * storefront cannot render is a section an author can publish into a blank
- * space on the page. `sanity/schemas/schema.test.ts` asserts the type names on
- * both sides are identical, so the two cannot drift apart silently.
- * ─────────────────────────────────────────────────────────────────────────────
- *
- * Eight of the fifteen specified types are modelled here — the eight the
- * storefront renders today. The remaining seven are additive: a new type is a
- * new member here, a new member of the union, and a new case in the registry.
- */
-
 export const heroSection = defineType({
   name: "hero",
   title: "Hero",
@@ -54,6 +33,53 @@ export const heroSection = defineType({
   ],
   preview: {
     select: { title: "title", subtitle: "eyebrow", media: "art.desktop" },
+  },
+});
+
+export const heroCarouselSection = defineType({
+  name: "heroCarousel",
+  title: "Hero Carousel",
+  type: "object",
+  fields: [
+    defineField({
+      name: "slides",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "heroSlide",
+          fields: [
+            defineField({
+              name: "art",
+              type: "artPair",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "eyebrow",
+              type: "string",
+              validation: (rule) => rule.max(40),
+            }),
+            defineField({
+              name: "title",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "body",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(240),
+            }),
+            ...ctaFields(),
+          ],
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+  ],
+  preview: {
+    select: { title: "slides.0.title" },
+    prepare: ({ title }) => ({ title: `Carousel: ${title || "Hero Carousel"}` }),
   },
 });
 
@@ -90,8 +116,6 @@ export const collectionTriptychSection = defineType({
       title: "Three frames",
       type: "array",
       of: [defineArrayMember({ type: "artPair" })],
-      // Exactly three. The layout is a triptych; two or four is a different
-      // section, and silently rendering the wrong count is worse than refusing.
       validation: (rule) => rule.required().length(3),
     }),
     defineField({
@@ -108,6 +132,149 @@ export const collectionTriptychSection = defineType({
     ...ctaFields(),
   ],
   preview: { select: { title: "title", media: "art.0.desktop" } },
+});
+
+export const videoBandSection = defineType({
+  name: "videoBand",
+  title: "Video Band",
+  type: "object",
+  fields: [
+    defineField({
+      name: "art",
+      type: "artPair",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "title",
+      type: "string",
+      validation: (rule) => rule.required().max(60),
+    }),
+    defineField({
+      name: "body",
+      type: "text",
+      rows: 3,
+      validation: (rule) => rule.required().max(300),
+    }),
+    ...ctaFields(),
+  ],
+  preview: { select: { title: "title" } },
+});
+
+export const categorySplitSection = defineType({
+  name: "categorySplit",
+  title: "Category Split (2-Up)",
+  type: "object",
+  fields: [
+    defineField({
+      name: "items",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "categoryItem",
+          fields: [
+            defineField({ name: "art", type: "artPair", validation: (rule) => rule.required() }),
+            defineField({ name: "label", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "href", type: "string", validation: (rule) => rule.required() }),
+          ],
+        }),
+      ],
+      validation: (rule) => rule.required().length(2),
+    }),
+  ],
+  preview: { select: { title: "items.0.label" } },
+});
+
+export const tileRowSection = defineType({
+  name: "tileRow",
+  title: "Quick-Link Tile Row (4-Up)",
+  type: "object",
+  fields: [
+    defineField({
+      name: "items",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "tileItem",
+          fields: [
+            defineField({ name: "art", type: "artPair", validation: (rule) => rule.required() }),
+            defineField({ name: "label", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "href", type: "string", validation: (rule) => rule.required() }),
+          ],
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+  ],
+  preview: { select: { title: "items.0.label" } },
+});
+
+export const dualCampaignSection = defineType({
+  name: "dualCampaign",
+  title: "Dual Campaign Feature",
+  type: "object",
+  fields: [
+    defineField({
+      name: "items",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "campaignItem",
+          fields: [
+            defineField({ name: "art", type: "artPair", validation: (rule) => rule.required() }),
+            defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "body", type: "text", rows: 3, validation: (rule) => rule.required() }),
+            ...ctaFields(),
+          ],
+        }),
+      ],
+      validation: (rule) => rule.required().length(2),
+    }),
+  ],
+  preview: { select: { title: "items.0.title" } },
+});
+
+export const storesBandSection = defineType({
+  name: "storesBand",
+  title: "Boutique Stores Band",
+  type: "object",
+  fields: [
+    defineField({ name: "art", type: "artPair", validation: (rule) => rule.required() }),
+    defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),
+    defineField({ name: "body", type: "text", rows: 3, validation: (rule) => rule.required() }),
+    defineField({
+      name: "stores",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "storeLocation",
+          fields: [
+            defineField({ name: "name", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "href", type: "string", validation: (rule) => rule.required() }),
+          ],
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+  ],
+  preview: { select: { title: "title" } },
+});
+
+export const hereToHelpSection = defineType({
+  name: "hereToHelp",
+  title: "Here to Help Block",
+  type: "object",
+  fields: [
+    defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),
+    defineField({ name: "email", type: "string", validation: (rule) => rule.required() }),
+    defineField({ name: "phone", type: "string", validation: (rule) => rule.required() }),
+    defineField({ name: "whatsapp", type: "string", validation: (rule) => rule.required() }),
+    defineField({ name: "hours", type: "string", validation: (rule) => rule.required() }),
+  ],
+  preview: { select: { title: "title" } },
 });
 
 export const productRailSection = defineType({
@@ -220,14 +387,6 @@ export const richTextSection = defineType({
       validation: (rule) => rule.max(80),
     }),
     defineField({
-      /*
-       * KNOWN MISMATCH, deliberate. The storefront currently types this as
-       * `paragraphs: string[]`, which cannot carry a link, an emphasis or a
-       * reference to a named piece. On a site that is ~45% editorial that is
-       * the wrong model, so the CMS holds Portable Text and the storefront
-       * gains a serializer when the Studio is connected. Recorded in
-       * sanity/README.md under "Known mismatches".
-       */
       name: "body",
       type: "blockContent",
       validation: (rule) => rule.required(),
@@ -260,8 +419,15 @@ export const pullQuoteSection = defineType({
 /** Every section type, in the order they appear in the Studio's insert menu. */
 export const sectionTypes = [
   heroSection,
+  heroCarouselSection,
   brandStatementSection,
   collectionTriptychSection,
+  videoBandSection,
+  categorySplitSection,
+  tileRowSection,
+  dualCampaignSection,
+  storesBandSection,
+  hereToHelpSection,
   productRailSection,
   editorialPairSection,
   poetryBandSection,

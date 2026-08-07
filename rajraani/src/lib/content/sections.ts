@@ -17,9 +17,21 @@
  * photography exists to fill it.
  */
 
+import { BRAND } from "@/lib/brand";
+
 export type ArtPair = {
   desktop: { tone: string; src?: string };
   mobile: { tone: string; src?: string };
+};
+
+export type HeroSlide = {
+  id: string;
+  art: ArtPair;
+  eyebrow?: string;
+  title: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref: string;
 };
 
 export type Section =
@@ -32,6 +44,11 @@ export type Section =
       body: string;
       ctaLabel: string;
       ctaHref: string;
+    }
+  | {
+      type: "heroCarousel";
+      id: string;
+      slides: HeroSlide[];
     }
   | {
       type: "brandStatement";
@@ -47,6 +64,54 @@ export type Section =
       body: string;
       ctaLabel: string;
       ctaHref: string;
+    }
+  | {
+      type: "videoBand";
+      id: string;
+      art: ArtPair;
+      title: string;
+      body: string;
+      ctaLabel: string;
+      ctaHref: string;
+      videoSrc?: string;
+    }
+  | {
+      type: "categorySplit";
+      id: string;
+      items: [
+        { art: ArtPair; label: string; href: string },
+        { art: ArtPair; label: string; href: string },
+      ];
+    }
+  | {
+      type: "tileRow";
+      id: string;
+      items: { art: ArtPair; label: string; href: string }[];
+    }
+  | {
+      type: "dualCampaign";
+      id: string;
+      items: [
+        { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
+        { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
+      ];
+    }
+  | {
+      type: "storesBand";
+      id: string;
+      art: ArtPair;
+      title: string;
+      body: string;
+      stores: { name: string; href: string }[];
+    }
+  | {
+      type: "hereToHelp";
+      id: string;
+      title: string;
+      email: string;
+      phone: string;
+      whatsapp: string;
+      hours: string;
     }
   | {
       type: "productRail";
@@ -94,17 +159,6 @@ const pair = (desktop: string, mobile = desktop): ArtPair => ({
 
 /**
  * A pair backed by a real image file.
- *
- * ─────────────────────────────────────────────────────────────────────────────
- * TEMPORARY. These point at `/reference-only/`, which is gitignored and holds
- * third-party photographs used to judge layout. They are not licensed for this
- * site and must not reach a deploy. Replace with commissioned photography per
- * `docs/research/photography-brief.md`, at which point the paths change and
- * nothing else does.
- *
- * The `tone` is kept alongside as the fallback, so removing the folder degrades
- * to the schematic colour field rather than to a broken image.
- * ─────────────────────────────────────────────────────────────────────────────
  */
 const imagePair = (
   tone: string,
@@ -116,17 +170,74 @@ const imagePair = (
   mobile: { tone: mobileTone, src: `/reference-only/${mobileSrc}` },
 });
 
-/** Homepage, ordered. In production this is the Sanity `homepage` document. */
+/**
+ * Homepage.
+ *
+ * Eleven sections, in the order the category runs them (design-addendum.md A7).
+ * The SEQUENCE is inherited deliberately — it is a solved merchandising problem
+ * and build.md's scope note is explicit that structure is what we copy. The
+ * names, copy and imagery in it are ours.
+ */
 export const HOMEPAGE_SECTIONS: readonly Section[] = [
   {
-    type: "hero",
-    id: "hero-nadi",
-    art: imagePair("indigo", "Small-Booti-2Banner_2000x.webp"),
-    eyebrow: "Monsoon 2026",
-    title: "Nadi",
-    body: "A river does not repeat itself. Nine pieces that follow water through the season it belongs to.",
-    ctaLabel: "Read the collection",
-    ctaHref: "/pages/nadi",
+    type: "heroCarousel",
+    id: "homepage-hero-carousel",
+    slides: [
+      {
+        id: "slide-nadi",
+        art: imagePair("indigo", "hero-1.webp"),
+        eyebrow: "Monsoon 2026",
+        title: "Nadi",
+        body: "A river does not repeat itself. Nine pieces that follow water through the season it belongs to.",
+        ctaLabel: "Discover",
+        ctaHref: "/collections/sarees",
+      },
+      {
+        id: "slide-mrigaya",
+        art: imagePair("maroon", "hero-2.webp"),
+        eyebrow: "Kadhua Collectibles",
+        title: "Mrigaya",
+        body: "A celebration of flora and fauna woven into pure silk.",
+        ctaLabel: "Discover",
+        ctaHref: "/collections/kadhua",
+      },
+      {
+        id: "slide-icons",
+        art: imagePair("gold", "hero-3.webp"),
+        eyebrow: "Heritage Classics",
+        title: "Signatures",
+        body: "Timeless Banarasi masterpieces crafted with traditional precision.",
+        ctaLabel: "Explore Icons",
+        ctaHref: "/collections/sarees",
+      },
+      {
+        id: "slide-gifting",
+        art: imagePair("pink", "hero-4.webp"),
+        eyebrow: "Curated Edits",
+        title: "The Gifting Edit",
+        body: "Handwoven treasures packaged for timeless celebrations.",
+        ctaLabel: "Explore Gifts",
+        ctaHref: "/collections/sarees",
+      },
+      {
+        id: "slide-linen",
+        art: imagePair("green", "hero-5.webp"),
+        eyebrow: "Seasonal Selections",
+        title: "Linen & Kora",
+        body: "Lightweight weaves for modern elegance.",
+        ctaLabel: "Discover",
+        ctaHref: "/collections/sarees",
+      },
+      {
+        id: "slide-collectibles",
+        art: imagePair("black", "hero-6.webp"),
+        eyebrow: "Repoussé & Metalwork",
+        title: "Repoussé",
+        body: "Heirloom metal repoussé and master artisan collectibles.",
+        ctaLabel: "Discover",
+        ctaHref: "/pages/antaraal",
+      },
+    ],
   },
   {
     type: "brandStatement",
@@ -135,42 +246,107 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     body: "We buy directly from weavers in and around Varanasi, and we make one of a thing. When it sells, it is rewoven or it is not made again.",
   },
   {
-    type: "productRail",
-    id: "rail-available",
-    title: "On the shelf now",
-    collectionHandle: "sarees",
-    ctaLabel: "All sarees",
-  },
-  {
     type: "collectionTriptych",
     id: "triptych-kadhua",
     art: [
-      imagePair("maroon", "Small-Booti-Website-2000px-square_400x.webp"),
-      imagePair("gold", "Small-Booti-2Website-2000px-square_400x.webp"),
-      imagePair("green", "Small-Booti-3Website-2000px-square_400x.webp"),
+      imagePair("maroon", "triptych-1.webp"),
+      imagePair("gold", "triptych-2.webp"),
+      imagePair("green", "triptych-3.webp"),
     ],
     title: "Kadhua",
     body: "Each motif entered as a separate unit, with no thread carried behind the cloth. The slowest way to weave a Banarasi, and the reason the reverse reads almost as cleanly as the face.",
-    ctaLabel: "See kadhua pieces",
+    ctaLabel: "Discover Kadhua",
     ctaHref: "/collections/kadhua",
+  },
+  {
+    type: "videoBand",
+    id: "loom-video",
+    art: imagePair("black", "editorial-1.webp"),
+    title: "The Motion of the Loom",
+    body: "Between six and twenty-six weeks on a pit loom in Varanasi. Every thread guided by human hand.",
+    ctaLabel: "Watch Our Process",
+    ctaHref: "/pages/handloom",
+    videoSrc: "/reference-only/loom.mp4",
+  },
+  {
+    type: "categorySplit",
+    id: "cat-split",
+    items: [
+      {
+        art: imagePair("maroon", "category-sarees.webp"),
+        label: "SAREES",
+        href: "/collections/sarees",
+      },
+      {
+        art: imagePair("gold", "category-dupattas.webp"),
+        label: "DUPATTAS",
+        href: "/collections/dupattas",
+      },
+    ],
   },
   {
     type: "editorialPair",
     id: "stories",
     items: [
       {
-        art: imagePair("purple", "Vanam-Leela-Banner_2000x.webp"),
+        art: imagePair("purple", "editorial-2.webp"),
         title: "Antaraal",
         body: "The interval — the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
-        ctaLabel: "Read",
+        ctaLabel: "Read Story",
         ctaHref: "/pages/antaraal",
       },
       {
-        art: imagePair("black", "awadhSquares_1200x.webp"),
+        art: imagePair("black", "editorial-1.webp"),
         title: "Handloom, or not",
         body: "Four tests you can run in a shop, in under a minute, without any special knowledge. Two of them work on a photograph.",
-        ctaLabel: "Read",
+        ctaLabel: "Read Guide",
         ctaHref: "/pages/handloom",
+      },
+    ],
+  },
+  {
+    type: "tileRow",
+    id: "quick-links",
+    items: [
+      {
+        art: imagePair("pink", "tile-bridal.webp"),
+        label: "BRIDAL",
+        href: "/collections/sarees",
+      },
+      {
+        art: imagePair("gold", "tile-gifting.webp"),
+        label: "GIFTING",
+        href: "/collections/sarees",
+      },
+      {
+        art: imagePair("purple", "tile-zarkashi.webp"),
+        label: "ZARKASHI",
+        href: "/collections/sarees",
+      },
+      {
+        art: imagePair("black", "tile-repousse.webp"),
+        label: "REPOUSSÉ",
+        href: "/pages/antaraal",
+      },
+    ],
+  },
+  {
+    type: "dualCampaign",
+    id: "campaigns-dual",
+    items: [
+      {
+        art: imagePair("maroon", "hero-2.webp"),
+        title: "Mrigaya",
+        body: "Depicting forest motifs and intricate animal allegories in hand-spun silk.",
+        ctaLabel: "Discover",
+        ctaHref: "/collections/sarees",
+      },
+      {
+        art: imagePair("green", "hero-5.webp"),
+        title: "Linen & Kora",
+        body: "Breathable textures woven for quiet afternoon gatherings.",
+        ctaLabel: "Discover",
+        ctaHref: "/collections/sarees",
       },
     ],
   },
@@ -179,6 +355,26 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     id: "poetry",
     heading: "Slow is the only speed it comes at",
     body: "Between six and twenty-six weeks on a pit loom, depending on what is being asked of it. There is no faster version of this that is still this.",
+  },
+  {
+    type: "storesBand",
+    id: "boutiques",
+    art: imagePair("black", "stores.webp"),
+    title: "Visit Our Boutiques",
+    body: "Experience the drape, texture, and brilliance of handloom silk in person. Private consultations hosted daily.",
+    stores: [
+      { name: "Varanasi Flagship", href: "/pages/antaraal" },
+      { name: "Mumbai Gallery", href: "/pages/antaraal" },
+    ],
+  },
+  {
+    type: "hereToHelp",
+    id: "help-strip",
+    title: "Here to Help",
+    email: BRAND.supportEmail,
+    phone: BRAND.supportPhone,
+    whatsapp: "Consult on WhatsApp",
+    hours: BRAND.supportHours,
   },
 ];
 

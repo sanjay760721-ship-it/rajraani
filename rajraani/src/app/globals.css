@@ -147,14 +147,21 @@
 :root {
   --gutter: 16px;
   --header-h: 60px;
+  --header-h-condensed: 56px;
+  --header-h-top: 96px; /* at page top, roomier */
+  --announcement-h: 36px;
   --t-fast: 160ms; /* link and icon hover */
   --t-base: 280ms; /* image crossfade, underline draw */
   --t-slow: 420ms; /* drawer and menu reveal */
+  --t-header-condense: 200ms; /* height transition */
+  --t-header-bg: 300ms; /* background transition */
 }
 @media (min-width: 768px) {
   :root {
     --gutter: 32px;
     --header-h: 68px;
+    --header-h-condensed: 64px;
+    --header-h-top: 104px;
   }
 }
 @media (min-width: 1024px) {
@@ -286,4 +293,96 @@
   &:focus-visible::after {
     transform: scaleX(1);
   }
+}
+
+/* ============================================================================
+   Header utilities (plain CSS — @utility doesn't support descendant selectors)
+   ============================================================================ */
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gutter);
+  padding-inline: var(--gutter);
+  width: 100%;
+  max-width: var(--container-site);
+  margin-inline: auto;
+}
+
+.header-row-top {
+  height: var(--header-h-top);
+  min-height: var(--header-h-top);
+  background: transparent;
+  border-bottom: none;
+  transition: height var(--t-header-condense) linear,
+              background-color var(--t-header-bg) linear,
+              border-color var(--t-header-bg) linear;
+}
+
+.header-row-middle {
+  height: var(--header-h);
+  min-height: var(--header-h);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: height var(--t-header-condense) linear,
+              background-color var(--t-header-bg) linear,
+              border-color var(--t-header-bg) linear;
+}
+
+.header-row-bottom {
+  height: 44px;
+  min-height: 44px;
+  background: transparent;
+  border-bottom: 1px solid var(--color-rule);
+  transition: height var(--t-header-condense) linear,
+              opacity var(--t-header-condense) linear,
+              visibility var(--t-header-condense) linear;
+}
+
+.header-condensed .header-row-top {
+  display: none;
+}
+
+.header-condensed .header-row-middle {
+  height: var(--header-h-condensed);
+  min-height: var(--header-h-condensed);
+  background: var(--color-bg);
+  border-bottom-color: var(--color-rule);
+}
+
+.header-condensed .header-row-bottom {
+  height: 0;
+  min-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.header-wordmark {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-ink);
+  transition: font-size var(--t-header-condense) linear,
+              opacity var(--t-header-condense) linear;
+}
+
+.header-wordmark-condensed {
+  font-size: clamp(1.125rem, 0.9rem + 1.2vw, 1.5rem);
+}
+
+.header-tagline {
+  font-family: var(--font-ui);
+  font-style: italic;
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  transition: opacity var(--t-header-condense) linear;
+}
+
+.header-condensed .header-tagline {
+  display: none;
 }

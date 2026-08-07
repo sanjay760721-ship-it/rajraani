@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Frame } from "./Frame";
 import { Price } from "./Price";
+import { WishlistHeart } from "./WishlistHeart";
 import { isAvailable, type Product } from "@/lib/domain/types";
 
 /**
@@ -75,6 +76,8 @@ export function ProductCard({
             {badge}
           </span>
         ) : null}
+        {/* Wishlist heart — fades in on card hover */}
+        <WishlistHeart product={product} />
       </div>
 
       {/*

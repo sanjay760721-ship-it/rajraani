@@ -4,18 +4,26 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { ToneTile } from "./Frame";
+import { CurrencySelector } from "./CurrencySelector";
+import { WishlistButton } from "./WishlistButton";
 import { useCart } from "./cart-context";
+import { useSearchModal } from "./search-context";
 import { BRAND } from "@/lib/brand";
 import { NAVIGATION, type NavPanel } from "@/lib/data/navigation";
 
 /**
  * Header, mega menu and mobile navigation.
  *
- * The mega menu opens on hover, which is the category convention (design.md
- * §12 item 6) — but hover alone is an accessibility failure and the category
- * does not solve it for you. So every trigger is a real `<button>` with
- * `aria-expanded` and `aria-controls`, opens on click and on focus as well as
- * hover, closes on Escape, and returns focus to its trigger when it does.
+ * Structure (design.md §5.2):
+ *   Row 1 (top):     Announcement bar — separate component, scrolls away
+ *   Row 2 (middle):  Search | centred wordmark + tagline | Currency / Account / Wishlist / Cart
+ *   Row 3 (bottom):  Nav links — SHOP, COLLECTIONS, CAMPAIGNS, CRAFT, STORIES, ABOUT US
+ *
+ * On scroll past ~120px:
+ *   - Row 1 (announcement) scrolls away naturally (not sticky)
+ *   - Row 2 condenses: wordmark shrinks ~70%, background becomes solid, 1px bottom rule
+ *   - Row 3 fades out (height → 0)
+ *   - Transition: background-color 300ms linear, height 200ms linear
  *
  * The wordmark is centred with utilities split either side. That is a
  * luxury-retail signature and moving the mark to the left reads as a different
@@ -23,16 +31,19 @@ import { NAVIGATION, type NavPanel } from "@/lib/data/navigation";
  */
 
 const HOVER_INTENT_MS = 120;
+const SCROLL_THRESHOLD = 120;
 
 export function SiteHeader() {
   const [openPanel, setOpenPanel] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isCondensed, setIsCondensed] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const openTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const navRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
 
   const { itemCount, open: openCart } = useCart();
+  const { open: openSearch } = useSearchModal();
 
   useEffect(() => {
     return () => {
@@ -40,6 +51,18 @@ export function SiteHeader() {
       clearTimeout(openTimer.current);
     };
   }, []);
+
+  // Scroll handler for header condense
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolled = window.scrollY > SCROLL_THRESHOLD;
+      if (scrolled !== isCondensed) {
+        setIsCondensed(scrolled);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isCondensed]);
 
   // Escape closes the panel and returns focus to the trigger that opened it.
   useEffect(() => {
@@ -68,7 +91,6 @@ export function SiteHeader() {
 
   const scheduleOpen = (id: string) => {
     clearTimeout(closeTimer.current);
-    // Intent delay stops the panel flickering as the pointer crosses the bar.
     openTimer.current = setTimeout(() => setOpenPanel(id), HOVER_INTENT_MS);
   };
 
@@ -78,84 +100,87 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-bg">
-      <div className="wrap-wide">
-        <div className="flex items-center justify-between gap-4 py-3 md:py-4">
-          {/* Left utilities */}
-          <div className="flex flex-1 items-center gap-4">
-            <button
-              type="button"
-              className="eyebrow text-ink lg:hidden"
-              aria-expanded={mobileOpen}
-              aria-controls={`${panelId}-mobile`}
-              onClick={() => setMobileOpen((open) => !open)}
-            >
-              {mobileOpen ? "Close" : "Menu"}
-            </button>
-            <Link href="/search" className="eyebrow hidden text-ink lg:inline">
-              Search
-            </Link>
-          </div>
+    <header
+      className={`sticky top-0 z-50 transition-all duration-200 ease-linear ${isCondensed ? "header-condensed" : ""}`}
+      style={{ transitionProperty: "background-color, height, border-color" }}
+    >
+      {/* Row 2 (middle): Search | Wordmark + Tagline | Currency / Account / Wishlist / Cart */}
+      <div className="header-row header-row-middle">
+        {/* Left utilities: Search */}
+        <div className="flex flex-1 items-center gap-4 min-w-0">
+          <button
+            type="button"
+            className="eyebrow text-ink hidden lg:inline"
+            aria-label="Search"
+            onClick={openSearch}
+          >
+            Search
+          </button>
+        </div>
 
-          {/* Centred wordmark */}
-          <Link href="/" className="shrink-0 text-center">
-            <span className="block font-display text-xl tracking-[0.22em] text-ink uppercase md:text-2xl">
-              {BRAND.name}
-            </span>
-            <span className="eyebrow mt-1 block text-ink-muted normal-case italic">
-              {BRAND.line}
-            </span>
+        {/* Centred wordmark + tagline */}
+        <Link href="/" className="shrink-0 text-center mx-auto" aria-label={`${BRAND.name} home`}>
+          <span className="header-wordmark block header-wordmark-condensed">
+            {BRAND.name}
+          </span>
+          <span className="header-tagline block mt-1">
+            {BRAND.line}
+          </span>
+        </Link>
+
+        {/* Right utilities: Currency / Account / Wishlist / Cart */}
+        <div className="flex flex-1 items-center justify-end gap-4 min-w-0">
+          {/* Currency selector */}
+          <CurrencySelector />
+          {/* Account */}
+          <Link href="/account" className="eyebrow text-ink hidden lg:inline" aria-label="Account">
+            Account
           </Link>
-
-          {/* Right utilities */}
-          <div className="flex flex-1 items-center justify-end gap-4">
-            {/* The currency switcher lived here. India-only, so there is
-                nothing to switch — see lib/money.ts. */}
-            <button type="button" className="eyebrow text-ink" onClick={openCart}>
-              Cart
-              {itemCount > 0 ? (
-                <span className="ml-2 bg-ink px-1.5 py-0.5 text-bg">{itemCount}</span>
-              ) : null}
-            </button>
-          </div>
+          {/* Wishlist */}
+          <WishlistButton />
+          {/* Cart */}
+          <button type="button" className="eyebrow text-ink" onClick={openCart} aria-label="Cart">
+            Cart
+            {itemCount > 0 ? (
+              <span className="ml-2 bg-ink px-1.5 py-0.5 text-bg">{itemCount}</span>
+            ) : null}
+          </button>
         </div>
+      </div>
 
-        {/* Desktop navigation */}
-        <div ref={navRef} className="hidden lg:block" onMouseLeave={scheduleClose}>
-          <nav aria-label="Primary">
-            <ul className="flex justify-center gap-10 pb-3">
-              {NAVIGATION.map((panel) => (
-                <li key={panel.id}>
-                  <button
-                    type="button"
-                    id={`${panelId}-trigger-${panel.id}`}
-                    aria-expanded={openPanel === panel.id}
-                    aria-controls={`${panelId}-panel-${panel.id}`}
-                    className="eyebrow border-b border-transparent pb-1 text-ink transition-colors hover:border-rule-strong aria-expanded:border-rule-strong"
-                    onClick={() =>
-                      setOpenPanel((current) => (current === panel.id ? null : panel.id))
-                    }
-                    onMouseEnter={() => scheduleOpen(panel.id)}
-                    onFocus={() => setOpenPanel(panel.id)}
-                  >
-                    {panel.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+      {/* Row 3 (bottom): Desktop navigation */}
+      <div ref={navRef} className="header-row header-row-bottom hidden lg:flex" onMouseLeave={scheduleClose}>
+        <nav aria-label="Primary navigation">
+          <ul className="flex justify-center gap-8 w-full pb-2">
+            {NAVIGATION.map((panel) => (
+              <li key={panel.id}>
+                <button
+                  type="button"
+                  id={`${panelId}-trigger-${panel.id}`}
+                  aria-expanded={openPanel === panel.id}
+                  aria-controls={`${panelId}-panel-${panel.id}`}
+                  className="eyebrow border-b border-transparent pb-1 text-ink transition-colors hover:border-rule-strong aria-expanded:border-rule-strong"
+                  onClick={() => setOpenPanel((current) => (current === panel.id ? null : panel.id))}
+                  onMouseEnter={() => scheduleOpen(panel.id)}
+                  onFocus={() => setOpenPanel(panel.id)}
+                >
+                  {panel.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          {NAVIGATION.map((panel) => (
-            <MegaPanel
-              key={panel.id}
-              panel={panel}
-              id={`${panelId}-panel-${panel.id}`}
-              open={openPanel === panel.id}
-              onMouseEnter={() => clearTimeout(closeTimer.current)}
-              onClose={() => setOpenPanel(null)}
-            />
-          ))}
-        </div>
+        {NAVIGATION.map((panel) => (
+          <MegaPanel
+            key={panel.id}
+            panel={panel}
+            id={`${panelId}-panel-${panel.id}`}
+            open={openPanel === panel.id}
+            onMouseEnter={() => clearTimeout(closeTimer.current)}
+            onClose={() => setOpenPanel(null)}
+          />
+        ))}
       </div>
 
       {mobileOpen ? (
@@ -209,7 +234,7 @@ function MegaPanel({
           </div>
         ))}
 
-        {/* Merchandised slots, not decoration — each is an editorial choice. */}
+        {/* Merchandised slots — editorial choices */}
         <div className="col-start-4 grid gap-4">
           {panel.tiles.map((tile) => (
             <Link key={tile.href} href={tile.href} onClick={onClose}>
@@ -225,7 +250,7 @@ function MegaPanel({
 function MobileNav({ id, onNavigate }: { id: string; onNavigate: () => void }) {
   return (
     <div id={id} className="border-t border-rule bg-bg lg:hidden">
-      <nav aria-label="Primary" className="wrap-wide py-6">
+      <nav aria-label="Primary navigation" className="wrap-wide py-6">
         {NAVIGATION.map((panel) => (
           <details key={panel.id} className="border-b border-rule py-3">
             <summary className="eyebrow cursor-pointer text-ink">{panel.label}</summary>
@@ -258,4 +283,3 @@ function MobileNav({ id, onNavigate }: { id: string; onNavigate: () => void }) {
     </div>
   );
 }
-

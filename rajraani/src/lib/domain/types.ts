@@ -18,17 +18,37 @@
 /**
  * Currencies.
  *
- * INR only — the store is India-only and Razorpay settles in rupees. The eight
- * markets the research measured were a Shopify Markets capability; without it
- * there is no rate source, and an unmaintained rate prices real orders wrongly.
- * See lib/money.ts.
+ * Eight currencies per design.md §7. INR is the base; others are display-only
+ * with static conversion rates for the prototype. Real rates require a rate
+ * source (e.g., exchangerate.host API) and are Sprint 2 work.
  */
-export const CURRENCIES = ["INR"] as const;
+export const CURRENCIES = [
+  "INR",
+  "USD",
+  "CAD",
+  "GBP",
+  "AUD",
+  "EUR",
+  "JPY",
+  "SGD",
+] as const;
 
 export type CurrencyCode = (typeof CURRENCIES)[number];
 
 /** The store's base currency. All catalogue prices are held in this. */
 export const BASE_CURRENCY: CurrencyCode = "INR";
+
+/** Static display rates (INR base). Replace with live API in production. */
+export const DISPLAY_RATES: Record<CurrencyCode, number> = {
+  INR: 1,
+  USD: 0.012,
+  CAD: 0.016,
+  GBP: 0.0095,
+  AUD: 0.018,
+  EUR: 0.011,
+  JPY: 1.8,
+  SGD: 0.016,
+};
 
 /**
  * Money in minor units (paise for INR), to keep arithmetic in integers.

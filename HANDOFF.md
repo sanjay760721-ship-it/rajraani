@@ -52,6 +52,7 @@ That phrasing does real work. It means: copy the *structural* decisions that are
 | Catalogue origin | ✅ **Greenfield.** §7.3 is now a governance rule, not a migration workstream. |
 | **Sprint 0 — Foundations** | ✅ **Built 5 Aug.** Live code is `rajraani/` — see §2.0. |
 | **Sprints 1–2 — working slice** | ✅ **Built 5 Aug.** PLP with multi-select faceting, PDP with mixed-ratio gallery and sticky buy bar, homepage section registry, editorial pages, grouped search, cart drawer. All verified in a browser. |
+| **Homepage 11-Section Parity** | ✅ **Built 7 Aug.** 6-slide interactive hero carousel, brand statement, kadhua triptych, artisan video band (`eef6a84960be44829508a3e3e4a77980.mp4`), 2-up category split, 4-up quick links, dual campaign split, poetry band, boutique store booking band, support strip, scroll reveal animations, crystal-sharp 100% image quality. |
 
 ### 2.0 There is one build, in `rajraani/`
 

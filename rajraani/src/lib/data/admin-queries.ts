@@ -281,3 +281,76 @@ export function skuTaken(sku: string, excludeId?: number): boolean {
     .get(sku.trim()) as unknown as { id: number } | undefined;
   return row !== undefined && row.id !== excludeId;
 }
+
+export type DashboardMetrics = {
+  totalProducts: number;
+  liveProducts: number;
+  draftProducts: number;
+  soldOutProducts: number;
+  lowStockProducts: number;
+  incompletePhotoProducts: number;
+  totalInventoryValueMinor: number;
+  totalCollections: number;
+  totalCampaigns: number;
+};
+
+export function getDashboardMetrics(): DashboardMetrics {
+  const database = db();
+  const totalProducts = (database.prepare(`SELECT COUNT(*) as n FROM product`).get() as { n: number }).n;
+  const liveProducts = (database.prepare(`SELECT COUNT(*) as n FROM product WHERE published = 1`).get() as { n: number }).n;
+  const draftProducts = (database.prepare(`SELECT COUNT(*) as n FROM product WHERE published = 0`).get() as { n: number }).n;
+  const soldOutProducts = (database.prepare(`SELECT COUNT(*) as n FROM product WHERE published = 1 AND inventory_quantity = 0`).get() as { n: number }).n;
+  const lowStockProducts = (database.prepare(`SELECT COUNT(*) as n FROM product WHERE inventory_quantity > 0 AND inventory_quantity <= 2`).get() as { n: number }).n;
+  const incompletePhotoProducts = (database.prepare(`SELECT COUNT(*) as n FROM product WHERE (SELECT COUNT(*) FROM product_image WHERE product_id = product.id) < 6`).get() as { n: number }).n;
+  const totalInventoryValueMinor = (database.prepare(`SELECT COALESCE(SUM(price_minor * inventory_quantity), 0) as n FROM product`).get() as { n: number }).n;
+  const totalCollections = (database.prepare(`SELECT COUNT(*) as n FROM collection`).get() as { n: number }).n;
+  const totalCampaigns = (database.prepare(`SELECT COUNT(*) as n FROM campaign`).get() as { n: number }).n;
+
+  return {
+    totalProducts,
+    liveProducts,
+    draftProducts,
+    soldOutProducts,
+    lowStockProducts,
+    incompletePhotoProducts,
+    totalInventoryValueMinor,
+    totalCollections,
+    totalCampaigns,
+  };
+}
+
+export type TaxonomyTermRow = {
+  facet: string;
+  slug: string;
+  label: string;
+  description: string | null;
+  hex: string | null;
+};
+
+export function listTaxonomyTerms(): TaxonomyTermRow[] {
+  return plain<TaxonomyTermRow>(
+    db()
+      .prepare(`SELECT facet, slug, label, description, hex FROM taxonomy_term ORDER BY facet, label`)
+      .all(),
+  );
+}
+
+export type CollectionRow = {
+  handle: string;
+  title: string;
+  seo_intro: string;
+  kind: string;
+  facets_json: string | null;
+  campaign_slug: string | null;
+  position: number;
+};
+
+export function listCollectionsForAdmin(): CollectionRow[] {
+  return plain<CollectionRow>(
+    db()
+      .prepare(`SELECT handle, title, seo_intro, kind, facets_json, campaign_slug, position FROM collection ORDER BY position`)
+      .all(),
+  );
+}
+
+

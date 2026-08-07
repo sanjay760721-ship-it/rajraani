@@ -1,59 +1,107 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroCarousel } from "./HeroCarousel";
 import { PLACEHOLDER_WASH, toneFor } from "../Frame";
 import { ProductCard } from "../ProductCard";
+import { ScrollReveal } from "../ScrollReveal";
 import { catalogue } from "@/lib/data/catalogue";
 import { sortProducts } from "@/lib/facets/engine";
 import type { ArtPair, Section } from "@/lib/content/sections";
 
-/**
- * Section registry.
- *
- * A page is an ordered list of typed sections and this switch is the only place
- * that knows how each renders. Adding a section type is a new union member plus
- * a new case — no page changes, and no engineer needed to compose a page once
- * the types exist (build.md §6).
- */
 export async function SectionRenderer({
   section,
   index = 1,
 }: {
   section: Section;
-  /**
-   * Position on the page. Only the section at index 0 may own the `h1`, which
-   * is how a hero can be a page title on the homepage and a sub-heading
-   * further down without either case hardcoding a level.
-   */
   index?: number;
 }) {
   switch (section.type) {
     case "hero":
       return <Hero section={section} isPageTitle={index === 0} />;
+    case "heroCarousel":
+      return <HeroCarousel slides={section.slides} isPageTitle={index === 0} />;
     case "brandStatement":
-      return <BrandStatement section={section} />;
+      return (
+        <ScrollReveal>
+          <BrandStatement section={section} />
+        </ScrollReveal>
+      );
     case "collectionTriptych":
-      return <CollectionTriptych section={section} />;
+      return (
+        <ScrollReveal>
+          <CollectionTriptych section={section} />
+        </ScrollReveal>
+      );
+    case "videoBand":
+      return (
+        <ScrollReveal>
+          <VideoBand section={section} />
+        </ScrollReveal>
+      );
+    case "categorySplit":
+      return (
+        <ScrollReveal>
+          <CategorySplit section={section} />
+        </ScrollReveal>
+      );
+    case "tileRow":
+      return (
+        <ScrollReveal>
+          <TileRow section={section} />
+        </ScrollReveal>
+      );
+    case "dualCampaign":
+      return (
+        <ScrollReveal>
+          <DualCampaign section={section} />
+        </ScrollReveal>
+      );
+    case "storesBand":
+      return (
+        <ScrollReveal>
+          <StoresBand section={section} />
+        </ScrollReveal>
+      );
+    case "hereToHelp":
+      return (
+        <ScrollReveal>
+          <HereToHelp section={section} />
+        </ScrollReveal>
+      );
     case "productRail":
-      return <ProductRail section={section} />;
+      return (
+        <ScrollReveal>
+          <ProductRail section={section} />
+        </ScrollReveal>
+      );
     case "editorialPair":
-      return <EditorialPair section={section} />;
+      return (
+        <ScrollReveal>
+          <EditorialPair section={section} />
+        </ScrollReveal>
+      );
     case "poetryBand":
-      return <PoetryBand section={section} />;
+      return (
+        <ScrollReveal>
+          <PoetryBand section={section} />
+        </ScrollReveal>
+      );
     case "richText":
-      return <RichText section={section} />;
+      return (
+        <ScrollReveal>
+          <RichText section={section} />
+        </ScrollReveal>
+      );
     case "pullQuote":
-      return <PullQuote section={section} />;
+      return (
+        <ScrollReveal>
+          <PullQuote section={section} />
+        </ScrollReveal>
+      );
   }
 }
 
-/**
- * Art-directed placeholder.
- *
- * The desktop/mobile pair is honoured with a `<picture>`-equivalent swap: the
- * two tones differ, so the art direction is visibly a pair rather than a CSS
- * resize of one asset (design.md §3.7).
- */
 function Art({
   art,
   className = "",
@@ -63,18 +111,8 @@ function Art({
   art: ArtPair;
   className?: string;
   alt?: string;
-  /** Set on the hero only — it is the LCP element. */
   priority?: boolean;
 }) {
-  /**
-   * One crop per breakpoint, as separate elements rather than a CSS resize —
-   * the mobile frame is a recomposition, not the same photograph scaled
-   * (addendum A7).
-   *
-   * When a pair carries no `src` it falls back to the schematic colour field,
-   * so deleting the reference folder degrades to a blank rather than to a
-   * broken image icon.
-   */
   const crop = (
     side: ArtPair["desktop"],
     visibility: string,
@@ -82,20 +120,26 @@ function Art({
     priority: boolean,
   ) =>
     side.src ? (
-      // next/image rather than a bare <img>: these slots hold the LCP element
-      // on the homepage, and the format negotiation and srcset ladder
-      // configured in next.config.ts apply here too.
       <div
         className={`relative ${visibility} ${className}`}
         style={{ backgroundColor: toneFor(side.tone) }}
       >
+        {/*
+          No `unoptimized`, and no quality={100}.
+          Those switch the image pipeline off entirely — no AVIF, no WebP, no
+          resizing — so a phone downloads the full-size original. On a page
+          where images are ~72% of payload that is the most expensive line in
+          the codebase. If a photograph looks soft, the cause is almost always
+          object-cover on a source smaller than its slot, not the optimiser.
+        */}
         <Image
           src={side.src}
           alt={alt}
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          quality={90}
+          className="object-cover object-center"
         />
       </div>
     ) : (
@@ -132,20 +176,10 @@ function Hero({
         className="h-[82vh] max-h-[900px] min-h-[520px] w-full"
         priority
       />
-
-      {/*
-        A scrim, not a flat overlay.
-        White type over an uncontrolled photograph is a legibility gamble — and
-        now that real images are in these slots, the gamble is live. A gradient
-        weighted to the bottom third protects the text without greying out the
-        cloth, which is the thing the customer came to look at. design.md §3.1
-        keeps scrims to the type area for exactly this reason.
-      */}
       <div
         aria-hidden
         className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent"
       />
-
       <div className="absolute inset-0 flex items-end">
         <div className="wrap-wide pb-16 md:pb-24">
           <div className="max-w-[46ch]">
@@ -186,8 +220,11 @@ function CollectionTriptych({
     <section className="wrap-wide py-20 md:py-28 lg:py-32">
       <div className="grid grid-cols-3 gap-4">
         {section.art.map((art, index) => (
-          <Link key={index} href={section.ctaHref}>
-            <Art art={art} className="aspect-square w-full" />
+          <Link key={index} href={section.ctaHref} className="group overflow-hidden">
+            <Art
+              art={art}
+              className="aspect-square w-full transition-transform duration-700 ease-out group-hover:scale-105"
+            />
           </Link>
         ))}
       </div>
@@ -197,6 +234,190 @@ function CollectionTriptych({
         <Link href={section.ctaHref} className="cta mt-6 inline-block">
           {section.ctaLabel}
         </Link>
+      </div>
+    </section>
+  );
+}
+
+function VideoBand({
+  section,
+}: {
+  section: Extract<Section, { type: "videoBand" }>;
+}) {
+  return (
+    <section className="wrap-wide py-16 md:py-24">
+      <div className="relative aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden bg-ink text-bg">
+        {section.videoSrc ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          >
+            <source src={section.videoSrc} type="video/mp4" />
+          </video>
+        ) : (
+          <Art art={section.art} className="absolute inset-0 h-full w-full opacity-60" />
+        )}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent"
+        />
+        <div className="absolute inset-0 flex items-end p-8 md:p-14">
+          <div className="max-w-[44ch]">
+            <span className="eyebrow block text-bg/80">HANDLOOM HERITAGE</span>
+            <h2 className="text-display mt-2 text-bg">{section.title}</h2>
+            <p className="text-prose mt-3 text-bg/90">{section.body}</p>
+            <Link
+              href={section.ctaHref}
+              className="cta mt-6 inline-block text-bg border-b border-bg/50 hover:border-bg"
+            >
+              {section.ctaLabel}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CategorySplit({
+  section,
+}: {
+  section: Extract<Section, { type: "categorySplit" }>;
+}) {
+  return (
+    <section className="wrap-wide grid grid-cols-1 gap-6 py-16 md:grid-cols-2 md:py-24">
+      {section.items.map((item) => (
+        <Link key={item.label} href={item.href} className="group block overflow-hidden">
+          <div className="relative aspect-square w-full overflow-hidden">
+            <Art
+              art={item.art}
+              className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          </div>
+          <div className="py-4 text-center">
+            <span className="eyebrow tracking-[0.2em] text-ink group-hover:underline">
+              {item.label}
+            </span>
+          </div>
+        </Link>
+      ))}
+    </section>
+  );
+}
+
+function TileRow({
+  section,
+}: {
+  section: Extract<Section, { type: "tileRow" }>;
+}) {
+  return (
+    <section className="wrap-wide py-16 md:py-24">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        {section.items.map((item) => (
+          <Link key={item.label} href={item.href} className="group block text-center">
+            <div className="relative aspect-square w-full overflow-hidden">
+              <Art
+                art={item.art}
+                className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+            </div>
+            <span className="eyebrow mt-3 block text-ink group-hover:underline">
+              {item.label}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function DualCampaign({
+  section,
+}: {
+  section: Extract<Section, { type: "dualCampaign" }>;
+}) {
+  return (
+    <section className="wrap-wide grid gap-10 py-16 md:grid-cols-2 md:gap-14 md:py-24">
+      {section.items.map((item) => (
+        <article key={item.title} className="group">
+          <Link href={item.ctaHref} className="block overflow-hidden">
+            <Art
+              art={item.art}
+              className="aspect-square w-full transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          </Link>
+          <div className="mt-6 max-w-[44ch]">
+            <h2 className="text-h2">{item.title}</h2>
+            <p className="text-prose mt-3 text-ink-body">{item.body}</p>
+            <Link href={item.ctaHref} className="cta mt-5 inline-block">
+              {item.ctaLabel}
+            </Link>
+          </div>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+function StoresBand({
+  section,
+}: {
+  section: Extract<Section, { type: "storesBand" }>;
+}) {
+  return (
+    <section className="relative my-16 overflow-hidden bg-bg-sand py-24 md:py-32">
+      <div className="wrap-wide relative z-10 grid gap-12 md:grid-cols-2 md:items-center">
+        <div>
+          <Art art={section.art} className="aspect-[4/3] w-full object-cover" />
+        </div>
+        <div className="max-w-prose">
+          <span className="eyebrow text-ink-muted">RETAIL GALLERIES</span>
+          <h2 className="text-h1 mt-3 text-ink">{section.title}</h2>
+          <p className="text-prose mt-4 text-ink-body">{section.body}</p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            {section.stores.map((store) => (
+              <Link
+                key={store.name}
+                href={store.href}
+                className="btn-secondary inline-block px-6 py-3 text-xs tracking-widest uppercase border border-ink text-ink hover:bg-ink hover:text-bg transition-colors"
+              >
+                {store.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HereToHelp({
+  section,
+}: {
+  section: Extract<Section, { type: "hereToHelp" }>;
+}) {
+  return (
+    <section className="border-t border-rule bg-bg-alt py-16 text-center">
+      <div className="wrap-prose px-4">
+        <h2 className="eyebrow tracking-widest text-ink">{section.title}</h2>
+        <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-ink-body">
+          <a href={`mailto:${section.email}`} className="hover:underline">
+            {section.email}
+          </a>
+          <span aria-hidden className="text-rule">•</span>
+          <a href={`tel:${section.phone}`} className="hover:underline">
+            {section.phone}
+          </a>
+          <span aria-hidden className="text-rule">•</span>
+          <a href={`https://wa.me/${section.phone.replace(/[^0-9]/g, "")}`} className="hover:underline font-medium text-ink">
+            {section.whatsapp}
+          </a>
+        </div>
+        <p className="mt-3 text-caption text-ink-muted italic">{section.hours}</p>
       </div>
     </section>
   );
@@ -242,9 +463,12 @@ function EditorialPair({
   return (
     <section className="wrap-wide grid gap-12 py-20 md:grid-cols-2 md:gap-16 md:py-28 lg:py-32">
       {section.items.map((item) => (
-        <article key={item.ctaHref}>
-          <Link href={item.ctaHref}>
-            <Art art={item.art} className="aspect-square w-full" />
+        <article key={item.ctaHref} className="group">
+          <Link href={item.ctaHref} className="block overflow-hidden">
+            <Art
+              art={item.art}
+              className="aspect-square w-full transition-transform duration-700 ease-out group-hover:scale-105"
+            />
           </Link>
           <h2 className="text-h3 mt-6">{item.title}</h2>
           <p className="text-prose mt-3 text-ink-body">{item.body}</p>
