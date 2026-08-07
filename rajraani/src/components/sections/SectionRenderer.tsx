@@ -129,18 +129,32 @@ function Hero({
     <section className="relative">
       <Art
         art={section.art}
-        className="h-[70vh] max-h-[820px] min-h-[440px] w-full"
+        className="h-[82vh] max-h-[900px] min-h-[520px] w-full"
         priority
       />
+
+      {/*
+        A scrim, not a flat overlay.
+        White type over an uncontrolled photograph is a legibility gamble — and
+        now that real images are in these slots, the gamble is live. A gradient
+        weighted to the bottom third protects the text without greying out the
+        cloth, which is the thing the customer came to look at. design.md §3.1
+        keeps scrims to the type area for exactly this reason.
+      */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent"
+      />
+
       <div className="absolute inset-0 flex items-end">
-        <div className="wrap-wide pb-14">
-          <div className="max-w-prose">
+        <div className="wrap-wide pb-16 md:pb-24">
+          <div className="max-w-[46ch]">
             {section.eyebrow ? (
-              <p className="eyebrow text-bg/80">{section.eyebrow}</p>
+              <p className="eyebrow text-bg/75">{section.eyebrow}</p>
             ) : null}
-            <Heading className="text-display mt-3 text-bg">{section.title}</Heading>
-            <p className="text-prose mt-4 text-bg/90">{section.body}</p>
-            <Link href={section.ctaHref} className="cta mt-6 inline-block text-bg">
+            <Heading className="text-display mt-4 text-bg">{section.title}</Heading>
+            <p className="text-prose mt-5 max-w-[38ch] text-bg/85">{section.body}</p>
+            <Link href={section.ctaHref} className="cta mt-8 inline-block text-bg">
               {section.ctaLabel}
             </Link>
           </div>
@@ -156,7 +170,7 @@ function BrandStatement({
   section: Extract<Section, { type: "brandStatement" }>;
 }) {
   return (
-    <section className="wrap-prose py-24 text-center md:py-32">
+    <section className="wrap-prose py-24 text-center md:py-32 lg:py-40">
       <p className="font-display text-h1 text-ink">{section.quote}</p>
       <p className="text-prose mt-6 text-ink-body">{section.body}</p>
     </section>
@@ -169,7 +183,7 @@ function CollectionTriptych({
   section: Extract<Section, { type: "collectionTriptych" }>;
 }) {
   return (
-    <section className="wrap-wide py-16">
+    <section className="wrap-wide py-20 md:py-28 lg:py-32">
       <div className="grid grid-cols-3 gap-4">
         {section.art.map((art, index) => (
           <Link key={index} href={section.ctaHref}>
@@ -202,7 +216,7 @@ async function ProductRail({
   ).slice(0, 4);
 
   return (
-    <section className="wrap-wide py-16">
+    <section className="wrap-wide py-20 md:py-28 lg:py-32">
       <div className="mb-8 flex items-baseline justify-between gap-4">
         <h2 className="text-h2">{section.title}</h2>
         <Link href={`/collections/${section.collectionHandle}`} className="cta">
@@ -226,7 +240,7 @@ function EditorialPair({
   section: Extract<Section, { type: "editorialPair" }>;
 }) {
   return (
-    <section className="wrap-wide grid gap-12 py-16 md:grid-cols-2">
+    <section className="wrap-wide grid gap-12 py-20 md:grid-cols-2 md:gap-16 md:py-28 lg:py-32">
       {section.items.map((item) => (
         <article key={item.ctaHref}>
           <Link href={item.ctaHref}>
@@ -249,7 +263,7 @@ function PoetryBand({
   section: Extract<Section, { type: "poetryBand" }>;
 }) {
   return (
-    <section className="bg-bg-alt py-24 md:py-32">
+    <section className="bg-bg-alt py-24 md:py-32 lg:py-40">
       <div className="wrap-prose text-center">
         <h2 className="text-h2">{section.heading}</h2>
         <p className="text-prose mt-5 text-ink-body">{section.body}</p>
@@ -260,7 +274,7 @@ function PoetryBand({
 
 function RichText({ section }: { section: Extract<Section, { type: "richText" }> }) {
   return (
-    <section className="wrap-prose py-12">
+    <section className="wrap-prose py-14 md:py-20">
       {section.heading ? <h2 className="text-h3 mb-5">{section.heading}</h2> : null}
       <div className="space-y-5">
         {section.paragraphs.map((paragraph, index) => (
@@ -275,7 +289,7 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
 
 function PullQuote({ section }: { section: Extract<Section, { type: "pullQuote" }> }) {
   return (
-    <figure className="wrap-prose py-16 text-center">
+    <figure className="wrap-prose py-20 text-center md:py-28">
       <blockquote className="font-display text-h2 text-ink italic">
         {section.quote}
       </blockquote>

@@ -18,26 +18,35 @@
 
 @theme {
   /* --- Palette: surfaces ------------------------------------------------- */
+  /* Three grounds, all warm. Paper, then two progressively warmer bands used
+     to separate editorial from commerce without drawing a line. */
   --color-bg: #ffffff;
-  --color-bg-alt: #faf8f5; /* warm off-white, editorial bands */
-  --color-bg-sand: #f2eee8; /* footer, newsletter block */
+  --color-bg-alt: #fbf9f6; /* warm off-white, editorial bands */
+  --color-bg-sand: #f1ece4; /* footer, provenance, quiet bands */
 
   /* --- Palette: ink ------------------------------------------------------ */
-  --color-ink: #3b332c; /* headings                 12.4:1 on bg */
-  --color-ink-body: #5b5148; /* body copy                 7.7:1 on bg */
-  --color-ink-muted: #6e6459; /* meta, SKU, captions       5.8:1 on bg */
+  /* Warm neutral, deliberately not near-black. design.md §3.0 measured the
+     category's ink at a warm mid-brown and called this the one token lesson
+     worth keeping: a near-black scheme reads colder and harder than this
+     category does. Deepened from the first pass — the earlier ink was too
+     light to carry a display face at 56px. */
+  --color-ink: #2e2721; /* headings                 14.7:1 on bg */
+  --color-ink-body: #55493f; /* body copy                 8.7:1 on bg */
+  --color-ink-muted: #6b6055; /* meta, SKU, captions       6.1:1 on bg */
 
   /* --- Palette: rules ---------------------------------------------------- */
   /* Two rule tokens, deliberately. One hairline colour cannot serve both
      decorative dividers and form-control boundaries: the latter is a UI
      component and owes 3:1 under WCAG 1.4.11. */
-  --color-rule: #e4ded5; /* decorative hairlines      1.3:1 — non-informational */
-  --color-rule-input: #918779; /* form control boundaries   3.1:1 on the worst surface */
-  --color-rule-strong: #3b332c; /* active tab, CTA underline */
+  --color-rule: #e7e0d6; /* decorative hairlines      non-informational */
+  --color-rule-input: #8b8072; /* form control boundaries   3.3:1 on the worst surface */
+  --color-rule-strong: #2e2721; /* active tab, CTA underline */
 
   /* --- Palette: accent and state ----------------------------------------- */
-  /* Accent is used sparingly and never on large fields (build.md §2.5). */
-  --color-accent: #856539; /* muted antique gold        5.4:1 on bg */
+  /* Antique gold, deepened so it clears AA on the sand ground too. Used
+     sparingly and never on large fields (build.md §2.5) — if gold covers more
+     than about 2% of a page, it has been overdone. */
+  --color-accent: #7d5f2a; /* antique gold              5.9:1 on bg */
   --color-error: #9c3b30; /*                           6.8:1 on bg */
   --color-success: #4a6b48; /*                           6.0:1 on bg */
 
@@ -46,48 +55,59 @@
   --color-scrim-strong: rgb(0 0 0 / 0.45);
 
   /* --- Type families ----------------------------------------------------- */
-  /* PLACEHOLDER STACKS. No webfonts are loaded, so the app is licence-clean
-     and renders identically offline until the designer picks faces. The
-     Devanagari fallbacks are in the stack because product naming may use it
-     (build.md §2.5) — the licensed face must cover it too. */
-  --font-display: Georgia, "Times New Roman", "Noto Serif Devanagari", serif;
+  /* Loaded and self-hosted by next/font in app/layout.tsx — no runtime request
+     to Google, no third-party script, no shift while a webfont arrives.
+     Devanagari falls back to a system face; no product naming uses it yet, and
+     when it does the branded face has to cover both scripts (build.md §2.5). */
+  --font-display:
+    var(--font-display-family), "Cormorant Garamond", Georgia,
+    "Noto Serif Devanagari", serif;
   --font-ui:
-    ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+    var(--font-ui-family), Inter, ui-sans-serif, system-ui, "Segoe UI",
     "Noto Sans Devanagari", sans-serif;
 
   /* --- Type scale -------------------------------------------------------- */
   /* Fluid between the 768 and 1440 breakpoints. Each entry carries size,
-     line-height and tracking together so the trio cannot drift apart. */
-  --text-display: clamp(2.25rem, 1.5rem + 2.4vw, 3.5rem);
-  --text-display--line-height: 1.12;
-  --text-display--letter-spacing: 0.01em;
+     line-height and tracking together so the trio cannot drift apart.
 
-  --text-h1: clamp(1.875rem, 1.4rem + 1.5vw, 2.5rem);
-  --text-h1--line-height: 1.18;
-  --text-h1--letter-spacing: 0.01em;
+     The display sizes are larger and the tracking tighter than the first pass.
+     A high-contrast serif needs scale to show what makes it worth having, and
+     it needs NEGATIVE tracking at display sizes — letterspacing that reads as
+     generous at 15px reads as loose and amateur at 56px. */
+  --text-display: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.02em;
 
-  --text-h2: clamp(1.5rem, 1.2rem + 1vw, 2rem);
-  --text-h2--line-height: 1.22;
-  --text-h2--letter-spacing: 0.01em;
+  --text-h1: clamp(2.125rem, 1.4rem + 2.2vw, 3.25rem);
+  --text-h1--line-height: 1.08;
+  --text-h1--letter-spacing: -0.015em;
 
-  --text-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
-  --text-h3--line-height: 1.3;
+  --text-h2: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  --text-h2--line-height: 1.14;
+  --text-h2--letter-spacing: -0.01em;
 
-  --text-h4: 1.125rem;
+  --text-h3: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.005em;
+
+  --text-h4: 1.1875rem;
   --text-h4--line-height: 1.35;
 
   --text-body: 0.9375rem; /* 15px */
-  --text-body--line-height: 1.65;
+  --text-body--line-height: 1.7;
 
-  --text-prose: 1rem; /* editorial long-form */
-  --text-prose--line-height: 1.75;
+  --text-prose: 1.0625rem; /* editorial long-form, 17px */
+  --text-prose--line-height: 1.8;
 
   --text-caption: 0.8125rem; /* 13px */
-  --text-caption--line-height: 1.5;
+  --text-caption--line-height: 1.55;
 
-  --text-eyebrow: 0.6875rem; /* 11px uppercase micro-label */
+  /* The category's signature: a small uppercase label, widely tracked. Getting
+     this wrong is the fastest way to lose the register — too tight reads as a
+     system UI, too loose as a wedding invitation. */
+  --text-eyebrow: 0.6875rem; /* 11px */
   --text-eyebrow--line-height: 1.2;
-  --text-eyebrow--letter-spacing: 0.12em;
+  --text-eyebrow--letter-spacing: 0.16em;
 
   /* --- Space scale: 4px base --------------------------------------------- */
   --spacing: 4px;

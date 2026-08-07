@@ -77,16 +77,23 @@ export function ProductCard({
         ) : null}
       </div>
 
-      <div className="mt-3">
-        <Heading className="font-display text-ink">
+      {/*
+        The name leads, in the display face at a size where it reads as a name
+        rather than a label. The descriptive title sits under it, quiet and
+        clamped — it exists for search and for scanning, not for admiring.
+        Price last, in the UI face with tabular figures so a column of prices
+        aligns on the decimal even at different lengths.
+      */}
+      <div className="mt-4">
+        <Heading className="font-display text-[1.375rem] leading-tight tracking-tight text-ink">
           {/* Stretched link: the whole card is one target, without nesting
               anchors inside an anchor. */}
           <Link href={`/products/${product.handle}`} className="after:absolute after:inset-0">
             {product.poeticName}
           </Link>
         </Heading>
-        <p className="text-caption mt-0.5 line-clamp-2 text-ink-body">{product.title}</p>
-        <p className="mt-1.5 text-ink">
+        <p className="text-caption mt-1.5 line-clamp-2 text-ink-muted">{product.title}</p>
+        <p className="mt-2.5 text-caption text-ink">
           <Price value={product.price} />
         </p>
       </div>
