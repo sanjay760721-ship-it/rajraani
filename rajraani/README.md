@@ -62,7 +62,7 @@ reverse. The brand name was the third and is now settled.
 |---|---|---|
 | Brand name | **Rajraani**, settled 5 Aug | Edit `BRAND.name` in `src/lib/brand.ts` — a test fails if the string appears anywhere else. It was "Tantu" until then, and the rename was exactly that one edit. |
 | Catalogue backend | **Fixtures**, behind the real interface. The database exists and is seeded but the site does not read it yet. | Implement `SqliteCatalogueRepository` against `CatalogueRepository` and switch `catalogue.ts`. No page changes. |
-| Design tokens | **Placeholder values in the §2.5 shape** | Replace values in `src/app/globals.css` and `src/lib/tokens/contrast.ts`. Structure stays. |
+| Design tokens | **Real values** as of 7 Aug — Cormorant Garamond + Inter, warm palette, editorial rhythm | Change values in `src/app/globals.css` **and** `src/lib/tokens/contrast.ts` together; the test fails if they drift or drop below AA. |
 
 Everything visual is a placeholder, and the running site says so in a banner.
 
@@ -74,6 +74,12 @@ Everything visual is a placeholder, and the running site says so in a banner.
 scale, palette, space, grid, motion, elevation, image ratios. Breakpoints are
 locked to 768 / 1024 / 1440 by deleting Tailwind's `sm` and `2xl` stops, so a
 fourth breakpoint cannot appear out of habit.
+
+**Typography** — Cormorant Garamond for display, Inter for UI, both self-hosted
+by `next/font` so there is no runtime request to Google and no shift while a
+webfont loads. Tracking goes **negative** at display sizes: letterspacing that
+reads as generous at 15px reads as loose at 56px. Cormorant is deliberately not
+used below ~18px, where its thin strokes disappear.
 
 **Contrast contract** (`src/lib/tokens/contrast.ts`) — all 22 ink-on-surface
 pairs are computed and asserted against WCAG minimums. §2.5 asks for this at

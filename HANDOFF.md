@@ -44,7 +44,7 @@ That phrasing does real work. It means: copy the *structural* decisions that are
 | Photography brief | ✅ `photography-brief.md` — was the critical path, now unblocked |
 | Platform decision | ⚠️ **CHANGED 6 Aug** — Shopify and Sanity dropped. Razorpay + our own database and admin, India-only. See `rajraani/docs/architecture-change-2026-08-06.md`. This supersedes `build.md` §1.1 and §1.3. |
 | Brand name | ✅ **Rajraani.** Settled 5 Aug. |
-| Design tokens | ✅ **Authored 5 Aug** — `rajraani/src/app/globals.css`, full §2.5 shape, 22 contrast pairs asserted in tests. Sprint 1 unblocked. A designer may still refine values; the shape is fixed and code depends on it. |
+| Design tokens | ✅ **Authored 5 Aug, real values 7 Aug** — `rajraani/src/app/globals.css`. Cormorant Garamond + Inter via `next/font`, warm deepened palette, editorial spacing. 22 contrast pairs asserted in tests. No longer placeholders. |
 | Facet taxonomy | 🟡 **Drafted 5 Aug** — `rajraani/taxonomy/`. 9 facets, 63 values. **11 decisions need domain review before Sprint 3.** |
 | Catalogue and editorial content | ❌ Open — see `build.md` §7.7. Confirm the writer exists before Sprint 4. |
 | Photography commissioning | ❌ Open — fill SKU counts, send brief, collect quotes |
@@ -319,17 +319,32 @@ All research is in `docs/research/`. **Always work in this folder**, not in sess
 scratch space — session outputs don't survive. Everything is under git as of 6 August,
 so nothing is lost to a crash either.
 
-### 5.2 ~~Design tokens~~ — resolved 5 Aug
+### 5.2 ~~Design tokens~~ — resolved 5 Aug, given real values 7 Aug
 
 Every §2.5 group present in `rajraani/src/app/globals.css`, with all 22
 ink-on-surface contrast pairs asserted in the test suite
-(`src/lib/tokens/contrast.ts`). **Sprint 1 is unblocked.**
+(`src/lib/tokens/contrast.ts`).
 
-Standing caveat: these are engineering-authored values, not a designer's. They are
-deliberate and defensible, not arbitrary — but a designer may still want to refine the
-palette and type. That is cheap: the *shape* is what code depends on, and it will not move.
-Swapping a value means editing `globals.css` and `contrast.ts` together; the test fails if
-they drift, or if a new value drops below AA.
+**Real values as of 7 August**, after sanju pointed out the site looked
+unfinished — which it did, and treating tokens as "a designer's deliverable"
+had become the reason it stayed that way:
+
+- **Cormorant Garamond** display + **Inter** UI, self-hosted via `next/font`.
+  No runtime request to Google, no shift while a webfont loads.
+- Ink deepened to `#2e2721` — the earlier value was too light to carry a
+  high-contrast serif at 72px.
+- Display sizes raised and tracking made **negative** at display sizes.
+  Letterspacing that reads as generous at 15px reads as loose at 56px, and that
+  one detail was doing much of the "unfinished" work.
+- Section rhythm raised to 64 / 96 / 128px, against design.md §3.3's 104–140px
+  desktop specification. Everything had been at 64.
+- Hero gained a bottom-weighted scrim: white type over an uncontrolled
+  photograph is a legibility gamble, and it went live the moment real images
+  entered those slots.
+
+Still engineering-authored, not a designer's. Swapping a value means editing
+`globals.css` and `contrast.ts` together; the test fails if they drift or if a
+value drops below AA. That contract is why the palette could be moved at all.
 
 *(The parallel Sprint 0 held these as a `design/tokens.json` with a generator. That approach
 was not carried over — see §2.0. Worth revisiting only if a designer wants tokens as data to
