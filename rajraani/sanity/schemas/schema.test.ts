@@ -25,6 +25,9 @@ const storefrontSections = readFileSync(
   fileURLToPath(new URL("../../src/lib/content/sections.ts", import.meta.url)),
   "utf8",
 );
+console.log("DEBUG storefrontSections length:", storefrontSections.length);
+console.log("DEBUG index of Section:", storefrontSections.indexOf("export type Section ="));
+console.log("DEBUG index of EditorialTeaser:", storefrontSections.indexOf("export type EditorialTeaser"));
 
 /** The `type: "…"` discriminants of the storefront's Section union. */
 function storefrontSectionNames(): string[] {
@@ -32,7 +35,9 @@ function storefrontSectionNames(): string[] {
     storefrontSections.indexOf("export type Section ="),
     storefrontSections.indexOf("export type EditorialTeaser"),
   );
-  return [...body.matchAll(/^\s*type:\s*"([a-zA-Z]+)";/gm)].map((m) => m[1]!);
+  const matches = [...body.matchAll(/^\s*type:\s*"([a-zA-Z]+)";/gm)].map((m) => m[1]!);
+  console.log("DEBUG storefrontSectionNames:", matches);
+  return matches;
 }
 
 describe("schema is well-formed", () => {
@@ -79,6 +84,8 @@ describe("schema is well-formed", () => {
 describe("section types match the storefront renderer", () => {
   const cmsNames = sectionTypes.map((section) => section.name).sort();
   const appNames = storefrontSectionNames().sort();
+  console.log("DEBUG cmsNames:", cmsNames);
+  console.log("DEBUG appNames:", appNames);
 
   it("finds the storefront union (guards against this test silently passing)", () => {
     // If the parse breaks, every comparison below would trivially pass.

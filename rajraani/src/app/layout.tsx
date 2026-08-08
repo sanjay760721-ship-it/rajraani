@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cardo, Lato } from "next/font/google";
 
 import { BRAND } from "@/lib/brand";
 
@@ -16,32 +16,26 @@ import "./globals.css";
  */
 
 /**
- * Two families, and the split is the one the category runs on: a high-contrast
- * display serif for anything expressive, a quiet sans for anything functional.
+ * Two families, matching reference exactly: Cardo for display, Lato for UI.
  *
- * **Cormorant Garamond** for display. Light, generously modulated, and it holds
- * its elegance at 48px+ where the hero and section headings live — most serifs
- * either go weedy or turn into a slab at that size. It is deliberately NOT used
- * below ~18px; at caption sizes its thin strokes disappear.
+ * **Cardo** for display. Classic, elegant, weight 400 only — matches reference.
  *
- * **Inter** for UI. It is uninteresting on purpose. Nav labels, prices, buttons
- * and form fields should be legible and then get out of the way — the research
- * is unambiguous that the photography is the colour and the interface recedes.
+ * **Lato** for UI. Clean, legible, weight 400 only — matches reference.
  *
- * `next/font` self-hosts both at build time, so there is no request to Google
- * at runtime, no third-party script, and no layout shift while a webfont
- * arrives. `display: swap` keeps text visible throughout.
+ * `next/font` self-hosts both at build time, no runtime request to Google,
+ * no third-party script, no layout shift. `display: swap` keeps text visible.
  */
-const display = Cormorant_Garamond({
+const display = Cardo({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-display-family",
+  weight: "400",
+  variable: "--font-cardo",
   display: "swap",
 });
 
-const ui = Inter({
+const ui = Lato({
   subsets: ["latin"],
-  variable: "--font-ui-family",
+  weight: "400",
+  variable: "--font-lato",
   display: "swap",
 });
 
@@ -56,8 +50,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // data-scroll-behavior tells the router to skip the smooth scroll on route
-    // transitions, where it reads as lag rather than as polish.
     <html
       lang="en"
       data-scroll-behavior="smooth"

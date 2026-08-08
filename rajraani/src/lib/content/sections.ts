@@ -89,41 +89,36 @@ export type Section =
       items: { art: ArtPair; label: string; href: string }[];
     }
   | {
-      type: "dualCampaign";
-      id: string;
-      items: [
-        { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
-        { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
-      ];
-    }
-  | {
-      type: "storesBand";
-      id: string;
-      art: ArtPair;
-      title: string;
-      body: string;
-      stores: { name: string; href: string }[];
-    }
-  | {
-      type: "hereToHelp";
-      id: string;
-      title: string;
-      email: string;
-      phone: string;
-      whatsapp: string;
-      hours: string;
-    }
-  | {
-      type: "productRail";
-      id: string;
-      title: string;
-      collectionHandle: string;
-      ctaLabel: string;
-    }
-  | {
       type: "editorialPair";
       id: string;
       items: [EditorialTeaser, EditorialTeaser];
+    }
+  | {
+      type: "editorialSlideshow";
+      id: string;
+      slides: {
+        id: string;
+        art: ArtPair;
+        eyebrow?: string;
+        title: string;
+        body: string;
+        ctaLabel: string;
+        ctaHref: string;
+        buttonVariant: "primary" | "secondary";
+        textAlign: "left" | "right" | "center";
+      }[];
+    }
+  | {
+      type: "storesSlideshow";
+      id: string;
+      slides: {
+        id: string;
+        art: ArtPair;
+        title: string;
+        body: string;
+        ctaLabel: string;
+        ctaHref: string;
+      }[];
     }
   | {
       type: "poetryBand";
@@ -142,6 +137,38 @@ export type Section =
       id: string;
       quote: string;
       attribution?: string;
+    }
+  | {
+      type: "productRail";
+      id: string;
+      title: string;
+      collectionHandle: string;
+      ctaLabel: string;
+    }
+  | {
+      type: "hereToHelp";
+      id: string;
+      title: string;
+      email: string;
+      phone: string;
+      whatsapp: string;
+      hours: string;
+    }
+  | {
+      type: "storesBand";
+      id: string;
+      art: ArtPair;
+      title: string;
+      body: string;
+      stores: { name: string; href: string }[];
+    }
+  | {
+      type: "dualCampaign";
+      id: string;
+      items: [
+        { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
+        { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
+      ];
     };
 
 export type EditorialTeaser = {
@@ -285,22 +312,33 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     ],
   },
   {
-    type: "editorialPair",
-    id: "stories",
-    items: [
+    type: "editorialSlideshow",
+    id: "editorial-womenswear-menswear",
+    slides: [
       {
+        id: "slide-womenswear",
+        // `editorial-2` is the womenswear banner from the reference set. There
+        // is no menswear frame in it at all, so the slide below borrows an
+        // unrelated square. Both go when the commissioned shoot lands.
         art: imagePair("purple", "editorial-2.webp"),
-        title: "Antaraal",
-        body: "The interval — the pause a loom takes between one motif and the next. A study in ground, and in the space that makes a pattern legible.",
-        ctaLabel: "Read Story",
-        ctaHref: "/pages/antaraal",
+        eyebrow: "Womenswear",
+        title: "Womenswear",
+        body: "Elegant silhouettes and timeless textiles",
+        ctaLabel: "Explore",
+        ctaHref: "/collections/womenswear",
+        buttonVariant: "secondary",
+        textAlign: "right",
       },
       {
+        id: "slide-menswear",
         art: imagePair("black", "editorial-1.webp"),
-        title: "Handloom, or not",
-        body: "Four tests you can run in a shop, in under a minute, without any special knowledge. Two of them work on a photograph.",
-        ctaLabel: "Read Guide",
-        ctaHref: "/pages/handloom",
+        eyebrow: "Menswear",
+        title: "Menswear",
+        body: "Classic weaves and signature tailoring",
+        ctaLabel: "Explore",
+        ctaHref: "/collections/menswear",
+        buttonVariant: "secondary",
+        textAlign: "left",
       },
     ],
   },
@@ -331,50 +369,34 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     ],
   },
   {
-    type: "dualCampaign",
-    id: "campaigns-dual",
-    items: [
-      {
-        art: imagePair("maroon", "hero-2.webp"),
-        title: "Mrigaya",
-        body: "Depicting forest motifs and intricate animal allegories in hand-spun silk.",
-        ctaLabel: "Discover",
-        ctaHref: "/collections/sarees",
-      },
-      {
-        art: imagePair("green", "hero-5.webp"),
-        title: "Linen & Kora",
-        body: "Breathable textures woven for quiet afternoon gatherings.",
-        ctaLabel: "Discover",
-        ctaHref: "/collections/sarees",
-      },
-    ],
-  },
-  {
     type: "poetryBand",
     id: "poetry",
-    heading: "Slow is the only speed it comes at",
-    body: "Between six and twenty-six weeks on a pit loom, depending on what is being asked of it. There is no faster version of this that is still this.",
+    heading: "Immerse yourself in the poetry of the house",
+    body: `Many-hued yarns spun like verses on a silken parchment and patterns woven to the soft cadences of the loom, a ${BRAND.name} saree is a weaver's poem.`,
   },
   {
-    type: "storesBand",
-    id: "boutiques",
-    art: imagePair("black", "stores.webp"),
-    title: "Visit Our Boutiques",
-    body: "Experience the drape, texture, and brilliance of handloom silk in person. Private consultations hosted daily.",
-    stores: [
-      { name: "Varanasi Flagship", href: "/pages/antaraal" },
-      { name: "Mumbai Gallery", href: "/pages/antaraal" },
+    type: "storesSlideshow",
+    id: "stores-varanasi-mumbai",
+    slides: [
+      {
+        id: "slide-varanasi",
+        // `stores.webp` is the Mumbai frame — the reference set has no Banaras
+        // one, so this slide is showing the wrong city until ours is shot.
+        art: imagePair("black", "stores.webp"),
+        title: "VISIT OUR STORES",
+        body: `Book your appointment to experience ${BRAND.name}'s exquisite Banarasi art in an intimate setting.`,
+        ctaLabel: "Banaras Store",
+        ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi",
+      },
+      {
+        id: "slide-mumbai",
+        art: imagePair("black", "stores.webp"),
+        title: "VISIT OUR STORES",
+        body: `Book your appointment to experience ${BRAND.name}'s exquisite Banarasi art in an intimate setting.`,
+        ctaLabel: "Mumbai Store",
+        ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-flagship-store-mumbai",
+      },
     ],
-  },
-  {
-    type: "hereToHelp",
-    id: "help-strip",
-    title: "Here to Help",
-    email: BRAND.supportEmail,
-    phone: BRAND.supportPhone,
-    whatsapp: "Consult on WhatsApp",
-    hours: BRAND.supportHours,
   },
 ];
 

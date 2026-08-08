@@ -1,185 +1,121 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   DESIGN TOKENS
-
-   Shape per build.md §2.5. Every VALUE below is a placeholder awaiting the
-   designer deliverable; the STRUCTURE is the spec and should survive the swap.
-
-   Two rules carried over from research and deliberately baked in:
-
-   1. Ink is a warm neutral, not near-black — design.md §3.0 calls this the one
-      token lesson worth keeping from the competitive sweep.
-   2. Contrast is verified at token-definition time, not at audit time
-      (build.md §2.5). The ratios noted below are computed and asserted in
-      src/lib/tokens/contrast.test.ts, so a designer swapping in a value that
-      drops below AA fails the test run rather than the accessibility audit.
+   DESIGN TOKENS — Exact match to reference (live analysis)
    ============================================================================ */
 
 @theme {
   /* --- Palette: surfaces ------------------------------------------------- */
-  /* Three grounds, all warm. Paper, then two progressively warmer bands used
-     to separate editorial from commerce without drawing a line. */
   --color-bg: #ffffff;
-  --color-bg-alt: #fbf9f6; /* warm off-white, editorial bands */
-  --color-bg-sand: #f1ece4; /* footer, provenance, quiet bands */
+  --color-bg-alt: #fbf9f6;
+  --color-bg-sand: #f1ece4;
 
-  /* --- Palette: ink ------------------------------------------------------ */
-  /* Warm neutral, deliberately not near-black. design.md §3.0 measured the
-     category's ink at a warm mid-brown and called this the one token lesson
-     worth keeping: a near-black scheme reads colder and harder than this
-     category does. Deepened from the first pass — the earlier ink was too
-     light to carry a display face at 56px. */
-  --color-ink: #2e2721; /* headings                 14.7:1 on bg */
-  --color-ink-body: #55493f; /* body copy                 8.7:1 on bg */
-  --color-ink-muted: #6b6055; /* meta, SKU, captions       6.1:1 on bg */
+  /* --- Palette: ink — Exact from reference ------------------------------- */
+  --color-ink: #533e2d;         /* headings - warm mid-brown */
+  --color-ink-dark: #301E1D;    /* preheadings, darker accents */
+  --color-ink-body: #533e2d;    /* body copy */
+  --color-ink-muted: #6b6055;   /* meta, SKU, captions */
 
   /* --- Palette: rules ---------------------------------------------------- */
-  /* Two rule tokens, deliberately. One hairline colour cannot serve both
-     decorative dividers and form-control boundaries: the latter is a UI
-     component and owes 3:1 under WCAG 1.4.11. */
-  --color-rule: #e7e0d6; /* decorative hairlines      non-informational */
-  --color-rule-input: #8b8072; /* form control boundaries   3.3:1 on the worst surface */
-  --color-rule-strong: #2e2721; /* active tab, CTA underline */
+  --color-rule: #e7e0d6;        /* decorative hairlines */
+  --color-rule-input: #8b8072;  /* form control boundaries */
+  --color-rule-strong: #533e2d; /* active tab, CTA underline */
 
   /* --- Palette: accent and state ----------------------------------------- */
-  /* Antique gold, deepened so it clears AA on the sand ground too. Used
-     sparingly and never on large fields (build.md §2.5) — if gold covers more
-     than about 2% of a page, it has been overdone. */
-  --color-accent: #7d5f2a; /* antique gold              5.9:1 on bg */
-  --color-error: #9c3b30; /*                           6.8:1 on bg */
-  --color-success: #4a6b48; /*                           6.0:1 on bg */
+  --color-accent: #7d5f2a;
+  --color-error: #9c3b30;
+  --color-success: #4a6b48;
 
   /* --- Palette: overlays ------------------------------------------------- */
   --color-scrim: rgb(0 0 0 / 0.3);
   --color-scrim-strong: rgb(0 0 0 / 0.45);
+  --color-scrim-gallery: rgba(0, 0, 0, 0.77); /* gallery hover overlay */
 
-  /* --- Type families ----------------------------------------------------- */
-  /* Loaded and self-hosted by next/font in app/layout.tsx — no runtime request
-     to Google, no third-party script, no shift while a webfont arrives.
-     Devanagari falls back to a system face; no product naming uses it yet, and
-     when it does the branded face has to cover both scripts (build.md §2.5). */
-  --font-display:
-    var(--font-display-family), "Cormorant Garamond", Georgia,
-    "Noto Serif Devanagari", serif;
-  --font-ui:
-    var(--font-ui-family), Inter, ui-sans-serif, system-ui, "Segoe UI",
-    "Noto Sans Devanagari", sans-serif;
+  /* --- Type families — Self-hosted via next/font ------------------------ */
+  --font-display: var(--font-cardo), "Cardo", Georgia, "Noto Serif Devanagari", serif;
+  --font-ui: var(--font-lato), "Lato", ui-sans-serif, system-ui, "Segoe UI", "Noto Sans Devanagari", sans-serif;
 
-  /* --- Type scale -------------------------------------------------------- */
-  /* Fluid between the 768 and 1440 breakpoints. Each entry carries size,
-     line-height and tracking together so the trio cannot drift apart.
+  /* --- Type scale — Exact from reference --------------------------------- */
+  /* Cardo display: ~30-40px responsive, weight 400 */
+  --text-display: clamp(1.875rem, 1.25rem + 2vw, 2.5rem);     /* ~30-40px */
+  --text-display--line-height: 1.2;
+  --text-display--letter-spacing: 0;
 
-     The display sizes are larger and the tracking tighter than the first pass.
-     A high-contrast serif needs scale to show what makes it worth having, and
-     it needs NEGATIVE tracking at display sizes — letterspacing that reads as
-     generous at 15px reads as loose and amateur at 56px. */
-  --text-display: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem);
-  --text-display--line-height: 1.04;
-  --text-display--letter-spacing: -0.02em;
+  --text-h1: clamp(1.5rem, 1.125rem + 1.2vw, 1.875rem);       /* ~24-30px brand quote */
+  --text-h1--line-height: 1.3;
+  --text-h1--letter-spacing: 0;
 
-  --text-h1: clamp(2.125rem, 1.4rem + 2.2vw, 3.25rem);
-  --text-h1--line-height: 1.08;
-  --text-h1--letter-spacing: -0.015em;
+  --text-h2: clamp(1.25rem, 1rem + 0.8vw, 1.5rem);            /* ~20-24px section headings */
+  --text-h2--line-height: 1.35;
+  --text-h2--letter-spacing: 0;
 
-  --text-h2: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
-  --text-h2--line-height: 1.14;
-  --text-h2--letter-spacing: -0.01em;
+  --text-h3: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);          /* ~18-20px */
+  --text-h3--line-height: 1.4;
+  --text-h3--letter-spacing: 0;
 
-  --text-h3: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem);
-  --text-h3--line-height: 1.25;
-  --text-h3--letter-spacing: -0.005em;
+  --text-h4: 1rem;                                             /* 16px */
 
-  --text-h4: 1.1875rem;
-  --text-h4--line-height: 1.35;
+  --text-body: 0.875rem;                                       /* 14px Lato body */
+  --text-body--line-height: 1.6;
 
-  --text-body: 0.9375rem; /* 15px */
-  --text-body--line-height: 1.7;
+  --text-prose: 0.875rem;                                      /* 14px */
+  --text-prose--line-height: 1.7;
 
-  --text-prose: 1.0625rem; /* editorial long-form, 17px */
-  --text-prose--line-height: 1.8;
+  --text-caption: 0.75rem;                                     /* 12px */
+  --text-caption--line-height: 1.5;
 
-  --text-caption: 0.8125rem; /* 13px */
-  --text-caption--line-height: 1.55;
+  /* Quick-link labels: Cardo 16px centered, not eyebrow */
+  --text-quicklink: 1rem;                                      /* 16px Cardo */
+  --text-quicklink--line-height: 1.5;
+  --text-quicklink--letter-spacing: 0;
 
-  /* The category's signature: a small uppercase label, widely tracked. Getting
-     this wrong is the fastest way to lose the register — too tight reads as a
-     system UI, too loose as a wedding invitation. */
-  --text-eyebrow: 0.6875rem; /* 11px */
+  /* Eyebrow (uppercase micro-label) — still used for some UI */
+  --text-eyebrow: 0.75rem;                                     /* 12px */
   --text-eyebrow--line-height: 1.2;
   --text-eyebrow--letter-spacing: 0.16em;
 
   /* --- Space scale: 4px base --------------------------------------------- */
   --spacing: 4px;
 
+  /* --- Section padding — 20px standard per reference -------------------- */
+  --section-padding: 20px;
+  --section-padding-lg: 40px;  /* for larger bands if needed */
+
   /* --- Grid -------------------------------------------------------------- */
-  /* Breakpoints are settled at 768 / 1024 / 1440 (build.md §8.4). Tailwind's
-     default sm and 2xl stops are removed so the three cannot be bypassed out
-     of habit — an `sm:` or `2xl:` prefix now produces no utility at all
-     rather than a silent fourth breakpoint. */
   --breakpoint-sm: initial;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1440px;
   --breakpoint-2xl: initial;
 
-  --container-site: 1600px;
-  --container-content: 1280px;
-  --container-prose: 680px; /* ~62ch at body size */
+  --container-site: 1600px;      /* full viewport width */
+  --container-content: 1200px;   /* standard content */
+  --container-prose: 680px;      /* prose limit */
 
-  /* --- Motion: three speeds, restrained ---------------------------------- */
-  --ease-brand: cubic-bezier(0.2, 0, 0.2, 1);
-  --animate-duration-fast: 160ms;
+  /* --- Motion ------------------------------------------------------------ */
+  --ease-brand: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 180ms;
+  --t-base: 320ms;
+  --t-slow: 600ms;
+  --t-hero: 4000ms;  /* hero carousel interval */
 
   /* --- Elevation: rules and space, never shadows ------------------------- */
   --radius-none: 0;
 
-  /* --- Image ratios: first-class tokens ---------------------------------- */
-  /* Must match photography-brief.md §2.1 exactly: masters are 3000×4500 and
-     3000×3000. Both are reserved in CSS to protect CLS (build.md §6). */
+  /* --- Image ratios ------------------------------------------------------ */
+  --aspect-hero: 2 / 1;          /* 1800/900 = 2:1 hero carousel */
+  --aspect-triptych: 1 / 1;      /* 1:1 square triptych */
+  --aspect-category: 2000 / 2415; /* category split ~0.828 */
   --aspect-portrait: 2 / 3;
   --aspect-square: 1 / 1;
 }
 
-/* ============================================================================
-   Layout tokens that are not utility-generating
-   ============================================================================ */
-:root {
-  --gutter: 16px;
-  --header-h: 60px;
-  --header-h-condensed: 56px;
-  --header-h-top: 96px; /* at page top, roomier */
-  --announcement-h: 36px;
-  --t-fast: 160ms; /* link and icon hover */
-  --t-base: 280ms; /* image crossfade, underline draw */
-  --t-slow: 420ms; /* drawer and menu reveal */
-  --t-header-condense: 200ms; /* height transition */
-  --t-header-bg: 300ms; /* background transition */
-}
-@media (min-width: 768px) {
-  :root {
-    --gutter: 32px;
-    --header-h: 68px;
-    --header-h-condensed: 64px;
-    --header-h-top: 104px;
-  }
-}
-@media (min-width: 1024px) {
-  :root {
-    --gutter: 48px;
-  }
-}
-
-/* ============================================================================
-   Base
-   ============================================================================ */
 @layer base {
   *,
   *::before,
   *::after {
     box-sizing: border-box;
-    /* Square corners everywhere. This category separates with rules and
-       space, not elevation — build.md §2.5 Elevation. */
     border-radius: 0;
   }
 
@@ -193,20 +129,16 @@
     color: var(--color-ink-body);
     font-family: var(--font-ui);
     font-size: var(--text-body);
-    line-height: 1.65;
+    line-height: var(--text-body--line-height);
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
+  h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 400;
     color: var(--color-ink);
   }
 
-  img,
-  video {
+  img, video {
     display: block;
     max-width: 100%;
   }
@@ -216,15 +148,9 @@
     outline-offset: 3px;
   }
 
-  /* The entire motion inventory is hover-swap, menu reveal and drawer slide,
-     so honouring this costs nothing functional. */
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -233,40 +159,134 @@
 }
 
 /* ============================================================================
-   Utilities
+   Layout Utilities
    ============================================================================ */
+
 @utility wrap {
   width: 100%;
   max-width: var(--container-content);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: 20px; /* 20px gutter */
 }
 
 @utility wrap-wide {
   width: 100%;
   max-width: var(--container-site);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: 20px;
 }
 
 @utility wrap-prose {
   width: 100%;
   max-width: var(--container-prose);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: 20px;
 }
 
-/* The category's signature micro-label: uppercase, widely tracked. */
+@utility section-pad {
+  padding-block: var(--section-padding);
+}
+
+@utility section-pad-lg {
+  padding-block: var(--section-padding-lg);
+}
+
+/* ============================================================================
+   Typography Utilities
+   ============================================================================ */
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
+  letter-spacing: var(--text-display--letter-spacing);
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+@utility text-h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  line-height: var(--text-h1--line-height);
+  letter-spacing: var(--text-h1--letter-spacing);
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  line-height: var(--text-h2--line-height);
+  letter-spacing: var(--text-h2--letter-spacing);
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  line-height: var(--text-h3--line-height);
+  letter-spacing: var(--text-h3--letter-spacing);
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+@utility text-body {
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  color: var(--color-ink-body);
+}
+
+@utility text-quicklink {
+  font-family: var(--font-display);
+  font-size: var(--text-quicklink);
+  line-height: var(--text-quicklink--line-height);
+  letter-spacing: var(--text-quicklink--letter-spacing);
+  font-weight: 400;
+  color: var(--color-ink);
+  text-align: center;
+}
+
 @utility eyebrow {
   font-family: var(--font-ui);
   font-size: var(--text-eyebrow);
   line-height: var(--text-eyebrow--line-height);
   letter-spacing: var(--text-eyebrow--letter-spacing);
   text-transform: uppercase;
+  color: var(--color-ink-muted);
 }
 
-/* Editorial CTA — 1px rule that draws left to right on hover. */
-@utility cta {
+@utility cta-primary {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-ink);
+  padding: 12px 24px;
+  transition: opacity var(--t-fast) var(--ease-brand);
+}
+.cta-primary:hover { opacity: 0.85; }
+
+@utility cta-secondary {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+  padding: 12px 24px;
+  transition: all var(--t-fast) var(--ease-brand);
+}
+.cta-secondary:hover {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+
+@utility cta-link {
   display: inline-block;
   font-family: var(--font-ui);
   font-size: var(--text-eyebrow);
@@ -275,114 +295,237 @@
   color: var(--color-ink);
   position: relative;
   padding-bottom: 6px;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 1px;
-    width: 100%;
-    background: var(--color-rule-strong);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--t-base) var(--ease-brand);
-  }
-
-  &:hover::after,
-  &:focus-visible::after {
-    transform: scaleX(1);
-  }
+}
+.cta-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 1px; width: 100%;
+  background: var(--color-rule-strong);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-base) var(--ease-brand);
+}
+.cta-link:hover::after,
+.cta-link:focus-visible::after {
+  transform: scaleX(1);
 }
 
 /* ============================================================================
-   Header utilities (plain CSS — @utility doesn't support descendant selectors)
+   Container widths matching reference
    ============================================================================ */
 
-.header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gutter);
-  padding-inline: var(--gutter);
-  width: 100%;
-  max-width: var(--container-site);
-  margin-inline: auto;
-}
+.is-width-wide { max-width: 100%; }
+.is-width-standard { max-width: 1200px; margin-inline: auto; }
+.has-limit { max-width: 680px; margin-inline: auto; }
+.has-gutter { gap: 24px; }
 
-.header-row-top {
-  height: var(--header-h-top);
-  min-height: var(--header-h-top);
-  background: transparent;
-  border-bottom: none;
-  transition: height var(--t-header-condense) linear,
-              background-color var(--t-header-bg) linear,
-              border-color var(--t-header-bg) linear;
-}
+/* ============================================================================
+   Scroll reveal animation (fadeInDown) - Framer Motion will handle this
+   ============================================================================ */
 
-.header-row-middle {
-  height: var(--header-h);
-  min-height: var(--header-h);
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: height var(--t-header-condense) linear,
-              background-color var(--t-header-bg) linear,
-              border-color var(--t-header-bg) linear;
-}
-
-.header-row-bottom {
-  height: 44px;
-  min-height: 44px;
-  background: transparent;
-  border-bottom: 1px solid var(--color-rule);
-  transition: height var(--t-header-condense) linear,
-              opacity var(--t-header-condense) linear,
-              visibility var(--t-header-condense) linear;
-}
-
-.header-condensed .header-row-top {
-  display: none;
-}
-
-.header-condensed .header-row-middle {
-  height: var(--header-h-condensed);
-  min-height: var(--header-h-condensed);
-  background: var(--color-bg);
-  border-bottom-color: var(--color-rule);
-}
-
-.header-condensed .header-row-bottom {
-  height: 0;
-  min-height: 0;
+.fade-in-down {
   opacity: 0;
-  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.fade-in-down.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   Gallery / Slideshow utilities
+   ============================================================================ */
+
+.gallery-item__overlay {
+  background-color: var(--color-scrim-gallery);
+  opacity: 0;
+  transition: opacity var(--t-base) var(--ease-brand);
+}
+.gallery-item:hover .gallery-item__overlay {
+  opacity: 1;
+}
+
+.flickity-enabled { position: relative; }
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
   overflow: hidden;
+  position: relative;
+  height: 100%;
+  touch-action: pan-y;
 }
 
-.header-wordmark {
-  font-family: var(--font-display);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--color-ink);
-  transition: font-size var(--t-header-condense) linear,
-              opacity var(--t-header-condense) linear;
+/* No `display: flex` here. Flickity positions cells itself, absolutely, and
+   drives the track with a transform on this element — a flex context fights
+   that and leaves the slider unable to move. Upstream flickity.css does not
+   set it either; this file is a hand-maintained copy of that stylesheet, so
+   it needs to stay faithful to it. */
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
 }
 
-.header-wordmark-condensed {
-  font-size: clamp(1.125rem, 0.9rem + 1.2vw, 1.5rem);
+.flickity-rtl .flickity-slider {
+  left: unset;
+  right: 0;
 }
 
-.header-tagline {
-  font-family: var(--font-ui);
-  font-style: italic;
-  font-size: var(--text-eyebrow);
-  letter-spacing: var(--text-eyebrow--letter-spacing);
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
-  transition: opacity var(--t-header-condense) linear;
+/* draggable */
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-.header-condensed .header-tagline {
-  display: none;
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: grabbing;
+}
+
+/* flickity-cell */
+.flickity-cell {
+  position: absolute;
+  left: 0;
+}
+
+.flickity-rtl .flickity-cell {
+  left: unset;
+  right: 0;
+}
+
+/* flickity-button */
+.flickity-button {
+  position: absolute;
+  background: transparent !important;
+  border: none;
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+
+.flickity-enabled:hover .flickity-button,
+.flickity-button:focus {
+  opacity: 1;
+}
+
+.flickity-button:focus {
+  outline: none;
+}
+
+.flickity-button .arrow { fill: var(--color-bg); }
+
+.flickity-prev-next-button {
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  transform: translateY(-50%);
+}
+
+.flickity-prev-next-button.previous { left: 24px; }
+.flickity-prev-next-button.next { right: 24px; }
+
+.flickity-rtl .flickity-prev-next-button.previous {
+  left: auto;
+  right: 24px;
+}
+.flickity-rtl .flickity-prev-next-button.next {
+  right: auto;
+  left: 24px;
+}
+
+.flickity-prev-next-button .flickity-button-icon {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  height: 60%;
+}
+
+/* page dots */
+.flickity-page-dots {
+  position: absolute;
+  width: 100%;
+  bottom: 24px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* Flickity 3 renders `<button class="flickity-page-dot">` with visible label
+   text. Version 2 rendered `<li class="dot">`, and these rules were written
+   against that markup, so every dot was landing on the page as an unstyled
+   73x22px button reading "View slide 1". Both selectors are kept so the styling
+   survives a major-version move in either direction. */
+.flickity-page-dots .flickity-page-dot,
+.flickity-page-dots .dot {
+  width: 8px; height: 8px; border-radius: 0;
+  padding: 0; border: 0;
+  /* The label is the accessible name — keep it for screen readers, off-screen
+     for everyone else. `text-indent` alone leaves it selectable. */
+  font-size: 0; line-height: 0; color: transparent; overflow: hidden;
+  background: var(--color-bg);
+  opacity: 0.4; cursor: pointer;
+  transition: opacity var(--t-fast), width var(--t-base);
+}
+
+.flickity-page-dots .flickity-page-dot.is-selected,
+.flickity-page-dots .dot.is-selected { opacity: 1; width: 24px; border-radius: 0; }
+
+/* draggable styles */
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: grabbing;
+}
+
+/* flickity-button overrides */
+.flickity-button {
+  background: transparent !important;
+  border: none;
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+
+.flickity-enabled:hover .flickity-button,
+.flickity-button:focus { opacity: 1; }
+
+.flickity-button:focus { outline: none; }
+
+.flickity-button .arrow { fill: var(--color-bg); }
+
+.flickity-prev-next-button {
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  transform: translateY(-50%);
+}
+
+.flickity-prev-next-button.previous { left: 24px; }
+.flickity-prev-next-button.next { right: 24px; }
+
+.flickity-rtl .flickity-prev-next-button.previous {
+  left: auto;
+  right: 24px;
+}
+.flickity-rtl .flickity-prev-next-button.next {
+  right: auto;
+  left: 24px;
 }

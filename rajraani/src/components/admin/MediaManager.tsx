@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-type MediaItem = {
+export type MediaItem = {
   name: string;
   path: string;
   size: string;
@@ -11,96 +11,7 @@ type MediaItem = {
   ratio: "2:3" | "1:1" | "banner" | "video";
 };
 
-const SAMPLE_MEDIA: MediaItem[] = [
-  {
-    name: "Small-Booti-2Banner_2000x.webp",
-    path: "/reference-only/Small-Booti-2Banner_2000x.webp",
-    size: "149 KB",
-    type: "image",
-    ratio: "banner",
-  },
-  {
-    name: "Vanam-Leela-Banner_2000x.webp",
-    path: "/reference-only/Vanam-Leela-Banner_2000x.webp",
-    size: "207 KB",
-    type: "image",
-    ratio: "banner",
-  },
-  {
-    name: "Icons-Banner_2000x.webp",
-    path: "/reference-only/Icons-Banner_2000x.webp",
-    size: "62 KB",
-    type: "image",
-    ratio: "banner",
-  },
-  {
-    name: "GiftingBanner_2000x.webp",
-    path: "/reference-only/GiftingBanner_2000x.webp",
-    size: "46 KB",
-    type: "image",
-    ratio: "banner",
-  },
-  {
-    name: "linen-banner_2000x.webp",
-    path: "/reference-only/linen-banner_2000x.webp",
-    size: "60 KB",
-    type: "image",
-    ratio: "banner",
-  },
-  {
-    name: "Art_CollectibleBanner_2000x.webp",
-    path: "/reference-only/Art_CollectibleBanner_2000x.webp",
-    size: "136 KB",
-    type: "image",
-    ratio: "banner",
-  },
-  {
-    name: "saree-Website-2000px-square_1000x.webp",
-    path: "/reference-only/saree-Website-2000px-square_1000x.webp",
-    size: "84 KB",
-    type: "image",
-    ratio: "1:1",
-  },
-  {
-    name: "Dupatta-Website-2000px-square_1000x.webp",
-    path: "/reference-only/Dupatta-Website-2000px-square_1000x.webp",
-    size: "135 KB",
-    type: "image",
-    ratio: "1:1",
-  },
-  {
-    name: "desktop-banner-womenswear_2000x.webp",
-    path: "/reference-only/desktop-banner-womenswear_2000x.webp",
-    size: "96 KB",
-    type: "image",
-    ratio: "1:1",
-  },
-  {
-    name: "awadhSquares_1200x.webp",
-    path: "/reference-only/awadhSquares_1200x.webp",
-    size: "48 KB",
-    type: "image",
-    ratio: "1:1",
-  },
-  {
-    name: "MumbaiBanner_2000x.webp",
-    path: "/reference-only/MumbaiBanner_2000x.webp",
-    size: "197 KB",
-    type: "image",
-    ratio: "banner",
-  },
-  {
-    name: "eef6a84960be44829508a3e3e4a77980.mp4",
-    path: "/reference-only/eef6a84960be44829508a3e3e4a77980.mp4",
-    size: "822 MB",
-    type: "video",
-    ratio: "video",
-  },
-];
-
-export function MediaManager() {
-  // Fixed until there is a media table to read from — nothing mutates this list.
-  const items: MediaItem[] = SAMPLE_MEDIA;
+export function MediaManager({ items }: { items: MediaItem[] }) {
   const [filter, setFilter] = useState<"all" | "image" | "video">("all");
   const [copiedPath, setCopiedPath] = useState<string | null>(null);
 
@@ -185,6 +96,20 @@ export function MediaManager() {
           it to use in a product or section.
         </p>
       </div>
+
+      {/*
+        Empty is the expected state on a fresh checkout, not an error:
+        `public/reference-only/` is gitignored on purpose (unlicensed reference
+        photography), so it exists only on machines where someone put it there.
+        Saying so beats an unexplained blank grid.
+      */}
+      {filteredItems.length === 0 ? (
+        <p className="border border-rule bg-bg-alt px-4 py-8 text-center text-caption text-ink-muted">
+          {items.length === 0
+            ? "No media found. public/reference-only/ is gitignored — reference imagery lives only on the machine it was placed on, and commissioned photography has not landed yet."
+            : "No media of this type."}
+        </p>
+      ) : null}
 
       {/* Media Grid */}
       <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">

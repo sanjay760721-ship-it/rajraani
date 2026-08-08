@@ -5,20 +5,31 @@ import Link from "next/link";
 import { useState } from "react";
 import { HOMEPAGE_SECTIONS, type Section } from "@/lib/content/sections";
 
-const SECTION_DESCRIPTIONS: Record<Section["type"], string> = {
+type HomepageSectionType =
+  | "hero"
+  | "heroCarousel"
+  | "brandStatement"
+  | "collectionTriptych"
+  | "videoBand"
+  | "categorySplit"
+  | "editorialSlideshow"
+  | "tileRow"
+  | "poetryBand"
+  | "storesSlideshow"
+  | "richText"
+  | "pullQuote";
+
+const SECTION_DESCRIPTIONS: Record<HomepageSectionType, string> = {
   hero: "Single full-bleed banner with title, paragraph, and CTA",
   heroCarousel: "6-slide auto-playing interactive hero carousel with desktop/mobile crops",
   brandStatement: "High-whitespace brand philosophy text band with centered quote",
   collectionTriptych: "3-frame square image feature highlighting weave craftsmanship",
   videoBand: "Full-bleed or 16:9 framed ambient pit loom video section",
   categorySplit: "2-column square category grid with 1.03x hover zoom scaling",
-  editorialPair: "2-column craft & campaign story teasers",
+  editorialSlideshow: "2-slide slideshow (Womenswear/Menswear) with secondary Explore buttons",
   tileRow: "4-column quick-link square tile grid (Bridal, Gifting, Zarkashi, Collectibles)",
-  dualCampaign: "Side-by-side campaign split with narrow prose columns",
   poetryBand: "Warm sand background (var(--color-bg-alt)) lyrical text section",
-  storesBand: "Boutique store feature with Varanasi & Mumbai consultation booking",
-  hereToHelp: "Customer care support strip with email, phone, and WhatsApp link",
-  productRail: "4-card product rail drawn automatically from a collection",
+  storesSlideshow: "2-slide fade slideshow (Banaras/Mumbai) with Calendly booking links",
   richText: "Rich text narrative prose block",
   pullQuote: "Centered serif pull quote section",
 };
@@ -130,7 +141,7 @@ export function HomepageEditor() {
                       )}
                     </div>
                     <p className="text-caption mt-1 text-ink-muted">
-                      {SECTION_DESCRIPTIONS[section.type] ?? "Homepage Section Component"}
+                      {SECTION_DESCRIPTIONS[section.type as HomepageSectionType] ?? "Homepage Section Component"}
                     </p>
                   </div>
                 </div>

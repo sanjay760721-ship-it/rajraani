@@ -1,13 +1,24 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+
 import { toneFor } from "../Frame";
 import { BRAND } from "@/lib/brand";
 import type { ArtPair, HeroSlide } from "@/lib/content/sections";
+import type Flickity from "flickity";
 
-const AUTOPLAY_MS = 6000;
+/**
+ * Hero Carousel — Flickity-based, matching reference exactly.
+ *
+ * - 6 slides, slide transition (not fade)
+ * - 4000ms interval, pause on hover/focus
+ * - Dots only (no prev/next arrows on desktop)
+ * - 2:1 aspect ratio (1800/900)
+ * - Full viewport width, max-height 900px, min-height 520px
+ * - sr-only h1 for accessibility
+ */
 
 function SlideArt({
   art,
@@ -18,40 +29,33 @@ function SlideArt({
   alt?: string;
   priority?: boolean;
 }) {
-  const renderCrop = (
-    side: ArtPair["desktop"],
-    visibility: string,
-    sizes: string,
-  ) =>
-    side.src ? (
-      <div
-        className={`relative h-[82vh] max-h-[900px] min-h-[520px] w-full ${visibility}`}
-        style={{ backgroundColor: toneFor(side.tone) }}
-      >
-        <Image
-          src={side.src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          quality={100}
-          unoptimized
-          className="object-cover object-center"
-        />
-      </div>
-    ) : (
-      <div
-        aria-hidden
-        className={`h-[82vh] max-h-[900px] min-h-[520px] w-full ${visibility}`}
-        style={{ backgroundColor: toneFor(side.tone) }}
-      />
-    );
-
   return (
-    <>
-      {renderCrop(art.mobile, "md:hidden", "100vw")}
-      {renderCrop(art.desktop, "hidden md:block", "(min-width: 1440px) 1600px, 100vw")}
-    </>
+    <div
+      className="relative h-full w-full"
+      style={{ backgroundColor: toneFor(art.desktop.tone) }}
+    >
+      {art.desktop.src ? (
+        <Image
+          src={art.desktop.src}
+          alt={alt}
+          className="h-full w-full object-cover object-center"
+          fill
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          sizes="100vw"
+        />
+      ) : (
+        <div
+          aria-hidden
+          className="h-full w-full"
+          style={{
+            backgroundColor: toneFor(art.desktop.tone),
+            backgroundImage:
+              "linear-gradient(160deg, rgb(255 255 255 / 0.22), rgb(0 0 0 / 0.18))",
+          }}
+        />
+      )}
+    </div>
   );
 }
 
@@ -62,161 +66,165 @@ export function HeroCarousel({
   slides: HeroSlide[];
   isPageTitle?: boolean;
 }) {
-  const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const touchStartX = useRef<number | null>(null);
-
-  const nextSlide = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % slides.length);
-  }, [slides.length]);
-
-  const prevSlide = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-  }, [slides.length]);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const flickityRef = useRef<Flickity | null>(null);
 
   useEffect(() => {
-    if (paused || slides.length <= 1) return;
-    const timer = setInterval(nextSlide, AUTOPLAY_MS);
-    return () => clearInterval(timer);
-  }, [paused, slides.length, nextSlide]);
+    const element = carouselRef.current;
+    if (!element) return;
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0]?.clientX ?? null;
-  };
+    // Flickity is loaded here rather than at module scope for two reasons: it
+    // touches `window` on import so it cannot be evaluated during SSR, and a
+    // static import would put the whole library in the entry bundle for a
+    // component that only matters below the fold on some pages.
+    let flkty: Flickity | null = null;
+    let cancelled = false;
+    let handleFocus: (() => void) | undefined;
+    let handleBlur: (() => void) | undefined;
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const touchEndX = e.changedTouches[0]?.clientX ?? null;
-    if (touchEndX === null) return;
-    const diff = touchStartX.current - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
-    }
-    touchStartX.current = null;
-  };
+    void (async () => {
+      const { default: FlickityCtor } = await import("flickity");
+      if (cancelled) return;
 
-  /*
-   * Every slide heading is an h2, never an h1.
-   *
-   * A carousel has one heading per slide, so making them h1 gives the page six
-   * of them — the heading lint caught exactly that. A document has one h1, and
-   * which slide happens to be showing must not change the outline.
-   *
-   * The page keeps its h1 below: visually hidden, stable, and the thing a
-   * screen-reader user hears first.
-   */
-  const Heading = "h2";
+      flkty = new FlickityCtor(element, {
+        cellAlign: "left",
+        // `contain` is ignored when `wrapAround` is on, and `percentPosition`
+        // made Flickity measure each full-width cell as a fraction of the
+        // track — every slide landed ~63px from the origin and selecting a dot
+        // moved almost nothing. Pixel positioning is correct for cells that are
+        // exactly one viewport wide.
+        wrapAround: true,
+        percentPosition: false,
+        autoPlay: 4000,
+        pauseAutoPlayOnHover: true,
+        draggable: true,
+        prevNextButtons: false, // No arrows on desktop
+        pageDots: true,
+        resize: true,
+        selectedAttraction: 0.025,
+        friction: 0.25,
+        initialIndex: 0,
+        cellSelector: ".carousel-cell",
+      });
+
+      flickityRef.current = flkty;
+
+      /*
+       * Flickity measures cell geometry during its constructor. At that point
+       * this carousel has not been through a layout pass with its final cell
+       * height, so it computed scroll targets ~31px apart instead of one
+       * viewport each — every dot selected the right index and the track
+       * barely moved. Re-measuring after a paint, and again once the first
+       * (eager) slide image has decoded, fixes the targets.
+       *
+       * `window.resize` is not enough: Flickity's own handler short-circuits
+       * when the viewport width is unchanged, which it is here.
+       */
+      requestAnimationFrame(() => {
+        if (!cancelled) flkty?.resize();
+      });
+
+      const firstImage = element.querySelector("img");
+      if (firstImage && !firstImage.complete) {
+        firstImage.addEventListener(
+          "load",
+          () => {
+            if (!cancelled) flkty?.resize();
+          },
+          { once: true },
+        );
+      }
+
+      // Pause on focus (accessibility)
+      handleFocus = () => flkty?.pausePlayer?.();
+      handleBlur = () => flkty?.unpausePlayer?.();
+      element.addEventListener("focusin", handleFocus);
+      element.addEventListener("focusout", handleBlur);
+    })();
+
+    return () => {
+      cancelled = true;
+      if (handleFocus) element.removeEventListener("focusin", handleFocus);
+      if (handleBlur) element.removeEventListener("focusout", handleBlur);
+      flkty?.destroy();
+      flickityRef.current = null;
+    };
+  }, []);
 
   return (
     <section
-      className="group relative w-full overflow-hidden bg-bg text-bg"
+      ref={carouselRef}
+      /*
+       * `flickity-enabled` is Flickity's own class and must not be hardcoded —
+       * it styles the cells for a viewport element that only exists once the
+       * library has initialised. The `min-h` is the safety net: cells are
+       * `h-full`, so without a height on an ancestor they resolve to 0 and the
+       * whole hero collapses behind `overflow-hidden`.
+       */
+      className="relative w-full min-h-[520px] overflow-hidden bg-bg text-bg"
       aria-label="Featured collections"
       aria-roledescription="carousel"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
     >
-      {/*
-        The page's only h1. Visually hidden because the design leads with a
-        photograph rather than a title, but the document still owes one — it is
-        what a screen reader announces on arrival, and what the outline hangs
-        from. `isPageTitle` is false when this carousel is used further down a
-        page, in which case the page's own h1 is elsewhere.
-      */}
+      {/* The page's only h1. Visually hidden because the design leads with a
+          photograph rather than a title, but the document still owes one — it is
+          what a screen reader announces on arrival, and what the outline hangs
+          from. `isPageTitle` is false when this carousel is used further down a
+          page, in which case the page's own h1 is elsewhere. */}
       {isPageTitle ? (
         <h1 className="sr-only">{BRAND.name} — handwoven Banarasi textiles</h1>
       ) : null}
 
-      {/* Slide Stack */}
-      <div className="relative h-[82vh] max-h-[900px] min-h-[520px] w-full">
-        {slides.map((slide, index) => {
-          const active = index === current;
-          return (
+      {/*
+        The cells are direct children on purpose. Flickity builds its own
+        `.flickity-viewport > .flickity-slider` around them at init, so a
+        hand-written wrapper carrying those class names both fights the library
+        and buries the cells a level deeper than `cellSelector` looks.
+
+        The height lives on each cell rather than on an ancestor: cells sized
+        `h-full` inside a viewport that Flickity sizes *from* its cells is
+        circular, and resolves to zero. `82vh` clamped to the design's 520–900
+        band keeps the 2:1 intent without depending on any parent.
+      */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`carousel-cell relative h-[82vh] max-h-[900px] min-h-[520px] w-full ${index === 0 ? "is-selected" : ""}`}
+          aria-hidden={index !== 0}
+        >
+            <SlideArt art={slide.art} alt={slide.title} priority={index === 0} />
+
+            {/* Scrim Overlay — bottom gradient for text legibility */}
             <div
-              key={slide.id}
-              aria-hidden={!active}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                active ? "z-10 opacity-100" : "z-0 opacity-0 pointer-events-none"
-              }`}
-            >
-              <SlideArt art={slide.art} alt={slide.title} priority={index === 0} />
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+            />
 
-              {/* Scrim Overlay */}
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-              />
-
-              {/* Slide Content */}
-              <div className="absolute inset-0 flex items-end">
-                <div className="wrap-wide pb-16 md:pb-24">
-                  <div className="max-w-[46ch]">
-                    {slide.eyebrow ? (
-                      <p className="eyebrow text-bg/80">{slide.eyebrow}</p>
-                    ) : null}
-                    <Heading className="text-display mt-3 text-bg drop-shadow-sm">
-                      {slide.title}
-                    </Heading>
-                    <p className="text-prose mt-4 max-w-[38ch] text-bg/90">
-                      {slide.body}
-                    </p>
-                    <Link
-                      href={slide.ctaHref}
-                      className="cta mt-8 inline-block text-bg hover:underline"
-                    >
-                      {slide.ctaLabel}
-                    </Link>
-                  </div>
+            {/* Slide Content — bottom-aligned, max-width 46ch */}
+            <div className="absolute inset-0 flex items-end">
+              <div className="wrap-wide pb-16 md:pb-24">
+                <div className="max-w-[46ch]">
+                  {slide.eyebrow ? (
+                    <p className="eyebrow text-bg/80">{slide.eyebrow}</p>
+                  ) : null}
+                  <h2 className="text-display mt-3 text-bg drop-shadow-sm">
+                    {slide.title}
+                  </h2>
+                  <p className="text-prose mt-4 max-w-[38ch] text-bg/90">
+                    {slide.body}
+                  </p>
+                  <Link
+                    href={slide.ctaHref}
+                    className="cta-primary mt-8 inline-block"
+                  >
+                    {slide.ctaLabel}
+                  </Link>
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
-
-      {/* Prev / Next Controls (Desktop Hover) */}
-      {slides.length > 1 ? (
-        <>
-          <button
-            type="button"
-            onClick={prevSlide}
-            aria-label="Previous Slide"
-            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 p-3 text-bg/75 opacity-0 transition-opacity hover:text-bg group-hover:opacity-100 focus:opacity-100"
-          >
-            <span className="font-display text-3xl font-light">‹</span>
-          </button>
-          <button
-            type="button"
-            onClick={nextSlide}
-            aria-label="Next Slide"
-            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 p-3 text-bg/75 opacity-0 transition-opacity hover:text-bg group-hover:opacity-100 focus:opacity-100"
-          >
-            <span className="font-display text-3xl font-light">›</span>
-          </button>
-        </>
-      ) : null}
-
-      {/* Indicator Dots */}
-      {slides.length > 1 ? (
-        <div className="absolute bottom-6 inset-x-0 z-20 flex justify-center gap-2.5">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.id}
-              type="button"
-              onClick={() => setCurrent(index)}
-              aria-label={`Go to slide ${index + 1}: ${slide.title}`}
-              aria-current={index === current ? "true" : undefined}
-              className={`h-1.5 transition-all duration-300 ${
-                index === current ? "w-8 bg-bg" : "w-2 bg-bg/40 hover:bg-bg/75"
-              }`}
-            />
-          ))}
         </div>
-      ) : null}
+      ))}
+
+      {/* Flickity will inject page dots here automatically */}
     </section>
   );
 }

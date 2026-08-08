@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
      * AVIF first, WebP fallback — build.md §9.3.
      */
     formats: ["image/avif", "image/webp"],
+    qualities: [75, 90],
     deviceSizes: [400, 600, 900, 1200, 1800, 2400, 3000],
     imageSizes: [80, 160, 240, 320, 480, 640],
   },

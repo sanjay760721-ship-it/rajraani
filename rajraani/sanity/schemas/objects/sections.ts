@@ -1,6 +1,151 @@
 import { defineArrayMember, defineField, defineType } from "../../lib/define.ts";
 import { ctaFields } from "./artPair.ts";
 
+/**
+ * Section type for the 2-slide editorial slideshow (Womenswear/Menswear).
+ * Matches reference's editorial split with slide transition, arrows, secondary buttons.
+ */
+export const editorialSlideshowSection = defineType({
+  name: "editorialSlideshow",
+  title: "Editorial Slideshow (2-Slide)",
+  type: "object",
+  description:
+    "Two full-width slides (Womenswear/Menswear) with slide transition, arrows, secondary Explore buttons.",
+  fields: [
+    defineField({
+      name: "slides",
+      title: "Slides (exactly 2)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "editorialSlide",
+          fields: [
+            defineField({
+              name: "art",
+              type: "artPair",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "eyebrow",
+              type: "string",
+              validation: (rule) => rule.max(40),
+            }),
+            defineField({
+              name: "title",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "body",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(240),
+            }),
+            defineField({
+              name: "ctaLabel",
+              type: "string",
+              validation: (rule) => rule.required().max(40),
+            }),
+            defineField({
+              name: "ctaHref",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "buttonVariant",
+              type: "string",
+              options: { list: ["primary", "secondary"] },
+              initialValue: "secondary",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "textAlign",
+              type: "string",
+              options: { list: ["left", "right", "center"] },
+              initialValue: "center",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: "title", media: "art.desktop" },
+          },
+        }),
+      ],
+      validation: (rule) => rule.required().length(2),
+    }),
+  ],
+  preview: {
+    select: { first: "slides.0.title", second: "slides.1.title" },
+    prepare: ({ first, second }) => ({
+      title: [first, second].filter(Boolean).join(" · ") || "Editorial Slideshow",
+    }),
+  },
+});
+
+/**
+ * Section type for the 2-slide stores slideshow (Banaras/Mumbai).
+ * Fade transition, no arrows/dots, Calendly links.
+ */
+export const storesSlideshowSection = defineType({
+  name: "storesSlideshow",
+  title: "Stores Slideshow (2-Slide Fade)",
+  type: "object",
+  description:
+    "Two slides (Banaras/Mumbai) with fade transition, overlaid VISIT OUR STORES heading, Calendly links.",
+  fields: [
+    defineField({
+      name: "slides",
+      title: "Slides (exactly 2: Banaras, Mumbai)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "storeSlide",
+          fields: [
+            defineField({
+              name: "art",
+              type: "artPair",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "title",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "body",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(240),
+            }),
+            defineField({
+              name: "ctaLabel",
+              type: "string",
+              validation: (rule) => rule.required().max(40),
+            }),
+            defineField({
+              name: "ctaHref",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: "title", media: "art.desktop" },
+          },
+        }),
+      ],
+      validation: (rule) => rule.required().length(2),
+    }),
+  ],
+  preview: {
+    select: { first: "slides.0.title", second: "slides.1.title" },
+    prepare: ({ first, second }) => ({
+      title: [first, second].filter(Boolean).join(" · ") || "Stores Slideshow",
+    }),
+  },
+});
+
 export const heroSection = defineType({
   name: "hero",
   title: "Hero",
@@ -430,6 +575,8 @@ export const sectionTypes = [
   hereToHelpSection,
   productRailSection,
   editorialPairSection,
+  editorialSlideshowSection,
+  storesSlideshowSection,
   poetryBandSection,
   richTextSection,
   pullQuoteSection,

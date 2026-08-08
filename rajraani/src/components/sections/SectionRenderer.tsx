@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { HeroCarousel } from "./HeroCarousel";
+import { EditorialSlideshow } from "./EditorialSlideshow";
+import { StoresSlideshow } from "./StoresSlideshow";
 import { PLACEHOLDER_WASH, toneFor } from "../Frame";
 import { ProductCard } from "../ProductCard";
 import { ScrollReveal } from "../ScrollReveal";
@@ -51,22 +53,20 @@ export async function SectionRenderer({
           <TileRow section={section} />
         </ScrollReveal>
       );
-    case "dualCampaign":
+    case "editorialPair":
       return (
         <ScrollReveal>
-          <DualCampaign section={section} />
+          <EditorialPair section={section} />
         </ScrollReveal>
       );
-    case "storesBand":
+    case "editorialSlideshow":
+      return <EditorialSlideshow slides={section.slides} />;
+    case "storesSlideshow":
+      return <StoresSlideshow slides={section.slides} />;
+    case "poetryBand":
       return (
         <ScrollReveal>
-          <StoresBand section={section} />
-        </ScrollReveal>
-      );
-    case "hereToHelp":
-      return (
-        <ScrollReveal>
-          <HereToHelp section={section} />
+          <PoetryBand section={section} />
         </ScrollReveal>
       );
     case "productRail":
@@ -75,16 +75,22 @@ export async function SectionRenderer({
           <ProductRail section={section} />
         </ScrollReveal>
       );
-    case "editorialPair":
+    case "hereToHelp":
       return (
         <ScrollReveal>
-          <EditorialPair section={section} />
+          <HereToHelp section={section} />
         </ScrollReveal>
       );
-    case "poetryBand":
+    case "storesBand":
       return (
         <ScrollReveal>
-          <PoetryBand section={section} />
+          <StoresBand section={section} />
+        </ScrollReveal>
+      );
+    case "dualCampaign":
+      return (
+        <ScrollReveal>
+          <DualCampaign section={section} />
         </ScrollReveal>
       );
     case "richText":
@@ -124,14 +130,6 @@ function Art({
         className={`relative ${visibility} ${className}`}
         style={{ backgroundColor: toneFor(side.tone) }}
       >
-        {/*
-          No `unoptimized`, and no quality={100}.
-          Those switch the image pipeline off entirely — no AVIF, no WebP, no
-          resizing — so a phone downloads the full-size original. On a page
-          where images are ~72% of payload that is the most expensive line in
-          the codebase. If a photograph looks soft, the cause is almost always
-          object-cover on a source smaller than its slot, not the optimiser.
-        */}
         <Image
           src={side.src}
           alt={alt}
@@ -188,7 +186,7 @@ function Hero({
             ) : null}
             <Heading className="text-display mt-4 text-bg">{section.title}</Heading>
             <p className="text-prose mt-5 max-w-[38ch] text-bg/85">{section.body}</p>
-            <Link href={section.ctaHref} className="cta mt-8 inline-block text-bg">
+            <Link href={section.ctaHref} className="cta-primary mt-8 inline-block">
               {section.ctaLabel}
             </Link>
           </div>
@@ -204,9 +202,9 @@ function BrandStatement({
   section: Extract<Section, { type: "brandStatement" }>;
 }) {
   return (
-    <section className="wrap-prose py-24 text-center md:py-32 lg:py-40">
-      <p className="font-display text-h1 text-ink">{section.quote}</p>
-      <p className="text-prose mt-6 text-ink-body">{section.body}</p>
+    <section className="wrap-prose section-pad text-center">
+      <p className="text-h1 text-ink">&ldquo;{section.quote}&rdquo;</p>
+      <p className="text-body mt-4 text-ink-body">{section.body}</p>
     </section>
   );
 }
@@ -217,21 +215,21 @@ function CollectionTriptych({
   section: Extract<Section, { type: "collectionTriptych" }>;
 }) {
   return (
-    <section className="wrap-wide py-20 md:py-28 lg:py-32">
-      <div className="grid grid-cols-3 gap-4">
+    <section className="wrap-wide section-pad has-gutter" data-scroll-class="fadeInDown">
+      <div className="grid grid-cols-3 gap-6">
         {section.art.map((art, index) => (
           <Link key={index} href={section.ctaHref} className="group overflow-hidden">
             <Art
               art={art}
-              className="aspect-square w-full transition-transform duration-700 ease-out group-hover:scale-105"
+              className="aspect-square w-full transition-transform duration-600 ease-brand group-hover:scale-103"
             />
           </Link>
         ))}
       </div>
-      <div className="mx-auto mt-10 max-w-prose text-center">
+      <div className="mx-auto mt-8 max-w-prose text-center">
         <h2 className="text-h2">{section.title}</h2>
-        <p className="text-prose mt-4 text-ink-body">{section.body}</p>
-        <Link href={section.ctaHref} className="cta mt-6 inline-block">
+        <p className="text-body mt-3 text-ink-body">{section.body}</p>
+        <Link href={section.ctaHref} className="cta-link mt-6 inline-block">
           {section.ctaLabel}
         </Link>
       </div>
@@ -245,14 +243,15 @@ function VideoBand({
   section: Extract<Section, { type: "videoBand" }>;
 }) {
   return (
-    <section className="wrap-wide py-16 md:py-24">
-      <div className="relative aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden bg-ink text-bg">
+    <section className="is-width-wide section-pad-vertical" style={{ paddingTop: "20px" }}>
+      <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
         {section.videoSrc ? (
           <video
             autoPlay
             loop
             muted
             playsInline
+            controls
             preload="metadata"
             className="absolute inset-0 h-full w-full object-cover object-center"
           >
@@ -272,7 +271,7 @@ function VideoBand({
             <p className="text-prose mt-3 text-bg/90">{section.body}</p>
             <Link
               href={section.ctaHref}
-              className="cta mt-6 inline-block text-bg border-b border-bg/50 hover:border-bg"
+              className="cta-link mt-6 inline-block text-bg border-b border-bg/50 hover:border-bg"
             >
               {section.ctaLabel}
             </Link>
@@ -289,22 +288,22 @@ function CategorySplit({
   section: Extract<Section, { type: "categorySplit" }>;
 }) {
   return (
-    <section className="wrap-wide grid grid-cols-1 gap-6 py-16 md:grid-cols-2 md:py-24">
-      {section.items.map((item) => (
-        <Link key={item.label} href={item.href} className="group block overflow-hidden">
-          <div className="relative aspect-square w-full overflow-hidden">
-            <Art
-              art={item.art}
-              className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-          </div>
-          <div className="py-4 text-center">
-            <span className="eyebrow tracking-[0.2em] text-ink group-hover:underline">
-              {item.label}
-            </span>
-          </div>
-        </Link>
-      ))}
+    <section className="is-width-wide has-gutter section-pad-vertical" style={{ paddingTop: "39px", paddingBottom: "20px" }}>
+      <div className="grid grid-cols-2 gap-6">
+        {section.items.map((item) => (
+          <Link key={item.label} href={item.href} className="group block overflow-hidden">
+            <div className="relative overflow-hidden" style={{ aspectRatio: "2000/2415" }}>
+              <Art
+                art={item.art}
+                className="h-full w-full transition-transform duration-600 ease-brand group-hover:scale-103"
+              />
+            </div>
+            <div className="py-4 text-center">
+              <span className="text-quicklink group-hover:underline">{item.label}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
@@ -315,19 +314,17 @@ function TileRow({
   section: Extract<Section, { type: "tileRow" }>;
 }) {
   return (
-    <section className="wrap-wide py-16 md:py-24">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+    <section className="is-width-wide has-gutter">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 gap-6">
         {section.items.map((item) => (
-          <Link key={item.label} href={item.href} className="group block text-center">
-            <div className="relative aspect-square w-full overflow-hidden">
+          <Link key={item.label} href={item.href} className="group block overflow-hidden">
+            <div className="aspect-square w-full relative overflow-hidden">
               <Art
                 art={item.art}
-                className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
+                className="h-full w-full transition-transform duration-600 ease-brand group-hover:scale-103"
               />
             </div>
-            <span className="eyebrow mt-3 block text-ink group-hover:underline">
-              {item.label}
-            </span>
+            <span className="text-quicklink mt-3 block group-hover:underline">{item.label}</span>
           </Link>
         ))}
       </div>
@@ -335,6 +332,12 @@ function TileRow({
   );
 }
 
+/*
+ * Restored from 69335d2. These four renderers were dropped from the working
+ * copy while the slideshow sections were being added, but their `case` arms
+ * and their members of the `Section` union both survived — so the module
+ * stopped compiling. Recovered verbatim; no behaviour change.
+ */
 function DualCampaign({
   section,
 }: {
@@ -423,38 +426,6 @@ function HereToHelp({
   );
 }
 
-async function ProductRail({
-  section,
-}: {
-  section: Extract<Section, { type: "productRail" }>;
-}) {
-  const collection = await catalogue.getCollection(section.collectionHandle);
-  if (!collection) return null;
-
-  const products = sortProducts(
-    await catalogue.productsInCollection(collection),
-    "featured",
-  ).slice(0, 4);
-
-  return (
-    <section className="wrap-wide py-20 md:py-28 lg:py-32">
-      <div className="mb-8 flex items-baseline justify-between gap-4">
-        <h2 className="text-h2">{section.title}</h2>
-        <Link href={`/collections/${section.collectionHandle}`} className="cta">
-          {section.ctaLabel}
-        </Link>
-      </div>
-      <ul className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4">
-        {products.map((product) => (
-          <li key={product.handle}>
-            <ProductCard product={product} />
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 function EditorialPair({
   section,
 }: {
@@ -487,33 +458,68 @@ function PoetryBand({
   section: Extract<Section, { type: "poetryBand" }>;
 }) {
   return (
-    <section className="bg-bg-alt py-24 md:py-32 lg:py-40">
-      <div className="wrap-prose text-center">
-        <h2 className="text-h2">{section.heading}</h2>
-        <p className="text-prose mt-5 text-ink-body">{section.body}</p>
+    <section className="wrap-prose section-pad text-center" style={{ backgroundColor: "var(--color-bg-alt)" }}>
+      <h2 className="text-h2">{section.heading}</h2>
+      <p className="text-body mt-4 text-ink-body">{section.body}</p>
+    </section>
+  );
+}
+
+async function ProductRail({
+  section,
+}: {
+  section: Extract<Section, { type: "productRail" }>;
+}) {
+  const collection = await catalogue.getCollection(section.collectionHandle);
+  if (!collection) return null;
+
+  const products = sortProducts(
+    await catalogue.productsInCollection(collection),
+    "featured",
+  ).slice(0, 4);
+
+  return (
+    <section className="wrap-wide section-pad-lg">
+      <div className="mb-8 flex items-baseline justify-between gap-4">
+        <h2 className="text-h2">{section.title}</h2>
+        <Link href={`/collections/${section.collectionHandle}`} className="cta-link">
+          {section.ctaLabel}
+        </Link>
       </div>
+      <ul className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4">
+        {products.map((product) => (
+          <li key={product.handle}>
+            <ProductCard product={product} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
 
 function RichText({ section }: { section: Extract<Section, { type: "richText" }> }) {
   return (
-    <section className="wrap-prose py-14 md:py-20">
+    <section className="wrap-prose section-pad" style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}>
       {section.heading ? <h2 className="text-h3 mb-5">{section.heading}</h2> : null}
-      <div className="space-y-5">
+      <div className="space-y-5 text-center">
         {section.paragraphs.map((paragraph, index) => (
-          <p key={index} className="text-prose text-ink-body">
-            {paragraph}
-          </p>
+          <p key={index} className="text-body text-ink-body">{paragraph}</p>
         ))}
       </div>
+      {section.paragraphs.length > 1 && (
+        <div className="mt-6">
+          <Link href="/pages/dashashva" className="cta-link">
+            DISCOVER
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
 
 function PullQuote({ section }: { section: Extract<Section, { type: "pullQuote" }> }) {
   return (
-    <figure className="wrap-prose py-20 text-center md:py-28">
+    <figure className="wrap-prose section-pad text-center">
       <blockquote className="font-display text-h2 text-ink italic">
         {section.quote}
       </blockquote>
