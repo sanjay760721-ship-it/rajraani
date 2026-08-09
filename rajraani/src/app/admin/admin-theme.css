@@ -1,0 +1,92 @@
+/* ============================================================================
+   ADMIN — "Ethos & Elegance"
+   ============================================================================
+   The admin runs a separate design system from the storefront. It is internal
+   tooling: data-dense, read for hours, never seen by a customer. So it gets a
+   serif-on-sans editorial voice, an off-white canvas, and the soft-square
+   radius and ambient elevation the brand surface deliberately refuses.
+
+   Everything is scoped under `.admin-surface`, applied once on the protected
+   admin layout. None of it is in `@theme`, so none of it can reach the
+   storefront's palette — which is contract-tested for WCAG contrast and for
+   staying in sync with `src/lib/tokens/contrast.ts`.
+   ========================================================================= */
+
+.admin-surface {
+  /* Canvas and elevations — "surface-on-surface", not shadow-on-white. */
+  --a-surface: #fbf9f8;
+  --a-surface-low: #f5f3f3;
+  --a-surface-lowest: #ffffff;
+  --a-surface-high: #e9e8e7;
+
+  /* Ink. */
+  --a-ink: #1b1c1c;
+  --a-ink-variant: #444748;
+  --a-outline: #747878;
+  --a-outline-variant: #c4c7c7;
+
+  /* Bronze, used sparingly: active nav, accent icons, focus. */
+  --a-accent: #715a3e;
+  --a-accent-container: #fdddb9;
+  --a-on-accent-container: #786044;
+
+  /* State. Greens and reds are for deltas and badges only. */
+  --a-positive: #3f6b41;
+  --a-negative: #ba1a1a;
+
+  /* Soft-square: structural, not clinical. Images stay sharp. */
+  --a-radius: 4px;
+  --a-radius-lg: 8px;
+  --a-radius-pill: 9999px;
+
+  /* Ambient, only on interaction — "stacked paper", not floating objects. */
+  --a-lift: 0 8px 24px rgb(26 26 26 / 0.06);
+
+  background-color: var(--a-surface);
+  color: var(--a-ink);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Playfair carries every heading in the admin. */
+.admin-surface .a-display {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.admin-surface .a-heading {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* The catalog-style label: small, spaced, uppercase. */
+.admin-surface .a-label {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* A card. Border first, shadow only when the pointer is on it. */
+.admin-surface .a-card {
+  background-color: var(--a-surface-lowest);
+  border: 1px solid color-mix(in srgb, var(--a-outline-variant) 45%, transparent);
+  border-radius: var(--a-radius-lg);
+  transition: box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.admin-surface .a-card-interactive:hover {
+  box-shadow: var(--a-lift);
+  border-color: color-mix(in srgb, var(--a-outline-variant) 90%, transparent);
+}
+
+/* Tabular figures so metrics do not shift width as they tick. */
+.admin-surface .a-figure {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}

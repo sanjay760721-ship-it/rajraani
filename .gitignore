@@ -20,3 +20,7 @@ Thumbs.db
 
 # Reference imagery dropped here for local mockups. Never commit.
 /images/
+
+# Stitch design export — mockup HTML and docs are tracked; the PNG renders are
+# not. They are 9.5MB of the 9.7MB and the HTML reproduces them exactly.
+stitch_rajraani_design_system/**/*.png

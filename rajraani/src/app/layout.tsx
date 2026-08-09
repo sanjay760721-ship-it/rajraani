@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cardo, Lato } from "next/font/google";
+import { Cardo, Lato, Manrope, Playfair_Display } from "next/font/google";
 
 import { BRAND } from "@/lib/brand";
 
@@ -39,6 +39,29 @@ const ui = Lato({
   display: "swap",
 });
 
+/**
+ * Two more families, for the admin only.
+ *
+ * The admin runs its own design system ("Ethos & Elegance") — Playfair Display
+ * for headings, Manrope for interface and data. They are declared here because
+ * `next/font` has to be called at module scope in a layout, but nothing on the
+ * storefront references these variables, and the weights are self-hosted the
+ * same way, so the shop pays no download cost for them.
+ */
+const adminDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const adminUi = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     default: `${BRAND.name} — handwoven Banarasi textiles`,
@@ -53,7 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${display.variable} ${ui.variable} h-full antialiased`}
+      className={`${display.variable} ${ui.variable} ${adminDisplay.variable} ${adminUi.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>

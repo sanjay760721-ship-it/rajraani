@@ -28,6 +28,25 @@ const SKIP_DIRS = new Set([
   ".claude",
 ]);
 
+/*
+ * The admin is internal tooling, not the storefront, and it runs on its own
+ * design system ("Ethos & Elegance"): Playfair Display over Manrope, a 4px
+ * soft-square radius, and an ambient hover shadow on cards.
+ *
+ * Elevation-by-rules-and-space is a rule about the *brand surface* — what a
+ * customer sees. Applying it to a data-dense operations console bought nothing
+ * and was already being violated 37 times before anyone decided it should be.
+ * This makes the exemption a decision with a reason rather than a drift.
+ *
+ * Deliberately narrow: only shadow and radius, only under these two paths.
+ * Everything else — competitor names, borrowed asset paths, fulfilment state
+ * in titles, stray hexes, mojibake — still applies to the admin in full.
+ */
+const ADMIN_SURFACE = [
+  /^src\/app\/admin\//,
+  /^src\/components\/admin\//,
+];
+
 const SCAN_EXT = new Set([
   ".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs",
   ".json", ".css", ".md", ".mdx", ".html", ".yml", ".yaml",
@@ -92,6 +111,7 @@ const RULES = [
       "Elevation is rules and space, not shadows (build.md §2.5). The reference " +
       "site carries 5 box-shadows on an entire page and all 5 are third-party " +
       "widgets. Separate with a border or with space.",
+    exempt: ADMIN_SURFACE,
   },
   {
     id: "border-radius",
@@ -101,6 +121,7 @@ const RULES = [
     why:
       "Square corners, no exceptions (build.md §2.5 Elevation). 891 of 900 " +
       "sampled elements in this category measure `border-radius: 0`.",
+    exempt: ADMIN_SURFACE,
   },
   {
     /*

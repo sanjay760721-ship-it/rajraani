@@ -1,48 +1,41 @@
-import { InteractiveAdminHub } from "@/components/admin/InteractiveAdminHub";
-import { togglePublishedAction } from "@/lib/admin/product-actions";
+import { ExecutiveOverview } from "@/components/admin/ExecutiveOverview";
 import { getDashboardMetrics, listProductsForAdmin } from "@/lib/data/admin-queries";
 
-export const metadata = { title: "Dashboard & Operating System" };
+export const metadata = { title: "Executive Overview" };
 
 /**
- * Admin Dashboard & Catalogue Overview.
- *
- * Single-pane-of-glass interactive operating system for catalogue readiness, inventory,
- * live stock adjusters, search, inspect modals, and launch progress meters.
+ * The admin's landing screen — catalogue health at a glance, then the
+ * catalogue itself with inline stock control.
  */
 export default async function AdminHome(props: PageProps<"/admin">) {
   const { saved, deleted } = await props.searchParams;
   const products = listProductsForAdmin();
   const metrics = getDashboardMetrics();
 
+  const notice = saved
+    ? "Piece saved."
+    : deleted
+      ? "Piece deleted."
+      : null;
+
   return (
-    <div className="space-y-6">
-      {saved ? (
+    <div className="flex flex-col gap-8">
+      {notice ? (
         <p
           role="status"
-          className="text-caption border border-emerald-700/40 bg-emerald-50 px-4 py-3 text-emerald-800 text-xs font-semibold"
+          className="border px-4 py-3 text-[13px] font-semibold"
+          style={{
+            borderRadius: "var(--a-radius)",
+            borderColor: "var(--a-accent)",
+            color: "var(--a-on-accent-container)",
+            backgroundColor: "var(--a-accent-container)",
+          }}
         >
-          ✓ Product successfully saved and updated.
+          {notice}
         </p>
       ) : null}
 
-      {deleted ? (
-        <p
-          role="status"
-          className="text-caption border border-rule bg-bg-alt px-4 py-3 text-ink-muted text-xs"
-        >
-          ✓ Product deleted from database.
-        </p>
-      ) : null}
-
-      <InteractiveAdminHub
-        products={products}
-        metrics={metrics}
-        togglePublishedAction={togglePublishedAction}
-      />
+      <ExecutiveOverview products={products} metrics={metrics} />
     </div>
   );
 }
-
-
-

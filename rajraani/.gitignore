@@ -48,3 +48,6 @@ next-env.d.ts
 # must never be committed, deployed, or published. Replace with commissioned
 # photography per docs/research/photography-brief.md.
 /public/reference-only/
+
+# Stitch admin mockups — local preview only, not part of the build.
+/public/_design-preview/
