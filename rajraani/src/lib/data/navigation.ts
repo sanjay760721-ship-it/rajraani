@@ -37,7 +37,9 @@ export type NavColumn = {
 export type NavTile = {
   label: string;
   href: string;
-  /** Deliberately no image field yet — see components/Frame for why. */
+  /** Optional image source for art-directed tiles. */
+  src?: string;
+  /** Fallback tone when no image is available. */
   tone: string;
 };
 
@@ -96,7 +98,9 @@ export const NAVIGATION: readonly NavPanel[] = [
         ],
       },
     ],
-    tiles: [{ label: "Nadi", href: "/collections/nadi", tone: "indigo" }],
+    tiles: [
+      { label: "Nadi", href: "/collections/nadi", tone: "indigo", src: "/reference-only/tile-nadi.webp" },
+    ],
   },
   {
     id: "collections",
@@ -138,7 +142,9 @@ export const NAVIGATION: readonly NavPanel[] = [
         ],
       },
     ],
-    tiles: [{ label: "On kadhua", href: "/pages/kadhua", tone: "maroon" }],
+    tiles: [
+      { label: "On kadhua", href: "/pages/kadhua", tone: "maroon", src: "/reference-only/tile-kadhua.webp" },
+    ],
   },
   {
     id: "campaigns",
@@ -171,8 +177,8 @@ export const NAVIGATION: readonly NavPanel[] = [
       },
     ],
     tiles: [
-      { label: "Nadi", href: "/pages/nadi", tone: "green" },
-      { label: "Antaraal", href: "/pages/antaraal", tone: "purple" },
+      { label: "Nadi", href: "/pages/nadi", tone: "green", src: "/reference-only/tile-nadi-campaign.webp" },
+      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/reference-only/tile-antaraal-campaign.webp" },
     ],
   },
   {
@@ -201,8 +207,8 @@ export const NAVIGATION: readonly NavPanel[] = [
       },
     ],
     tiles: [
-      { label: "The loom", href: "/pages/handloom", tone: "gold" },
-      { label: "Repoussé", href: "/pages/repousse", tone: "black" },
+      { label: "The loom", href: "/pages/handloom", tone: "gold", src: "/reference-only/tile-loom.webp" },
+      { label: "Repoussé", href: "/pages/repousse", tone: "black", src: "/reference-only/tile-repousse.webp" },
     ],
   },
   {
@@ -236,8 +242,8 @@ export const NAVIGATION: readonly NavPanel[] = [
       },
     ],
     tiles: [
-      { label: "Nadi", href: "/pages/nadi", tone: "indigo" },
-      { label: "Antaraal", href: "/pages/antaraal", tone: "purple" },
+      { label: "Nadi", href: "/pages/nadi", tone: "indigo", src: "/reference-only/tile-nadi-story.webp" },
+      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/reference-only/tile-antaraal-story.webp" },
     ],
   },
   {
@@ -257,8 +263,8 @@ export const NAVIGATION: readonly NavPanel[] = [
       },
     ],
     tiles: [
-      { label: "Impact", href: "/pages/impact", tone: "green" },
-      { label: "Retail Stores", href: "/pages/stores", tone: "maroon" },
+      { label: "Impact", href: "/pages/impact", tone: "green", src: "/reference-only/tile-impact.webp" },
+      { label: "Retail Stores", href: "/pages/stores", tone: "maroon", src: "/reference-only/tile-stores.webp" },
     ],
   },
 ];

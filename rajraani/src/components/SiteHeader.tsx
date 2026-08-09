@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
-import { ToneTile } from "./Frame";
+import { MegaMenuTile } from "./MegaMenuTile";
 import { CurrencySelector } from "./CurrencySelector";
 import { WishlistButton } from "./WishlistButton";
 import { useCart } from "./cart-context";
@@ -203,10 +203,107 @@ function MegaPanel({
   onMouseEnter: () => void;
   onClose: () => void;
 }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  // Keyboard navigation within mega panel
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      const focusable = panelRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable || focusable.length === 0) return;
+
+      const currentIndex = Array.from(focusable).findIndex(
+        (el) => el === document.activeElement,
+      );
+      if (currentIndex === -1) return;
+
+      let nextIndex = currentIndex;
+      if (event.key === "ArrowRight") {
+        nextIndex = (currentIndex + 1) % focusable.length;
+        event.preventDefault();
+      } else if (event.key === "ArrowLeft") {
+        nextIndex = (currentIndex - 1 + focusable.length) % focusable.length;
+        event.preventDefault();
+      } else if (event.key === "ArrowDown") {
+        // Find next focusable in next column (rough approximation)
+        const cols = panelRef.current?.querySelectorAll(".grid > div") || [];
+        let found = false;
+        for (let i = 0; i < cols.length; i++) {
+          const col = cols[i];
+          if (!col) continue;
+          const colFocusable = col.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          );
+          const idx = Array.from(colFocusable).findIndex(
+            (el) => el === document.activeElement,
+          );
+          if (idx !== -1 && i + 1 < cols.length) {
+            const nextCol = cols[i + 1];
+            if (!nextCol) continue;
+            const nextColFocusable = nextCol.querySelectorAll<HTMLElement>(
+              'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+            );
+            if (nextColFocusable.length > 0) {
+              const focusableArray = Array.from(nextColFocusable);
+              const target = focusableArray[Math.min(idx, focusableArray.length - 1)];
+              if (target) {
+                target.focus();
+                event.preventDefault();
+                found = true;
+                break;
+              }
+            }
+          }
+        }
+        if (!found) return;
+      } else if (event.key === "ArrowUp") {
+        // Find previous focusable in previous column
+        const cols = panelRef.current?.querySelectorAll(".grid > div") || [];
+        let found = false;
+        for (let i = 0; i < cols.length; i++) {
+          const col = cols[i];
+          if (!col) continue;
+          const colFocusable = col.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          );
+          const idx = Array.from(colFocusable).findIndex(
+            (el) => el === document.activeElement,
+          );
+          if (idx !== -1 && i - 1 >= 0) {
+            const prevCol = cols[i - 1];
+            if (!prevCol) continue;
+            const prevColFocusable = prevCol.querySelectorAll<HTMLElement>(
+              'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+            );
+            if (prevColFocusable.length > 0) {
+              const focusableArray = Array.from(prevColFocusable);
+              const target = focusableArray[Math.min(idx, focusableArray.length - 1)];
+              if (target) {
+                target.focus();
+                event.preventDefault();
+                found = true;
+                break;
+              }
+            }
+          }
+        }
+        if (!found) return;
+      } else {
+        return;
+      }
+      focusable[nextIndex]?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open, panel]);
+
   if (!open) return null;
 
   return (
     <div
+      ref={panelRef}
       id={id}
       aria-label={panel.label}
       onMouseEnter={onMouseEnter}
@@ -237,9 +334,15 @@ function MegaPanel({
         {/* Merchandised slots — editorial choices */}
         <div className="col-start-4 grid gap-4">
           {panel.tiles.map((tile) => (
-            <Link key={tile.href} href={tile.href} onClick={onClose}>
-              <ToneTile label={tile.label} tone={tile.tone} />
-            </Link>
+            <MegaMenuTile
+              key={tile.href}
+              label={tile.label}
+              tone={tile.tone}
+              src={tile.src}
+              alt={tile.label}
+              href={tile.href}
+              onClose={onClose}
+            />
           ))}
         </div>
       </div>
