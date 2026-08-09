@@ -8,11 +8,12 @@ export const metadata = { title: "Add a piece" };
 
 export default function NewProductPage() {
   return (
-    <div>
-      <Link href="/admin" className="eyebrow text-ink-muted hover:underline">
-        ← Pieces
+    <div className="space-y-8">
+      <Link href="/admin" className="a-btn-ghost inline-flex items-center gap-2">
+        <span className="material-symbols-outlined">arrow_back</span>
+        Pieces
       </Link>
-      <h1 className="text-h2 mt-3 mb-8">Add a piece</h1>
+      <h1 className="a-display-md">Add a piece</h1>
 
       <ProductForm vocabulary={formVocabulary()} campaigns={campaignOptions()} />
     </div>

@@ -9,18 +9,6 @@ import {
 } from "@/lib/admin/product-actions";
 import type { ProductInput } from "@/lib/data/admin-queries";
 
-/**
- * The product form.
- *
- * Grouped the way someone photographing and describing a saree actually thinks
- * about it — what it is, what it costs, what it says, how it was made, how it
- * is classified — rather than in database column order.
- *
- * `useActionState` keeps the typed values on a validation failure. Losing 90
- * words of narrative to a mistyped SKU is the kind of thing that stops people
- * using an admin at all.
- */
-
 export type Option = { slug: string; name: string };
 export type Vocabulary = {
   garment: Option[];
@@ -77,8 +65,6 @@ export function ProductForm({
     { errors: {} },
   );
 
-  // Values come from the last submission if it failed, then the saved record,
-  // then the defaults.
   const value = state.values ?? product ?? EMPTY;
   const errors = state.errors;
 
@@ -87,7 +73,7 @@ export function ProductForm({
       {product ? <input type="hidden" name="id" value={product.id} /> : null}
 
       {errors.form ? (
-        <p role="alert" className="border border-error px-4 py-3 text-caption text-error">
+        <p role="alert" className="border px-4 py-3 a-label" style={{ borderColor: "var(--a-negative)", color: "var(--a-negative)", backgroundColor: "color-mix(in srgb, var(--a-negative) 6%, transparent)", borderRadius: "var(--a-radius)" }}>
           {errors.form}
         </p>
       ) : null}
@@ -237,7 +223,7 @@ export function ProductForm({
       </Section>
 
       <Section title="Publishing">
-        <label className="flex items-center gap-3 text-caption text-ink-body">
+        <label className="flex items-center gap-3 a-body-sm" style={{ color: "var(--a-ink)" }}>
           <input
             type="checkbox"
             name="published"
@@ -246,20 +232,20 @@ export function ProductForm({
           />
           Show this piece on the site
         </label>
-        <p className="text-caption text-ink-muted">
+        <p className="a-label" style={{ color: "var(--a-outline)" }}>
           Leave unticked to keep it as a draft while you finish the photographs.
         </p>
       </Section>
 
-      <div className="flex items-center gap-4 border-t border-rule pt-6">
+      <div className="flex items-center gap-4 border-t pt-6" style={{ borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)" }}>
         <button
           type="submit"
           disabled={pending}
-          className="bg-ink px-8 py-4 text-bg disabled:opacity-50"
+          className="a-btn-primary"
         >
-          <span className="eyebrow">{pending ? "Saving…" : "Save"}</span>
+          <span className="a-label">{pending ? "Saving…" : "Save"}</span>
         </button>
-        <Link href="/admin" className="eyebrow text-ink-muted underline">
+        <Link href="/admin" className="a-btn-ghost">
           Cancel
         </Link>
       </div>
@@ -279,11 +265,11 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <fieldset className="space-y-6 border-t border-rule pt-6">
+    <fieldset className="space-y-6 border-t pt-6" style={{ borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)" }}>
       <legend className="sr-only">{title}</legend>
       <div>
-        <h2 className="text-h4">{title}</h2>
-        {note ? <p className="text-caption mt-1 text-ink-muted">{note}</p> : null}
+        <h2 className="a-heading-sm">{title}</h2>
+        {note ? <p className="a-label mt-1" style={{ color: "var(--a-outline)" }}>{note}</p> : null}
       </div>
       {children}
     </fieldset>
@@ -312,7 +298,7 @@ function Field({
 
   return (
     <div>
-      <label htmlFor={name} className="eyebrow block text-ink-muted">
+      <label htmlFor={name} className="a-label block" style={{ color: "var(--a-outline)" }}>
         {label}
       </label>
       <input
@@ -321,18 +307,19 @@ function Field({
         type={type}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy || undefined}
-        className={`w-full border-b bg-transparent py-2 text-ink outline-none focus:border-ink ${
-          error ? "border-error" : "border-rule-input"
+        defaultValue={rest.defaultValue}
+        className={`a-input w-full ${
+          error ? "a-input-error" : ""
         }`}
         {...rest}
       />
       {hint ? (
-        <p id={`${name}-hint`} className="text-caption mt-1 text-ink-muted">
+        <p id={`${name}-hint`} className="a-label mt-1" style={{ color: "var(--a-outline)" }}>
           {hint}
         </p>
       ) : null}
       {error ? (
-        <p id={`${name}-error`} className="text-caption mt-1 text-error">
+        <p id={`${name}-error`} className="a-label mt-1" style={{ color: "var(--a-negative)" }}>
           {error}
         </p>
       ) : null}
@@ -357,7 +344,7 @@ function TextArea({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="eyebrow block text-ink-muted">
+      <label htmlFor={name} className="a-label block" style={{ color: "var(--a-outline)" }}>
         {label}
       </label>
       <textarea
@@ -368,12 +355,12 @@ function TextArea({
         required={required}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${name}-error` : undefined}
-        className={`w-full border bg-transparent p-3 text-ink outline-none focus:border-ink ${
-          error ? "border-error" : "border-rule-input"
+        className={`a-input w-full min-h-[120px] resize-y ${
+          error ? "a-input-error" : ""
         }`}
       />
       {error ? (
-        <p id={`${name}-error`} className="text-caption mt-1 text-error">
+        <p id={`${name}-error`} className="a-label mt-1" style={{ color: "var(--a-negative)" }}>
           {error}
         </p>
       ) : null}
@@ -400,7 +387,7 @@ function Select({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="eyebrow block text-ink-muted">
+      <label htmlFor={name} className="a-label block" style={{ color: "var(--a-outline)" }}>
         {label}
       </label>
       <select
@@ -408,9 +395,7 @@ function Select({
         name={name}
         defaultValue={defaultValue ?? ""}
         aria-invalid={error ? true : undefined}
-        className={`w-full border-b bg-transparent py-2 text-ink outline-none focus:border-ink ${
-          error ? "border-error" : "border-rule-input"
-        }`}
+        className={`a-select w-full ${error ? "a-input-error" : ""}`}
       >
         <option value="">{allowEmpty ? "None" : "Choose…"}</option>
         {options.map((option) => (
@@ -419,8 +404,8 @@ function Select({
           </option>
         ))}
       </select>
-      {hint ? <p className="text-caption mt-1 text-ink-muted">{hint}</p> : null}
-      {error ? <p className="text-caption mt-1 text-error">{error}</p> : null}
+      {hint ? <p className="a-label mt-1" style={{ color: "var(--a-outline)" }}>{hint}</p> : null}
+      {error ? <p className="a-label mt-1" style={{ color: "var(--a-negative)" }}>{error}</p> : null}
     </div>
   );
 }
@@ -440,12 +425,13 @@ function CheckboxGroup({
 }) {
   return (
     <fieldset>
-      <legend className="eyebrow text-ink-muted">{label}</legend>
+      <legend className="a-label" style={{ color: "var(--a-outline)" }}>{label}</legend>
       <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
         {options.map((option) => (
           <label
             key={option.slug}
-            className="flex items-center gap-2 text-caption text-ink-body"
+            className="flex items-center gap-2 a-body-sm"
+            style={{ color: "var(--a-ink)" }}
           >
             <input
               type="checkbox"
@@ -458,7 +444,7 @@ function CheckboxGroup({
           </label>
         ))}
       </div>
-      {error ? <p className="text-caption mt-1 text-error">{error}</p> : null}
+      {error ? <p className="a-label mt-1" style={{ color: "var(--a-negative)" }}>{error}</p> : null}
     </fieldset>
   );
 }

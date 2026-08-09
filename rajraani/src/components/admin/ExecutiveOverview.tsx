@@ -1,29 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 
 import { AdminIcon, type AdminIconName } from "./AdminIcon";
-import { adjustStockAction } from "@/lib/admin/product-actions";
+import { adjustStockAction, togglePublishedAction } from "@/lib/admin/product-actions";
 import type { AdminProductRow, DashboardMetrics } from "@/lib/data/admin-queries";
 import { formatMoney } from "@/lib/money";
 
-/**
- * Executive Overview — the admin's landing screen, in "Ethos & Elegance".
- *
- * A note on what is *not* here. The mockup led with Total Revenue, Active
- * Orders, New Customers and a six-month revenue trend. None of those exist
- * yet: there is no payment gateway wired, so there is no revenue to report,
- * and no order queries in the admin data layer. Rendering them would have
- * meant inventing numbers, which is the exact failure this dashboard already
- * had — a stock control that moved on screen and wrote nothing.
- *
- * So the layout is the mockup's and the metrics are the catalogue's, which is
- * the part of this business the admin can currently see. When orders land,
- * the revenue tiles drop into the same grid unchanged.
- */
-
 type Tone = "neutral" | "positive" | "warning";
+
+type FilterTab = "all" | "live" | "draft" | "soldout" | "incomplete";
+
+const TABS: { id: FilterTab; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "live", label: "Live" },
+  { id: "draft", label: "Draft" },
+  { id: "soldout", label: "Sold out" },
+  { id: "incomplete", label: "Short of frames" },
+];
+
+function matchesTab(p: AdminProductRow, tab: FilterTab): boolean {
+  if (tab === "live") return p.published === 1;
+  if (tab === "draft") return p.published === 0;
+  if (tab === "soldout") return p.published === 1 && p.inventory_quantity === 0;
+  if (tab === "incomplete") return p.image_count < 6;
+  return true;
+}
 
 function Tile({
   label,
@@ -76,8 +79,10 @@ export function ExecutiveOverview({
   const [pending, setPending] = useState<ReadonlySet<number>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [tab, setTab] = useState<FilterTab>("all");
+  const [view, setView] = useState<"table" | "grid">("table");
+  const [preview, setPreview] = useState<AdminProductRow | null>(null);
 
-  /** Optimistic, then reconciled against what the database actually stored. */
   const adjustStock = (productId: number, delta: number) => {
     const before = products.find((p) => p.id === productId)?.inventory_quantity;
     if (before === undefined) return;
@@ -113,11 +118,13 @@ export function ExecutiveOverview({
   const readiness = Math.round((readyCount / Math.max(1, products.length)) * 100);
 
   const needle = query.trim().toLowerCase();
-  const visible = needle
-    ? products.filter((p) =>
-        [p.poetic_name, p.title, p.sku].some((f) => f.toLowerCase().includes(needle)),
-      )
-    : products;
+  const visible = products.filter((p) => {
+    if (!matchesTab(p, tab)) return false;
+    if (!needle) return true;
+    return [p.poetic_name, p.title, p.sku].some((f) => f.toLowerCase().includes(needle));
+  });
+
+  const countFor = (id: FilterTab) => products.filter((p) => matchesTab(p, id)).length;
 
   const recent = [...products]
     .sort((a, b) => b.updated_at.localeCompare(a.updated_at))
@@ -142,11 +149,11 @@ export function ExecutiveOverview({
 
       <header className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="flex flex-col gap-3">
-          <h1 className="a-display text-[52px]" style={{ color: "var(--a-ink)" }}>
+          <h1 className="a-display-md" style={{ color: "var(--a-ink)" }}>
             Executive Overview
           </h1>
           <p
-            className="max-w-2xl text-[17px] leading-7"
+            className="max-w-2xl a-body-lg"
             style={{ color: "var(--a-ink-variant)" }}
           >
             The state of the catalogue — what is live, what is short of stock, and
@@ -155,12 +162,7 @@ export function ExecutiveOverview({
         </div>
         <Link
           href="/admin/products/new"
-          className="a-label inline-flex shrink-0 items-center gap-2 px-6 py-3.5 transition-opacity hover:opacity-85"
-          style={{
-            borderRadius: "var(--a-radius)",
-            backgroundColor: "var(--a-ink)",
-            color: "var(--a-surface-lowest)",
-          }}
+          className="a-btn-primary inline-flex shrink-0 items-center gap-2"
         >
           Add a piece
         </Link>
@@ -202,7 +204,7 @@ export function ExecutiveOverview({
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.6fr_1fr]">
         <div className="a-card flex flex-col gap-7 p-8">
           <div className="flex items-baseline justify-between gap-4">
-            <h2 className="a-heading text-[26px]" style={{ color: "var(--a-ink)" }}>
+            <h2 className="a-heading-sm" style={{ color: "var(--a-ink)" }}>
               Launch readiness
             </h2>
             <span className="a-figure text-[26px]" style={{ color: "var(--a-accent)" }}>
@@ -251,7 +253,7 @@ export function ExecutiveOverview({
         </div>
 
         <div className="a-card flex flex-col gap-6 p-8">
-          <h2 className="a-heading text-[26px]" style={{ color: "var(--a-ink)" }}>
+          <h2 className="a-heading-sm" style={{ color: "var(--a-ink)" }}>
             Recently edited
           </h2>
           <ol className="flex flex-col">
@@ -290,7 +292,7 @@ export function ExecutiveOverview({
 
       <section className="flex flex-col gap-5">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className="a-heading text-[26px]" style={{ color: "var(--a-ink)" }}>
+          <h2 className="a-heading-sm" style={{ color: "var(--a-ink)" }}>
             The catalogue
           </h2>
           <label className="flex items-center gap-2 px-4 py-2"
@@ -311,17 +313,163 @@ export function ExecutiveOverview({
           </label>
         </div>
 
-        <div className="a-card overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-sm">
-              <thead>
-                <tr
+        {/* Filters and view mode. */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter the catalogue">
+            {TABS.map((t) => {
+              const isActive = tab === t.id;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setTab(t.id)}
+                  className="a-label px-3.5 py-2 transition-colors"
                   style={{
-                    borderBottom:
-                      "1px solid color-mix(in srgb, var(--a-outline-variant) 55%, transparent)",
+                    borderRadius: "var(--a-radius)",
+                    backgroundColor: isActive ? "var(--a-accent-container)" : "transparent",
+                    color: isActive ? "var(--a-on-accent-container)" : "var(--a-ink-variant)",
+                    border: `1px solid ${
+                      isActive
+                        ? "transparent"
+                        : "color-mix(in srgb, var(--a-outline-variant) 55%, transparent)"
+                    }`,
                   }}
                 >
-                  {["Piece", "Price", "Stock", "Frames", "State"].map((h) => (
+                  {t.label}
+                  <span className="ml-2 tabular-nums" style={{ opacity: 0.65 }}>
+                    {countFor(t.id)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex gap-1" role="group" aria-label="View mode">
+            {(["table", "grid"] as const).map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                onClick={() => setView(mode)}
+                aria-pressed={view === mode}
+                className="a-label px-3 py-2 transition-colors"
+                style={{
+                  borderRadius: "var(--a-radius)",
+                  backgroundColor: view === mode ? "var(--a-surface-high)" : "transparent",
+                  color: view === mode ? "var(--a-ink)" : "var(--a-outline)",
+                }}
+              >
+                {mode === "table" ? "Table" : "Grid"}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {view === "grid" ? (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {visible.map((p) => (
+              <div key={p.id} className="a-card a-card-interactive flex flex-col gap-4 p-6">
+                <div className="flex items-start justify-between gap-3">
+                  <Link
+                    href={`/admin/products/${p.id}`}
+                    className="a-heading-sm hover:underline"
+                    style={{ color: "var(--a-ink)" }}
+                  >
+                    {p.poetic_name}
+                  </Link>
+                  <span
+                    className={`a-label shrink-0 px-2.5 py-1 ${
+                      p.published === 1 ? "a-badge-live" : "a-badge-draft"
+                    }`}
+                  >
+                    {p.published === 1 ? "Live" : "Draft"}
+                  </span>
+                </div>
+
+                <span className="text-xs" style={{ color: "var(--a-outline)" }}>
+                  {p.sku}
+                </span>
+
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="a-figure text-[22px]" style={{ color: "var(--a-ink)" }}>
+                    {formatMoney({ minorUnits: p.price_minor, currency: "INR" })}
+                  </span>
+                  <span
+                    className="text-[13px] tabular-nums"
+                    style={{
+                      color: p.image_count < 6 ? "var(--a-negative)" : "var(--a-outline)",
+                    }}
+                  >
+                    {p.image_count} of 6 frames
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => adjustStock(p.id, -1)}
+                    disabled={pending.has(p.id) || p.inventory_quantity === 0}
+                    aria-label={`Decrease stock of ${p.poetic_name}`}
+                    className="h-6 w-6 border text-xs disabled:opacity-35"
+                    style={{
+                      borderRadius: "var(--a-radius)",
+                      borderColor: "var(--a-outline-variant)",
+                      color: "var(--a-ink)",
+                    }}
+                  >
+                    −
+                  </button>
+                  <span
+                    aria-live="polite"
+                    className="min-w-[26px] text-center font-semibold tabular-nums"
+                    style={{
+                      color:
+                        p.inventory_quantity === 0 ? "var(--a-negative)" : "var(--a-ink)",
+                      opacity: pending.has(p.id) ? 0.5 : 1,
+                    }}
+                  >
+                    {p.inventory_quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => adjustStock(p.id, 1)}
+                    disabled={pending.has(p.id)}
+                    aria-label={`Increase stock of ${p.poetic_name}`}
+                    className="h-6 w-6 border text-xs disabled:opacity-35"
+                    style={{
+                      borderRadius: "var(--a-radius)",
+                      borderColor: "var(--a-outline-variant)",
+                      color: "var(--a-ink)",
+                    }}
+                  >
+                    +
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPreview(p)}
+                    className="a-label ml-auto px-2.5 py-1.5"
+                    style={{
+                      borderRadius: "var(--a-radius)",
+                      border:
+                        "1px solid color-mix(in srgb, var(--a-outline-variant) 55%, transparent)",
+                      color: "var(--a-ink-variant)",
+                    }}
+                  >
+                    Inspect
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+        <div className="a-card overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="a-table">
+              <thead>
+                <tr>
+                  {["Piece", "Price", "Stock", "Frames", "State", ""].map((h) => (
                     <th
                       key={h}
                       scope="col"
@@ -419,21 +567,55 @@ export function ExecutiveOverview({
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className="a-label inline-block px-2.5 py-1"
-                        style={{
-                          borderRadius: "var(--a-radius)",
-                          backgroundColor:
-                            p.published === 1
-                              ? "var(--a-accent-container)"
-                              : "var(--a-surface-high)",
-                          color:
-                            p.published === 1
-                              ? "var(--a-on-accent-container)"
-                              : "var(--a-ink-variant)",
-                        }}
+                        className={`a-label inline-block px-2.5 py-1 ${
+                          p.published === 1 ? "a-badge-live" : "a-badge-draft"
+                        }`}
                       >
                         {p.published === 1 ? "Live" : "Draft"}
                       </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setPreview(p)}
+                          className="a-label px-2.5 py-1.5 transition-colors"
+                          style={{
+                            borderRadius: "var(--a-radius)",
+                            border:
+                              "1px solid color-mix(in srgb, var(--a-outline-variant) 55%, transparent)",
+                            color: "var(--a-ink-variant)",
+                          }}
+                        >
+                          Inspect
+                        </button>
+                        {/*
+                          One-click publish. This is a form rather than an
+                          onClick because `togglePublishedAction` redirects,
+                          and it is the only write path to `published` outside
+                          the full edit form.
+                        */}
+                        <form action={togglePublishedAction}>
+                          <input type="hidden" name="id" value={p.id} />
+                          <input
+                            type="hidden"
+                            name="publish"
+                            value={p.published === 1 ? "0" : "1"}
+                          />
+                          <button
+                            type="submit"
+                            className="a-label px-2.5 py-1.5 transition-colors"
+                            style={{
+                              borderRadius: "var(--a-radius)",
+                              border:
+                                "1px solid color-mix(in srgb, var(--a-outline-variant) 55%, transparent)",
+                              color: "var(--a-ink-variant)",
+                            }}
+                          >
+                            {p.published === 1 ? "Unpublish" : "Publish"}
+                          </button>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -441,13 +623,116 @@ export function ExecutiveOverview({
             </table>
           </div>
 
-          {visible.length === 0 ? (
-            <p className="px-6 py-10 text-center text-sm" style={{ color: "var(--a-outline)" }}>
-              Nothing matches “{query}”.
-            </p>
-          ) : null}
         </div>
+        )}
+
+        {visible.length === 0 ? (
+          <p
+            className="a-card px-6 py-10 text-center text-sm"
+            style={{ color: "var(--a-outline)" }}
+          >
+            {query
+              ? `Nothing matches “${query}”.`
+              : "No pieces in this view."}
+          </p>
+        ) : null}
       </section>
+
+      {preview ? (
+        <PreviewDialog product={preview} onClose={() => setPreview(null)} />
+      ) : null}
+    </div>
+  );
+}
+
+/**
+ * Inspect panel — the quick read on a piece without leaving the dashboard.
+ *
+ * Closes on Escape and on a click outside, and returns focus to the page. The
+ * backdrop is a button rather than a div with onClick so it is reachable by
+ * keyboard and announced as a control.
+ */
+function PreviewDialog({
+  product,
+  onClose,
+}: {
+  product: AdminProductRow;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [onClose]);
+
+  const rows: [string, string][] = [
+    ["SKU", product.sku],
+    ["Title", product.title],
+    ["Price", formatMoney({ minorUnits: product.price_minor, currency: "INR" })],
+    ["In stock", String(product.inventory_quantity)],
+    ["Frames", `${product.image_count} of 6`],
+    ["Fulfilment", product.fulfilment_mode.replace(/_/g, " ")],
+    ["State", product.published === 1 ? "Live" : "Draft"],
+    ["Last edited", new Date(product.updated_at).toLocaleString("en-IN")],
+  ];
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
+      <button
+        type="button"
+        aria-label="Close"
+        onClick={onClose}
+        className="absolute inset-0"
+        style={{ backgroundColor: "rgb(27 28 28 / 0.35)" }}
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${product.poetic_name} details`}
+        className="a-card relative w-full max-w-lg p-8"
+      >
+        <h2 className="a-heading-sm" style={{ color: "var(--a-ink)" }}>
+          {product.poetic_name}
+        </h2>
+
+        <dl className="mt-6 flex flex-col">
+          {rows.map(([k, v], i) => (
+            <div
+              key={k}
+              className="flex items-baseline justify-between gap-6 py-3"
+              style={{
+                borderTop:
+                  i === 0
+                    ? "none"
+                    : "1px solid color-mix(in srgb, var(--a-outline-variant) 40%, transparent)",
+              }}
+            >
+              <dt className="a-label" style={{ color: "var(--a-outline)" }}>
+                {k}
+              </dt>
+              <dd className="text-sm capitalize" style={{ color: "var(--a-ink)" }}>
+                {v}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className="mt-7 flex justify-end gap-3">
+          <button type="button" onClick={onClose} className="a-btn-secondary">
+            Close
+          </button>
+          <Link href={`/admin/products/${product.id}`} className="a-btn-primary">
+            Edit
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

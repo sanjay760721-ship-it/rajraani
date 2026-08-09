@@ -16,7 +16,7 @@
     "taxonomy:check": "node scripts/build-taxonomy.mjs --check",
     "check:taxonomy": "node scripts/check-taxonomy.mjs",
     "check:originality": "node scripts/check-originality.mjs",
-    "verify": "npm run taxonomy:check && npm run check:taxonomy && npm run check:originality && npm test && npm run lint && npm run typecheck && npm run build && npm run lint:headings"
+    "verify": "npm run taxonomy:check && npm run check:taxonomy && npm run check:originality && npm run test && npm run lint && npm run typecheck && npm run build && npm run lint:headings"
   },
   "dependencies": {
     "@types/flickity": "^2.2.12",

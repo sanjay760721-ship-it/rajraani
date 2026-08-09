@@ -12,7 +12,6 @@ type NavItem = {
   icon: AdminIconName;
   target?: string;
   exact?: boolean;
-  /** Reads from the database. Everything else is still a static shell. */
   live?: boolean;
 };
 
@@ -44,6 +43,7 @@ const NAV_GROUPS: NavGroup[] = [
     title: "Operations",
     items: [
       { href: "/admin/orders", label: "Orders", icon: "orders" },
+      { href: "/admin/analytics", label: "Analytics", icon: "analytics" },
       { href: "/admin/customers", label: "Customers", icon: "customers" },
       { href: "/admin/appointments", label: "Appointments", icon: "appointments" },
       { href: "/admin/discounts", label: "Discounts", icon: "discounts" },
@@ -51,16 +51,6 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-/**
- * Admin sidebar — fixed rail, grouped navigation, bronze active state.
- *
- * The mockups put a wordmark image here. This uses live type instead, so the
- * brand name comes from `BRAND` and there is no asset to go stale.
- *
- * Sections still backed by hardcoded arrays are marked. Eight of twelve are,
- * and an operations console that looks equally authoritative everywhere is how
- * someone ends up trusting a number that was typed in by hand.
- */
 export function AdminSidebar({
   adminEmail,
   signOutAction,
@@ -72,20 +62,19 @@ export function AdminSidebar({
 
   return (
     <aside
-      className="sticky top-0 flex h-screen w-64 shrink-0 flex-col justify-between overflow-y-auto border-r"
+      className="sticky top-0 flex h-screen w-64 shrink-0 flex-col justify-between overflow-y-auto border-r a-glass"
       style={{
-        backgroundColor: "var(--a-surface-low)",
-        borderColor: "color-mix(in srgb, var(--a-outline-variant) 40%, transparent)",
+        borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)",
       }}
     >
-      <div>
-        <div className="px-6 pt-8 pb-9">
-          <Link href="/admin" className="block">
+      <div className="flex flex-col">
+        <div className="p-6 pb-8">
+          <Link href="/admin" className="block" aria-label={`${BRAND.name} Admin Home`}>
             <span className="a-label block" style={{ color: "var(--a-accent)" }}>
               Admin
             </span>
             <span
-              className="a-heading mt-1 block text-2xl"
+              className="a-heading-sm mt-1 block"
               style={{ color: "var(--a-ink)" }}
             >
               {BRAND.name}
@@ -93,16 +82,16 @@ export function AdminSidebar({
           </Link>
         </div>
 
-        <nav className="space-y-7 px-3 pb-8" aria-label="Admin">
+        <nav className="flex-1 px-3 pb-8 overflow-y-auto" aria-label="Admin navigation">
           {NAV_GROUPS.map((group) => (
-            <div key={group.title}>
+            <div key={group.title} className="mb-6">
               <span
                 className="a-label block px-3 pb-2"
                 style={{ color: "var(--a-outline)" }}
               >
                 {group.title}
               </span>
-              <ul className="space-y-0.5">
+              <ul className="space-y-1" role="list">
                 {group.items.map((item) => {
                   const isActive = item.exact
                     ? pathname === item.href
@@ -114,19 +103,13 @@ export function AdminSidebar({
                         href={item.href}
                         target={item.target}
                         aria-current={isActive ? "page" : undefined}
-                        className="group flex items-center gap-3 px-3 py-2.5 text-sm transition-colors"
-                        style={{
-                          borderRadius: "var(--a-radius)",
-                          backgroundColor: isActive
-                            ? "var(--a-accent-container)"
-                            : "transparent",
-                          color: isActive
-                            ? "var(--a-on-accent-container)"
-                            : "var(--a-ink-variant)",
-                          fontWeight: isActive ? 600 : 500,
-                        }}
+                        className={`a-nav-link group ${isActive ? "a-nav-link-active" : ""}`}
                       >
-                        <AdminIcon name={item.icon} className="h-[18px] w-[18px] shrink-0" />
+                        <AdminIcon
+                          name={item.icon}
+                          className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5"
+                          aria-hidden="true"
+                        />
                         <span className="truncate">{item.label}</span>
                         {!item.live ? (
                           <span
@@ -136,6 +119,7 @@ export function AdminSidebar({
                               borderRadius: "var(--a-radius-pill)",
                               backgroundColor: "var(--a-outline-variant)",
                             }}
+                            aria-label="Not yet connected to database"
                           />
                         ) : null}
                       </Link>
@@ -149,27 +133,27 @@ export function AdminSidebar({
       </div>
 
       <div
-        className="border-t px-4 py-4"
+        className="border-t p-4"
         style={{
-          borderColor: "color-mix(in srgb, var(--a-outline-variant) 40%, transparent)",
+          borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)",
         }}
       >
         <Link
           href="/"
           target="_blank"
-          className="mb-3 flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:opacity-70"
-          style={{ color: "var(--a-ink-variant)", borderRadius: "var(--a-radius)" }}
+          rel="noopener noreferrer"
+          className="mb-3 a-btn-ghost w-full justify-start"
         >
-          <AdminIcon name="external" className="h-[18px] w-[18px] shrink-0" />
+          <AdminIcon name="external" className="h-4 w-4 shrink-0" aria-hidden="true" />
           <span>View shop</span>
         </Link>
 
-        <div className="px-3 pb-3">
+        <div className="px-2 pb-3">
           <span className="a-label block" style={{ color: "var(--a-outline)" }}>
             Signed in
           </span>
           <span
-            className="mt-0.5 block truncate text-xs font-semibold"
+            className="mt-1 block truncate text-xs font-semibold"
             title={adminEmail}
             style={{ color: "var(--a-ink)" }}
           >
@@ -180,12 +164,7 @@ export function AdminSidebar({
         <form action={signOutAction}>
           <button
             type="submit"
-            className="a-label w-full border px-3 py-2 transition-colors"
-            style={{
-              borderRadius: "var(--a-radius)",
-              borderColor: "var(--a-outline-variant)",
-              color: "var(--a-ink-variant)",
-            }}
+            className="a-btn-secondary w-full justify-center"
           >
             Sign out
           </button>

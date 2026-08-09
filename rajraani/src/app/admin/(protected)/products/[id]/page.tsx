@@ -27,31 +27,44 @@ export default async function EditProductPage(
   const images = listImages(productId);
 
   return (
-    <div>
-      <Link href="/admin" className="eyebrow text-ink-muted hover:underline">
-        ← Pieces
+    <div className="space-y-8">
+      <Link href="/admin" className="a-btn-ghost inline-flex items-center gap-2">
+        <span className="material-symbols-outlined">arrow_back</span>
+        Pieces
       </Link>
 
-      <div className="mt-3 mb-8 flex flex-wrap items-baseline justify-between gap-4">
+      <header className="flex flex-wrap items-baseline justify-between gap-4">
         <div>
-          <h1 className="text-h2">{product.poeticName}</h1>
-          <p className="text-caption mt-1 text-ink-muted">{product.title}</p>
+          <h1 className="a-display-md" style={{ color: "var(--a-ink)" }}>
+            {product.poeticName}
+          </h1>
+          <p className="a-body-lg mt-1" style={{ color: "var(--a-ink-variant)" }}>
+            {product.title}
+          </p>
         </div>
         {product.published ? (
           <Link
             href={`/products/${product.handle}`}
             target="_blank"
-            className="eyebrow text-ink underline"
+            rel="noopener noreferrer"
+            className="a-btn-ghost"
           >
-            View on the shop ↗
+            View on the shop
+            <span className="material-symbols-outlined">external</span>
           </Link>
         ) : null}
-      </div>
+      </header>
 
       {saved ? (
         <p
           role="status"
-          className="text-caption mb-8 border border-success px-4 py-3 text-success"
+          className="border px-4 py-3 a-label"
+          style={{
+            borderRadius: "var(--a-radius)",
+            borderColor: "var(--a-positive)",
+            color: "var(--a-positive)",
+            backgroundColor: "var(--a-positive-container)",
+          }}
         >
           Saved.
         </p>
@@ -63,42 +76,44 @@ export default async function EditProductPage(
         campaigns={campaignOptions()}
       />
 
-      <section className="mt-16 max-w-3xl border-t border-rule pt-6">
-        <h2 className="text-h4">Photographs</h2>
-        <p className="text-caption mt-1 text-ink-muted">
+      <section className="mt-12 max-w-3xl border-t pt-8" style={{ borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)" }}>
+        <h2 className="a-heading-sm">Photographs</h2>
+        <p className="a-label mt-1" style={{ color: "var(--a-outline)" }}>
           The template is five upright frames then one or two square detail
           frames. {images.length} on file.
         </p>
 
         {images.length === 0 ? (
-          <p className="text-caption mt-4 text-ink-body">
+          <p className="a-body-sm mt-4" style={{ color: "var(--a-ink-variant)" }}>
             None yet. Upload is not built — this piece renders schematic frames
             until it is.
           </p>
         ) : (
           <ul className="mt-4 space-y-2">
             {images.map((image) => (
-              <li key={image.id} className="text-caption text-ink-body">
-                <span className="eyebrow mr-3 text-ink-muted">
+              <li key={image.id} className="a-body-sm flex items-center gap-3" style={{ color: "var(--a-ink)" }}>
+                <span className="a-label shrink-0" style={{ color: "var(--a-outline)" }}>
                   {image.position + 1} · {image.ratio}
                 </span>
-                {image.alt}
+                <span>{image.alt}</span>
               </li>
             ))}
           </ul>
         )}
       </section>
 
-      <section className="mt-16 max-w-3xl border-t border-error pt-6">
-        <h2 className="text-h4 text-error">Delete</h2>
-        <p className="text-caption mt-1 text-ink-body">
+      <section className="mt-12 max-w-3xl border-t pt-8" style={{ borderColor: "var(--a-negative)" }}>
+        <h2 className="a-heading-sm" style={{ color: "var(--a-negative)" }}>
+          Delete
+        </h2>
+        <p className="a-body-sm mt-1" style={{ color: "var(--a-ink-variant)" }}>
           Permanent, and takes the photographs with it. Unpublishing is usually
           what you want instead — it hides the piece but keeps everything.
         </p>
         <form action={deleteProductAction} className="mt-4">
           <input type="hidden" name="id" value={product.id} />
-          <button type="submit" className="border border-error px-6 py-3 text-error">
-            <span className="eyebrow">Delete this piece</span>
+          <button type="submit" className="a-btn-secondary border-error text-error" style={{ borderColor: "var(--a-negative)" }}>
+            <span className="a-label">Delete this piece</span>
           </button>
         </form>
       </section>

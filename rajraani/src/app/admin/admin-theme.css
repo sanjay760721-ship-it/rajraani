@@ -15,9 +15,11 @@
 .admin-surface {
   /* Canvas and elevations — "surface-on-surface", not shadow-on-white. */
   --a-surface: #fbf9f8;
+  --a-surface-dim: #dbdad9;
   --a-surface-low: #f5f3f3;
   --a-surface-lowest: #ffffff;
   --a-surface-high: #e9e8e7;
+  --a-surface-highest: #e4e2e2;
 
   /* Ink. */
   --a-ink: #1b1c1c;
@@ -25,22 +27,50 @@
   --a-outline: #747878;
   --a-outline-variant: #c4c7c7;
 
-  /* Bronze, used sparingly: active nav, accent icons, focus. */
+  /* Bronze — the accent. Used sparingly: active nav, accent icons, focus. */
   --a-accent: #715a3e;
   --a-accent-container: #fdddb9;
   --a-on-accent-container: #786044;
+  /* Muted bronze — chart series and data segments, where the container tint is
+     too pale to read against the card. */
+  --a-accent-dim: #e0c29f;
+  --a-accent-fixed: #fdddb9;
+  --a-accent-fixed-dim: #e0c29f;
 
   /* State. Greens and reds are for deltas and badges only. */
-  --a-positive: #3f6b41;
+  --a-positive: #4caf50;
   --a-negative: #ba1a1a;
+  --a-positive-container: #e8f5e9;
+  --a-negative-container: #ffdad6;
 
-  /* Soft-square: structural, not clinical. Images stay sharp. */
+  /*
+   * Fulfilment status dots.
+   *
+   * Named for the state rather than the colour, so a badge reads
+   * `var(--a-status-waiting)` and not "the orange one" — the palette can move
+   * without every call site changing. Muted against the Material defaults:
+   * these sit beside bronze and near-black, and a saturated blue shouts.
+   */
+  --a-status-waiting: #b06a1f;   /* pending dispatch */
+  --a-status-progress: #2a5d86;  /* in weaving, in transit */
+  --a-status-done: #3f6b41;      /* dispatched, delivered */
+  --a-status-stopped: #ba1a1a;   /* cancelled, failed */
+
+  /* Soft-square: structural, not clinical. Images stay sharp (0px). */
   --a-radius: 4px;
-  --a-radius-lg: 8px;
+  --a-radius-sm: 4px;
+  --a-radius-md: 8px;
+  --a-radius-lg: 12px;
+  --a-radius-xl: 16px;
   --a-radius-pill: 9999px;
 
   /* Ambient, only on interaction — "stacked paper", not floating objects. */
   --a-lift: 0 8px 24px rgb(26 26 26 / 0.06);
+  --a-lift-lg: 0 12px 40px rgb(26 26 26 / 0.08);
+  --a-glow-accent: 0 0 12px rgb(113 90 62 / 0.3);
+
+  /* Grain texture overlay for depth. */
+  --a-grain-opacity: 0.03;
 
   background-color: var(--a-surface);
   color: var(--a-ink);
@@ -55,14 +85,40 @@
   line-height: 1.08;
 }
 
+.admin-surface .a-display-lg {
+  font-size: 64px;
+  line-height: 72px;
+}
+
+.admin-surface .a-display-md {
+  font-size: 40px;
+  line-height: 48px;
+}
+
 .admin-surface .a-heading {
   font-family: var(--font-playfair), Georgia, serif;
   font-weight: 600;
   line-height: 1.2;
 }
 
+.admin-surface .a-heading-lg {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.admin-surface .a-heading-md {
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.admin-surface .a-heading-sm {
+  font-size: 24px;
+  line-height: 32px;
+}
+
 /* The catalog-style label: small, spaced, uppercase. */
 .admin-surface .a-label {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   font-size: 11px;
   font-weight: 600;
   line-height: 1.45;
@@ -70,17 +126,30 @@
   text-transform: uppercase;
 }
 
-/* A card. Border first, shadow only when the pointer is on it. */
-.admin-surface .a-card {
-  background-color: var(--a-surface-lowest);
-  border: 1px solid color-mix(in srgb, var(--a-outline-variant) 45%, transparent);
-  border-radius: var(--a-radius-lg);
-  transition: box-shadow 240ms ease, border-color 240ms ease;
+.admin-surface .a-label-lg {
+  font-size: 12px;
 }
 
-.admin-surface .a-card-interactive:hover {
-  box-shadow: var(--a-lift);
-  border-color: color-mix(in srgb, var(--a-outline-variant) 90%, transparent);
+/* Body text. */
+.admin-surface .a-body-lg {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.admin-surface .a-body-md {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.admin-surface .a-body-sm {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 }
 
 /* Tabular figures so metrics do not shift width as they tick. */
@@ -90,3 +159,394 @@
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
 }
+
+/* A card. Border first, shadow only when the pointer is on it. */
+.admin-surface .a-card {
+  background-color: var(--a-surface-lowest);
+  border: 1px solid color-mix(in srgb, var(--a-outline-variant) 45%, transparent);
+  border-radius: var(--a-radius-lg);
+  transition: box-shadow 240ms ease, border-color 240ms ease, transform 240ms ease;
+}
+
+.admin-surface .a-card-interactive:hover {
+  box-shadow: var(--a-lift);
+  border-color: color-mix(in srgb, var(--a-outline-variant) 90%, transparent);
+}
+
+.admin-surface .a-card-elevated {
+  box-shadow: var(--a-lift);
+  border-color: color-mix(in srgb, var(--a-outline-variant) 60%, transparent);
+}
+
+/* Glassmorphic sidebar variant. */
+.admin-surface .a-glass {
+  background-color: color-mix(in srgb, var(--a-surface-low) 80%, transparent);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid color-mix(in srgb, var(--a-outline-variant) 30%, transparent);
+}
+
+/* Input fields — underline style for elegance. */
+.admin-surface .a-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--a-outline-variant);
+  border-radius: 0;
+  padding: 8px 0;
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  color: var(--a-ink);
+  outline: none;
+  transition: border-color 200ms ease;
+}
+
+.admin-surface .a-input:focus {
+  border-bottom-color: var(--a-ink);
+}
+
+.admin-surface .a-input-error {
+  border-bottom-color: var(--a-negative);
+}
+
+.admin-surface .a-select {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--a-outline-variant);
+  border-radius: 0;
+  padding: 8px 24px 8px 0;
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  color: var(--a-ink);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23747878' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  transition: border-color 200ms ease;
+}
+
+.admin-surface .a-select:focus {
+  border-bottom-color: var(--a-ink);
+}
+
+/* Buttons. */
+.admin-surface .a-btn-primary {
+  background-color: var(--a-ink);
+  color: var(--a-surface-lowest);
+  border: none;
+  border-radius: var(--a-radius);
+  padding: 12px 24px;
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 200ms ease, opacity 200ms ease;
+}
+
+.admin-surface .a-btn-primary:hover {
+  background-color: color-mix(in srgb, var(--a-ink) 90%, transparent);
+}
+
+.admin-surface .a-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-surface .a-btn-secondary {
+  background-color: transparent;
+  color: var(--a-ink);
+  border: 1px solid var(--a-outline-variant);
+  border-radius: var(--a-radius);
+  padding: 12px 24px;
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.admin-surface .a-btn-secondary:hover {
+  background-color: var(--a-surface-high);
+  border-color: var(--a-outline);
+}
+
+.admin-surface .a-btn-accent {
+  background-color: var(--a-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--a-radius);
+  padding: 12px 24px;
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.admin-surface .a-btn-accent:hover {
+  background-color: color-mix(in srgb, var(--a-accent) 90%, transparent);
+}
+
+.admin-surface .a-btn-ghost {
+  background-color: transparent;
+  color: var(--a-ink-variant);
+  border: none;
+  padding: 8px 16px;
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 200ms ease, background-color 200ms ease;
+  border-radius: var(--a-radius);
+}
+
+.admin-surface .a-btn-ghost:hover {
+  color: var(--a-ink);
+  background-color: var(--a-surface-high);
+}
+
+.admin-surface .a-btn-icon {
+  background-color: transparent;
+  color: var(--a-ink-variant);
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: color 200ms ease, background-color 200ms ease;
+  border-radius: var(--a-radius-pill);
+}
+
+.admin-surface .a-btn-icon:hover {
+  color: var(--a-ink);
+  background-color: var(--a-surface-high);
+}
+
+/* Badges / Status chips. */
+.admin-surface .a-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--a-radius-pill);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-surface .a-badge-live {
+  background-color: var(--a-accent-container);
+  color: var(--a-on-accent-container);
+}
+
+.admin-surface .a-badge-draft {
+  background-color: var(--a-surface-high);
+  color: var(--a-ink-variant);
+}
+
+.admin-surface .a-badge-processing {
+  background-color: var(--a-accent-container);
+  color: var(--a-on-accent-container);
+}
+
+.admin-surface .a-badge-shipped {
+  background-color: var(--a-surface-high);
+  color: var(--a-ink-variant);
+  border: 1px solid color-mix(in srgb, var(--a-outline-variant) 50%, transparent);
+}
+
+.admin-surface .a-badge-delivered {
+  background-color: var(--a-surface-high);
+  color: var(--a-ink-variant);
+  border: 1px solid color-mix(in srgb, var(--a-outline-variant) 50%, transparent);
+}
+
+.admin-surface .a-badge-cancelled {
+  background-color: var(--a-negative-container);
+  color: var(--a-negative);
+}
+
+.admin-surface .a-badge-reserved {
+  background-color: var(--a-accent-fixed);
+  color: var(--a-on-accent-container);
+}
+
+.admin-surface .a-badge-in-auth {
+  background-color: var(--a-surface-high);
+  color: var(--a-ink-variant);
+  border: 1px solid color-mix(in srgb, var(--a-outline-variant) 50%, transparent);
+}
+
+/* Table styles. */
+.admin-surface .a-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.admin-surface .a-table th {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--a-ink-variant);
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--a-outline-variant) 40%, transparent);
+  background-color: var(--a-surface-low);
+}
+
+.admin-surface .a-table td {
+  padding: 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--a-outline-variant) 25%, transparent);
+  color: var(--a-ink);
+}
+
+.admin-surface .a-table tbody tr {
+  transition: background-color 200ms ease;
+}
+
+.admin-surface .a-table tbody tr:hover {
+  background-color: color-mix(in srgb, var(--a-surface-low) 50%, transparent);
+}
+
+/* Sidebar navigation. */
+.admin-surface .a-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--a-radius-md);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--a-ink-variant);
+  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+
+.admin-surface .a-nav-link:hover {
+  background-color: var(--a-surface-high);
+  color: var(--a-ink);
+}
+
+.admin-surface .a-nav-link-active {
+  background-color: var(--a-accent-container);
+  color: var(--a-on-accent-container);
+  box-shadow: var(--a-glow-accent);
+  font-weight: 600;
+}
+
+/* Section dividers. */
+.admin-surface .a-divider {
+  height: 1px;
+  background-color: color-mix(in srgb, var(--a-outline-variant) 30%, transparent);
+  border: none;
+}
+
+.admin-surface .a-divider-strong {
+  height: 1px;
+  background-color: color-mix(in srgb, var(--a-outline-variant) 50%, transparent);
+  border: none;
+}
+
+/* Activity feed timeline. */
+.admin-surface .a-timeline {
+  position: relative;
+  padding-left: 20px;
+}
+
+.admin-surface .a-timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--a-accent) 0%, var(--a-outline-variant) 50%, transparent 100%);
+}
+
+.admin-surface .a-timeline-item {
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.admin-surface .a-timeline-dot {
+  position: absolute;
+  left: -20px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 4px solid var(--a-surface-lowest);
+  z-index: 1;
+}
+
+.admin-surface .a-timeline-dot-accent {
+  background-color: var(--a-accent);
+}
+
+.admin-surface .a-timeline-dot-ink {
+  background-color: var(--a-ink);
+}
+
+.admin-surface .a-timeline-dot-muted {
+  background-color: var(--a-outline);
+}
+
+/* Chart grid lines. */
+.admin-surface .a-chart-grid {
+  stroke: color-mix(in srgb, var(--a-outline-variant) 30%, transparent);
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+}
+
+/* Scrollbar styling. */
+.admin-surface ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.admin-surface ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-surface ::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--a-outline-variant) 60%, transparent);
+  border-radius: 3px;
+}
+
+.admin-surface ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--a-outline-variant);
+}
+
+/* Focus visible for accessibility. */
+.admin-surface *:focus-visible {
+  outline: 2px solid var(--a-accent);
+  outline-offset: 2px;
+}
+
+/* Utility classes for spacing (8px base unit). */
+.admin-surface .a-space-1 { padding: 8px; }
+.admin-surface .a-space-2 { padding: 16px; }
+.admin-surface .a-space-3 { padding: 24px; }
+.admin-surface .a-space-4 { padding: 32px; }
+.admin-surface .a-space-5 { padding: 40px; }
+.admin-surface .a-space-6 { padding: 48px; }
+.admin-surface .a-space-8 { padding: 64px; }
+
+.admin-surface .a-gap-1 { gap: 8px; }
+.admin-surface .a-gap-2 { gap: 16px; }
+.admin-surface .a-gap-3 { gap: 24px; }
+.admin-surface .a-gap-4 { gap: 32px; }
+.admin-surface .a-gap-5 { gap: 40px; }
+.admin-surface .a-gap-6 { gap: 48px; }
+.admin-surface .a-gap-8 { gap: 64px; }

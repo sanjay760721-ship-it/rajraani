@@ -1,12 +1,18 @@
+import type { NextConfig } from "next";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import type { NextConfig } from "next";
-
 const nextConfig: NextConfig = {
   turbopack: {
-    // Without this, Turbopack walks up to the home directory looking for a
-    // lockfile and infers the workspace root there.
+    /*
+     * Pin the workspace root to this package.
+     *
+     * Without it Turbopack walks up looking for a lockfile, finds the stray
+     * `package-lock.json` in the home directory, infers the workspace root
+     * there, and then warns that it is ignoring it for being outside the
+     * repository. Removing this does not fix a build — it only moves the
+     * root somewhere wrong and quietly.
+     */
     root: path.dirname(fileURLToPath(import.meta.url)),
   },
   images: {
