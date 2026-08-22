@@ -180,6 +180,18 @@ export type Section =
         { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
         { art: ArtPair; title: string; body: string; ctaLabel: string; ctaHref: string },
       ];
+    }
+  | {
+      type: "campaignSlideshow";
+      id: string;
+      slides: {
+        id: string;
+        art: ArtPair;
+        title: string;
+        body: string;
+        ctaLabel: string;
+        ctaHref: string;
+      }[];
     };
 
 export type EditorialTeaser = {
@@ -204,8 +216,8 @@ const imagePair = (
   mobileSrc = desktopSrc,
   mobileTone = tone,
 ): ArtPair => ({
-  desktop: { tone, src: `/reference-only/${desktopSrc}` },
-  mobile: { tone: mobileTone, src: `/reference-only/${mobileSrc}` },
+  desktop: { tone, src: `/homepage/${desktopSrc}` },
+  mobile: { tone: mobileTone, src: `/homepage/${mobileSrc}` },
 });
 
 /**
@@ -222,58 +234,49 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     id: "homepage-hero-carousel",
     slides: [
       {
-        id: "slide-nadi",
-        art: imagePair("indigo", "hero-1.webp"),
-        eyebrow: "Monsoon 2026",
-        title: "Nadi",
-        body: "A river does not repeat itself. Nine pieces that follow water through the season it belongs to.",
+        id: "slide-textured-trails",
+        art: imagePair("indigo", "hero/slide-01-textured-trails.webp"),
+        eyebrow: "Roman Frescoes",
+        title: "Textured Trails",
+        body: "Woven for the discerning, these are raw and beautiful textured silk sarees infused with a modern aesthetic.",
         ctaLabel: "Discover",
-        ctaHref: "/collections/sarees",
+        ctaHref: "/collections/textured-trails",
       },
       {
-        id: "slide-mrigaya",
-        art: imagePair("maroon", "hero-2.webp"),
-        eyebrow: "Woven Motif By Motif",
-        title: "Mrigaya",
-        body: "A celebration of flora and fauna woven into pure silk.",
+        id: "slide-dashashva",
+        art: imagePair("maroon", "hero/slide-02-dashashva.webp"),
+        eyebrow: "Handloom Day",
+        title: "Dashashva",
+        body: "A celebration of the loom and the hands that work it.",
         ctaLabel: "Discover",
-        ctaHref: "/collections/kadhua",
+        ctaHref: "/pages/dashashva",
       },
       {
-        id: "slide-icons",
-        art: imagePair("gold", "hero-3.webp"),
-        eyebrow: "Heritage Classics",
-        title: "Signatures",
-        body: "Timeless Banarasi masterpieces crafted with traditional precision.",
-        ctaLabel: "Explore Icons",
-        ctaHref: "/collections/sarees",
+        id: "slide-onam-edit",
+        art: imagePair("gold", "hero/slide-03-onam-edit.webp"),
+        eyebrow: "Seasonal Edit",
+        title: "The Onam Edit",
+        body: "Classic white and gold sarees for the festivities.",
+        ctaLabel: "Discover",
+        ctaHref: "/collections/the-onam-edit",
       },
       {
         id: "slide-gifting",
-        art: imagePair("pink", "hero-4.webp"),
+        art: imagePair("pink", "hero/slide-04-gifting.webp"),
         eyebrow: "Curated Edits",
-        title: "The Gifting Edit",
-        body: "Handwoven treasures packaged for timeless celebrations.",
+        title: "The Art of Gifting",
+        body: "Thoughtfully handwoven pieces for timeless celebrations.",
         ctaLabel: "Explore Gifts",
-        ctaHref: "/collections/sarees",
+        ctaHref: "/collections/gifts",
       },
       {
-        id: "slide-linen",
-        art: imagePair("green", "hero-5.webp"),
-        eyebrow: "Lighter For The Season",
-        title: "Linen & Kora",
-        body: "Lightweight weaves for modern elegance.",
-        ctaLabel: "Discover",
-        ctaHref: "/collections/sarees",
-      },
-      {
-        id: "slide-collectibles",
-        art: imagePair("black", "hero-6.webp"),
-        eyebrow: "Repoussé & Metalwork",
-        title: "Repoussé",
+        id: "slide-art-collectibles",
+        art: imagePair("black", "hero/slide-05-art-collectibles.webp"),
+        eyebrow: "Metalwork",
+        title: "Art & Collectibles",
         body: "Heirloom metal repoussé and master artisan collectibles.",
         ctaLabel: "Discover",
-        ctaHref: "/pages/antaraal",
+        ctaHref: "/pages/art-collectibles",
       },
     ],
   },
@@ -285,63 +288,50 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
   },
   {
     type: "collectionTriptych",
-    id: "triptych-kadhua",
+    id: "triptych-textured-trails",
     art: [
-      imagePair("maroon", "triptych-1.webp"),
-      imagePair("gold", "triptych-2.webp"),
-      imagePair("green", "triptych-3.webp"),
+      imagePair("maroon", "gallery/tile-01-saree.webp"),
+      imagePair("gold", "gallery/tile-02-dupatta.webp"),
+      imagePair("green", "gallery/tile-03-textured-trails.webp"),
     ],
-    title: "Kadhua",
-    body: "Each motif entered as a separate unit, with no thread carried behind the cloth. The slowest way to weave a Banarasi, and the reason the reverse reads almost as cleanly as the face.",
-    ctaLabel: "Discover Kadhua",
-    ctaHref: "/collections/kadhua",
+    title: "Textured Trails",
+    body: "This collection draws from the ornamental depth of Roman Frescoes — the rhythm, the layering of motifs and the richness of their aged surfaces. Translated into the language of the Banarasi loom with Gheecha silk.",
+    ctaLabel: "Discover Textured Trails",
+    ctaHref: "/collections/textured-trails",
   },
   {
-    /*
-     * Section 4 of 11 — the prose beat.
-     *
-     * The rhythm this page inherits alternates: a band you look at, then a band
-     * you read. Without this one the page runs image → image → video with no
-     * pause, which is what it did until 22 Aug 2026 — the section type existed
-     * and was simply never placed.
-     *
-     * It earns its slot by covering something no other band does. The triptych
-     * above is kadhua; this is the open weaves, which are half of what sells
-     * between March and September and were unmentioned on the homepage.
-     */
     type: "richText",
-    id: "open-weaves",
-    heading: "The lighter weaves, and why they are harder",
+    id: "textured-trails-prose",
+    heading: "Textured Trails",
     paragraphs: [
-      "Kora organza and sooti cotton do a different job from katan. They are woven open, so the cloth carries air rather than weight, and a motif on them reads as an outline rather than as mass \u2014 the ground shows through the pattern instead of sitting behind it.",
-      "It is the less forgiving discipline. A loose weave hides nothing: an uneven beat stays in the cloth as a ripple that no finishing will take out, and the tension has to be held steady across six yards by hand and by eye. The pieces that come off the loom right are worth the ones that do not.",
+      "This collection draws from the ornamental depth of Roman Frescoes — the rhythm, the layering of motifs and the richness of their aged surfaces. Translated into the language of the Banarasi loom with Gheecha silk."
     ],
-    ctaLabel: "See the open weaves",
-    ctaHref: "/collections/sarees?fabric=kora-organza",
+    ctaLabel: "See the collection",
+    ctaHref: "/collections/textured-trails",
   },
   {
     type: "videoBand",
     id: "loom-video",
-    art: imagePair("black", "editorial-1.webp"),
+    art: imagePair("black", "video/loom-poster.webp"),
     title: "The Motion of the Loom",
     body: "Between six and twenty-six weeks on a pit loom in Varanasi. Every thread guided by human hand.",
     ctaLabel: "Watch Our Process",
     ctaHref: "/pages/handloom",
-    videoSrc: "/reference-only/loom.mp4",
+    videoSrc: "/homepage/video/loom.mp4",
   },
   {
     type: "categorySplit",
     id: "cat-split",
     items: [
       {
-        art: imagePair("maroon", "category-sarees.webp"),
+        art: imagePair("maroon", "category/sarees.webp"),
         label: "SAREES",
         href: "/collections/sarees",
       },
       {
-        art: imagePair("gold", "category-dupattas.webp"),
-        label: "DUPATTAS",
-        href: "/collections/dupattas",
+        art: imagePair("gold", "category/suits.webp"),
+        label: "SUITS",
+        href: "/collections/suits",
       },
     ],
   },
@@ -351,10 +341,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     slides: [
       {
         id: "slide-womenswear",
-        // `editorial-2` is the womenswear banner from the reference set. There
-        // is no menswear frame in it at all, so the slide below borrows an
-        // unrelated square. Both go when the commissioned shoot lands.
-        art: imagePair("purple", "editorial-2.webp"),
+        art: imagePair("purple", "womens-mens/womenswear.webp"),
         eyebrow: "Womenswear",
         title: "Womenswear",
         body: "Sarees, dupattas and stitched pieces, all off the same looms.",
@@ -365,7 +352,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       },
       {
         id: "slide-menswear",
-        art: imagePair("black", "editorial-1.webp"),
+        art: imagePair("black", "womens-mens/menswear.webp"),
         eyebrow: "Menswear",
         title: "Menswear",
         body: "Kurtas, stoles and cloth by the metre, cut from handloom.",
@@ -381,67 +368,72 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     id: "quick-links",
     items: [
       {
-        art: imagePair("pink", "tile-bridal.webp"),
+        art: imagePair("pink", "four-tiles/tile-01-bridal.webp"),
         label: "BRIDAL",
-        href: "/collections/sarees",
+        href: "/collections/bridal",
       },
       {
-        art: imagePair("gold", "tile-gifting.webp"),
+        art: imagePair("gold", "four-tiles/tile-02-gifting.webp"),
         label: "GIFTING",
-        href: "/collections/sarees",
+        href: "/collections/gifts",
       },
       {
-        art: imagePair("purple", "tile-zarkashi.webp"),
+        art: imagePair("purple", "four-tiles/tile-03-zarkashi.webp"),
         label: "ZARKASHI",
-        href: "/collections/sarees",
+        href: "/collections/zarkashi",
       },
       {
-        art: imagePair("black", "tile-repousse.webp"),
+        art: imagePair("black", "four-tiles/tile-04-art-collectibles.webp"),
         label: "REPOUSSÉ",
-        href: "/pages/antaraal",
+        href: "/pages/art-collectibles",
       },
     ],
   },
   {
-    /*
-     * Section 9 of 11 — the campaign pair.
-     *
-     * `dualCampaign` has had a renderer since the section registry was written
-     * and had never been placed on any page, which is why the homepage carried
-     * nine sections under a comment promising eleven.
-     *
-     * The pairing is the point (build.md §2.2): a campaign is one entity
-     * holding a story page and a collection, so each half links to the story
-     * and the collection follows from it — not two collections dressed up.
-     */
-    type: "dualCampaign",
-    id: "campaign-pair",
-    items: [
+    type: "campaignSlideshow",
+    id: "campaign-slideshow",
+    slides: [
       {
-        art: imagePair("indigo", "hero-1.webp"),
+        id: "slide-textured-trails-campaign",
+        art: imagePair("indigo", "campaign/slide-01-textured-trails.webp"),
         title: "Nadi",
         body: "The monsoon collection. On every piece in it the ground was dyed before the motif was chosen, which is the reverse of the usual order and the reason the colours sit as deep as they do.",
         ctaLabel: "Enter Nadi",
         ctaHref: "/pages/nadi",
       },
       {
-        art: imagePair("black", "hero-4.webp"),
+        id: "slide-dashashva-campaign",
+        art: imagePair("purple", "campaign/slide-02-dashashva.webp"),
         title: "Antaraal",
-        body: "A study in empty ground \u2014 how much of it a pattern needs before it stops reading as a pattern, and what a weaver does with the space between one motif and the next.",
+        body: "A study in empty ground — how much of it a pattern needs before it stops reading as a pattern, and what a weaver does with the space between one motif and the next.",
         ctaLabel: "Enter Antaraal",
         ctaHref: "/pages/antaraal",
+      },
+      {
+        id: "slide-onam-edit-campaign",
+        art: imagePair("gold", "campaign/slide-03-onam-edit.webp"),
+        title: "Onam Edit",
+        body: "From classic white and gold sarees to more unconventional options, enjoy the sweetness of festivities wearing handwoven sarees crafted from dainty and precious fabrics.",
+        ctaLabel: "Enter Onam Edit",
+        ctaHref: "/pages/onam-edit",
+      },
+      {
+        id: "slide-gifting-campaign",
+        art: imagePair("pink", "campaign/slide-04-gifting.webp"),
+        title: "The Art of Gifting",
+        body: "Thoughtfully handwoven pieces packaged for timeless celebrations — a curated selection of enchanting gifts.",
+        ctaLabel: "Explore Gifts",
+        ctaHref: "/pages/gifting",
       },
     ],
   },
   {
-    type: "poetryBand",
-    id: "poetry",
+    type: "richText",
+    id: "closing-thought",
     heading: "Cloth that keeps time",
-    body:
-      "A saree outlives the season it was bought for, and often the person who " +
-      "chose it. That is the argument for weaving slowly and for buying once \u2014 " +
-      "a cupboard in this country is a form of archive, and what goes into it " +
-      "should still be worth taking out in twenty years.",
+    paragraphs: [
+      "A saree outlives the season it was bought for, and often the person who chose it. That is the argument for weaving slowly and for buying once — a cupboard in this country is a form of archive, and what goes into it should still be worth taking out in twenty years."
+    ],
   },
   {
     type: "storesSlideshow",
@@ -449,9 +441,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     slides: [
       {
         id: "slide-varanasi",
-        // `stores.webp` is the Mumbai frame — the reference set has no Banaras
-        // one, so this slide is showing the wrong city until ours is shot.
-        art: imagePair("black", "stores.webp"),
+        art: imagePair("black", "stores/varanasi.webp"),
         title: "VISIT OUR STORES",
         body:
           "The Banaras room is ten minutes from the looms we buy from. Come and " +
@@ -461,7 +451,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       },
       {
         id: "slide-mumbai",
-        art: imagePair("black", "stores.webp"),
+        art: imagePair("black", "stores/mumbai.webp"),
         title: "VISIT OUR STORES",
         body:
           "An appointment, an afternoon, and as many pieces off the shelf as you " +

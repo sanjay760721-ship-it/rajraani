@@ -116,7 +116,7 @@ export function SiteFooter() {
             </div>
           ))}
 
-          {/* Stay in Touch */}
+          {/* Stay in Touch — Column 4 */}
           <div>
             <h2 className="eyebrow mb-4 text-ink">Stay in touch</h2>
             <p className="text-caption mb-4 text-ink-body">
@@ -136,7 +136,7 @@ export function SiteFooter() {
                   required
                 />
               </div>
-              <button type="submit" className="cta">
+              <button type="submit" className="cta-primary">
                 Sign up
               </button>
             </form>

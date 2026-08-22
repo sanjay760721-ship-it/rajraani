@@ -4,8 +4,16 @@
     {
       "name": "rajraani-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "rajraani", "run", "dev"],
-      "port": 8080
+      "runtimeArgs": [
+        "--prefix",
+        "rajraani",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "8081"
+      ],
+      "port": 8081
     }
   ]
 }

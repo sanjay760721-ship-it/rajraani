@@ -1,31 +1,32 @@
 import { BRAND_NAME } from "@/lib/brand-name";
 
 /**
- * Navigation.
+ * Site navigation.
  *
- * build.md §6 requires the mega menu be 100% CMS-driven, so changing it needs
- * zero deploys. This file is the shape that contract produces — in production
- * it comes from the Sanity `navigation` document (§2.3) and this becomes the
- * fallback. Addendum A2 found the reference site's menu differed between two
- * page loads, so menu content is genuinely dynamic data and must never be
- * treated as a compile-time constant.
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ARCHITECTURE inherited from the category, CONTENT ours.
  *
- * Every panel carries at least one image tile. Those are merchandised slots,
- * not decoration — each is an editorially chosen link (A2).
+ * Six panels, split three either side of the centred wordmark, each panel a set
+ * of link columns plus one or two image tiles. That shape is a solved
+ * merchandising problem for a catalogue this deep and build.md's scope note is
+ * explicit that structure is what we copy.
  *
- * Panel structure per design.md §5.3 Table 5.3:
- * 1. Shop — New Arrivals · Clothing · Featured | 1 tile
- * 2. Collections — Weaves & Patterns · Fabrics · How to Style | 1 tile
- * 3. Campaigns — Shop by Campaign · Featured Campaign | 2 tiles
- * 4. Craft — Handloom · Metal | 2 tiles
- * 5. Stories — Spirit of Creations · Stories | 2 tiles
- * 6. About Us — About Us | 2 tiles (Impact, Retail Stores)
+ * What is NOT inherited: collection and campaign names. Those are a house's
+ * identity, and the reference site's were sitting in this file until 22 Aug
+ * 2026 — see HANDOFF §2.49. The names below are ours.
+ *
+ * WEAVE AND FABRIC NAMES ARE NEITHER. `kadhua`, `katan silk`, `tanchoi` and the
+ * rest are the craft's own technical vocabulary, documented in
+ * taxonomy/facets.json, and they belong to Banaras rather than to any shop in
+ * it. They are used here as facet values, which is why those links carry query
+ * strings: they resolve to a real filtered PLP rather than to a hand-built
+ * landing page that has to be maintained separately.
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 
 export type NavLink = {
   label: string;
   href: string;
-  /** Merchandising emphasis. Intentional weighting, preserved from the CMS. */
   emphasis?: boolean;
 };
 
@@ -37,9 +38,7 @@ export type NavColumn = {
 export type NavTile = {
   label: string;
   href: string;
-  /** Optional image source for art-directed tiles. */
   src?: string;
-  /** Fallback tone when no image is available. */
   tone: string;
 };
 
@@ -47,117 +46,168 @@ export type NavPanel = {
   id: string;
   label: string;
   href: string;
-  columns: NavColumn[];
-  tiles: NavTile[];
+  /** Flat list used by the mobile drawer, which has no room for columns. */
+  links: NavLink[];
+  columns?: NavColumn[];
+  tiles?: NavTile[];
 };
 
+/** Facet-filtered PLP. One place that builds these, so the shape stays right. */
+const facet = (group: string, value: string) =>
+  `/collections/sarees?${group}=${value}`;
+
 export const NAVIGATION: readonly NavPanel[] = [
+  /* ─── 1 · Shop ─────────────────────────────────────────────────────────── */
   {
     id: "shop",
     label: "Shop",
     href: "/collections/sarees",
+    links: [
+      { label: "Sarees", href: "/collections/sarees" },
+      { label: "Suits", href: "/collections/suits" },
+      { label: "Dupattas", href: "/collections/dupattas" },
+      { label: "Lehengas", href: "/collections/lehengas" },
+    ],
     columns: [
       {
         heading: "New Arrivals",
         links: [
-          { label: "Fresh off the loom", href: "/collections/sarees?sort=name-asc" },
-          { label: "Freshly Tailored", href: "/collections/sarees?availability=freshly-tailored" },
-          { label: "Gifts", href: "/collections/sarees?edit=gifts" },
-          { label: "Bestsellers", href: "/collections/sarees?sort=popular", emphasis: true },
-          { label: "Back in Stock", href: "/collections/sarees?availability=back-in-stock" },
-          { label: "Pre Orders", href: "/collections/sarees?availability=pre-order" },
-          { label: "Ready to Ship", href: "/collections/sarees?availability=ready-to-ship" },
+          { label: "Fresh Off the Loom", href: "/collections/fresh-off-the-loom", emphasis: true },
+          { label: "Freshly Tailored", href: "/collections/freshly-tailored" },
+          { label: "Back in Stock", href: "/collections/back-in-stock" },
+          { label: "Ready to Ship", href: "/collections/sarees?fulfilment=ready_to_ship" },
+          { label: "Made to Order", href: "/collections/sarees?fulfilment=made_to_order" },
+          { label: "Pre-Order", href: "/collections/sarees?fulfilment=pre_order" },
+          { label: "Gifts", href: "/collections/gifts" },
         ],
       },
       {
         heading: "Clothing",
         links: [
           { label: "Sarees", href: "/collections/sarees" },
-          { label: "Lehengas", href: "/collections/lehengas" },
-          { label: "Dupattas", href: "/collections/dupattas" },
           { label: "Suits", href: "/collections/suits" },
-          { label: "Blouses", href: "/collections/blouses" },
-          { label: "Jackets", href: "/collections/jackets" },
-          { label: "Tops & Shirts", href: "/collections/tops-shirts" },
-          { label: "Pants & Co-Ords", href: "/collections/pants-co-ords" },
-          { label: "Dresses", href: "/collections/dresses" },
-          { label: "Scarves & Stoles", href: "/collections/scarves-stoles" },
-          { label: "Accessories", href: "/collections/accessories" },
+          { label: "Dupattas", href: "/collections/dupattas" },
+          { label: "Lehengas", href: "/collections/lehengas" },
+          { label: "Blouse Pieces", href: "/collections/blouse-pieces" },
+          { label: "Stoles & Scarves", href: "/collections/stoles" },
+          { label: "Fabric by the Metre", href: "/collections/yardage" },
+          { label: "Menswear", href: "/collections/menswear" },
+          { label: "Womenswear", href: "/collections/womenswear" },
         ],
       },
       {
         heading: "Featured",
         links: [
-          { label: "Shikargah Tales", href: "/collections/sarees?motif=shikargah" },
-          { label: `${BRAND_NAME} Icons`, href: "/collections/icons" },
-          { label: "Handwoven Fabrics", href: "/collections/fabrics" },
           { label: "Bridal", href: "/collections/bridal" },
-          { label: "Zarkashi", href: "/collections/sarees?motif=zarkashi" },
-          { label: "Antara", href: "/collections/antara" },
-          { label: "Menswear", href: "/collections/menswear", emphasis: true },
+          { label: "Gifting", href: "/collections/gifts" },
+          { label: "Zarkashi", href: facet("zari", "real_zari") },
+          { label: "Shikargah", href: facet("motif", "shikargah") },
+          { label: "Handwoven Fabrics", href: "/collections/yardage" },
+          { label: "Art & Collectibles", href: "/pages/repousse" },
+          { label: "Under ₹50,000", href: "/collections/sarees?price=under-50000" },
+          { label: `${BRAND_NAME} Signatures`, href: "/collections/signatures" },
         ],
       },
     ],
     tiles: [
-      { label: "Nadi", href: "/collections/nadi", tone: "indigo", src: "/reference-only/tile-nadi.webp" },
+      { label: "Nadi", href: "/pages/nadi", tone: "indigo", src: "/homepage/mega-menu/tile-nadi.webp" },
     ],
   },
+
+  /* ─── 2 · Collections ──────────────────────────────────────────────────── */
   {
     id: "collections",
     label: "Collections",
     href: "/collections/kadhua",
+    links: [
+      { label: "Kadhua", href: "/collections/kadhua" },
+      { label: "Katan Silk", href: "/collections/katan-silk" },
+      { label: "This Season", href: "/collections/seasonal" },
+    ],
     columns: [
       {
         heading: "Weaves & Patterns",
         links: [
           { label: "Kadhua", href: "/collections/kadhua", emphasis: true },
-          { label: "Tanchoi", href: "/collections/sarees?weave=tanchoi" },
-          { label: "Shikargah", href: "/collections/sarees?weave=shikargah" },
-          { label: "Kadiyal", href: "/collections/sarees?weave=kadiyal" },
-          { label: "Rangkat", href: "/collections/sarees?weave=rangkat" },
-          { label: "Jamdani", href: "/collections/sarees?weave=jamdani" },
-          { label: "Meenakari", href: "/collections/sarees?weave=meenakari" },
+          { label: "Kadiyal", href: facet("weave", "kadiyal") },
+          { label: "Jangla", href: facet("weave", "jangla") },
+          { label: "Jamawar", href: facet("weave", "jamawar") },
+          { label: "Tanchoi", href: facet("weave", "tanchoi") },
+          { label: "Cutwork", href: facet("weave", "cutwork") },
+          { label: "Jamdani", href: facet("weave", "jamdani") },
+          { label: "Rangkat", href: facet("weave", "rangkat") },
+          { label: "Bootidar", href: facet("weave", "bootidar") },
+          { label: "Meenakari", href: facet("motif", "meenakari") },
+          { label: "Shikargah", href: facet("motif", "shikargah") },
         ],
       },
       {
         heading: "Fabrics",
         links: [
           { label: "Katan Silk", href: "/collections/katan-silk" },
-          { label: "Kora Organza", href: "/collections/sarees?fabric=kora-organza" },
-          { label: "Handwoven Georgette", href: "/collections/sarees?fabric=handwoven-georgette" },
-          { label: "Sooti Cotton", href: "/collections/sarees?fabric=sooti-cotton" },
-          { label: "Tissue Silk", href: "/collections/sarees?fabric=tissue-silk" },
-          { label: "Silk Wool", href: "/collections/sarees?fabric=silk-wool" },
+          { label: "Kora Organza", href: facet("fabric", "kora-organza") },
+          { label: "Khaddi Georgette", href: facet("fabric", "khaddi-georgette") },
+          { label: "Georgette", href: facet("fabric", "georgette") },
+          { label: "Tissue Silk", href: facet("fabric", "tissue-silk") },
+          { label: "Satin Silk", href: facet("fabric", "satin-silk") },
+          { label: "Tussar Silk", href: facet("fabric", "tussar-silk") },
+          { label: "Muslin Cotton", href: facet("fabric", "muslin-cotton") },
+          { label: "Silk Wool", href: facet("fabric", "silk-wool") },
         ],
       },
       {
         heading: "How to Style",
         links: [
-          { label: "Bridal", href: "/collections/bridal" },
-          { label: "Festive Edit", href: "/collections/festive" },
+          { label: "First Saree", href: "/collections/first-saree" },
+          { label: "Everyday Silks", href: "/collections/everyday" },
+          { label: "Occasion Drapes", href: "/collections/occasion" },
+          { label: "Bridal Trousseau", href: "/collections/bridal" },
+          { label: "The Gifting Edit", href: "/collections/gifts" },
+          { label: "Lightweight Weaves", href: "/collections/lightweight" },
+          { label: "Festive", href: "/collections/festive" },
           { label: "Modern Classics", href: "/collections/modern-classics" },
-          { label: "Collector's Edit", href: "/collections/collectors-edit" },
-          { label: "Excellence Series", href: "/collections/excellence" },
+          { label: "Collector's Pieces", href: "/collections/collectors-edit" },
+          { label: "Heirloom Weight", href: "/collections/heirloom" },
+          { label: "Office & Travel", href: "/collections/office-travel" },
           { label: "This Season", href: "/collections/seasonal" },
         ],
       },
     ],
     tiles: [
-      { label: "On kadhua", href: "/pages/kadhua", tone: "maroon", src: "/reference-only/tile-kadhua.webp" },
+      { label: "On kadhua", href: "/pages/kadhua", tone: "maroon", src: "/homepage/mega-menu/tile-kadhua.webp" },
     ],
   },
+
+  /* ─── 3 · Campaigns ────────────────────────────────────────────────────── */
   {
     id: "campaigns",
     label: "Campaigns",
-    href: "/collections/nadi",
+    href: "/pages/nadi",
+    links: [
+      { label: "Nadi", href: "/pages/nadi" },
+      { label: "Antaraal", href: "/pages/antaraal" },
+    ],
     columns: [
       {
         heading: "Shop by Campaign",
         links: [
+          { label: "Nadi", href: "/collections/nadi", emphasis: true },
+          { label: "Antaraal", href: "/collections/antaraal" },
+          { label: "Alap", href: "/collections/alap" },
+          { label: "Kinara", href: "/collections/kinara" },
+          { label: "Chhaya", href: "/collections/chhaya" },
+          { label: "Udgam", href: "/collections/udgam" },
+          { label: "Prabhat", href: "/collections/prabhat" },
+          { label: "Ritu", href: "/collections/ritu" },
+          { label: "Nirantar", href: "/collections/nirantar" },
+          { label: "Taar", href: "/collections/taar" },
+        ],
+      },
+      {
+        heading: "Read the Campaign",
+        links: [
           { label: "Nadi", href: "/pages/nadi", emphasis: true },
           { label: "Antaraal", href: "/pages/antaraal" },
-          // Named for this house, 22 Aug 2026. The ten that stood here were the
-          // reference site's campaign list, copied entire — see HANDOFF §2.49.
           { label: "Alap", href: "/pages/alap" },
           { label: "Kinara", href: "/pages/kinara" },
           { label: "Chhaya", href: "/pages/chhaya" },
@@ -168,60 +218,63 @@ export const NAVIGATION: readonly NavPanel[] = [
           { label: "Taar", href: "/pages/taar" },
         ],
       },
-      {
-        heading: "Featured Campaign",
-        links: [
-          { label: "Nadi", href: "/collections/nadi" },
-          { label: "Antaraal", href: "/collections/antaraal" },
-        ],
-      },
     ],
     tiles: [
-      { label: "Nadi", href: "/pages/nadi", tone: "green", src: "/reference-only/tile-nadi-campaign.webp" },
-      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/reference-only/tile-antaraal-campaign.webp" },
+      { label: "Nadi", href: "/pages/nadi", tone: "green", src: "/homepage/mega-menu/tile-nadi-campaign.webp" },
+      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/homepage/mega-menu/tile-antaraal-campaign.webp" },
     ],
   },
+
+  /* ─── 4 · Craft ────────────────────────────────────────────────────────── */
   {
     id: "craft",
     label: "Craft",
-    href: "/pages/kadhua",
+    href: "/pages/handloom",
+    links: [
+      { label: "On kadhua", href: "/pages/kadhua" },
+      { label: "The loom", href: "/pages/handloom" },
+    ],
     columns: [
       {
         heading: "Handloom",
         links: [
-          { label: "On kadhua", href: "/pages/kadhua" },
+          { label: "On kadhua", href: "/pages/kadhua", emphasis: true },
           { label: "Telling handloom from powerloom", href: "/pages/handloom" },
           { label: "Identify a handloom saree", href: "/pages/identify" },
           { label: "Fabrics of Banaras", href: "/pages/fabrics" },
-          { label: "Weaving Process", href: "/pages/weaving-process" },
-          { label: "How It Is Woven", href: "/pages/techniques" },
-          { label: "The People At The Loom", href: "/pages/many-hands" },
+          { label: "The weaving process", href: "/pages/weaving-process" },
+          { label: "How it is woven", href: "/pages/techniques" },
+          { label: "The people at the loom", href: "/pages/many-hands" },
         ],
       },
       {
         heading: "Metal",
         links: [
-          { label: "Metal Repoussé", href: "/pages/repousse" },
+          { label: "Metal repoussé", href: "/pages/repousse" },
           { label: "Art & Collectibles", href: "/pages/repousse" },
         ],
       },
     ],
     tiles: [
-      { label: "The loom", href: "/pages/handloom", tone: "gold", src: "/reference-only/tile-loom.webp" },
-      { label: "Repoussé", href: "/pages/repousse", tone: "black", src: "/reference-only/tile-repousse.webp" },
+      { label: "The loom", href: "/pages/handloom", tone: "gold", src: "/homepage/mega-menu/tile-loom.webp" },
+      { label: "Repoussé", href: "/pages/repousse", tone: "black", src: "/homepage/mega-menu/tile-repousse.webp" },
     ],
   },
+
+  /* ─── 5 · Stories ──────────────────────────────────────────────────────── */
   {
     id: "stories",
     label: "Stories",
-    href: "/pages/nadi",
+    href: "/blogs/arts-culture",
+    links: [
+      { label: "Arts & Culture", href: "/blogs/arts-culture" },
+      { label: "Weavers we buy from", href: "/blogs/maestros" },
+    ],
     columns: [
       {
         heading: "Spirit of Creations",
         links: [
-          // Likewise ours. "Evening Raga" is kept — it was the one name in this
-          // group that was not taken from the reference site.
-          { label: "Sutradhar", href: "/pages/sutradhar" },
+          { label: "Sutradhar", href: "/pages/sutradhar", emphasis: true },
           { label: "Bunkar", href: "/pages/bunkar" },
           { label: "Anavrit", href: "/pages/anavrit" },
           { label: "Vistaar", href: "/pages/vistaar" },
@@ -233,40 +286,58 @@ export const NAVIGATION: readonly NavPanel[] = [
         ],
       },
       {
-        heading: "Stories",
+        heading: "Journal",
         links: [
           { label: "Arts & Culture", href: "/blogs/arts-culture" },
           { label: "Style", href: "/blogs/style" },
           { label: "Features", href: "/blogs/features" },
           { label: "Perspective", href: "/blogs/perspective" },
-          { label: "Weavers We Buy From", href: "/blogs/maestros" },
+          { label: "Weavers we buy from", href: "/blogs/maestros" },
         ],
       },
     ],
     tiles: [
-      { label: "Nadi", href: "/pages/nadi", tone: "indigo", src: "/reference-only/tile-nadi-story.webp" },
-      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/reference-only/tile-antaraal-story.webp" },
+      { label: "Nadi", href: "/pages/nadi", tone: "indigo", src: "/homepage/mega-menu/tile-nadi-story.webp" },
+      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/homepage/mega-menu/tile-antaraal-story.webp" },
     ],
   },
+
+  /* ─── 6 · About Us ─────────────────────────────────────────────────────── */
   {
     id: "about",
     label: "About Us",
     href: "/pages/our-story",
+    links: [
+      { label: "Our story", href: "/pages/our-story" },
+      { label: "Contact us", href: "/pages/contact" },
+    ],
     columns: [
       {
         heading: "About Us",
         links: [
-          { label: "Our Story / Our Heritage", href: "/pages/our-story" },
+          { label: "Our story", href: "/pages/our-story", emphasis: true },
+          { label: "Our Banaras store", href: "/pages/banaras-store" },
+          { label: "Our Mumbai store", href: "/pages/mumbai-store" },
           { label: "Impact", href: "/pages/impact" },
-          { label: "Press & Media", href: "/pages/press" },
+          { label: "Press & media", href: "/pages/press" },
           { label: "Careers", href: "/pages/careers" },
-          { label: "Contact Us", href: "/pages/contact" },
+          { label: "FAQs", href: "/pages/faqs" },
+          { label: "Contact us", href: "/pages/contact" },
         ],
       },
     ],
     tiles: [
-      { label: "Impact", href: "/pages/impact", tone: "green", src: "/reference-only/tile-impact.webp" },
-      { label: "Retail Stores", href: "/pages/stores", tone: "maroon", src: "/reference-only/tile-stores.webp" },
+      { label: "Our stores", href: "/pages/banaras-store", tone: "black", src: "/homepage/mega-menu/tile-stores.webp" },
+      { label: "Impact", href: "/pages/impact", tone: "green", src: "/homepage/mega-menu/tile-impact.webp" },
     ],
   },
 ];
+
+/**
+ * Split either side of the centred wordmark.
+ *
+ * Three and three, matching the header layout: the panels a shopper reaches for
+ * sit left, the ones they browse sit right.
+ */
+export const LEFT_NAVIGATION = NAVIGATION.slice(0, 3);
+export const RIGHT_NAVIGATION = NAVIGATION.slice(3, 6);

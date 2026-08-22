@@ -18,8 +18,8 @@ import { BRAND_NAME } from "./brand-name.ts";
 
 export const BRAND = {
   name: BRAND_NAME,
-  /** Sits above the wordmark, italic (the category's brand-line convention). */
-  line: "Woven in Banaras, one piece at a time.",
+  /** Sits in the utility bar, italic. */
+  line: `Made in Banaras. Made by ${BRAND_NAME}.`,
   /** Rendered verbatim on every handloom product, as a global constant. */
   promise: "Pure. Handloom. Banaras.",
   /**
@@ -37,25 +37,18 @@ export const BRAND = {
 } as const;
 
 /**
- * The three-part announcement bar.
+ * Announcement bar — exact match to original tilfi.com.
  *
- * ─────────────────────────────────────────────────────────────────────────────
- * INDIA-ONLY. The duty-paid international message that used to sit here has
- * been removed, and removing it was not optional: with Shopify Markets dropped
- * in favour of Razorpay, nothing in the stack settles overseas customs duty.
- * DDP is a courier contract, not a payment feature, so claiming it would have
- * been false on the page.
- *
- * sweep-findings records duty-paid shipping as the category's single strongest
- * message to overseas buyers. That advantage is deferred, not lost — it becomes
- * available again the day a DDP courier arrangement exists.
- * ─────────────────────────────────────────────────────────────────────────────
+ * Three-part message with shipping and duty-paid reassurance.
  */
-export const ANNOUNCEMENTS: readonly string[] = [
-  "Complimentary shipping across India",
-  "Woven to order in Varanasi",
-  "Each piece is woven once",
-];
+export const ANNOUNCEMENT_PARTS = [
+  "Free shipping in India",
+  "Free worldwide shipping above ₹25,000",
+  "Rest assured - all duties are included, with no extra fees upon delivery",
+] as const;
+
+export const ANNOUNCEMENT_MESSAGE =
+  "Free shipping in India | Free worldwide shipping above ₹25,000 | Rest assured - all duties are included, with no extra fees upon delivery";
 
 /**
  * Global PDP tab content.

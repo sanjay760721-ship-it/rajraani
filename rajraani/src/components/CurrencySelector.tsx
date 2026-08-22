@@ -5,28 +5,21 @@ import { useEffect, useId, useRef, useState } from "react";
 import { useCurrency } from "./currency-context";
 import { CURRENCIES, type CurrencyCode } from "@/lib/domain/types";
 
-/** Narrows a `data-currency` attribute, which is only ever a string to the DOM. */
 function isCurrencyCode(value: string): value is CurrencyCode {
   return CURRENCIES.includes(value as CurrencyCode);
 }
 
 const CURRENCY_LABELS: Record<string, string> = {
-  INR: "₹ INR",
-  USD: "$ USD",
-  CAD: "CA$ CAD",
-  GBP: "£ GBP",
-  AUD: "A$ AUD",
-  EUR: "€ EUR",
-  JPY: "¥ JPY",
-  SGD: "S$ SGD",
+  INR: "INR",
+  USD: "USD",
+  CAD: "CAD",
+  GBP: "GBP",
+  AUD: "AUD",
+  EUR: "EUR",
+  JPY: "JPY",
+  SGD: "SGD",
 };
 
-/**
- * Currency selector dropdown.
- *
- * Opens on click, closes on outside click or Escape. Keyboard accessible.
- * Persists selection to localStorage via currency context.
- */
 export function CurrencySelector() {
   const { currency, setCurrency, currencies } = useCurrency();
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +29,6 @@ export function CurrencySelector() {
 
   const close = () => setIsOpen(false);
 
-  // Outside click closes. The handler lives inside the effect so it is not
-  // rebuilt on every render and the dependency list stays honest.
   useEffect(() => {
     if (!isOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
@@ -52,7 +43,6 @@ export function CurrencySelector() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  // Escape closes
   useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -65,41 +55,6 @@ export function CurrencySelector() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
-  // Arrow key navigation
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    const options = listboxRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]');
-    if (!options?.length) return;
-
-    const currentIndex = Array.from(options).findIndex((opt) => opt === document.activeElement);
-    let nextIndex = currentIndex;
-
-    if (event.key === "ArrowDown") {
-      nextIndex = (currentIndex + 1) % options.length;
-      event.preventDefault();
-    } else if (event.key === "ArrowUp") {
-      nextIndex = (currentIndex - 1 + options.length) % options.length;
-      event.preventDefault();
-    } else if (event.key === "Home") {
-      nextIndex = 0;
-      event.preventDefault();
-    } else if (event.key === "End") {
-      nextIndex = options.length - 1;
-      event.preventDefault();
-    } else if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      const selected = options[currentIndex];
-      if (selected) {
-        const currencyCode = selected.dataset.currency;
-        if (currencyCode && isCurrencyCode(currencyCode)) setCurrency(currencyCode);
-        close();
-      }
-    }
-
-    if (nextIndex !== currentIndex) {
-      options[nextIndex]?.focus();
-    }
-  };
-
   return (
     <div className="relative">
       <button
@@ -109,21 +64,36 @@ export function CurrencySelector() {
         aria-expanded={isOpen}
         aria-controls={id}
         aria-label="Currency"
-        className="eyebrow text-ink flex items-center gap-1.5 px-2 py-1 border border-transparent hover:border-rule-strong transition-colors"
+        className="font-display text-[13px] tracking-wide text-ink hover:text-[#ae7922] flex items-center gap-1.5 py-1 transition-colors cursor-pointer"
         onClick={() => setIsOpen((open) => !open)}
-        onKeyDown={handleKeyDown}
       >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
         <span>{CURRENCY_LABELS[currency] ?? currency}</span>
-        <span className="text-ink-muted" aria-hidden>▾</span>
+        <span className="text-[10px] text-ink/70" aria-hidden>▾</span>
       </button>
 
-      {isOpen ? (
+      {isOpen && (
         <ul
           ref={listboxRef}
           id={id}
           role="listbox"
           aria-label="Select currency"
-          className="absolute right-0 top-full z-50 mt-1 min-w-[140px] bg-bg border border-rule shadow-lg overflow-hidden"
+          className="absolute right-0 top-full z-50 mt-1 min-w-[130px] bg-white border border-rule shadow-lg py-1.5 overflow-hidden"
+          style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
         >
           {currencies.map((curr) => (
             <li key={curr}>
@@ -132,23 +102,22 @@ export function CurrencySelector() {
                 role="option"
                 aria-selected={curr === currency}
                 data-currency={curr}
-                className={`w-full text-left px-3 py-2 text-caption ${
+                className={`w-full text-left px-4 py-1.5 font-display text-[12.5px] tracking-wide transition-colors ${
                   curr === currency
-                    ? "bg-ink text-bg font-semibold"
-                    : "text-ink-body hover:bg-bg-alt hover:text-ink"
+                    ? "bg-[#faf0f0] text-[#ae7922] font-semibold"
+                    : "text-ink/80 hover:bg-[#faf0f0]/60 hover:text-[#ae7922]"
                 }`}
                 onClick={() => {
                   setCurrency(curr);
                   close();
                 }}
-                onKeyDown={handleKeyDown}
               >
-                {CURRENCY_LABELS[curr] ?? curr}
+                {curr}
               </button>
             </li>
           ))}
         </ul>
-      ) : null}
+      )}
     </div>
   );
 }

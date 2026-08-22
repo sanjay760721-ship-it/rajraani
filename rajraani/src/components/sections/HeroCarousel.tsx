@@ -98,8 +98,8 @@ export function HeroCarousel({
         autoPlay: 4000,
         pauseAutoPlayOnHover: true,
         draggable: true,
-        prevNextButtons: false, // No arrows on desktop
-        pageDots: true,
+        prevNextButtons: true, // Arrows only (spec: Hero has arrows, no dots)
+        pageDots: false, // No dots
         resize: true,
         selectedAttraction: 0.025,
         friction: 0.25,

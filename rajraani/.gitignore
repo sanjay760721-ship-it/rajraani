@@ -51,3 +51,8 @@ next-env.d.ts
 
 # Stitch admin mockups — local preview only, not part of the build.
 /public/_design-preview/
+
+# Homepage art staged for local preview. Same category as /public/reference-only/
+# — unlicensed reference photography, fine on this machine, not for a public repo.
+# Delete this rule if these are ever replaced with commissioned shots.
+/public/homepage/

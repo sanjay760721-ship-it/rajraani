@@ -4,6 +4,7 @@ import Link from "next/link";
 import { HeroCarousel } from "./HeroCarousel";
 import { EditorialSlideshow } from "./EditorialSlideshow";
 import { StoresSlideshow } from "./StoresSlideshow";
+import { CampaignSlideshow } from "./CampaignSlideshow";
 import { PLACEHOLDER_WASH, toneFor } from "../Frame";
 import { ProductCard } from "../ProductCard";
 import { ScrollReveal } from "../ScrollReveal";
@@ -61,6 +62,8 @@ export async function SectionRenderer({
       );
     case "editorialSlideshow":
       return <EditorialSlideshow slides={section.slides} />;
+    case "campaignSlideshow":
+      return <CampaignSlideshow slides={section.slides} />;
     case "storesSlideshow":
       return <StoresSlideshow slides={section.slides} />;
     case "poetryBand":
@@ -251,8 +254,8 @@ function VideoBand({
             loop
             muted
             playsInline
-            controls
             preload="metadata"
+            poster={section.art.desktop.src}
             className="absolute inset-0 h-full w-full object-cover object-center"
           >
             <source src={section.videoSrc} type="video/mp4" />

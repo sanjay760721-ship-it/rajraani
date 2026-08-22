@@ -8,7 +8,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CartProvider } from "@/components/cart-context";
 import { WishlistProvider } from "@/components/wishlist-context";
-import { IS_FIXTURE_CATALOGUE } from "@/lib/data/catalogue";
 
 /** The shop. Everything a customer sees is inside this layout. */
 export default function StorefrontLayout({
@@ -28,7 +27,6 @@ export default function StorefrontLayout({
               Skip to content
             </a>
 
-            <PlaceholderNotice fixtures={IS_FIXTURE_CATALOGUE} />
             <AnnouncementBar />
             <SiteHeader />
             <main id="main" className="flex-1">
@@ -42,21 +40,5 @@ export default function StorefrontLayout({
         </WishlistProvider>
       </CurrencyProvider>
     </CartProvider>
-  );
-}
-
-/**
- * Standing reminder that nothing here is finished work.
- *
- * The catalogue is seed data, the tokens are placeholders and there is no
- * photography. Saying so on the page is cheaper than someone screenshotting it
- * and circulating it as a design.
- */
-function PlaceholderNotice({ fixtures }: { fixtures: boolean }) {
-  return (
-    <p className="bg-ink px-4 py-2 text-center text-caption text-bg">
-      Placeholder build — {fixtures ? "seed fixtures" : "seed catalogue"},
-      placeholder design tokens, no photography. Frames are schematic on purpose.
-    </p>
   );
 }
