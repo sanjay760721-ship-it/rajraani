@@ -156,16 +156,16 @@ export const NAVIGATION: readonly NavPanel[] = [
         links: [
           { label: "Nadi", href: "/pages/nadi", emphasis: true },
           { label: "Antaraal", href: "/pages/antaraal" },
-          { label: "Charbagh", href: "/pages/charbagh" },
-          { label: "Tarang", href: "/pages/tarang" },
-          { label: "Peony Pavilion", href: "/pages/peony-pavilion" },
-          { label: "SeeSaw", href: "/pages/seesaw" },
-          { label: "Sandhi", href: "/pages/sandhi" },
-          { label: "Charulata", href: "/pages/charulata" },
-          { label: "Nagma", href: "/pages/nagma" },
-          { label: "Janavi", href: "/pages/janavi" },
-          { label: "Shakti", href: "/pages/shakti" },
-          { label: "Balance", href: "/pages/balance" },
+          // Named for this house, 22 Aug 2026. The ten that stood here were the
+          // reference site's campaign list, copied entire — see HANDOFF §2.49.
+          { label: "Alap", href: "/pages/alap" },
+          { label: "Kinara", href: "/pages/kinara" },
+          { label: "Chhaya", href: "/pages/chhaya" },
+          { label: "Udgam", href: "/pages/udgam" },
+          { label: "Prabhat", href: "/pages/prabhat" },
+          { label: "Ritu", href: "/pages/ritu" },
+          { label: "Nirantar", href: "/pages/nirantar" },
+          { label: "Taar", href: "/pages/taar" },
         ],
       },
       {
@@ -202,7 +202,7 @@ export const NAVIGATION: readonly NavPanel[] = [
         heading: "Metal",
         links: [
           { label: "Metal Repoussé", href: "/pages/repousse" },
-          { label: "Art & Collectibles", href: "/pages/antaraal" },
+          { label: "Art & Collectibles", href: "/pages/repousse" },
         ],
       },
     ],
@@ -219,15 +219,17 @@ export const NAVIGATION: readonly NavPanel[] = [
       {
         heading: "Spirit of Creations",
         links: [
-          { label: "Becoming", href: "/pages/becoming" },
-          { label: "A Colour Unbroken", href: "/pages/colour-unbroken" },
-          { label: "Banaras Nocturne", href: "/pages/banaras-nocturne" },
-          { label: "Banaras Bombay", href: "/pages/banaras-bombay" },
+          // Likewise ours. "Evening Raga" is kept — it was the one name in this
+          // group that was not taken from the reference site.
+          { label: "Sutradhar", href: "/pages/sutradhar" },
+          { label: "Bunkar", href: "/pages/bunkar" },
+          { label: "Anavrit", href: "/pages/anavrit" },
+          { label: "Vistaar", href: "/pages/vistaar" },
           { label: "Evening Raga", href: "/pages/evening-raga" },
-          { label: "Yatra", href: "/pages/yatra" },
-          { label: "Gulab Bari", href: "/pages/gulab-bari" },
-          { label: "Kala", href: "/pages/kala" },
-          { label: "Katha", href: "/pages/katha" },
+          { label: "Bandish", href: "/pages/bandish" },
+          { label: "Aavaran", href: "/pages/aavaran" },
+          { label: "Baithak", href: "/pages/baithak" },
+          { label: "Dhaaga", href: "/pages/dhaaga" },
         ],
       },
       {

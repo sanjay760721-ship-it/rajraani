@@ -130,6 +130,18 @@ export type Section =
       id: string;
       heading?: string;
       paragraphs: string[];
+      /*
+       * The call to action is DATA, not a property of having two paragraphs.
+       *
+       * It used to be neither: the renderer emitted a hard-coded link whenever
+       * `paragraphs.length > 1`, pointing at a competitor campaign slug that has
+       * no route in this build. Six sections rendered it, on the homepage and on
+       * every editorial page, and it 404d from all of them.
+       *
+       * Both fields or neither — a label with nowhere to go is the bug again.
+       */
+      ctaLabel?: string;
+      ctaHref?: string;
     }
   | {
       type: "pullQuote";
@@ -285,6 +297,29 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     ctaHref: "/collections/kadhua",
   },
   {
+    /*
+     * Section 4 of 11 — the prose beat.
+     *
+     * The rhythm this page inherits alternates: a band you look at, then a band
+     * you read. Without this one the page runs image → image → video with no
+     * pause, which is what it did until 22 Aug 2026 — the section type existed
+     * and was simply never placed.
+     *
+     * It earns its slot by covering something no other band does. The triptych
+     * above is kadhua; this is the open weaves, which are half of what sells
+     * between March and September and were unmentioned on the homepage.
+     */
+    type: "richText",
+    id: "open-weaves",
+    heading: "The lighter weaves, and why they are harder",
+    paragraphs: [
+      "Kora organza and sooti cotton do a different job from katan. They are woven open, so the cloth carries air rather than weight, and a motif on them reads as an outline rather than as mass \u2014 the ground shows through the pattern instead of sitting behind it.",
+      "It is the less forgiving discipline. A loose weave hides nothing: an uneven beat stays in the cloth as a ripple that no finishing will take out, and the tension has to be held steady across six yards by hand and by eye. The pieces that come off the loom right are worth the ones that do not.",
+    ],
+    ctaLabel: "See the open weaves",
+    ctaHref: "/collections/sarees?fabric=kora-organza",
+  },
+  {
     type: "videoBand",
     id: "loom-video",
     art: imagePair("black", "editorial-1.webp"),
@@ -364,6 +399,37 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         art: imagePair("black", "tile-repousse.webp"),
         label: "REPOUSSÉ",
         href: "/pages/antaraal",
+      },
+    ],
+  },
+  {
+    /*
+     * Section 9 of 11 — the campaign pair.
+     *
+     * `dualCampaign` has had a renderer since the section registry was written
+     * and had never been placed on any page, which is why the homepage carried
+     * nine sections under a comment promising eleven.
+     *
+     * The pairing is the point (build.md §2.2): a campaign is one entity
+     * holding a story page and a collection, so each half links to the story
+     * and the collection follows from it — not two collections dressed up.
+     */
+    type: "dualCampaign",
+    id: "campaign-pair",
+    items: [
+      {
+        art: imagePair("indigo", "hero-1.webp"),
+        title: "Nadi",
+        body: "The monsoon collection. On every piece in it the ground was dyed before the motif was chosen, which is the reverse of the usual order and the reason the colours sit as deep as they do.",
+        ctaLabel: "Enter Nadi",
+        ctaHref: "/pages/nadi",
+      },
+      {
+        art: imagePair("black", "hero-4.webp"),
+        title: "Antaraal",
+        body: "A study in empty ground \u2014 how much of it a pattern needs before it stops reading as a pattern, and what a weaver does with the space between one motif and the next.",
+        ctaLabel: "Enter Antaraal",
+        ctaHref: "/pages/antaraal",
       },
     ],
   },

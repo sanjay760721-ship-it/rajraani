@@ -159,9 +159,12 @@ describe("constraints that exist because the reference site got them wrong", () 
 
   it("enforces kebab-case slugs", () => {
     // Handle casing was inconsistent on the reference site; a slug is a URL.
-    assert.ok(SLUG_PATTERN.test("of-the-first-water"));
-    assert.ok(!SLUG_PATTERN.test("campaignpage_songs_of_the_season_"));
-    assert.ok(!SLUG_PATTERN.test("Of-The-First-Water"));
+    // Neutral examples. These were the reference site's own campaign slugs
+    // until 22 Aug 2026 — a test fixture is still a place their names do not
+    // belong, and build.md §6 says so explicitly.
+    assert.ok(SLUG_PATTERN.test("evening-raga"));
+    assert.ok(!SLUG_PATTERN.test("campaignpage_evening_raga_"));
+    assert.ok(!SLUG_PATTERN.test("Evening-Raga"));
     assert.ok(!SLUG_PATTERN.test("double--hyphen"));
   });
 

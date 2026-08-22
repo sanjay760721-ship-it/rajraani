@@ -81,9 +81,24 @@ const RULES = [
   },
   {
     id: "competitor-campaigns",
-    // The confirmed campaign pairs measured in pre-build-gaps.md §4.
+    /*
+     * The nine confirmed pairs from pre-build-gaps.md §4, plus the second batch
+     * added 22 Aug 2026 after their full navigation tree was mapped: six mega
+     * menus, ~90 destinations, roughly thirty campaign names between them.
+     *
+     * The batch was not academic. `dashashva` was sitting hard-coded in the
+     * RichText renderer as a link target, firing on six sections across the
+     * homepage and every editorial page, 404ing from all of them — and passing
+     * this gate, because the list only knew nine names and that was not one.
+     *
+     * ONLY DISTINCTIVE NAMES BELONG HERE. Their catalogue also uses ordinary
+     * words as campaign titles — balance, becoming, katha, tarang, surkh,
+     * shakti — and blocking those would fire on legitimate prose about cloth.
+     * A gate that cries wolf gets switched off. When in doubt, leave it out and
+     * rely on the human review in build.md §6.
+     */
     pattern:
-      /\b(antinomy|of-threads-and-time|the-way-of-flowers|quarter-to-time|the-art-of-gifting|songs-of-the-season|a-quiet-interlude|a-motley-crew|echoes-in-silk)\b/i,
+      /\b(antinomy|of-threads-and-time|the-way-of-flowers|quarter-to-time|the-art-of-gifting|songs-of-the-season|a-quiet-interlude|a-motley-crew|echoes-in-silk|dash[a\u0101]shva|textured-trails|peony-pavilion|gulab-bari|banaras-nocturne|a-colour-unbroken|of-the-first-water|portrait-of-a-woman|an-artists-legacy|shikargah-tales|excellence-series|the-onam-edit|many-hands-of-handloom)\b/i,
     why:
       "A competitor campaign name. Campaign names are the most tempting thing to " +
       "copy and the most obviously theirs.",

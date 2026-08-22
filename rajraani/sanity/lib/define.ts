@@ -114,4 +114,4 @@ export const slugValidation = (rule: ValidationRule) =>
   rule
     .required()
     .regex(SLUG_PATTERN, { name: "kebab-case" })
-    .error("Lower-case words separated by single hyphens, e.g. of-the-first-water");
+    .error("Lower-case words separated by single hyphens, e.g. evening-raga");

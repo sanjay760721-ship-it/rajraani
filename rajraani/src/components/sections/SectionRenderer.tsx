@@ -506,13 +506,13 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
           <p key={index} className="text-body text-ink-body">{paragraph}</p>
         ))}
       </div>
-      {section.paragraphs.length > 1 && (
+      {section.ctaLabel && section.ctaHref ? (
         <div className="mt-6">
-          <Link href="/pages/dashashva" className="cta-link">
-            DISCOVER
+          <Link href={section.ctaHref} className="cta-link">
+            {section.ctaLabel}
           </Link>
         </div>
-      )}
+      ) : null}
     </section>
   );
 }
