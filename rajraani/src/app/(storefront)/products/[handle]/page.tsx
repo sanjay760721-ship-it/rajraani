@@ -45,11 +45,20 @@ export default async function ProductPage(props: PageProps<"/products/[handle]">
   const product = await catalogue.getProduct(handle);
   if (!product) notFound();
 
+  /**
+   * Related pieces share the weave — the strongest craft signal on the page.
+   * A stitched garment has none, so it falls back to garment type; without that
+   * fallback every weaveless piece would match every other one on
+   * `undefined === undefined` and the rail would fill with unrelated suits.
+   */
   const related = (await catalogue.listProducts())
-    .filter(
-      (candidate) =>
-        candidate.handle !== product.handle && candidate.weave === product.weave,
-    )
+    .filter((candidate) => {
+      if (candidate.handle === product.handle) return false;
+      return product.weave
+        ? candidate.weave === product.weave
+        : candidate.weave === undefined &&
+            candidate.garmentType === product.garmentType;
+    })
     .slice(0, 4);
 
   return (
@@ -219,11 +228,17 @@ function ProductJsonLd({ product }: { product: Product }) {
     color: colour?.name ?? product.colourFamily,
     image: product.images.map((image) => image.id),
     additionalProperty: [
-      {
-        "@type": "PropertyValue",
-        name: "Weave",
-        value: findTerm("weave", product.weave)?.name ?? product.weave,
-      },
+      // Omitted rather than sent empty when the garment has no loom technique:
+      // a PropertyValue with no value is worse structured data than no property.
+      ...(product.weave
+        ? [
+            {
+              "@type": "PropertyValue",
+              name: "Weave",
+              value: findTerm("weave", product.weave)?.name ?? product.weave,
+            },
+          ]
+        : []),
       {
         "@type": "PropertyValue",
         name: "Motifs",

@@ -177,7 +177,9 @@ try {
       product.provenance.weaveTimeWeeks,
       product.provenance.artisanCount,
       product.garmentType,
-      product.weave,
+      // Absent for stitched garments — node:sqlite will not bind `undefined`,
+      // and the column is nullable precisely so this can be NULL.
+      product.weave ?? null,
       product.fabric,
       product.colourFamily,
       product.campaign ?? null,

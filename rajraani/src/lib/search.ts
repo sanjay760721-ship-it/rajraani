@@ -43,7 +43,7 @@ export function search(rawQuery: string): SearchResults {
 
   const products = PRODUCTS.filter((product) => {
     if (
-      matchedSlugs.has(product.weave) ||
+      (product.weave !== undefined && matchedSlugs.has(product.weave)) ||
       matchedSlugs.has(product.fabric) ||
       matchedSlugs.has(product.colourFamily) ||
       product.motifs.some((motif) => matchedSlugs.has(motif))

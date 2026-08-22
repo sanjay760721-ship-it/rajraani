@@ -1,6 +1,11 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 
+import {
+  HAS_LOCAL_PHOTOGRAPHY,
+  withLocalPhotography,
+  withLocalPhotographyOne,
+} from "./local-photography.ts";
 import { MockCatalogueRepository } from "./mock-repository.ts";
 import type { CatalogueRepository } from "./repository.ts";
 import { SqliteCatalogueRepository } from "./sqlite-repository.ts";
@@ -22,11 +27,43 @@ const DB_PATH =
 
 const hasDatabase = existsSync(DB_PATH);
 
+/**
+ * Wraps a repository so staged local photography reaches the pages.
+ *
+ * Applied here rather than inside either implementation, so both get it from
+ * one place and neither knows about it — the seam absorbing a change again,
+ * which is the third time it has (see repository.ts). It is a pass-through when
+ * nothing is staged, which is the case on every clone and in CI.
+ *
+ * Deliberately NOT applied to the committed fixtures themselves: those must
+ * keep `src` absent for the originality guard in catalogue.test.ts to mean
+ * anything. See local-photography.ts.
+ */
+function withPhotography(inner: CatalogueRepository): CatalogueRepository {
+  if (!HAS_LOCAL_PHOTOGRAPHY) return inner;
+
+  return {
+    listProducts: async () => withLocalPhotography(await inner.listProducts()),
+    getProduct: async (handle) =>
+      withLocalPhotographyOne(await inner.getProduct(handle)),
+    productsInCollection: async (collection) =>
+      withLocalPhotography(await inner.productsInCollection(collection)),
+    listCollections: () => inner.listCollections(),
+    getCollection: (handle) => inner.getCollection(handle),
+    getCampaign: (slug) => inner.getCampaign(slug),
+  };
+}
+
 function createCatalogue(): CatalogueRepository {
-  return hasDatabase ? new SqliteCatalogueRepository() : new MockCatalogueRepository();
+  return withPhotography(
+    hasDatabase ? new SqliteCatalogueRepository() : new MockCatalogueRepository(),
+  );
 }
 
 export const catalogue: CatalogueRepository = createCatalogue();
+
+/** True when the pages are showing staged local photography. */
+export { HAS_LOCAL_PHOTOGRAPHY };
 
 /**
  * True when the site is serving fixtures rather than the database.

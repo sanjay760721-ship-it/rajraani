@@ -144,9 +144,17 @@ function validate(input: ProductInput, id?: number): Record<string, string> {
     ["fulfilmentMode", "fulfilment"],
   ] as const;
 
+  /**
+   * Garment types that may leave `weave` blank — stitched, not woven to shape.
+   * Kept as a list rather than a `weave`-is-always-optional rule, because a
+   * saree with no weave is a mistake and should still be caught here.
+   */
+  const STITCHED = new Set(["suit"]);
+
   for (const [field, group] of single) {
     const value = input[field];
     if (!value) {
+      if (field === "weave" && STITCHED.has(input.garmentType)) continue;
       errors[field] = "Required.";
       continue;
     }

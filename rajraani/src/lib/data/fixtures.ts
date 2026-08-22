@@ -109,6 +109,48 @@ export const CAMPAIGNS: readonly Campaign[] = [
   },
 ];
 
+/**
+ * The shot template for stitched garments.
+ *
+ * A suit is not draped, so the saree sequence does not transfer: there is no
+ * pallu to carry over a shoulder and no selvedge to shoot. What replaces them
+ * is a flat lay — the only way to show a multi-piece set as a set, since the
+ * churidar and dupatta never appear together on the model.
+ *
+ * Deliberately reuses the existing `ShotType` union rather than widening it.
+ * `on_model_drape` reads as the dupatta here, and inventing `on_model_dupatta`
+ * would put a term in the type that photography-brief.md §3 has never briefed.
+ */
+function stitchedShotTemplate(input: {
+  handle: string;
+  colour: string;
+  cloth: string;
+  motif: string;
+  garment: string;
+}): ProductImage[] {
+  const shots: ShotType[] = [
+    "on_model_full",
+    "on_model_drape",
+    "on_model_detail",
+    "on_model_movement",
+    "flat_lay",
+    "detail_weave",
+  ];
+
+  return shots.map((shot, index) => {
+    const square = shot.startsWith("detail_");
+    return {
+      id: `${input.handle}-${index + 1}`,
+      ratio: square ? "square" : "portrait",
+      shot,
+      // Names the cloth rather than a weave, because a stitched garment has
+      // none — see the `weave` field on Product.
+      alt: `${SHOT_DESCRIPTIONS[shot]}: ${input.colour} ${input.garment} in ${input.cloth} with ${input.motif} motifs`,
+      ...(square ? SQUARE : PORTRAIT),
+    };
+  });
+}
+
 export const PRODUCTS: readonly Product[] = [
   {
     id: "1",
@@ -603,6 +645,208 @@ export const PRODUCTS: readonly Product[] = [
       garment: "saree",
     }),
   },
+  /* ------------------------------------------------------------------------
+   * Stitched garments.
+   *
+   * The first pieces in this catalogue that are cut and tailored rather than
+   * woven to shape, which is why four of the five carry no `weave` (Ksheera is
+   * the exception — its cloth is genuinely a jamdani). taxonomy/facets.json
+   * `garment.suit` records what still needs a domain reviewer's confirmation.
+   *
+   * A suit is also the first product here assembled from several cloths, so
+   * `fabric` names its principal piece and the dupatta and churidar are
+   * described in `spec` rather than faceted. That is a known simplification.
+   * ---------------------------------------------------------------------- */
+  {
+    id: "13",
+    handle: "ksheera-off-white-muslin-cotton-jamdani-suit",
+    title: "Off-White Muslin Cotton Jamdani Anarkali Suit",
+    poeticName: "Ksheera",
+    sku: "SUJMOW10131",
+    price: money(42_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [14, 18],
+    narrative:
+      "Ksheera is milk, and the whole piece stays inside that one word. The cloth is a jamdani woven in undyed muslin, the booti raised in the same thread as the ground so the pattern is a change in texture rather than in colour — visible when the light moves and almost gone when it does not. It is cut as an anarkali with a gathered fall from a high waist, and left unlined, because a cloth this fine is worth seeing light through.",
+    spec: {
+      colour: "Undyed off-white",
+      technique: "Jamdani, with tonal booti across the panel",
+      fabric: "Muslin cotton, unlined",
+      speciality: "Self-thread booti — no zari anywhere on the piece",
+      note: "Anarkali with churidar and a matching muslin dupatta.",
+    },
+    provenance: {
+      workshop: "Lohta workshop",
+      loom: "Pit loom, jamdani",
+      weaveTimeWeeks: 6,
+      artisanCount: 2,
+    },
+    garmentType: "suit",
+    weave: "jamdani",
+    fabric: "muslin-cotton",
+    colourFamily: "off-white",
+    zariTypes: ["resham"],
+    motifs: ["booti", "floral"],
+    images: stitchedShotTemplate({
+      handle: "ksheera",
+      colour: "off-white",
+      cloth: "muslin cotton jamdani",
+      motif: "booti",
+      garment: "anarkali suit",
+    }),
+  },
+  {
+    id: "14",
+    handle: "shyamala-green-katan-silk-kurta-set",
+    title: "Green Katan Silk Kurta Set",
+    poeticName: "Shyamala",
+    sku: "SUKTGR10141",
+    price: money(36_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "ready_to_ship",
+    dispatchLeadDays: [10, 12],
+    narrative:
+      "A green that sits closer to the leaf than to the emerald, which is the harder of the two to dye and the easier of the two to wear. There is no weave to name here — the cloth is plain katan, and everything the piece does it does through cut: a straight kurta that skims rather than fits, side slits taken high enough to walk in, and a churidar gathered short. Restraint standing in for ornament.",
+    spec: {
+      colour: "Leaf green",
+      technique: "Plain-woven ground, tailored",
+      fabric: "Pure Katan silk",
+      note: "Straight kurta with churidar and a plain silk dupatta.",
+    },
+    provenance: {
+      workshop: "Ramnagar atelier",
+      loom: "Pit loom, plain ground",
+      weaveTimeWeeks: 3,
+      artisanCount: 3,
+    },
+    garmentType: "suit",
+    fabric: "katan-silk",
+    colourFamily: "green",
+    zariTypes: [],
+    motifs: [],
+    images: stitchedShotTemplate({
+      handle: "shyamala",
+      colour: "leaf green",
+      cloth: "plain katan silk",
+      motif: "no",
+      garment: "kurta set",
+    }),
+  },
+  {
+    id: "15",
+    handle: "padmini-pink-moonga-silk-anarkali-suit",
+    title: "Rose Pink Moonga Silk Anarkali Suit",
+    poeticName: "Padmini",
+    sku: "SUMGPK10151",
+    price: money(58_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [16, 20],
+    narrative:
+      "Moonga takes dye unevenly, and that is the reason to use it: the rose here is deeper along the slubs and lighter between them, so the colour moves across the panel without anything having been done to make it. The anarkali is cut full from a high waist and carries its weight well. Over it sits an organza dupatta embroidered by hand — the only worked surface on the piece, and deliberately the lightest one.",
+    spec: {
+      colour: "Rose pink",
+      technique: "Handwoven moonga ground, tailored; hand-embroidered dupatta",
+      fabric: "Moonga silk",
+      speciality: "Hand-embroidered organza dupatta",
+      note: "Anarkali with churidar and an embroidered organza dupatta.",
+    },
+    provenance: {
+      workshop: "Sarnath atelier",
+      loom: "Pit loom, moonga ground",
+      weaveTimeWeeks: 5,
+      artisanCount: 4,
+    },
+    garmentType: "suit",
+    fabric: "moonga-silk",
+    colourFamily: "pink",
+    zariTypes: ["resham"],
+    motifs: ["floral", "bel"],
+    images: stitchedShotTemplate({
+      handle: "padmini",
+      colour: "rose pink",
+      cloth: "handwoven moonga silk",
+      motif: "floral",
+      garment: "anarkali suit",
+    }),
+  },
+  {
+    id: "16",
+    handle: "ashoka-maroon-satin-silk-anarkali-suit",
+    title: "Maroon Satin Silk Anarkali Suit",
+    poeticName: "Ashoka",
+    sku: "SUSTMR10161",
+    price: money(52_000),
+    inventoryQuantity: 0,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [16, 20],
+    narrative:
+      "Named for the tree that flowers red before it leafs. The ground is a light satin silk, chosen because an angrakha neckline has to cross and lie flat, and a heavier cloth will not do it without bulk. The tie sits off to one side where it belongs, the skirt is cut full, and the dupatta is organza worked with a running floral bel. Sold out, and it will be made again to measure rather than repeated exactly.",
+    spec: {
+      colour: "Deep maroon",
+      technique: "Angrakha-style crossed neckline, tailored",
+      fabric: "Light satin silk, in the Chanderi weight",
+      speciality: "Embroidered organza dupatta with a running bel",
+      note: "Anarkali with a silk churidar and an embroidered organza dupatta.",
+    },
+    provenance: {
+      workshop: "Ramnagar atelier",
+      loom: "Pit loom, satin ground",
+      weaveTimeWeeks: 4,
+      artisanCount: 3,
+    },
+    garmentType: "suit",
+    fabric: "satin-silk",
+    colourFamily: "maroon",
+    zariTypes: ["resham"],
+    motifs: ["floral", "bel"],
+    images: stitchedShotTemplate({
+      handle: "ashoka",
+      colour: "deep maroon",
+      cloth: "satin silk",
+      motif: "bel",
+      garment: "anarkali suit",
+    }),
+  },
+  {
+    id: "17",
+    handle: "baluka-beige-tussar-silk-embroidered-suit",
+    title: "Beige Tussar Silk Embroidered Kurta Set",
+    poeticName: "Baluka",
+    sku: "SUTSBG10171",
+    price: money(64_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [18, 22],
+    narrative:
+      "Baluka is sand, and the piece is built in three layers of it. A plain inner kurta, a churidar in a lighter weight, and over both an embroidered overlay in raw tussar that carries the whole of the ornament. Keeping the worked surface on a layer that comes off is a practical decision as much as a designed one — it makes one set read as two, and it puts the hand-embroidery where it can be seen against the light rather than flat against the body.",
+    spec: {
+      colour: "Sand beige",
+      technique: "Hand-embroidered overlay over a plain inner kurta",
+      fabric: "Raw tussar silk overlay, lighter silk inner",
+      speciality: "Three pieces — overlay, inner kurta and churidar",
+      note: "The overlay is the worked layer; the inner kurta is deliberately plain.",
+    },
+    provenance: {
+      workshop: "Sarnath atelier",
+      loom: "Pit loom, tussar ground",
+      weaveTimeWeeks: 7,
+      artisanCount: 5,
+    },
+    garmentType: "suit",
+    fabric: "tussar-silk",
+    colourFamily: "off-white",
+    zariTypes: ["resham"],
+    motifs: ["floral", "jaal"],
+    images: stitchedShotTemplate({
+      handle: "baluka",
+      colour: "sand beige",
+      cloth: "hand-embroidered tussar silk",
+      motif: "floral",
+      garment: "kurta set",
+    }),
+  },
 ];
 
 /**
@@ -620,6 +864,14 @@ export const COLLECTIONS: readonly Collection[] = [
     seoIntro:
       "Every saree here is woven by hand on a pit loom in Banaras, in silk, cotton or wool, by weavers we buy from directly. Each is a single piece — when it is gone, it is rewoven or it is not made again.",
     facets: { garment: ["saree"] },
+  },
+  {
+    kind: "facet",
+    handle: "suits",
+    title: "Suits",
+    seoIntro:
+      "Anarkalis and kurta sets cut from the same handwoven cloth as the sarees, and tailored in Banaras. A stitched piece is made to measure more often than not, so most of these are made to order rather than held in stock.",
+    facets: { garment: ["suit"] },
   },
   {
     kind: "facet",

@@ -56,7 +56,8 @@ type ProductRow = {
   provenance_weeks: number;
   provenance_artisans: number;
   garment_type: string;
-  weave: string;
+  /** NULL for stitched garments, which have no loom technique. */
+  weave: string | null;
   fabric: string;
   colour_family: string;
   campaign_slug: string | null;
@@ -119,7 +120,10 @@ function toProduct(
       artisanCount: row.provenance_artisans,
     },
     garmentType: row.garment_type,
-    weave: row.weave,
+    // Spread rather than assigned, so a stitched garment carries no `weave` key
+    // at all. `weave: undefined` would satisfy the type but survive JSON round
+    // trips as an explicit null, and the domain rule is that the field is absent.
+    ...(row.weave ? { weave: row.weave } : {}),
     fabric: row.fabric,
     colourFamily: row.colour_family,
     zariTypes: zari,

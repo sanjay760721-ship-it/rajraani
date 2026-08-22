@@ -189,7 +189,16 @@ export type Product = {
 
   /* --- Facet references. Slugs into the controlled vocabularies. --------- */
   readonly garmentType: string;
-  readonly weave: string;
+  /**
+   * Loom technique. **Optional, and absent is meaningful** — a tailored suit or
+   * anarkali is cut from cloth rather than woven to shape, so it has no weave to
+   * name (taxonomy/facets.json `weave.note`: surface treatments do not belong
+   * here, and "mixing them here is how a taxonomy starts to rot").
+   *
+   * Absent means "this garment has no loom technique", never "not filled in yet".
+   * A woven piece without a weave is a data error and the catalogue test says so.
+   */
+  readonly weave?: string;
   readonly fabric: string;
   readonly colourFamily: string;
   readonly zariTypes: readonly ZariType[];

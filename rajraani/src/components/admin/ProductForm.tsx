@@ -204,7 +204,15 @@ export function ProductForm({
       >
         <div className="grid gap-6 md:grid-cols-2">
           <Select label="Garment" name="garmentType" options={vocabulary.garment} defaultValue={value.garmentType} error={errors.garmentType} />
-          <Select label="Weave" name="weave" options={vocabulary.weave} defaultValue={value.weave} error={errors.weave} />
+          <Select
+            label="Weave"
+            name="weave"
+            options={vocabulary.weave}
+            defaultValue={value.weave}
+            error={errors.weave}
+            allowEmpty
+            hint="Leave blank for stitched garments — a suit is cut from cloth, not woven to shape."
+          />
           <Select label="Fabric" name="fabric" options={vocabulary.fabric} defaultValue={value.fabric} error={errors.fabric} />
           <Select label="Colour family" name="colourFamily" options={vocabulary.colour} defaultValue={value.colourFamily} error={errors.colourFamily} />
         </div>

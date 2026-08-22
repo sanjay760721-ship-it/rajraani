@@ -81,6 +81,7 @@ export type ProductInput = {
   provenanceWeeks: number;
   provenanceArtisans: number;
   garmentType: string;
+  /** Empty string means the garment has no weave; stored as NULL. */
   weave: string;
   fabric: string;
   colourFamily: string;
@@ -179,7 +180,7 @@ function columnValues(input: ProductInput): (string | number | null)[] {
     input.provenanceWeeks,
     input.provenanceArtisans,
     input.garmentType,
-    input.weave,
+    orNull(input.weave),
     input.fabric,
     input.colourFamily,
     orNull(input.campaignSlug),

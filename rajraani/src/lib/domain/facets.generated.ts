@@ -62,6 +62,24 @@ export const FACETS: Record<string, RawFacetGroup> = {
         ]
       },
       {
+        "canonical": "suit",
+        "label": "Suit",
+        "aliases": [
+          "suits",
+          "anarkali",
+          "anarkalis",
+          "kurta-set",
+          "kurta-sets",
+          "salwar-suit",
+          "salwar-kameez",
+          "churidar-set",
+          "sharara-set"
+        ],
+        "definition": "A stitched multi-piece ensemble — kurta or anarkali with churidar, salwar or palazzo, usually with a dupatta. Tailored from cloth rather than woven to shape, which is why it is the first garment in this vocabulary that may carry no `weave`.",
+        "review": true,
+        "decision": "ADDED 22 Aug 2026 to admit the first stitched garments to the catalogue. Two things need a domain reviewer. (1) Is `suit` the right umbrella, or should `anarkali`, `kurta-set` and `sharara-set` be siblings rather than aliases? Aliasing them is reversible now and becomes a URL later — the same argument that made `kadhua` worth confirming. (2) A suit is the only garment here assembled from several cloths, so `fabric` and `weave` describe its principal piece and silently drop the dupatta and churidar. If that matters commercially it wants a component model, not a facet."
+      },
+      {
         "canonical": "stole",
         "label": "Stole",
         "aliases": [

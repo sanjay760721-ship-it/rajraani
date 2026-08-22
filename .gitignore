@@ -24,3 +24,12 @@ Thumbs.db
 # Stitch design export — mockup HTML and docs are tracked; the PNG renders are
 # not. They are 9.5MB of the 9.7MB and the HTML reproduces them exactly.
 stitch_rajraani_design_system/**/*.png
+
+# Raw reference-photo drop. Same category as /images/ — unlicensed third-party
+# photography kept for local mockups, plus an 822MB video that exceeds GitHub's
+# per-file limit. Never commit.
+/pics/
+
+# Per-machine Claude Code permission allowlist. Machine-specific absolute paths,
+# no value to anyone else on the repo.
+.claude/settings.local.json

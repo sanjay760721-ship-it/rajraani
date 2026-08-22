@@ -67,7 +67,11 @@ export function productValues(
     case "garment":
       return [product.garmentType];
     case "weave":
-      return [product.weave];
+      // A stitched garment has no loom technique, so it belongs in no weave
+      // bucket — it must not become a phantom count under some default value.
+      // Returning [] also keeps it correctly filtered *out* of any weave
+      // selection, which is what a shopper narrowing by "kadhua" means.
+      return product.weave ? [product.weave] : [];
     case "fabric":
       return [product.fabric];
     case "colour":

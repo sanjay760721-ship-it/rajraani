@@ -103,7 +103,11 @@ CREATE TABLE IF NOT EXISTS product (
 
   -- Single-valued facets.
   garment_type       TEXT NOT NULL,
-  weave              TEXT NOT NULL,
+  -- Nullable on purpose: a stitched garment (suit, anarkali) is cut from cloth
+  -- rather than woven to shape and has no loom technique to name. NULL means
+  -- "has no weave", not "not filled in" — the trigger below still rejects any
+  -- non-NULL value that is outside the vocabulary.
+  weave              TEXT,
   fabric             TEXT NOT NULL,
   colour_family      TEXT NOT NULL,
   campaign_slug      TEXT,
@@ -176,7 +180,7 @@ BEGIN
     SELECT 1 FROM taxonomy_term WHERE facet = 'garment' AND slug = NEW.garment_type
   );
   SELECT RAISE(ABORT, 'unknown weave — add it to taxonomy/facets.json first')
-  WHERE NOT EXISTS (
+  WHERE NEW.weave IS NOT NULL AND NOT EXISTS (
     SELECT 1 FROM taxonomy_term WHERE facet = 'weave' AND slug = NEW.weave
   );
   SELECT RAISE(ABORT, 'unknown fabric — add it to taxonomy/facets.json first')
@@ -202,7 +206,7 @@ BEGIN
     SELECT 1 FROM taxonomy_term WHERE facet = 'garment' AND slug = NEW.garment_type
   );
   SELECT RAISE(ABORT, 'unknown weave — add it to taxonomy/facets.json first')
-  WHERE NOT EXISTS (
+  WHERE NEW.weave IS NOT NULL AND NOT EXISTS (
     SELECT 1 FROM taxonomy_term WHERE facet = 'weave' AND slug = NEW.weave
   );
   SELECT RAISE(ABORT, 'unknown fabric — add it to taxonomy/facets.json first')

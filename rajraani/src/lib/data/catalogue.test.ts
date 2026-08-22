@@ -75,10 +75,16 @@ describe("controlled vocabulary (build.md §7.3 governance)", () => {
   // one rule. The reference catalogue reached 1,592 unique tags without it.
   const VOCABULARIES = {
     garmentType: slugsIn(GARMENT_TYPES),
-    weave: slugsIn(WEAVES),
     fabric: slugsIn(FABRICS),
     colourFamily: slugsIn(COLOURS),
   } as const;
+
+  /**
+   * Garments cut and stitched from cloth rather than woven to shape. These may
+   * carry no `weave`, and the rule below is what stops "optional" decaying into
+   * "sometimes forgotten": absent is legal *here* and nowhere else.
+   */
+  const STITCHED = new Set(["suit"]);
 
   for (const product of PRODUCTS) {
     it(`${product.handle} references only known terms`, () => {
@@ -87,6 +93,18 @@ describe("controlled vocabulary (build.md §7.3 governance)", () => {
         assert.ok(
           allowed.has(value),
           `${field} "${value}" is not in the controlled vocabulary`,
+        );
+      }
+
+      if (product.weave === undefined) {
+        assert.ok(
+          STITCHED.has(product.garmentType),
+          `${product.garmentType} is a woven garment and must name a weave`,
+        );
+      } else {
+        assert.ok(
+          slugsIn(WEAVES).has(product.weave),
+          `weave "${product.weave}" is not in the controlled vocabulary`,
         );
       }
       for (const motif of product.motifs) {
