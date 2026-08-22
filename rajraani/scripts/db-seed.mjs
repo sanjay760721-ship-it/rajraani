@@ -16,7 +16,7 @@
  */
 
 import { DatabaseSync } from "node:sqlite";
-import { mkdirSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -24,7 +24,40 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dbPath = process.env.DATABASE_PATH ?? path.join(root, "data", "rajraani.db");
 const fresh = process.argv.includes("--fresh");
 
+/**
+ * Admin accounts survive a --fresh reset.
+ *
+ * They did not until 22 August 2026, and the failure was quiet in the worst
+ * way: `--fresh` deletes the database file, this script seeds vocabulary,
+ * products, collections and campaigns, and `admin_user` is not among them. So a
+ * reset run to reload the catalogue silently destroyed every admin login, and
+ * the only symptom was a sign-in form that rejected a correct password.
+ *
+ * Resetting the CATALOGUE should not revoke CREDENTIALS. They are unrelated
+ * concerns that happened to share a file. The rows are read out before the file
+ * goes and written back after the schema is recreated — hashes and all, so no
+ * password is known to this script at any point.
+ *
+ * Sessions are deliberately NOT preserved. A database rebuild is exactly when
+ * you want everyone holding a cookie to sign in again.
+ */
+let preservedAdmins = [];
+
 if (fresh) {
+  if (existsSync(dbPath)) {
+    try {
+      const old = new DatabaseSync(dbPath);
+      preservedAdmins = old
+        .prepare("SELECT email, password_hash, created_at, last_login_at FROM admin_user")
+        .all();
+      old.close();
+    } catch {
+      // A corrupt or pre-schema database has nothing worth rescuing. Carry on
+      // and rebuild rather than refusing to reset.
+      preservedAdmins = [];
+    }
+  }
+
   for (const suffix of ["", "-wal", "-shm"]) {
     rmSync(`${dbPath}${suffix}`, { force: true });
   }
@@ -36,6 +69,24 @@ mkdirSync(path.dirname(dbPath), { recursive: true });
 const db = new DatabaseSync(dbPath);
 db.exec("PRAGMA foreign_keys = ON");
 db.exec(readFileSync(path.join(root, "src", "lib", "db", "schema.sql"), "utf8"));
+
+if (preservedAdmins.length > 0) {
+  const restore = db.prepare(
+    `INSERT OR IGNORE INTO admin_user (email, password_hash, created_at, last_login_at)
+     VALUES (?, ?, ?, ?)`,
+  );
+  for (const admin of preservedAdmins) {
+    restore.run(
+      admin.email,
+      admin.password_hash,
+      admin.created_at,
+      admin.last_login_at ?? null,
+    );
+  }
+  console.log(
+    `Admin accounts preserved: ${preservedAdmins.length}. Sessions were not — sign in again.`,
+  );
+}
 
 const now = new Date().toISOString();
 
