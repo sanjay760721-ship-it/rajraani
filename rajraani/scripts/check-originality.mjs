@@ -55,7 +55,20 @@ const SCAN_EXT = new Set([
 const RULES = [
   {
     id: "competitor-name",
-    pattern: /\btilfi\b/i,
+    /*
+     * NO WORD BOUNDARIES, deliberately.
+     *
+     * This was `/\btilfi\b/i` until 22 Aug 2026, and the boundaries made it
+     * blind to exactly the case it most needed to catch: asset filenames.
+     * `…TILFI06301_2048x.webp` has a digit welded to the name, so `\b` never
+     * matches and 59 staged competitor photographs passed a green run. Any
+     * borrowed file whose name ends in a digit was invisible.
+     *
+     * The cost of dropping the boundaries is false positives on words that
+     * merely contain the letters. There is no such English word, and if one
+     * ever appears in a dependency name it can be exempted by path.
+     */
+    pattern: /tilfi/i,
     why:
       "The competitor brand name. The Shopify metafield namespace is `rajraani` " +
       "(src/lib/brand.ts) — build.md §2.1 was written against the reference site " +
@@ -74,6 +87,64 @@ const RULES = [
     why:
       "A competitor campaign name. Campaign names are the most tempting thing to " +
       "copy and the most obviously theirs.",
+  },
+  {
+    /*
+     * Prose lifted from the reference site.
+     *
+     * A 22 Aug 2026 sweep diffed every visible string on their homepage against
+     * this repository and found nineteen matches — a whole brand statement, the
+     * store-booking line, two category taglines, four mega-menu group labels and
+     * a footer heading. One had their sentence with `${BRAND.name}` substituted
+     * for their brand, which is worse than an unedited paste: it is deliberate
+     * enough to be hard to explain.
+     *
+     * Every one of them passed this gate, because until now it only knew their
+     * NAME, their DOMAIN and their CAMPAIGNS. Nothing here looked at sentences.
+     *
+     * BE CLEAR ABOUT WHAT THIS RULE DOES AND DOES NOT DO. It pins the specific
+     * phrasings that were found and removed, so they cannot creep back in a
+     * later edit. It CANNOT detect copying it has not seen before — no regex
+     * can. Novel borrowing is still caught only by build.md §6's human review
+     * gate: "a reviewer unfamiliar with the project cannot identify the
+     * reference site". If you are adding homepage copy, that review is the
+     * control, not this list.
+     *
+     * Fragments are short and distinctive on purpose — enough to fingerprint a
+     * reused line, not a transcription of their page.
+     */
+    id: "borrowed-copy",
+    pattern: new RegExp(
+      [
+        "many-hued yarns",
+        "silken parchment",
+        "soft cadences",
+        "is a weaver's poem",
+        "immerse yourself in the poetry",
+        "exquisite banarasi art",
+        "in an intimate setting",
+        "elegant silhouettes and timeless",
+        "classic weaves and signature",
+        "handwoven stories written in",
+        "skills passed down through generations",
+        "kadhua collectibles",
+        "seasonal selections",
+        "many hands of handloom",
+        "maestros of the arts",
+        "techniques & patterns",
+        "here to help",
+        "with love from banaras",
+        "new woven treasures",
+      ].join("|"),
+      "i",
+    ),
+    why:
+      "A phrase measured on the reference site and rewritten out of this build " +
+      "on 22 Aug 2026. It must not return. Write the line for this brand " +
+      "instead — build.md §6 makes originality an acceptance criterion, and " +
+      "product copy is the part of it a shopper can actually recognise.",
+    // Prose only. Comments explaining the rule have to name what they forbid.
+    skipComments: true,
   },
   {
     id: "fulfilment-in-title",

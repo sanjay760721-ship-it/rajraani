@@ -410,7 +410,7 @@ export const storesBandSection = defineType({
 
 export const hereToHelpSection = defineType({
   name: "hereToHelp",
-  title: "Here to Help Block",
+  title: "Talk To Us Block",
   type: "object",
   fields: [
     defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),

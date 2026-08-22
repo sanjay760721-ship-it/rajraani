@@ -27,10 +27,11 @@
  *
  * FILES ARE RENAMED on the way in, to `01.webp`, `02.webp`… That is not
  * tidiness: `check-originality.mjs` scans the working tree, not the index, so a
- * staged file called `…TILFI06301_2048x.webp` would sit inside the project
- * tripping the gate — or worse, slipping past it, since the pattern is
- * `/\btilfi\b/i` and a digit-suffixed name has no word boundary. Renaming
- * removes the question.
+ * staged file keeping its original name would sit inside the project tripping
+ * the competitor-name gate. Until 22 Aug 2026 it would have done something
+ * worse and slipped past — that pattern required word boundaries, and these
+ * filenames weld a digit to the brand name. The hole is closed now, and
+ * renaming on ingest means the question does not arise either way.
  * ─────────────────────────────────────────────────────────────────────────────
  *
  *   node scripts/import-local-photos.mjs [--clean]

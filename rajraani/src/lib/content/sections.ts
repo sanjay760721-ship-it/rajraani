@@ -17,7 +17,6 @@
  * photography exists to fill it.
  */
 
-import { BRAND } from "@/lib/brand";
 
 export type ArtPair = {
   desktop: { tone: string; src?: string };
@@ -222,7 +221,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       {
         id: "slide-mrigaya",
         art: imagePair("maroon", "hero-2.webp"),
-        eyebrow: "Kadhua Collectibles",
+        eyebrow: "Woven Motif By Motif",
         title: "Mrigaya",
         body: "A celebration of flora and fauna woven into pure silk.",
         ctaLabel: "Discover",
@@ -249,7 +248,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       {
         id: "slide-linen",
         art: imagePair("green", "hero-5.webp"),
-        eyebrow: "Seasonal Selections",
+        eyebrow: "Lighter For The Season",
         title: "Linen & Kora",
         body: "Lightweight weaves for modern elegance.",
         ctaLabel: "Discover",
@@ -323,7 +322,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         art: imagePair("purple", "editorial-2.webp"),
         eyebrow: "Womenswear",
         title: "Womenswear",
-        body: "Elegant silhouettes and timeless textiles",
+        body: "Sarees, dupattas and stitched pieces, all off the same looms.",
         ctaLabel: "Explore",
         ctaHref: "/collections/womenswear",
         buttonVariant: "secondary",
@@ -334,7 +333,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         art: imagePair("black", "editorial-1.webp"),
         eyebrow: "Menswear",
         title: "Menswear",
-        body: "Classic weaves and signature tailoring",
+        body: "Kurtas, stoles and cloth by the metre, cut from handloom.",
         ctaLabel: "Explore",
         ctaHref: "/collections/menswear",
         buttonVariant: "secondary",
@@ -371,8 +370,12 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
   {
     type: "poetryBand",
     id: "poetry",
-    heading: "Immerse yourself in the poetry of the house",
-    body: `Many-hued yarns spun like verses on a silken parchment and patterns woven to the soft cadences of the loom, a ${BRAND.name} saree is a weaver's poem.`,
+    heading: "Cloth that keeps time",
+    body:
+      "A saree outlives the season it was bought for, and often the person who " +
+      "chose it. That is the argument for weaving slowly and for buying once \u2014 " +
+      "a cupboard in this country is a form of archive, and what goes into it " +
+      "should still be worth taking out in twenty years.",
   },
   {
     type: "storesSlideshow",
@@ -384,7 +387,9 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         // one, so this slide is showing the wrong city until ours is shot.
         art: imagePair("black", "stores.webp"),
         title: "VISIT OUR STORES",
-        body: `Book your appointment to experience ${BRAND.name}'s exquisite Banarasi art in an intimate setting.`,
+        body:
+          "The Banaras room is ten minutes from the looms we buy from. Come and " +
+          "see cloth in daylight, over a shoulder, before deciding anything.",
         ctaLabel: "Banaras Store",
         ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi",
       },
@@ -392,7 +397,9 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         id: "slide-mumbai",
         art: imagePair("black", "stores.webp"),
         title: "VISIT OUR STORES",
-        body: `Book your appointment to experience ${BRAND.name}'s exquisite Banarasi art in an intimate setting.`,
+        body:
+          "An appointment, an afternoon, and as many pieces off the shelf as you " +
+          "care to see. Nothing here is sold in a hurry.",
         ctaLabel: "Mumbai Store",
         ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-flagship-store-mumbai",
       },

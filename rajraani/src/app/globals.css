@@ -10,16 +10,30 @@
   --color-bg-alt: #fbf9f6;
   --color-bg-sand: #f1ece4;
 
-  /* --- Palette: ink — Exact from reference ------------------------------- */
-  --color-ink: #533e2d;         /* headings - warm mid-brown */
+  /*
+   * --- Palette: ink -------------------------------------------------------
+   *
+   * Was #533e2d until 22 August 2026, under a comment reading "Exact from
+   * reference". It was exact: #533e2d is rgb(83, 62, 45), which a sweep that
+   * day measured as the single most-used colour on the reference site — 1,402
+   * elements, text and borders. The brief for this project is the reference
+   * site's ARCHITECTURE and an independent visual identity, so shipping their
+   * primary ink was the one place the two were confused.
+   *
+   * #3a2a2e is 42 degrees away in hue: still a warm deep brown, but mulberry
+   * rather than their orange-brown, and it sits better beside the gold accent.
+   * It also reads 13.54:1 on white where the old value read 10.03:1, so every
+   * contrast pair in tokens/contrast.ts gained headroom rather than losing it.
+   */
+  --color-ink: #3a2a2e;         /* headings - deep warm mulberry-brown */
   --color-ink-dark: #301E1D;    /* preheadings, darker accents */
-  --color-ink-body: #533e2d;    /* body copy */
+  --color-ink-body: #3a2a2e;    /* body copy */
   --color-ink-muted: #6b6055;   /* meta, SKU, captions */
 
   /* --- Palette: rules ---------------------------------------------------- */
   --color-rule: #e7e0d6;        /* decorative hairlines */
   --color-rule-input: #8b8072;  /* form control boundaries */
-  --color-rule-strong: #533e2d; /* active tab, CTA underline */
+  --color-rule-strong: #3a2a2e; /* active tab, CTA underline — tracks ink */
 
   /* --- Palette: accent and state ----------------------------------------- */
   --color-accent: #7d5f2a;

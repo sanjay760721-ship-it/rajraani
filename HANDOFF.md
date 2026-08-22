@@ -4,6 +4,8 @@
 **Purpose:** Resume state. Read this first in any new session, then read the two documents it points to.
 
 > **Start at [§2.45](#245-audited-state-22-august-2026), then [§2.46](#246-progress-ledger--measured-against-git-22-august-2026) and [§2.47](#247-photography-integrated-and-the-three-blocking-decisions-taken--22-august-2026).**
+> §[2.48](#248-originality-remediation--22-august-2026) records copy and palette taken from the
+> reference site and since rewritten — read it before adding any homepage copy.
 > Sections 1–2.4 were written between 5 and 8 August and were not revised as the build
 > moved past them. Where they disagree with §2.45/§2.46, the later sections are the
 > measured ones — read out of the tree at `80dc7cd` with `npm run verify` green.
@@ -484,6 +486,84 @@ fixture. Fixing them properly means either more fixtures or renaming these two.
 
 **The saree grid is deliberately mixed** — 5 of 12 sarees have photography, the rest still
 render placeholder colour fields. That is honest: only five were shot.
+
+---
+
+### 2.48 Originality remediation — 22 August 2026
+
+A five-pass sweep of the reference site, run to find UI/UX gaps, found something
+else first. Recorded here because it is the kind of thing that gets quietly
+re-introduced by the next person who needs a headline and reaches for the
+nearest example.
+
+#### Nineteen strings of their copy were in this repository
+
+Every visible string on their homepage was diffed against `src/`. Nineteen
+matched: a brand statement, the store-booking line, two category taglines, two
+slide eyebrows, four mega-menu group labels, a footer heading, and a block title
+in the Sanity schema.
+
+**All nineteen passed `check:originality` green**, because the gate knew their
+name, their domain and nine campaign names — and nothing about sentences.
+
+One had their sentence with `${BRAND.name}` interpolated in place of their brand.
+That is worse than an unedited paste: it is deliberate enough to be hard to
+explain as an accident, and it is the strongest argument for why the human review
+gate in build.md §6 cannot be replaced by a regex.
+
+**Rewritten, not paraphrased.** Fifteen were replaced with copy written for this
+brand from scratch, in the voice the product narratives already use — plain,
+concrete, ending on an observation rather than a flourish. The store slides now
+read differently per city, which they did not before: the same sentence was
+printed under both Banaras and Mumbai.
+
+Four were left alone on purpose: a common search placeholder and three standard
+policy labels (`Useful Information`, `Returns & Cancellation`,
+`Delivery & Shipping`). These are functional retail nomenclature used across the
+category, not authored expression, and they are deliberately absent from the
+blocklist below for the same reason.
+
+#### The primary ink was theirs, exactly
+
+`--color-ink` was `#533e2d`. That is `rgb(83, 62, 45)`, which the sweep measured
+as the most-used colour on the reference site — **1,402 elements**, text and
+borders. The comment above it in `globals.css` read *"Exact from reference"*, so
+this was documented rather than accidental: §2 records the token pass as
+"verified against live computed styles", and verification became adoption.
+
+Now `#3a2a2e` — 42 degrees away in hue, mulberry rather than orange-brown, and
+13.54:1 on white where the old value was 10.03:1, so all 22 contrast pairs gained
+headroom. A candidate one degree away was rejected: darkening a colour is a
+nudge, not a decision.
+
+#### The gate now has nine rules, and one hole is closed
+
+- **`competitor-name` lost its word boundaries.** `/\btilfi\b/i` could not see
+  `…TILFI06301_2048x.webp` — a digit welded to the name defeats `\b` — so 59
+  staged competitor photographs passed a green run. This is the hole §2.45 flagged;
+  it is now closed.
+- **New `borrowed-copy` rule** pins the phrasings that were found and removed, as
+  short fingerprint fragments, so they cannot creep back.
+
+**Be clear about what that second rule does not do.** It catches regression of
+known strings. It cannot catch copying it has not seen — no pattern can. Novel
+borrowing is still caught only by build.md §6's human gate: a reviewer unfamiliar
+with the project must not be able to identify the reference site. If you are
+writing homepage copy, that review is the control, not the blocklist.
+
+#### What the sweep found about the UI, for when this is picked up
+
+Genuine gaps, none urgent, in rough priority: the **9 missing mega-menu tiles**
+(most panels fall back to flat colour); no **Shipping / Dimensions / Care**
+accordion on the PDP; no **second image per product card** for hover-swap; no
+cross-sell rail beyond the weave-matched related strip.
+
+Two places this build is **ahead** and should not be "corrected" toward theirs:
+faceting — their PLP is a single tag dropdown with price bands and raw dates
+(`11052026`) rotting in the same list, which is the 1,592-tag problem
+`pre-build-gaps.md` measured, still live — and the sticky header, which they do
+not have. Their gallery is 7 portrait + 1 square, so the shot template here is
+already right.
 
 ---
 

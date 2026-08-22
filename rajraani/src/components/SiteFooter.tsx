@@ -7,7 +7,7 @@ import { BRAND } from "@/lib/brand";
  * Footer.
  *
  * Four regions, on the sand surface, per design.md §5.7:
- * 1. Here to Help
+ * 1. Talk To Us
  * 2. Useful Information
  * 3. About
  * 4. Stay in Touch
@@ -29,7 +29,7 @@ type FooterColumn = {
 
 const FOOTER_COLUMNS: readonly FooterColumn[] = [
   {
-    heading: "Here to Help",
+    heading: "Talk To Us",
     links: [
       { label: "Email", href: `mailto:${BRAND.supportEmail}` },
       { label: "Phone", href: `tel:${BRAND.supportPhone}` },
