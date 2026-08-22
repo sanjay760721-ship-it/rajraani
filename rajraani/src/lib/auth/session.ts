@@ -25,6 +25,45 @@ const SESSION_DAYS = 7;
 
 export type AdminUser = { id: number; email: string };
 
+/**
+ * Development sign-in bypass.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * WHY THIS IS NOT SIMPLY "AUTH REMOVED"
+ *
+ * The admin edits the catalogue, moves stock and reads orders. An unauthenticated
+ * one reachable from the internet is not a rough edge, it is the whole shop. So
+ * the password path is untouched and still the only way in on a deployed build;
+ * what follows short-circuits it on a developer's machine and cannot be switched
+ * on anywhere else.
+ *
+ * Two independent conditions, both of which must hold:
+ *
+ *   1. `NODE_ENV !== "production"`. `next build` hard-codes production, so a
+ *      deployed bundle cannot take this branch no matter how it is configured —
+ *      the check is compiled against a literal, not read at runtime.
+ *   2. `ADMIN_AUTH !== "strict"`. An escape hatch for exercising the real login
+ *      locally without editing this file.
+ *
+ * Condition 1 is the one that matters; condition 2 is a convenience. Neither is
+ * a substitute for the other.
+ *
+ * The identity returned is synthetic and deliberately not written to the
+ * database: `admin_user` stays empty, no session row is created, and nothing
+ * here mints a cookie. Only `email` is consumed downstream (the sidebar prints
+ * it), and no table references `admin_user.id`, so a row that does not exist
+ * costs nothing.
+ *
+ * TO TURN IT OFF:  set ADMIN_AUTH=strict in .env.local, or delete this block
+ * and the branch in `currentAdmin()`.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+const DEV_AUTH_BYPASS =
+  process.env.NODE_ENV !== "production" && process.env.ADMIN_AUTH !== "strict";
+
+/** The stand-in identity used while the bypass is active. */
+const DEV_ADMIN: AdminUser = { id: 0, email: "dev@localhost" };
+
 const sha256 = (value: string) =>
   createHash("sha256").update(value).digest("hex");
 
@@ -92,6 +131,14 @@ export async function signOut(): Promise<void> {
 
 /** The signed-in admin, or undefined. Never throws. */
 export async function currentAdmin(): Promise<AdminUser | undefined> {
+  /*
+   * Placed here rather than in `requireAdmin`, because this is the one function
+   * both the layout guard and every server action funnel through. Putting it in
+   * `requireAdmin` alone would leave the login page still believing nobody is
+   * signed in, and it would bounce a developer back to a form they cannot use.
+   */
+  if (DEV_AUTH_BYPASS) return DEV_ADMIN;
+
   const store = await cookies();
   const token = store.get(COOKIE)?.value;
   if (!token) return undefined;
