@@ -205,9 +205,17 @@ function BrandStatement({
   section: Extract<Section, { type: "brandStatement" }>;
 }) {
   return (
-    <section className="wrap-prose section-pad text-center">
+    <section className="wrap-wide section-pad text-center">
       <p className="text-h1 text-ink">&ldquo;{section.quote}&rdquo;</p>
-      <p className="text-body mt-4 text-ink-body">{section.body}</p>
+      {/*
+       * The body runs as ONE line on desktop, which is why it is not inside
+       * `wrap-prose` like the rest of the text bands: a prose measure wraps it
+       * to three. `nowrap` is gated at `md` so the sentence still breaks
+       * normally on a phone, where one line would mean a horizontal scrollbar.
+       */}
+      <p className="text-body mt-4 text-ink-body md:whitespace-nowrap">
+        {section.body}
+      </p>
     </section>
   );
 }
@@ -219,20 +227,56 @@ function CollectionTriptych({
 }) {
   return (
     <section className="wrap-wide section-pad has-gutter" data-scroll-class="fadeInDown">
-      <div className="grid grid-cols-3 gap-6">
+      {/*
+        * 380x501 tiles, 20px apart.
+        *
+        * Constrained here rather than inheriting `wrap-wide`, which is capped
+        * at --container-site (1600px). At that width three tiles come out
+        * around 507px each and the band reads a third too large. 1180 is the
+        * measured content width: 380*3 + 20*2.
+        */}
+      <div className="mx-auto grid max-w-[1180px] grid-cols-3 gap-5">
         {section.art.map((art, index) => (
-          <Link key={index} href={section.ctaHref} className="group overflow-hidden">
+          <Link
+            key={index}
+            href={section.artHrefs?.[index] ?? section.ctaHref}
+            className="group overflow-hidden"
+          >
+            {/*
+              * Portrait, not square.
+              *
+              * The masters are portrait and the band renders them at 380x501,
+              * a ratio of 0.76. A square frame cropped a third off every one of
+              * them, which on a full-length drape is the part worth showing.
+              */}
             <Art
               art={art}
-              className="aspect-square w-full transition-transform duration-600 ease-brand group-hover:scale-103"
+              className="aspect-[380/501] w-full transition-transform duration-600 ease-brand group-hover:scale-103"
             />
           </Link>
         ))}
       </div>
-      <div className="mx-auto mt-8 max-w-prose text-center">
+      <div className="mt-8 text-center">
         <h2 className="text-h2">{section.title}</h2>
-        <p className="text-body mt-3 text-ink-body">{section.body}</p>
-        <Link href={section.ctaHref} className="cta-link mt-6 inline-block">
+        {/*
+          * Two centred lines.
+          *
+          * The measure is set to break roughly in half rather than left to the
+          * container, and `text-balance` evens the two so the second is not a
+          * short orphan. One line was never realistic at this length — 212
+          * characters needs about 1400px, which no ordinary window has.
+          */}
+        <p className="text-body mt-3 mx-auto max-w-[720px] text-balance text-ink-body">
+          {section.body}
+        </p>
+        {/*
+          * `cta-link` keeps its rule hidden until hover. Here it stays drawn —
+          * this is the band's only exit, so it has to read as a link at rest.
+          */}
+        <Link
+          href={section.ctaHref}
+          className="cta-link is-drawn mt-6 inline-block"
+        >
           {section.ctaLabel}
         </Link>
       </div>

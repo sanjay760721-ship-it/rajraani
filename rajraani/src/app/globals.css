@@ -33,7 +33,7 @@
 
   /* --- Type families — Self-hosted via next/font ------------------------ */
   --font-display: var(--font-cardo), "Cardo", Georgia, "Noto Serif Devanagari", serif;
-  --font-ui: var(--font-lato), "Lato", ui-sans-serif, system-ui, "Segoe UI", "Noto Sans Devanagari", sans-serif;
+  --font-ui: var(--font-open-sans), "Open Sans", ui-sans-serif, system-ui, "Segoe UI", "Noto Sans Devanagari", sans-serif;
 
   /* --- Type scale — Exact from reference --------------------------------- */
   /* Cardo display: ~30-40px responsive, weight 400 */
@@ -55,7 +55,7 @@
 
   --text-h4: 1rem;                                             /* 16px */
 
-  --text-body: 0.875rem;                                       /* 14px Lato body */
+  --text-body: 0.875rem;                                       /* 14px Open Sans body */
   --text-body--line-height: 1.6;
 
   --text-prose: 0.875rem;                                      /* 14px */
@@ -308,6 +308,16 @@
 }
 .cta-link:hover::after,
 .cta-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/*
+ * A cta-link whose rule is drawn at rest.
+ *
+ * For a band whose only exit is this one link: hidden-until-hover leaves it
+ * reading as plain text, and on a touch screen there is no hover to reveal it.
+ */
+.cta-link.is-drawn::after {
   transform: scaleX(1);
 }
 

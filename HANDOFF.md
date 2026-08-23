@@ -6,6 +6,8 @@
 > **Start at [§2.45](#245-audited-state-22-august-2026), then [§2.46](#246-progress-ledger--measured-against-git-22-august-2026) and [§2.47](#247-photography-integrated-and-the-three-blocking-decisions-taken--22-august-2026).**
 > §[2.48](#248-originality-remediation--22-august-2026) records copy and palette taken from the
 > reference site and since rewritten — read it before adding any homepage copy.
+> §[2.49](#249-homepage-and-navigation-build--2223-august-2026) is the homepage and navigation
+> session, and records that **the originality gate does not currently pass**.
 > Sections 1–2.4 were written between 5 and 8 August and were not revised as the build
 > moved past them. Where they disagree with §2.45/§2.46, the later sections are the
 > measured ones — read out of the tree at `80dc7cd` with `npm run verify` green.
@@ -564,6 +566,105 @@ faceting — their PLP is a single tag dropdown with price bands and raw dates
 `pre-build-gaps.md` measured, still live — and the sticky header, which they do
 not have. Their gallery is 7 portrait + 1 square, so the shot template here is
 already right.
+
+---
+
+### 2.49 Homepage and navigation build — 22–23 August 2026
+
+A working session against `pics/homepage/homepage.txt`, the structural spec for
+the homepage, expanded into `pics/homepage/homepage-spec.md` (19 sections,
+measured at 1280 / 1024 / 768 / 375). Both live in the gitignored `pics/` tree.
+
+#### Navigation rebuilt on the taxonomy
+
+Six panels, split three either side of the centred wordmark, **106 destinations**
+across the group structure the category uses. Twenty-four of those links are
+**facet-filtered rather than hand-built pages** — weaves and fabrics resolve
+through `taxonomy/facets.json` and the faceting engine, so they cannot drift out
+of sync with the vocabulary the way a separate landing page would. Campaigns is
+split shop-side and read-side so the collection/story pairing is visible.
+
+#### Three defects found in the header, all of them load-bearing
+
+1. **No dropdown link was clickable.** `MegaMenuPanel` had
+   `onMouseEnter={scheduleClose}` — moving the pointer *into* the menu started
+   its own 120ms dismiss timer. Added `cancelClose`, which clears the pending
+   timer on entry. The panel sits below the trigger with a rule between them, so
+   the pointer necessarily leaves the button on the way in; something has to
+   call the close off or the menu shuts under the cursor.
+2. **Two identical panels rendered at once**, one per-trigger and one at nav
+   level. Clicks landed on whichever won the z-order. The nav-level one is
+   correct — `absolute top-full left-0 right-0` needs the full-width row as its
+   containing block — so the per-trigger render is gone.
+3. **Both nav groups were pinned to the outer edges.** `justify-between` on the
+   row plus `justify-start` / `justify-end` on the groups all push the same way,
+   leaving a canyon around the wordmark. Reversed each group so they hug it.
+
+Triggers now carry a caret (9×6 SVG, rotating 180° on open) and the measured
+type: Cardo 14px, uppercase, 1px tracking. The open state was a 2px gold
+underline sitting directly above the row's own hairline; a colour shift plus the
+rotated caret says the same thing without two rules competing.
+
+#### The UI face was wrong, and the menu was set in the serif
+
+`--font-ui` was **Lato**; the category standard is **Open Sans**. More visible
+than the family swap: mega-menu links were `font-display` — Cardo — where the
+reference sets them in the UI face at 13px. A dropdown of serif links against
+sans body text is not a subtle mismatch. Both corrected; wordmark to 25px.
+
+#### `--container-site` is 1600px, and that is why bands read oversized
+
+The three-photo band renders at **380×501 tiles, 20px apart, in a 1180px
+measure** (`380*3 + 20*2`). Inheriting `wrap-wide` it stretched to 1600px and the
+tiles came out around 507px — a third too large. Setting the aspect ratio fixed
+the shape and did nothing about the scale, which cost two rounds to work out.
+
+**This is not confined to that band.** Every section using `wrap-wide` runs
+wider than the reference's ~1200px. Either drop the token to ~1200 (one line,
+moves everything) or constrain per band (safer, repeats the number). Unresolved.
+
+#### Hero captions are per-slide
+
+`HeroSlide` gained `align?: "left" | "center" | "right"`. Slides that set it get
+a narrow measure pinned to one edge, vertically centred, with the scrim running
+in from that side; slides that do not keep the original bottom-left treatment
+untouched. Both are kept deliberately — bottom-left reads better on a frame with
+room across the foot, and converting every slide to the centred variant lost
+that. Currently 1, 2 and 4 are right-aligned.
+
+#### Smaller fixes
+
+- **`RichText` had a competitor campaign slug hard-coded as a link target**,
+  firing on any section with more than one paragraph — six of them, across the
+  homepage and every editorial page, 404ing from all of them. The CTA is now
+  data on the section: both fields or neither.
+- That slug passed the gate, so the campaign blocklist went from 9 names to 22
+  after their navigation was mapped properly. Only distinctive names were added;
+  their catalogue also uses ordinary words as campaign titles and blocking those
+  would fire on honest prose about cloth.
+- The widened gate then found **19 campaign names in our own nav** — two entire
+  menu groups copied whole. All renamed.
+- A duplicate section: `collectionTriptych` and the `richText` after it carried
+  the same heading and body, so the band rendered twice.
+- `.cta-link.is-drawn` added — `cta-link` hides its rule until hover, which on a
+  touch screen means never.
+- Homepage art moved to `rajraani/public/homepage/`, organised by slot. It had
+  been in a `public/` at the repository root, which Next does not serve from, so
+  every image 404d. That directory is gitignored, as `reference-only` is.
+
+#### ⚠️ The gate does not pass at this commit
+
+`npm run check:originality` reports **56 hits**: 34 `hardcoded-hex`, 14
+`competitor-campaigns`, 4 `competitor-name`, 4 `competitor-domain`.
+
+The palette ink has gone back to the reference's measured value and the comments
+around it now name the source directly, which is what trips the last three rules.
+`globals.css:13-14`, `AnnouncementBar.tsx:8` and `brand.ts:40` are four lines
+between them.
+
+**Commits are unaffected. The pre-push hook runs the full gate, so nothing
+reaches the remote until this is resolved.** That is the current state: the work
+is committed locally and `main` is ahead of `origin/main`.
 
 ---
 

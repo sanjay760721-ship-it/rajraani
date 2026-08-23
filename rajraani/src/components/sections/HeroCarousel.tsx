@@ -185,7 +185,9 @@ export function HeroCarousel({
         circular, and resolves to zero. `82vh` clamped to the design's 520–900
         band keeps the 2:1 intent without depending on any parent.
       */}
-      {slides.map((slide, index) => (
+      {slides.map((slide, index) => {
+        const align = slide.align;
+        return (
         <div
           key={slide.id}
           className={`carousel-cell relative h-[82vh] max-h-[900px] min-h-[520px] w-full ${index === 0 ? "is-selected" : ""}`}
@@ -193,36 +195,104 @@ export function HeroCarousel({
         >
             <SlideArt art={slide.art} alt={slide.title} priority={index === 0} />
 
-            {/* Scrim Overlay — bottom gradient for text legibility */}
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-            />
+            {/*
+              * Two caption treatments, and the default is the original one.
+              *
+              * Slides that set `align` get the reference's centred variant: a
+              * narrow measure pinned to one edge, vertically centred, with the
+              * scrim running in from that side. Slides that do not are left
+              * exactly as they were \u2014 wide measure along the bottom, ranged
+              * left, bottom-up scrim.
+              *
+              * Keeping both is the point. The bottom-left treatment reads
+              * better on a frame with room across the foot of it, and swapping
+              * every slide to the centred one lost that.
+              */}
+            {align ? (
+              <>
+                <div
+                  aria-hidden
+                  className={`absolute inset-0 ${
+                    align === "right"
+                      ? "bg-gradient-to-l from-black/60 via-black/20 to-transparent"
+                      : align === "left"
+                        ? "bg-gradient-to-r from-black/60 via-black/20 to-transparent"
+                        : "bg-gradient-to-t from-black/60 via-black/25 to-transparent"
+                  }`}
+                />
 
-            {/* Slide Content — bottom-aligned, max-width 46ch */}
-            <div className="absolute inset-0 flex items-end">
-              <div className="wrap-wide pb-16 md:pb-24">
-                <div className="max-w-[46ch]">
-                  {slide.eyebrow ? (
-                    <p className="eyebrow text-bg/80">{slide.eyebrow}</p>
-                  ) : null}
-                  <h2 className="text-display mt-3 text-bg drop-shadow-sm">
-                    {slide.title}
-                  </h2>
-                  <p className="text-prose mt-4 max-w-[38ch] text-bg/90">
-                    {slide.body}
-                  </p>
-                  <Link
-                    href={slide.ctaHref}
-                    className="cta-primary mt-8 inline-block"
-                  >
-                    {slide.ctaLabel}
-                  </Link>
+                <div className="absolute inset-0 flex items-center">
+                  <div className="wrap-wide w-full">
+                    <div
+                      className={`w-full max-w-[360px] text-center ${
+                        align === "right"
+                          ? "ml-auto"
+                          : align === "left"
+                            ? "mr-auto"
+                            : "mx-auto"
+                      }`}
+                    >
+                      {slide.eyebrow ? (
+                        <p className="font-ui text-[11px] uppercase tracking-[0.16em] text-bg/85">
+                          {slide.eyebrow}
+                        </p>
+                      ) : null}
+                      {/* Cardo 35px / 39.4px, white, no tracking \u2014 measured. */}
+                      <h2 className="font-display text-[28px] md:text-[35px] leading-[1.125] mt-3 text-bg font-normal">
+                        {slide.title}
+                      </h2>
+                      <p className="font-ui text-[14px] leading-[1.6] mt-4 text-bg/90">
+                        {slide.body}
+                      </p>
+                      {/*
+                        * Filled, not outlined: 81% white with black text is
+                        * what stays legible over an arbitrary photograph.
+                        */}
+                      <Link
+                        href={slide.ctaHref}
+                        className="font-display text-[16px] tracking-[1px] mt-7 inline-block border border-black/15 bg-white/80 px-4 py-[5px] text-black transition-colors duration-300 hover:bg-white"
+                      >
+                        {slide.ctaLabel}
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </>
+            ) : (
+              <>
+                {/* Scrim Overlay \u2014 bottom gradient for text legibility */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+                />
+
+                {/* Slide Content \u2014 bottom-aligned, max-width 46ch */}
+                <div className="absolute inset-0 flex items-end">
+                  <div className="wrap-wide pb-16 md:pb-24">
+                    <div className="max-w-[46ch]">
+                      {slide.eyebrow ? (
+                        <p className="eyebrow text-bg/80">{slide.eyebrow}</p>
+                      ) : null}
+                      <h2 className="text-display mt-3 text-bg drop-shadow-sm">
+                        {slide.title}
+                      </h2>
+                      <p className="text-prose mt-4 max-w-[38ch] text-bg/90">
+                        {slide.body}
+                      </p>
+                      <Link
+                        href={slide.ctaHref}
+                        className="cta-primary mt-8 inline-block"
+                      >
+                        {slide.ctaLabel}
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
         </div>
-      ))}
+        );
+      })}
 
       {/* Flickity will inject page dots here automatically */}
     </section>

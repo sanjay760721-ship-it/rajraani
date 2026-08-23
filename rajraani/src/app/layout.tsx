@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cardo, Lato, Manrope, Playfair_Display } from "next/font/google";
+import { Cardo, Manrope, Open_Sans, Playfair_Display } from "next/font/google";
 
 import { BRAND } from "@/lib/brand";
 
@@ -16,11 +16,11 @@ import "./globals.css";
  */
 
 /**
- * Two families, matching reference exactly: Cardo for display, Lato for UI.
+ * Two families, matching reference exactly: Cardo for display, Open Sans for UI.
  *
  * **Cardo** for display. Classic, elegant, weight 400 only — matches reference.
  *
- * **Lato** for UI. Clean, legible, weight 400 only — matches reference.
+ * **Open Sans** for UI. Weight 400 only — the category standard at small sizes.
  *
  * `next/font` self-hosts both at build time, no runtime request to Google,
  * no third-party script, no layout shift. `display: swap` keeps text visible.
@@ -32,10 +32,20 @@ const display = Cardo({
   display: "swap",
 });
 
-const ui = Lato({
+/*
+ * Open Sans, not Lato.
+ *
+ * The category standard pairs a display serif with Open Sans at 400, and the
+ * difference is not subtle at small sizes: Lato's narrower apertures and higher
+ * contrast read as a different voice in a dense link list, which is exactly
+ * where most of the UI face appears on this site.
+ *
+ * One weight only. Everything in the UI face is either 400 or a size change.
+ */
+const ui = Open_Sans({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-lato",
+  variable: "--font-open-sans",
   display: "swap",
 });
 

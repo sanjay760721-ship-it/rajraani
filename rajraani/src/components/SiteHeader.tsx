@@ -63,6 +63,19 @@ export function SiteHeader() {
     openTimer.current = setTimeout(() => setOpenPanel(id), HOVER_INTENT_MS);
   };
 
+  /**
+   * Cancel a pending dismissal.
+   *
+   * The panel sits below the trigger with a hairline between them, so the
+   * pointer necessarily leaves the button on its way into the menu and
+   * `scheduleClose` fires. Something has to call this off once the pointer
+   * lands inside the panel, or the menu closes underneath the cursor and no
+   * link in it is ever clickable.
+   */
+  const cancelClose = () => {
+    clearTimeout(closeTimer.current);
+  };
+
   const scheduleClose = () => {
     clearTimeout(openTimer.current);
     closeTimer.current = setTimeout(() => setOpenPanel(null), HOVER_INTENT_MS);
@@ -83,7 +96,7 @@ export function SiteHeader() {
         onMouseLeave={scheduleClose}
       >
         {/* Left Navigation Group: Shop, Collections, Campaigns */}
-        <div className="flex items-center gap-4 flex-1 justify-start min-w-0">
+        <div className="flex items-center gap-1 flex-1 justify-end min-w-0">
           {LEFT_NAVIGATION.map((panel) => (
             <CompactNavTrigger
               key={panel.id}
@@ -98,20 +111,20 @@ export function SiteHeader() {
         </div>
 
         {/* Center Brand Wordmark */}
-        <div className="shrink-0 px-3">
+        <div className="shrink-0 px-7 xl:px-10">
           <Link
             href="/"
             aria-label={`${BRAND.name} home`}
             className="block group"
           >
-            <span className="font-display text-[20px] tracking-normal text-ink font-normal leading-tight group-hover:text-[#ae7922] transition-colors duration-300">
+            <span className="font-display text-[25px] tracking-normal text-ink font-normal leading-tight group-hover:text-[#ae7922] transition-colors duration-300">
               {BRAND.name}
             </span>
           </Link>
         </div>
 
         {/* Right Navigation Group: Craft, Stories, About Us */}
-        <div className="flex items-center gap-4 flex-1 justify-end min-w-0">
+        <div className="flex items-center gap-1 flex-1 justify-start min-w-0">
           {RIGHT_NAVIGATION.map((panel) => (
             <CompactNavTrigger
               key={panel.id}
@@ -125,13 +138,20 @@ export function SiteHeader() {
           ))}
         </div>
 
-        {/* Mega Menu Panels for desktop */}
+        {/*
+          * The one and only dropdown.
+          *
+          * It renders here, as a child of <nav>, because that is the element it
+          * is positioned against — `absolute top-full left-0 right-0` needs the
+          * full-width row as its containing block to span the header. Rendering
+          * it per-trigger as well put two identical panels on top of each other.
+          */}
         {openPanel && (
           <MegaMenuPanel
             panel={NAVIGATION.find((p) => p.id === openPanel)!}
             id={`${panelId}-dropdown-${openPanel}`}
             onClose={() => setOpenPanel(() => null)}
-            onMouseEnter={scheduleClose}
+            onMouseEnter={cancelClose}
           />
         )}
       </nav>
@@ -231,10 +251,18 @@ function CompactNavTrigger({
         id={`${panelId}-trigger-${panel.id}`}
         aria-expanded={isOpen}
         aria-controls={`${panelId}-dropdown-${panel.id}`}
-        className={`font-display text-[13px] uppercase tracking-wider font-normal transition-colors duration-300 h-full flex items-center border-b-2 cursor-pointer ${
-          isOpen
-            ? "text-[#ae7922] border-[#ae7922]"
-            : "text-ink border-transparent hover:text-[#ae7922]"
+        /*
+         * Type is measured from the reference: display serif, 14px, uppercase,
+         * 1px tracking. Spacing lives in the button's own padding rather than a
+         * gap on the row, so the caret has somewhere to sit and the hit target
+         * covers the label plus its arrow.
+         *
+         * The open state was a 2px underline in brand gold, which shouted over
+         * six items and fought the rule under the row. A colour shift plus the
+         * rotated caret says the same thing and lets the row stay quiet.
+         */
+        className={`font-display text-[14px] uppercase tracking-[1px] font-normal transition-colors duration-300 h-full flex items-center gap-1.5 pl-3 pr-2 cursor-pointer ${
+          isOpen ? "text-[#ae7922]" : "text-ink hover:text-[#ae7922]"
         }`}
         onClick={() => setOpenPanel((curr) => (curr === panel.id ? null : panel.id))}
         onKeyDown={(e) => {
@@ -248,16 +276,26 @@ function CompactNavTrigger({
         onFocus={() => setOpenPanel(panel.id)}
       >
         {panel.label}
+        <svg
+          width="9"
+          height="6"
+          viewBox="0 0 9 6"
+          fill="none"
+          aria-hidden="true"
+          className={`shrink-0 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        >
+          <path
+            d="M1 1L4.5 4.5L8 1"
+            stroke="currentColor"
+            strokeWidth="1.1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </button>
 
-      {isOpen && (
-        <MegaMenuPanel
-          panel={panel}
-          id={`${panelId}-dropdown-${panel.id}`}
-          onClose={() => setOpenPanel(() => null)}
-          onMouseEnter={scheduleClose}
-        />
-      )}
     </>
   );
 }
@@ -293,7 +331,7 @@ function MegaMenuPanel({
             {/* Link Columns */}
             {panel.columns!.map((column, colIndex) => (
               <div key={colIndex} className="flex-1 min-w-[180px] max-w-[280px]">
-                <h4 className="font-display text-[11px] uppercase tracking-widest text-ink-muted font-normal mb-3 pb-2 border-b border-rule">
+                <h4 className="font-ui text-[11px] uppercase tracking-[0.14em] text-ink-muted font-semibold mb-3 pb-2 border-b border-rule">
                   {column.heading}
                 </h4>
                 <ul className="space-y-1">
@@ -302,7 +340,7 @@ function MegaMenuPanel({
                       <Link
                         href={link.href}
                         onClick={onClose}
-                        className={`block px-2 py-1.5 font-display text-[13.5px] ${link.emphasis ? "font-medium text-ink" : "font-normal text-[#332210]"} hover:text-[#ae7922] transition-colors tracking-wide`}
+                        className={`block px-2 py-1.5 font-ui text-[13px] leading-[1.5] ${link.emphasis ? "font-semibold text-ink" : "font-normal text-[#332210]"} hover:text-[#ae7922] transition-colors`}
                       >
                         {link.label}
                       </Link>
@@ -331,13 +369,13 @@ function MegaMenuPanel({
                       />
                     ) : (
                       <div className="aspect-[2/3] bg-rule flex items-center justify-center">
-                        <span className="font-display text-[14px] text-ink-muted">{tile.label}</span>
+                        <span className="font-ui text-[13px] text-ink-muted">{tile.label}</span>
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-4 left-4 right-4 text-white z-10">
-                      <span className="font-display text-[14px] tracking-wide block">{tile.label}</span>
-                      <span className="font-display text-[12px] tracking-wider mt-1 block opacity-80">Explore →</span>
+                      <span className="font-ui text-[13px] font-semibold block">{tile.label}</span>
+                      <span className="font-ui text-[11px] uppercase tracking-[0.12em] mt-1 block opacity-80">Explore →</span>
                     </div>
                   </Link>
                 ))}
@@ -352,7 +390,7 @@ function MegaMenuPanel({
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="block px-4 py-2 font-display text-[13.5px] text-[#332210] hover:text-[#ae7922] hover:bg-[#faf0f0] transition-colors tracking-wide"
+                    className="block px-4 py-2 font-ui text-[13px] leading-[1.5] text-[#332210] hover:text-[#ae7922] hover:bg-[#faf0f0] transition-colors"
                   >
                     {link.label}
                   </Link>

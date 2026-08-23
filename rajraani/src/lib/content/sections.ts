@@ -31,6 +31,17 @@ export type HeroSlide = {
   body: string;
   ctaLabel: string;
   ctaHref: string;
+  /**
+   * Where the caption sits over the art. Defaults to `center`.
+   *
+   * Per-slide because it has to be: the subject of the photograph decides it.
+   * A frame with the figure on the left wants its caption right, and the
+   * reverse. A single global alignment guarantees that half the slides put
+   * text over the thing you are meant to be looking at.
+   *
+   * Vertically the caption is always centred; only the horizontal edge moves.
+   */
+  align?: "left" | "center" | "right";
 };
 
 export type Section =
@@ -59,6 +70,15 @@ export type Section =
       type: "collectionTriptych";
       id: string;
       art: [ArtPair, ArtPair, ArtPair];
+      /**
+       * Where each tile goes, in the same order as `art`.
+       *
+       * A shopper who clicks a photograph expects the piece in it, not a
+       * listing that happens to contain it. Optional, and falls back to
+       * `ctaHref` per tile, so a band that really is three views of one
+       * collection does not have to repeat itself three times.
+       */
+      artHrefs?: [string, string, string];
       title: string;
       body: string;
       ctaLabel: string;
@@ -235,6 +255,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     slides: [
       {
         id: "slide-textured-trails",
+        align: "right",
         art: imagePair("indigo", "hero/slide-01-textured-trails.webp"),
         eyebrow: "Roman Frescoes",
         title: "Textured Trails",
@@ -244,6 +265,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       },
       {
         id: "slide-dashashva",
+        align: "right",
         art: imagePair("maroon", "hero/slide-02-dashashva.webp"),
         eyebrow: "Handloom Day",
         title: "Dashashva",
@@ -262,6 +284,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       },
       {
         id: "slide-gifting",
+        align: "right",
         art: imagePair("pink", "hero/slide-04-gifting.webp"),
         eyebrow: "Curated Edits",
         title: "The Art of Gifting",
@@ -290,23 +313,19 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     type: "collectionTriptych",
     id: "triptych-textured-trails",
     art: [
-      imagePair("maroon", "gallery/tile-01-saree.webp"),
-      imagePair("gold", "gallery/tile-02-dupatta.webp"),
-      imagePair("green", "gallery/tile-03-textured-trails.webp"),
+      imagePair("maroon", "gallery/tile-01.webp"),
+      imagePair("gold", "gallery/tile-02.webp"),
+      imagePair("green", "gallery/tile-03.webp"),
+    ],
+    // Each tile to the piece photographed in it.
+    artHrefs: [
+      "/products/sindoor-red-katan-silk-kadiyal-saree",
+      "/products/chandrika-ivory-tissue-silk-jangla-saree",
+      "/products/padmini-pink-moonga-silk-anarkali-suit",
     ],
     title: "Textured Trails",
     body: "This collection draws from the ornamental depth of Roman Frescoes — the rhythm, the layering of motifs and the richness of their aged surfaces. Translated into the language of the Banarasi loom with Gheecha silk.",
-    ctaLabel: "Discover Textured Trails",
-    ctaHref: "/collections/textured-trails",
-  },
-  {
-    type: "richText",
-    id: "textured-trails-prose",
-    heading: "Textured Trails",
-    paragraphs: [
-      "This collection draws from the ornamental depth of Roman Frescoes — the rhythm, the layering of motifs and the richness of their aged surfaces. Translated into the language of the Banarasi loom with Gheecha silk."
-    ],
-    ctaLabel: "See the collection",
+    ctaLabel: "Discover",
     ctaHref: "/collections/textured-trails",
   },
   {
