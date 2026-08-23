@@ -464,3 +464,114 @@ image loading (§17), `object-fit: fill` on tiles (§4), visible video controls
 - The reference runs Shopify sections; theme class names (`jsSlideshowClassic`,
   `gallery-with-text`, `collection-list`) map to our `heroCarousel`, `tileRow`,
   `categorySplit` — names differ, geometry does not
+
+---
+
+# Third sweep — band-by-band, 23 August
+
+Measured while rebuilding each band, including from screenshots at 1920 where
+the earlier passes only covered 1280 and below. Where these disagree with §§1–10,
+these are the later reading.
+
+## 20. Container width is the hidden variable
+
+`--container-site` in our build is **1600px**; the reference's bands sit around
+**1200**. Everything using `wrap-wide` inherits it, so bands read a third too
+large even when their aspect ratio is correct.
+
+This is worth internalising before measuring anything else: **ratio and scale are
+separate bugs.** Setting `aspect-[380/501]` on the three-photo band fixed its
+shape and left it oversized, because the tiles were still filling a 1600px
+container. Two rounds went into that.
+
+## 21. Three-photo band
+
+| | |
+|---|---:|
+| Tile | 380 × 501 (0.76) |
+| Gap | 20px |
+| Measure | **1180px** — `380×3 + 20×2` |
+
+## 22. Four-tile row — full bleed, not contained
+
+Read at a 1920 viewport:
+
+| | |
+|---|---:|
+| Tile | 456 × 603 (**0.757**) |
+| Gaps | 20px |
+| Side margins | ~10px |
+| Total span | 1886 of 1920 — **98%** |
+| Vertical padding | 32px above, 32px below |
+
+**The tiles scale with the viewport.** There is no max-width; only the ratio is
+fixed. Capping it at a measure is what makes this band read small.
+
+**The labels are inside the photographs.** That is why this section contains no
+text nodes at all on the reference. Do not draw the label over the top — it
+prints twice. Use it as the link's accessible name instead.
+
+## 23. Campaign band — split, not overlay
+
+| | |
+|---|---|
+| Text panel | left **40.6%** (0 → 770 of 1896) |
+| Image | right **59.4%**, flush to the edge |
+| Title | Cardo 24px |
+| Body | ~15px, centred in its panel |
+| CTA | underlined, uppercase |
+| Dots | 2, centred under the text |
+
+Prose of this length cannot sit over a photograph without a scrim, and the scrim
+is what dulls the image. The split avoids the trade entirely.
+
+## 24. Footer typography
+
+| | |
+|---|---|
+| Columns | 4 |
+| Headings | Cardo **18px**, weight 400, **sentence case**, no tracking, `margin-bottom: 10px` |
+| Links | Open Sans **13px**, line-height 19.5px (1.5) |
+| Links total | 18 |
+| Email capture | yes |
+
+Not small uppercase labels — that was our error and it changes the whole feel of
+the block.
+
+**Do not copy their heading levels:** `h2`, `h4`, `h5` across four columns, which
+skips levels. Our `lint-headings` gate rejects it, correctly.
+
+## 25. Over-image type needs its own gold
+
+Measured contrast for a button sitting on photography:
+
+| Colour | On dark frame | On mid-tone |
+|---|---:|---:|
+| `--color-accent` `#7d5f2a` | 3.1:1 | **1.7:1** |
+| `--color-accent-hover` `#ae7922` | 4.8:1 | **2.7:1** |
+| **`#d9bb6c`** | **9.7:1** | **5.4:1** |
+
+A slide cannot control what is behind it, so the mid-tone column is the one that
+matters. Both palette golds fail it.
+
+## 26. Scrims — the reference has none
+
+Measured: no overlay, no filter, on any slideshow band. The photograph plays at
+full brightness and the captions rely on the frames being art-directed for text.
+
+Ours carry `from-black/70 via-black/30`. Removing them entirely was **too bright
+for taste** and they were restored — recorded because the measurement stands.
+Between the two extremes, `/50` is untried.
+
+## 27. Traps found while building
+
+Two utilities setting one property; the loser is dropped with no error:
+
+- `hidden` vs `grid` — Tailwind emits `hidden` first, so `grid` wins and the
+  hiding silently fails
+- `gap-4` vs `gap-6` on one element
+- `aspect-square` against 0.76 masters
+- `text-center` on the paragraphs only, leaving heading and CTA ranged left
+
+If scanning for these, **compare within a breakpoint**. Stripping prefixes turns
+every legitimate `hidden md:flex` into a false positive.

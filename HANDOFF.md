@@ -7,7 +7,8 @@
 > §[2.48](#248-originality-remediation--22-august-2026) records copy and palette taken from the
 > reference site and since rewritten — read it before adding any homepage copy.
 > §[2.49](#249-homepage-and-navigation-build--2223-august-2026) is the homepage and navigation
-> session. The gate it broke was repaired on 23 Aug and `npm run verify` exits 0.
+> session, and §[2.50](#250-homepage-bands-measured-and-rebuilt--23-august-2026) the band-by-band
+> rebuild. **`check:originality` does not currently pass** — see the end of §2.50.
 > Sections 1–2.4 were written between 5 and 8 August and were not revised as the build
 > moved past them. Where they disagree with §2.45/§2.46, the later sections are the
 > measured ones — read out of the tree at `80dc7cd` with `npm run verify` green.
@@ -696,6 +697,122 @@ between them.
 **Commits are unaffected. The pre-push hook runs the full gate, so nothing
 reaches the remote until this is resolved.** That is the current state: the work
 is committed locally and `main` is ahead of `origin/main`.
+
+---
+
+### 2.50 Homepage bands, measured and rebuilt — 23 August 2026
+
+Section-by-section work against the reference, measured at 1280 / 1024 / 768 /
+375 and against screenshots at 1920. `pics/homepage/homepage-spec.md` carries
+the full geometry; this records the decisions and the traps.
+
+#### `--container-site` is 1600px, and it is why bands read oversized
+
+The single most useful finding. Set to **1600px** where the reference's bands sit
+around 1200. Every section using `wrap-wide` inherits it, so the whole page runs
+wide. It cost two rounds on the three-photo band alone: setting the aspect ratio
+fixed the *shape* and did nothing about the *scale*, which is a different bug
+wearing the same clothes.
+
+Bands are constrained individually for now — the triptych to an 1180px measure,
+the four-tile row to full bleed. **Dropping the token to ~1200 is still the
+better fix** and is unresolved: one line, but it moves every band at once.
+
+#### Four utility conflicts, three of them silent
+
+Two classes setting one property; the loser is dropped with no error anywhere.
+
+| Where | Conflict | Effect |
+|---|---|---|
+| `CampaignSlideshow` | `hidden` vs `grid` | Every slide painted at once; the band looked frozen |
+| `TileRow` | `gap-4` vs `gap-6` | Wrong gutter, silently |
+| `TileRow` | `aspect-square` vs 0.76 masters | A third cropped off every tile |
+| `RichText` | centring on the paragraphs only | Heading and CTA ranged left under centred prose |
+
+A scanner now exists for this shape (`display`, `position`, `object-fit`,
+`text-align`, `gap`, `aspect`). **Write it breakpoint-aware or it is useless** —
+the first pass stripped prefixes, called every legitimate `hidden md:flex` a
+conflict, and reported 25 findings of which 25 were noise. Corrected, the tree
+is clean.
+
+#### The campaign band is a split, not an overlay
+
+Text on the left 40.6%, photograph flush right at 59.4% — the panel divides at
+x=770 of 1896. Prose of that length over a photograph needs a scrim, and the
+scrim is what made the other bands read dull; on a split the words sit on paper
+and the picture keeps its brightness.
+
+Getting it to slide took three attempts, and the failures are the useful part:
+
+1. `hidden` on the inactive slide — inert, per the conflict above.
+2. Render only the active slide — fixed the overlap, left nothing to move, read
+   as a flash.
+3. **A translating flex track.** Both slides mounted side by side, the row moves
+   one width per step, `overflow-hidden` crops the rest.
+
+The off-screen slide is `inert`, not `aria-hidden`: it still holds a link and two
+dot buttons, and `aria-hidden` would hide them from a screen reader while leaving
+them in the tab order — focus landing on something invisible is the worse of the
+two failures.
+
+Flickity was dropped here. Two slides, one translate and two dots did not justify
+a carousel dependency.
+
+#### The four-tile row prints its labels twice, and why
+
+The lettering is **inside those four photographs**. That is why the reference
+renders that band with no text nodes at all — it does not need any. Drawing
+`item.label` over the top printed every word twice. The label is now the link's
+`aria-label` and nothing else, because a link containing only an image announces
+as "link" and stops there.
+
+**Consequence worth knowing:** the words in that band cannot be changed,
+translated or restyled without re-exporting the artwork.
+
+#### Scrims: measured off, then put back on request
+
+The reference carries **no overlay and no filter** on its slideshows. Ours had a
+70%-black gradient across the whole slide, which is what made them read dull
+beside it. Removed from all three bands — and restored, because the result was
+too bright for taste. Recorded because the measurement stands even though the
+decision went the other way: if brightness comes up again, the value is
+`from-black/70` in three files and it is worth trying `/50` before all-or-nothing.
+
+#### The over-image button was invisible
+
+`cta-secondary` was ink-coloured on a darkened photograph. Both existing golds
+fail there too — `--color-accent` measures **1.7:1** over a mid-tone frame.
+`--color-gold-on-image` (`#d9bb6c`) holds 9.7:1 on dark and 5.4:1 on mid, and the
+button is filled at rest rather than only on hover, since a touch screen has no
+hover at all.
+
+#### Smaller, all measured
+
+- **Nav**: groups pinned to the outer edges by three settings pushing the same
+  way; carets added; Cardo 14px / 1px tracking.
+- **Fonts**: UI face was Lato, the category standard is **Open Sans** — and the
+  mega-menu was set in the display serif where the reference uses the UI face.
+- **Video**: fullscreen, pause-on-scroll-away with a manual pause outranking the
+  observer, and `preload="metadata"` — which on an 822MB file is the difference
+  between a page that loads and one that does not.
+- **Stores**: Banaras and **Lucknow**. There is no Mumbai store; six storefront
+  references corrected. The admin mock screens still say Mumbai in sample data.
+- **Footer**: reference headings are Cardo 18px sentence case, not small
+  uppercase labels. Contact details remain ours.
+
+#### Still open
+
+- **`--container-site`** — see above. The real fix, deliberately deferred.
+- **Compression.** Nine of twenty-two homepage images sit under 0.06 bytes/px
+  against a 0.10–0.20 norm; `womens-mens/womenswear.webp` is **0.027**. They are
+  byte-identical to their sources, so nothing in the build degraded them —
+  better-encoded alternatives at the same dimensions exist in `pics/homepage/`.
+- **`loom.mp4` is still 822MB.** `preload="metadata"` stops it downloading up
+  front; it still streams on scroll. No poster frame either.
+- **Campaign names.** Reverted on request, so `check:originality` reports 10 hits
+  and **the pre-push hook blocks the remote**. `main` is ahead of `origin/main`
+  until this is settled. Renaming them onto Kinara / Udgam / Ritu is the known
+  fix — those exist in `navigation.ts`, so the links resolve rather than 404.
 
 ---
 
