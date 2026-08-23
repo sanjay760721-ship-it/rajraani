@@ -5,6 +5,56 @@ import { ctaFields } from "./artPair.ts";
  * Section type for the 2-slide editorial slideshow (Womenswear/Menswear).
  * Matches reference's editorial split with slide transition, arrows, secondary buttons.
  */
+export const campaignSlideshowSection = defineType({
+  name: "campaignSlideshow",
+  title: "Campaign Slideshow",
+  type: "object",
+  description:
+    "Full-width campaign slides, each pairing one square frame with a title, a paragraph and a link into the campaign's story page.",
+  fields: [
+    defineField({
+      name: "slides",
+      title: "Slides",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "campaignSlide",
+          fields: [
+            defineField({
+              name: "art",
+              type: "artPair",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "title",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "body",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(400),
+            }),
+            defineField({
+              name: "ctaLabel",
+              type: "string",
+              validation: (rule) => rule.required().max(40),
+            }),
+            defineField({
+              name: "ctaHref",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+        }),
+      ],
+      validation: (rule) => rule.required().min(2),
+    }),
+  ],
+});
+
 export const editorialSlideshowSection = defineType({
   name: "editorialSlideshow",
   title: "Editorial Slideshow (2-Slide)",
@@ -576,6 +626,7 @@ export const sectionTypes = [
   productRailSection,
   editorialPairSection,
   editorialSlideshowSection,
+  campaignSlideshowSection,
   storesSlideshowSection,
   poetryBandSection,
   richTextSection,

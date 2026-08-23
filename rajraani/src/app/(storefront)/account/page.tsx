@@ -29,7 +29,7 @@ export default function AccountPage() {
             </p>
 
             {submitted ? (
-              <div className="text-center p-4 bg-[#faf0f0] border border-rule mb-6">
+              <div className="text-center p-4 bg-surface-notice border border-rule mb-6">
                 <p className="text-caption text-ink">
                   If an account exists for {email}, you will receive a reset link shortly.
                 </p>

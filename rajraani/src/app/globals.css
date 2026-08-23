@@ -10,19 +10,36 @@
   --color-bg-alt: #fbf9f6;
   --color-bg-sand: #f1ece4;
 
-  /* --- Palette: ink — Exact match to tilfi.com ------------------------- */
-  --color-ink: #533e2d;         /* headings and brand ink - exact #533e2d from tilfi.com */
+  /*
+   * --- Palette: ink -------------------------------------------------------
+   *
+   * #3a2a2e, and deliberately not the value this was set to twice before.
+   * That value is the most-used colour on the reference site by a wide margin,
+   * so shipping it made our primary ink theirs. This one is 42 degrees away in
+   * hue — still a deep warm brown, mulberry rather than orange — and reads
+   * 13.5:1 on white against the old 10:1, so every contrast pair gained room.
+   */
+  --color-ink: #3a2a2e;         /* headings and brand ink */
   --color-ink-dark: #3a2b1f;    /* preheadings, darker accents */
-  --color-ink-body: #533e2d;    /* body copy */
+  --color-ink-body: #3a2a2e;    /* body copy */
   --color-ink-muted: #6b6055;   /* meta, SKU, captions */
 
   /* --- Palette: rules ---------------------------------------------------- */
   --color-rule: #e7e0d6;        /* decorative hairlines */
   --color-rule-input: #8b8072;  /* form control boundaries */
-  --color-rule-strong: #533e2d; /* active tab, CTA underline — tracks ink */
+  --color-rule-strong: #3a2a2e; /* active tab, CTA underline — tracks ink */
 
   /* --- Palette: accent and state ----------------------------------------- */
   --color-accent: #7d5f2a;
+  /*
+   * Values that were repeated as literals across components until 23 Aug 2026.
+   * Named here so a change is one edit, and so `hardcoded-hex` has nothing to
+   * catch — the gate exists because a stray hex is how a palette drifts.
+   */
+  --color-accent-hover: #ae7922;   /* link and nav hover */
+  --color-announce-ink: #fbe9c4;   /* cream on the announcement bar */
+  --color-surface-notice: #faf0f0; /* empty-state and notice panels */
+  --color-danger: #e02424;         /* remove / delete affordances */
   --color-error: #9c3b30;
   --color-success: #4a6b48;
 

@@ -12,8 +12,8 @@ import { BRAND } from "@/lib/brand";
  *
  * Spec:
  * - Height: 67px (homepagespec.md §1)
- * - Background: #ffffff with 1px border-b #e7e0d6
- * - Left corner: "Made in Banaras. Made by Rajraani." (italic display serif)
+ * - Background: --color-bg, with a 1px --color-rule bottom border
+ * - Left corner: the house tagline from BRAND (italic display serif)
  * - Right side: Search | Currency Selector | Login | Wishlist (Red Heart) | Cart
  */
 export function UtilityBar() {
@@ -23,7 +23,7 @@ export function UtilityBar() {
   return (
     <div
       className="hidden lg:flex items-center justify-between h-[42px] border-b border-rule px-8 xl:px-14 w-full select-none"
-      style={{ backgroundColor: "#faf0f0" }}
+      style={{ backgroundColor: "var(--color-surface-notice)" }}
       aria-label="Utility navigation"
     >
       {/* Left Corner: Tagline */}
@@ -39,7 +39,7 @@ export function UtilityBar() {
         <button
           type="button"
           onClick={openSearch}
-          className="font-display flex items-center gap-1.5 text-ink hover:text-[#ae7922] transition-colors py-0.5 text-[13px] tracking-wide cursor-pointer group"
+          className="font-display flex items-center gap-1.5 text-ink hover:text-accent-hover transition-colors py-0.5 text-[13px] tracking-wide cursor-pointer group"
           aria-label="Search catalogue"
         >
           <svg
@@ -51,7 +51,7 @@ export function UtilityBar() {
             strokeWidth="1.75"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-ink group-hover:text-[#ae7922] transition-colors"
+            className="text-ink group-hover:text-accent-hover transition-colors"
             aria-hidden="true"
           >
             <circle cx="11" cy="11" r="8" />
@@ -66,7 +66,7 @@ export function UtilityBar() {
         {/* Login */}
         <Link
           href="/account"
-          className="font-display flex items-center gap-1.5 text-ink hover:text-[#ae7922] transition-colors text-[13px] tracking-wide"
+          className="font-display flex items-center gap-1.5 text-ink hover:text-accent-hover transition-colors text-[13px] tracking-wide"
           aria-label="Login to account"
         >
           <svg
@@ -92,7 +92,7 @@ export function UtilityBar() {
         {/* Cart */}
         <Link
           href="/cart"
-          className="font-display flex items-center gap-1.5 text-ink hover:text-[#ae7922] transition-colors text-[13px] tracking-wide cursor-pointer group"
+          className="font-display flex items-center gap-1.5 text-ink hover:text-accent-hover transition-colors text-[13px] tracking-wide cursor-pointer group"
           aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
         >
           <svg
@@ -104,7 +104,7 @@ export function UtilityBar() {
             strokeWidth="1.75"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-ink group-hover:text-[#ae7922] transition-colors"
+            className="text-ink group-hover:text-accent-hover transition-colors"
             aria-hidden="true"
           >
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
@@ -113,7 +113,7 @@ export function UtilityBar() {
           </svg>
           <span>Cart</span>
           {itemCount > 0 && (
-            <span className="bg-[#ae7922] text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full font-mono leading-none">
+            <span className="bg-accent-hover text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full font-mono leading-none">
               {itemCount}
             </span>
           )}

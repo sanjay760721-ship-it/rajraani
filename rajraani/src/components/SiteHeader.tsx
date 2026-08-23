@@ -117,7 +117,7 @@ export function SiteHeader() {
             aria-label={`${BRAND.name} home`}
             className="block group"
           >
-            <span className="font-display text-[25px] tracking-normal text-ink font-normal leading-tight group-hover:text-[#ae7922] transition-colors duration-300">
+            <span className="font-display text-[25px] tracking-normal text-ink font-normal leading-tight group-hover:text-accent-hover transition-colors duration-300">
               {BRAND.name}
             </span>
           </Link>
@@ -161,7 +161,7 @@ export function SiteHeader() {
         <button
           type="button"
           onClick={() => setMobileOpen((prev) => !prev)}
-          className="p-2 text-ink hover:text-[#ae7922] transition-colors cursor-pointer"
+          className="p-2 text-ink hover:text-accent-hover transition-colors cursor-pointer"
           aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={mobileOpen}
         >
@@ -189,7 +189,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={openSearch}
-            className="p-2 text-ink hover:text-[#ae7922] transition-colors cursor-pointer"
+            className="p-2 text-ink hover:text-accent-hover transition-colors cursor-pointer"
             aria-label="Search"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
@@ -200,7 +200,7 @@ export function SiteHeader() {
           <WishlistButton />
           <Link
             href="/cart"
-            className="p-2 text-ink hover:text-[#ae7922] transition-colors relative block cursor-pointer"
+            className="p-2 text-ink hover:text-accent-hover transition-colors relative block cursor-pointer"
             aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
@@ -262,7 +262,7 @@ function CompactNavTrigger({
          * rotated caret says the same thing and lets the row stay quiet.
          */
         className={`font-display text-[14px] uppercase tracking-[1px] font-normal transition-colors duration-300 h-full flex items-center gap-1.5 pl-3 pr-2 cursor-pointer ${
-          isOpen ? "text-[#ae7922]" : "text-ink hover:text-[#ae7922]"
+          isOpen ? "text-accent-hover" : "text-ink hover:text-accent-hover"
         }`}
         onClick={() => setOpenPanel((curr) => (curr === panel.id ? null : panel.id))}
         onKeyDown={(e) => {
@@ -340,7 +340,7 @@ function MegaMenuPanel({
                       <Link
                         href={link.href}
                         onClick={onClose}
-                        className={`block px-2 py-1.5 font-ui text-[13px] leading-[1.5] ${link.emphasis ? "font-semibold text-ink" : "font-normal text-[#332210]"} hover:text-[#ae7922] transition-colors`}
+                        className={`block px-2 py-1.5 font-ui text-[13px] leading-[1.5] ${link.emphasis ? "font-semibold text-ink" : "font-normal text-ink-body"} hover:text-accent-hover transition-colors`}
                       >
                         {link.label}
                       </Link>
@@ -390,7 +390,7 @@ function MegaMenuPanel({
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="block px-4 py-2 font-ui text-[13px] leading-[1.5] text-[#332210] hover:text-[#ae7922] hover:bg-[#faf0f0] transition-colors"
+                    className="block px-4 py-2 font-ui text-[13px] leading-[1.5] text-ink-body hover:text-accent-hover hover:bg-surface-notice transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -420,7 +420,7 @@ function MobileNav({ id, onNavigate }: { id: string; onNavigate: () => void }) {
                   <Link
                     href={link.href}
                     onClick={onNavigate}
-                    className="text-xs text-ink/85 hover:text-[#ae7922] block py-1.5"
+                    className="text-xs text-ink/85 hover:text-accent-hover block py-1.5"
                   >
                     {link.label}
                   </Link>

@@ -64,7 +64,7 @@ export function CurrencySelector() {
         aria-expanded={isOpen}
         aria-controls={id}
         aria-label="Currency"
-        className="font-display text-[13px] tracking-wide text-ink hover:text-[#ae7922] flex items-center gap-1.5 py-1 transition-colors cursor-pointer"
+        className="font-display text-[13px] tracking-wide text-ink hover:text-accent-hover flex items-center gap-1.5 py-1 transition-colors cursor-pointer"
         onClick={() => setIsOpen((open) => !open)}
       >
         <svg
@@ -104,8 +104,8 @@ export function CurrencySelector() {
                 data-currency={curr}
                 className={`w-full text-left px-4 py-1.5 font-display text-[12.5px] tracking-wide transition-colors ${
                   curr === currency
-                    ? "bg-[#faf0f0] text-[#ae7922] font-semibold"
-                    : "text-ink/80 hover:bg-[#faf0f0]/60 hover:text-[#ae7922]"
+                    ? "bg-surface-notice text-accent-hover font-semibold"
+                    : "text-ink/80 hover:bg-surface-notice/60 hover:text-accent-hover"
                 }`}
                 onClick={() => {
                   setCurrency(curr);

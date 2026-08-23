@@ -37,7 +37,7 @@ export const BRAND = {
 } as const;
 
 /**
- * Announcement bar — exact match to original tilfi.com.
+ * Announcement bar — shipping and duty terms, above the utility row.
  *
  * Three-part message with shipping and duty-paid reassurance.
  */

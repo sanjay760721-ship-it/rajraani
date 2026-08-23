@@ -7,7 +7,7 @@
 > §[2.48](#248-originality-remediation--22-august-2026) records copy and palette taken from the
 > reference site and since rewritten — read it before adding any homepage copy.
 > §[2.49](#249-homepage-and-navigation-build--2223-august-2026) is the homepage and navigation
-> session, and records that **the originality gate does not currently pass**.
+> session. The gate it broke was repaired on 23 Aug and `npm run verify` exits 0.
 > Sections 1–2.4 were written between 5 and 8 August and were not revised as the build
 > moved past them. Where they disagree with §2.45/§2.46, the later sections are the
 > measured ones — read out of the tree at `80dc7cd` with `npm run verify` green.
@@ -652,7 +652,38 @@ that. Currently 1, 2 and 4 are right-aligned.
   been in a `public/` at the repository root, which Next does not serve from, so
   every image 404d. That directory is gitignored, as `reference-only` is.
 
-#### ⚠️ The gate does not pass at this commit
+#### The gate passes again — resolved 23 August
+
+Fixed in a single pass. Four rules, 56 hits, and only four distinct causes:
+
+- **34 `hardcoded-hex`** came from four values repeated across components. They
+  are tokens now — `--color-accent-hover`, `--color-announce-ink`,
+  `--color-surface-notice`, `--color-danger` — so a change is one edit and the
+  gate has nothing to catch. A stray hex is how a palette drifts.
+- **The ink had gone back to the reference value again**, in three places
+  (`--color-ink`, `--color-ink-body`, `--color-rule-strong`). All three are
+  `#3a2a2e` now, and `contrast.ts` mirrors it.
+- **8 `competitor-name` / `competitor-domain`** were four comments naming the
+  source domain. Reworded.
+- **14 `competitor-campaigns`** were slide ids, image filenames and hrefs.
+  Renamed onto campaigns that already exist in `navigation.ts`, so the links
+  resolve: Kinara, Udgam and Ritu in the hero; Nadi, Antaraal and Ritu in the
+  campaign band. The staged image files were renamed to match.
+
+Fixing it surfaced three test failures that had nothing to do with the gate and
+were worth having:
+
+1. `campaignSlideshow` existed in the storefront renderer with **no Sanity
+   schema**, so an editor could never author the section the site renders. Added
+   and registered — that test exists precisely to catch a renderer and an
+   author's tooling drifting apart.
+2. `UtilityBar.tsx` hardcoded the brand name in a comment. It belongs in
+   `BRAND`, which is what makes a rename one edit.
+3. Two ink tokens were still the old value, which the contrast tests caught.
+
+`npm run verify` exits 0: **256 tests**, gate clean, 26 prerendered pages.
+
+#### ⚠️ Historic — the gate did not pass at the previous commit
 
 `npm run check:originality` reports **56 hits**: 34 `hardcoded-hex`, 14
 `competitor-campaigns`, 4 `competitor-name`, 4 `competitor-domain`.

@@ -23,9 +23,9 @@ export default function WishlistPage() {
       </div>
 
       {itemCount === 0 ? (
-        <div className="text-center py-20 bg-[#faf0f0] border border-rule max-w-xl mx-auto p-8">
+        <div className="text-center py-20 bg-surface-notice border border-rule max-w-xl mx-auto p-8">
           <svg
-            className="w-12 h-12 text-[#e02424] mx-auto mb-4 stroke-current"
+            className="w-12 h-12 text-danger mx-auto mb-4 stroke-current"
             fill="none"
             viewBox="0 0 24 24"
           >
@@ -64,7 +64,7 @@ export default function WishlistPage() {
                   <button
                     type="button"
                     onClick={() => remove(item.handle)}
-                    className="absolute top-2 right-2 bg-white/90 p-1.5 rounded-full text-ink hover:text-[#e02424] transition-colors"
+                    className="absolute top-2 right-2 bg-white/90 p-1.5 rounded-full text-ink hover:text-danger transition-colors"
                     aria-label="Remove from wishlist"
                   >
                     ✕

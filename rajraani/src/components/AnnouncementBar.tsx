@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ANNOUNCEMENT_PARTS } from "@/lib/brand";
 
 /**
- * Announcement bar — exact match to original tilfi.com.
+ * Announcement bar — shipping and duty terms, above the utility row.
  *
  * Structure & Design tokens (design.md §5.1):
  * - Height: 36px
@@ -33,20 +33,20 @@ export function AnnouncementBar() {
     <aside
       aria-label="Store announcement"
       className="relative z-30 w-full min-h-[36px] transition-all duration-300"
-      style={{ backgroundColor: "#533e2d", color: "#fbe9c4" }}
+      style={{ backgroundColor: "var(--color-ink)", color: "var(--color-announce-ink)" }}
     >
       <div className="mx-auto flex min-h-[36px] max-w-[1680px] items-center justify-center px-8 sm:px-12 py-1.5">
         {/* Desktop view: 3-part pipe-delimited message */}
-        <div className="hidden md:flex md:items-center md:justify-center md:gap-3 text-center text-[11.5px] lg:text-[12px] font-normal tracking-[0.06em] text-[#fbe9c4] leading-none">
+        <div className="hidden md:flex md:items-center md:justify-center md:gap-3 text-center text-[11.5px] lg:text-[12px] font-normal tracking-[0.06em] text-announce-ink leading-none">
           <span>{ANNOUNCEMENT_PARTS[0]}</span>
-          <span className="text-[#fbe9c4]/40 select-none" aria-hidden="true">|</span>
+          <span className="text-announce-ink/40 select-none" aria-hidden="true">|</span>
           <span>{ANNOUNCEMENT_PARTS[1]}</span>
-          <span className="text-[#fbe9c4]/40 select-none" aria-hidden="true">|</span>
+          <span className="text-announce-ink/40 select-none" aria-hidden="true">|</span>
           <span className="italic">{ANNOUNCEMENT_PARTS[2]}</span>
         </div>
 
         {/* Mobile view: rotating ticker with smooth fade */}
-        <div className="flex md:hidden items-center justify-center text-center text-[11px] font-normal tracking-[0.05em] text-[#fbe9c4] leading-snug px-2">
+        <div className="flex md:hidden items-center justify-center text-center text-[11px] font-normal tracking-[0.05em] text-announce-ink leading-snug px-2">
           <span
             key={currentIndex}
             className="animate-[fadeIn_300ms_ease-in-out] inline-block transition-opacity duration-300"
@@ -63,7 +63,7 @@ export function AnnouncementBar() {
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-[#fbe9c4] hover:bg-[#fbe9c4]/15 active:bg-[#fbe9c4]/25 transition-colors"
+          className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-announce-ink hover:bg-announce-ink/15 active:bg-announce-ink/25 transition-colors"
           aria-label="Close announcement bar"
           title="Close announcement"
         >

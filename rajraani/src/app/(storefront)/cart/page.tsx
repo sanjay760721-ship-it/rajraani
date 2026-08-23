@@ -21,7 +21,7 @@ export default function CartPage() {
       </div>
 
       {itemCount === 0 ? (
-        <div className="text-center py-20 bg-[#faf0f0] border border-rule max-w-xl mx-auto p-8">
+        <div className="text-center py-20 bg-surface-notice border border-rule max-w-xl mx-auto p-8">
           <h2 className="font-display text-xl text-ink mb-2">Your cart is currently empty</h2>
           <p className="text-caption text-ink-muted mb-8">
             Continue exploring our handloom sarees, dupattas and collectibles.
@@ -77,7 +77,7 @@ export default function CartPage() {
                       <button
                         type="button"
                         onClick={() => remove(line.handle)}
-                        className="text-xs text-ink-muted hover:text-[#e02424] underline cursor-pointer"
+                        className="text-xs text-ink-muted hover:text-danger underline cursor-pointer"
                       >
                         Remove
                       </button>
