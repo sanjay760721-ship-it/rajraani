@@ -260,7 +260,7 @@ export function HeroCarousel({
               </>
             ) : (
               <>
-                {/* Scrim Overlay \u2014 bottom gradient for text legibility */}
+                {/* Scrim Overlay — bottom gradient for text legibility */}
                 <div
                   aria-hidden
                   className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"

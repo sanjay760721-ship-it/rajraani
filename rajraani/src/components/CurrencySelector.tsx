@@ -3,11 +3,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 import { useCurrency } from "./currency-context";
-import { CURRENCIES, type CurrencyCode } from "@/lib/domain/types";
-
-function isCurrencyCode(value: string): value is CurrencyCode {
-  return CURRENCIES.includes(value as CurrencyCode);
-}
 
 const CURRENCY_LABELS: Record<string, string> = {
   INR: "INR",

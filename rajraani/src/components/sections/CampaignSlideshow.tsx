@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import { toneFor } from "../Frame";
 import type { ArtPair } from "@/lib/content/sections";
-import type Flickity from "flickity";
-
-declare global {
-  interface Window {
-    Flickity: typeof Flickity;
-  }
-}
 
 interface CampaignSlide {
   id: string;
@@ -28,122 +21,139 @@ interface CampaignSlideshowProps {
 }
 
 /**
- * Campaign Slideshow — 4 slides, dots only, no arrows, matching reference spec.
+ * The campaign band — a split, not an overlay.
  *
- * - Fade transition (not slide)
- * - Page dots only (no prev/next arrows)
- * - Auto-play 4000ms
- * - Secondary buttons
- * - Full viewport width, 1:1 aspect
+ * Text occupies the left ~40% on its own ground; the photograph holds the right
+ * ~60% full-bleed to the edge. Measured off the reference at a 1896 viewport:
+ * the panel divides at x = 770, which is 40.6% / 59.4%.
+ *
+ * This replaced a full-bleed slide with the caption laid over the image. The
+ * split is the better arrangement for prose of this length: a paragraph over a
+ * photograph needs a scrim to stay legible, and the scrim is what made the
+ * other bands read dull. Here the words sit on paper and the picture keeps its
+ * brightness.
+ *
+ * Hand-rolled rather than Flickity: two slides, one translate, and two dots
+ * justify a carousel library, and the previous implementation pulled Flickity
+ * in for exactly that.
  */
 export function CampaignSlideshow({ slides }: CampaignSlideshowProps) {
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const paused = useRef(false);
 
   useEffect(() => {
-    const element = carouselRef.current;
-    if (!element) return;
+    if (slides.length < 2) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
 
-    let flkty: Flickity | null = null;
-    let cancelled = false;
+    const timer = window.setInterval(() => {
+      if (!paused.current) setActive((i) => (i + 1) % slides.length);
+    }, 6000);
+    return () => window.clearInterval(timer);
+  }, [slides.length]);
 
-    void (async () => {
-      const { default: FlickityCtor } = await import("flickity");
-      if (cancelled) return;
-
-      flkty = new FlickityCtor(element, {
-        cellAlign: "left",
-        wrapAround: true,
-        percentPosition: false,
-        autoPlay: 4000,
-        pauseAutoPlayOnHover: true,
-        draggable: true,
-        prevNextButtons: false,
-        pageDots: true,
-        resize: true,
-        selectedAttraction: 0.025,
-        friction: 0.25,
-        initialIndex: 0,
-        cellSelector: ".carousel-cell",
-      });
-
-      requestAnimationFrame(() => {
-        if (!cancelled) flkty?.resize();
-      });
-    })();
-
-    return () => {
-      cancelled = true;
-      flkty?.destroy();
-    };
-  }, []);
+  if (slides.length === 0) return null;
 
   return (
     <section
-      ref={carouselRef}
-      className="relative w-full min-h-[520px] overflow-hidden bg-bg"
-      aria-label="Campaigns"
       aria-roledescription="carousel"
+      aria-label="Campaigns"
+      className="relative w-full overflow-hidden"
+      onMouseEnter={() => {
+        paused.current = true;
+      }}
+      onMouseLeave={() => {
+        paused.current = false;
+      }}
     >
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`carousel-cell relative h-[82vh] max-h-[900px] min-h-[520px] w-full ${index === 0 ? "is-selected" : ""}`}
-          aria-hidden={index !== 0}
-        >
+      {/*
+        * A track that translates, not a fade.
+        *
+        * Every slide is laid side by side in a flex row the width of the band,
+        * and the row slides by one full width per step. Two earlier attempts
+        * were wrong in different ways: `hidden` on the inactive slide did
+        * nothing, because `hidden` and `grid` both set `display` and Tailwind
+        * emits `hidden` first; rendering only the active slide fixed that but
+        * left nothing to move, so it read as a flash.
+        *
+        * `overflow-hidden` on the section is what crops the off-screen slide.
+        */}
+      <div
+        className="flex transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
+        style={{ transform: `translateX(-${active * 100}%)` }}
+      >
+      {slides.map((slide, index) => {
+        return (
+          <div
+            key={slide.id}
+            /*
+              * `inert`, not `aria-hidden`.
+              *
+              * Both slides stay mounted so the track has something to move, so
+              * the off-screen one still holds a link and two dot buttons.
+              * `aria-hidden` would hide them from a screen reader while leaving
+              * them in the tab order — focus lands on something nobody can see.
+              * `inert` removes them from both.
+              */
+            inert={index !== active}
+            className="grid w-full shrink-0 grid-cols-1 md:grid-cols-[40.6%_59.4%]"
+          >
+            {/* Left: the words, on paper. */}
+            <div className="order-2 flex items-center justify-center px-6 py-14 md:order-1 md:py-24">
+              <div className="max-w-[650px] text-center">
+                <h2 className="font-display text-[24px] leading-tight text-ink">
+                  {slide.title}
+                </h2>
+                <p className="text-body mt-5 leading-[1.75] text-ink-body">
+                  {slide.body}
+                </p>
+                <Link
+                  href={slide.ctaHref}
+                  className="cta-link is-drawn mt-8 inline-block"
+                >
+                  {slide.ctaLabel}
+                </Link>
+
+                {slides.length > 1 ? (
+                  <div className="mt-10 flex items-center justify-center gap-2.5">
+                    {slides.map((dot, dotIndex) => (
+                      <button
+                        key={dot.id}
+                        type="button"
+                        aria-label={`Show ${dot.title}`}
+                        aria-current={dotIndex === active}
+                        onClick={() => setActive(dotIndex)}
+                        className={`h-2 w-2 rounded-full transition-colors ${
+                          dotIndex === active ? "bg-ink" : "bg-ink/25"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+
+            {/* Right: the photograph, flush to the edge. */}
             <div
-              className="relative h-full w-full"
+              className="relative order-1 aspect-square w-full md:order-2 md:aspect-auto md:min-h-[800px]"
               style={{ backgroundColor: toneFor(slide.art.desktop.tone) }}
             >
               {slide.art.desktop.src ? (
                 <Image
                   src={slide.art.desktop.src}
-                  alt={slide.title}
-                  className="h-full w-full object-cover object-center"
+                  alt=""
                   fill
+                  sizes="(min-width: 768px) 60vw, 100vw"
+                  quality={90}
                   loading={index === 0 ? "eager" : "lazy"}
-                  fetchPriority={index === 0 ? "high" : "auto"}
-                  sizes="100vw"
+                  className="object-cover object-center"
                 />
-              ) : (
-                <div
-                  aria-hidden
-                  className="h-full w-full"
-                  style={{
-                    backgroundColor: toneFor(slide.art.desktop.tone),
-                    backgroundImage:
-                      "linear-gradient(160deg, rgb(255 255 255 / 0.22), rgb(0 0 0 / 0.18))",
-                  }}
-                />
-              )}
+              ) : null}
             </div>
-
-            {/* Scrim Overlay — bottom gradient for text legibility */}
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-            />
-
-            {/* Slide Content — centered */}
-            <div className="absolute inset-0 flex items-end">
-              <div className="wrap-wide pb-16 md:pb-24">
-                <div className="max-w-[46ch] mx-auto text-center">
-                  <h2 className="text-display text-bg drop-shadow-sm">
-                    {slide.title}
-                  </h2>
-                  <p className="text-prose mt-4 max-w-[38ch] text-bg/90 mx-auto">
-                    {slide.body}
-                  </p>
-                  <Link
-                    href={slide.ctaHref}
-                    className="cta-secondary mt-8 inline-block"
-                  >
-                    {slide.ctaLabel}
-                  </Link>
-                </div>
-              </div>
-            </div>
-        </div>
-      ))}
+          </div>
+        );
+      })}
+      </div>
     </section>
   );
 }

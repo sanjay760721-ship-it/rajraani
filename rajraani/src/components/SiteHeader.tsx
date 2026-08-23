@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
@@ -361,12 +362,22 @@ function MegaMenuPanel({
                     className="block group relative overflow-hidden"
                   >
                     {tile.src ? (
-                      <img
-                        src={tile.src}
-                        alt=""
-                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        loading="lazy"
-                      />
+                      /*
+                        * next/image, not a raw <img>: these are 400x600 tiles
+                        * served at 280 wide, so without it every panel ships
+                        * the full master. `sizes` is fixed because the column
+                        * is a fixed 280px \u2014 no guessing needed.
+                        */
+                      <div className="relative aspect-[2/3] w-full overflow-hidden">
+                        <Image
+                          src={tile.src}
+                          alt=""
+                          fill
+                          sizes="280px"
+                          loading="lazy"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        />
+                      </div>
                     ) : (
                       <div className="aspect-[2/3] bg-rule flex items-center justify-center">
                         <span className="font-ui text-[13px] text-ink-muted">{tile.label}</span>

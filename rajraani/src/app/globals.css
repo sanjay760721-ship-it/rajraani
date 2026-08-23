@@ -40,6 +40,15 @@
   --color-announce-ink: #fbe9c4;   /* cream on the announcement bar */
   --color-surface-notice: #faf0f0; /* empty-state and notice panels */
   --color-danger: #e02424;         /* remove / delete affordances */
+  /*
+   * Gold for type sitting ON photography.
+   *
+   * --color-accent is built for ink on paper and measures 1.7:1 over a
+   * mid-tone frame, which is invisible. This one holds 9.7:1 on a dark
+   * photograph and 5.4:1 on a mid one, so it clears AA either way — and the
+   * slides cannot control what is behind them.
+   */
+  --color-gold-on-image: #d9bb6c;
   --color-error: #9c3b30;
   --color-success: #4a6b48;
 
@@ -287,20 +296,32 @@
 }
 .cta-primary:hover { opacity: 0.85; }
 
+/*
+ * The over-image button.
+ *
+ * Every use of this is a slide caption sitting on a photograph — editorial,
+ * campaign and stores. It was ink-coloured with a matching border, which on a
+ * darkened frame is dark on dark and effectively invisible.
+ */
 @utility cta-secondary {
   display: inline-block;
   font-family: var(--font-ui);
   font-size: var(--text-eyebrow);
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  background: var(--color-gold-on-image);
   color: var(--color-ink);
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--color-gold-on-image);
   padding: 12px 24px;
   transition: all var(--t-fast) var(--ease-brand);
 }
-.cta-secondary:hover {
-  background: var(--color-ink);
-  color: var(--color-bg);
+/* Filled at rest, deepening on hover — the button never relies on a pointer
+   to become visible, which is also the only behaviour a touch screen has. */
+.cta-secondary:hover,
+.cta-secondary:focus-visible {
+  background: #c9a227;
+  border-color: #c9a227;
+  color: var(--color-ink);
 }
 
 @utility cta-link {
@@ -556,3 +577,4 @@
   right: auto;
   left: 24px;
 }
+

@@ -5,6 +5,7 @@ import { HeroCarousel } from "./HeroCarousel";
 import { EditorialSlideshow } from "./EditorialSlideshow";
 import { StoresSlideshow } from "./StoresSlideshow";
 import { CampaignSlideshow } from "./CampaignSlideshow";
+import { VideoPlayer } from "./VideoPlayer";
 import { PLACEHOLDER_WASH, toneFor } from "../Frame";
 import { ProductCard } from "../ProductCard";
 import { ScrollReveal } from "../ScrollReveal";
@@ -293,26 +294,19 @@ function VideoBand({
     <section className="is-width-wide section-pad-vertical" style={{ paddingTop: "20px" }}>
       <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
         {section.videoSrc ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            poster={section.art.desktop.src}
+          <VideoPlayer
+            src={section.videoSrc}
             className="absolute inset-0 h-full w-full object-cover object-center"
-          >
-            <source src={section.videoSrc} type="video/mp4" />
-          </video>
+          />
         ) : (
           <Art art={section.art} className="absolute inset-0 h-full w-full opacity-60" />
         )}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent"
         />
-        <div className="absolute inset-0 flex items-end p-8 md:p-14">
-          <div className="max-w-[44ch]">
+        <div className="pointer-events-none absolute inset-0 flex items-end p-8 md:p-14">
+          <div className="max-w-[44ch] pointer-events-auto">
             <span className="eyebrow block text-bg/80">HANDLOOM HERITAGE</span>
             <h2 className="text-display mt-2 text-bg">{section.title}</h2>
             <p className="text-prose mt-3 text-bg/90">{section.body}</p>
@@ -344,9 +338,28 @@ function CategorySplit({
                 art={item.art}
                 className="h-full w-full transition-transform duration-600 ease-brand group-hover:scale-103"
               />
-            </div>
-            <div className="py-4 text-center">
-              <span className="text-quicklink group-hover:underline">{item.label}</span>
+              {/*
+                * A scrim the reference does not have.
+                *
+                * There the label is white on bare photograph, which works
+                * because their frames are dark in that corner. Ours are not
+                * chosen for it, and white on a pale hem is unreadable. This is
+                * the least that guarantees legibility; delete it once the
+                * commissioned shoot controls what is in that corner.
+                */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent"
+              />
+              {/*
+                * Caption inside the frame, bottom-left: absolute at left 0 /
+                * bottom 0 with 20px of padding, Cardo 16px in white. Measured.
+                * Weight is 400 on the reference, not bold — it reads heavy
+                * because it is white over a photograph, not because it is bold.
+                */}
+              <span className="absolute bottom-0 left-0 z-[2] p-5 font-display text-[16px] font-normal text-white">
+                {item.label}
+              </span>
             </div>
           </Link>
         ))}
@@ -361,17 +374,55 @@ function TileRow({
   section: Extract<Section, { type: "tileRow" }>;
 }) {
   return (
-    <section className="is-width-wide has-gutter">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 gap-6">
+    /*
+     * Full-bleed, not a contained measure.
+     *
+     * Measured off the reference at a 1920 viewport: four tiles 456px wide with
+     * 20px between them, spanning 1886px — 98% of the window. The tiles scale
+     * with the viewport rather than stopping at a max-width, which is why an
+     * 1180px cap made this band read small next to the original.
+     *
+     * The ratio is what stays fixed: 0.757, near enough 280/369.
+     *
+     * 32px above and below.
+     *
+     * The top figure is measured — the slideshow ends at 107 and the tiles
+     * begin at 139. The bottom was a guess against the edge of a screenshot, so
+     * it is matched to the top rather than invented: an even band is the safer
+     * default, and it is the one that survives a section being reordered.
+     */
+    <section className="py-8">
+      <div className="grid grid-cols-2 gap-5 px-[10px] md:grid-cols-4">
         {section.items.map((item) => (
-          <Link key={item.label} href={item.href} className="group block overflow-hidden">
-            <div className="aspect-square w-full relative overflow-hidden">
+          /*
+           * `aria-label` because nothing here renders text: the lettering is
+           * inside the photograph. Without it this is a link containing only an
+           * image, and a screen reader announces it as "link" and nothing else.
+           */
+          <Link
+            key={item.label}
+            href={item.href}
+            aria-label={item.label}
+            className="group block overflow-hidden"
+          >
+            <div className="relative aspect-[280/369] w-full overflow-hidden">
               <Art
                 art={item.art}
                 className="h-full w-full transition-transform duration-600 ease-brand group-hover:scale-103"
               />
+              {/*
+                * No label overlay, and no scrim to support one.
+                *
+                * These four frames carry their own lettering — it is part of
+                * the artwork, which is why the reference renders this band with
+                * no text nodes at all. Drawing `item.label` over the top of
+                * them printed every word twice.
+                *
+                * `item.label` still exists and still does work: it is the
+                * accessible name of the link and the React key. It just is not
+                * painted.
+                */}
             </div>
-            <span className="text-quicklink mt-3 block group-hover:underline">{item.label}</span>
           </Link>
         ))}
       </div>
@@ -546,9 +597,16 @@ async function ProductRail({
 
 function RichText({ section }: { section: Extract<Section, { type: "richText" }> }) {
   return (
-    <section className="wrap-prose section-pad" style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}>
+    /*
+     * `text-center` sits on the section, not on the paragraphs.
+     *
+     * It used to be on the inner <div> only, so the body centred while the
+     * heading above it and the link below it stayed ranged left — three
+     * elements in a column, disagreeing about their own axis.
+     */
+    <section className="wrap-prose section-pad text-center" style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}>
       {section.heading ? <h2 className="text-h3 mb-5">{section.heading}</h2> : null}
-      <div className="space-y-5 text-center">
+      <div className="space-y-5">
         {section.paragraphs.map((paragraph, index) => (
           <p key={index} className="text-body text-ink-body">{paragraph}</p>
         ))}

@@ -317,7 +317,7 @@ export const NAVIGATION: readonly NavPanel[] = [
         links: [
           { label: "Our story", href: "/pages/our-story", emphasis: true },
           { label: "Our Banaras store", href: "/pages/banaras-store" },
-          { label: "Our Mumbai store", href: "/pages/mumbai-store" },
+          { label: "Our Lucknow store", href: "/pages/lucknow-store" },
           { label: "Impact", href: "/pages/impact" },
           { label: "Press & media", href: "/pages/press" },
           { label: "Careers", href: "/pages/careers" },

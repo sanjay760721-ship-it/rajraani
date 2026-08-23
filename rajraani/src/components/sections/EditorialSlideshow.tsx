@@ -24,6 +24,7 @@ interface EditorialSlide {
   ctaHref: string;
   buttonVariant: "primary" | "secondary";
   textAlign: "left" | "right" | "center";
+  verticalAlign?: "bottom" | "center";
 }
 
 interface EditorialSlideshowProps {
@@ -130,8 +131,16 @@ export function EditorialSlideshow({ slides }: EditorialSlideshowProps) {
             />
 
             {/* Slide Content — text alignment varies per slide */}
-            <div className="absolute inset-0 flex items-end">
-              <div className="wrap-wide pb-16 md:pb-24">
+            <div
+              className={`absolute inset-0 flex ${
+                slide.verticalAlign === "center" ? "items-center" : "items-end"
+              }`}
+            >
+              <div
+                className={`wrap-wide ${
+                  slide.verticalAlign === "center" ? "" : "pb-16 md:pb-24"
+                }`}
+              >
                 <div
                   className={`max-w-[46ch] ${
                     slide.textAlign === "left"
@@ -142,7 +151,9 @@ export function EditorialSlideshow({ slides }: EditorialSlideshowProps) {
                   }`}
                 >
                   {slide.eyebrow ? (
-                    <p className="eyebrow text-bg/80 mb-2">{slide.eyebrow}</p>
+                    <p className="eyebrow mb-2 text-bg/80">
+                      {slide.eyebrow}
+                    </p>
                   ) : null}
                   <h2 className="text-display text-bg drop-shadow-sm">
                     {slide.title}

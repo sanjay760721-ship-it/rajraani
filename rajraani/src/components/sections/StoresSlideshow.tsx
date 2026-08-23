@@ -28,7 +28,7 @@ interface StoresSlideshowProps {
 }
 
 /**
- * Stores Slideshow — 2 slides (Banaras/Mumbai), fade transition, matching reference.
+ * Stores Slideshow — 2 slides (Banaras/Lucknow), fade transition.
  *
  * - Fade transition (not slide)
  * - No arrows, no dots

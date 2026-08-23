@@ -52,7 +52,7 @@ const FOOTER_COLUMNS: readonly FooterColumn[] = [
     links: [
       { label: "Our Story / Our Heritage", href: "/pages/our-story" },
       { label: "Banaras Store", href: "/pages/banaras-store" },
-      { label: "Mumbai Store", href: "/pages/mumbai-store" },
+      { label: "Lucknow Store", href: "/pages/lucknow-store" },
       { label: "Press & Media", href: "/pages/press" },
       { label: "Careers", href: "/pages/careers" },
       { label: "Size Guide", href: "/pages/size-guide" },
@@ -99,8 +99,8 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {FOOTER_COLUMNS.map((column) => (
             <div key={column.heading}>
-              <h2 className="eyebrow mb-4 text-ink">{column.heading}</h2>
-              <ul className="space-y-2 text-caption text-ink-body">
+              <h2 className="font-display text-[18px] font-normal mb-2.5 text-ink">{column.heading}</h2>
+              <ul className="space-y-1 font-ui text-[13px] leading-[1.5] text-ink-body">
                 {column.links.map((link) => (
                   <li key={link.href}>
                     {link.isText ? (
@@ -118,8 +118,8 @@ export function SiteFooter() {
 
           {/* Stay in Touch — Column 4 */}
           <div>
-            <h2 className="eyebrow mb-4 text-ink">Stay in touch</h2>
-            <p className="text-caption mb-4 text-ink-body">
+            <h2 className="font-display text-[18px] font-normal mb-2.5 text-ink">Stay in touch</h2>
+            <p className="font-ui text-[13px] leading-[1.5] mb-4 text-ink-body">
               Occasional letters about what has come off the loom.
             </p>
             <form className="flex flex-col gap-3" aria-label="Newsletter signup">

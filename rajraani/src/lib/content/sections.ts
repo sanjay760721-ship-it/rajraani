@@ -125,6 +125,13 @@ export type Section =
         ctaHref: string;
         buttonVariant: "primary" | "secondary";
         textAlign: "left" | "right" | "center";
+        /**
+         * Where the caption sits vertically. Defaults to `bottom`.
+         *
+         * Per-slide, and defaulting to the existing behaviour, so adding it to
+         * one slide cannot quietly move the others.
+         */
+        verticalAlign?: "bottom" | "center";
       }[];
     }
   | {
@@ -254,40 +261,40 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     id: "homepage-hero-carousel",
     slides: [
       {
-        id: "slide-kinara",
+        id: "slide-textured-trails",
         align: "right",
-        art: imagePair("indigo", "hero/slide-01-kinara.webp"),
-        eyebrow: "Textured Silks",
-        title: "Kinara",
+        art: imagePair("indigo", "hero/slide-01-textured-trails.webp"),
+        eyebrow: "Roman Frescoes",
+        title: "Textured Trails",
         body: "Gheecha silk worked against a katan ground, so the surface takes light unevenly and never twice the same way.",
         ctaLabel: "Discover",
-        ctaHref: "/collections/kinara",
+        ctaHref: "/collections/textured-trails",
       },
       {
-        id: "slide-udgam",
+        id: "slide-dashashva",
         align: "right",
-        art: imagePair("maroon", "hero/slide-02-udgam.webp"),
-        eyebrow: "The Source",
-        title: "Udgam",
+        art: imagePair("maroon", "hero/slide-02-dashashva.webp"),
+        eyebrow: "Handloom Day",
+        title: "Dashashva",
         body: "Nine pieces built outward from one motif at the centre of the pallu, and read from there.",
         ctaLabel: "Discover",
-        ctaHref: "/pages/udgam",
+        ctaHref: "/pages/dashashva",
       },
       {
-        id: "slide-ritu",
-        art: imagePair("gold", "hero/slide-03-ritu.webp"),
-        eyebrow: "This Season",
-        title: "Ritu",
+        id: "slide-onam-edit",
+        art: imagePair("gold", "hero/slide-03-onam-edit.webp"),
+        eyebrow: "Seasonal Edit",
+        title: "The Onam Edit",
         body: "Undyed grounds and real zari, in the lighter weights a long afternoon asks for.",
         ctaLabel: "Discover",
-        ctaHref: "/collections/ritu",
+        ctaHref: "/collections/the-onam-edit",
       },
       {
         id: "slide-gifting",
         align: "right",
         art: imagePair("pink", "hero/slide-04-gifting.webp"),
         eyebrow: "Curated Edits",
-        title: "The Gifting Edit",
+        title: "The Art of Gifting",
         body: "Thoughtfully handwoven pieces for timeless celebrations.",
         ctaLabel: "Explore Gifts",
         ctaHref: "/collections/gifts",
@@ -311,7 +318,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
   },
   {
     type: "collectionTriptych",
-    id: "triptych-kinara",
+    id: "triptych-textured-trails",
     art: [
       imagePair("maroon", "gallery/tile-01.webp"),
       imagePair("gold", "gallery/tile-02.webp"),
@@ -323,10 +330,10 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       "/products/chandrika-ivory-tissue-silk-jangla-saree",
       "/products/padmini-pink-moonga-silk-anarkali-suit",
     ],
-    title: "Kinara",
+    title: "Textured Trails",
     body: "Gheecha is spun from the short, uneven fibres left after the reel, which is why it will not lie flat and why the light never settles on it. Woven into a katan ground it gives a surface with grain in it.",
     ctaLabel: "Discover",
-    ctaHref: "/collections/kinara",
+    ctaHref: "/collections/textured-trails",
   },
   {
     type: "videoBand",
@@ -348,7 +355,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         href: "/collections/sarees",
       },
       {
-        art: imagePair("gold", "category/suits.webp"),
+        art: imagePair("gold", "category/suits-b.webp"),
         label: "SUITS",
         href: "/collections/suits",
       },
@@ -378,7 +385,8 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         ctaLabel: "Explore",
         ctaHref: "/collections/menswear",
         buttonVariant: "secondary",
-        textAlign: "left",
+        textAlign: "right",
+        verticalAlign: "center",
       },
     ],
   },
@@ -413,36 +421,28 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     id: "campaign-slideshow",
     slides: [
       {
-        id: "slide-nadi-campaign",
-        art: imagePair("indigo", "campaign/slide-01-nadi.webp"),
-        title: "Nadi",
-        body: "The monsoon collection. On every piece in it the ground was dyed before the motif was chosen, which is the reverse of the usual order and the reason the colours sit as deep as they do.",
-        ctaLabel: "Enter Nadi",
-        ctaHref: "/pages/nadi",
+        id: "slide-kala",
+        art: imagePair("maroon", "campaign/kala.webp"),
+        title: "Kala",
+        body:
+          "Kala is craft with nothing ranked above anything else \u2014 the loom, the " +
+          "brush and the chisel under one word. These are the pieces where the " +
+          "weaving leans hardest on the other three, and where a weaver has " +
+          "clearly been looking at something that was not cloth.",
+        ctaLabel: "Discover",
+        ctaHref: "/pages/kala",
       },
       {
-        id: "slide-antaraal-campaign",
-        art: imagePair("purple", "campaign/slide-02-antaraal.webp"),
-        title: "Antaraal",
-        body: "A study in empty ground — how much of it a pattern needs before it stops reading as a pattern, and what a weaver does with the space between one motif and the next.",
-        ctaLabel: "Enter Antaraal",
-        ctaHref: "/pages/antaraal",
-      },
-      {
-        id: "slide-ritu-campaign",
-        art: imagePair("gold", "campaign/slide-03-ritu.webp"),
-        title: "Ritu",
-        body: "The season's edit. Undyed and off-white grounds, real zari, and the lighter weights \u2014 kora, sooti, tissue \u2014 that carry air rather than weight.",
-        ctaLabel: "Enter Ritu",
-        ctaHref: "/pages/ritu",
-      },
-      {
-        id: "slide-gifting-campaign",
-        art: imagePair("pink", "campaign/slide-04-gifting.webp"),
-        title: "The Gifting Edit",
-        body: "Pieces chosen to be given: finished, folded and boxed by hand, with the weaver's name on the card inside.",
-        ctaLabel: "Explore Gifts",
-        ctaHref: "/pages/gifting",
+        id: "slide-charbagh",
+        art: imagePair("green", "campaign/charbagh.webp"),
+        title: "Charbagh",
+        body:
+          "A charbagh is a garden quartered by water. The plan turns up in " +
+          "Banarasi jaal constantly once you have seen it \u2014 fourfold, symmetrical, " +
+          "and drawn to be read from above rather than from where anyone stands. " +
+          "These are the pieces that admit it.",
+        ctaLabel: "Discover",
+        ctaHref: "/pages/charbagh",
       },
     ],
   },
@@ -456,7 +456,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
   },
   {
     type: "storesSlideshow",
-    id: "stores-varanasi-mumbai",
+    id: "stores-banaras-lucknow",
     slides: [
       {
         id: "slide-varanasi",
@@ -469,14 +469,14 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi",
       },
       {
-        id: "slide-mumbai",
-        art: imagePair("black", "stores/mumbai.webp"),
+        id: "slide-lucknow",
+        art: imagePair("black", "stores/lucknow.webp"),
         title: "VISIT OUR STORES",
         body:
           "An appointment, an afternoon, and as many pieces off the shelf as you " +
           "care to see. Nothing here is sold in a hurry.",
-        ctaLabel: "Mumbai Store",
-        ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-flagship-store-mumbai",
+        ctaLabel: "Lucknow Store",
+        ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-store-lucknow",
       },
     ],
   },

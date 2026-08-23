@@ -18,7 +18,9 @@ import { BRAND } from "@/lib/brand";
  */
 export function UtilityBar() {
   const { open: openSearch } = useSearchModal();
-  const { itemCount, open: openCart } = useCart();
+  // The cart here navigates to /cart rather than opening the drawer, so the
+  // drawer opener is deliberately not pulled off the context.
+  const { itemCount } = useCart();
 
   return (
     <div

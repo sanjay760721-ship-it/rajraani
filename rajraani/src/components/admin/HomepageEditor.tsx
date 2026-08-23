@@ -29,7 +29,7 @@ const SECTION_DESCRIPTIONS: Record<HomepageSectionType, string> = {
   editorialSlideshow: "2-slide slideshow (Womenswear/Menswear) with secondary Explore buttons",
   tileRow: "4-column quick-link square tile grid (Bridal, Gifting, Zarkashi, Collectibles)",
   poetryBand: "Warm sand background (var(--color-bg-alt)) lyrical text section",
-  storesSlideshow: "2-slide fade slideshow (Banaras/Mumbai) with Calendly booking links",
+  storesSlideshow: "2-slide fade slideshow (Banaras/Lucknow) with Calendly booking links",
   richText: "Rich text narrative prose block",
   pullQuote: "Centered serif pull quote section",
 };
