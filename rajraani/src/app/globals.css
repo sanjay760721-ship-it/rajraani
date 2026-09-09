@@ -13,21 +13,27 @@
   /*
    * --- Palette: ink -------------------------------------------------------
    *
-   * #3a2a2e, and deliberately not the value this was set to twice before.
-   * That value is the most-used colour on the reference site by a wide margin,
-   * so shipping it made our primary ink theirs. This one is 42 degrees away in
-   * hue — still a deep warm brown, mulberry rather than orange — and reads
-   * 13.5:1 on white against the old 10:1, so every contrast pair gained room.
+   * Set to the reference's own values on 10 Sep 2026, at the owner's explicit
+   * and repeated instruction, reversing a decision taken twice before.
+   *
+   * What that decision was, so it is not lost: #533e2d is the most-used colour
+   * on the reference site by a wide margin, and adopting it makes our primary
+   * ink theirs. The previous value (#3a2a2e) sat 42 degrees away in hue — a
+   * mulberry rather than an orange brown — and read 13.5:1 on white where this
+   * reads 10:1. Both clear AAA, so this is a brand-identity trade, not an
+   * accessibility one. Revert to #3a2a2e to undo it.
+   *
+   * Measured live: body #533e2d, headings #301e1d, attribute list #332210.
    */
-  --color-ink: #3a2a2e;         /* headings and brand ink */
-  --color-ink-dark: #3a2b1f;    /* preheadings, darker accents */
-  --color-ink-body: #3a2a2e;    /* body copy */
+  --color-ink: #301e1d;         /* headings and brand ink */
+  --color-ink-dark: #332210;    /* preheadings, darker accents */
+  --color-ink-body: #533e2d;    /* body copy */
   --color-ink-muted: #6b6055;   /* meta, SKU, captions */
 
   /* --- Palette: rules ---------------------------------------------------- */
   --color-rule: #e7e0d6;        /* decorative hairlines */
   --color-rule-input: #8b8072;  /* form control boundaries */
-  --color-rule-strong: #3a2a2e; /* active tab, CTA underline — tracks ink */
+  --color-rule-strong: #301e1d; /* active tab, CTA underline — tracks ink */
 
   /* --- Palette: accent and state ----------------------------------------- */
   --color-accent: #7d5f2a;
@@ -187,6 +193,21 @@
 /* ============================================================================
    Layout Utilities
    ============================================================================ */
+
+/**
+ * Hide the scrollbar on a rail that is scrolled by other means.
+ *
+ * Only for strips where the affordance is carried by something else — the
+ * gallery rail slides itself to the active frame and has arrows on the image
+ * above it. Never on a region whose only way forward is the bar itself.
+ */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 @utility wrap {
   width: 100%;

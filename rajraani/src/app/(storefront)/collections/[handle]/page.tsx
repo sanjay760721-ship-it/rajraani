@@ -70,7 +70,7 @@ export default async function CollectionPage(
   );
 
   return (
-    <div className="wrap-wide">
+    <div className="wrap">
       <nav aria-label="Breadcrumb" className="py-5">
         <ol className="eyebrow flex gap-2 text-ink-muted">
           <li>
@@ -86,8 +86,10 @@ export default async function CollectionPage(
       <header className="pb-10">
         <h1 className="text-h1">{collection.title}</h1>
         {/* Meaningful organic-traffic infrastructure — keep it on every
-            major collection (design.md §6.2). */}
-        <p className="text-prose mt-5 max-w-prose text-ink-body">
+            major collection (design.md §6.2). It reads as a paragraph, not as a
+            narrow caption column: 65ch at 14px broke this into four stub lines
+            under a full-width h1, which looked like a layout accident. */}
+        <p className="text-prose mt-5 max-w-[var(--container-content)] text-ink-body">
           {collection.seoIntro}
         </p>
       </header>
@@ -121,27 +123,60 @@ export default async function CollectionPage(
           />
 
           {visible.length === 0 ? (
+            /*
+              Two different empty states, because they have different causes and
+              only one of them is the shopper's to fix. Filters that exclude
+              everything are undone by clearing them. A collection with nothing
+              in it yet cannot be — telling someone to "remove a filter above"
+              when they have set none reads as a broken page.
+            */
             <div className="border border-rule px-6 py-20 text-center">
-              <p className="font-display text-h3 text-ink">
-                Nothing matches all of those at once.
-              </p>
-              <p className="mt-3 text-ink-body">
-                Remove a filter above, or start again.
-              </p>
-              <Link href={`/collections/${collection.handle}`} className="cta mt-6 inline-block">
-                Clear filters
-              </Link>
+              {base.length === 0 ? (
+                <>
+                  <p className="font-display text-h3 text-ink">
+                    Nothing on the loom here yet.
+                  </p>
+                  <p className="mt-3 text-ink-body">
+                    {collection.title} is being woven. Ask to hear when the first
+                    pieces are ready, or look at what is finished.
+                  </p>
+                  <Link href="/collections/sarees" className="cta mt-6 inline-block">
+                    See what is ready
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p className="font-display text-h3 text-ink">
+                    Nothing matches all of those at once.
+                  </p>
+                  <p className="mt-3 text-ink-body">
+                    Remove a filter above, or start again.
+                  </p>
+                  <Link
+                    href={`/collections/${collection.handle}`}
+                    className="cta mt-6 inline-block"
+                  >
+                    Clear filters
+                  </Link>
+                </>
+              )}
             </div>
           ) : (
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 xl:grid-cols-4">
+            /* Two to a row at every width. A saree is a full-length garment;
+               at four across the drape stops being legible and the grid reads
+               as a contact sheet. The reference site shows them large. */
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-12 lg:gap-x-8">
               {visible.map((product, index) => (
                 <li key={product.handle}>
-                  {/* First row is the LCP candidate. The grid sits directly
-                      under the page h1, so cards are h2 here. */}
+                  {/* First row is the LCP candidate — two cards wide now, so
+                      two get priority. The grid sits directly under the page
+                      h1, so cards are h2 here. */}
                   <ProductCard
                     product={product}
-                    priority={index < 4}
+                    priority={index < 2}
                     headingLevel={2}
+                    sizes="(min-width: 1024px) 460px, 50vw"
+                    quickView
                   />
                 </li>
               ))}

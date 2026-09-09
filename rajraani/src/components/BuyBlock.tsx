@@ -1,22 +1,26 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useState } from "react";
 
 import { QuantityStepper } from "./CartDrawer";
-import { Price } from "./Price";
 import { useCart } from "./cart-context";
 import { isAvailable, type Product } from "@/lib/domain/types";
 
 /**
- * The buy block, and the sticky bar that follows it.
+ * The buy block.
  *
- * Two findings drive this component.
+ * ─────────────────────────────────────────────────────────────────────────────
+ * There was a sticky buy bar here, removed 10 Sep 2026 at the owner's request.
  *
- * §9.2 — on the reference PDP, add-to-cart sits at y=1168 against an 889px
- * viewport: 1.3 screens below the fold, no sticky bar, on a ₹49,500
- * single-variant product. The gallery column is taller than the copy column and
- * pushes the button down. So the buy action must be reachable from any scroll
- * position.
+ * It came from §9.2: on the reference PDP add-to-cart sits 1.3 screens below
+ * the fold with nothing following it down the page, and the argument was that
+ * the buy action should be reachable from any scroll position. That argument
+ * still holds on paper — but the bar was a permanent strip across the foot of
+ * every product page, and the reference has no such thing, so it was both an
+ * intrusion and a visible departure from the page being matched. If it is ever
+ * wanted again, it belongs behind a deliberate decision rather than as a
+ * default.
+ * ─────────────────────────────────────────────────────────────────────────────
  *
  * §9.7 — 49% of a mature catalogue of unique pieces is sold out, so roughly
  * half of all product views land on the sold-out template. The notify form is
@@ -25,38 +29,25 @@ import { isAvailable, type Product } from "@/lib/domain/types";
  * grey box.
  */
 export function BuyBlock({ product }: { product: Product }) {
-  const buyRef = useRef<HTMLDivElement>(null);
-  const [showSticky, setShowSticky] = useState(false);
-
-  useEffect(() => {
-    const element = buyRef.current;
-    if (!element) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowSticky(entry ? !entry.isIntersecting : false),
-      { rootMargin: "0px 0px -80px 0px" },
-    );
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <>
-      <div ref={buyRef}>
-        {isAvailable(product) ? (
-          <AddToCart product={product} />
-        ) : (
-          <NotifyWhenRewoven product={product} />
-        )}
-      </div>
-      {showSticky ? <StickyBuyBar product={product} /> : null}
-    </>
+  return isAvailable(product) ? (
+    <AddToCart product={product} />
+  ) : (
+    <NotifyWhenRewoven product={product} />
   );
 }
 
 function AddToCart({ product }: { product: Product }) {
   const { add } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [consented, setConsented] = useState(false);
   const primary = product.images[0];
+
+  const [finishing, setFinishing] = useState<readonly string[]>([]);
+  const isPreOrder = product.fulfilmentMode === "pre_order";
+  // The button says what the action is. Measured §A5.2 item 13: the reference
+  // labels a pre-order button "Pre-Order", not "Add to cart".
+  const label = isPreOrder ? "Pre-order" : "Add to cart";
+  const blocked = isPreOrder && !consented;
 
   return (
     <div>
@@ -66,43 +57,156 @@ function AddToCart({ product }: { product: Product }) {
           ? "One piece, and only one."
           : `${product.inventoryQuantity} available to order.`}
       </p>
-      <p className="text-caption mt-1 text-ink-muted">
-        Dispatched in {product.dispatchLeadDays[0]}–{product.dispatchLeadDays[1]}{" "}
-        business days.
+
+      {/*
+        Pre-order consent (§A5.2 item 11).
+        A pre-order is a promise about a date, and the one thing that reliably
+        goes wrong is a buyer who did not register that the piece is not woven
+        yet. The checkbox is a gate on the button, not a formality below it.
+      */}
+      {isPreOrder ? (
+        <div className="mt-4 border border-rule p-4">
+          <p className="text-caption text-ink-body">
+            Pre-order — despatch in {product.dispatchLeadDays[0]}–
+            {product.dispatchLeadDays[1]} business days.
+          </p>
+          <label className="text-caption mt-3 flex items-start gap-2 text-ink-body">
+            <input
+              type="checkbox"
+              checked={consented}
+              onChange={(event) => setConsented(event.target.checked)}
+              className="mt-0.5 shrink-0"
+            />
+            <span>
+              I understand this is a pre-order and have read the despatch
+              timeline.
+            </span>
+          </label>
+        </div>
+      ) : null}
+
+      {/*
+        Complimentary finishing services (§A5.2 item 9).
+
+        Checkboxes, not radios — the reference lets more than one be chosen,
+        and "despatch as is" is simply the state of choosing none. Each adds
+        days before despatch, so the estimate below moves with the selection
+        rather than sitting stale above it.
+      */}
+      <FinishingServices selected={finishing} onChange={setFinishing} />
+
+      <p className="text-caption mt-4 text-ink-muted">
+        Despatch in {product.dispatchLeadDays[0] + extraDays(finishing)}–
+        {product.dispatchLeadDays[1] + extraDays(finishing)} business days.
       </p>
 
-      <div className="mt-5 flex items-stretch gap-3">
-        {product.inventoryQuantity > 1 ? (
-          <QuantityStepper
-            value={quantity}
-            max={product.inventoryQuantity}
-            onChange={setQuantity}
-            label={product.poeticName}
-          />
-        ) : null}
-        <button
-          type="button"
-          className="flex-1 bg-ink px-6 py-4 text-bg transition-opacity hover:opacity-90"
-          onClick={() =>
-            add(
-              {
-                handle: product.handle,
-                title: product.title,
-                poeticName: product.poeticName,
-                sku: product.sku,
-                priceMinorUnits: product.price.minorUnits,
-                colourSlug: product.colourFamily,
-                alt: primary?.alt ?? product.title,
-                maxQuantity: product.inventoryQuantity,
-              },
-              quantity,
-            )
-          }
-        >
-          <span className="eyebrow">Add to cart</span>
-        </button>
+      {/* Qty on its own row above the button, not inline beside it (§A5.2
+          item 12), and the button sized to its label rather than stretched
+          across the column (item 13). */}
+      {/* Always shown, even on a single piece, where it renders as "1" with a
+          disabled minus — the reference does the same, and a control that
+          appears only on some products reads as a rendering fault. */}
+      <div className="mt-5">
+        <QuantityStepper
+          value={quantity}
+          max={product.inventoryQuantity}
+          onChange={setQuantity}
+          label={product.poeticName}
+          variant="wide"
+        />
       </div>
+
+      <button
+        type="button"
+        disabled={blocked}
+        aria-describedby={blocked ? "preorder-consent" : undefined}
+        className="mt-4 bg-ink px-8 py-3 font-display text-[1.0625rem] text-bg transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+        onClick={() =>
+          add(
+            {
+              handle: product.handle,
+              title: product.title,
+              poeticName: product.poeticName,
+              sku: product.sku,
+              priceMinorUnits: product.price.minorUnits,
+              colourSlug: product.colourFamily,
+              alt: primary?.alt ?? product.title,
+              maxQuantity: product.inventoryQuantity,
+            },
+            quantity,
+          )
+        }
+      >
+        {label}
+      </button>
+      {blocked ? (
+        <p id="preorder-consent" className="text-caption mt-2 text-ink-muted">
+          Tick the box above to continue.
+        </p>
+      ) : null}
     </div>
+  );
+}
+
+/**
+ * Finishing a saree adds days before it can go out.
+ *
+ * Held here rather than in the catalogue: these are a service the workshop
+ * offers, identical across every saree, so a per-product field would be the
+ * same three rows copied several hundred times. If it ever varies by garment
+ * it moves into the product record and this list reads from there.
+ */
+const FINISHING_SERVICES: readonly { id: string; label: string; days: number }[] =
+  [
+    { id: "fall-pico", label: "Fall and pico", days: 3 },
+    { id: "tassels", label: "Tassels", days: 3 },
+  ];
+
+function extraDays(selected: readonly string[]): number {
+  return FINISHING_SERVICES.filter((service) =>
+    selected.includes(service.id),
+  ).reduce((most, service) => Math.max(most, service.days), 0);
+}
+
+function FinishingServices({
+  selected,
+  onChange,
+}: {
+  selected: readonly string[];
+  onChange: (next: readonly string[]) => void;
+}) {
+  return (
+    <fieldset className="mt-5">
+      <legend className="text-caption text-ink-body">
+        Complimentary finishing. Each adds working days before despatch.
+      </legend>
+      <div className="mt-2 space-y-1.5">
+        {FINISHING_SERVICES.map((service) => (
+          <label
+            key={service.id}
+            className="text-caption flex items-center gap-2 text-ink-body"
+          >
+            <input
+              type="checkbox"
+              checked={selected.includes(service.id)}
+              onChange={(event) =>
+                onChange(
+                  event.target.checked
+                    ? [...selected, service.id]
+                    : selected.filter((id) => id !== service.id),
+                )
+              }
+            />
+            <span>
+              {service.label} ({service.days} days)
+            </span>
+          </label>
+        ))}
+        <p className="text-caption text-ink-muted">
+          Choose none to have it despatched as it is.
+        </p>
+      </div>
+    </fieldset>
   );
 }
 
@@ -155,49 +259,6 @@ function NotifyWhenRewoven({ product }: { product: Product }) {
           </button>
         </form>
       )}
-    </div>
-  );
-}
-
-function StickyBuyBar({ product }: { product: Product }) {
-  const { add } = useCart();
-  const available = isAvailable(product);
-  const primary = product.images[0];
-
-  return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-rule bg-bg/97 backdrop-blur">
-      <div className="wrap-wide flex items-center justify-between gap-4 py-3">
-        <div className="min-w-0">
-          <p className="truncate font-display text-ink">{product.poeticName}</p>
-          <p className="text-caption text-ink">
-            <Price value={product.price} />
-          </p>
-        </div>
-        {available ? (
-          <button
-            type="button"
-            className="shrink-0 bg-ink px-6 py-3 text-bg"
-            onClick={() =>
-              add({
-                handle: product.handle,
-                title: product.title,
-                poeticName: product.poeticName,
-                sku: product.sku,
-                priceMinorUnits: product.price.minorUnits,
-                colourSlug: product.colourFamily,
-                alt: primary?.alt ?? product.title,
-                maxQuantity: product.inventoryQuantity,
-              })
-            }
-          >
-            <span className="eyebrow">Add to cart</span>
-          </button>
-        ) : (
-          <a href="#notify" className="shrink-0 border border-ink px-6 py-3 text-ink">
-            <span className="eyebrow">Notify me</span>
-          </a>
-        )}
-      </div>
     </div>
   );
 }

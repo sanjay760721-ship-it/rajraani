@@ -881,6 +881,47 @@ export const COLLECTIONS: readonly Collection[] = [
       "Handwoven dupattas in georgette, organza and silk, in the same techniques and from the same looms as the sarees.",
     facets: { garment: ["dupatta"] },
   },
+  /*
+   * The remaining garment categories.
+   *
+   * Added 10 Sep 2026: the navigation linked to all four and none existed, so
+   * every one of them 404'd. They are facet collections like the three above,
+   * keyed on a `garment` value that already lives in taxonomy/facets.json, so
+   * they fill themselves the moment a piece of that kind is catalogued and
+   * need no maintenance in between.
+   */
+  {
+    kind: "facet",
+    handle: "lehengas",
+    title: "Lehengas",
+    seoIntro:
+      "Lehengas cut from handwoven Banarasi cloth and tailored to measure. A skirt this size takes several metres from the same warp, so a piece is woven for it rather than cut from stock.",
+    facets: { garment: ["lehenga"] },
+  },
+  {
+    kind: "facet",
+    handle: "stoles",
+    title: "Stoles",
+    seoIntro:
+      "Stoles in silk, wool and blends of the two, woven on the same looms as the sarees. The smallest thing we make that still carries a full border.",
+    facets: { garment: ["stole"] },
+  },
+  {
+    kind: "facet",
+    handle: "blouse-pieces",
+    title: "Blouse Pieces",
+    seoIntro:
+      "Blouse lengths, woven to pair with a saree or to stand against one. Roughly a metre each, in the same fabrics and techniques as the pieces they are meant to sit with.",
+    facets: { garment: ["blouse-piece"] },
+  },
+  {
+    kind: "facet",
+    handle: "yardage",
+    title: "Yardage",
+    seoIntro:
+      "Handwoven cloth by the metre, unstitched and uncut, for anyone who would rather have it made up their own way.",
+    facets: { garment: ["yardage"] },
+  },
   {
     kind: "facet",
     handle: "kadhua",

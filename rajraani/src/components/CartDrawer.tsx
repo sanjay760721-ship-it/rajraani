@@ -485,29 +485,51 @@ export function QuantityStepper({
   max,
   onChange,
   label,
+  variant = "compact",
 }: {
   value: number;
   max: number;
   onChange: (quantity: number) => void;
   label: string;
+  /**
+   * `compact` for the cart line, where the stepper sits inside a narrow
+   * column. `wide` for the PDP, where the reference gives it a full bar with
+   * filled ends — measured ~250×44 (design-addendum §A5.2).
+   */
+  variant?: "compact" | "wide";
 }) {
+  const wide = variant === "wide";
+  // Filled ends on a white centre, as the reference has it: the ± are solid
+  // ink blocks and the disabled one greys back rather than fading the glyph
+  // alone, so it is obvious which way the count can still go.
+  const buttonClass = wide
+    ? "bg-ink px-5 py-3 text-lg leading-none text-bg transition-colors disabled:bg-ink-muted/45"
+    : "px-3 py-1.5 text-ink disabled:opacity-40";
+
   return (
-    <div className="flex items-center border border-rule-input">
+    <div
+      className={`flex items-center border border-rule-input ${
+        wide ? "w-[250px] justify-between bg-bg" : ""
+      }`}
+    >
       <button
         type="button"
-        className="px-3 py-1.5 text-ink disabled:opacity-40"
+        className={buttonClass}
         onClick={() => onChange(value - 1)}
         disabled={value <= 1}
         aria-label={`Decrease quantity of ${label}`}
       >
         −
       </button>
-      <span className="min-w-8 text-center tabular-nums" aria-live="polite">
+      <span
+        className={`text-center tabular-nums ${wide ? "flex-1" : "min-w-8"}`}
+        aria-live="polite"
+      >
         {value}
       </span>
       <button
         type="button"
-        className="px-3 py-1.5 text-ink disabled:opacity-40"
+        className={buttonClass}
         onClick={() => onChange(value + 1)}
         disabled={value >= max}
         aria-label={`Increase quantity of ${label}`}

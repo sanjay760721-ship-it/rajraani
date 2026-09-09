@@ -57,6 +57,8 @@ export function Frame({
   sizes = "(min-width: 1024px) 33vw, 50vw",
   className = "",
   showLabel = false,
+  ratio,
+  fit = "cover",
 }: {
   image: ProductImage;
   /** Drives the placeholder tint so a grid reads plausibly. */
@@ -66,8 +68,24 @@ export function Frame({
   className?: string;
   /** Label the frame's role in the shot template — useful while placeholding. */
   showLabel?: boolean;
+  /**
+   * Force the box's shape, ignoring the frame's own.
+   *
+   * The gallery needs this: a shot template that mixes 2:3 on-model frames
+   * with 1:1 details will otherwise change the height of the whole column
+   * every time someone steps onto a detail shot. Reserving one shape and
+   * letting the square sit inside it keeps the page still.
+   */
+  ratio?: ImageRatio;
+  /**
+   * `contain` shows the whole photograph inside the box, letterboxed if its
+   * shape differs. Use it wherever the box's shape is forced — cropping a
+   * square detail into a 2:3 hole throws away the detail it was shot for.
+   */
+  fit?: "cover" | "contain";
 }) {
-  const ratioClass = RATIO_CLASS[image.ratio];
+  const ratioClass = RATIO_CLASS[ratio ?? image.ratio];
+  const fitClass = fit === "contain" ? "object-contain" : "object-cover";
 
   if (image.src) {
     return (
@@ -80,7 +98,7 @@ export function Frame({
           priority={priority}
           quality={100}
           unoptimized
-          className="object-cover"
+          className={fitClass}
         />
       </div>
     );

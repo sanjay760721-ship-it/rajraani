@@ -215,6 +215,124 @@ Top to bottom:
     belongs in settings, not per-product fields. Full text captured in A6.
 11. **"You may also like"** recommendation rail.
 
+### A5.2 Re-measured 10 Sep 2026 — corrections to A5 and to design.md §6.3
+
+Measured live at 1280×720 on a saree PDP. Where this section and A5/§6.3 disagree,
+**this section is correct** — the earlier pass got the gallery and the column split
+wrong, and both are load-bearing for how the page reads.
+
+**Container and columns**
+- Container **1160px**, centred. Not `--max-w-content` (1200) and not full-bleed.
+- **Two equal columns of 580px**, ~20px gutter. Not 58/42. The gallery is exactly as
+  wide as the details.
+- The details column is **`position: static`**. It does **not** stick. §6.3's "sticky
+  while the gallery scrolls (a key premium feel)" is not what the site does.
+
+**Gallery — the big one**
+- There is **no vertical thumbnail rail**. A5 item 2 is wrong.
+- Layout is **main image on top, horizontal thumbnail strip beneath it**, both inside
+  the left column. Thumbnails are `one-fifth column` — **five per row**, wrapping.
+- Main image **580×870** (2:3), served from a 1440×2159 master.
+- Thumbnails **96×144** for 2:3 frames and **96×96** for 1:1 detail frames, from 300px
+  masters. The mixed-ratio sequence is confirmed: 5 portrait, then square.
+- Click the main image → **fullscreen lightbox** with prev/next arrows at the screen
+  edges and a top-right toolbar (zoom / slideshow / close). Flickity underneath.
+
+**Breadcrumb row**
+- Separator is **`→`**, not `/`. Trail is `Home → Sarees → <full product title>`.
+- **`Previous | Next`** sits at the **far right of the same row**. Confirmed.
+
+**Details column, corrected order**
+1. **Fulfilment badge** — a filled pill, `rgb(174, 121, 34)` ochre, ~75×22, **above the
+   h1**, in the details column. Not on the image.
+2. `h1` — full descriptive title, including the `Pre-Order:` prefix (§9.8 still stands:
+   that prefix is a data-modelling error we do not copy).
+3. **SKU**, plain.
+4. **Price**, then `MRP inc. of taxes` in italic.
+5. **Poetic name as `<strong>`**, not a heading. A5 item 6 and §6.3 item 4 both say
+   `<h4>`; it is a bold run inside body copy.
+6. **Lead paragraph.**
+7. **Attribute list.** Labels are `<em>` italic; the separator is a plain **hyphen `-`**,
+   not an en dash. Observed labels: `Color`, `Technique`, `Fabric`, `Collection note`,
+   `Tilfi Promise`, `Note`. `Speciality` did not appear on this SKU — it is optional.
+   **`Expected Dispatch Time - 1 week.`** appears as a **bold item inside this list**,
+   not as separate body copy. A5's closing note has it in the wrong place.
+8. **Irregularity disclaimer**, italic.
+9. **Complimentary finishing services** — *not previously recorded anywhere.* A radio
+   group headed "Would you like the following complimentary services? Please add extra
+   working days before despatch:", with three options: **Fall Pico (3 days)**,
+   **Tassels (3 days)**, **Despatch as is**. This is a real per-order choice that
+   changes the despatch estimate, and it needs product fields we do not have.
+10. **Inventory line** — `1 available to order`.
+11. **Pre-order consent** (pre-order SKUs only) — a `Pre-Order timelines - <n> week`
+    line plus a **required checkbox**: "I understand that this is a pre-order and have
+    read the despatch timeline".
+12. **Qty input** — 190×44, on **its own row above the button**. Not inline beside it.
+13. **Primary button** — **auto-width (101px measured) × 44px**, *not* full column width
+    and not 48px tall. Its **label follows fulfilment mode**: `Pre-Order` here, not
+    `Add to cart`.
+
+**Below the columns**
+- **Tab bar** at full container width (1160), below both columns:
+  `Shipping · Dimensions · Care · Other`, first active. A real tab bar, not an accordion.
+  Confirmed as specified.
+- **`You may also like`** — an `<h4>`, **centred**, then the card row.
+- Nothing else. No provenance block, no reviews — A5.1 still holds.
+
+**What we keep that the reference does not do.** The sticky buy bar (§9.2), the
+provenance block (§9.4), corrected heading order (§5) and the fuller `Product` +
+`BreadcrumbList` schema (§6) are deliberate departures, argued elsewhere and unaffected
+by this re-measurement. `Tilfi Promise` stays `Our promise` in our build — build.md §6
+forbids the competitor's literal strings regardless of what the reference does.
+
+### A5.2b Second pass, 10 Sep 2026 — Quick View, and the rest of the detail
+
+**§12 item 7 is wrong. Quick View exists.**
+
+`design.md` §12 item 7 records "No Quick View exists. No such control anywhere on the
+PLP", and that finding was acted on twice: the component was specified out of the
+inventory, then built as an "original addition", then deleted again on the strength of
+it. The control is there. It appears **on hover over a product card** — a pale
+translucent bar across the middle of the image, the words *Quick View* set in the
+display serif, centred. Treat §12 item 7 as retracted.
+
+The lesson is not about Quick View. A single negative observation from one automated
+pass was allowed to stand as settled fact and then to remove a feature; negative
+findings about hover-only affordances should be held much more loosely than positive
+ones, because an automation session that never hovers cannot see them.
+
+**Type and colour — measured, not inferred**
+- Body: **Open Sans 400, 14px / 21px**, colour **`#533e2d`**.
+- Headings: **Cardo 400**, PDP `h1` at **25px / 28px**, colour **`#301e1d`**.
+- Attribute list: **Cardo 13px**, letter-spacing **1px**, colour **`#332210`**.
+- Page background **`#ffffff`**.
+
+Our type families already matched. The ink did not, deliberately — see the note in
+`globals.css`, which records the decision that was reversed here on the owner's
+instruction and how to undo it.
+
+**Gallery — hover magnification**
+- The main frame is a `.zoom-container` at frame size with `overflow: hidden`, holding
+  a **larger copy of the same photograph** (measured **800×1200 inside 580×870**, so
+  **1.4×**) that is **panned so the point under the cursor stays under the cursor**.
+- This is a pan-zoom, not `scale()` on hover: with a fixed origin the detail being
+  pointed at slides out from under the pointer, which defeats the purpose.
+- **Circular step arrows sit on the frame itself**, left and right, vertically centred —
+  translucent white discs. Not recorded in the first pass.
+- Click still opens the fullscreen viewer.
+
+**Details column — further corrections to A5.2**
+- Finishing services are **checkboxes, not radios** (A5.2 item 9 said radios). More than
+  one can be chosen, and "despatch as is" is the state of choosing none.
+- The **`Note` row's value is set in italic**; the other attribute values are not.
+- The qty control is a **wide bar (~250×44)** with filled `−` / `+` at each end, not a
+  compact inline stepper.
+
+**Recommendation rail**
+- **Three cards, not four.**
+- Heading `You may also like` is **centred**, in the display serif at section size.
+- **Card titles and prices are centred** under the frame, not left-aligned.
+
 ### A5.1 What is NOT on the PDP
 
 No reviews. No star ratings. No social share row. No "customers also bought". No size

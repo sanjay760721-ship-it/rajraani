@@ -623,6 +623,17 @@ Home / Sarees                                    [breadcrumb, 11px, muted]
 
 ### 6.3 Product detail / PDP
 
+> 🔴 **Corrected 10 Sep 2026 by live re-measurement — see `design-addendum.md` §A5.2.**
+> Three things in this section are wrong and A5.2 supersedes them:
+> - **Columns are 50/50 in a 1160px container**, not "roughly 58% gallery / 42% details".
+> - **The details column is not sticky.** It is `position: static`.
+> - **There is no vertical thumbnail rail.** The main image sits above a horizontal
+>   five-up thumbnail strip, both in the left column.
+>
+> The ASCII sketch below still shows the old, wrong arrangement; read A5.2 for the
+> measured one.
+
+
 ```
 Home / Sarees / 'Majestic Leap' Green…          ← Previous  |  Next →
 
@@ -848,14 +859,14 @@ Divide your score by 115. Anything below 0.90 — look first at items 2, 3, 4, a
 | 4 | Hero autoplay interval / loop | Flickity (`jsSlideshowClassic`, `gallery-cell`), **9 slide indicators**, `overlaid-header-option` on the section. **No slide advance observed across 13 s** — autoplay is either disabled, longer than 13 s, or paused when the tab is not focused. |
 | 5 | PLP pagination — load more or infinite scroll? | **Neither. Numbered pagination.** Controls read `1 · 2 · 3 … 20 · Next`. Sarees collection is 20 pages at ~48 products each. |
 | 6 | Mega menu — hover or click? | **Opens on hover.** Layout is three link columns (New Arrivals / Clothing / Featured) plus one large campaign image tile at the right. |
-| 7 | Quick View contents | **No Quick View exists.** No such control anywhere on the PLP. §5's Quick View component should be dropped from the inventory unless you want it as an original addition. |
+| 7 | Quick View contents | ~~**No Quick View exists.**~~ **RETRACTED 10 Sep 2026 — this finding was wrong.** Quick View is there, on the product cards, revealed **on hover**; an automated pass that never hovered could not see it. See `design-addendum.md` §A5.2b. |
 | 8 | Mobile grid gutter at 375px | **Not verified** — window resize did not take effect in the automation session. Also **moot**: under the own-brand target the grid is ours, and `build.md` §2.5 sets breakpoints at 768 / 1024 / 1440. |
 
 ### What this changes
 
 **Item 5 is the one that matters for the build.** Numbered pagination on a 971-product collection is a poor experience and a poor discovery surface — it also means a shopper cannot land deep into a collection from search without paging. `build.md` Sprint 3 already specifies Algolia-backed faceting; pair it with infinite scroll or a Load More that pushes state to the URL. Do not copy the numbered pager.
 
-**Item 7 removes a component.** No Quick View to match, so nothing to reverse-engineer.
+**~~Item 7 removes a component.~~ Retracted — see §A5.2b.** Quick View exists and is matched.
 
 **Item 6 confirms hover.** Keep hover, but the keyboard-navigable requirement in `build.md` §6 stands — hover-only is an accessibility failure and the category does not solve it for you.
 

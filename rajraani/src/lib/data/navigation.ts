@@ -1,4 +1,7 @@
-import { BRAND_NAME } from "@/lib/brand-name";
+// Relative, like every sibling in this directory: the `@/` alias is a bundler
+// concern and `node --test` does not resolve it, so an aliased import here is
+// what kept this module untestable.
+import { BRAND_NAME } from "../brand-name.ts";
 
 /**
  * Site navigation.

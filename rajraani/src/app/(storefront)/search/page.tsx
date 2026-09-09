@@ -95,7 +95,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
           <ul className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 xl:grid-cols-4">
             {results.products.map((product) => (
               <li key={product.handle}>
-                <ProductCard product={product} />
+                <ProductCard product={product} quickView />
               </li>
             ))}
           </ul>

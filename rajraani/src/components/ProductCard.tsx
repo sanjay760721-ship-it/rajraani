@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Frame } from "./Frame";
 import { Price } from "./Price";
+import { QuickView } from "./QuickView";
 import { WishlistHeart } from "./WishlistHeart";
 import { isAvailable, type Product } from "@/lib/domain/types";
 
@@ -21,13 +22,29 @@ const BADGES: Partial<Record<Product["fulfilmentMode"], string>> = {
   made_to_order: "Made to order",
 };
 
+/** Rails and mega-menu tiles; the PLP is two-up and passes its own. */
+const RAIL_SIZES = "(min-width: 1440px) 25vw, (min-width: 768px) 33vw, 50vw";
+
 export function ProductCard({
   product,
   priority = false,
   headingLevel = 3,
+  sizes = RAIL_SIZES,
+  quickView = false,
 }: {
   product: Product;
   priority?: boolean;
+  /**
+   * The card cannot know how wide it renders — that is the grid's business —
+   * so the caller states it. Wrong here means the browser picks the wrong rung
+   * of the srcset ladder, which is a bandwidth bug, not a visual one.
+   */
+  sizes?: string;
+  /**
+   * Offer the quick-view bar on hover. On in the listing grids and the
+   * recommendation rail, which is where the reference puts it.
+   */
+  quickView?: boolean;
   /**
    * The card's heading level depends on what encloses it, so the caller has to
    * say. In a grid sitting directly under the page `h1` it is an `h2`; inside a
@@ -44,8 +61,14 @@ export function ProductCard({
 
   const Heading = `h${headingLevel}` as const;
 
-  const available = isAvailable(product);
-  const badge = available ? BADGES[product.fulfilmentMode] : "Sold out";
+  // Sold-out pieces are badged, not dimmed. Fading the photograph to 60% made
+  // them read as poor photography rather than as unavailable stock — and on a
+  // catalogue where roughly half of a mature season is sold out (§9.7), that
+  // would be half the grid looking washed out for no informational gain. The
+  // badge already carries the state.
+  const badge = isAvailable(product)
+    ? BADGES[product.fulfilmentMode]
+    : "Sold out";
 
   return (
     <article className="group relative">
@@ -54,8 +77,7 @@ export function ProductCard({
           image={primary}
           colourSlug={product.colourFamily}
           priority={priority}
-          sizes="(min-width: 1440px) 25vw, (min-width: 768px) 33vw, 50vw"
-          className={available ? "" : "opacity-60"}
+          sizes={sizes}
         />
         {/* Hover swaps to the second frame — the only motion on the card. */}
         {secondary ? (
@@ -66,7 +88,7 @@ export function ProductCard({
             <Frame
               image={secondary}
               colourSlug={product.colourFamily}
-              sizes="(min-width: 1440px) 25vw, (min-width: 768px) 33vw, 50vw"
+              sizes={sizes}
             />
           </div>
         ) : null}
@@ -78,6 +100,7 @@ export function ProductCard({
         ) : null}
         {/* Wishlist heart — fades in on card hover */}
         <WishlistHeart product={product} />
+        {quickView ? <QuickView product={product} /> : null}
       </div>
 
       {/*
@@ -87,7 +110,10 @@ export function ProductCard({
         Price last, in the UI face with tabular figures so a column of prices
         aligns on the decimal even at different lengths.
       */}
-      <div className="mt-4">
+      {/* Centred under the frame — the reference centres both the title and
+          the price, and a left-aligned column of names under centred images
+          reads as a different grid entirely. */}
+      <div className="mt-4 text-center">
         <Heading className="font-display text-[1.375rem] leading-tight tracking-tight text-ink">
           {/* Stretched link: the whole card is one target, without nesting
               anchors inside an anchor. */}

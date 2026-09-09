@@ -34,13 +34,18 @@ const IMAGE_EXT = new Set([".webp", ".jpg", ".jpeg", ".png", ".avif"]);
 const collator = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
 
 /**
- * Read once per process. The staging directory does not change while the server
- * runs, and doing this per request would stat the disk on every product view.
- * Restart the dev server after re-running the import script.
+ * Read once per process in production, and per call in development.
+ *
+ * Doing this per request would stat the disk on every product view, which is
+ * why it is cached at all. But in development the staging directory *does*
+ * change — that is the entire point of the import script — and a stale cache
+ * there is worse than the stat: re-running the import silently changed nothing
+ * on the running server, so the pages kept serving the previous run's frame
+ * order and the bug looked like it was in the sort.
  */
 function readStagedPhotography(): ReadonlyMap<string, readonly string[]> {
-  const staged = new Map<string, readonly string[]>();
-  if (!existsSync(STAGE_DIR)) return staged;
+  const byHandle = new Map<string, readonly string[]>();
+  if (!existsSync(STAGE_DIR)) return byHandle;
 
   for (const entry of readdirSync(STAGE_DIR, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
@@ -50,16 +55,30 @@ function readStagedPhotography(): ReadonlyMap<string, readonly string[]> {
       .sort(collator.compare)
       .map((name) => `${PUBLIC_PREFIX}/${entry.name}/${name}`);
 
-    if (files.length > 0) staged.set(entry.name, files);
+    if (files.length > 0) byHandle.set(entry.name, files);
   }
 
-  return staged;
+  return byHandle;
 }
 
-const STAGED = readStagedPhotography();
+const IS_DEV = process.env.NODE_ENV !== "production";
 
-/** True when anything is staged — drives the local-preview notice. */
-export const HAS_LOCAL_PHOTOGRAPHY = STAGED.size > 0;
+let cached: ReadonlyMap<string, readonly string[]> | undefined;
+
+function staged(): ReadonlyMap<string, readonly string[]> {
+  if (IS_DEV) return readStagedPhotography();
+  cached ??= readStagedPhotography();
+  return cached;
+}
+
+/**
+ * True when anything is staged — drives the local-preview notice.
+ *
+ * Read at module load either way: whether photography exists at all is a
+ * property of the checkout, not of the request, and it decides whether the
+ * overlay is installed on the repository in the first place.
+ */
+export const HAS_LOCAL_PHOTOGRAPHY = readStagedPhotography().size > 0;
 
 /**
  * Attach staged photography to one product.
@@ -79,7 +98,7 @@ export const HAS_LOCAL_PHOTOGRAPHY = STAGED.size > 0;
  * person who can see the picture.
  */
 function withStagedImages(product: Product): Product {
-  const files = STAGED.get(product.handle);
+  const files = staged().get(product.handle);
   if (!files || product.images.length === 0) return product;
 
   const template = product.images;

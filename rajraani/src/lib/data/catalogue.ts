@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 
+import type { Product } from "../domain/types.ts";
 import {
   HAS_LOCAL_PHOTOGRAPHY,
   withLocalPhotography,
@@ -43,15 +44,38 @@ function withPhotography(inner: CatalogueRepository): CatalogueRepository {
   if (!HAS_LOCAL_PHOTOGRAPHY) return inner;
 
   return {
-    listProducts: async () => withLocalPhotography(await inner.listProducts()),
+    listProducts: async () => photographed(await inner.listProducts()),
     getProduct: async (handle) =>
-      withLocalPhotographyOne(await inner.getProduct(handle)),
+      onlyIfPhotographed(withLocalPhotographyOne(await inner.getProduct(handle))),
     productsInCollection: async (collection) =>
-      withLocalPhotography(await inner.productsInCollection(collection)),
+      photographed(await inner.productsInCollection(collection)),
     listCollections: () => inner.listCollections(),
     getCollection: (handle) => inner.getCollection(handle),
     getCampaign: (slug) => inner.getCampaign(slug),
   };
+}
+
+/** A product is shoppable once at least one of its frames has a photograph. */
+function hasPhotograph(product: Product): boolean {
+  return product.images.some((image) => Boolean(image.src));
+}
+
+/**
+ * Overlay the staged photography, then drop what it did not reach.
+ *
+ * Once *any* photography is staged, a product still on placeholder colour
+ * fields reads as a broken tile next to a real one rather than as pending — so
+ * it leaves the grid entirely, and the facet counts, which are computed from
+ * this same list, follow it out. With nothing staged the whole site is
+ * schematic on purpose and this wrapper is never installed at all.
+ */
+function photographed(products: readonly Product[]): readonly Product[] {
+  return withLocalPhotography(products).filter(hasPhotograph);
+}
+
+/** The same rule for one product: an unphotographed handle is a 404. */
+function onlyIfPhotographed(product: Product | undefined): Product | undefined {
+  return product && hasPhotograph(product) ? product : undefined;
 }
 
 function createCatalogue(): CatalogueRepository {

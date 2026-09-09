@@ -48,26 +48,28 @@ That phrasing does real work. It means: copy the *structural* decisions that are
 > 9 August carousel/slideshow/mega-menu/admin-redesign commits and the 22 August audit.
 > It says "8 of 15 sections" where there are 17, and it does not mention that the
 > checkout is a facade. Kept because the research rows are still accurate.
-> **For build status use [§2.46](#246-progress-ledger--measured-against-git-22-august-2026).**
+> **For build status use [§2.46](#246-progress-ledger--measured-against-git-22-august-2026),
+> then [§2.51](#251-plp-and-pdp-matched-to-the-reference--10-september-2026) for the
+> 10 September PLP/PDP work and the corrections it made to the research.**
 
 | Item | Status |
 |---|---|
 | `build.md` — architecture spec | ✅ **Revised 5 Aug.** Re-cut for own-brand target; §8 resolved; §9 added. |
-| `design.md` §3 + §12 | ✅ **Verified 5 Aug** against live computed styles. Many token values were wrong — corrections in new §3.0; §12 closed. |
+| `design.md` §3 + §12 | 🟡 **Verified 5 Aug, partly wrong.** Corrections in §3.0. **§12 item 7 retracted 10 Sep — Quick View does exist**, and §6.3's gallery, column split and sticky column were all re-measured wrong. See `design-addendum.md` §A5.2 / §A5.2b. |
 | `pre-build-gaps.md` — sweep 4 | ✅ **New 5 Aug.** Data quality, campaign architecture, availability, SEO, accessibility. **Research is now complete.** |
 | §8 competitive sweep | ✅ **Closed.** All seven original questions answered or retired. |
 | Deep competitive sweep | ✅ `sweep-findings.md` |
 | Photography brief | ✅ `photography-brief.md` — was the critical path, now unblocked |
 | Platform decision | ⚠️ **CHANGED 6 Aug** — Shopify and Sanity dropped. Razorpay + our own database and admin, India-only. See `rajraani/docs/architecture-change-2026-08-06.md`. This supersedes `build.md` §1.1 and §1.3. |
 | Brand name | ✅ **Rajraani.** Settled 5 Aug. |
-| Design tokens | ✅ **Authored 5 Aug, real values 7 Aug** — `rajraani/src/app/globals.css`. Cormorant Garamond + Inter via `next/font`, warm deepened palette, editorial spacing. 22 contrast pairs asserted in tests. No longer placeholders. |
+| Design tokens | ✅ **Authored 5 Aug, real values 7 Aug, ink changed 10 Sep** — `rajraani/src/app/globals.css`. **Cardo + Open Sans** via `next/font` (not Cormorant/Inter — that row was stale). Ink set to the reference's own values on 10 Sep at the owner's instruction; the reversed decision and how to undo it are recorded in the file. 22 contrast pairs asserted in tests. |
 | Facet taxonomy | 🟡 **Drafted 5 Aug** — `rajraani/taxonomy/`. 9 facets, 63 values. **11 decisions need domain review before Sprint 3.** |
 | Catalogue and editorial content | ❌ Open — see `build.md` §7.7. Confirm the writer exists before Sprint 4. |
 | Photography commissioning | ❌ Open — fill SKU counts, send brief, collect quotes |
 | `prototype.html` — architecture prototype | ✅ Built 5 Aug. **Superseded by the live build** — kept for reference, still says "Tantu". |
 | Catalogue origin | ✅ **Greenfield.** §7.3 is now a governance rule, not a migration workstream. |
 | **Sprint 0 — Foundations** | ✅ **Built 5 Aug.** Live code is `rajraani/` — see §2.0. |
-| **Sprints 1–2 — working slice** | ✅ **Built 5 Aug.** PLP with multi-select faceting, PDP with mixed-ratio gallery and sticky buy bar, homepage section registry, editorial pages, grouped search, cart drawer. All verified in a browser. |
+| **Sprints 1–2 — working slice** | ✅ **Built 5 Aug.** PLP with multi-select faceting, PDP with mixed-ratio gallery (sticky buy bar removed 10 Sep, §2.51), homepage section registry, editorial pages, grouped search, cart drawer. All verified in a browser. |
 | **Homepage 11-Section Parity** | ✅ **Built 7 Aug.** 6-slide interactive hero carousel, brand statement, kadhua triptych, artisan video band (`eef6a84960be44829508a3e3e4a77980.mp4`), 2-up category split, 4-up quick links, dual campaign split, poetry band, boutique store booking band, support strip, scroll reveal animations, crystal-sharp 100% image quality. |
 
 ### 2.0 There is one build, in `rajraani/`
@@ -816,6 +818,65 @@ hover at all.
 
 ---
 
+### 2.51 PLP and PDP matched to the reference — 10 September 2026
+
+A working session driven by the owner comparing pages side by side with the reference
+site. Most of it was correcting the research, not the code: **three separate findings
+in `design.md` turned out to be wrong**, and each had already caused work to be built
+the wrong way or torn out.
+
+**Corrections to the research** (all in `docs/research/`)
+- **§A5.2** — the PDP was re-measured live. The gallery has **no vertical thumbnail
+  rail**; it is a main image above a horizontal five-up strip. Columns are **50/50 in a
+  1160px container**, not 58/42. The details column is **`position: static`**, not
+  sticky. Attribute labels use a **hyphen**, not an en dash. The poetic name is a
+  `<strong>`, not an `<h4>`. Dispatch time is a **row inside the attribute list**.
+  Previously unrecorded: a fulfilment badge above the h1, a pre-order consent checkbox,
+  and a complimentary-finishing checkbox group.
+- **§A5.2b** — **§12 item 7 is retracted. Quick View exists.** It is on the product
+  cards, revealed on hover; an automated pass that never hovered could not see it. The
+  component had been specified out, built as an "original addition", then deleted on the
+  strength of that finding. Type and colour measured: Open Sans 14/21 `#533e2d`, Cardo
+  h1 25px `#301e1d`, list `#332210`. Gallery hover is a **pan-zoom at 1.4×**, not a
+  `scale()`.
+- **§6.3** carries a correction banner pointing at both.
+
+**Build changes**
+- Products with no photograph are dropped at the catalogue seam once any photography is
+  staged, so no placeholder colour field sits beside a real photograph. Facet counts
+  follow, because they are computed from the same list.
+- PLP: content-width container, two-up grid, intro as a real paragraph, centred card
+  titles and prices, Quick View on hover.
+- PDP rebuilt to §A5.2: breadcrumb with `→` and the full title, prev/next, 50/50
+  columns, badge above the h1, hyphenated attribute list with a despatch row, finishing
+  checkboxes, pre-order consent gating the button, wide qty bar, serif sentence-case
+  button, tab bar on desktop and accordion on mobile, three-up centred recommendation
+  rail, `BreadcrumbList` alongside `Product`.
+- Gallery: constant frame shape with squares fitted rather than cropped, a five-up rail
+  that scrolls and slides to the active frame, circular arrows on the frame,
+  hover pan-zoom, fullscreen viewer with arrow-key navigation.
+- **Ink palette changed to the reference's own values** at the owner's explicit and
+  repeated instruction, reversing a decision taken twice before. `globals.css` records
+  what was reversed and how to undo it. Contrast goes 13.5:1 → 10:1; both clear AAA.
+- The **sticky buy bar was removed** on request. The §9.2 argument for it is preserved
+  in `BuyBlock.tsx` so nobody re-adds it thinking it was an oversight.
+
+**Bugs found and fixed while verifying**
+- The staged photography directory was **stale against `pics/`** — a fabric close-up was
+  serving as frame 1 on two sarees. Re-staged; `local-photography.ts` now re-reads per
+  call in development, because the process-lifetime cache made re-running the import
+  appear to do nothing.
+- Sold-out pieces were **dimmed to 60% opacity**, which read as bad photography rather
+  than as unavailable stock. Badged only now.
+- The recommendation rail was **empty on every product** — it hard-filtered on shared
+  weave, and at this catalogue size most weaves have one member. Weave now ranks rather
+  than excludes.
+- The sticky bar **bypassed the pre-order consent checkbox**. Moot now it is gone, but it
+  was live for part of the session.
+
+**The navigation is mostly dead links.** See §5.8 — this is the largest open item to
+come out of the session and it predates it.
+
 ### 2.4 Pick up here
 
 *Re-ordered 22 Aug. Item 0 is new and outranks everything: the payment path currently
@@ -1031,6 +1092,32 @@ What still needs sanju rather than code: **photography** (§5.6 and §6), the **
 writer** (§5.3), and the **taxonomy review** (§5.4). Plus a Razorpay account when
 checkout is ready to wire up, which needs business KYC and is worth starting early.
 
+### 5.8 The navigation links to collections that do not exist
+
+Found 10 September 2026. **30 of the 36 collection links in the menus 404'd.** The
+navigation was written as a merchandising structure — the shape a catalogue this deep
+wants — and the collections behind it were never created. Nothing failed and nothing
+warned, because nobody clicks all 36.
+
+**Closed:** `lehengas`, `stoles`, `blouse-pieces`, `yardage`. Each maps to a `garment`
+value already in `taxonomy/facets.json`, so they are facet collections like `sarees` and
+fill themselves as pieces are catalogued.
+
+**Open — 26 collections, listed in `src/lib/data/navigation.test.ts` as
+`NOT_YET_AUTHORED`:** `alap`, `back-in-stock`, `bridal`, `chhaya`, `collectors-edit`,
+`everyday`, `festive`, `first-saree`, `fresh-off-the-loom`, `freshly-tailored`, `gifts`,
+`heirloom`, `kinara`, `lightweight`, `menswear`, `modern-classics`, `nirantar`,
+`occasion`, `office-travel`, `prabhat`, `ritu`, `seasonal`, `signatures`, `taar`,
+`udgam`, `womenswear`.
+
+These are editorial groupings with no facet behind them. Each needs a title, an
+`seoIntro` and either a facet definition or a product list — **authorship, not
+engineering**, and it belongs to whoever owns the merchandising. The alternative is to
+trim the menus to what exists and re-add entries as collections are written.
+
+`navigation.test.ts` fails on any *new* dead link, and fails if the list goes stale in
+either direction, so the backlog cannot quietly grow or rot.
+
 ### 5.6 Not blocking
 
 **Photography.** The brief is written and the shoot runs in parallel. Build against placeholder images at the exact specified ratios (2:3 at 3000×4500, 1:1 at 3000×3000) and the swap is clean.
@@ -1054,6 +1141,10 @@ checkout is ready to wire up, which needs business KYC and is worth starting ear
    checkout is ready to wire up. (Replaces the old "create a Shopify store" item —
    see §5.7.)
 8. ~~Delete the superseded parallel build~~ — done 6 Aug; there is one folder now (§2.0)
+9. **Decide the 26 unwritten collections (§5.8).** The menus advertise them and they
+   404. Either say what belongs in each — a title, an intro, and a facet or a product
+   list — or say to trim the menus to what exists. This is merchandising, not
+   engineering, and it is the largest open item from 10 September.
 
 **For the next session:**
 
