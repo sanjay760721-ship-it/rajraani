@@ -1,336 +1,328 @@
 "use client";
 
-import Image from "next/image";
+import { useMemo, useRef, useState, useTransition } from "react";
+
 import Link from "next/link";
-import { useState } from "react";
-import { HOMEPAGE_SECTIONS, type Section } from "@/lib/content/sections";
 
-type HomepageSectionType =
-  | "hero"
-  | "heroCarousel"
-  | "brandStatement"
-  | "collectionTriptych"
-  | "videoBand"
-  | "categorySplit"
-  | "editorialSlideshow"
-  | "tileRow"
-  | "poetryBand"
-  | "storesSlideshow"
-  | "richText"
-  | "pullQuote";
+import { saveHomepageAction } from "@/lib/admin/content-actions";
+import type { Section } from "@/lib/content/sections";
 
-const SECTION_DESCRIPTIONS: Record<HomepageSectionType, string> = {
-  hero: "Single full-bleed banner with title, paragraph, and CTA",
-  heroCarousel: "6-slide auto-playing interactive hero carousel with desktop/mobile crops",
-  brandStatement: "High-whitespace brand philosophy text band with centered quote",
-  collectionTriptych: "3-frame square image feature highlighting weave craftsmanship",
-  videoBand: "Full-bleed or 16:9 framed ambient pit loom video section",
-  categorySplit: "2-column square category grid with 1.03x hover zoom scaling",
-  editorialSlideshow: "2-slide slideshow (Womenswear/Menswear) with secondary Explore buttons",
-  tileRow: "4-column quick-link square tile grid (Bridal, Gifting, Zarkashi, Collectibles)",
-  poetryBand: "Warm sand background (var(--color-bg-alt)) lyrical text section",
-  storesSlideshow: "2-slide fade slideshow (Banaras/Lucknow) with Calendly booking links",
-  richText: "Rich text narrative prose block",
-  pullQuote: "Centered serif pull quote section",
-};
+/**
+ * The homepage layout manager.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * This screen used to be a mock, and could not have been anything else: it read
+ * `HOMEPAGE_SECTIONS` — a TypeScript constant — into `useState`, let you
+ * rearrange it, and discarded everything on navigation. There was nowhere to
+ * save to. `src/lib/content/` is that somewhere now.
+ * ─────────────────────────────────────────────────────────────────────────────
+ *
+ * Two decisions worth stating.
+ *
+ * **Hiding a section is removing it from the list.** There is no `hidden` flag.
+ * The saved list *is* the homepage, in order, which means there is exactly one
+ * thing to reason about rather than a list plus a set of exceptions. Nothing is
+ * lost by removing: everything not currently placed sits in the tray below,
+ * ready to go back, and the committed seed is in git regardless.
+ *
+ * **Preview is the real page, in an iframe, not a reconstruction.** A preview
+ * built out of admin components is a second implementation that drifts from the
+ * first and lies to you exactly when it matters. `SectionRenderer` is an async
+ * server component and cannot run in here anyway. So: save, then reload the
+ * actual homepage — which now reads from the database, so it shows the truth.
+ */
 
-export function HomepageEditor() {
-  const [sections, setSections] = useState<Section[]>([...HOMEPAGE_SECTIONS]);
-  const [hiddenIds, setHiddenIds] = useState<Record<string, boolean>>({});
-  const [editingId, setEditingId] = useState<string | null>(null);
+/**
+ * Text fields an editor may change from this screen.
+ *
+ * Deliberately a whitelist rather than "every string on the object". Section
+ * objects carry `id` and `type`, which are structural and would break the page
+ * if typed over, and `ctaHref`, which is a link and gets its own treatment.
+ */
+const TEXT_FIELDS = ["eyebrow", "title", "body", "ctaLabel", "ctaHref"] as const;
 
-  const moveUp = (index: number) => {
-    if (index === 0) return;
-    const updated = [...sections];
-    const temp = updated[index - 1]!;
-    updated[index - 1] = updated[index]!;
-    updated[index] = temp;
-    setSections(updated);
+const MULTILINE = new Set(["body"]);
+
+type Editable = Section & Partial<Record<(typeof TEXT_FIELDS)[number], string>>;
+
+export function HomepageEditor({
+  initialSections,
+  library,
+  isSeed,
+}: {
+  initialSections: readonly Section[];
+  /** Every section the seed knows about, for the "not placed" tray. */
+  library: readonly Section[];
+  /** True while the homepage is still the committed default. */
+  isSeed: boolean;
+}) {
+  const [sections, setSections] = useState<Editable[]>([
+    ...(initialSections as Editable[]),
+  ]);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
+  const previewRef = useRef<HTMLIFrameElement>(null);
+
+  const dirtyRef = useRef(false);
+  const markDirty = () => {
+    dirtyRef.current = true;
+    setMessage(null);
   };
 
-  const moveDown = (index: number) => {
-    if (index === sections.length - 1) return;
-    const updated = [...sections];
-    const temp = updated[index + 1]!;
-    updated[index + 1] = updated[index]!;
-    updated[index] = temp;
-    setSections(updated);
+  /** Seed sections not currently on the homepage. */
+  const unplaced = useMemo(() => {
+    const placed = new Set(sections.map((section) => section.id));
+    return library.filter((section) => !placed.has(section.id));
+  }, [library, sections]);
+
+  const move = (index: number, delta: number) => {
+    const target = index + delta;
+    if (target < 0 || target >= sections.length) return;
+    const next = [...sections];
+    const held = next[index]!;
+    next[index] = next[target]!;
+    next[target] = held;
+    setSections(next);
+    markDirty();
   };
 
-  const toggleHide = (id: string) => {
-    setHiddenIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  const remove = (id: string) => {
+    setSections((current) => current.filter((section) => section.id !== id));
+    markDirty();
+  };
+
+  const place = (section: Section) => {
+    setSections((current) => [...current, section as Editable]);
+    markDirty();
+  };
+
+  const editField = (id: string, field: string, value: string) => {
+    setSections((current) =>
+      current.map((section) =>
+        section.id === id ? ({ ...section, [field]: value } as Editable) : section,
+      ),
+    );
+    markDirty();
+  };
+
+  const save = () => {
+    setError(null);
+    startTransition(async () => {
+      const result = await saveHomepageAction(sections);
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      dirtyRef.current = false;
+      setMessage("Saved. The homepage is showing this now.");
+      // Reload the preview so it reflects what was just written, rather than
+      // whatever it was showing before.
+      const frame = previewRef.current;
+      if (frame) frame.src = `/?preview=${Date.now()}`;
+    });
   };
 
   return (
-    <div className="space-y-8">
-      {/* Top Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-rule pb-6">
+    <div className="space-y-6">
+      <header className="flex flex-wrap items-start justify-between gap-4 border-b border-rule pb-5">
         <div>
-          <h1 className="text-h2">Homepage Layout & Section Manager</h1>
+          <h1 className="text-h2">Homepage</h1>
           <p className="text-caption mt-1 text-ink-muted">
-            Visually arrange what appears on the homepage, edit copy, assign photography, and reorder sections.
+            Reorder, edit and remove the bands that make up the homepage. Changes
+            go live when you save.
           </p>
+          {isSeed ? (
+            <p className="text-caption mt-2 text-ink-muted">
+              Nothing has been authored yet — this is the built-in default. Your
+              first save replaces it.
+            </p>
+          ) : null}
         </div>
+
         <div className="flex items-center gap-3">
           <Link
             href="/"
             target="_blank"
-            className="btn-secondary border border-rule px-4 py-2 text-xs tracking-wider uppercase text-ink hover:bg-bg-sand"
+            className="border border-rule px-4 py-2 text-xs tracking-wider text-ink uppercase hover:bg-bg-sand"
           >
-            Preview Shop ↗
+            Open homepage ↗
           </Link>
           <button
             type="button"
-            disabled
-            title="Saving the homepage layout is not built yet — see HANDOFF §2.3"
-            className="bg-ink px-6 py-2.5 text-xs tracking-widest uppercase text-bg opacity-40 cursor-not-allowed"
+            onClick={save}
+            disabled={pending}
+            className="bg-ink px-5 py-2 text-xs tracking-wider text-bg uppercase disabled:opacity-50"
           >
-            Save Homepage Layout
+            {pending ? "Saving…" : "Save"}
           </button>
         </div>
-      </div>
+      </header>
 
-      {/*
-        This editor is a working prototype of the interface, not a working
-        editor. Reordering, hiding and copy edits all live in React state and
-        are discarded on navigation — the homepage still renders from
-        `src/lib/content/sections.ts`. The notice stays until there is a write
-        path behind the save button; an admin tool that quietly forgets what it
-        was told is worse than one that admits it cannot remember.
-      */}
-      <div
-        role="note"
-        className="border border-amber-700/40 bg-amber-50 px-4 py-3 text-caption text-xs text-amber-900"
-      >
-        <strong>Preview only.</strong> Changes here are not saved yet — the homepage is still
-        edited in code (<code>src/lib/content/sections.ts</code>). Use this to plan a layout, then
-        hand the order to a developer.
-      </div>
+      {error ? (
+        <p role="alert" className="border border-error px-4 py-3 text-caption text-error">
+          {error}
+        </p>
+      ) : null}
+      {message ? (
+        <p role="status" className="text-caption text-success">
+          {message}
+        </p>
+      ) : null}
 
-      {/* Sections List */}
-      <div className="space-y-4">
-        {sections.map((section, index) => {
-          const isHidden = !!hiddenIds[section.id];
-          const isEditing = editingId === section.id;
-
-          return (
-            <div
-              key={section.id}
-              className={`border transition-colors ${
-                isHidden ? "border-rule/60 bg-bg-sand/40 opacity-60" : "border-rule bg-bg"
-              }`}
-            >
-              {/* Section Item Header */}
-              <div className="flex flex-wrap items-center justify-between gap-4 p-5">
-                <div className="flex items-center gap-4">
-                  <span className="flex h-8 w-8 items-center justify-center bg-bg-sand font-display text-sm font-semibold text-ink">
+      <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="space-y-6">
+          <ol className="space-y-3">
+            {sections.map((section, index) => (
+              <li key={section.id} className="border border-rule">
+                <div className="flex items-center gap-3 px-4 py-3">
+                  <span className="text-caption w-6 shrink-0 text-ink-muted tabular-nums">
                     {index + 1}
                   </span>
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h2 className="font-display text-lg text-ink">
-                        {section.type.toUpperCase()}
-                      </h2>
-                      <span className="eyebrow bg-bg-sand px-2 py-0.5 text-[10px] text-ink-muted">
-                        ID: {section.id}
-                      </span>
-                      {isHidden ? (
-                        <span className="eyebrow text-error text-[10px]">HIDDEN</span>
-                      ) : (
-                        <span className="eyebrow text-success text-[10px]">ACTIVE</span>
-                      )}
-                    </div>
-                    <p className="text-caption mt-1 text-ink-muted">
-                      {SECTION_DESCRIPTIONS[section.type as HomepageSectionType] ?? "Homepage Section Component"}
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-ink">
+                      {section.title ?? section.type}
+                    </p>
+                    <p className="text-caption text-ink-muted">{section.type}</p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => move(index, -1)}
+                    disabled={index === 0}
+                    aria-label={`Move ${section.type} up`}
+                    className="px-2 py-1 text-ink disabled:opacity-30"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => move(index, 1)}
+                    disabled={index === sections.length - 1}
+                    aria-label={`Move ${section.type} down`}
+                    className="px-2 py-1 text-ink disabled:opacity-30"
+                  >
+                    ↓
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpenId(openId === section.id ? null : section.id)}
+                    aria-expanded={openId === section.id}
+                    className="text-caption px-2 py-1 text-ink underline"
+                  >
+                    {openId === section.id ? "Close" : "Edit"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => remove(section.id)}
+                    aria-label={`Remove ${section.type} from the homepage`}
+                    className="text-caption px-2 py-1 text-danger"
+                  >
+                    Remove
+                  </button>
+                </div>
+
+                {openId === section.id ? (
+                  <div className="space-y-3 border-t border-rule bg-bg-alt px-4 py-4">
+                    {TEXT_FIELDS.filter(
+                      (field) => typeof section[field] === "string",
+                    ).map((field) => (
+                      <label key={field} className="block">
+                        <span className="text-caption text-ink-muted capitalize">
+                          {field === "ctaLabel"
+                            ? "Button label"
+                            : field === "ctaHref"
+                              ? "Button link"
+                              : field}
+                        </span>
+                        {MULTILINE.has(field) ? (
+                          <textarea
+                            rows={3}
+                            value={section[field] ?? ""}
+                            onChange={(event) =>
+                              editField(section.id, field, event.target.value)
+                            }
+                            className="mt-1 w-full border border-rule-input bg-bg px-3 py-2 text-ink"
+                          />
+                        ) : (
+                          <input
+                            type="text"
+                            value={section[field] ?? ""}
+                            onChange={(event) =>
+                              editField(section.id, field, event.target.value)
+                            }
+                            className="mt-1 w-full border border-rule-input bg-bg px-3 py-2 text-ink"
+                          />
+                        )}
+                      </label>
+                    ))}
+                    <p className="text-caption text-ink-muted">
+                      Photography, slides and product picks for this band are not
+                      editable here yet — see the handoff.
                     </p>
                   </div>
-                </div>
+                ) : null}
+              </li>
+            ))}
+          </ol>
 
-                {/* Section Action Buttons */}
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    disabled={index === 0}
-                    onClick={() => moveUp(index)}
-                    className="border border-rule px-3 py-1 text-xs text-ink disabled:opacity-30 hover:bg-bg-sand"
-                    title="Move section up"
-                  >
-                    ↑ Up
-                  </button>
-                  <button
-                    type="button"
-                    disabled={index === sections.length - 1}
-                    onClick={() => moveDown(index)}
-                    className="border border-rule px-3 py-1 text-xs text-ink disabled:opacity-30 hover:bg-bg-sand"
-                    title="Move section down"
-                  >
-                    ↓ Down
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => toggleHide(section.id)}
-                    className="border border-rule px-3 py-1 text-xs text-ink hover:bg-bg-sand"
-                  >
-                    {isHidden ? "Show" : "Hide"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setEditingId(isEditing ? null : section.id)}
-                    className="bg-ink px-4 py-1 text-xs text-bg hover:opacity-90"
-                  >
-                    {isEditing ? "Close" : "Edit Content"}
-                  </button>
-                </div>
-              </div>
+          {sections.length === 0 ? (
+            <p className="border border-rule px-4 py-8 text-center text-ink-muted">
+              The homepage has no bands. Add one from below.
+            </p>
+          ) : null}
 
-              {/* Editable Details Form */}
-              {isEditing ? (
-                <div className="border-t border-rule bg-bg-alt p-6 space-y-6">
-                  <h3 className="eyebrow text-ink font-semibold">Edit Section Content</h3>
-                  <SectionEditorForm section={section} />
-                </div>
-              ) : null}
-            </div>
-          );
-        })}
+          <section>
+            <h2 className="text-caption text-ink-muted uppercase">
+              Not on the homepage
+            </h2>
+            {unplaced.length === 0 ? (
+              <p className="text-caption mt-2 text-ink-muted">
+                Every band is placed.
+              </p>
+            ) : (
+              <ul className="mt-2 space-y-2">
+                {unplaced.map((section) => (
+                  <li
+                    key={section.id}
+                    className="flex items-center gap-3 border border-rule px-4 py-2"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-ink">
+                        {(section as Editable).title ?? section.type}
+                      </p>
+                      <p className="text-caption text-ink-muted">{section.type}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => place(section)}
+                      className="text-caption px-2 py-1 text-ink underline"
+                    >
+                      Add
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        </div>
+
+        {/* The real page, not a reconstruction of it. */}
+        <div className="hidden xl:block">
+          <div className="sticky top-6">
+            <p className="text-caption mb-2 text-ink-muted">
+              Live homepage — reloads when you save.
+            </p>
+            <iframe
+              ref={previewRef}
+              src="/"
+              title="Homepage preview"
+              className="h-[70vh] w-full border border-rule bg-bg"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
-}
-
-function SectionEditorForm({ section }: { section: Section }) {
-  switch (section.type) {
-    case "heroCarousel":
-      return (
-        <div className="space-y-4">
-          <p className="text-caption text-ink-muted">
-            Managing 6 Slides in Hero Carousel. Each slide art-directs a desktop and mobile image.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {section.slides.map((slide, i) => (
-              <div key={slide.id} className="border border-rule bg-bg p-4 space-y-2">
-                <span className="eyebrow text-ink font-semibold">Slide {i + 1}: {slide.title}</span>
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px]">Eyebrow</label>
-                  <input
-                    type="text"
-                    defaultValue={slide.eyebrow}
-                    className="w-full border-b border-rule py-1 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-                  />
-                </div>
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px]">Title</label>
-                  <input
-                    type="text"
-                    defaultValue={slide.title}
-                    className="w-full border-b border-rule py-1 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-                  />
-                </div>
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px]">Body Copy</label>
-                  <textarea
-                    defaultValue={slide.body}
-                    rows={2}
-                    className="w-full border-b border-rule py-1 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <div className="flex-1">
-                    <label className="eyebrow block text-ink-muted text-[10px]">CTA Label</label>
-                    <input
-                      type="text"
-                      defaultValue={slide.ctaLabel}
-                      className="w-full border-b border-rule py-1 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <label className="eyebrow block text-ink-muted text-[10px]">CTA Link</label>
-                    <input
-                      type="text"
-                      defaultValue={slide.ctaHref}
-                      className="w-full border-b border-rule py-1 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-                    />
-                  </div>
-                </div>
-                {slide.art.desktop.src ? (
-                  <div className="mt-2 flex items-center gap-3">
-                    <div className="relative h-12 w-20 bg-bg-sand overflow-hidden border border-rule">
-                      <Image
-                        src={slide.art.desktop.src}
-                        alt={slide.title}
-                        fill
-                        unoptimized
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="text-caption text-ink-muted truncate max-w-[200px]">
-                      {slide.art.desktop.src}
-                    </span>
-                  </div>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-
-    case "brandStatement":
-      return (
-        <div className="space-y-4 max-w-xl">
-          <div>
-            <label className="eyebrow block text-ink-muted text-[10px]">Main Quote</label>
-            <input
-              type="text"
-              defaultValue={section.quote}
-              className="w-full border-b border-rule py-2 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-            />
-          </div>
-          <div>
-            <label className="eyebrow block text-ink-muted text-[10px]">Body Philosophy</label>
-            <textarea
-              defaultValue={section.body}
-              rows={3}
-              className="w-full border-b border-rule py-2 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-            />
-          </div>
-        </div>
-      );
-
-    case "videoBand":
-      return (
-        <div className="space-y-4 max-w-xl">
-          <div>
-            <label className="eyebrow block text-ink-muted text-[10px]">Video File (.mp4)</label>
-            <input
-              type="text"
-              defaultValue={section.videoSrc}
-              className="w-full border-b border-rule py-2 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-            />
-          </div>
-          <div>
-            <label className="eyebrow block text-ink-muted text-[10px]">Section Heading</label>
-            <input
-              type="text"
-              defaultValue={section.title}
-              className="w-full border-b border-rule py-2 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-            />
-          </div>
-          <div>
-            <label className="eyebrow block text-ink-muted text-[10px]">Description</label>
-            <textarea
-              defaultValue={section.body}
-              rows={2}
-              className="w-full border-b border-rule py-2 text-caption text-ink bg-transparent focus:outline-none focus:border-ink"
-            />
-          </div>
-        </div>
-      );
-
-    default:
-      return (
-        <div className="text-caption text-ink-muted">
-          Content fields available for editing. Modify text parameters or re-assign image assets.
-        </div>
-      );
-  }
 }

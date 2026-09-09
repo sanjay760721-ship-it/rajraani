@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SectionRenderer } from "@/components/sections/SectionRenderer";
-import { PAGES } from "@/lib/content/sections";
+import { content } from "@/lib/content/content";
 import { catalogue } from "@/lib/data/catalogue";
 
 /**
@@ -16,21 +16,27 @@ import { catalogue } from "@/lib/data/catalogue";
  */
 export const revalidate = 300;
 
-export function generateStaticParams() {
-  return Object.keys(PAGES).map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const pages = await content.listPages();
+  // Only published pages get a prerendered path — a draft must not be
+  // reachable by guessing its slug.
+  return pages.filter((page) => page.published).map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata(props: PageProps<"/pages/[slug]">) {
   const { slug } = await props.params;
-  const page = PAGES[slug];
-  if (!page) return {};
+  const page = await content.getPage(slug);
+  if (!page?.published) return {};
   return { title: page.title, description: page.standfirst };
 }
 
 export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
   const { slug } = await props.params;
-  const page = PAGES[slug];
-  if (!page) notFound();
+  const page = await content.getPage(slug);
+  // A draft is a 404 to the storefront. Preview is the admin's job, and it
+  // authenticates; a published check here is the only thing standing between a
+  // half-written page and anyone who guesses the URL.
+  if (!page?.published) notFound();
 
   // Campaign lookup goes through the repository. The pairing is authored, so
   // the story page has to ask for it rather than infer it from the slug.

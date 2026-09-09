@@ -877,6 +877,53 @@ the wrong way or torn out.
 **The navigation is mostly dead links.** See §5.8 — this is the largest open item to
 come out of the session and it predates it.
 
+### 2.52 The content seam, and a real homepage editor — 10 September 2026
+
+**The admin's content screens were mocks because they had nowhere to save to.**
+`HomepageEditor` read `HOMEPAGE_SECTIONS` — a TypeScript constant — into `useState`,
+let you rearrange it, and discarded everything on navigation. That was not laziness in
+the screen; it was the absence of a seam.
+
+The database had been shaped for this since the schema was written and had never held a
+row. `schema.sql` line 303 literally reads *"Singleton rows: navigation, homepage
+sections, global settings."* `page.sections_json` existed too. Both were empty, and both
+storefront routes imported straight from `sections.ts`.
+
+**Built**
+- `src/lib/content/repository.ts` — `ContentRepository` (reads) and
+  `ContentWriteRepository` (reads + writes), split so a storefront page cannot mutate
+  content even by accident. Same shape as `CatalogueRepository`, for the same reasons.
+- `src/lib/content/sqlite-content.ts` — `setting` for the homepage, `page` for editorial
+  pages. Sections stored as JSON; the trade is argued in the file.
+- `src/lib/content/content.ts` — entry point, with a **fixture fallback**: an empty
+  database means "nothing authored yet", not "the homepage is blank". The first save
+  writes a real row and the fallback stops applying, per key. Rearranging and saving
+  cannot lose the seed, because the seed is in git.
+- `src/lib/admin/content-actions.ts` — `requireAdmin()` on every action, structural
+  validation of the section list, `revalidatePath` so an ISR page does not show the old
+  version for a minute after saving.
+- `HomepageEditor` rewritten against it: reorder, edit text fields, remove to a tray,
+  place back, save, and a **live iframe of the real homepage** that reloads on save.
+
+**Verified end to end**: reordered two bands in the admin, saved, confirmed the row in
+`setting`, and confirmed the storefront homepage led with the moved band. Seed restored
+afterwards.
+
+**Design notes**
+- *Hiding is removing.* There is no `hidden` flag. The saved list **is** the homepage,
+  in order — one thing to reason about instead of a list plus a set of exceptions.
+  Unplaced bands sit in a tray.
+- *Preview is the real page in an iframe.* A preview assembled from admin components is
+  a second implementation that drifts from the first and lies exactly when it matters.
+  `SectionRenderer` is an async server component and cannot run in a client editor
+  anyway.
+- *Drafts 404 on the storefront.* `/pages/[slug]` now checks `published`, and
+  `generateStaticParams` only prerenders published pages.
+
+**Not built — the rest of what was asked for.** Editors for shop, collections, craft,
+stories and about-us are **not** done. The seam they need now exists, and `savePage` /
+`deletePage` / `listPages` are written and unused. See §5.9.
+
 ### 2.4 Pick up here
 
 *Re-ordered 22 Aug. Item 0 is new and outranks everything: the payment path currently
@@ -1117,6 +1164,31 @@ trim the menus to what exists and re-add entries as collections are written.
 
 `navigation.test.ts` fails on any *new* dead link, and fails if the list goes stale in
 either direction, so the backlog cannot quietly grow or rot.
+
+### 5.9 The remaining admin editors
+
+The content seam landed 10 September (§2.52) and the homepage editor is real. These are
+still mock or absent, in the order they are worth doing:
+
+1. **Editorial pages** (`/pages/[slug]` — craft, stories, campaign stories). Highest
+   value and lowest risk: `savePage`, `deletePage` and `listPages` are already written
+   and tested by nothing. Needs a list screen, a section editor reusing the homepage
+   one, and a draft/publish toggle. The storefront already honours `published`.
+2. **Collections.** The screen is a mock. Writes need to go through
+   `admin-queries.ts` alongside the product ones. This is also where the **26 unwritten
+   collections (§5.8)** would get authored, which makes it the item that unblocks the
+   navigation.
+3. **Navigation.** Still a TypeScript constant (`navigation.ts`). `setting` is the
+   right home for it; the schema comment names it. Until then, menu changes are deploys.
+4. **Per-band media and slides.** The homepage editor edits text only — photography,
+   carousel slides and product picks are read-only there, and the screen says so rather
+   than pretending otherwise.
+5. **About us / FAQs / artisans.** `faqs` and `artisans` screens exist as mocks; there
+   is no `about` content model at all.
+
+**The generic blocker for 4 and 5** is that section editing is currently a whitelist of
+five text fields. A real section editor needs a per-type form — fifteen types — or a
+schema-driven one. That is the fortnight the ledger refers to.
 
 ### 5.6 Not blocking
 

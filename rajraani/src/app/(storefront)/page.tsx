@@ -1,5 +1,5 @@
 import { SectionRenderer } from "@/components/sections/SectionRenderer";
-import { HOMEPAGE_SECTIONS } from "@/lib/content/sections";
+import { content } from "@/lib/content/content";
 
 /** ISR at 60s per build.md §3. */
 export const revalidate = 60;
@@ -9,10 +9,14 @@ export const revalidate = 60;
  * an ordered list rather than hardcoded. Reordering it is a content edit
  * (build.md §2.4).
  */
-export default function HomePage() {
+export default async function HomePage() {
+  // Through the content seam, so an edit in the admin reaches the page. Falls
+  // back to the committed seed while nothing has been authored.
+  const sections = await content.getHomepageSections();
+
   return (
     <>
-      {HOMEPAGE_SECTIONS.map((section, index) => (
+      {sections.map((section, index) => (
         <SectionRenderer key={section.id} section={section} index={index} />
       ))}
     </>
