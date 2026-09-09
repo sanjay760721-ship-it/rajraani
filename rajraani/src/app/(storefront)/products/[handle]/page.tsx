@@ -254,7 +254,7 @@ function SpecList({ product }: { product: Product }) {
     ["Fabric", product.spec.fabric],
     ["Speciality", product.spec.speciality],
     ["Collection note", product.spec.collectionNote],
-    // Never "Tilfi Promise", whatever the reference does — build.md §6.
+    // Ours, never the reference's own phrasing of it — build.md §6.
     ["Our promise", BRAND.promise],
     [
       "Expected despatch",
