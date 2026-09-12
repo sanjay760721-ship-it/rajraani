@@ -218,13 +218,30 @@ function toCollection(row: CollectionRow): Collection {
     )
     .all(row.handle) as unknown as { handle: string }[];
 
+  const productHandles = handles.map((item) => item.handle);
+
+  /*
+   * An edit is an authored list with no campaign behind it. A NULL
+   * `campaign_slug` is the distinction in storage, and it is the only thing
+   * separating the two authored kinds.
+   */
+  if (row.kind === "edit") {
+    return {
+      kind: "edit",
+      handle: row.handle,
+      title: row.title,
+      seoIntro: row.seo_intro,
+      productHandles,
+    };
+  }
+
   return {
     kind: "campaign",
     handle: row.handle,
     title: row.title,
     seoIntro: row.seo_intro,
     campaignSlug: row.campaign_slug ?? row.handle,
-    productHandles: handles.map((item) => item.handle),
+    productHandles,
   };
 }
 
@@ -260,7 +277,7 @@ export class SqliteCatalogueRepository implements CatalogueRepository {
       return filterProducts(products, collection.facets);
     }
 
-    // A campaign collection is authored, and its order is editorial.
+    // A campaign or an edit is authored, and its order is editorial.
     const byHandle = new Map(products.map((product) => [product.handle, product]));
     return collection.productHandles
       .map((handle) => byHandle.get(handle))

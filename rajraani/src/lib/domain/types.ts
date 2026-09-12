@@ -234,4 +234,24 @@ export type Collection =
       readonly seoIntro: string;
       readonly campaignSlug: string;
       readonly productHandles: readonly string[];
+    }
+  /*
+   * An authored list that is NOT a campaign — added 12 Sep 2026.
+   *
+   * Bridal, Gifts, Fresh Off the Loom and Back in Stock are picked by hand and
+   * no facet would produce them: there is no `occasion` facet, and nothing on
+   * `Product` records when a piece arrived or came back into stock.
+   *
+   * They are not campaigns either. A campaign here means a commission with a
+   * story page paired to it (build.md §3). Filing these as `campaign` would
+   * have worked mechanically and lied in the data — `campaignSlug` pointing at
+   * a story that does not exist, and the admin listing four campaigns nobody
+   * ever ran.
+   */
+  | {
+      readonly kind: "edit";
+      readonly handle: string;
+      readonly title: string;
+      readonly seoIntro: string;
+      readonly productHandles: readonly string[];
     };

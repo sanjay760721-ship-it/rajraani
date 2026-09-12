@@ -263,13 +263,18 @@ CREATE TABLE IF NOT EXISTS collection (
   handle        TEXT PRIMARY KEY,
   title         TEXT NOT NULL,
   seo_intro     TEXT NOT NULL,
-  kind          TEXT NOT NULL CHECK (kind IN ('facet', 'campaign')),
+  kind          TEXT NOT NULL CHECK (kind IN ('facet', 'campaign', 'edit')),
   facets_json   TEXT,   -- facet collections: the saved selection
   campaign_slug TEXT REFERENCES campaign (slug) ON DELETE CASCADE,
   position      INTEGER NOT NULL DEFAULT 0,
+  -- An `edit` is the third kind, added 12 Sep 2026: an authored list with no
+  -- facet behind it and no campaign story paired to it (Bridal, Gifts, Fresh
+  -- Off the Loom, Back in Stock). It carries neither column, which is exactly
+  -- what distinguishes it from the other two in storage.
   CHECK (
     (kind = 'facet'    AND facets_json IS NOT NULL AND campaign_slug IS NULL) OR
-    (kind = 'campaign' AND campaign_slug IS NOT NULL)
+    (kind = 'campaign' AND campaign_slug IS NOT NULL) OR
+    (kind = 'edit'     AND facets_json IS NULL     AND campaign_slug IS NULL)
   ),
   CHECK (facets_json IS NULL OR facets_json NOT LIKE '%"price"%')
 );
@@ -306,6 +311,28 @@ CREATE TABLE IF NOT EXISTS setting (
   value_json TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
+
+-- Messages sent from the contact page.
+--
+-- The form on /pages/contact writes here. It exists because the alternative was
+-- a form that silently discarded what people typed into it, which is worse than
+-- having no form at all: someone who writes in and hears nothing concludes they
+-- were ignored rather than that the button was decorative.
+--
+-- There is no admin screen for this yet. Read it with
+--   SELECT * FROM enquiry ORDER BY created_at DESC;
+-- until there is one.
+CREATE TABLE IF NOT EXISTS enquiry (
+  id         INTEGER PRIMARY KEY,
+  name       TEXT NOT NULL,
+  email      TEXT NOT NULL,
+  message    TEXT NOT NULL,
+  handled    INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS enquiry_unhandled
+  ON enquiry (handled, created_at DESC);
 
 -- ---------------------------------------------------------------------------
 -- Orders

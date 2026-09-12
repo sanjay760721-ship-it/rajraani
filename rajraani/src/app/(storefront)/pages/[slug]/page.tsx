@@ -45,19 +45,50 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
   // A campaign story opens on a hero, which carries the h1. A craft page opens
   // on prose and needs a title block of its own — otherwise the page ships with
   // no h1 at all, which is how heading order rots.
-  const opensWithHero = page.sections[0]?.type === "hero";
+  const first = page.sections[0];
+  const opensWithHero = first?.type === "hero";
+
+  /*
+   * An about page opens on a full-bleed banner and puts its title UNDERNEATH.
+   *
+   * So a leading `imageBand` with `bleed` is hoisted above the header and the
+   * rest of the list renders after it. Done here rather than by letting the
+   * header float, because the h1 has to stay in the document before the bands
+   * that follow it — `scripts/lint-headings.mjs` checks that, and a banner is
+   * not a heading.
+   */
+  const opensWithBanner = first?.type === "imageBand" && first.bleed === true;
+  const body = opensWithBanner ? page.sections.slice(1) : page.sections;
 
   return (
     <article>
+      {opensWithBanner ? <SectionRenderer section={first} index={0} /> : null}
+
       {opensWithHero ? null : (
-        <header className="wrap-prose py-16">
+        /*
+         * Centred, and at the same measure as the `richText` blocks below it.
+         * It was ranged left in a 680px column while everything under it was
+         * centred in the same column — three elements in a stack disagreeing
+         * about their own axis.
+         */
+        <header className="wrap-prose section-pad text-center">
           <h1 className="text-h1">{page.title}</h1>
-          <p className="text-prose mt-5 text-ink-body">{page.standfirst}</p>
+          <p className="text-body mt-4 text-ink-body">{page.standfirst}</p>
         </header>
       )}
 
-      {page.sections.map((section, index) => (
-        <SectionRenderer key={section.id} section={section} index={index} />
+      {body.map((section, index) => (
+        /*
+         * The index must stay the section's position in the ORIGINAL list.
+         * `Hero` renders its title as the h1 only at index 0, so shifting every
+         * section up by one took the h1 off all five campaign stories at once
+         * — caught by `lint:headings`, invisible in a browser.
+         */
+        <SectionRenderer
+          key={section.id}
+          section={section}
+          index={opensWithBanner ? index + 1 : index}
+        />
       ))}
 
       {campaign ? (

@@ -234,9 +234,44 @@ describe("availability modelling (§9.7)", () => {
 });
 
 describe("collections (§9.5)", () => {
-  it("is only ever a facet result or an editorially-earned campaign", () => {
+  it("is only ever a facet result, a campaign, or an authored edit", () => {
+    /*
+     * `edit` joined the union on 12 Sep 2026 for Bridal, Gifts, Fresh Off the
+     * Loom and Back in Stock — hand-picked lists with no facet that would
+     * produce them and no campaign story behind them. The point of 9.5 stands:
+     * a collection is one of these three and never a hand-made duplicate of a
+     * facet combination, which is what the tests below guard.
+     */
     for (const collection of COLLECTIONS) {
-      assert.ok(["facet", "campaign"].includes(collection.kind));
+      assert.ok(
+        ["facet", "campaign", "edit"].includes(collection.kind),
+        `${collection.handle} has kind ${collection.kind}`,
+      );
+    }
+  });
+
+  it("gives every authored list at least one product", () => {
+    // An authored list that renders an empty grid is worse than a menu entry
+    // that is not there: it reads as "sold out" rather than "not written yet".
+    for (const collection of COLLECTIONS) {
+      if (collection.kind === "facet") continue;
+      assert.ok(
+        collection.productHandles.length > 0,
+        `${collection.handle} is authored but empty`,
+      );
+    }
+  });
+
+  it("points every authored list at products that exist", () => {
+    const handles = new Set(PRODUCTS.map((product) => product.handle));
+    for (const collection of COLLECTIONS) {
+      if (collection.kind === "facet") continue;
+      for (const handle of collection.productHandles) {
+        assert.ok(
+          handles.has(handle),
+          `${collection.handle} lists ${handle}, which is not a product`,
+        );
+      }
     }
   });
 

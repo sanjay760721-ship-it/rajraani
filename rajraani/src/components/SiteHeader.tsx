@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
+import { MegaMenuTile } from "./MegaMenuTile";
 import { WishlistButton } from "./WishlistButton";
 import { UtilityBar } from "./UtilityBar";
 import { useCart } from "./cart-context";
@@ -326,69 +326,77 @@ function MegaMenuPanel({
       onMouseLeave={onClose}
       className="absolute top-full left-0 right-0 bg-white border-t border-rule shadow-[0_10px_28px_rgba(0,0,0,0.09)] z-50 animate-[fadeIn_120ms_ease-out]"
     >
-      <div className="mx-auto max-w-[1265px] px-8 xl:px-14 py-6">
+      <div className="mx-auto max-w-[1265px] px-8 xl:px-14 py-8">
         {hasColumns ? (
-          <div className="flex flex-wrap gap-12">
+          /*
+            * Two bands: the link columns at the reading edge, the tiles hard
+            * against the right one.
+            *
+            * The columns used to be `flex-1 min-w-[180px] max-w-[280px]` in a
+            * wrapping row, which distributed the full 1265px across whatever
+            * happened to be there. That is fine for the three-column Shop panel
+            * and falls apart for the one-column ones: a single list of four
+            * links stretched to 280px and the tiles dragged in beside it,
+            * nowhere near the edge they belong on.
+            *
+            * Fixed-width columns and `ml-auto` on the tiles instead. Every
+            * panel is then the same shape whether it carries one column or
+            * three, and a short panel is simply a short panel — the space
+            * between the two bands is left empty rather than filled with copy
+            * nobody asked the menu for.
+            */
+          <div className="flex items-start gap-10 xl:gap-14">
             {/* Link Columns */}
-            {panel.columns!.map((column, colIndex) => (
-              <div key={colIndex} className="flex-1 min-w-[180px] max-w-[280px]">
-                <h4 className="font-ui text-[11px] uppercase tracking-[0.14em] text-ink-muted font-semibold mb-3 pb-2 border-b border-rule">
-                  {column.heading}
-                </h4>
-                <ul className="space-y-1">
-                  {column.links.map((link) => (
-                    <li key={link.href + link.label}>
-                      <Link
-                        href={link.href}
-                        onClick={onClose}
-                        className={`block px-2 py-1.5 font-ui text-[13px] leading-[1.5] ${link.emphasis ? "font-semibold text-ink" : "font-normal text-ink-body"} hover:text-accent-hover transition-colors`}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div className="flex items-start gap-8 xl:gap-12">
+              {panel.columns!.map((column) => (
+                <div key={column.heading} className="w-[180px] shrink-0">
+                  <h4 className="font-ui text-[11px] uppercase tracking-[0.14em] text-ink-muted font-semibold mb-3 pb-2 border-b border-rule">
+                    {column.heading}
+                  </h4>
+                  <ul>
+                    {column.links.map((link) => (
+                      <li key={link.href + link.label}>
+                        <Link
+                          href={link.href}
+                          onClick={onClose}
+                          className={`block py-[5px] font-ui text-[13px] leading-[1.5] ${link.emphasis ? "font-semibold text-ink" : "font-normal text-ink-body"} hover:text-accent-hover transition-colors`}
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
 
             {/* Image Tiles */}
             {hasTiles && (
-              <div className="w-[280px] flex-shrink-0 flex flex-col gap-4">
-                {panel.tiles!.map((tile, tileIndex) => (
-                  <Link
-                    key={tileIndex}
-                    href={tile.href}
-                    onClick={onClose}
-                    className="block group relative overflow-hidden"
+              <div className="ml-auto flex shrink-0 gap-4">
+                {panel.tiles!.map((tile, index) => (
+                  /*
+                    * Only the first tile survives below 1280.
+                    *
+                    * A three-column panel plus two 200px tiles needs about
+                    * 1110px of content box and there is 960 at the 1024
+                    * breakpoint where this row first appears. The columns are
+                    * the menu; the tiles are decoration, so the tiles are what
+                    * gives way. Dropping one is quieter than letting the row
+                    * wrap, which pushed the art under the links and doubled the
+                    * panel height.
+                    */
+                  <div
+                    key={tile.href + tile.label}
+                    className={`w-[160px] xl:w-[200px] ${index > 0 ? "hidden xl:block" : ""}`}
                   >
-                    {tile.src ? (
-                      /*
-                        * next/image, not a raw <img>: these are 400x600 tiles
-                        * served at 280 wide, so without it every panel ships
-                        * the full master. `sizes` is fixed because the column
-                        * is a fixed 280px \u2014 no guessing needed.
-                        */
-                      <div className="relative aspect-[2/3] w-full overflow-hidden">
-                        <Image
-                          src={tile.src}
-                          alt=""
-                          fill
-                          sizes="280px"
-                          loading="lazy"
-                          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        />
-                      </div>
-                    ) : (
-                      <div className="aspect-[2/3] bg-rule flex items-center justify-center">
-                        <span className="font-ui text-[13px] text-ink-muted">{tile.label}</span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute bottom-4 left-4 right-4 text-white z-10">
-                      <span className="font-ui text-[13px] font-semibold block">{tile.label}</span>
-                      <span className="font-ui text-[11px] uppercase tracking-[0.12em] mt-1 block opacity-80">Explore →</span>
-                    </div>
-                  </Link>
+                    <MegaMenuTile
+                      label={tile.label}
+                      tone={tile.tone}
+                      src={tile.src}
+                      href={tile.href}
+                      onClose={onClose}
+                    />
+                  </div>
                 ))}
               </div>
             )}

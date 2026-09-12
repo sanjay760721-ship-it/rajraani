@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
+import { PAGES } from "../content/sections.ts";
 import { COLLECTIONS } from "./fixtures.ts";
 import { NAVIGATION } from "./navigation.ts";
 
@@ -27,6 +28,12 @@ function collectionHandle(href: string): string | undefined {
   return match?.[1];
 }
 
+/** Editorial page slug a nav href points at, or undefined if it points elsewhere. */
+function pageSlug(href: string): string | undefined {
+  const match = /^\/pages\/([^/?#]+)/.exec(href);
+  return match?.[1];
+}
+
 function everyNavLink(): { label: string; href: string }[] {
   return NAVIGATION.flatMap((panel) => [
     { label: panel.label, href: panel.href },
@@ -48,33 +55,19 @@ function everyNavLink(): { label: string; href: string }[] {
  * The only correct reasons to touch it are removing a handle because the
  * collection now exists, or removing a handle along with the menu entry.
  */
-const NOT_YET_AUTHORED = new Set([
-  "alap",
-  "back-in-stock",
-  "bridal",
-  "chhaya",
-  "collectors-edit",
-  "everyday",
-  "festive",
-  "first-saree",
-  "fresh-off-the-loom",
-  "freshly-tailored",
-  "gifts",
-  "heirloom",
-  "kinara",
-  "lightweight",
-  "menswear",
-  "modern-classics",
-  "nirantar",
-  "occasion",
-  "office-travel",
-  "prabhat",
-  "ritu",
-  "seasonal",
-  "signatures",
-  "taar",
-  "udgam",
-  "womenswear",
+const NOT_YET_AUTHORED = new Set<string>([
+  /*
+   * EMPTY, as of 12 Sep 2026 — and the aim is to keep it that way.
+   *
+   * The last four (`back-in-stock`, `bridal`, `fresh-off-the-loom`, `gifts`)
+   * were authored as `edit` collections in `fixtures.ts`. Every collection the
+   * menus advertise now exists, which is the first time that has been true.
+   *
+   * This is kept rather than deleted because the mechanism is the point: if a
+   * menu entry has to go in before the collection behind it is written, it
+   * goes here, in the open, with the test insisting the list stays honest in
+   * both directions.
+   */
 ]);
 
 describe("navigation", () => {
@@ -117,6 +110,44 @@ describe("navigation", () => {
       orphaned,
       [],
       "nothing links to these any more — take them off NOT_YET_AUTHORED",
+    );
+  });
+
+  /*
+   * The other half of the same bug, found 12 Sep 2026.
+   *
+   * The collection half of this file had been guarded since 10 Sep. The
+   * editorial half had not, and it was in a worse state: About Us pointed at
+   * five pages and every one of them 404d, Stories advertised a `/blogs`
+   * section that has no route in this build at all, and Craft listed seven
+   * essays of which two had been written.
+   *
+   * There is no NOT_YET_AUTHORED equivalent here on purpose. A collection can
+   * honestly be "real but empty" while the catalogue fills; an editorial page
+   * cannot — it either has words or it does not, and a menu entry to a page
+   * with no words is just a 404 with a nicer label.
+   */
+  it("links only to editorial pages that exist", () => {
+    const dead = everyNavLink()
+      .map((link) => ({ ...link, slug: pageSlug(link.href) }))
+      .filter((link) => link.slug && !(link.slug in PAGES));
+
+    assert.deepEqual(
+      dead.map((link) => `${link.label} → ${link.href}`),
+      [],
+      "these menu links resolve to nothing",
+    );
+  });
+
+  it("points nowhere but at a collection or an editorial page", () => {
+    const stray = everyNavLink().filter(
+      (link) => !/^\/(collections|pages)\//.test(link.href),
+    );
+
+    assert.deepEqual(
+      stray.map((link) => `${link.label} → ${link.href}`),
+      [],
+      "the menus have two destination shapes; this is neither",
     );
   });
 });

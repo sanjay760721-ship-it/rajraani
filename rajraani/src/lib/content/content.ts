@@ -32,9 +32,11 @@ const inner = new SqliteContentRepository();
 function seedPages(): readonly PageContent[] {
   return Object.entries(PAGES).map(([slug, page]) => ({
     slug,
-    // The seed set is campaign stories and craft pages; `craft` is the safer
-    // default for anything the fixtures did not label.
-    kind: slug === "nadi" || slug === "antaraal" ? "campaign_story" : "craft",
+    // Carried on the seed itself. This used to be inferred here — `slug ===
+    // "nadi" || slug === "antaraal"` — which filed every campaign story added
+    // after those two under `craft`, silently, in a list the admin groups by
+    // kind.
+    kind: page.kind,
     title: page.title,
     standfirst: page.standfirst,
     sections: page.sections,

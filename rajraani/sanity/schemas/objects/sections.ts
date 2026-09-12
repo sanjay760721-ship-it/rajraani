@@ -611,6 +611,348 @@ export const pullQuoteSection = defineType({
   preview: { select: { title: "quote", subtitle: "attribution" } },
 });
 
+/*
+ * ── The About Us set (12 Sep 2026) ─────────────────────────────────────────
+ *
+ * Four types added to the storefront union and mirrored here, because
+ * `schema.test.ts` holds the two sides to the same set: a section an author can
+ * publish and the storefront cannot render is a blank space on a live page.
+ */
+
+export const imageWithTextSection = defineType({
+  name: "imageWithText",
+  title: "Image with text",
+  type: "object",
+  fields: [
+    defineField({ name: "art", type: "artPair", validation: (rule) => rule.required() }),
+    defineField({
+      name: "eyebrow",
+      type: "string",
+      description: "Optional. Small caps above the heading.",
+      validation: (rule) => rule.max(40),
+    }),
+    defineField({
+      name: "heading",
+      type: "string",
+      description: "Optional. A band can run as photograph and prose alone.",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
+      name: "paragraphs",
+      type: "array",
+      of: [defineArrayMember({ type: "text" })],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "ratio",
+      type: "string",
+      description: "Frame ratio. Square by default; campaign bands use 4:5.",
+      options: { list: ["1/1", "4/5"] },
+    }),
+    defineField({
+      name: "imageSide",
+      type: "string",
+      description:
+        "Which side the photograph takes on desktop. Alternate it down a page.",
+      options: { list: ["left", "right"] },
+      validation: (rule) => rule.required(),
+    }),
+    ...ctaFields(),
+  ],
+  preview: { select: { title: "heading", subtitle: "eyebrow" } },
+});
+
+export const imageBandSection = defineType({
+  name: "imageBand",
+  title: "Image band",
+  type: "object",
+  fields: [
+    defineField({ name: "art", type: "artPair", validation: (rule) => rule.required() }),
+    defineField({
+      name: "ratio",
+      type: "string",
+      description: "Frame ratio on desktop. Defaults to 15:8.",
+      options: { list: ["15/8", "2/1", "4/3"] },
+    }),
+    defineField({
+      name: "caption",
+      type: "string",
+      description:
+        "Optional. Sits under the frame and doubles as the alt text, so write it even when the design hides it.",
+      validation: (rule) => rule.max(120),
+    }),
+    defineField({
+      name: "overlay",
+      type: "object",
+      description:
+        "Optional. Text and a button laid over the frame, for a closing band.",
+      fields: [
+        defineField({
+          name: "title",
+          type: "string",
+          validation: (rule) => rule.required().max(80),
+        }),
+        defineField({ name: "body", type: "text", rows: 2 }),
+        defineField({
+          name: "ctaLabel",
+          type: "string",
+          validation: (rule) => rule.required().max(40),
+        }),
+        defineField({
+          name: "ctaHref",
+          type: "string",
+          validation: (rule) => rule.required(),
+        }),
+      ],
+    }),
+  ],
+  preview: { select: { title: "caption" } },
+});
+
+export const faqAccordionSection = defineType({
+  name: "faqAccordion",
+  title: "FAQ accordion",
+  type: "object",
+  fields: [
+    defineField({
+      name: "groups",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "faqGroup",
+          fields: [
+            defineField({
+              name: "heading",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "items",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  name: "faqItem",
+                  fields: [
+                    defineField({
+                      name: "question",
+                      type: "string",
+                      validation: (rule) => rule.required().max(160),
+                    }),
+                    defineField({
+                      name: "answer",
+                      type: "text",
+                      rows: 4,
+                      validation: (rule) => rule.required(),
+                    }),
+                  ],
+                  preview: { select: { title: "question" } },
+                }),
+              ],
+              validation: (rule) => rule.required().min(1),
+            }),
+          ],
+          preview: { select: { title: "heading" } },
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+  ],
+});
+
+export const mapBandSection = defineType({
+  name: "mapBand",
+  title: "Map",
+  type: "object",
+  fields: [
+    defineField({
+      name: "query",
+      type: "string",
+      description: "What to search for — a place name, not coordinates.",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "label",
+      type: "string",
+      description: "Announced to screen readers, which cannot use the map.",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({ name: "zoom", type: "number", description: "Defaults to 16." }),
+  ],
+  preview: { select: { title: "label", subtitle: "query" } },
+});
+
+export const galleryGridSection = defineType({
+  name: "galleryGrid",
+  title: "Gallery grid",
+  type: "object",
+  fields: [
+    defineField({ name: "heading", type: "string", validation: (rule) => rule.max(80) }),
+    defineField({ name: "standfirst", type: "text", rows: 2 }),
+    defineField({
+      name: "columns",
+      type: "number",
+      description: "2, 3 or 4. Four reads as a grid, three as a sequence.",
+      options: { list: [2, 3, 4] },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "items",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "galleryTile",
+          fields: [
+            defineField({
+              name: "art",
+              type: "artPair",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "label",
+              type: "string",
+              description: "Optional. Also the tile's alt text.",
+              validation: (rule) => rule.max(60),
+            }),
+            defineField({
+              name: "href",
+              type: "string",
+              description: "Optional. A tile with no href is not a link.",
+            }),
+          ],
+          preview: { select: { title: "label" } },
+        }),
+      ],
+      validation: (rule) => rule.required().min(2),
+    }),
+  ],
+  preview: { select: { title: "heading" } },
+});
+
+export const contactPanelSection = defineType({
+  name: "contactPanel",
+  title: "Contact panel",
+  type: "object",
+  fields: [
+    defineField({
+      name: "heading",
+      type: "string",
+      description:
+        "Optional. The page header already carries the title — set this only if the section needs its own.",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
+      name: "routes",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "contactRoute",
+          fields: [
+            defineField({
+              name: "text",
+              type: "text",
+              rows: 2,
+              validation: (rule) => rule.required(),
+            }),
+            defineField({ name: "email", type: "string" }),
+            defineField({ name: "linkLabel", type: "string" }),
+            defineField({ name: "linkHref", type: "string" }),
+          ],
+          preview: { select: { title: "text", subtitle: "email" } },
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "socialIntro",
+      type: "string",
+      validation: (rule) => rule.required().max(120),
+    }),
+    defineField({
+      name: "socials",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "socialLink",
+          fields: [
+            defineField({
+              name: "label",
+              type: "string",
+              validation: (rule) => rule.required().max(40),
+            }),
+            defineField({
+              name: "href",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: { select: { title: "label" } },
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "visitHeading",
+      type: "string",
+      validation: (rule) => rule.required().max(60),
+    }),
+    defineField({
+      name: "stores",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "contactStore",
+          fields: [
+            defineField({
+              name: "name",
+              type: "string",
+              validation: (rule) => rule.required().max(80),
+            }),
+            defineField({
+              name: "detail",
+              type: "text",
+              rows: 2,
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "address",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: { select: { title: "name" } },
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "form",
+      type: "object",
+      fields: [
+        defineField({
+          name: "intro",
+          type: "text",
+          rows: 2,
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "submitLabel",
+          type: "string",
+          validation: (rule) => rule.required().max(30),
+        }),
+      ],
+      validation: (rule) => rule.required(),
+    }),
+  ],
+  preview: { select: { title: "heading" } },
+});
+
 /** Every section type, in the order they appear in the Studio's insert menu. */
 export const sectionTypes = [
   heroSection,
@@ -631,6 +973,12 @@ export const sectionTypes = [
   poetryBandSection,
   richTextSection,
   pullQuoteSection,
+  imageWithTextSection,
+  imageBandSection,
+  faqAccordionSection,
+  mapBandSection,
+  galleryGridSection,
+  contactPanelSection,
 ];
 
 /** The array members for any document's `sections[]` field. */

@@ -970,4 +970,73 @@ export const COLLECTIONS: readonly Collection[] = [
       "hemant-green-silk-wool-tanchoi-stole",
     ],
   },
+
+  /*
+   * ── The four the menus advertised and nobody had written ──────────────────
+   *
+   * Added 12 Sep 2026. These were the last dead links in the navigation: the
+   * Shop menu offered Fresh Off the Loom, Back in Stock, Gifts and Bridal, and
+   * all four 404d. `navigation.test.ts` tracked them on `NOT_YET_AUTHORED`,
+   * which is a backlog, not a fix.
+   *
+   * They are `edit`, not `facet` and not `campaign`. No facet produces them —
+   * there is no occasion facet, and nothing on `Product` records arrival or
+   * restock dates — and they have no campaign story behind them. Authored
+   * lists, ordered editorially, and they are meant to be re-picked by hand as
+   * stock moves rather than left to rot.
+   *
+   * A short list is honest at this catalogue size. Padding them out with
+   * whatever was to hand is how a "Bridal" edit ends up holding a stole.
+   */
+  {
+    kind: "edit",
+    handle: "fresh-off-the-loom",
+    title: "Fresh Off the Loom",
+    seoIntro:
+      "The most recent pieces to come off the looms we buy from, cut down and photographed within the fortnight. This is the shortest-lived page on the site — a piece stays on it until the next batch arrives.",
+    productHandles: [
+      "bela-white-handwoven-georgette-kadhua-saree",
+      "ksheera-off-white-muslin-cotton-jamdani-suit",
+      "chandrika-ivory-tissue-silk-jangla-saree",
+      "shyamala-green-katan-silk-kurta-set",
+    ],
+  },
+  {
+    kind: "edit",
+    handle: "back-in-stock",
+    title: "Back in Stock",
+    seoIntro:
+      "Pieces that sold, were asked after, and have been rewoven. Nothing here is a reprint in the ordinary sense — a second weaving of the same design is a second piece, with its own irregularities and its own weeks on the loom.",
+    productHandles: [
+      "sindoor-red-katan-silk-kadiyal-saree",
+      "kesari-orange-katan-silk-tanchoi-saree",
+      "baluka-beige-tussar-silk-embroidered-suit",
+    ],
+  },
+  {
+    kind: "edit",
+    handle: "gifts",
+    title: "Gifts",
+    seoIntro:
+      "Pieces that survive being chosen for somebody else: forgiving in size, uncomplicated in colour, and worth keeping whether or not the person already owns something like them. Everything here ships in a cotton sleeve with the weaver and the weeks on the loom written on the card.",
+    productHandles: [
+      "bela-white-handwoven-georgette-kadhua-saree",
+      "chandrika-ivory-tissue-silk-jangla-saree",
+      "kesari-orange-katan-silk-tanchoi-saree",
+      "ksheera-off-white-muslin-cotton-jamdani-suit",
+    ],
+  },
+  {
+    kind: "edit",
+    handle: "bridal",
+    title: "Bridal",
+    seoIntro:
+      "The heavy end of the catalogue — real zari, dense grounds, and the weaving that takes months rather than weeks. Commission early: a bridal piece is between three and six months on the loom, and no amount of asking shortens it.",
+    productHandles: [
+      "sindoor-red-katan-silk-kadiyal-saree",
+      "nilambari-blue-katan-silk-shikargah-saree",
+      "ashoka-maroon-satin-silk-anarkali-suit",
+      "padmini-pink-moonga-silk-anarkali-suit",
+    ],
+  },
 ];

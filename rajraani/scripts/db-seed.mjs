@@ -268,7 +268,10 @@ try {
       collection.kind === "campaign" ? collection.campaignSlug : null,
       index,
     );
-    if (collection.kind === "campaign") {
+    // Campaigns AND edits carry an authored product list. Only facets do not.
+    // This read `=== "campaign"` until 12 Sep 2026, which meant the four `edit`
+    // collections seeded with a row and no products and rendered empty grids.
+    if (collection.kind !== "facet") {
       collection.productHandles.forEach((handle, position) => {
         const row = findProduct.get(handle);
         if (row) insertCollectionProduct.run(collection.handle, row.id, position);

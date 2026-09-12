@@ -1,6 +1,6 @@
 # Project Handoff — Rajraani
 
-**Last updated:** 22 August 2026 (audit and reconciliation session)
+**Last updated:** 13 September 2026 (navigation, About Us, campaign and craft pages)
 **Purpose:** Resume state. Read this first in any new session, then read the two documents it points to.
 
 > **Start at [§2.45](#245-audited-state-22-august-2026), then [§2.46](#246-progress-ledger--measured-against-git-22-august-2026) and [§2.47](#247-photography-integrated-and-the-three-blocking-decisions-taken--22-august-2026).**
@@ -8,7 +8,14 @@
 > reference site and since rewritten — read it before adding any homepage copy.
 > §[2.49](#249-homepage-and-navigation-build--2223-august-2026) is the homepage and navigation
 > session, and §[2.50](#250-homepage-bands-measured-and-rebuilt--23-august-2026) the band-by-band
-> rebuild. **`check:originality` does not currently pass** — see the end of §2.50.
+> rebuild.
+>
+> **The 10–13 September work is §5.8 and its four sub-sections** — the navigation rebuild,
+> the About Us pages, Shop/Collections/Campaigns/Stories, Crafts, and the measured
+> reference sweep. Start there for anything about pages or menus.
+>
+> `npm run verify` is green as of 13 September 2026 (269 tests), `check:originality`
+> included.
 > Sections 1–2.4 were written between 5 and 8 August and were not revised as the build
 > moved past them. Where they disagree with §2.45/§2.46, the later sections are the
 > measured ones — read out of the tree at `80dc7cd` with `npm run verify` green.
@@ -380,18 +387,32 @@ Commerce is **~50% built and 0% trustworthy**. See the §2.45 checkout finding.
 | Workstream | Done | Remaining |
 |---|---|---|
 | Research and specs | ~95% | catalogue copy, photography commissioning |
-| Storefront UI | ~85% | blog/editorial routes, lost components |
+| Storefront UI | ~90% *(was ~85%; §5.8)* | no `/blogs` route, lost components |
+| Navigation and pages | ~95% *(was ~50%; §5.8)* | admin editing, commissioned imagery |
 | Design system | ~95% | 9 missing tile images |
 | Admin | ~30% | 10 screens to wire to the DB |
 | Commerce / payments | ~50% built, untrusted | signature check, webhook, tests |
 | Content and imagery | ~55% *(was ~40%; see §2.47)* | commissioned shoot, 7 unphotographed sarees, 9 tiles, no Banaras store photo, 822 MB video |
 | Launch hardening | ~10% | perf, SEO, a11y audit, load test, monitoring |
 
-**Overall: roughly 62% of the build is done** (60% before the photography integration of §2.47). The remaining 40% is unevenly
-distributed — the storefront needs finishing touches, the admin needs a fortnight of
-unglamorous wiring, and the payment path needs to be made real before anything ships.
+**Overall: roughly 68% of the build is done** (62% on 22 August; the 13 September pages
+session moved the storefront, nothing else). The remaining third is unevenly distributed
+and the distribution is the point:
 
-**Nothing here is deployable today**, and that is a payments statement, not a polish one.
+- what a visitor **sees** is ~85% there
+- what **takes money** is ~40% built and 0% trustworthy
+- what you would **run the business from** is ~30%
+
+**Nothing here is deployable today, and two separate things block it.**
+
+1. **Payments.** Re-verified 13 September 2026 and unchanged: `createCheckoutAction`
+   fabricates the gateway order id with a string template rather than calling Razorpay,
+   and `completePaymentAction` accepts the payment id AND the amount paid from the
+   browser, with no signature verification anywhere in the file. Anyone with devtools can
+   mark an order paid for nothing. This is the single most serious defect in the repo.
+2. **Photography.** There are now ~150 staged third-party images across
+   `public/reference-only/` and `public/homepage/` — all gitignored, none licensed. The
+   site only looks finished on the machine that holds them. See §5.8.1.
 
 #### What the sprint plan in `build.md` §5 no longer means
 
@@ -1139,31 +1160,228 @@ What still needs sanju rather than code: **photography** (§5.6 and §6), the **
 writer** (§5.3), and the **taxonomy review** (§5.4). Plus a Razorpay account when
 checkout is ready to wire up, which needs business KYC and is worth starting early.
 
-### 5.8 The navigation links to collections that do not exist
+### 5.8 The navigation links to pages that do not exist
 
-Found 10 September 2026. **30 of the 36 collection links in the menus 404'd.** The
-navigation was written as a merchandising structure — the shape a catalogue this deep
-wants — and the collections behind it were never created. Nothing failed and nothing
-warned, because nobody clicks all 36.
+Found 10 September 2026 on the shoppable half, 12 September on the editorial half.
 
-**Closed:** `lehengas`, `stoles`, `blouse-pieces`, `yardage`. Each maps to a `garment`
-value already in `taxonomy/facets.json`, so they are facet collections like `sarees` and
-fill themselves as pieces are catalogued.
+**The collection half.** 30 of the 36 collection links in the menus 404'd. The
+navigation had been written as a merchandising structure — the shape a catalogue this
+deep wants — and the collections behind it were never created. Nothing failed and
+nothing warned, because nobody clicks all 36.
 
-**Open — 26 collections, listed in `src/lib/data/navigation.test.ts` as
-`NOT_YET_AUTHORED`:** `alap`, `back-in-stock`, `bridal`, `chhaya`, `collectors-edit`,
-`everyday`, `festive`, `first-saree`, `fresh-off-the-loom`, `freshly-tailored`, `gifts`,
-`heirloom`, `kinara`, `lightweight`, `menswear`, `modern-classics`, `nirantar`,
-`occasion`, `office-travel`, `prabhat`, `ritu`, `seasonal`, `signatures`, `taar`,
-`udgam`, `womenswear`.
+**The editorial half, and it was worse.** About Us pointed at five `/pages` and every
+one of them 404'd, including Our story, FAQs and Contact us — the three a shopper opens
+when they are deciding whether to trust an unfamiliar shop with a large sum. Stories
+advertised a `/blogs` section that has no route in this build at all. Craft listed seven
+essays of which two had been written.
 
-These are editorial groupings with no facet behind them. Each needs a title, an
-`seoIntro` and either a facet definition or a product list — **authorship, not
-engineering**, and it belongs to whoever owns the merchandising. The alternative is to
-trim the menus to what exists and re-add entries as collections are written.
+**What was done, 12 September 2026.** The menus were cut back to what the shop actually
+holds, on instruction, and the pages they land on were written:
+
+- **Removed:** the Journal column (`/blogs`, no route), How to Style (twelve edits with
+  nothing in them), the Handloom column, seven garment types we do not make, and eight
+  of the ten campaigns. Menswear and Womenswear went with them.
+- **Written, in `sections.ts` as seed content:** `kala`, `awadh`, `katha`,
+  `art-collectibles`, `our-story`, `banaras-store`, `faqs`, `contact`. Twelve editorial
+  pages now prerender where there were four.
+- **Guarded:** `navigation.test.ts` now holds both halves — collection handles must
+  exist, page slugs must exist, and nothing may point outside `/collections` or
+  `/pages`. There is deliberately no `NOT_YET_AUTHORED` equivalent for pages: a
+  collection can honestly be real but empty while the catalogue fills, an editorial page
+  cannot.
+
+**Open — 4 collections, in `NOT_YET_AUTHORED`:** `back-in-stock`, `bridal`,
+`fresh-off-the-loom`, `gifts`. Down from 26, because the menu entries for the other 22
+were removed rather than because anything was authored. These four were kept on
+instruction — they are the New Arrivals and Featured entries a shopper expects — and
+they still 404. Each needs a title, an `seoIntro` and either a facet definition or a
+product list: **authorship, not engineering.** None of the four has a facet that would
+back it today.
 
 `navigation.test.ts` fails on any *new* dead link, and fails if the list goes stale in
 either direction, so the backlog cannot quietly grow or rot.
+
+**Still open elsewhere on the homepage:** the Womenswear and Menswear slides in the
+editorial slideshow point at `/collections/womenswear` and `/collections/menswear`,
+which no longer appear in any menu and have never existed. That is a merchandising
+decision — cut the band or author the collections — so it was left alone.
+
+### 5.8.1 The About Us pages, built 12 September 2026
+
+Rebuilt to match the reference's own About pages **band for band**, on instruction and
+with the originality trade-off named out loud by the person asking for it.
+
+**What was measured and copied: the layout.** 1200px container (their
+`.container.has-limit`), two 50/50 columns, square image beside prose, alternating
+image-left / image-right down the page, stacking image-first below the tablet
+breakpoint, closing frame inside the same container rather than bleeding. Section
+sequences and paragraph counts per band were taken from their pages directly:
+
+- **Our story** — standfirst block (1 para), band image-left (3 paras), band
+  image-right (2 paras), band image-left (3 paras), 15:8 closing frame. No eyebrows and
+  no pull quotes; neither is in the original.
+- **Our Banaras store** — 2:1 banner, block of 4 short paras, band image-left (2 paras,
+  **no heading**), band image-right (3 paras, no heading), 1-para block, 4:3 closing
+  frame with a heading and booking button laid over it.
+- **Contact us** — enquiry routes, direct-contact block, closing store band.
+- **FAQs** — grouped accordions, 22 questions across 6 groups.
+
+Paragraph lengths are within a few characters of theirs, because on a page like this the
+measure is most of what the eye reads as "the same design".
+
+**What was NOT copied: a single sentence.** Every word is ours. Matching their layout at
+their text lengths produces the same page; their prose would only add a legal exposure
+with no visual gain. `check-originality` passes, and none of their headings ("Behind the
+name", "Design Philosophy", "Our Journey") appears anywhere.
+
+**THEIR PHOTOGRAPHS ARE NOW STAGED IN THIS TREE.** Eleven files pulled from their CDN on
+12 Sep 2026 into `public/homepage/about/`, renamed to neutral filenames so the
+originality gate's filename rule cannot be tripped:
+
+    story-banner.jpg, story-band-01..03.jpg, story-closing.jpg,
+    store-banner.jpg, store-band-01..02.jpg, store-closing.jpg,
+    contact-band.jpg, contact-portrait.jpg
+
+`/public/homepage/` is gitignored, so they are local mockup only — the same footing as
+the rest of the staged reference imagery. **They are not licensed to this project and
+must never be committed or deployed.** Replacing them is a launch blocker, not a
+nice-to-have: see `docs/research/photography-brief.md`. The person who asked for them
+knows this and intends to swap them.
+
+**A second pass on 12 Sep** took the match further, after the first attempt was judged
+not close enough. What was actually still different turned out not to be the skeleton:
+
+- **Fonts, ink colours, body size and section padding already matched** — Cardo and Open
+  Sans, `#301e1d` headings on `#533e2d` body, 14px/1.5, 20px and 40px section padding.
+  Those were settled on 10 Sep (see the `--color-ink` note in globals.css) and needed no
+  change. Worth knowing before anyone "fixes" them again.
+- **The opening banners were missing.** Both their about and store pages open on a
+  full-bleed image with the page title UNDERNEATH it. `imageBand` gained `bleed`, and
+  `pages/[slug]/page.tsx` hoists a leading bleed band above its own header.
+- **The title block was ranged left** in a 680px column while every `richText` under it
+  was centred in the same column. Now centred, which also tidies the campaign pages.
+- **The contact page was the wrong shape entirely** — a six-cell grid where theirs is two
+  halves, routes and store details left, message form right.
+
+**Section types**, added and mirrored in `sanity/schemas/objects/sections.ts` because
+`schema.test.ts` holds both sides to the same set: `imageWithText` (heading optional —
+their store bands carry none), `imageBand` (`ratio`, `bleed`, and an optional centred
+`overlay` carrying a title and button, which is their contained closing banner),
+`faqAccordion`, `contactPanel`. The library is now 22 implemented types.
+
+**The contact form is real.** `src/lib/contact/actions.ts` validates and writes to a new
+`enquiry` table; `ContactForm.tsx` drives it through `useActionState` so it still posts
+without JavaScript. Verified end to end on 12 Sep — submitted, row landed, row removed.
+
+    SELECT * FROM enquiry ORDER BY created_at DESC;
+
+**But messages are STORED, NOT DELIVERED.** There is no mail transport and no admin
+inbox, so nothing notifies anyone that a message arrived. Until that screen exists
+somebody has to read the table. This is the most likely way a real customer gets ignored.
+
+**These pages are not yet editable from the admin.** Seed content in `sections.ts` reads
+through the content seam and a first admin save would take over, but the editorial-page
+editor does not exist — item 1 of §5.9. Until it lands, changing this copy is a code
+edit and a deploy.
+
+### 5.8.2 Shop, Collections, Campaigns and Stories — 12 September 2026
+
+The same treatment as the About pages, applied to the rest of the menus. The saree and
+suit PLPs were left alone deliberately; the template works.
+
+**The last four dead links are gone, and `NOT_YET_AUTHORED` is now empty for the first
+time.** `fresh-off-the-loom`, `back-in-stock`, `gifts` and `bridal` are authored in
+`fixtures.ts`.
+
+**A third collection kind, `edit`.** Those four are hand-picked lists: no facet produces
+them (there is no occasion facet, and nothing on `Product` records arrival or restock),
+and they have no campaign story paired to them. Filing them as `campaign` would have
+worked mechanically and lied in the data — `campaignSlug` pointing at a story that does
+not exist, and the admin listing four campaigns nobody ever ran. Touched:
+`domain/types.ts`, both repositories, `schema.sql` (two CHECKs), `db-seed.mjs` and
+`catalogue.test.ts`.
+
+**MIGRATION NOTE.** `migrate()` is `CREATE TABLE IF NOT EXISTS`, so it does NOT widen a
+CHECK on a database that already exists. The local `collection` table was rebuilt in
+place (create-copy-drop-rename) to pick both changes up. **Any other existing database
+needs the same treatment** — a fresh `npm run db:reset` is enough if the data is
+disposable, and on this machine it was (every table but the seeded catalogue was empty).
+
+**Campaign and story pages rebuilt** — `kala`, `awadh`, `katha` — to the reference's own
+campaign shape, measured from their pages: full-bleed hero carrying the title, short
+opening, then `[4:5 portrait band | full-bleed banner]` twice with the sides alternating,
+then a product rail, a closing line and a full-bleed closing image.
+
+**Their banners ship separate mobile crops** — 1800×900 on desktop, 900×1350 on a phone.
+`ArtPair` has demanded that pairing since the schema was written and nothing in the build
+had ever used it for two different files. These pages do; verified at 375px and 1440px.
+
+**Section types gained** `imageWithText.ratio` (`1/1` default, `4/5` for campaign bands)
+and `imageBand.bleed`. `pages/[slug]/page.tsx` hoists a leading bleed band above its own
+header, because an about page puts its title under the banner.
+
+**A trap worth knowing about.** `catalogue.ts` drops any product with no staged
+photography (`photographed()`), so only the ten handles under
+`public/reference-only/products/` are shoppable locally. The first pick for these edits
+used handles outside that set and `gifts` rendered "0 pieces" while passing every test —
+the fixtures were right and the page was empty. **When authoring an `edit`, pick handles
+that are in the photographed set, or the page looks sold out.** This disappears once
+commissioned photography covers the catalogue.
+
+**Photography for these pages** is another 23 files from the reference CDN, in the
+gitignored `public/homepage/campaigns/`. Same footing and same warning as §5.8.1: local
+mockup only, never committed, never deployed.
+
+### 5.8.3 Crafts — 13 September 2026
+
+`/pages/art-collectibles` rebuilt against the reference's metal page. Theirs runs to
+nineteen sections; this is the same sequence with the repetitions collapsed — full-bleed
+hero (with a phone crop), opening line, banner, a four-up square grid of what the metal
+work divides into, banner, a square band, a three-up gallery of the making, closing line,
+full-bleed closing image.
+
+**One new section type, `galleryGrid`** — a row of square frames, optionally captioned
+and optionally linked, at 2, 3 or 4 columns. It covers both of the shapes that page
+needs: the four categories, which are links, and the three-up of the making, which is
+not. A tile with no `href` renders as a plain `<div>` rather than an anchor to nowhere.
+`columns` is authored rather than inferred from `items.length`, because four tiles read
+as a grid and three as a sequence and that is a choice about the set.
+
+Fifteen more of their photographs staged in the gitignored `public/homepage/craft/`.
+Same footing and same warning as §5.8.1.
+
+The library is now 23 implemented section types, against the fifteen-plus build.md §2.4
+specifies.
+
+### 5.8.4 The measured sweep — 13 September 2026
+
+The match was judged about 60% and it was. The first three passes worked from
+remembered structure; this one worked from a script that dumps their block sequence,
+per-block heading and paragraph lengths, image aspect ratios and CTAs, and runs the same
+extraction against our own pages for a side-by-side diff. **Everything below was a
+measured gap, not a guess.** The tool is worth rebuilding before the next comparison.
+
+What it found and what was fixed:
+
+- **Our story was missing an entire block.** Their page runs TWO rich-text sections
+  before the first band — a one-line statement, then four paragraphs of what the shop is
+  — and we had only the first. That alone is most of why the top of the page read thin.
+- **Contact's closing band was the wrong component.** Theirs is a full-width overlay
+  banner with the text over it and a booking button, plus a separate phone crop; ours was
+  a side-by-side band.
+- **Both the contact and store pages end on a map.** We had none. New `mapBand` type —
+  a keyless Google embed (`output=embed`), lazy-loaded because it sits below the fold and
+  pulls a third-party bundle.
+- **The FAQ was less than two thirds of theirs.** Now their six group names (Product,
+  Ordering, Payment, Delivery, Returns/Refund & Cancellation, General) and all 34
+  questions, answered in our own words.
+- **The store page's closing rich-text carries a heading** on theirs; ours did not.
+- **Two pages had the title twice** — a page h1 plus a section h2 saying the same thing —
+  because their pages have no separate title header and ours does. `contactPanel.heading`
+  is now optional and omitted, and `visitHeading` became an h2 styled at h3 size: with the
+  panel heading gone it was an h1 followed by an h3, which `lint:headings` caught.
+
+The library is now 25 implemented section types.
 
 ### 5.9 The remaining admin editors
 
@@ -1175,9 +1393,9 @@ still mock or absent, in the order they are worth doing:
    and tested by nothing. Needs a list screen, a section editor reusing the homepage
    one, and a draft/publish toggle. The storefront already honours `published`.
 2. **Collections.** The screen is a mock. Writes need to go through
-   `admin-queries.ts` alongside the product ones. This is also where the **26 unwritten
+   `admin-queries.ts` alongside the product ones. This is also where the **4 unwritten
    collections (§5.8)** would get authored, which makes it the item that unblocks the
-   navigation.
+   last dead links in the menus.
 3. **Navigation.** Still a TypeScript constant (`navigation.ts`). `setting` is the
    right home for it; the schema comment names it. Until then, menu changes are deploys.
 4. **Per-band media and slides.** The homepage editor edits text only — photography,
@@ -1198,6 +1416,21 @@ schema-driven one. That is the fortnight the ledger refers to.
 
 ## 6. Next actions
 
+### The two that gate everything else (13 September 2026)
+
+**A. Verify the payment signature.** `src/lib/checkout/actions.ts`. Contained work —
+call Razorpay to create the order, HMAC-verify `razorpay_signature` in
+`completePaymentAction`, stop trusting the browser's amount, and delete the fabricated
+order id. Until this exists the site cannot take one real order, and every other
+commerce task is built on sand.
+
+**B. Build the editorial-page editor** (§5.9 item 1). Twelve pages of content now live in
+`sections.ts` as seed constants. The content seam and `savePage`/`deletePage` already
+exist and are used by nothing. Until this screen lands, changing any page copy is a code
+edit and a deploy, which is not a workable arrangement for whoever writes the copy.
+
+---
+
 **For sanju — three emails and one conversation, and nothing is blocked:**
 
 1. Fill in SKU counts at §1 of `photography-brief.md`
@@ -1213,10 +1446,11 @@ schema-driven one. That is the fortnight the ledger refers to.
    checkout is ready to wire up. (Replaces the old "create a Shopify store" item —
    see §5.7.)
 8. ~~Delete the superseded parallel build~~ — done 6 Aug; there is one folder now (§2.0)
-9. **Decide the 26 unwritten collections (§5.8).** The menus advertise them and they
-   404. Either say what belongs in each — a title, an intro, and a facet or a product
-   list — or say to trim the menus to what exists. This is merchandising, not
-   engineering, and it is the largest open item from 10 September.
+9. **Author the 4 remaining collections (§5.8):** `back-in-stock`, `bridal`,
+   `fresh-off-the-loom`, `gifts`. The menus advertise them and they 404. Each needs a
+   title, an intro, and a facet or a product list; none has a facet that would back it
+   today. The other 22 were closed on 12 September by trimming the menus to what the
+   shop holds. This is merchandising, not engineering.
 
 **For the next session:**
 

@@ -7,6 +7,7 @@ import { StoresSlideshow } from "./StoresSlideshow";
 import { CampaignSlideshow } from "./CampaignSlideshow";
 import { VideoPlayer } from "./VideoPlayer";
 import { PLACEHOLDER_WASH, toneFor } from "../Frame";
+import { ContactForm } from "../ContactForm";
 import { ProductCard } from "../ProductCard";
 import { ScrollReveal } from "../ScrollReveal";
 import { catalogue } from "@/lib/data/catalogue";
@@ -107,6 +108,42 @@ export async function SectionRenderer({
       return (
         <ScrollReveal>
           <PullQuote section={section} />
+        </ScrollReveal>
+      );
+    case "imageWithText":
+      return (
+        <ScrollReveal>
+          <ImageWithText section={section} />
+        </ScrollReveal>
+      );
+    case "imageBand":
+      return (
+        <ScrollReveal>
+          <ImageBand section={section} />
+        </ScrollReveal>
+      );
+    case "faqAccordion":
+      return (
+        <ScrollReveal>
+          <FaqAccordion section={section} />
+        </ScrollReveal>
+      );
+    case "mapBand":
+      return (
+        <ScrollReveal>
+          <MapBand section={section} />
+        </ScrollReveal>
+      );
+    case "galleryGrid":
+      return (
+        <ScrollReveal>
+          <GalleryGrid section={section} />
+        </ScrollReveal>
+      );
+    case "contactPanel":
+      return (
+        <ScrollReveal>
+          <ContactPanel section={section} />
         </ScrollReveal>
       );
   }
@@ -634,5 +671,345 @@ function PullQuote({ section }: { section: Extract<Section, { type: "pullQuote" 
         </figcaption>
       ) : null}
     </figure>
+  );
+}
+/*
+ * ── The About Us set ───────────────────────────────────────────────────────
+ *
+ * Type scale note: these use `text-body` and `eyebrow`, which are real
+ * `@utility` declarations in globals.css. Several older renderers in this file
+ * reach for `text-prose` and `text-caption`, which are not — they were never
+ * declared, so they style nothing and the paragraphs under them fall back to
+ * the base size. Not fixed here because it is a visual change to the homepage
+ * and belongs in its own pass, but do not copy those two class names forward.
+ */
+
+function ImageWithText({
+  section,
+}: {
+  section: Extract<Section, { type: "imageWithText" }>;
+}) {
+  /*
+   * Order is set on the columns, not by swapping the JSX.
+   *
+   * Below `md` the grid is a single column and the image must come first
+   * whichever side it takes on desktop — a heading, then prose, then the
+   * photograph it refers to reads backwards on a phone. Putting the art first
+   * in source and moving it with `order` gets both without duplicating the
+   * markup.
+   */
+  const imageLeft = section.imageSide === "left";
+
+  return (
+    /*
+     * `wrap` (1200) rather than `wrap-wide` (1600).
+     *
+     * At 1600 the prose column comes out around 660px on a laptop, which is
+     * half again the comfortable measure, and the band runs to the viewport
+     * edge while the page title above it sits in a 680px prose column — a step
+     * that reads as broken alignment rather than as a change of gear. The
+     * closing `fullBleedImage` is the section that is meant to break the
+     * container, and it is the only one that does.
+     */
+    <section className="wrap section-pad">
+      <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+        <div className={imageLeft ? "md:order-1" : "md:order-2"}>
+          <Art
+            art={section.art}
+            className={`w-full ${section.ratio === "4/5" ? "aspect-4/5" : "aspect-square"}`}
+            alt={section.heading ?? ""}
+          />
+        </div>
+
+        <div className={imageLeft ? "md:order-2" : "md:order-1"}>
+          {section.eyebrow ? (
+            <p className="eyebrow text-ink-muted">{section.eyebrow}</p>
+          ) : null}
+          {section.heading ? (
+            <h2 className="text-h2 mt-3">{section.heading}</h2>
+          ) : null}
+          <div className={section.heading || section.eyebrow ? "mt-5 space-y-4" : "space-y-4"}>
+            {section.paragraphs.map((paragraph, index) => (
+              <p key={index} className="text-body text-ink-body">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          {section.ctaLabel && section.ctaHref ? (
+            <Link href={section.ctaHref} className="cta-link mt-6 inline-block">
+              {section.ctaLabel}
+            </Link>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const IMAGE_BAND_RATIO = {
+  "15/8": "md:aspect-[15/8]",
+  "2/1": "md:aspect-[2/1]",
+  "4/3": "md:aspect-[4/3]",
+} as const;
+
+function ImageBand({
+  section,
+}: {
+  section: Extract<Section, { type: "imageBand" }>;
+}) {
+  return (
+    <section className={section.bleed ? "" : "wrap section-pad"}>
+      {/*
+        * 3:2 on a phone whatever the desktop ratio is. A 15:8 frame at 375
+        * wide is 200px tall, which is not a photograph so much as a rule with
+        * a picture in it.
+        */}
+      <div className="relative">
+        <Art
+          art={section.art}
+          className={`aspect-[3/2] w-full ${IMAGE_BAND_RATIO[section.ratio ?? "15/8"]}`}
+          alt={section.caption ?? section.overlay?.title ?? ""}
+        />
+        {section.overlay ? (
+          <>
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-black/10"
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+              <h2 className="text-h1 text-bg">{section.overlay.title}</h2>
+              {section.overlay.body ? (
+                <p className="text-body mt-4 max-w-[46ch] text-bg/85">
+                  {section.overlay.body}
+                </p>
+              ) : null}
+              <Link
+                href={section.overlay.ctaHref}
+                className="cta-primary mt-7 inline-block"
+              >
+                {section.overlay.ctaLabel}
+              </Link>
+            </div>
+          </>
+        ) : null}
+      </div>
+      {section.caption ? (
+        <p className="mt-3 text-xs tracking-wide text-ink-muted italic">
+          {section.caption}
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
+function FaqAccordion({
+  section,
+}: {
+  section: Extract<Section, { type: "faqAccordion" }>;
+}) {
+  return (
+    <section className="wrap-prose section-pad">
+      {section.groups.map((group) => (
+        <div key={group.heading} className="mb-14 last:mb-0">
+          <h2 className="eyebrow border-b border-rule pb-3 text-ink">
+            {group.heading}
+          </h2>
+          <dl>
+            {group.items.map((item) => (
+              <div key={item.question} className="border-b border-rule">
+                {/*
+                  * `<details>` inside a `<dt>`/`<dd>` pair rather than around
+                  * one: a definition list is the right structure for question
+                  * and answer, and `<details>` cannot wrap both halves without
+                  * putting a block element inside `<dt>`, which is invalid.
+                  */}
+                <details className="group py-4">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
+                    <dt className="text-body text-ink">{item.question}</dt>
+                    <span
+                      aria-hidden
+                      className="mt-1 shrink-0 text-ink-muted transition-transform duration-300 group-open:rotate-180"
+                    >
+                      ▾
+                    </span>
+                  </summary>
+                  <dd className="text-body mt-3 pr-10 text-ink-body">
+                    {item.answer}
+                  </dd>
+                </details>
+              </div>
+            ))}
+          </dl>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+function ContactPanel({
+  section,
+}: {
+  section: Extract<Section, { type: "contactPanel" }>;
+}) {
+  return (
+    <section className="wrap section-pad">
+      {/*
+        * Two halves, form on the right, stacking on a phone with the addresses
+        * first — somebody on a train wants the phone number before the form.
+        */}
+      <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+        <div>
+          {section.heading ? (
+            <h2 className="text-h1">{section.heading}</h2>
+          ) : null}
+
+          <div className="space-y-4">
+            {section.routes.map((route) => (
+              <p key={route.text} className="text-body text-ink-body">
+                {route.text}{" "}
+                {route.email ? (
+                  <a href={`mailto:${route.email}`} className="cta-link">
+                    {route.email}
+                  </a>
+                ) : null}
+                {route.linkLabel && route.linkHref ? (
+                  <Link href={route.linkHref} className="cta-link">
+                    {route.linkLabel}
+                  </Link>
+                ) : null}
+              </p>
+            ))}
+          </div>
+
+          <p className="text-body mt-6 text-ink-body">{section.socialIntro}</p>
+          <ul className="mt-2 space-y-1">
+            {section.socials.map((social) => (
+              <li key={social.label} className="text-body text-ink-body">
+                <span aria-hidden>— </span>
+                <a
+                  href={social.href}
+                  className="cta-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {social.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/*
+            * An h2, styled at h3 size. With the panel's own heading dropped
+            * this is the first heading under the page h1, and an h1 followed by
+            * an h3 is a skipped level — `lint:headings` catches it. The size is
+            * a visual choice; the level is a structural fact.
+            */}
+          <h2 className="text-h3 mt-10">{section.visitHeading}</h2>
+          <div className="mt-4 space-y-6">
+            {section.stores.map((store) => (
+              <div key={store.name}>
+                <p className="text-body text-ink">{store.name}</p>
+                <p className="text-body mt-1 text-ink-body">{store.detail}</p>
+                <address className="text-body mt-1 text-ink-muted not-italic">
+                  {store.address}
+                </address>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="text-body text-ink-body">{section.form.intro}</p>
+          <div className="mt-6">
+            <ContactForm submitLabel={section.form.submitLabel} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const GALLERY_COLUMNS = {
+  2: "sm:grid-cols-2",
+  3: "sm:grid-cols-3",
+  4: "sm:grid-cols-2 lg:grid-cols-4",
+} as const;
+
+function GalleryGrid({
+  section,
+}: {
+  section: Extract<Section, { type: "galleryGrid" }>;
+}) {
+  return (
+    <section className="wrap section-pad">
+      {section.heading ? (
+        <h2 className="text-h2 text-center">{section.heading}</h2>
+      ) : null}
+      {section.standfirst ? (
+        <p className="text-body mx-auto mt-4 max-w-[60ch] text-center text-ink-body">
+          {section.standfirst}
+        </p>
+      ) : null}
+
+      <div
+        className={`mt-10 grid grid-cols-2 gap-5 ${GALLERY_COLUMNS[section.columns]}`}
+      >
+        {section.items.map((item, index) => {
+          const frame = (
+            <>
+              <Art
+                art={item.art}
+                className="aspect-square w-full"
+                alt={item.label ?? ""}
+              />
+              {item.label ? (
+                <span className="eyebrow mt-3 block text-ink">{item.label}</span>
+              ) : null}
+            </>
+          );
+
+          /*
+           * A tile is a link only when it has somewhere to go. The gallery of
+           * the making is photographs and nothing else — wrapping those in an
+           * anchor to the same page is a keyboard tab stop that does nothing.
+           */
+          return item.href ? (
+            <Link key={index} href={item.href} className="group block">
+              {frame}
+            </Link>
+          ) : (
+            <div key={index}>{frame}</div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function MapBand({
+  section,
+}: {
+  section: Extract<Section, { type: "mapBand" }>;
+}) {
+  const src =
+    "https://maps.google.com/maps?output=embed&q=" +
+    encodeURIComponent(section.query) +
+    `&z=${section.zoom ?? 16}`;
+
+  return (
+    <section aria-label={section.label}>
+      {/*
+        * `loading="lazy"` matters more here than on an image: the embed pulls
+        * a third-party bundle, and this sits at the very bottom of the page.
+        * Most visitors never scroll to it and should not pay for it.
+        */}
+      <iframe
+        src={src}
+        title={section.label}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        className="block h-[320px] w-full border-0 md:h-[420px]"
+      />
+    </section>
   );
 }

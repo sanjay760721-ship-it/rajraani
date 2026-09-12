@@ -39,7 +39,7 @@ export class MockCatalogueRepository implements CatalogueRepository {
       // drift out of sync with the catalogue behind it (build.md §9.5).
       return filterProducts(PRODUCTS, collection.facets);
     }
-    // A campaign collection is authored, and order is editorial.
+    // A campaign or an edit is authored, and order is editorial.
     return collection.productHandles
       .map((handle) => PRODUCTS.find((product) => product.handle === handle))
       .filter((product): product is Product => product !== undefined);
