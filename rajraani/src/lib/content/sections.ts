@@ -1690,6 +1690,7 @@ export const PAGES: Readonly<
       {
         type: "contactPanel",
         id: "contact-panel",
+        heading: "Contact us",
         routes: [
           {
             text: "For orders, deliveries, returns and repairs — anything about a piece you have bought or are about to — write to us at",
@@ -1715,8 +1716,8 @@ export const PAGES: Readonly<
         ],
         socialIntro: "You can also find us and write to us here:",
         socials: [
-          { label: "Instagram", href: "https://www.instagram.com/" },
           { label: "Facebook", href: "https://www.facebook.com/" },
+          { label: "Instagram", href: "https://www.instagram.com/" },
           { label: "Pinterest", href: "https://www.pinterest.com/" },
         ],
         visitHeading: "Visit us",

@@ -60,11 +60,21 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
   const opensWithBanner = first?.type === "imageBand" && first.bleed === true;
   const body = opensWithBanner ? page.sections.slice(1) : page.sections;
 
+  /*
+   * A contact panel carries its own h1, at the top of its left column.
+   *
+   * The reference's contact page has no centred title block above the two
+   * columns — the title sits where the addresses start. Rendering the shared
+   * header as well put "Contact us" on the page twice, once centred and once
+   * ranged left underneath it.
+   */
+  const opensWithContactPanel = first?.type === "contactPanel";
+
   return (
     <article>
       {opensWithBanner ? <SectionRenderer section={first} index={0} /> : null}
 
-      {opensWithHero ? null : (
+      {opensWithHero || opensWithContactPanel ? null : (
         /*
          * Centred, and at the same measure as the `richText` blocks below it.
          * It was ranged left in a 680px column while everything under it was

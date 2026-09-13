@@ -43,7 +43,7 @@ export function ContactForm({ submitLabel }: { submitLabel: string }) {
       <Field name="email" label="Email" type="email" autoComplete="email" />
 
       <div>
-        <label htmlFor="enquiry-message" className="eyebrow block text-ink-muted">
+        <label htmlFor="enquiry-message" className="text-body block text-ink-body">
           Message <Required />
         </label>
         <textarea
@@ -56,7 +56,17 @@ export function ContactForm({ submitLabel }: { submitLabel: string }) {
         />
       </div>
 
-      <button type="submit" disabled={pending} className="cta-primary disabled:opacity-60">
+      {/*
+        * Full width, light, bordered — not `cta-primary`, which is the solid
+        * dark button the rest of the site uses for shopping actions. Inside a
+        * filled panel a solid block reads as the loudest thing on the page,
+        * and this is a "write to us", not a "buy it".
+        */}
+      <button
+        type="submit"
+        disabled={pending}
+        className="font-display w-full border border-rule bg-bg py-3 text-[15px] text-ink transition-colors hover:bg-bg-alt disabled:opacity-60"
+      >
         {pending ? "Sending…" : submitLabel}
       </button>
     </form>
@@ -83,7 +93,12 @@ function Field({
   const id = `enquiry-${name}`;
   return (
     <div>
-      <label htmlFor={id} className="eyebrow block text-ink-muted">
+      {/*
+        * Sentence case, body size. These were `eyebrow` — uppercase, tracked
+        * and muted — which is the site's label style for merchandising chrome
+        * and reads as shouting above a form field.
+        */}
+      <label htmlFor={id} className="text-body block text-ink-body">
         {label} <Required />
       </label>
       <input

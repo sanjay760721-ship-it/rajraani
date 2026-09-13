@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
 
 import { HeroCarousel } from "./HeroCarousel";
 import { EditorialSlideshow } from "./EditorialSlideshow";
@@ -143,7 +144,7 @@ export async function SectionRenderer({
     case "contactPanel":
       return (
         <ScrollReveal>
-          <ContactPanel section={section} />
+          <ContactPanel section={section} isPageTitle={index === 0} />
         </ScrollReveal>
       );
   }
@@ -846,11 +847,63 @@ function FaqAccordion({
   );
 }
 
+/**
+ * Small mark for a social account. Unknown networks render nothing rather than
+ * a placeholder box — an icon nobody recognises is worse than a gap.
+ */
+function SocialIcon({ label }: { label: string }) {
+  const common = {
+    width: 16,
+    height: 16,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    "aria-hidden": true,
+  } as const;
+
+  switch (label.toLowerCase()) {
+    case "instagram":
+      return (
+        <svg {...common}>
+          <rect x="2" y="2" width="20" height="20" />
+          <circle cx="12" cy="12" r="4.5" />
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "facebook":
+      return (
+        <svg {...common}>
+          <path d="M14 8.5V6.8c0-.7.3-1.1 1.1-1.1H16V3h-2c-2 0-3 1.2-3 3.2v2.3H9V11h2v10h3V11h2l.4-2.5H14z" />
+        </svg>
+      );
+    case "pinterest":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9.5" />
+          <path d="M10 18l1.6-6.4M9.7 10.2c0-1.5 1.1-2.6 2.6-2.6 1.4 0 2.4 1 2.4 2.4 0 1.9-1 3.4-2.4 3.4-.8 0-1.4-.6-1.2-1.4" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 function ContactPanel({
   section,
+  isPageTitle,
 }: {
   section: Extract<Section, { type: "contactPanel" }>;
+  isPageTitle: boolean;
 }) {
+  /*
+   * The heading is the page's h1 when this section opens the page, which on the
+   * contact page it does. `pages/[slug]/page.tsx` suppresses its own header for
+   * exactly this case, because the reference puts the title at the top of the
+   * left column rather than centred above both.
+   */
+  const Heading = isPageTitle ? "h1" : "h2";
+
   return (
     <section className="wrap section-pad">
       {/*
@@ -860,65 +913,108 @@ function ContactPanel({
       <div className="grid gap-12 md:grid-cols-2 md:gap-16">
         <div>
           {section.heading ? (
-            <h2 className="text-h1">{section.heading}</h2>
+            <Heading className="text-h1">{section.heading}</Heading>
           ) : null}
 
-          <div className="space-y-4">
-            {section.routes.map((route) => (
-              <p key={route.text} className="text-body text-ink-body">
-                {route.text}{" "}
-                {route.email ? (
-                  <a href={`mailto:${route.email}`} className="cta-link">
-                    {route.email}
-                  </a>
+          <div className="mt-6 space-y-4">
+            {section.routes.map((route, index) => (
+              <Fragment key={route.text}>
+                <p className="text-body text-ink-body">
+                  {route.text}{" "}
+                  {route.email ? (
+                    <a
+                      href={`mailto:${route.email}`}
+                      className="font-semibold text-ink hover:underline"
+                    >
+                      {route.email}
+                    </a>
+                  ) : null}
+                  {route.linkLabel && route.linkHref ? (
+                    <Link
+                      href={route.linkHref}
+                      className="font-semibold text-ink hover:underline"
+                    >
+                      {route.linkLabel}
+                    </Link>
+                  ) : null}
+                  {/*
+                    * The "you can also find us" line belongs to the first
+                    * paragraph, not to a new one — it introduces the list that
+                    * follows it, and a paragraph gap between them reads as a
+                    * change of subject.
+                    */}
+                  {index === 0 ? (
+                    <>
+                      <br />
+                      {section.socialIntro}
+                    </>
+                  ) : null}
+                </p>
+
+                {index === 0 ? (
+                  <div className="space-y-3 pt-1">
+                    {section.socials.map((social) => (
+                      <p key={social.label} className="text-body">
+                        <a
+                          href={social.href}
+                          className="font-semibold text-ink hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          -{social.label}
+                        </a>
+                      </p>
+                    ))}
+                  </div>
                 ) : null}
-                {route.linkLabel && route.linkHref ? (
-                  <Link href={route.linkHref} className="cta-link">
-                    {route.linkLabel}
-                  </Link>
-                ) : null}
-              </p>
+              </Fragment>
             ))}
           </div>
 
-          <p className="text-body mt-6 text-ink-body">{section.socialIntro}</p>
-          <ul className="mt-2 space-y-1">
+          {/*
+            * An h2 at body size and weight. It is the first heading under the
+            * page h1, so h3 would skip a level and `lint:headings` would say so
+            * — the size is a visual choice, the level is a structural fact.
+            */}
+          <h2 className="text-body mt-8 font-semibold text-ink">
+            {section.visitHeading}
+          </h2>
+          <div className="mt-4 space-y-4">
+            {section.stores.map((store) => (
+              <Fragment key={store.name}>
+                <p className="text-body text-ink-body">{store.detail}</p>
+                <address className="text-body text-ink-body italic">
+                  <span className="font-semibold">{store.name}</span>
+                  {", "}
+                  {store.address}
+                </address>
+              </Fragment>
+            ))}
+          </div>
+
+          <ul className="mt-8 flex items-center gap-4">
             {section.socials.map((social) => (
-              <li key={social.label} className="text-body text-ink-body">
-                <span aria-hidden>— </span>
+              <li key={social.label}>
                 <a
                   href={social.href}
-                  className="cta-link"
+                  className="block text-ink-muted transition-colors hover:text-ink"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.label}
                 >
-                  {social.label}
+                  <SocialIcon label={social.label} />
                 </a>
               </li>
             ))}
           </ul>
-
-          {/*
-            * An h2, styled at h3 size. With the panel's own heading dropped
-            * this is the first heading under the page h1, and an h1 followed by
-            * an h3 is a skipped level — `lint:headings` catches it. The size is
-            * a visual choice; the level is a structural fact.
-            */}
-          <h2 className="text-h3 mt-10">{section.visitHeading}</h2>
-          <div className="mt-4 space-y-6">
-            {section.stores.map((store) => (
-              <div key={store.name}>
-                <p className="text-body text-ink">{store.name}</p>
-                <p className="text-body mt-1 text-ink-body">{store.detail}</p>
-                <address className="text-body mt-1 text-ink-muted not-italic">
-                  {store.address}
-                </address>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div>
+        {/*
+          * The form sits in a filled panel, which is the whole reason it reads
+          * as a second thing on the page rather than as more of the first.
+          * Intro line inside the panel, not above it.
+          */}
+        <div className="bg-bg-sand p-6 md:p-8">
           <p className="text-body text-ink-body">{section.form.intro}</p>
           <div className="mt-6">
             <ContactForm submitLabel={section.form.submitLabel} />
