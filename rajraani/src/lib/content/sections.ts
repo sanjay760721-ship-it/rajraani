@@ -394,8 +394,14 @@ export type Section =
         ink?: "cream" | "deep" | "white";
         /**
          * How the caption's own text sits, which is NOT the same as where the
-         * panel sits. Measured on theirs: text ranges LEFT when the panel is
-         * pushed to an edge, and centres when the panel is centred.
+         * panel sits.
+         *
+         * Their markup says `text-align-left` on the two edge-positioned
+         * captions, with no desktop override — but the panel is an
+         * `inline-block` only 40-45% wide, so a left-ranged line inside it
+         * reads as centred on the page, and centred is what was asked for
+         * after looking at both. Kept as a field because the film caption is
+         * genuinely centred in both markup and appearance.
          */
         textAlign?: "left" | "center";
       };
@@ -1079,7 +1085,7 @@ export const PAGES: Readonly<
           title: "A process of discovery",
           body: "Every curve has to be resolved into a stepped path the loom can execute, and the finer the steps the more picks it takes. A motif copied faithfully from stone costs several times one drawn for cloth to begin with.",
           align: "right",
-          textAlign: "left",
+          textAlign: "center",
           panel: "none",
           ink: "cream",
         },
@@ -1209,7 +1215,7 @@ export const PAGES: Readonly<
           title: "Playful illusions",
           body: "Repeat one figure at several sizes rather than laying out a sequence, and any fragment carries the subject even when it does not carry the plot.",
           align: "right",
-          textAlign: "left",
+          textAlign: "center",
           panel: "none",
           ink: "white",
         },
