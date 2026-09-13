@@ -459,6 +459,16 @@ export type Section =
       id: string;
       heading?: string;
       standfirst?: string;
+      /**
+       * A short rule under the heading.
+       *
+       * Their craft page introduces its category grid with a centred heading
+       * and a `divider-section` beneath it — the only rule of its kind on the
+       * page, and what separates the essay above from the grid below.
+       */
+      divider?: boolean;
+      /** Sets the heading in small caps, as theirs is. */
+      uppercase?: boolean;
       columns: 2 | 3 | 4;
       items: { art: ArtPair; label?: string; href?: string }[];
     }
@@ -1404,6 +1414,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "craft-opening",
+        measure: "content",
         paragraphs: [
           "The metal beaters of Banaras were here before the looms were, and the two trades have been borrowing from each other ever since.",
         ],
@@ -1418,6 +1429,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "craft-what",
+        measure: "content",
         heading: "What repoussé is",
         paragraphs: [
           "A flat sheet of brass or silver, worked from behind against a bed of pitch until the design stands out in relief, then turned over and sharpened from the front. Nothing is poured into a mould and nothing is soldered on — a raised figure and the ground around it are the same piece of metal, stretched.",
@@ -1427,7 +1439,15 @@ export const PAGES: Readonly<
       {
         type: "galleryGrid",
         id: "craft-categories",
-        heading: "What we make in metal",
+        /*
+         * Their page introduces this grid with a centred small-caps heading and
+         * a short rule under it — a `heading-section` plus a `divider-section`,
+         * the only rule of its kind on the page. Ours had the heading and no
+         * rule, so the essay above ran straight into the grid.
+         */
+        heading: "Explore art & collectibles",
+        uppercase: true,
+        divider: true,
         columns: 4,
         items: [
           { art: imagePair("maroon", "craft/craft-cat-01.jpg"), label: "Furniture" },
@@ -1447,6 +1467,20 @@ export const PAGES: Readonly<
         ratio: "2/1",
         mobileRatio: "2/3",
         bleed: true,
+        /*
+         * Their one captioned banner on this page sits `text-align-left
+         * align-middle` with the text ranged left inside it and no panel —
+         * unlike the campaign banners, which centre both. Measured, not
+         * carried over.
+         */
+        overlay: {
+          title: "Shikargah, beaten rather than woven",
+          body: "The hunting field is the oldest motif on a Banaras loom. In metal it survives being walked past rather than worn, and the relief does the work the zari does on cloth.",
+          align: "left",
+          textAlign: "left",
+          panel: "none",
+          ink: "white",
+        },
       },
       {
         type: "imageWithText",
@@ -1475,6 +1509,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "craft-availability",
+        measure: "content",
         heading: "Buying one",
         paragraphs: [
           "These are made in ones, not in runs, and we hold very few at a time. Write to us and we will tell you what is in the room this month rather than list pieces that have already gone.",

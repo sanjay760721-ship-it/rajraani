@@ -1301,7 +1301,16 @@ function GalleryGrid({
   return (
     <section className="wrap section-pad">
       {section.heading ? (
-        <h2 className="text-h2 text-center">{section.heading}</h2>
+        <h2
+          className={`text-h2 text-center${
+            section.uppercase ? " uppercase tracking-[0.08em]" : ""
+          }`}
+        >
+          {section.heading}
+        </h2>
+      ) : null}
+      {section.divider ? (
+        <hr className="mx-auto mt-5 w-16 border-0 border-t border-rule" />
       ) : null}
       {section.standfirst ? (
         <p className="text-body mx-auto mt-4 max-w-[60ch] text-center text-ink-body">

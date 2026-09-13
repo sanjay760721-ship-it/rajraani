@@ -1564,6 +1564,33 @@ version of it is more elaborate than these two — gallery and slideshow blocks
 this build has no equivalent for. It works and it is consistent; it is simply
 not matched.
 
+### 5.8.9 Crafts — 13 September 2026
+
+Walked their metal page the same way. Its vocabulary is the one already built,
+with three treatments this build was missing:
+
+- Rich text runs at the **1200 measure**, centred, like the campaign pages — ours
+  was at the 680 prose measure.
+- The category grid is introduced by a **centred small-caps heading and a short
+  rule** (`heading-section` + `divider-section`), the only rule of its kind on
+  the page. Ours ran the essay straight into the grid.
+- Its one captioned banner sits **`text-align-left align-middle` with the text
+  ranged left inside it**, no panel — the opposite of the campaign banners,
+  which centre both. Measured rather than carried over.
+
+**Deliberately not built.** Their page runs about fifteen content blocks to our
+ten: a three-slide classic slideshow, a "Craft Notes" HTML block, a second
+image-and-prose band, and four category tiles linking to `/collections/furniture`,
+`/objects`, `/wall-art` and `/lighting`. Those four links are the reason the rest
+is not worth forcing — **this catalogue holds no metal at all**, only sarees and
+suits, so the sub-collections would be empty and the tiles would advertise
+nothing. The tiles render unlinked, which `galleryGrid` supports, and the page's
+call to action asks people to write in rather than pointing at a listing that
+does not exist.
+
+That is the honest state: the page is matched in treatment and short in content,
+and it stays short until there is metal in the catalogue.
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are
