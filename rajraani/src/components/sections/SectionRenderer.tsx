@@ -941,11 +941,14 @@ function ContactPanel({
         * Two halves, form on the right, stacking on a phone with the addresses
         * first — somebody on a train wants the phone number before the form.
         *
-        * `flex-1` so the grid takes the section's full height and the filled
-        * panel stretches with it; a short grey box floating in a tall section
-        * is worse than the peeking band was.
+        * `items-start`, so the filled panel is the height of its own content.
+        * It was stretching to the section's full height, which made the grey
+        * block by far the largest thing on the page — theirs stops just under
+        * the Submit button and is shorter than the column of addresses beside
+        * it. The section keeps its minimum height; the slack falls below both
+        * columns as white space rather than inflating the panel.
         */}
-      <div className="grid gap-12 md:flex-1 md:grid-cols-2 md:gap-16">
+      <div className="grid gap-12 md:grid-cols-2 md:items-start md:gap-16">
         <div>
           {section.heading ? (
             <Heading className="text-h1">{section.heading}</Heading>
