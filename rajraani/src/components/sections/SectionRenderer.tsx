@@ -737,11 +737,18 @@ function ImageWithText({
         }
       >
         <div className={imageLeft ? "md:order-1" : "md:order-2"}>
-          <Art
-            art={section.art}
-            className={`w-full ${section.ratio === "4/5" ? "aspect-4/5" : "aspect-square"}`}
-            alt={section.heading ?? ""}
-          />
+          {/*
+            * Linked when the band has somewhere to go. Their campaign bands
+            * wrap the photograph in an anchor to the collection, so the picture
+            * is the shortest route to the thing it is a picture of.
+            */}
+          {section.href ? (
+            <Link href={section.href} className="block">
+              <BandArt section={section} />
+            </Link>
+          ) : (
+            <BandArt section={section} />
+          )}
         </div>
 
         <div
@@ -830,8 +837,32 @@ const PAD_BOTTOM = {
   40: "pb-10",
 } as const;
 
+
+function BandArt({
+  section,
+}: {
+  section: Extract<Section, { type: "imageWithText" }>;
+}) {
+  return (
+    <Art
+      art={section.art}
+      className={`w-full ${section.ratio === "4/5" ? "aspect-4/5" : "aspect-square"}`}
+      alt={section.heading ?? ""}
+    />
+  );
+}
+
+/** Which edge an `imageBand` caption panel sits against. */
+const OVERLAY_ALIGN = {
+  left: "justify-start",
+  center: "justify-center",
+  right: "justify-end",
+} as const;
+
 const IMAGE_BAND_RATIO = {
   "15/8": "md:aspect-[15/8]",
+  "3/1": "md:aspect-[3/1]",
+  "9/8": "md:aspect-[9/8]",
   "2/1": "md:aspect-[2/1]",
   "7/5": "md:aspect-[7/5]",
   "3/2": "md:aspect-[3/2]",
@@ -883,7 +914,11 @@ function ImageBand({
             * gradient dims the photograph to make type legible; a panel leaves
             * the photograph alone and puts the type on its own ground.
             */
-          <div className="absolute inset-0 flex items-center justify-center px-5">
+          <div
+            className={`absolute inset-0 flex items-center px-5 ${
+              OVERLAY_ALIGN[section.overlay.align ?? "center"]
+            }`}
+          >
             {/*
               * 55% wide, min 350px — their numbers. A `max-w` cap was pulling
               * this to 39% of the frame, which made the panel read as a label
@@ -896,10 +931,12 @@ function ImageBand({
                   {section.overlay.body}
                 </p>
               ) : null}
-              <OverlayCta
-                href={section.overlay.ctaHref}
-                label={section.overlay.ctaLabel}
-              />
+              {section.overlay.ctaLabel && section.overlay.ctaHref ? (
+                <OverlayCta
+                  href={section.overlay.ctaHref}
+                  label={section.overlay.ctaLabel}
+                />
+              ) : null}
             </div>
           </div>
         ) : null}

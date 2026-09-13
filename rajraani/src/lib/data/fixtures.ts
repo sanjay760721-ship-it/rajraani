@@ -988,6 +988,41 @@ export const COLLECTIONS: readonly Collection[] = [
    * A short list is honest at this catalogue size. Padding them out with
    * whatever was to hand is how a "Bridal" edit ends up holding a stole.
    */
+  /*
+   * The two story collections, added 13 Sep 2026.
+   *
+   * Their campaign pages carry a "discover the collection" button and link the
+   * band photographs to the same place, so the page has somewhere to send a
+   * reader who wants the pieces rather than the essay. `kala` and `katha` are
+   * editorial groupings with no facet behind them — same shape as Bridal and
+   * Gifts — so they are `edit`.
+   *
+   * Handles picked from the photographed set; see the trap in HANDOFF §5.8.2.
+   */
+  {
+    kind: "edit",
+    handle: "kala",
+    title: "Kala",
+    seoIntro:
+      "The pieces the Kala story is about: weaving that is plainly looking at something which was not cloth. Motifs carried across from metal, from tile, from a photograph on a phone.",
+    productHandles: [
+      "nilambari-blue-katan-silk-shikargah-saree",
+      "chandrika-ivory-tissue-silk-jangla-saree",
+      "kesari-orange-katan-silk-tanchoi-saree",
+    ],
+  },
+  {
+    kind: "edit",
+    handle: "katha",
+    title: "Katha",
+    seoIntro:
+      "Narrative weaving — figures, episodes, and the problem of telling a story on a cloth that will be read in fragments, over a shoulder and around a waist.",
+    productHandles: [
+      "nilambari-blue-katan-silk-shikargah-saree",
+      "sindoor-red-katan-silk-kadiyal-saree",
+      "bela-white-handwoven-georgette-kadhua-saree",
+    ],
+  },
   {
     kind: "edit",
     handle: "fresh-off-the-loom",

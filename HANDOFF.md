@@ -1527,6 +1527,43 @@ rail, closing text 1160, closing frame 1497@0, and no horizontal overflow.
 Check the section class. Do not carry an answer from one page family to another
 — that mistake has now been made in both directions.
 
+### 5.8.8 Kala and Katha, block by block — 13 September 2026
+
+Walked their two story pages element by element rather than inferring from CSS.
+Both run one template, and it is not the about-page template:
+
+    plain full-bleed banner, no text over it        1800x1600  (9:8)
+    rich text: heading, one paragraph, a collection button
+    band: 4:5 portrait, NO heading, photograph links to the collection
+    captioned banner, caption ranged RIGHT          1800x900 + phone crop
+    band: 4:5 portrait, no heading, linked
+    plain full-bleed banner
+    [kala only] captioned film banner, caption CENTRED  1800x600 (3:1)
+    rich text: one paragraph
+    plain full-bleed closing banner                 1800x1282 (7:5)
+
+**What this replaced.** A `hero` with the title burned over the corner; bands
+carrying headings theirs do not have; and a `productRail` theirs does not run.
+The rail is gone because their page sells through the button and the linked band
+photographs — three routes to one listing, none of them a grid dropped into the
+middle of an essay.
+
+**New capabilities this needed:** `imageBand.overlay.align` (their captions
+alternate right and centre; always-centred fights whatever the photograph is
+doing), an optional overlay CTA (a campaign caption often has no button),
+`imageWithText.href` (the photograph is a link), and ratios 9/8 and 3/1.
+
+**Links now resolve.** Their pages carry "discover the collection" and link the
+band images to the same place. `kala` and `katha` are authored as `edit`
+collections — editorial groupings with no facet behind them, the same shape as
+Bridal and Gifts. Both render three pieces. Every link on both pages returns
+200, checked.
+
+**Awadh was left on the older shape.** It is the third story page and their
+version of it is more elaborate than these two — gallery and slideshow blocks
+this build has no equivalent for. It works and it is consistent; it is simply
+not matched.
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are

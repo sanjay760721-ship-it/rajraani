@@ -262,6 +262,13 @@ export type Section =
       /** Which side the art sits on at `md` and up. Stacks image-first below. */
       imageSide: "left" | "right";
       /**
+       * Makes the photograph a link.
+       *
+       * Their campaign bands wrap the image in an anchor to the collection, so
+       * the picture is the shortest route to the thing it is a picture of.
+       */
+      href?: string;
+      /**
        * Run the band edge to edge instead of inside the 1200px container.
        *
        * Their campaign pages put every section on `is-width-wide`, where the
@@ -308,7 +315,7 @@ export type Section =
        * on a 3:2 photograph does not letterbox it, it crops a third of the
        * picture away and nothing warns you.
        */
-      ratio?: "15/8" | "2/1" | "7/5" | "3/2" | "4/3" | "1/1";
+      ratio?: "15/8" | "3/1" | "2/1" | "7/5" | "3/2" | "4/3" | "9/8" | "1/1";
       /**
        * Ratio of the phone frame. Defaults to 3:2.
        *
@@ -339,8 +346,18 @@ export type Section =
       overlay?: {
         title: string;
         body?: string;
-        ctaLabel: string;
-        ctaHref: string;
+        /** Both or neither. A campaign caption often has no button at all. */
+        ctaLabel?: string;
+        ctaHref?: string;
+        /**
+         * Which edge the caption panel sits against.
+         *
+         * Their campaign banners alternate: the first caption on both kala and
+         * katha is `text-align-right align-middle`, the film caption on kala is
+         * centred. A caption always in the middle fights whatever the
+         * photograph is doing.
+         */
+        align?: "left" | "center" | "right";
       };
     }
   | {
@@ -936,6 +953,34 @@ export const PAGES: Readonly<
    * which is gitignored. Words are ours.
    */
 
+  /*
+   * ── Kala and Katha, to their campaign template ────────────────────────────
+   *
+   * Walked block by block off their pages on 13 Sep 2026. Both run the same
+   * shape, and it is not the shape the about pages use:
+   *
+   *   plain full-bleed banner, no text over it          (1800x1600, 9:8)
+   *   rich text: heading, one paragraph, a collection button
+   *   band: 4:5 portrait, NO heading, photograph links to the collection
+   *   captioned banner, caption ranged RIGHT             (1800x900 + phone crop)
+   *   band: 4:5 portrait, no heading, linked
+   *   plain full-bleed banner
+   *   [kala only] captioned banner for the film, caption CENTRED (1800x600)
+   *   rich text: one paragraph
+   *   plain full-bleed closing banner                    (1800x1282, 7:5)
+   *
+   * What this replaces: a `hero` with the title burned over the top-left, bands
+   * that carried headings theirs do not have, and a product rail theirs does
+   * not run. The rail is gone because the "discover the collection" button and
+   * the linked band photographs are how their page sells — three routes to the
+   * same listing, none of them a grid dropped into the middle of an essay.
+   *
+   * The page title sits between the banner and the first block, as it does on
+   * the about page. Theirs shows no page title at all; ours keeps one because
+   * `lint:headings` wants exactly one h1 and a page without one is bad for
+   * search and for screen readers both.
+   */
+
   kala: {
     kind: "campaign_story",
     title: "Kala",
@@ -943,33 +988,34 @@ export const PAGES: Readonly<
       "One word for the loom, the brush and the chisel. Pieces where the weaving is plainly looking at something that was not cloth.",
     sections: [
       {
-        type: "hero",
+        type: "imageBand",
         id: "kala-hero",
         art: imagePair("maroon", "campaigns/kala-hero.jpg"),
-        eyebrow: "Featured",
-        title: "Kala",
-        body: "What a weaver borrows, and from whom.",
-        ctaLabel: "See the pieces",
-        ctaHref: "/collections/kadhua",
+        ratio: "9/8",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
       },
       {
         type: "richText",
         id: "kala-intro",
         measure: "content",
+        heading: "What a weaver borrows",
         paragraphs: [
-          "Banarasi design has never been self-sufficient and has never pretended to be.",
+          "Banarasi design has never been self-sufficient and has never pretended to be. A jaal that reads as a textile pattern turns out, once you have seen the building, to be a screen; a border that looks abstract is a row of niches drawn from memory and flattened until it fits a four-inch strip. Everything on this loom arrived from somewhere that was not a loom.",
         ],
+        ctaLabel: "Discover the collection",
+        ctaHref: "/collections/kala",
       },
       {
         type: "imageWithText",
         id: "kala-band-01",
         art: imagePair("gold", "campaigns/kala-band-01.webp"),
-        fullWidth: true,
         imageSide: "left",
         ratio: "4/5",
-        heading: "What the weavers were looking at",
+        fullWidth: true,
+        href: "/collections/kala",
         paragraphs: [
-          "A jaal that reads as a textile pattern turns out, once you have seen the building, to be a screen. A border that looks abstract is a row of niches drawn from memory and flattened until it fits a four-inch strip.",
           "We asked four weavers what they had in front of them when they set the last piece they were proud of. None of them said a saree. One said a brass tray his father had beaten, one said the tilework on a gate he passes twice a day, and two said a photograph on a phone.",
         ],
       },
@@ -984,18 +1030,24 @@ export const PAGES: Readonly<
         ratio: "2/1",
         mobileRatio: "2/3",
         bleed: true,
+        padTop: 0,
+        padBottom: 0,
+        overlay: {
+          title: "A process of discovery",
+          body: "Every curve has to be resolved into a stepped path the loom can execute, and the finer the steps the more picks it takes. A motif copied faithfully from stone costs several times one drawn for cloth to begin with.",
+          align: "right",
+        },
       },
       {
         type: "imageWithText",
         id: "kala-band-02",
         art: imagePair("indigo", "campaigns/kala-band-02.png"),
-        fullWidth: true,
         imageSide: "right",
         ratio: "4/5",
-        heading: "The cost of carrying it across",
+        fullWidth: true,
+        href: "/collections/kala",
         paragraphs: [
-          "A drawn line is free and a woven line is not. Every curve has to be resolved into a stepped path the loom can execute, and the finer the steps the more picks it takes.",
-          "That is the whole reason a motif copied faithfully from stone costs several times one that was designed for cloth to begin with. The pieces gathered here are the ones where that argument was lost on purpose.",
+          "The pieces gathered here are the ones where that argument was lost on purpose — where the weaver went after the difficult line rather than the one the loom would have preferred, and the extra weeks are visible in the cloth if you know to look for them.",
         ],
       },
       {
@@ -1009,20 +1061,31 @@ export const PAGES: Readonly<
         ratio: "2/1",
         mobileRatio: "2/3",
         bleed: true,
+        padTop: 0,
+        padBottom: 0,
       },
       {
-        type: "productRail",
-        id: "kala-rail",
-        title: "The pieces",
-        collectionHandle: "kadhua",
-        ctaLabel: "See all",
+        type: "imageBand",
+        id: "kala-banner-03",
+        art: imagePair("black", "campaigns/kala-banner-03.jpg"),
+        ratio: "3/1",
+        mobileRatio: "3/2",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+        overlay: {
+          title: "The making of it",
+          body: "Filmed over four days in the weaving sheds, at the hours when the light is worth having.",
+          align: "center",
+        },
       },
       {
         type: "richText",
         id: "kala-closing",
         measure: "content",
+        heading: "Nothing here is invented",
         paragraphs: [
-          "Nothing on a loom is invented. It is carried across from somewhere that was not woven, and the carrying is the craft.",
+          "It is carried across from somewhere that was not woven, and the carrying is the craft. A weaver who copies well is doing the easiest thing in this city; a weaver who translates is doing the hardest.",
         ],
       },
       {
@@ -1031,6 +1094,111 @@ export const PAGES: Readonly<
         art: imagePair("black", "campaigns/kala-closing.jpg"),
         ratio: "7/5",
         bleed: true,
+        padTop: 0,
+        padBottom: 0,
+      },
+    ],
+  },
+
+  katha: {
+    kind: "campaign_story",
+    title: "Katha",
+    standfirst:
+      "Pieces that are telling you something specific. Figures, episodes, and the problem of putting a story on a garment that will be folded in half.",
+    sections: [
+      {
+        type: "imageBand",
+        id: "katha-hero",
+        art: imagePair("indigo", "campaigns/katha-hero.jpg"),
+        ratio: "9/8",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+      },
+      {
+        type: "richText",
+        id: "katha-intro",
+        measure: "content",
+        heading: "A story, a telling, an invention",
+        paragraphs: [
+          "A hunting field full of animals is the oldest narrative device on this loom and the least honest one: it shows a scene without ever saying what happens next. The pieces here go after the next bit, which is harder than it sounds and has defeated better weavers than the ones who avoid it.",
+        ],
+        ctaLabel: "Discover the collection",
+        ctaHref: "/collections/katha",
+      },
+      {
+        type: "imageWithText",
+        id: "katha-band-01",
+        art: imagePair("maroon", "campaigns/katha-band-01.jpg"),
+        imageSide: "left",
+        ratio: "4/5",
+        fullWidth: true,
+        href: "/collections/katha",
+        paragraphs: [
+          "A saree is read in fragments, over a shoulder and around a waist, and no viewer ever sees the whole cloth at once. Anything that depends on sequence is lost the moment the piece is worn — which rules out almost every ordinary way of telling a story, and leaves the few that survive being cut up by the person wearing them.",
+        ],
+      },
+      {
+        type: "imageBand",
+        id: "katha-banner-01",
+        art: imagePair(
+          "black",
+          "campaigns/katha-banner-01.jpg",
+          "campaigns/katha-banner-01-mob.jpg",
+        ),
+        ratio: "2/1",
+        mobileRatio: "2/3",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+        overlay: {
+          title: "Playful illusions",
+          body: "Repeat one figure at several sizes rather than laying out a sequence, and any fragment carries the subject even when it does not carry the plot.",
+          align: "right",
+        },
+      },
+      {
+        type: "imageWithText",
+        id: "katha-band-02",
+        art: imagePair("gold", "campaigns/katha-band-02.jpg"),
+        imageSide: "right",
+        ratio: "4/5",
+        fullWidth: true,
+        href: "/collections/katha",
+        paragraphs: [
+          "The pallu holds the single moment that is not repeated, because the pallu is the only part of a saree anyone is guaranteed to look at whole. Everything else is written to survive being glimpsed — which is a constraint most storytellers would refuse and these weavers accepted.",
+        ],
+      },
+      {
+        type: "imageBand",
+        id: "katha-banner-02",
+        art: imagePair(
+          "indigo",
+          "campaigns/katha-banner-02.jpg",
+          "campaigns/katha-banner-02-mob.jpg",
+        ),
+        ratio: "2/1",
+        mobileRatio: "2/3",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+      },
+      {
+        type: "richText",
+        id: "katha-closing",
+        measure: "content",
+        paragraphs: [
+          "Nobody reads a saree left to right. They read the part that happens to be facing them, and a weaver who forgets that is writing for an audience of one — themselves, at the loom.",
+        ],
+      },
+      {
+        type: "imageBand",
+        id: "katha-closing-image",
+        art: imagePair("maroon", "campaigns/katha-closing.jpg"),
+        ratio: "7/5",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
       },
     ],
   },
@@ -1121,105 +1289,6 @@ export const PAGES: Readonly<
         ),
         ratio: "2/1",
         mobileRatio: "2/3",
-        bleed: true,
-      },
-    ],
-  },
-
-  katha: {
-    kind: "campaign_story",
-    title: "Katha",
-    standfirst:
-      "Pieces that are telling you something specific. Figures, episodes, and the problem of putting a story on a garment that will be folded in half.",
-    sections: [
-      {
-        type: "hero",
-        id: "katha-hero",
-        art: imagePair("indigo", "campaigns/katha-hero.jpg"),
-        eyebrow: "Spirit of Creation",
-        title: "Katha",
-        body: "Narrative weaving, and where it has to stop.",
-        ctaLabel: "See the pieces",
-        ctaHref: "/collections/sarees?motif=shikargah",
-      },
-      {
-        type: "richText",
-        id: "katha-intro",
-        measure: "content",
-        paragraphs: [
-          "A hunting field full of animals is the oldest narrative device on this loom, and the least honest one: it shows a scene without ever saying what happens next.",
-        ],
-      },
-      {
-        type: "imageWithText",
-        id: "katha-band-01",
-        art: imagePair("maroon", "campaigns/katha-band-01.jpg"),
-        fullWidth: true,
-        imageSide: "left",
-        ratio: "4/5",
-        heading: "The constraint",
-        paragraphs: [
-          "A saree is read in fragments, over a shoulder and around a waist, and no viewer ever sees the whole cloth at once.",
-          "Anything that depends on sequence is lost the moment the piece is worn. The story has to survive being cut into arbitrary pieces by the person wearing it, which rules out almost every way of telling one.",
-        ],
-      },
-      {
-        type: "imageBand",
-        id: "katha-banner-01",
-        art: imagePair(
-          "black",
-          "campaigns/katha-banner-01.jpg",
-          "campaigns/katha-banner-01-mob.jpg",
-        ),
-        ratio: "2/1",
-        mobileRatio: "2/3",
-        bleed: true,
-      },
-      {
-        type: "imageWithText",
-        id: "katha-band-02",
-        art: imagePair("gold", "campaigns/katha-band-02.jpg"),
-        fullWidth: true,
-        imageSide: "right",
-        ratio: "4/5",
-        heading: "How the weavers solved it",
-        paragraphs: [
-          "By repeating one figure at several sizes rather than laying out a sequence, so any fragment carries the subject even when it does not carry the plot.",
-          "The pallu holds the single moment that is not repeated, because the pallu is the only part of a saree anyone is guaranteed to look at whole.",
-        ],
-      },
-      {
-        type: "imageBand",
-        id: "katha-banner-02",
-        art: imagePair(
-          "indigo",
-          "campaigns/katha-banner-02.jpg",
-          "campaigns/katha-banner-02-mob.jpg",
-        ),
-        ratio: "2/1",
-        mobileRatio: "2/3",
-        bleed: true,
-      },
-      {
-        type: "productRail",
-        id: "katha-rail",
-        title: "The pieces",
-        collectionHandle: "antaraal",
-        ctaLabel: "See all",
-      },
-      {
-        type: "richText",
-        id: "katha-closing",
-        measure: "content",
-        paragraphs: [
-          "Nobody reads a saree left to right. They read the part that happens to be facing them, and a weaver who forgets that is writing for an audience of one — themselves, at the loom.",
-        ],
-      },
-      {
-        type: "imageBand",
-        id: "katha-closing-image",
-        art: imagePair("maroon", "campaigns/katha-closing.jpg"),
-        ratio: "7/5",
         bleed: true,
       },
     ],
