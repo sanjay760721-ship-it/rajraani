@@ -258,6 +258,17 @@ try {
     for (const zari of product.zariTypes) insertZari.run(id, zari);
   }
 
+  /*
+   * Membership is REPLACED, not merged.
+   *
+   * `insertCollectionProduct` is `ON CONFLICT DO NOTHING`, so re-seeding after
+   * editing a collection's `productHandles` added the new pieces and left the
+   * old ones behind. Three campaigns quietly grew to seven, six and five
+   * pieces on 13 Sep 2026 and the listings looked right until they were
+   * counted.
+   */
+  db.exec("DELETE FROM collection_product");
+
   for (const [index, collection] of COLLECTIONS.entries()) {
     insertCollection.run(
       collection.handle,

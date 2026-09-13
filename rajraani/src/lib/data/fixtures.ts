@@ -847,6 +847,341 @@ export const PRODUCTS: readonly Product[] = [
       garment: "kurta set",
     }),
   },
+  /*
+   * ── Eight more pieces, 13 September 2026 ──────────────────────────────────
+   *
+   * Added so the campaign collections stop sharing the same handful of stock.
+   * With ten photographed pieces spread across Nadi, Antaraal, Awadh, Kala,
+   * Katha, Bridal, Gifts, Fresh Off the Loom and Back in Stock, every listing
+   * was showing the same sarees and no campaign made a distinct argument.
+   *
+   * Four sarees and four stitched garments, so each campaign can carry two of
+   * each — which is the shape the campaign listings on this category use.
+   *
+   * NAMES AND COPY ARE OURS. The photographs are staged reference shots, in
+   * `public/reference-only/products/<handle>/` under our own handles, and are
+   * gitignored like the rest. Their product titles are not here and must not
+   * be: build.md §6 names product copy explicitly and `check-originality`
+   * enforces it on seed data.
+   */
+  {
+    id: "18",
+    handle: "rohini-rose-katan-silk-jangla-saree",
+    title: "Rose Pink Pure Katan Silk Jangla Banarasi Handloom Saree",
+    poeticName: "Rohini",
+    sku: "SRKJGPK10181",
+    price: money(96_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "ready_to_ship",
+    dispatchLeadDays: [10, 12],
+    narrative:
+      "A jangla is a vine that refuses to stop, and this one runs the full width without once repeating where you expect it to. The ground is a rose that reads warm in daylight and almost brown by lamp, with meena in two greens worked into the flowering so the vine reads as a plant rather than as an outline of one. Sixteen weeks, and most of that was the meena.",
+    spec: {
+      colour: "Rose pink",
+      technique: "Jangla, with meenakari in two greens",
+      fabric: "Pure Katan silk",
+      speciality: "Real zari throughout, with a meena vine across the field",
+      collectionNote: "From Kala.",
+    },
+    provenance: {
+      workshop: "Lohta workshop",
+      loom: "Pit loom, six-shaft",
+      weaveTimeWeeks: 16,
+      artisanCount: 3,
+    },
+    garmentType: "saree",
+    weave: "jangla",
+    fabric: "katan-silk",
+    colourFamily: "pink",
+    zariTypes: ["real_zari"],
+    motifs: ["jaal", "meenakari", "floral"],
+    images: shotTemplate({
+      handle: "rohini",
+      colour: "rose pink",
+      weave: "jangla",
+      motif: "jaal",
+      garment: "saree",
+      includeBorderFrame: true,
+    }),
+  },
+  {
+    id: "19",
+    handle: "tarini-peach-kora-georgette-meenakari-saree",
+    title: "Peach Kora Georgette Meenakari Banarasi Handloom Saree",
+    poeticName: "Tarini",
+    sku: "SRGMNPE10191",
+    price: money(58_000),
+    inventoryQuantity: 0,
+    fulfilmentMode: "ready_to_ship",
+    dispatchLeadDays: [8, 10],
+    narrative:
+      "Kora by georgette is the lightest ground we buy, and it punishes a heavy hand — every extra pick shows as weight the cloth then has to carry. So this one is mostly empty. A paisley in gold zari with a meena centre repeats at a distance that looks careless and is not, and the pallu holds one larger version of the same figure to end on.",
+    spec: {
+      colour: "Peach",
+      technique: "Meenakari paisley on a kora georgette ground",
+      fabric: "Kora by georgette",
+      speciality: "Gold zari with a coloured meena centre to each paisley",
+      collectionNote: "From Awadh.",
+    },
+    provenance: {
+      workshop: "Ramnagar workshop",
+      loom: "Pit loom, four-shaft",
+      weaveTimeWeeks: 9,
+      artisanCount: 2,
+    },
+    garmentType: "saree",
+    weave: "cutwork",
+    fabric: "khaddi-georgette",
+    colourFamily: "orange",
+    zariTypes: ["gold"],
+    motifs: ["paisley", "meenakari"],
+    images: shotTemplate({
+      handle: "tarini",
+      colour: "peach",
+      weave: "cutwork",
+      motif: "paisley",
+      garment: "saree",
+      includeBorderFrame: true,
+    }),
+  },
+  {
+    id: "20",
+    handle: "mrinalini-rosewood-katan-silk-shikargah-saree",
+    title: "Rosewood Pure Katan Silk Shikargah Banarasi Handloom Saree",
+    poeticName: "Mrinalini",
+    sku: "SRKSHRW10201",
+    // 156, not 148: two pieces already sat at 148_000 and a tie at the maximum
+    // makes `desc[0]` and `asc[last]` different products, which engine.test.ts
+    // asserts are the same. A tie anywhere else is fine; a tie at an extreme
+    // is not.
+    price: money(156_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [20, 26],
+    narrative:
+      "A hunting field with the hunt taken out of it. The animals are all here and none of them is running: a tiger sits, the deer are unbothered, and the whole scene has the stillness of an afternoon rather than the drama the motif is usually asked for. Twenty-six weeks on the loom, and the restraint is what took the time.",
+    spec: {
+      colour: "Rosewood",
+      technique: "Shikargah, figures entered separately in kadhua",
+      fabric: "Pure Katan silk",
+      speciality: "Real zari, with every figure a detached kadhua unit",
+      collectionNote: "From Katha.",
+    },
+    provenance: {
+      workshop: "Lohta workshop",
+      loom: "Pit loom, jacquard head",
+      weaveTimeWeeks: 26,
+      artisanCount: 3,
+    },
+    garmentType: "saree",
+    weave: "kadhua",
+    fabric: "katan-silk",
+    colourFamily: "maroon",
+    zariTypes: ["real_zari"],
+    motifs: ["shikargah", "bird-animal"],
+    images: shotTemplate({
+      handle: "mrinalini",
+      colour: "rosewood",
+      weave: "kadhua",
+      motif: "shikargah",
+      garment: "saree",
+      includeBorderFrame: true,
+    }),
+  },
+  {
+    id: "21",
+    handle: "suvarna-gold-satin-organza-embroidered-saree",
+    title: "Light Gold Satin Organza Hand-Embroidered Saree",
+    poeticName: "Suvarna",
+    sku: "SROEMGD10211",
+    price: money(72_000),
+    inventoryQuantity: 0,
+    fulfilmentMode: "ready_to_ship",
+    dispatchLeadDays: [8, 10],
+    narrative:
+      "Not woven ornament — embroidered, on a satin organza that is almost a colour and almost not. The work is done after the cloth comes off the loom, by a different set of hands in a different room, which is the only reason a piece this light can carry this much surface. Hold it up and the ground disappears before the thread does.",
+    spec: {
+      colour: "Light gold",
+      technique: "Hand embroidery on woven satin organza",
+      fabric: "Satin organza",
+      speciality: "Embroidered after weaving, by hand, over eleven weeks",
+      collectionNote: "From Kala.",
+    },
+    provenance: {
+      workshop: "Madanpura workshop",
+      loom: "Pit loom, plain weave",
+      weaveTimeWeeks: 11,
+      artisanCount: 4,
+    },
+    garmentType: "saree",
+    weave: "cutwork",
+    fabric: "satin-silk",
+    colourFamily: "gold",
+    zariTypes: ["resham"],
+    motifs: ["floral", "bel"],
+    images: shotTemplate({
+      handle: "suvarna",
+      colour: "light gold",
+      weave: "cutwork",
+      motif: "floral",
+      garment: "saree",
+      includeBorderFrame: false,
+    }),
+  },
+  {
+    id: "22",
+    handle: "anupama-ivory-muslin-jamdani-anarkali-suit",
+    title: "Ivory Muslin Jamdani Anarkali Suit",
+    poeticName: "Anupama",
+    sku: "SUJMIV10221",
+    price: money(46_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [14, 18],
+    narrative:
+      "Jamdani cut as an anarkali, which is a harder thing than it sounds: the pattern has to survive being gathered, and most of it does not. This one was woven with the gather already planned, the booti spaced wider through the panels that would take the fullness, so the figure reads the same standing still as it does moving.",
+    spec: {
+      colour: "Ivory",
+      technique: "Jamdani, spaced for the gather",
+      fabric: "Muslin cotton",
+      speciality: "Woven to the cut rather than cut from the cloth",
+      note: "Anarkali with churidar and a matching muslin dupatta.",
+    },
+    provenance: {
+      workshop: "Lohta workshop",
+      loom: "Pit loom, jamdani",
+      weaveTimeWeeks: 7,
+      artisanCount: 3,
+    },
+    garmentType: "suit",
+    weave: "jamdani",
+    fabric: "muslin-cotton",
+    colourFamily: "off-white",
+    zariTypes: ["resham"],
+    motifs: ["booti", "floral"],
+    images: stitchedShotTemplate({
+      handle: "anupama",
+      colour: "ivory",
+      cloth: "muslin jamdani",
+      motif: "booti",
+      garment: "anarkali suit",
+    }),
+  },
+  {
+    id: "23",
+    handle: "sharvari-sage-chanderi-embroidered-suit",
+    title: "Sage Green Chanderi Hand-Embroidered Suit Set",
+    poeticName: "Sharvari",
+    sku: "SUCHSG10231",
+    price: money(38_000),
+    inventoryQuantity: 2,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [12, 16],
+    narrative:
+      "Chanderi holds a crease the way paper does, which makes it wrong for almost everything and right for this. The embroidery is kept to the yoke and the hem so the body of the kurta stays flat, and the dupatta is handwoven kora rather than more chanderi — two cloths that behave differently, put together on purpose.",
+    spec: {
+      colour: "Sage green",
+      technique: "Hand embroidery at yoke and hem",
+      fabric: "Chanderi silk cotton",
+      speciality: "Handwoven kora silk dupatta, not matched to the kurta",
+      note: "Kurta, churidar and dupatta.",
+    },
+    provenance: {
+      workshop: "Madanpura workshop",
+      loom: "Pit loom, plain weave",
+      weaveTimeWeeks: 5,
+      artisanCount: 3,
+    },
+    garmentType: "suit",
+    fabric: "muslin-cotton",
+    colourFamily: "green",
+    zariTypes: ["resham"],
+    motifs: ["floral", "bel"],
+    images: stitchedShotTemplate({
+      handle: "sharvari",
+      colour: "sage green",
+      cloth: "chanderi silk cotton",
+      motif: "floral",
+      garment: "suit set",
+    }),
+  },
+  {
+    id: "24",
+    handle: "madhavi-rose-moonga-silk-anarkali-suit",
+    title: "Rose Pink Handwoven Moonga Silk Anarkali Suit",
+    poeticName: "Madhavi",
+    sku: "SUMGRP10241",
+    price: money(64_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "made_to_order",
+    dispatchLeadDays: [16, 20],
+    narrative:
+      "Moonga is a wild silk and it will not take a dye evenly, which is the whole reason to use it: the rose here is three or four roses depending on where the light lands. Cut full, because a cloth with that much movement in the colour wants the length to show it, and finished with an embroidered organza dupatta that stays out of the argument.",
+    spec: {
+      colour: "Rose pink",
+      technique: "Handwoven moonga, plain ground",
+      fabric: "Moonga silk",
+      speciality: "Hand-embroidered organza dupatta",
+      note: "Anarkali with churidar and organza dupatta.",
+    },
+    provenance: {
+      workshop: "Ramnagar workshop",
+      loom: "Pit loom, plain weave",
+      weaveTimeWeeks: 8,
+      artisanCount: 3,
+    },
+    garmentType: "suit",
+    fabric: "moonga-silk",
+    colourFamily: "pink",
+    zariTypes: ["resham"],
+    motifs: ["floral"],
+    images: stitchedShotTemplate({
+      handle: "madhavi",
+      colour: "rose pink",
+      cloth: "moonga silk",
+      motif: "floral",
+      garment: "anarkali suit",
+    }),
+  },
+  {
+    id: "25",
+    handle: "kaveri-maroon-brocade-kurta-set",
+    title: "Maroon Katan Silk Brocade Kurta Set",
+    poeticName: "Kaveri",
+    sku: "SUKBMR10251",
+    price: money(52_000),
+    inventoryQuantity: 0,
+    fulfilmentMode: "ready_to_ship",
+    dispatchLeadDays: [10, 14],
+    narrative:
+      "Brocade cut straight, with no gather anywhere, because the cloth is already doing enough. The stripe is woven rather than printed and runs the length of the panel, so the kurta reads taller than it is; the dupatta is the same cloth turned ninety degrees, which is the only trick in the piece and the one worth having.",
+    spec: {
+      colour: "Maroon",
+      technique: "Striped brocade, woven to the panel",
+      fabric: "Pure Katan silk",
+      speciality: "Dupatta cut across the warp so the stripe turns",
+      note: "Kurta, straight pant and dupatta.",
+    },
+    provenance: {
+      workshop: "Lohta workshop",
+      loom: "Pit loom, four-shaft",
+      weaveTimeWeeks: 7,
+      artisanCount: 2,
+    },
+    garmentType: "suit",
+    weave: "bootidar",
+    fabric: "katan-silk",
+    colourFamily: "maroon",
+    zariTypes: ["gold"],
+    motifs: ["geometric", "booti"],
+    images: stitchedShotTemplate({
+      handle: "kaveri",
+      colour: "maroon",
+      cloth: "katan silk brocade",
+      motif: "geometric",
+      garment: "kurta set",
+    }),
+  },
 ];
 
 /**
@@ -1004,11 +1339,23 @@ export const COLLECTIONS: readonly Collection[] = [
     handle: "kala",
     title: "Kala",
     seoIntro:
-      "The pieces the Kala story is about: weaving that is plainly looking at something which was not cloth. Motifs carried across from metal, from tile, from a photograph on a phone.",
+      "The pieces the Kala story is about — two sarees and two stitched garments — where the weaving is plainly looking at something which was not cloth. Motifs carried across from metal, from tile, from a photograph on a phone.",
+    /*
+     * Two sarees and two suits, as the campaign listings on this category carry
+     * both. Chosen for the argument the story makes rather than for stock: the
+     * shikargah is a figure lifted off a hunting field, the jangla is
+     * architectural, and the two stitched pieces are where another craft's hand
+     * is most obvious.
+     *
+     * All four are in the photographed set — see the trap in HANDOFF §5.8.2,
+     * where a handle outside it renders the collection empty while every test
+     * still passes.
+     */
     productHandles: [
-      "nilambari-blue-katan-silk-shikargah-saree",
-      "chandrika-ivory-tissue-silk-jangla-saree",
-      "kesari-orange-katan-silk-tanchoi-saree",
+      "rohini-rose-katan-silk-jangla-saree",
+      "suvarna-gold-satin-organza-embroidered-saree",
+      "sharvari-sage-chanderi-embroidered-suit",
+      "anupama-ivory-muslin-jamdani-anarkali-suit",
     ],
   },
   {
@@ -1018,9 +1365,10 @@ export const COLLECTIONS: readonly Collection[] = [
     seoIntro:
       "Restraint borrowed from upriver: less zari, more ground, and a palette that stops short of what a Banarasi loom is usually asked for. A sparse field shows every fault, which is the whole difficulty of it.",
     productHandles: [
+      "tarini-peach-kora-georgette-meenakari-saree",
       "chandrika-ivory-tissue-silk-jangla-saree",
-      "bela-white-handwoven-georgette-kadhua-saree",
       "ksheera-off-white-muslin-cotton-jamdani-suit",
+      "baluka-beige-tussar-silk-embroidered-suit",
     ],
   },
   {
@@ -1028,11 +1376,14 @@ export const COLLECTIONS: readonly Collection[] = [
     handle: "katha",
     title: "Katha",
     seoIntro:
-      "Narrative weaving — figures, episodes, and the problem of telling a story on a cloth that will be read in fragments, over a shoulder and around a waist.",
+      "Narrative weaving, in two sarees and two stitched garments — figures, episodes, and the problem of telling a story on a cloth that will be read in fragments, over a shoulder and around a waist.",
+    // Two sarees and two suits, none of them shared with Kala: a piece that
+    // appears under both campaigns makes neither argument.
     productHandles: [
-      "nilambari-blue-katan-silk-shikargah-saree",
-      "sindoor-red-katan-silk-kadiyal-saree",
+      "mrinalini-rosewood-katan-silk-shikargah-saree",
       "bela-white-handwoven-georgette-kadhua-saree",
+      "madhavi-rose-moonga-silk-anarkali-suit",
+      "kaveri-maroon-brocade-kurta-set",
     ],
   },
   {
