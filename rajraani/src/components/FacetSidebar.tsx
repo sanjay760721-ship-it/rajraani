@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 
@@ -53,15 +54,63 @@ export function FacetSidebar({
   selection,
   counts,
   sort,
+  collection,
 }: {
   selection: FacetSelection;
   counts: FacetCounts;
   sort: SortOrder;
+  /**
+   * The authored collection this listing is already narrowed to.
+   *
+   * An authored collection IS a filter — the grid is a subset of the catalogue
+   * and the shopper arrived by choosing it — so it belongs in the filter column
+   * with the rest, shown as applied and clearable. Without it the narrowing is
+   * invisible: the page looks like the whole catalogue with surprisingly few
+   * pieces in it, and there is no way back out except the browser's own button.
+   *
+   * Absent on a facet collection, where the narrowing is already expressed by
+   * the facet groups below.
+   */
+  collection?: { title: string; clearHref: string };
 }) {
   const navigate = useFacetNavigation(sort);
 
   return (
     <aside aria-label="Filter" className="border-t border-rule">
+      {collection ? (
+        <details open className="border-b border-rule py-4">
+          <summary className="eyebrow flex cursor-pointer items-center justify-between text-ink">
+            Collection
+            <Link
+              href={collection.clearHref}
+              className="text-caption text-ink-muted normal-case italic underline"
+            >
+              clear
+            </Link>
+          </summary>
+          <ul className="mt-3 space-y-2">
+            <li>
+              {/*
+                * A radio, not a checkbox: the rest of this column is
+                * multi-select and this is not — a listing is narrowed to one
+                * authored collection at a time. Disabled because the only move
+                * available is clearing it, which the link above does.
+                */}
+              <label className="text-caption flex items-center gap-3 text-ink">
+                <input
+                  type="radio"
+                  checked
+                  readOnly
+                  disabled
+                  className="size-3.5 accent-ink"
+                />
+                <span className="flex-1 font-semibold">{collection.title}</span>
+              </label>
+            </li>
+          </ul>
+        </details>
+      ) : null}
+
       {FACET_GROUPS.map((group) => {
         const options = termsForGroup(group).filter(
           (term) => (counts[group][term.slug] ?? 0) > 0 || isSelected(selection, group, term.slug),

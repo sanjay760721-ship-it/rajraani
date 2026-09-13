@@ -58,6 +58,21 @@ export default async function CollectionPage(
 
   const { selection, sort, page } = parseFacetUrlState(await props.searchParams);
 
+  /*
+   * An authored collection is a filter, and the sidebar says so.
+   *
+   * A campaign or an edit narrows the catalogue to a hand-picked list, which is
+   * exactly what the facet column expresses for every other kind of narrowing.
+   * Showing it there — applied, with a way out — is how a shopper who landed on
+   * "Awadh" from the menu can tell what they are looking at and get back to the
+   * full listing. `clear` goes to sarees rather than to this page without a
+   * query, because there is no unfiltered version of an authored collection.
+   */
+  const appliedCollection =
+    collection.kind === "facet"
+      ? undefined
+      : { title: collection.title, clearHref: "/collections/sarees" };
+
   const base = await catalogue.productsInCollection(collection);
   const filtered = sortProducts(filterProducts(base, selection), sort);
   const counts = computeFacetCounts(base, selection);
@@ -105,7 +120,12 @@ export default async function CollectionPage(
         />
         {/* Desktop sidebar */}
         <div className="hidden lg:block">
-          <FacetSidebar selection={selection} counts={counts} sort={sort} />
+          <FacetSidebar
+            selection={selection}
+            counts={counts}
+            sort={sort}
+            collection={appliedCollection}
+          />
         </div>
 
         <div>
