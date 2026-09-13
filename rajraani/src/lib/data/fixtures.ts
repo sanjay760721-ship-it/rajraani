@@ -1013,6 +1013,18 @@ export const COLLECTIONS: readonly Collection[] = [
   },
   {
     kind: "edit",
+    handle: "awadh",
+    title: "Awadh",
+    seoIntro:
+      "Restraint borrowed from upriver: less zari, more ground, and a palette that stops short of what a Banarasi loom is usually asked for. A sparse field shows every fault, which is the whole difficulty of it.",
+    productHandles: [
+      "chandrika-ivory-tissue-silk-jangla-saree",
+      "bela-white-handwoven-georgette-kadhua-saree",
+      "ksheera-off-white-muslin-cotton-jamdani-suit",
+    ],
+  },
+  {
+    kind: "edit",
     handle: "katha",
     title: "Katha",
     seoIntro:

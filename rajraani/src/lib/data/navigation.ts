@@ -189,33 +189,36 @@ export const NAVIGATION: readonly NavPanel[] = [
     links: [
       { label: "Nadi", href: "/collections/nadi" },
       { label: "Antaraal", href: "/collections/antaraal" },
+      { label: "Awadh", href: "/collections/awadh" },
       { label: "Kala", href: "/pages/kala" },
-      { label: "Awadh", href: "/pages/awadh" },
+      { label: "Katha", href: "/pages/katha" },
     ],
     columns: [
       {
         /*
-         * Two campaigns, because two campaigns have been run. The column listed
+         * Three campaigns, each with a collection behind it. The column listed
          * ten until 12 Sep 2026 and eight of them had neither a collection nor
-         * a story behind them.
+         * a story — the rule since is that nothing goes in here until both
+         * halves exist.
          */
         heading: "Shop by Campaign",
         links: [
           { label: "Nadi", href: "/collections/nadi", emphasis: true },
           { label: "Antaraal", href: "/collections/antaraal" },
+          { label: "Awadh", href: "/collections/awadh" },
         ],
       },
       {
         /*
-         * Editorial, not shoppable — the pieces these two are about have sold
-         * or were never for sale, so they resolve to `/pages` and stop there.
-         * That is why the heading says Featured rather than Read: a shopper who
-         * clicks expecting a listing should be told first.
+         * The two story pages. These resolve to `/pages` — the essay is the
+         * point — and each one carries its own button through to the pieces, so
+         * a reader who wants the listing rather than the writing is one click
+         * away rather than stuck.
          */
         heading: "Featured Campaign",
         links: [
           { label: "Kala", href: "/pages/kala", emphasis: true },
-          { label: "Awadh", href: "/pages/awadh" },
+          { label: "Katha", href: "/pages/katha" },
         ],
       },
     ],

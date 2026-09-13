@@ -1305,7 +1305,7 @@ export const PAGES: Readonly<
         title: "Awadh",
         body: "Restraint, borrowed from a neighbour who is better at it.",
         ctaLabel: "See the pieces",
-        ctaHref: "/collections/katan-silk",
+        ctaHref: "/collections/awadh",
       },
       {
         type: "richText",
@@ -1352,7 +1352,9 @@ export const PAGES: Readonly<
         type: "productRail",
         id: "awadh-rail",
         title: "The pieces",
-        collectionHandle: "katan-silk",
+        // Its own collection now exists, so the rail no longer borrows
+        // katan-silk as the nearest available stand-in.
+        collectionHandle: "awadh",
         ctaLabel: "See all",
       },
       {
