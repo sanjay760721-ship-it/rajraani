@@ -277,6 +277,13 @@ export type Section =
        */
       fullWidth?: boolean;
       /**
+       * Coloured ground behind the band, with the type reversed out of it.
+       *
+       * Each of their campaigns carries one, and it is what stops a long story
+       * page reading as a single white scroll. Palettes live in globals.css.
+       */
+      ground?: "deep" | "cream";
+      /**
        * Frame ratio. Square by default, which is what the about pages use.
        *
        * Campaign pages run the same band at 4:5 — a figure in a saree wants
@@ -358,6 +365,14 @@ export type Section =
          * photograph is doing.
          */
         align?: "left" | "center" | "right";
+        /**
+         * `solid` is the white 77% panel their contact and store banners use.
+         * `none` is the campaign treatment: no panel at all, type straight over
+         * the photograph in a colour picked against that particular frame.
+         */
+        panel?: "solid" | "none";
+        /** Caption colour when there is no panel to sit on. */
+        ink?: "cream" | "deep" | "white";
       };
     }
   | {
@@ -1014,6 +1029,7 @@ export const PAGES: Readonly<
         imageSide: "left",
         ratio: "4/5",
         fullWidth: true,
+        ground: "deep",
         href: "/collections/kala",
         paragraphs: [
           "We asked four weavers what they had in front of them when they set the last piece they were proud of. None of them said a saree. One said a brass tray his father had beaten, one said the tilework on a gate he passes twice a day, and two said a photograph on a phone.",
@@ -1036,6 +1052,8 @@ export const PAGES: Readonly<
           title: "A process of discovery",
           body: "Every curve has to be resolved into a stepped path the loom can execute, and the finer the steps the more picks it takes. A motif copied faithfully from stone costs several times one drawn for cloth to begin with.",
           align: "right",
+          panel: "none",
+          ink: "cream",
         },
       },
       {
@@ -1045,6 +1063,7 @@ export const PAGES: Readonly<
         imageSide: "right",
         ratio: "4/5",
         fullWidth: true,
+        ground: "deep",
         href: "/collections/kala",
         paragraphs: [
           "The pieces gathered here are the ones where that argument was lost on purpose — where the weaver went after the difficult line rather than the one the loom would have preferred, and the extra weeks are visible in the cloth if you know to look for them.",
@@ -1077,6 +1096,8 @@ export const PAGES: Readonly<
           title: "The making of it",
           body: "Filmed over four days in the weaving sheds, at the hours when the light is worth having.",
           align: "center",
+          panel: "none",
+          ink: "deep",
         },
       },
       {
@@ -1133,6 +1154,7 @@ export const PAGES: Readonly<
         imageSide: "left",
         ratio: "4/5",
         fullWidth: true,
+        ground: "cream",
         href: "/collections/katha",
         paragraphs: [
           "A saree is read in fragments, over a shoulder and around a waist, and no viewer ever sees the whole cloth at once. Anything that depends on sequence is lost the moment the piece is worn — which rules out almost every ordinary way of telling a story, and leaves the few that survive being cut up by the person wearing them.",
@@ -1155,6 +1177,8 @@ export const PAGES: Readonly<
           title: "Playful illusions",
           body: "Repeat one figure at several sizes rather than laying out a sequence, and any fragment carries the subject even when it does not carry the plot.",
           align: "right",
+          panel: "none",
+          ink: "white",
         },
       },
       {
@@ -1164,6 +1188,7 @@ export const PAGES: Readonly<
         imageSide: "right",
         ratio: "4/5",
         fullWidth: true,
+        ground: "cream",
         href: "/collections/katha",
         paragraphs: [
           "The pallu holds the single moment that is not repeated, because the pallu is the only part of a saree anyone is guaranteed to look at whole. Everything else is written to survive being glimpsed — which is a constraint most storytellers would refuse and these weavers accepted.",

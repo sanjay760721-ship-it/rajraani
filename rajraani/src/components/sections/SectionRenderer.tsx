@@ -728,7 +728,11 @@ function ImageWithText({
      * closing `fullBleedImage` is the section that is meant to break the
      * container, and it is the only one that does.
      */
-    <section className={section.fullWidth ? "" : "wrap section-pad"}>
+    <section
+      className={`${section.fullWidth ? "" : "wrap section-pad"} ${
+        section.ground ? GROUND[section.ground] : ""
+      }`}
+    >
       <div
         className={
           section.fullWidth
@@ -770,7 +774,10 @@ function ImageWithText({
           ) : null}
           <div className={section.heading || section.eyebrow ? "mt-5 space-y-4" : "space-y-4"}>
             {section.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-body text-ink-body">
+              <p
+                key={index}
+                className={`text-body ${section.ground ? "" : "text-ink-body"}`}
+              >
                 {paragraph}
               </p>
             ))}
@@ -852,6 +859,15 @@ function BandArt({
   );
 }
 
+
+/** Campaign grounds and caption inks; the colours live in globals.css. */
+const GROUND = { deep: "ground-deep", cream: "ground-cream" } as const;
+const CAPTION_INK = {
+  cream: "caption-ink-cream",
+  deep: "caption-ink-deep",
+  white: "caption-ink-white",
+} as const;
+
 /** Which edge an `imageBand` caption panel sits against. */
 const OVERLAY_ALIGN = {
   left: "justify-start",
@@ -924,10 +940,26 @@ function ImageBand({
               * this to 39% of the frame, which made the panel read as a label
               * dropped on the photograph rather than as a band across it.
               */}
-            <div className="w-full min-w-[350px] bg-white/[0.77] p-[30px] text-center md:w-[55%]">
-              <h2 className="text-h1 text-ink">{section.overlay.title}</h2>
+            <div
+              className={`w-full min-w-[350px] p-[30px] text-center md:w-[55%] ${
+                section.overlay.panel === "none"
+                  ? CAPTION_INK[section.overlay.ink ?? "white"]
+                  : "bg-white/[0.77]"
+              }`}
+            >
+              <h2
+                className={`text-h1 ${
+                  section.overlay.panel === "none" ? "" : "text-ink"
+                }`}
+              >
+                {section.overlay.title}
+              </h2>
               {section.overlay.body ? (
-                <p className="text-body mt-3 text-ink-body">
+                <p
+                  className={`text-body mt-3 ${
+                    section.overlay.panel === "none" ? "" : "text-ink-body"
+                  }`}
+                >
                   {section.overlay.body}
                 </p>
               ) : null}

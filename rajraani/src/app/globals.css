@@ -619,3 +619,59 @@
 body:has([data-ends-full-bleed]) footer {
   margin-top: 0;
 }
+
+/* ============================================================================
+   Campaign palettes
+   ============================================================================
+
+   A campaign page on this category carries its own two colours, and they are
+   load-bearing rather than decorative: the image-and-prose bands sit on a
+   coloured ground with the type reversed out of it, which is what stops a
+   long story page reading as one white scroll.
+
+   Measured on the reference, per campaign:
+     Kala   ground #510404 (deep maroon), type #fbe9c4 (cream)
+     Katha  ground #fcf3df (cream),       type #533e2d (the standard body brown)
+
+   Declared here rather than in the renderer because `check-originality` blocks
+   literal hexes in .tsx — colour belongs in the token pipeline, and a campaign
+   palette is a token set even when it only serves two pages.
+   ========================================================================== */
+
+.ground-deep {
+  background-color: #510404;
+  color: #fbe9c4;
+}
+
+.ground-cream {
+  background-color: #fcf3df;
+  color: #533e2d;
+}
+
+/* Type reversed out of a coloured ground inherits it rather than the palette. */
+.ground-deep :where(h1, h2, h3, p),
+.ground-cream :where(h1, h2, h3, p) {
+  color: inherit;
+}
+
+/*
+ * Campaign banner captions have NO panel behind them — `rgba(255,255,255,0)`
+ * on theirs — and rely on a colour picked against that particular photograph.
+ * The contact and store banners are the opposite: a white 77% panel with dark
+ * type. Both treatments are theirs; which one applies is per banner.
+ */
+.caption-ink-cream { color: #fbe9c4; }
+.caption-ink-deep { color: #510404; }
+.caption-ink-white { color: #ffffff; }
+
+/*
+ * The descendants have to opt into inheriting, exactly as on the grounds above.
+ * A bare `h2 { color: … }` element rule beats an inherited value from a class on
+ * the parent, so setting the colour on the caption wrapper alone left every
+ * heading at the default ink and the captions looked unstyled.
+ */
+.caption-ink-cream :where(h1, h2, h3, p),
+.caption-ink-deep :where(h1, h2, h3, p),
+.caption-ink-white :where(h1, h2, h3, p) {
+  color: inherit;
+}
