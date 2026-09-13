@@ -218,6 +218,15 @@ export type Section =
        */
       asPageTitle?: boolean;
       /**
+       * Sets the heading in small caps at the larger display size.
+       *
+       * The opening block of their craft page is "ART & COLLECTIBLES" — 30px,
+       * uppercase, tracked, centred — where a campaign page's heading is
+       * sentence case at 25px. Both are `rich-text__heading`; the treatment is
+       * per block.
+       */
+      uppercase?: boolean;
+      /**
        * Text measure. `prose` (680px) by default; `content` is the 1200px
        * container their rich-text blocks actually use.
        *
@@ -1415,9 +1424,26 @@ export const PAGES: Readonly<
         type: "richText",
         id: "craft-opening",
         measure: "content",
+        /*
+         * Their opening block is a 30px uppercase centred heading, a centred
+         * paragraph, and an uppercase ruled link — the same three-part opening
+         * the campaign pages use. Ours had the paragraph alone.
+         *
+         * The link goes to the contact page rather than a collection: theirs
+         * points at /collections/art-collectibles-1 and this catalogue holds no
+         * metal at all, so a "discover the collection" button would open an
+         * empty grid. The label says what the link actually does.
+         */
+        heading: "Art & Collectibles",
+        uppercase: true,
+        // Carries the page's h1; theirs has no separate title block either, and
+        // without this the page showed the words twice, once in each.
+        asPageTitle: true,
         paragraphs: [
-          "The metal beaters of Banaras were here before the looms were, and the two trades have been borrowing from each other ever since.",
+          "The metal beaters of Banaras were here before the looms were, and the two trades have been borrowing from each other ever since. Raised from a single sheet, never cast, and made in ones.",
         ],
+        ctaLabel: "Ask what is in the room",
+        ctaHref: "/pages/contact",
       },
       {
         type: "imageBand",
@@ -1467,20 +1493,9 @@ export const PAGES: Readonly<
         ratio: "2/1",
         mobileRatio: "2/3",
         bleed: true,
-        /*
-         * Their one captioned banner on this page sits `text-align-left
-         * align-middle` with the text ranged left inside it and no panel —
-         * unlike the campaign banners, which centre both. Measured, not
-         * carried over.
-         */
-        overlay: {
-          title: "Shikargah, beaten rather than woven",
-          body: "The hunting field is the oldest motif on a Banaras loom. In metal it survives being walked past rather than worn, and the relief does the work the zari does on cloth.",
-          align: "left",
-          textAlign: "left",
-          panel: "none",
-          ink: "white",
-        },
+        // No caption. Type over this frame sat on the candle flame and the
+        // brightest part of the photograph, which is the one place on the page
+        // it could not be read.
       },
       {
         type: "imageWithText",

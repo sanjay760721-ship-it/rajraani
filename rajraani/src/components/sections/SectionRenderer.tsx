@@ -649,7 +649,15 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
       style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}
     >
       {section.heading ? (
-        <Heading className="text-h3 mb-5">{section.heading}</Heading>
+        <Heading
+          className={
+            section.uppercase
+              ? "text-h1 mb-5 uppercase tracking-[0.06em]"
+              : "text-h3 mb-5"
+          }
+        >
+          {section.heading}
+        </Heading>
       ) : null}
       {/*
         * `columns-2` flows the paragraphs into two columns and balances them,
@@ -1287,10 +1295,22 @@ function ContactPanel({
   );
 }
 
+/*
+ * `md:`, NOT `sm:`.
+ *
+ * globals.css sets `--breakpoint-sm: initial`, which REMOVES that breakpoint
+ * from the theme — so every `sm:` class in this codebase is dead CSS that
+ * silently does nothing. This grid was the proof: `sm:grid-cols-3` never
+ * applied, so the three-up gallery rendered as two columns at 570px each and
+ * the tiles came out half again the size they should be.
+ *
+ * Other `sm:` classes elsewhere in src/ have the same problem and are worth a
+ * sweep.
+ */
 const GALLERY_COLUMNS = {
-  2: "sm:grid-cols-2",
-  3: "sm:grid-cols-3",
-  4: "sm:grid-cols-2 lg:grid-cols-4",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-2 lg:grid-cols-4",
 } as const;
 
 function GalleryGrid({
