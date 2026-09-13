@@ -634,6 +634,8 @@ async function ProductRail({
 }
 
 function RichText({ section }: { section: Extract<Section, { type: "richText" }> }) {
+  // Their campaign pages have no title block; this heading is the page's h1.
+  const Heading = section.asPageTitle ? "h1" : "h2";
   return (
     /*
      * `text-center` sits on the section, not on the paragraphs.
@@ -646,7 +648,9 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
       className={`section-pad ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"} ${section.tone ? CAMPAIGN_TONE[section.tone] : ""}`}
       style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}
     >
-      {section.heading ? <h2 className="text-h3 mb-5">{section.heading}</h2> : null}
+      {section.heading ? (
+        <Heading className="text-h3 mb-5">{section.heading}</Heading>
+      ) : null}
       {/*
         * `columns-2` flows the paragraphs into two columns and balances them,
         * which is what `column-count: 2` does on theirs. `space-y` would fight
@@ -947,7 +951,9 @@ function ImageBand({
               * dropped on the photograph rather than as a band across it.
               */}
             <div
-              className={`w-full min-w-[350px] p-[30px] text-center md:w-[55%] ${
+              className={`w-full min-w-[350px] p-[30px] md:w-[55%] ${
+                section.overlay.textAlign === "left" ? "text-left" : "text-center"
+              } ${
                 section.overlay.panel === "none"
                   ? CAPTION_INK[section.overlay.ink ?? "white"]
                   : "bg-white/[0.77]"

@@ -207,6 +207,17 @@ export type Section =
        */
       tone?: "deep" | "brown";
       /**
+       * This block's heading is the page's h1, and the page suppresses its own
+       * title block.
+       *
+       * Their campaign pages show no page title at all — the banner runs
+       * straight into a rich-text block whose heading is the first thing you
+       * read. We still need exactly one h1 (`lint:headings`, and search), so
+       * the heading here becomes it rather than adding a title block theirs
+       * does not have.
+       */
+      asPageTitle?: boolean;
+      /**
        * Text measure. `prose` (680px) by default; `content` is the 1200px
        * container their rich-text blocks actually use.
        *
@@ -381,6 +392,12 @@ export type Section =
         panel?: "solid" | "none";
         /** Caption colour when there is no panel to sit on. */
         ink?: "cream" | "deep" | "white";
+        /**
+         * How the caption's own text sits, which is NOT the same as where the
+         * panel sits. Measured on theirs: text ranges LEFT when the panel is
+         * pushed to an edge, and centres when the panel is centred.
+         */
+        textAlign?: "left" | "center";
       };
     }
   | {
@@ -1022,6 +1039,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "kala-intro",
+        asPageTitle: true,
         tone: "deep",
         measure: "content",
         heading: "What a weaver borrows",
@@ -1061,6 +1079,7 @@ export const PAGES: Readonly<
           title: "A process of discovery",
           body: "Every curve has to be resolved into a stepped path the loom can execute, and the finer the steps the more picks it takes. A motif copied faithfully from stone costs several times one drawn for cloth to begin with.",
           align: "right",
+          textAlign: "left",
           panel: "none",
           ink: "cream",
         },
@@ -1105,6 +1124,7 @@ export const PAGES: Readonly<
           title: "The making of it",
           body: "Filmed over four days in the weaving sheds, at the hours when the light is worth having.",
           align: "center",
+          textAlign: "center",
           panel: "none",
           ink: "deep",
         },
@@ -1149,6 +1169,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "katha-intro",
+        asPageTitle: true,
         tone: "brown",
         measure: "content",
         heading: "A story, a telling, an invention",
@@ -1188,6 +1209,7 @@ export const PAGES: Readonly<
           title: "Playful illusions",
           body: "Repeat one figure at several sizes rather than laying out a sequence, and any fragment carries the subject even when it does not carry the plot.",
           align: "right",
+          textAlign: "left",
           panel: "none",
           ink: "white",
         },

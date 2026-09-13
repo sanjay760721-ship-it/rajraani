@@ -87,6 +87,15 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
   const opensWithFaq = first?.type === "faqAccordion";
 
   /*
+   * A section can carry the page's h1 itself, which the campaign pages do —
+   * theirs show no title block at all, the banner running straight into a
+   * rich-text heading. The template then renders no header of its own.
+   */
+  const sectionCarriesTitle = page.sections.some(
+    (section) => section.type === "richText" && section.asPageTitle === true,
+  );
+
+  /*
    * Does the page stop at the viewport edge?
    *
    * A map or a bleed band as the last section wants the footer flush against
@@ -106,7 +115,7 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
         */}
       {opensWithBanner ? <SectionRenderer section={first} index={0} /> : null}
 
-      {opensWithHero || opensWithContactPanel ? null : (
+      {opensWithHero || opensWithContactPanel || sectionCarriesTitle ? null : (
         /*
          * Centred, and at the same measure as the `richText` blocks below it.
          * It was ranged left in a 680px column while everything under it was
