@@ -2362,4 +2362,234 @@ export const PAGES: Readonly<
       },
     ],
   },
+  /*
+   * ── The three Featured pages, 13 September 2026 ───────────────────────────
+   *
+   * Bridal, Gifting and Zarkashi opened straight onto a grid. On the reference
+   * each has a page first, and the page carries the argument with a button
+   * through to the listing — which matters most for Bridal and Zarkashi, where
+   * the thing being sold is a decision rather than a garment.
+   *
+   * Gifts follows their gifting page block for block: full-bleed banner, a
+   * heading with a paragraph and a button, a second paragraph, a small-caps
+   * heading with a rule under it, a square grid, and a captioned closing
+   * banner.
+   */
+
+  gifts: {
+    kind: "craft",
+    title: "Gifting",
+    standfirst:
+      "Pieces that survive being chosen for somebody else.",
+    sections: [
+      {
+        type: "imageBand",
+        id: "gifts-hero",
+        art: imagePair(
+          "gold",
+          "featured/gifts-hero.jpg",
+          "featured/gifts-hero-mob.jpg",
+        ),
+        ratio: "2/1",
+        mobileRatio: "2/3",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+      },
+      {
+        type: "richText",
+        id: "gifts-intro",
+        measure: "content",
+        heading: "The art of giving cloth",
+        uppercase: true,
+        asPageTitle: true,
+        paragraphs: [
+          "Handwoven cloth is a difficult gift and a good one. Difficult because it is personal — a colour is a judgement about somebody, and getting it wrong is visible. Good because it is the rare present that is still in use in twenty years, and because nobody has ever had too many.",
+        ],
+        ctaLabel: "Explore gifts",
+        ctaHref: "/collections/gifts",
+      },
+      {
+        type: "richText",
+        id: "gifts-second",
+        measure: "content",
+        paragraphs: [
+          "What we look for in a gifting piece is forgiveness: a size that does not have to be exact, a colour that does not depend on the wearer's, and a weave that reads as considered rather than as expensive.",
+        ],
+      },
+      {
+        type: "galleryGrid",
+        id: "gifts-categories",
+        heading: "Explore gifts",
+        uppercase: true,
+        divider: true,
+        columns: 4,
+        items: [
+          {
+            art: imagePair("maroon", "featured/gifts-tile-01.jpg"),
+            label: "Sarees",
+            href: "/collections/sarees",
+          },
+          {
+            art: imagePair("gold", "featured/gifts-tile-02.jpg"),
+            label: "Stoles & dupattas",
+            href: "/collections/gifts",
+          },
+          {
+            art: imagePair("indigo", "featured/gifts-tile-05.jpg"),
+            label: "Art & collectibles",
+            href: "/pages/art-collectibles",
+          },
+          {
+            art: imagePair("green", "featured/gifts-tile-03.jpg"),
+            label: "Suits",
+            href: "/collections/suits",
+          },
+        ],
+      },
+      {
+        type: "imageWithText",
+        id: "gifts-wrapping",
+        art: imagePair("gold", "featured/gifts-tile-04.jpg"),
+        imageSide: "left",
+        heading: "How it arrives",
+        paragraphs: [
+          "Folded in unbleached cotton rather than plastic, in a box that is worth keeping, with the weaver and the weeks on the loom written on the card. If it is going straight to somebody else, say so and the price comes off the paperwork.",
+          "We will also write the note by hand if you send us the words. It is a small thing and it is the part people remember.",
+        ],
+        ctaLabel: "Ask us to arrange one",
+        ctaHref: "/pages/contact",
+      },
+      {
+        type: "imageBand",
+        id: "gifts-closing",
+        art: imagePair(
+          "maroon",
+          "featured/gifts-closing.jpg",
+          "featured/gifts-closing-mob.jpg",
+        ),
+        ratio: "2/1",
+        mobileRatio: "2/3",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+        overlay: {
+          title: "The joy of giving",
+          body: "Something that outlasts the occasion it was bought for.",
+          align: "center",
+          textAlign: "center",
+          panel: "none",
+          ink: "white",
+        },
+      },
+    ],
+  },
+
+  bridal: {
+    kind: "craft",
+    title: "Bridal",
+    standfirst:
+      "The heavy end of the catalogue, and the longest wait.",
+    sections: [
+      {
+        type: "imageBand",
+        id: "bridal-hero",
+        art: imagePair("maroon", "featured/bridal-01.jpg"),
+        ratio: "9/8",
+        mobileRatio: "2/3",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+      },
+      {
+        type: "richText",
+        id: "bridal-intro",
+        measure: "content",
+        heading: "Bridal",
+        uppercase: true,
+        asPageTitle: true,
+        paragraphs: [
+          "Real zari, dense grounds, and the weaving that takes months rather than weeks. A bridal piece is between three and six months on the loom and no amount of asking shortens it — which is the single most useful thing to know before you start.",
+        ],
+        ctaLabel: "See the pieces",
+        ctaHref: "/collections/bridal",
+      },
+      {
+        type: "imageWithText",
+        id: "bridal-band",
+        art: imagePair("red", "featured/bridal-02.jpg"),
+        imageSide: "right",
+        ratio: "4/5",
+        fullWidth: true,
+        href: "/collections/bridal",
+        paragraphs: [
+          "Commission early. Six months before is comfortable; three is tight; six weeks means choosing from what already exists, which is a smaller and more expensive set. If the date is close, tell us at the start rather than at the end — we would rather sell you a finished piece you love than take a deposit on one that cannot arrive.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "bridal-fittings",
+        measure: "content",
+        paragraphs: [
+          "Stitched pieces are made to measure, with one fitting by post and a second in the room if you can reach Banaras. Send a garment that already fits and we will copy it — more accurate than a tape measure used once, and faster.",
+        ],
+        ctaLabel: "Arrange a visit",
+        ctaHref: "/pages/banaras-store",
+      },
+    ],
+  },
+
+  zarkashi: {
+    kind: "craft",
+    title: "Zarkashi",
+    standfirst:
+      "Real zari — what it is, how to tell it, and why it costs what it does.",
+    sections: [
+      {
+        type: "imageBand",
+        id: "zarkashi-hero",
+        art: imagePair("gold", "featured/zarkashi-01.jpg"),
+        ratio: "9/8",
+        mobileRatio: "2/3",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
+      },
+      {
+        type: "richText",
+        id: "zarkashi-intro",
+        measure: "content",
+        heading: "Zarkashi",
+        uppercase: true,
+        asPageTitle: true,
+        paragraphs: [
+          "Zarkashi is the drawing of the metal: silver pulled to a thread, taken to gold, and wound on a silk core before it ever reaches a loom. Everything that makes real zari worth the difference happens before the weaving starts.",
+        ],
+        ctaLabel: "See the pieces",
+        ctaHref: "/collections/zarkashi",
+      },
+      {
+        type: "imageWithText",
+        id: "zarkashi-band",
+        art: imagePair("maroon", "featured/zarkashi-02.jpg"),
+        imageSide: "left",
+        ratio: "4/5",
+        fullWidth: true,
+        href: "/collections/zarkashi",
+        paragraphs: [
+          "Three tests, none of which needs any expertise. It is heavier — a real-zari saree announces itself the moment you lift it. It warms in the hand rather than staying cool, because metal takes your temperature and polyester does not. And it tarnishes slowly over years instead of flaking within one, which is the test that takes patience and settles the argument.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "zarkashi-price",
+        measure: "content",
+        paragraphs: [
+          "It is stated per piece on this site, because it is a fact about that piece rather than a claim about the shop. Where a piece uses tested zari rather than real, it says so — and that is a perfectly good cloth sold honestly, not a lesser one sold quietly.",
+        ],
+        ctaLabel: "Read the FAQs",
+        ctaHref: "/pages/faqs",
+      },
+    ],
+  },
 };

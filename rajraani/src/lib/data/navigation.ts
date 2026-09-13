@@ -119,12 +119,19 @@ export const NAVIGATION: readonly NavPanel[] = [
         ],
       },
       {
+        /*
+         * Each of these now opens on a page of its own rather than dropping
+         * straight into a grid, which is how the reference treats them. The
+         * page carries the argument and a button through to the listing.
+         *
+         * Handwoven Fabrics removed 13 Sep 2026: it pointed at
+         * /collections/yardage, and there is no yardage in the catalogue.
+         */
         heading: "Featured",
         links: [
-          { label: "Bridal", href: "/collections/bridal" },
-          { label: "Gifting", href: "/collections/gifts" },
-          { label: "Zarkashi", href: facet("zari", "real_zari") },
-          { label: "Handwoven Fabrics", href: "/collections/yardage" },
+          { label: "Bridal", href: "/pages/bridal" },
+          { label: "Gifting", href: "/pages/gifts" },
+          { label: "Zarkashi", href: "/pages/zarkashi" },
         ],
       },
     ],

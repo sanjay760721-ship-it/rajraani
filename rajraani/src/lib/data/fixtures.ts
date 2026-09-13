@@ -1467,6 +1467,22 @@ export const COLLECTIONS: readonly Collection[] = [
       "ksheera-off-white-muslin-cotton-jamdani-suit",
     ],
   },
+  /*
+   * Zarkashi was a facet link — /collections/sarees?zari=real_zari — which is
+   * a fine way to reach real-zari pieces and a poor way to name an edit. It
+   * now has a page of its own, and a page needs a collection to send people to.
+   */
+  {
+    kind: "edit",
+    handle: "zarkashi",
+    title: "Zarkashi",
+    seoIntro:
+      "Real zari: silver thread taken to gold and wound on silk, which is heavier than the substitute, warms in the hand rather than staying cool, and tarnishes over years instead of flaking within one. These are the pieces where it does the most work.",
+    productHandles: [
+      "rohini-rose-katan-silk-jangla-saree",
+      "mrinalini-rosewood-katan-silk-shikargah-saree",
+    ],
+  },
   {
     kind: "edit",
     handle: "bridal",
