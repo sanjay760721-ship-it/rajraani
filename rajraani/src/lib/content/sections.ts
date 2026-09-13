@@ -1470,8 +1470,8 @@ export const PAGES: Readonly<
         overlay: {
           title: "We would like to see you",
           body: "Write with a date and we will confirm the same day.",
-          ctaLabel: "Arrange a visit",
-          ctaHref: "/pages/contact",
+          ctaLabel: "Book an appointment",
+          ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi",
         },
       },
       {
@@ -1805,11 +1805,17 @@ export const PAGES: Readonly<
          * and boxing this one made the photograph read a third too small.
          */
         bleed: true,
+        /*
+         * Books an appointment on the scheduler, which is what theirs does and
+         * what the homepage's stores band already does. A banner headed "Our
+         * Banaras store" whose button only went to another page describing the
+         * store was a loop.
+         */
         overlay: {
           title: "Our Banaras store",
           body: "Most of what is hard to settle by email settles in ten minutes with the cloth in your hands.",
-          ctaLabel: "Arrange a visit",
-          ctaHref: "/pages/banaras-store",
+          ctaLabel: "Book an appointment",
+          ctaHref: "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi",
         },
       },
       {

@@ -747,6 +747,37 @@ function ImageWithText({
   );
 }
 
+
+/**
+ * The call to action inside an `imageBand` overlay.
+ *
+ * Appointment booking lives on an external scheduler, so this has to emit a
+ * plain anchor for an absolute URL — `next/link` prefetches and client-routes,
+ * neither of which means anything for a different origin, and React will warn.
+ */
+function OverlayCta({ href, label }: { href: string; label: string }) {
+  const external = /^https?:\/\//.test(href);
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cta-primary mt-6 inline-block"
+      >
+        {label}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className="cta-primary mt-6 inline-block">
+      {label}
+    </Link>
+  );
+}
+
 const IMAGE_BAND_RATIO = {
   "15/8": "md:aspect-[15/8]",
   "2/1": "md:aspect-[2/1]",
@@ -786,26 +817,35 @@ function ImageBand({
           alt={section.caption ?? section.overlay?.title ?? ""}
         />
         {section.overlay ? (
-          <>
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-black/10"
-            />
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-              <h2 className="text-h1 text-bg">{section.overlay.title}</h2>
+          /*
+            * A translucent white caption panel, centred, with dark text — not a
+            * dark scrim with light text over the whole frame.
+            *
+            * Measured on the reference: `background-color: rgba(255,255,255,
+            * 0.77)`, `width: 55%`, `min-width: 350px`, 30px of padding, text
+            * centred and middle-aligned, heading in near-black. A full-frame
+            * gradient dims the photograph to make type legible; a panel leaves
+            * the photograph alone and puts the type on its own ground.
+            */
+          <div className="absolute inset-0 flex items-center justify-center px-5">
+            {/*
+              * 55% wide, min 350px — their numbers. A `max-w` cap was pulling
+              * this to 39% of the frame, which made the panel read as a label
+              * dropped on the photograph rather than as a band across it.
+              */}
+            <div className="w-full min-w-[350px] bg-white/[0.77] p-[30px] text-center md:w-[55%]">
+              <h2 className="text-h1 text-ink">{section.overlay.title}</h2>
               {section.overlay.body ? (
-                <p className="text-body mt-4 max-w-[46ch] text-bg/85">
+                <p className="text-body mt-3 text-ink-body">
                   {section.overlay.body}
                 </p>
               ) : null}
-              <Link
+              <OverlayCta
                 href={section.overlay.ctaHref}
-                className="cta-primary mt-7 inline-block"
-              >
-                {section.overlay.ctaLabel}
-              </Link>
+                label={section.overlay.ctaLabel}
+              />
             </div>
-          </>
+          </div>
         ) : null}
       </div>
       {section.caption ? (
