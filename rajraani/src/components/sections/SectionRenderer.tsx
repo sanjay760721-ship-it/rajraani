@@ -754,8 +754,10 @@ function ImageWithText({
             * is the shortest route to the thing it is a picture of.
             */}
           {section.href ? (
-            <Link href={section.href} className="block">
-              <BandArt section={section} />
+            // `overflow-hidden` so the zoom is clipped to the frame rather than
+            // spilling over the band beside it.
+            <Link href={section.href} className="group block overflow-hidden">
+              <BandArt section={section} zoom />
             </Link>
           ) : (
             <BandArt section={section} />
@@ -854,13 +856,32 @@ const PAD_BOTTOM = {
 
 function BandArt({
   section,
+  zoom = false,
 }: {
   section: Extract<Section, { type: "imageWithText" }>;
+  zoom?: boolean;
 }) {
   return (
     <Art
       art={section.art}
-      className={`w-full ${section.ratio === "4/5" ? "aspect-4/5" : "aspect-square"}`}
+      className={`w-full ${section.ratio === "4/5" ? "aspect-4/5" : "aspect-square"}${
+        /*
+         * scale(1.1) over 0.3s ease-in-out, measured on their
+         *
+         * `ease-[ease-in-out]`, not Tailwind's `ease-in-out`: the utility is
+         * cubic-bezier(0.4, 0, 0.2, 1) while the CSS keyword theirs uses is
+         * (0.42, 0, 0.58, 1). Barely perceptible, but this is the one place
+         * where matching the curve costs nothing.
+         *
+         * `.image-with-text__link:hover .image-with-text__image`. Only the
+         * LINKED bands do this — their overlay banners hold still, and a
+         * photograph that moves under the cursor without being clickable is a
+         * promise the page does not keep.
+         */
+        zoom
+          ? " transition-transform duration-300 ease-[ease-in-out] group-hover:scale-110"
+          : ""
+      }`}
       alt={section.heading ?? ""}
     />
   );
