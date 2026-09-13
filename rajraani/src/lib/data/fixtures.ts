@@ -1029,6 +1029,46 @@ export const PRODUCTS: readonly Product[] = [
     }),
   },
   {
+    id: "26",
+    handle: "nayanika-rosegold-organza-embroidered-saree",
+    title: "Rose Gold Organza Hand-Embroidered Saree",
+    poeticName: "Nayanika",
+    sku: "SROEMRG10261",
+    price: money(66_000),
+    inventoryQuantity: 1,
+    fulfilmentMode: "ready_to_ship",
+    dispatchLeadDays: [8, 10],
+    narrative:
+      "Rose gold is a colour that goes wrong easily — a shade too warm and it is orange, a shade too cool and it is nothing. This one was dyed three times before the third bath held. The embroidery is worked after weaving, in a thread only half a step off the ground, so the pattern arrives late and stays quiet.",
+    spec: {
+      colour: "Rose gold",
+      technique: "Hand embroidery on handwoven organza",
+      fabric: "Banaras organza",
+      speciality: "Tonal thread, no zari anywhere on the piece",
+      collectionNote: "From Awadh.",
+    },
+    provenance: {
+      workshop: "Madanpura workshop",
+      loom: "Pit loom, plain weave",
+      weaveTimeWeeks: 10,
+      artisanCount: 4,
+    },
+    garmentType: "saree",
+    weave: "cutwork",
+    fabric: "kora-organza",
+    colourFamily: "pink",
+    zariTypes: ["resham"],
+    motifs: ["floral", "bel"],
+    images: shotTemplate({
+      handle: "nayanika",
+      colour: "rose gold",
+      weave: "cutwork",
+      motif: "floral",
+      garment: "saree",
+      includeBorderFrame: false,
+    }),
+  },
+  {
     id: "22",
     handle: "anupama-ivory-muslin-jamdani-anarkali-suit",
     title: "Ivory Muslin Jamdani Anarkali Suit",
@@ -1287,7 +1327,8 @@ export const COLLECTIONS: readonly Collection[] = [
       "vasanti-yellow-sooti-cotton-jamdani-saree",
       "sindoor-red-katan-silk-kadiyal-saree",
       "saanjh-purple-handwoven-georgette-kadhua-dupatta",
-      "bela-white-handwoven-georgette-kadhua-saree",
+      // bela moved out to Katha, which is the only campaign making an argument
+      // about narrative weaving; Nadi keeps the pieces about colour.
     ],
   },
   {
@@ -1366,7 +1407,9 @@ export const COLLECTIONS: readonly Collection[] = [
       "Restraint borrowed from upriver: less zari, more ground, and a palette that stops short of what a Banarasi loom is usually asked for. A sparse field shows every fault, which is the whole difficulty of it.",
     productHandles: [
       "tarini-peach-kora-georgette-meenakari-saree",
-      "chandrika-ivory-tissue-silk-jangla-saree",
+      // Was chandrika, which is Antaraal's. A piece in two campaigns weakens
+      // both — the listing stops being an argument and becomes a shelf.
+      "nayanika-rosegold-organza-embroidered-saree",
       "ksheera-off-white-muslin-cotton-jamdani-suit",
       "baluka-beige-tussar-silk-embroidered-suit",
     ],

@@ -2110,4 +2110,256 @@ export const PAGES: Readonly<
       },
     ],
   },
+  /*
+   * ── The footer's policy pages, 13 September 2026 ──────────────────────────
+   *
+   * Every one of these was a 404 in the footer of every page on the site. Their
+   * equivalents are a title block and a run of prose with sub-headings, which
+   * is what these are.
+   *
+   * **These state commitments to customers and have not been reviewed by
+   * anyone qualified.** They are written to match what the rest of the build
+   * already says — the announcement bar, `INFO_TABS` in brand.ts, and the FAQ
+   * answers — so the site stops contradicting itself, which it did. That is not
+   * the same as being correct, and the four policy pages want a read by someone
+   * who can commit the business before launch. See HANDOFF §5.8.10.
+   */
+
+  returns: {
+    kind: "craft",
+    title: "Returns & Cancellation",
+    standfirst:
+      "What can be sent back, what cannot, and why the line falls where it does.",
+    sections: [
+      {
+        type: "richText",
+        id: "returns-ready",
+        align: "left",
+        heading: "Ready-to-ship pieces",
+        paragraphs: [
+          "A ready-to-ship piece can be returned unworn, with its tags attached, within fourteen days of delivery. Write to us first so we can arrange the collection — sending a piece back without telling us risks it arriving unlogged, and an unlogged parcel is hard to refund.",
+          "The refund goes to the original payment method once the piece is back with us and has been checked, usually within five working days of arrival.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "returns-made",
+        align: "left",
+        heading: "Made-to-order and commissioned pieces",
+        paragraphs: [
+          "These cannot be returned. A piece woven or tailored to your measurements was made once, for you, and there is no second buyer for a blouse cut to someone else's back.",
+          "We would rather say that here than in small print later. If you are unsure about a commission, ask us before ordering — describing a colour against something you already own is free and takes ten minutes.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "returns-cancel",
+        align: "left",
+        heading: "Cancelling",
+        paragraphs: [
+          "A ready-to-ship order can be cancelled any time before it is dispatched. A commission can be cancelled until the warp is set; after that the weaver has committed the loom and we have committed the money, and neither can be taken back.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "returns-damage",
+        align: "left",
+        heading: "If something arrives damaged",
+        paragraphs: [
+          "Photograph it before doing anything else and write to us the same day. Transit damage is our problem rather than yours, and it is settled by replacement, repair or refund depending on what the piece needs.",
+        ],
+        ctaLabel: "Write to us",
+        ctaHref: "/pages/contact",
+      },
+    ],
+  },
+
+  shipping: {
+    kind: "craft",
+    title: "Delivery & Shipping",
+    standfirst:
+      "Where we ship, how long it takes, and what is included in the price.",
+    sections: [
+      {
+        type: "richText",
+        id: "shipping-india",
+        align: "left",
+        heading: "Within India",
+        paragraphs: [
+          "Shipping is free with no minimum. Orders are dispatched from Varanasi with a tracked courier and a tracking number is emailed on despatch.",
+          "Delivery takes three to five working days from dispatch. A ready-to-ship piece leaves within two or three working days of the order; a made-to-order piece is dispatched when it is finished, on the week stated on its product page.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "shipping-international",
+        align: "left",
+        heading: "Outside India",
+        paragraphs: [
+          "We ship worldwide. Shipping is free above ₹25,000 and quoted at checkout below that.",
+          "Duties are included in the price, so nothing further is asked for on delivery — which is why an international price is not a straight conversion of the rupee one. Delivery usually takes five to ten working days from dispatch, plus whatever customs adds.",
+          "If your country is not offered at checkout, write to us before assuming we cannot reach it.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "shipping-metal",
+        align: "left",
+        heading: "Art & Collectibles",
+        paragraphs: [
+          "Metal pieces are crated and insured, and travel more slowly than cloth. Large pieces are quoted individually, because the crate often costs more than the courier.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "shipping-missed",
+        align: "left",
+        heading: "A missed delivery",
+        paragraphs: [
+          "The courier reattempts, usually twice, then holds the parcel locally for a few days. Tell us rather than the courier — we have the account, and they answer us faster than they answer a consignee.",
+        ],
+        ctaLabel: "Write to us",
+        ctaHref: "/pages/contact",
+      },
+    ],
+  },
+
+  privacy: {
+    kind: "craft",
+    title: "Privacy Policy",
+    standfirst:
+      "What we collect, why, and what we do not do with it.",
+    sections: [
+      {
+        type: "richText",
+        id: "privacy-what",
+        align: "left",
+        heading: "What we collect",
+        paragraphs: [
+          "To send you an order we need a name, a delivery address, an email address and a telephone number for the courier. If you create an account we keep those so you do not have to type them again.",
+          "Payment is handled by our payment provider rather than by us. Card details are never on our servers and we never see them.",
+          "The site records ordinary technical information — pages requested, approximate location from the network address, the kind of device — which is what tells us a page is broken before somebody writes in about it.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "privacy-use",
+        align: "left",
+        heading: "What we use it for",
+        paragraphs: [
+          "Fulfilling your order, answering your messages, and keeping legally required records of what was sold. If you have asked for them, occasional emails about new pieces — and every one of those carries a way out that works.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "privacy-not",
+        align: "left",
+        heading: "What we do not do",
+        paragraphs: [
+          "We do not sell your details, rent them, or pass them to anybody whose job is advertising. The only third parties who receive anything are the ones who have to: the payment provider, the courier, and the service that sends our email.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "privacy-rights",
+        align: "left",
+        heading: "Asking us to delete it",
+        paragraphs: [
+          "Write and ask. We will tell you what we hold, correct it, or delete it — except the parts tax law requires us to keep, which we will name rather than hide behind.",
+        ],
+        ctaLabel: "Write to us",
+        ctaHref: "/pages/contact",
+      },
+    ],
+  },
+
+  terms: {
+    kind: "craft",
+    title: "Terms & Conditions",
+    standfirst:
+      "The terms you are agreeing to when you order from this site.",
+    sections: [
+      {
+        type: "richText",
+        id: "terms-pieces",
+        align: "left",
+        heading: "About the pieces",
+        paragraphs: [
+          "Everything here is woven by hand, so no two pieces are identical and small irregularities are part of the record of making rather than faults. Colour varies between screens; where an exact shade matters, ask us before ordering.",
+          "Every piece is described as accurately as we can manage, including the technique, the fabric, whether the zari is real silver, and roughly how many weeks it took. Where we do not know something we say so.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "terms-orders",
+        align: "left",
+        heading: "Orders and prices",
+        paragraphs: [
+          "An order is accepted when we confirm it, not when it is placed — almost everything here is a single piece, and two people can reach the checkout at the same moment. If that happens we will tell you immediately and refund in full.",
+          "Prices are in Indian rupees and include tax. We may change a price, but never on an order already confirmed.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "terms-returns",
+        align: "left",
+        heading: "Returns",
+        paragraphs: [
+          "Set out in full on the returns page, and the short version is that ready-to-ship pieces can come back within fourteen days unworn, and pieces made to your measurements cannot.",
+        ],
+        ctaLabel: "Returns & Cancellation",
+        ctaHref: "/pages/returns",
+      },
+      {
+        type: "richText",
+        id: "terms-law",
+        align: "left",
+        heading: "Everything else",
+        paragraphs: [
+          "Photographs and text on this site are ours and are not to be reproduced elsewhere. These terms are governed by Indian law, and any dispute goes to the courts at Varanasi.",
+          "If any part of this is unenforceable, the rest still stands.",
+        ],
+      },
+    ],
+  },
+
+  "size-guide": {
+    kind: "craft",
+    title: "Size Guide",
+    standfirst:
+      "Measurements for the cloth, and how a stitched piece is cut to you.",
+    sections: [
+      {
+        type: "richText",
+        id: "size-saree",
+        align: "left",
+        heading: "Sarees",
+        paragraphs: [
+          "A saree here is between 5.5 and 6.3 metres long, with the exact length on each product page, and around 46 inches wide. Where a blouse length is included it is roughly a metre and is stated separately.",
+          "Length varies by weave rather than by size — a heavier ground is woven shorter — so the figure on the page is the one to trust, not an average.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "size-suits",
+        align: "left",
+        heading: "Suits and stitched pieces",
+        paragraphs: [
+          "Most are made to your measurements rather than to a size. After ordering we ask for bust, waist, hip, shoulder, sleeve length and the finished length you want, and our tailor in Banaras works to those.",
+          "If you would rather send a garment that already fits, post it and we will copy it. That is usually more accurate than a tape measure used once.",
+        ],
+      },
+      {
+        type: "richText",
+        id: "size-help",
+        align: "left",
+        heading: "If you are unsure",
+        paragraphs: [
+          "Write to us with what you have. Somebody who has handled the piece will answer, and a five-minute exchange beforehand is worth more than a return afterwards — particularly on a piece cut to measure, which cannot come back.",
+        ],
+        ctaLabel: "Write to us",
+        ctaHref: "/pages/contact",
+      },
+    ],
+  },
 };

@@ -1591,6 +1591,37 @@ does not exist.
 That is the honest state: the page is matched in treatment and short in content,
 and it stays short until there is metal in the catalogue.
 
+### 5.8.10 The footer, and the policy pages — 13 September 2026
+
+The footer carried **nine dead links on every page of the site**: careers,
+gift-cards, lucknow-store, press, privacy, returns, shipping, size-guide and
+terms. Same class of bug the navigation had, and it had been there as long as
+the footer.
+
+- **Removed:** Lucknow Store, Press & Media, Careers. There is one store, no
+  press office and no open roles.
+- **Relabelled:** "Gift Cards" to "Gifting", pointing at `/collections/gifts`.
+  There is no gift-card product and no way to issue one, so that link would have
+  been a lie even if the page had existed.
+- **Written:** Returns & Cancellation, Delivery & Shipping, Privacy Policy,
+  Terms & Conditions, Size Guide. Their equivalents are a title block and a run
+  of prose with sub-headings, which is what these are.
+
+**THE FOUR POLICY PAGES STATE COMMITMENTS AND HAVE NOT BEEN REVIEWED BY ANYONE
+QUALIFIED.** They were written to agree with what the build already says — the
+announcement bar, `INFO_TABS` in brand.ts, and the FAQ answers — so the site
+stops contradicting itself, which it did in several places. That is not the same
+as being correct. Returns, Shipping, Privacy and Terms want a read by someone
+who can commit the business before launch. Size Guide is a measurements page and
+is a lower risk.
+
+**Campaign membership is unique again.** Chandrika was in both Antaraal and
+Awadh and bela in both Nadi and Katha. A piece in two campaigns weakens both —
+the listing stops being an argument and becomes a shelf. One more saree was
+staged so Awadh did not have to borrow one. Checked by query: no product appears
+in more than one campaign, and Awadh, Kala and Katha carry two sarees and two
+suits each.
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are

@@ -52,11 +52,19 @@ const FOOTER_COLUMNS: readonly FooterColumn[] = [
     links: [
       { label: "Our Story / Our Heritage", href: "/pages/our-story" },
       { label: "Banaras Store", href: "/pages/banaras-store" },
-      { label: "Lucknow Store", href: "/pages/lucknow-store" },
-      { label: "Press & Media", href: "/pages/press" },
-      { label: "Careers", href: "/pages/careers" },
+      /*
+       * Lucknow Store, Press & Media and Careers removed 13 Sep 2026. There is
+       * one store, no press office and no open roles, and all three had been
+       * 404ing from the footer of every page on the site since it was written.
+       * A footer link is a promise like any other.
+       */
       { label: "Size Guide", href: "/pages/size-guide" },
-      { label: "Gift Cards", href: "/pages/gift-cards" },
+      /*
+       * Was "Gift Cards" -> /pages/gift-cards, which 404d and would have been a
+       * lie if it had not: there is no gift-card product and no way to issue
+       * one. The gifting edit is the real thing this was reaching for.
+       */
+      { label: "Gifting", href: "/collections/gifts" },
       { label: "Contact Us", href: "/pages/contact" },
     ],
   },
