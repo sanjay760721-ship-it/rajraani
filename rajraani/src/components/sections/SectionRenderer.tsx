@@ -863,12 +863,25 @@ function FaqAccordion({
   section: Extract<Section, { type: "faqAccordion" }>;
 }) {
   return (
-    <section className="wrap-prose section-pad">
+    /*
+      * Full content width, not a prose measure.
+      *
+      * This was `wrap-prose` (680px) — right for an essay, wrong for a list of
+      * short questions, which then wrapped onto two lines apiece and made the
+      * page twice as long as theirs. Their accordion runs the full 1200px
+      * container and each question sits on one line.
+      */
+    <section className="wrap section-pad">
       {section.groups.map((group) => (
-        <div key={group.heading} className="mb-14 last:mb-0">
-          <h2 className="eyebrow border-b border-rule pb-3 text-ink">
-            {group.heading}
-          </h2>
+        <div key={group.heading} className="mb-12 last:mb-0">
+          {/*
+            * A display-serif heading, ranged left, with no rule under it.
+            * It was an `eyebrow` — uppercase, tracked, small, underlined —
+            * which reads as a table label rather than as the start of a
+            * section.
+            */}
+          <h2 className="text-h1 mb-2 text-ink">{group.heading}</h2>
+
           <dl>
             {group.items.map((item) => (
               <div key={item.question} className="border-b border-rule">
@@ -878,17 +891,29 @@ function FaqAccordion({
                   * and answer, and `<details>` cannot wrap both halves without
                   * putting a block element inside `<dt>`, which is invalid.
                   */}
-                <details className="group py-4">
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
-                    <dt className="text-body text-ink">{item.question}</dt>
-                    <span
+                <details className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center gap-4">
+                    {/*
+                      * Chevron on the LEFT of the question, which is where
+                      * theirs sits. On the right it reads as a disclosure
+                      * control on a table row; on the left it reads as a
+                      * bullet that happens to open.
+                      */}
+                    <svg
                       aria-hidden
-                      className="mt-1 shrink-0 text-ink-muted transition-transform duration-300 group-open:rotate-180"
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4 shrink-0 text-ink transition-transform duration-300 group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
-                      ▾
-                    </span>
+                      <path d="M5 9l7 7 7-7" />
+                    </svg>
+                    <dt className="text-body text-ink">{item.question}</dt>
                   </summary>
-                  <dd className="text-body mt-3 pr-10 text-ink-body">
+                  <dd className="text-body mt-3 pl-8 text-ink-body">
                     {item.answer}
                   </dd>
                 </details>

@@ -71,6 +71,14 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
   const opensWithContactPanel = first?.type === "contactPanel";
 
   /*
+   * The FAQ page ranges its title left at the full content width, where an
+   * about page centres its title in a prose column. Both are theirs; the
+   * difference is that one opens on an essay and the other on a list, and a
+   * centred title above a left-ranged list of questions looks like a mistake.
+   */
+  const opensWithFaq = first?.type === "faqAccordion";
+
+  /*
    * Does the page stop at the viewport edge?
    *
    * A map or a bleed band as the last section wants the footer flush against
@@ -93,9 +101,19 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
          * centred in the same column — three elements in a stack disagreeing
          * about their own axis.
          */
-        <header className="wrap-prose section-pad text-center">
+        <header
+          className={
+            opensWithFaq
+              ? "wrap section-pad"
+              : "wrap-prose section-pad text-center"
+          }
+        >
           <h1 className="text-h1">{page.title}</h1>
-          <p className="text-body mt-4 text-ink-body">{page.standfirst}</p>
+          <p
+            className={`text-body mt-4 text-ink-body${opensWithFaq ? " italic" : ""}`}
+          >
+            {page.standfirst}
+          </p>
         </header>
       )}
 
