@@ -809,6 +809,18 @@ export const mapBandSection = defineType({
       validation: (rule) => rule.required().max(80),
     }),
     defineField({ name: "zoom", type: "number", description: "Defaults to 16." }),
+    defineField({
+      name: "padY",
+      type: "number",
+      description: "Vertical padding, 20 or 30. Defaults to 30.",
+      options: { list: [20, 30] },
+    }),
+    defineField({
+      name: "padX",
+      type: "number",
+      description: "Horizontal inset, 0 or 20. Defaults to 0 (edge to edge).",
+      options: { list: [0, 20] },
+    }),
   ],
   preview: { select: { title: "label", subtitle: "query" } },
 });

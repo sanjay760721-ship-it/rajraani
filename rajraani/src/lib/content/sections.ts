@@ -364,6 +364,15 @@ export type Section =
       /** Announced to screen readers, which cannot use the map itself. */
       label: string;
       zoom?: number;
+      /**
+       * Padding, which is not the same on the two pages that carry a map.
+       *
+       * Contact: 30px top and bottom, nothing either side, so the map runs edge
+       * to edge. Store: 20px all round, so it sits slightly inset. Defaults to
+       * the contact treatment.
+       */
+      padY?: 20 | 30;
+      padX?: 0 | 20;
     }
   | {
       /**
@@ -1474,6 +1483,9 @@ export const PAGES: Readonly<
         id: "store-opening",
         align: "left",
         measure: "content",
+        // `has-columns--2 text-align-left` on theirs, same as the about page's
+        // opening block. No italics on this page, unlike that one.
+        columns: 2,
         paragraphs: [
           "The room holds a fraction of what is on this website, and a few things that are not on it at all.",
           "Someone who has handled every piece in it will be with you, and nobody else's job is to close the sale.",
@@ -1539,6 +1551,10 @@ export const PAGES: Readonly<
       {
         type: "mapBand",
         id: "store-map",
+        // Theirs insets the store map 20px on all four sides, where the contact
+        // one runs edge to edge with 30px above and below.
+        padY: 20,
+        padX: 20,
         query: "Rathyatra, Varanasi, Uttar Pradesh",
         label: "Map showing the Banaras store",
       },

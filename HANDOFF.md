@@ -1480,10 +1480,19 @@ steps (0, 20, 25, 30, 40). The footer's tight rule now covers a CONTAINED
 closing band too: 96px of margin is right under text and wrong under a
 photograph of any width. Verified at 40px on our-story, which is their number.
 
-**Still approximated, if anyone wants them exact:** `imageWithText` has no
-per-band padding and runs a uniform 20/20, where theirs varies (30/40, 0/40).
-`mapBand` is a flat 30px, which is right for contact and 10px over for the
-store page.
+**The store page takes the same treatment**, checked rather than assumed: its
+opening block is `has-columns--2 text-align-left` like the about page's, but it
+carries no italics. Its map is inset 20px on all four sides where the contact
+map runs edge to edge with 30px above and below, so `mapBand` carries `padY`
+and `padX`.
+
+**Two deliberate deviations from theirs on the store page.** Theirs has no page
+title at all — it runs banner straight into the four-paragraph block — while
+ours keeps an h1 and standfirst, because `lint:headings` requires exactly one h1
+and a page with none is bad for search as well as for screen readers. Second,
+`imageWithText` still has no per-band padding and runs a uniform 20/20 where
+theirs varies (30/40, then 0/40). That one is a real remaining gap, not a
+choice.
 
 ### 5.9 The remaining admin editors
 

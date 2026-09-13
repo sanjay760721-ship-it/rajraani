@@ -1247,7 +1247,12 @@ function MapBand({
       * is a measured 30. Matching the measurement was the instruction, and a
       * near-miss here is visible because both blocks run edge to edge.
       */
-    <section aria-label={section.label} className="py-[30px]">
+    <section
+      aria-label={section.label}
+      className={`${section.padY === 20 ? "py-5" : "py-[30px]"} ${
+        section.padX === 20 ? "px-5" : ""
+      }`}
+    >
       {/*
         * `loading="lazy"` matters more here than on an image: the embed pulls
         * a third-party bundle, and this sits at the very bottom of the page.
