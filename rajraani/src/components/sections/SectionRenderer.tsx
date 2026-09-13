@@ -919,12 +919,33 @@ function ContactPanel({
   const Heading = isPageTitle ? "h1" : "h2";
 
   return (
-    <section className="wrap section-pad">
+    /*
+      * Tall enough to hold the first screen on a laptop.
+      *
+      * Without this the panel came to about 665px against a 945px viewport and
+      * the full-bleed band below it showed 120px of itself under the fold — a
+      * strip of photograph with no context, which reads as a layout fault
+      * rather than as an invitation to scroll.
+      *
+      * 9rem is the measured header stack: announcement bar, utility row and nav
+      * come to 143px. If the announcement bar is dismissed the reserve is a
+      * little generous and the band simply starts a little lower, which is the
+      * harmless direction to be wrong in.
+      *
+      * `svh`, not `vh`: on mobile browsers `vh` is the tallest the viewport ever
+      * gets, so a `vh` box is under the address bar on load. Gated at `md`
+      * anyway, where the two columns exist at all.
+      */
+    <section className="wrap section-pad md:flex md:min-h-[calc(100svh-9rem)] md:flex-col">
       {/*
         * Two halves, form on the right, stacking on a phone with the addresses
         * first — somebody on a train wants the phone number before the form.
+        *
+        * `flex-1` so the grid takes the section's full height and the filled
+        * panel stretches with it; a short grey box floating in a tall section
+        * is worse than the peeking band was.
         */}
-      <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div className="grid gap-12 md:flex-1 md:grid-cols-2 md:gap-16">
         <div>
           {section.heading ? (
             <Heading className="text-h1">{section.heading}</Heading>

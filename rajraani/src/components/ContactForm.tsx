@@ -49,7 +49,7 @@ export function ContactForm({ submitLabel }: { submitLabel: string }) {
         <textarea
           id="enquiry-message"
           name="message"
-          rows={7}
+          rows={10}
           required
           maxLength={5000}
           className="text-body mt-2 w-full border border-rule-input bg-bg px-3 py-2 text-ink focus:border-ink focus:outline-none"
