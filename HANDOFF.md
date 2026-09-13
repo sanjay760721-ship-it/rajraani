@@ -1,6 +1,7 @@
 # Project Handoff — Rajraani
 
-**Last updated:** 13 September 2026 (navigation, About Us, campaign and craft pages)
+**Last updated:** 13 September 2026 (navigation, every editorial page, and the
+catalogue behind them)
 **Purpose:** Resume state. Read this first in any new session, then read the two documents it points to.
 
 > **Start at [§2.45](#245-audited-state-22-august-2026), then [§2.46](#246-progress-ledger--measured-against-git-22-august-2026) and [§2.47](#247-photography-integrated-and-the-three-blocking-decisions-taken--22-august-2026).**
@@ -387,21 +388,26 @@ Commerce is **~50% built and 0% trustworthy**. See the §2.45 checkout finding.
 | Workstream | Done | Remaining |
 |---|---|---|
 | Research and specs | ~95% | catalogue copy, photography commissioning |
-| Storefront UI | ~90% *(was ~85%; §5.8)* | no `/blogs` route, lost components |
-| Navigation and pages | ~95% *(was ~50%; §5.8)* | admin editing, commissioned imagery |
-| Design system | ~95% | 9 missing tile images |
+| Storefront UI | ~95% *(was ~85%; §5.8)* | no `/blogs` route, lost components |
+| Navigation and pages | ~98% *(was ~50%; §5.8)* | admin editing, commissioned imagery |
+| Catalogue depth | ~60% *(was ~35%)* | 36 fixture products; real stock, SKUs and prices |
+| Design system | ~95% | dead `sm:` breakpoint across 10 files |
 | Admin | ~30% | 10 screens to wire to the DB |
 | Commerce / payments | ~50% built, untrusted | signature check, webhook, tests |
 | Content and imagery | ~55% *(was ~40%; see §2.47)* | commissioned shoot, 7 unphotographed sarees, 9 tiles, no Banaras store photo, 822 MB video |
 | Launch hardening | ~10% | perf, SEO, a11y audit, load test, monitoring |
 
-**Overall: roughly 68% of the build is done** (62% on 22 August; the 13 September pages
-session moved the storefront, nothing else). The remaining third is unevenly distributed
-and the distribution is the point:
+**Overall: roughly 72% of the build is done** (62% on 22 August, 68% earlier on
+13 September). The remaining quarter is unevenly distributed and the
+distribution is the point:
 
-- what a visitor **sees** is ~85% there
+- what a visitor **sees** is ~95% there
 - what **takes money** is ~40% built and 0% trustworthy
 - what you would **run the business from** is ~30%
+
+Measured 13 September 2026: 36 products, 19 collections, 20 editorial pages, 27
+section types, 402 tests, 93 prerendered routes, and no dead link reachable from
+the homepage, the navigation or the footer.
 
 **Nothing here is deployable today, and two separate things block it.**
 
@@ -1655,7 +1661,7 @@ schema-driven one. That is the fortnight the ledger refers to.
 
 ## 6. Next actions
 
-### The two that gate everything else (13 September 2026)
+### The three that gate everything else (13 September 2026)
 
 **A. Verify the payment signature.** `src/lib/checkout/actions.ts`. Contained work —
 call Razorpay to create the order, HMAC-verify `razorpay_signature` in
@@ -1663,7 +1669,14 @@ call Razorpay to create the order, HMAC-verify `razorpay_signature` in
 order id. Until this exists the site cannot take one real order, and every other
 commerce task is built on sand.
 
-**B. Build the editorial-page editor** (§5.9 item 1). Twelve pages of content now live in
+**B. Replace the photography.** Every image on this site is a third-party
+reference shot staged in a gitignored folder — 203 files as of 13 September, up
+from ~150 that morning. The site only looks finished on the machine holding
+them, and none of it is licensed. This is now the largest single blocker by
+volume, and it is a commissioning and scheduling problem rather than an
+engineering one, so it wants starting early: `docs/research/photography-brief.md`.
+
+**C. Build the editorial-page editor** (§5.9 item 1). Twenty pages of content now live in
 `sections.ts` as seed constants. The content seam and `savePage`/`deletePage` already
 exist and are used by nothing. Until this screen lands, changing any page copy is a code
 edit and a deploy, which is not a workable arrangement for whoever writes the copy.
