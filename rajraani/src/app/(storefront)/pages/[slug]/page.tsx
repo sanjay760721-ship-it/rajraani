@@ -94,12 +94,16 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
    * the footer does not.
    */
   const last = page.sections[page.sections.length - 1];
-  const endsFullBleed =
-    last?.type === "mapBand" ||
-    (last?.type === "imageBand" && last.bleed === true);
+  const endsFullBleed = last?.type === "mapBand" || last?.type === "imageBand";
 
   return (
     <article {...(endsFullBleed ? { "data-ends-full-bleed": "" } : {})}>
+      {/*
+        * `data-ends-full-bleed` now covers a CONTAINED closing band too. The
+        * footer's 96px margin is right under text and wrong under a photograph
+        * of any width — the band carries its own bottom padding (40px on the
+        * about page) and that is the whole gap theirs leaves.
+        */}
       {opensWithBanner ? <SectionRenderer section={first} index={0} /> : null}
 
       {opensWithHero || opensWithContactPanel ? null : (
@@ -117,11 +121,8 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
           }
         >
           <h1 className="text-h1">{page.title}</h1>
-          <p
-            className={`text-body mt-4 text-ink-body${opensWithFaq ? " italic" : ""}`}
-          >
-            {page.standfirst}
-          </p>
+          {/* Italic, as theirs is on both the about and FAQ pages. */}
+          <p className="text-body mt-4 text-ink-body italic">{page.standfirst}</p>
         </header>
       )}
 

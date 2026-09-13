@@ -1459,6 +1459,32 @@ A leading `imageBand` is now hoisted above the page header whether or not it
 bleeds — the about banner is contained and still sits above the title. Width and
 running order are separate decisions.
 
+**A screenshot of their about page then showed three more things no amount of
+CSS reading had caught:**
+
+- Their opening block of four paragraphs runs in **two columns**
+  (`.has-columns--2 { column-count: 2 }`, collapsing to one under 480px). Ours
+  was a single stack, which made the top of the page twice as tall as theirs.
+- The standfirst and the closing aside are `<em>`. `richText` gained
+  `italicParagraphs` — an index list rather than markup inside the string,
+  because the string is content someone types and the emphasis is a layout
+  decision about which line is an aside.
+- We had THREE opening statements where theirs has two: a page standfirst, a
+  one-paragraph rich text saying the same thing, then the block. The middle one
+  is gone.
+
+**Per-band padding.** `section-pad` is a flat 20/20 and cannot express their
+0/0 opening banner or their 20/40 closing frame, which is most of what gives
+their pages their rhythm. `imageBand` gained `padTop`/`padBottom` in their own
+steps (0, 20, 25, 30, 40). The footer's tight rule now covers a CONTAINED
+closing band too: 96px of margin is right under text and wrong under a
+photograph of any width. Verified at 40px on our-story, which is their number.
+
+**Still approximated, if anyone wants them exact:** `imageWithText` has no
+per-band padding and runs a uniform 20/20, where theirs varies (30/40, 0/40).
+`mapBand` is a flat 30px, which is right for contact and 10px over for the
+store page.
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are

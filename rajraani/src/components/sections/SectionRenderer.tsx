@@ -647,9 +647,22 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
       style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}
     >
       {section.heading ? <h2 className="text-h3 mb-5">{section.heading}</h2> : null}
-      <div className="space-y-5">
+      {/*
+        * `columns-2` flows the paragraphs into two columns and balances them,
+        * which is what `column-count: 2` does on theirs. `space-y` would fight
+        * it — margins collapse oddly across a column break — so the spacing
+        * goes on the paragraphs instead.
+        */}
+      <div className={section.columns === 2 ? "md:columns-2 md:gap-16" : "space-y-5"}>
         {section.paragraphs.map((paragraph, index) => (
-          <p key={index} className="text-body text-ink-body">{paragraph}</p>
+          <p
+            key={index}
+            className={`text-body text-ink-body${
+              section.columns === 2 ? " mb-5 last:mb-0" : ""
+            }${section.italicParagraphs?.includes(index) ? " italic" : ""}`}
+          >
+            {paragraph}
+          </p>
         ))}
       </div>
       {section.ctaLabel && section.ctaHref ? (
@@ -781,6 +794,26 @@ function OverlayCta({ href, label }: { href: string; label: string }) {
   );
 }
 
+
+/*
+ * Their per-section padding steps, spelled out rather than approximated.
+ * `section-pad` is a flat 20/20 and could not express a 0/0 opening banner or a
+ * 20/40 closing frame, which is most of what gives their pages their rhythm.
+ */
+const PAD_TOP = {
+  0: "pt-0",
+  20: "pt-5",
+  25: "pt-[25px]",
+  30: "pt-[30px]",
+} as const;
+
+const PAD_BOTTOM = {
+  0: "pb-0",
+  20: "pb-5",
+  30: "pb-[30px]",
+  40: "pb-10",
+} as const;
+
 const IMAGE_BAND_RATIO = {
   "15/8": "md:aspect-[15/8]",
   "2/1": "md:aspect-[2/1]",
@@ -803,7 +836,11 @@ function ImageBand({
   section: Extract<Section, { type: "imageBand" }>;
 }) {
   return (
-    <section className={section.bleed ? "" : "wrap section-pad"}>
+    <section
+      className={`${section.bleed ? "" : "wrap"} ${
+        PAD_TOP[section.padTop ?? 20]
+      } ${PAD_BOTTOM[section.padBottom ?? 20]}`}
+    >
       {/*
         * The phone frame carries its own ratio, not the desktop one.
         *

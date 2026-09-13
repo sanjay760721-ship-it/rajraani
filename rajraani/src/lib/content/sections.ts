@@ -185,6 +185,20 @@ export type Section =
        */
       align?: "left" | "center";
       /**
+       * Flow the paragraphs into two columns (`column-count: 2` on theirs, on
+       * the opening block of the about page). Collapses to one on a phone.
+       */
+      columns?: 1 | 2;
+      /**
+       * Indices of paragraphs to set in italic.
+       *
+       * Their standfirsts and closing asides are wrapped in `<em>`. An index
+       * list rather than markup inside the string, because the string is
+       * content someone types and the emphasis is a layout decision about
+       * which line is an aside.
+       */
+      italicParagraphs?: number[];
+      /**
        * Text measure. `prose` (680px) by default; `content` is the 1200px
        * container their rich-text blocks actually use.
        *
@@ -270,6 +284,15 @@ export type Section =
       type: "imageBand";
       id: string;
       art: ArtPair;
+      /**
+       * Vertical padding, in the reference's own steps.
+       *
+       * Theirs varies per band and the variation is not decorative: the about
+       * page's opening banner is flush (0/0) while its closing frame is 20/40,
+       * which is what stops the page ending on a hard edge.
+       */
+      padTop?: 0 | 20 | 25 | 30;
+      padBottom?: 0 | 20 | 30 | 40;
       /**
        * Ratio of the desktop frame. Defaults to the 15:8 a closing image wants.
        *
@@ -1341,6 +1364,8 @@ export const PAGES: Readonly<
         id: "story-banner",
         art: imagePair("maroon", "about/story-banner.jpg"),
         ratio: "15/8",
+        padTop: 0,
+        padBottom: 0,
         /*
          * NOT bleed. Their about-page banners sit on `section is-width-standard`,
          * and the base `.section` rule is `max-width: 1200px; width: 95%` — so
@@ -1349,27 +1374,23 @@ export const PAGES: Readonly<
          * the full viewport. Same component, three pages, two widths.
          */
       },
-      {
-        type: "richText",
-        id: "story-opening",
-        measure: "content",
-        // No heading. The page header above already carries the h1 and the
-        // standfirst; theirs has one title block here and so should this.
-        paragraphs: [
-          `${BRAND.name} buys handloom from the people who weave it and sells it with no step in between. Everything below follows from that.`,
-        ],
-      },
       /*
-       * The second opening block. Their page runs two rich-text sections before
-       * the first band — a one-line statement, then four paragraphs of what the
-       * shop actually is — and this build had only the first, which is most of
-       * why the top of the page read thin against theirs.
+       * Their opening is a centred heading with ONE italic line under it, then
+       * a block of four paragraphs flowed into two columns. The heading and the
+       * italic line are the page header above; this is the four.
+       *
+       * There used to be an extra one-paragraph block between the two, which
+       * said the same thing as the standfirst and gave the page three opening
+       * statements where theirs has two.
        */
       {
         type: "richText",
         id: "story-what-we-are",
         align: "left",
         measure: "content",
+        columns: 2,
+        // The closing aside is `<em>` on theirs, as their standfirst is.
+        italicParagraphs: [3],
         paragraphs: [
           "We are a small shop in Banaras selling handwoven cloth from the looms around it. There is no wholesale arm, no second brand, and nothing bought in to fill a gap on a rail.",
           "Every piece is woven by hand on a pit loom by a weaver we buy from directly, at a price agreed before the warp goes on. We know who made each one and roughly how many weeks it took, and both of those are written on the piece rather than kept for anyone who thinks to ask.",
@@ -1417,6 +1438,8 @@ export const PAGES: Readonly<
         id: "story-closing-image",
         art: imagePair("black", "about/story-closing.jpg"),
         ratio: "15/8",
+        padTop: 20,
+        padBottom: 40,
       },
     ],
   },
@@ -1442,6 +1465,9 @@ export const PAGES: Readonly<
         art: imagePair("black", "about/store-banner.jpg"),
         ratio: "2/1",
         bleed: true,
+        // Theirs: padding-top 0, padding-bottom 30.
+        padTop: 0,
+        padBottom: 30,
       },
       {
         type: "richText",
@@ -1497,6 +1523,9 @@ export const PAGES: Readonly<
         id: "store-closing",
         art: imagePair("maroon", "about/store-closing.jpg"),
         ratio: "4/3",
+        // Theirs: flush both sides, with the map's own padding below it.
+        padTop: 0,
+        padBottom: 0,
         // `section is-width-wide` on theirs — the store page's banners run the
         // full viewport, unlike the about page's.
         bleed: true,
