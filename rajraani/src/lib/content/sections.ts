@@ -1796,6 +1796,15 @@ export const PAGES: Readonly<
         ),
         ratio: "3/2",
         mobileRatio: "4/5",
+        /*
+         * Full width, not boxed to 1200.
+         *
+         * Their contact banner's container carries no `has-limit`, so it runs
+         * the whole viewport — unlike the closing frame on the about page,
+         * which is limited. Same component, different width on the two pages,
+         * and boxing this one made the photograph read a third too small.
+         */
+        bleed: true,
         overlay: {
           title: "Our Banaras store",
           body: "Most of what is hard to settle by email settles in ten minutes with the cloth in your hands.",

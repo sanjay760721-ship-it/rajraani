@@ -1108,7 +1108,17 @@ function MapBand({
     `&z=${section.zoom ?? 16}`;
 
   return (
-    <section aria-label={section.label}>
+    /*
+      * 30px above and below, which is what the reference's map section carries
+      * (`padding-top: 30px; padding-bottom: 30px`). The band above it ends at
+      * `padding-bottom: 0`, so the gap between a photograph and the map is this
+      * rule alone.
+      *
+      * An arbitrary value rather than `section-pad`: the token is 20px and this
+      * is a measured 30. Matching the measurement was the instruction, and a
+      * near-miss here is visible because both blocks run edge to edge.
+      */
+    <section aria-label={section.label} className="py-[30px]">
       {/*
         * `loading="lazy"` matters more here than on an image: the embed pulls
         * a third-party bundle, and this sits at the very bottom of the page.
