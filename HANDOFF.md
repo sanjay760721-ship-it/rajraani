@@ -1494,6 +1494,39 @@ and a page with none is bad for search as well as for screen readers. Second,
 theirs varies (30/40, then 0/40). That one is a real remaining gap, not a
 choice.
 
+### 5.8.7 Campaign and story pages — 13 September 2026
+
+Measured the same way, and the answer is the opposite of the about pages:
+
+**Every section on kala and katha sits on `is-width-wide`.** Hero, rich text,
+bands, banners, closing frame — all of it runs the full viewport. The about
+pages put their bands on `is-width-standard`, which is 1200. Same components,
+same theme, and the width is most of what makes a campaign page read as a
+campaign page rather than as an article.
+
+So `imageWithText` gained `fullWidth`, and the six bands on kala, awadh and
+katha carry it. Their text columns get their own padding — 30px, growing at
+`lg`, because half of 1500px is a long measure for prose with no gutter to
+rein it in.
+
+Their rich text on these pages is `has-columns--1 text-align-center` inside a
+`has-limit` container: centred, single column, 1200 wide. Ours was centred at
+the 680px prose measure, so those six blocks now carry `measure: "content"`.
+
+Verified on katha at 1512px: hero 1497@0, intro 1160 centred, band image
+749@0 with a 589px text column, banner 1497@0, band image 749@749, banner,
+rail, closing text 1160, closing frame 1497@0, and no horizontal overflow.
+
+**The width rule now measured across all three page families:**
+
+| | About / store bands | Campaign bands | Banners |
+|---|---|---|---|
+| Section class | `is-width-standard` | `is-width-wide` | varies per page |
+| Width | 1200 | full | 1200 on about, full on store/contact/campaign |
+
+Check the section class. Do not carry an answer from one page family to another
+— that mistake has now been made in both directions.
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are

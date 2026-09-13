@@ -262,6 +262,14 @@ export type Section =
       /** Which side the art sits on at `md` and up. Stacks image-first below. */
       imageSide: "left" | "right";
       /**
+       * Run the band edge to edge instead of inside the 1200px container.
+       *
+       * Their campaign pages put every section on `is-width-wide`, where the
+       * about pages use `is-width-standard`. Same component, and the width is
+       * the main thing that makes a campaign page read as a campaign page.
+       */
+      fullWidth?: boolean;
+      /**
        * Frame ratio. Square by default, which is what the about pages use.
        *
        * Campaign pages run the same band at 4:5 — a figure in a saree wants
@@ -947,6 +955,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "kala-intro",
+        measure: "content",
         paragraphs: [
           "Banarasi design has never been self-sufficient and has never pretended to be.",
         ],
@@ -955,6 +964,7 @@ export const PAGES: Readonly<
         type: "imageWithText",
         id: "kala-band-01",
         art: imagePair("gold", "campaigns/kala-band-01.webp"),
+        fullWidth: true,
         imageSide: "left",
         ratio: "4/5",
         heading: "What the weavers were looking at",
@@ -979,6 +989,7 @@ export const PAGES: Readonly<
         type: "imageWithText",
         id: "kala-band-02",
         art: imagePair("indigo", "campaigns/kala-band-02.png"),
+        fullWidth: true,
         imageSide: "right",
         ratio: "4/5",
         heading: "The cost of carrying it across",
@@ -1009,6 +1020,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "kala-closing",
+        measure: "content",
         paragraphs: [
           "Nothing on a loom is invented. It is carried across from somewhere that was not woven, and the carrying is the craft.",
         ],
@@ -1046,6 +1058,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "awadh-intro",
+        measure: "content",
         paragraphs: [
           "Banaras ornaments in metal. Its neighbour ornaments in thread. The two have been arguing about it politely for two centuries.",
         ],
@@ -1054,6 +1067,7 @@ export const PAGES: Readonly<
         type: "imageWithText",
         id: "awadh-band-01",
         art: imagePair("gold", "campaigns/awadh-band-01.jpg"),
+        fullWidth: true,
         imageSide: "left",
         ratio: "4/5",
         heading: "Where it came from",
@@ -1073,6 +1087,7 @@ export const PAGES: Readonly<
         type: "imageWithText",
         id: "awadh-band-02",
         art: imagePair("indigo", "campaigns/awadh-band-03.webp"),
+        fullWidth: true,
         imageSide: "right",
         ratio: "4/5",
         heading: "What changed on the loom",
@@ -1091,6 +1106,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "awadh-closing",
+        measure: "content",
         paragraphs: [
           "Half the skill is deciding what not to weave, and the other half is holding your nerve once you have.",
         ],
@@ -1129,6 +1145,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "katha-intro",
+        measure: "content",
         paragraphs: [
           "A hunting field full of animals is the oldest narrative device on this loom, and the least honest one: it shows a scene without ever saying what happens next.",
         ],
@@ -1137,6 +1154,7 @@ export const PAGES: Readonly<
         type: "imageWithText",
         id: "katha-band-01",
         art: imagePair("maroon", "campaigns/katha-band-01.jpg"),
+        fullWidth: true,
         imageSide: "left",
         ratio: "4/5",
         heading: "The constraint",
@@ -1161,6 +1179,7 @@ export const PAGES: Readonly<
         type: "imageWithText",
         id: "katha-band-02",
         art: imagePair("gold", "campaigns/katha-band-02.jpg"),
+        fullWidth: true,
         imageSide: "right",
         ratio: "4/5",
         heading: "How the weavers solved it",
@@ -1191,6 +1210,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "katha-closing",
+        measure: "content",
         paragraphs: [
           "Nobody reads a saree left to right. They read the part that happens to be facing them, and a weaver who forgets that is writing for an audience of one — themselves, at the loom.",
         ],

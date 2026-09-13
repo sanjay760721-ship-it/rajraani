@@ -728,8 +728,14 @@ function ImageWithText({
      * closing `fullBleedImage` is the section that is meant to break the
      * container, and it is the only one that does.
      */
-    <section className="wrap section-pad">
-      <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+    <section className={section.fullWidth ? "" : "wrap section-pad"}>
+      <div
+        className={
+          section.fullWidth
+            ? "grid items-center md:grid-cols-2"
+            : "grid items-center gap-10 md:grid-cols-2 md:gap-16"
+        }
+      >
         <div className={imageLeft ? "md:order-1" : "md:order-2"}>
           <Art
             art={section.art}
@@ -738,7 +744,17 @@ function ImageWithText({
           />
         </div>
 
-        <div className={imageLeft ? "md:order-2" : "md:order-1"}>
+        <div
+          className={`${imageLeft ? "md:order-2" : "md:order-1"}${
+            /*
+             * A full-width band has no container gutter, so the prose would
+             * otherwise start at the viewport edge. 30px is their
+             * `.image-with-text__text-column` padding; the wide version gets
+             * more, because at half of 1500px the measure needs reining in.
+             */
+            section.fullWidth ? " p-[30px] md:px-12 lg:px-20" : ""
+          }`}
+        >
           {section.eyebrow ? (
             <p className="eyebrow text-ink-muted">{section.eyebrow}</p>
           ) : null}
