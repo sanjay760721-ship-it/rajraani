@@ -1408,6 +1408,23 @@ warned: a wrong `aspect-` class is a silent crop, not an error.
 Both ends are authored now (`ratio` and `mobileRatio`) and all 17 bands were set from the
 files measured on disk rather than from what the band "should" be. **Measure the file.**
 
+**Two more measurements off their contact page.** Its banner container carries no
+`has-limit`, so it runs the full viewport — the same component is width-limited on the
+about page, which is why one is `bleed` and the other is not. And the spacing around the
+map is theirs exactly: the band above ends at `padding-bottom: 0`, the map section carries
+`padding-top: 30px; padding-bottom: 30px`, and their footer sits flush after it.
+
+**`body:has([data-ends-full-bleed]) footer { margin-top: 0 }`** in globals.css is how that
+last part works. The footer's `mt-24` is right for a page ending in text and wrong for one
+ending edge to edge, so the editorial template sets `data-ends-full-bleed` on its
+`<article>` when the last section is a bleed band or a map. Opt-in, and it leaves pages
+like our-story and faqs — which end contained — untouched.
+
+Note when measuring spacing in a hidden browser pane: `ScrollReveal` holds a
+`translateY(16px)` until IntersectionObserver fires, and it never fires in a tab that is
+not compositing. Gaps read ~16px short. Force the wrapper to its settled state before
+trusting a number.
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are

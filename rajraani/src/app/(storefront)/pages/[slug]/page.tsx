@@ -70,8 +70,20 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
    */
   const opensWithContactPanel = first?.type === "contactPanel";
 
+  /*
+   * Does the page stop at the viewport edge?
+   *
+   * A map or a bleed band as the last section wants the footer flush against
+   * it — see the rule in globals.css. Declared here because the page knows and
+   * the footer does not.
+   */
+  const last = page.sections[page.sections.length - 1];
+  const endsFullBleed =
+    last?.type === "mapBand" ||
+    (last?.type === "imageBand" && last.bleed === true);
+
   return (
-    <article>
+    <article {...(endsFullBleed ? { "data-ends-full-bleed": "" } : {})}>
       {opensWithBanner ? <SectionRenderer section={first} index={0} /> : null}
 
       {opensWithHero || opensWithContactPanel ? null : (

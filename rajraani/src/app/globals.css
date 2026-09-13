@@ -599,3 +599,23 @@
   left: 24px;
 }
 
+
+/* ============================================================================
+   Pages that end edge to edge
+   ============================================================================
+
+   The footer carries `mt-24` — 96px of air above it — which is right for a page
+   whose last block is text or a contained band.
+
+   It is wrong for a page ending in something full-bleed. A map or an
+   edge-to-edge photograph followed by 96px of white reads as a page that
+   stopped early, and the reference puts its footer flush against that last
+   block, with only the block's own 30px bottom padding between them.
+
+   So the page declares it, rather than the footer guessing: the editorial
+   template sets `data-ends-full-bleed` on its <article> when the last section is
+   a bleed band or a map. One rule, opt-in, and it leaves every other page alone.
+   ========================================================================== */
+body:has([data-ends-full-bleed]) footer {
+  margin-top: 0;
+}
