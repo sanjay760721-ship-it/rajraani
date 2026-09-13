@@ -642,7 +642,10 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
      * heading above it and the link below it stayed ranged left — three
      * elements in a column, disagreeing about their own axis.
      */
-    <section className="wrap-prose section-pad text-center" style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}>
+    <section
+      className={`section-pad ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"}`}
+      style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}
+    >
       {section.heading ? <h2 className="text-h3 mb-5">{section.heading}</h2> : null}
       <div className="space-y-5">
         {section.paragraphs.map((paragraph, index) => (

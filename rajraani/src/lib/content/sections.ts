@@ -176,6 +176,24 @@ export type Section =
        */
       ctaLabel?: string;
       ctaHref?: string;
+      /**
+       * Defaults to `center`, which is what the homepage bands use.
+       *
+       * The reference ranges some of these left — the block of four paragraphs
+       * on its about page, the opening of its store page — and centres others.
+       * It is per block, not per page.
+       */
+      align?: "left" | "center";
+      /**
+       * Text measure. `prose` (680px) by default; `content` is the 1200px
+       * container their rich-text blocks actually use.
+       *
+       * NOTE: `content` is a long measure for body copy — around 180 characters
+       * a line at 1200px, well past comfortable. It is here because matching
+       * their page width was asked for explicitly. `prose` is the better
+       * default and stays the default.
+       */
+      measure?: "prose" | "content";
     }
   | {
       type: "pullQuote";
@@ -1323,11 +1341,18 @@ export const PAGES: Readonly<
         id: "story-banner",
         art: imagePair("maroon", "about/story-banner.jpg"),
         ratio: "15/8",
-        bleed: true,
+        /*
+         * NOT bleed. Their about-page banners sit on `section is-width-standard`,
+         * and the base `.section` rule is `max-width: 1200px; width: 95%` — so
+         * both the opening and closing frames are contained. Only the CONTACT
+         * and STORE banners carry `is-width-wide`, which is the one that runs
+         * the full viewport. Same component, three pages, two widths.
+         */
       },
       {
         type: "richText",
         id: "story-opening",
+        measure: "content",
         // No heading. The page header above already carries the h1 and the
         // standfirst; theirs has one title block here and so should this.
         paragraphs: [
@@ -1343,6 +1368,8 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "story-what-we-are",
+        align: "left",
+        measure: "content",
         paragraphs: [
           "We are a small shop in Banaras selling handwoven cloth from the looms around it. There is no wholesale arm, no second brand, and nothing bought in to fill a gap on a rail.",
           "Every piece is woven by hand on a pit loom by a weaver we buy from directly, at a price agreed before the warp goes on. We know who made each one and roughly how many weeks it took, and both of those are written on the piece rather than kept for anyone who thinks to ask.",
@@ -1419,6 +1446,8 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "store-opening",
+        align: "left",
+        measure: "content",
         paragraphs: [
           "The room holds a fraction of what is on this website, and a few things that are not on it at all.",
           "Someone who has handled every piece in it will be with you, and nobody else's job is to close the sale.",
@@ -1450,6 +1479,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "store-closing-line",
+        measure: "content",
         heading: "We took Banaras out to the world. This is the invitation back.",
         paragraphs: [
           "Tell us a date and roughly what you are after, and the pieces will be out before you arrive.",
@@ -1467,6 +1497,9 @@ export const PAGES: Readonly<
         id: "store-closing",
         art: imagePair("maroon", "about/store-closing.jpg"),
         ratio: "4/3",
+        // `section is-width-wide` on theirs — the store page's banners run the
+        // full viewport, unlike the about page's.
+        bleed: true,
         overlay: {
           title: "We would like to see you",
           body: "Write with a date and we will confirm the same day.",

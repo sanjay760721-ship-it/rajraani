@@ -1,6 +1,27 @@
 import { defineArrayMember, defineField, defineType } from "../../lib/define.ts";
 import { ctaFields } from "./artPair.ts";
 
+/*
+ * `richText` gained `align` and `measure` on 13 Sep 2026. The renderer defaults
+ * to centred prose, which is what the homepage bands want; the about and store
+ * pages range some blocks left at the full content width, per the reference.
+ */
+export const richTextLayoutFields = () => [
+  defineField({
+    name: "align",
+    type: "string",
+    description: "Defaults to centre.",
+    options: { list: ["left", "center"] },
+  }),
+  defineField({
+    name: "measure",
+    type: "string",
+    description:
+      "Text measure. 'prose' (680px) by default; 'content' is 1200px, which is a long line for body copy.",
+    options: { list: ["prose", "content"] },
+  }),
+];
+
 /**
  * Section type for the 2-slide editorial slideshow (Womenswear/Menswear).
  * Matches reference's editorial split with slide transition, arrows, secondary buttons.
@@ -586,6 +607,7 @@ export const richTextSection = defineType({
       type: "blockContent",
       validation: (rule) => rule.required(),
     }),
+    ...richTextLayoutFields(),
   ],
   preview: { select: { title: "heading" } },
 });

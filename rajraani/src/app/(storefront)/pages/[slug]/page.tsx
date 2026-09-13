@@ -57,7 +57,15 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
    * that follow it — `scripts/lint-headings.mjs` checks that, and a banner is
    * not a heading.
    */
-  const opensWithBanner = first?.type === "imageBand" && first.bleed === true;
+  /*
+   * Any leading image band is hoisted, bleed or not.
+   *
+   * This used to require `bleed`, which was wrong the moment the about page's
+   * opening banner turned out to be contained: theirs still sits ABOVE the
+   * title. Width and running order are separate decisions and this only cares
+   * about the order.
+   */
+  const opensWithBanner = first?.type === "imageBand";
   const body = opensWithBanner ? page.sections.slice(1) : page.sections;
 
   /*

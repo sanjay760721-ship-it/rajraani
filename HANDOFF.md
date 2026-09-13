@@ -1425,6 +1425,40 @@ Note when measuring spacing in a hidden browser pane: `ScrollReveal` holds a
 not compositing. Gaps read ~16px short. Force the wrapper to its settled state before
 trusting a number.
 
+### 5.8.6 The width rule, and where each page differs — 13 September 2026
+
+The single most useful thing measured in this whole sequence, because three
+earlier passes got it wrong by assuming instead:
+
+    .section                     { max-width: 1200px; width: 95% }   <- the BASE
+    .section.is-width-wide       { width: 100%; max-width: none }
+    .section.is-width-wide .container.has-limit { max-width: 1200px }
+
+So a block is 1200px unless its section carries `is-width-wide`. Reading the
+`.container` classes alone is not enough and led to the wrong answer twice.
+
+Measured per page, and now matched:
+
+| Block | About (our-story) | Store | Contact |
+|---|---|---|---|
+| Opening banner | `is-width-standard` → **1200** | `is-width-wide` → **full** | — |
+| Closing banner | `is-width-standard` → **1200** | `is-width-wide` → **full** | `is-width-wide` → **full** |
+| Image bands | 1200 | 1200 | — |
+| Rich text | 1200, centred then **left** | 1200, **left** then centred | — |
+
+The same component is a different width on different pages. Do not generalise
+from one page to another — check the section class.
+
+`richText` gained `align` and `measure` for this. **`measure: "content"` is a
+1200px line, which is around 180 characters and well past comfortable for body
+copy.** It is used because matching their page was asked for explicitly; `prose`
+remains the default and is the better one. Worth revisiting if readability ever
+beats fidelity.
+
+A leading `imageBand` is now hoisted above the page header whether or not it
+bleeds — the about banner is contained and still sits above the title. Width and
+running order are separate decisions.
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are
