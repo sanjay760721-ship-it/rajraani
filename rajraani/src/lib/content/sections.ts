@@ -199,6 +199,14 @@ export type Section =
        */
       italicParagraphs?: number[];
       /**
+       * Set the block in a campaign's own ink rather than the site's.
+       *
+       * Their campaign rich text is coloured per campaign, the heading is
+       * weight 700 — heavier than anywhere else on the site — and the link
+       * under it goes uppercase. `deep` is Kala's maroon, `brown` Katha's.
+       */
+      tone?: "deep" | "brown";
+      /**
        * Text measure. `prose` (680px) by default; `content` is the 1200px
        * container their rich-text blocks actually use.
        *
@@ -1014,6 +1022,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "kala-intro",
+        tone: "deep",
         measure: "content",
         heading: "What a weaver borrows",
         paragraphs: [
@@ -1103,6 +1112,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "kala-closing",
+        tone: "deep",
         measure: "content",
         heading: "Nothing here is invented",
         paragraphs: [
@@ -1139,6 +1149,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "katha-intro",
+        tone: "brown",
         measure: "content",
         heading: "A story, a telling, an invention",
         paragraphs: [
@@ -1211,6 +1222,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "katha-closing",
+        tone: "brown",
         measure: "content",
         paragraphs: [
           "Nobody reads a saree left to right. They read the part that happens to be facing them, and a weaver who forgets that is writing for an audience of one — themselves, at the loom.",

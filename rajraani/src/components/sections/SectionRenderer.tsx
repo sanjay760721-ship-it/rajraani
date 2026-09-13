@@ -643,7 +643,7 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
      * elements in a column, disagreeing about their own axis.
      */
     <section
-      className={`section-pad ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"}`}
+      className={`section-pad ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"} ${section.tone ? CAMPAIGN_TONE[section.tone] : ""}`}
       style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}
     >
       {section.heading ? <h2 className="text-h3 mb-5">{section.heading}</h2> : null}
@@ -667,7 +667,10 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
       </div>
       {section.ctaLabel && section.ctaHref ? (
         <div className="mt-6">
-          <Link href={section.ctaHref} className="cta-link">
+          <Link
+            href={section.ctaHref}
+            className={section.tone ? "campaign-cta" : "cta-link"}
+          >
             {section.ctaLabel}
           </Link>
         </div>
@@ -859,6 +862,9 @@ function BandArt({
   );
 }
 
+
+/** Campaign rich-text inks; the colours live in globals.css. */
+const CAMPAIGN_TONE = { deep: "campaign-deep", brown: "campaign-brown" } as const;
 
 /** Campaign grounds and caption inks; the colours live in globals.css. */
 const GROUND = { deep: "ground-deep", cream: "ground-cream" } as const;

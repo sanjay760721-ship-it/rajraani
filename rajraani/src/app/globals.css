@@ -675,3 +675,46 @@ body:has([data-ends-full-bleed]) footer {
 .caption-ink-white :where(h1, h2, h3, p) {
   color: inherit;
 }
+
+/* ----------------------------------------------------------------------------
+   Campaign text tone
+
+   Their campaign rich-text blocks are set in the campaign's own ink rather than
+   the site's, with the heading at weight 700 — heavier than anywhere else on
+   the site — and the call to action in uppercase display with a rule under it.
+
+   `:where()` keeps specificity at zero so the colour is a default the block can
+   still override, and the descendant selectors exist for the same reason the
+   grounds need them: a bare `h2 { color: … }` beats an inherited value.
+   -------------------------------------------------------------------------- */
+
+.campaign-deep { color: #510404; }
+.campaign-brown { color: #533e2d; }
+
+.campaign-deep :where(h1, h2, h3, p),
+.campaign-brown :where(h1, h2, h3, p) {
+  color: inherit;
+}
+
+.campaign-deep :where(h1, h2, h3),
+.campaign-brown :where(h1, h2, h3) {
+  font-weight: 700;
+  /*
+   * 25px, measured on their campaign intro block — larger than the site's
+   * `text-h3`, which was rendering these at 20px. Their CLOSING block is 20px,
+   * so that one is 5px over; not worth a field of its own, but it is a known
+   * difference rather than an oversight.
+   */
+  font-size: 25px;
+  line-height: 1.2;
+}
+
+/* The collection link: uppercase display, tracked, ruled under. */
+.campaign-cta {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+  color: inherit;
+}
