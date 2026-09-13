@@ -252,8 +252,22 @@ export type Section =
       type: "imageBand";
       id: string;
       art: ArtPair;
-      /** Ratio of the frame. Defaults to the 15:8 a closing image wants. */
-      ratio?: "15/8" | "2/1" | "4/3";
+      /**
+       * Ratio of the desktop frame. Defaults to the 15:8 a closing image wants.
+       *
+       * SET THIS FROM THE FILE, not from what the band "should" be. A 2:1 class
+       * on a 3:2 photograph does not letterbox it, it crops a third of the
+       * picture away and nothing warns you.
+       */
+      ratio?: "15/8" | "2/1" | "7/5" | "3/2" | "4/3" | "1/1";
+      /**
+       * Ratio of the phone frame. Defaults to 3:2.
+       *
+       * Needed because the art-directed phone crops are PORTRAIT — 900x1350 and
+       * 1080x1350 — and the default landscape frame squashed every one of them.
+       * Set it wherever `art.mobile` carries its own file.
+       */
+      mobileRatio?: "3/2" | "2/3" | "4/5" | "1/1";
       /**
        * Break the container and run edge to edge, with no padding above it.
        *
@@ -352,6 +366,14 @@ export type Section =
       routes: {
         text: string;
         email?: string;
+        /**
+         * Sentence continuing AFTER the address.
+         *
+         * "…write to us on x@y. We will respond as promptly as we can." The
+         * address sits mid-sentence rather than terminating it, and splitting
+         * that into two paragraphs changes how the line reads.
+         */
+        tail?: string;
         linkLabel?: string;
         linkHref?: string;
       }[];
@@ -900,6 +922,7 @@ export const PAGES: Readonly<
           "campaigns/kala-banner-01-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
       {
@@ -923,6 +946,7 @@ export const PAGES: Readonly<
           "campaigns/kala-banner-02-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
       {
@@ -943,7 +967,7 @@ export const PAGES: Readonly<
         type: "imageBand",
         id: "kala-closing-image",
         art: imagePair("black", "campaigns/kala-closing.jpg"),
-        ratio: "15/8",
+        ratio: "7/5",
         bleed: true,
       },
     ],
@@ -992,7 +1016,7 @@ export const PAGES: Readonly<
         type: "imageBand",
         id: "awadh-banner-01",
         art: imagePair("green", "campaigns/awadh-band-02.webp"),
-        ratio: "2/1",
+        ratio: "1/1",
         bleed: true,
       },
       {
@@ -1030,6 +1054,7 @@ export const PAGES: Readonly<
           "campaigns/awadh-closing-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
     ],
@@ -1079,6 +1104,7 @@ export const PAGES: Readonly<
           "campaigns/katha-banner-01-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
       {
@@ -1102,6 +1128,7 @@ export const PAGES: Readonly<
           "campaigns/katha-banner-02-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
       {
@@ -1122,7 +1149,7 @@ export const PAGES: Readonly<
         type: "imageBand",
         id: "katha-closing-image",
         art: imagePair("maroon", "campaigns/katha-closing.jpg"),
-        ratio: "15/8",
+        ratio: "7/5",
         bleed: true,
       },
     ],
@@ -1167,6 +1194,7 @@ export const PAGES: Readonly<
           "craft/craft-hero-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
       {
@@ -1213,6 +1241,7 @@ export const PAGES: Readonly<
           "craft/craft-banner-02-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
       {
@@ -1258,6 +1287,7 @@ export const PAGES: Readonly<
           "craft/craft-closing-mob.jpg",
         ),
         ratio: "2/1",
+        mobileRatio: "2/3",
         bleed: true,
       },
     ],
@@ -1687,59 +1717,72 @@ export const PAGES: Readonly<
     standfirst:
       "A small team in Banaras. You will get a person, and usually the same one throughout.",
     sections: [
+      /*
+       * COPY MATCHED TO THE REFERENCE, 13 Sep 2026, at the owner's explicit
+       * instruction — and narrowly.
+       *
+       * What is matched is this page's transactional boilerplate: which address
+       * takes which kind of enquiry, "Visit Us", the form's invitation and its
+       * button. Those sentences are close to the minimum way of saying the
+       * thing and read the same on a thousand shops.
+       *
+       * What is NOT matched, here or anywhere: the campaign stories, the About
+       * narrative and the brand statement. Those are the house's voice and stay
+       * ours. HANDOFF §2.48 records a 22 Aug sweep that pulled a store-booking
+       * line out of this build as borrowed copy — this reverses that decision
+       * for this page only, deliberately, so nobody "fixes" it back as a
+       * regression without knowing it was a call somebody made.
+       *
+       * Their name, addresses, phone numbers and second store are NOT here.
+       */
       {
         type: "contactPanel",
         id: "contact-panel",
         heading: "Contact us",
         routes: [
           {
-            text: "For orders, deliveries, returns and repairs — anything about a piece you have bought or are about to — write to us at",
+            text: "For all order related queries or assistance, please write to us on",
+            email: BRAND.supportEmail,
+            tail: "We will try to respond as promptly as we can.",
+          },
+          {
+            text: "For all press and media related queries, creative or artistic collaborations, you can get in touch with us on",
             email: BRAND.supportEmail,
           },
           {
-            text: "For press, media and anything about the craft rather than the shop, write to us at",
+            text: "For any business associations or stocking enquiries, please write to us on",
             email: BRAND.supportEmail,
           },
           {
-            text: "For stockists, wholesale and collaborations, write to us at",
+            // Theirs links to a careers page. This build has none, so the
+            // enquiry goes to an address rather than to a 404.
+            text: "If you would like to work with us, please write to us on",
             email: BRAND.supportEmail,
-          },
-          {
-            text: "If you would like to work with us, we are small and hire rarely, but we read everything sent to",
-            email: BRAND.supportEmail,
-          },
-          {
-            text: "If you are deciding between pieces and would rather see them in daylight first,",
-            linkLabel: "visit our Banaras store",
-            linkHref: "/pages/banaras-store",
           },
         ],
-        socialIntro: "You can also find us and write to us here:",
+        socialIntro: "You can also find us and reach out to us on:",
         socials: [
           { label: "Facebook", href: "https://www.facebook.com/" },
           { label: "Instagram", href: "https://www.instagram.com/" },
           { label: "Pinterest", href: "https://www.pinterest.com/" },
         ],
-        visitHeading: "Visit us",
+        visitHeading: "Visit Us",
         stores: [
           {
-            name: "Banaras",
-            detail: `By appointment, one visit at a time. Call or message ${BRAND.supportPhone} (WhatsApp on the same number), or write to ${BRAND.supportEmail}. Open 11am to 8pm, India time.`,
-            address:
-              `${BRAND.name}, Ground Floor, Rathyatra – Mahmoorganj Road, Varanasi, Uttar Pradesh`,
+            name: `${BRAND.name} Banaras Flagship`,
+            detail: `If you would like to visit our store in Banaras, please call us on: ${BRAND.supportPhone} (inc. whatsapp) or email us on ${BRAND.supportEmail} for an appointment. Hours: 11 am - 8 pm (India Time)`,
+            address: "Rathyatra - Mahmoorganj Road, Varanasi, Uttar Pradesh",
           },
         ],
         form: {
           intro:
-            "Or leave a message here and we will come back to you — usually the same day, and always by a person.",
-          submitLabel: "Send",
+            "Please leave your message here and we will get back to you promptly.",
+          submitLabel: "Submit",
         },
       },
       /*
-       * Their contact page closes on a store band, and so does this one.
-       */
-      /*
-       * An OVERLAY banner, not a side-by-side band — measured on their contact
+       * Their contact page closes on a store band, and so does this one — an
+       * OVERLAY banner, not a side-by-side band — measured on their contact
        * page, which closes on a full-width frame with the text over it and a
        * booking button. It ships a portrait crop for phones; this does too.
        */
@@ -1751,7 +1794,8 @@ export const PAGES: Readonly<
           "about/contact-band.jpg",
           "about/contact-portrait.jpg",
         ),
-        ratio: "2/1",
+        ratio: "3/2",
+        mobileRatio: "4/5",
         overlay: {
           title: "Our Banaras store",
           body: "Most of what is hard to settle by email settles in ten minutes with the cloth in your hands.",

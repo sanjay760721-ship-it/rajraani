@@ -671,8 +671,16 @@ export const imageBandSection = defineType({
     defineField({
       name: "ratio",
       type: "string",
-      description: "Frame ratio on desktop. Defaults to 15:8.",
-      options: { list: ["15/8", "2/1", "4/3"] },
+      description:
+        "Desktop frame ratio. Set it from the FILE — a 2:1 class on a 3:2 photograph crops a third of it away silently.",
+      options: { list: ["15/8", "2/1", "7/5", "3/2", "4/3", "1/1"] },
+    }),
+    defineField({
+      name: "mobileRatio",
+      type: "string",
+      description:
+        "Phone frame ratio, defaulting to 3:2. Set it wherever the art pair carries a separate portrait phone crop.",
+      options: { list: ["3/2", "2/3", "4/5", "1/1"] },
     }),
     defineField({
       name: "caption",
@@ -858,6 +866,12 @@ export const contactPanelSection = defineType({
               validation: (rule) => rule.required(),
             }),
             defineField({ name: "email", type: "string" }),
+            defineField({
+              name: "tail",
+              type: "string",
+              description:
+                "Optional. Sentence continuing after the address, which sits mid-sentence.",
+            }),
             defineField({ name: "linkLabel", type: "string" }),
             defineField({ name: "linkHref", type: "string" }),
           ],

@@ -750,7 +750,17 @@ function ImageWithText({
 const IMAGE_BAND_RATIO = {
   "15/8": "md:aspect-[15/8]",
   "2/1": "md:aspect-[2/1]",
+  "7/5": "md:aspect-[7/5]",
+  "3/2": "md:aspect-[3/2]",
   "4/3": "md:aspect-[4/3]",
+  "1/1": "md:aspect-square",
+} as const;
+
+const IMAGE_BAND_MOBILE_RATIO = {
+  "3/2": "aspect-[3/2]",
+  "2/3": "aspect-[2/3]",
+  "4/5": "aspect-[4/5]",
+  "1/1": "aspect-square",
 } as const;
 
 function ImageBand({
@@ -761,14 +771,18 @@ function ImageBand({
   return (
     <section className={section.bleed ? "" : "wrap section-pad"}>
       {/*
-        * 3:2 on a phone whatever the desktop ratio is. A 15:8 frame at 375
-        * wide is 200px tall, which is not a photograph so much as a rule with
-        * a picture in it.
+        * The phone frame carries its own ratio, not the desktop one.
+        *
+        * A 15:8 band at 375 wide is 200px tall — a rule with a picture in it
+        * rather than a photograph — so this was pinned to 3:2. That silently
+        * forced landscape onto every art-directed PORTRAIT phone crop we ship
+        * (900x1350, 1080x1350), which is the opposite of what art direction is
+        * for. Both ends are authored now.
         */}
       <div className="relative">
         <Art
           art={section.art}
-          className={`aspect-[3/2] w-full ${IMAGE_BAND_RATIO[section.ratio ?? "15/8"]}`}
+          className={`w-full ${IMAGE_BAND_MOBILE_RATIO[section.mobileRatio ?? "3/2"]} ${IMAGE_BAND_RATIO[section.ratio ?? "15/8"]}`}
           alt={section.caption ?? section.overlay?.title ?? ""}
         />
         {section.overlay ? (
@@ -937,6 +951,7 @@ function ContactPanel({
                       {route.linkLabel}
                     </Link>
                   ) : null}
+                  {route.tail ? <>. {route.tail}</> : null}
                   {/*
                     * The "you can also find us" line belongs to the first
                     * paragraph, not to a new one — it introduces the list that

@@ -1383,6 +1383,31 @@ What it found and what was fixed:
 
 The library is now 25 implemented section types.
 
+### 5.8.5 Contact page copy, and the banner ratios — 13 September 2026
+
+**A deliberate, narrow reversal of the §2.48 originality position, made by the owner.**
+The contact page's transactional copy is now matched to the reference: which address
+takes which kind of enquiry, "Visit Us", the form's invitation, the "Submit" label. Those
+sentences are close to the minimum way of saying the thing and read the same on a
+thousand shops. §2.48 records a 22 Aug sweep that pulled a store-booking line out of this
+build as borrowed copy; this reverses that **for this page only**, on instruction, and it
+is written down here so nobody removes it later as a regression without knowing it was a
+call somebody made.
+
+**Still ours, and not up for matching:** the campaign stories, the About narrative and
+the brand statement. Those are the house's voice. Their name, real addresses, phone
+numbers and second store are not in the build.
+
+**The banner ratio bug, worth understanding before adding any band.** `imageBand` pinned
+the phone frame to `aspect-[3/2]` regardless of the desktop ratio. Every art-directed
+PORTRAIT phone crop in the build — 900x1350 and 1080x1350, the whole reason `ArtPair`
+exists — was being forced into a landscape box and squashed. The contact banner was also
+authored at 2:1 against a 3:2 file, cropping a third of the photograph away. Nothing
+warned: a wrong `aspect-` class is a silent crop, not an error.
+
+Both ends are authored now (`ratio` and `mobileRatio`) and all 17 bands were set from the
+files measured on disk rather than from what the band "should" be. **Measure the file.**
+
 ### 5.9 The remaining admin editors
 
 The content seam landed 10 September (§2.52) and the homepage editor is real. These are
