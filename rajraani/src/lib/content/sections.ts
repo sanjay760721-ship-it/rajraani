@@ -236,6 +236,30 @@ export type Section =
        * default and stays the default.
        */
       measure?: "prose" | "content";
+      /**
+       * Vertical padding in px at a 1905px-wide window, overriding the
+       * default prose padding. Scales down with the viewport (never below
+       * 20px) — see `fluidPad` in SectionRenderer.
+       *
+       * Set per block because the reference's gaps are per block: the room a
+       * text block needs depends on what is next to it. The Kala and Katha
+       * opening banners carry a white strip in the image file itself, so the
+       * block under them wants 20px, not the full prose padding.
+       */
+      padTop?: number;
+      padBottom?: number;
+    }
+  | {
+      /** A size chart: figure with measuring points beside a table. */
+      type: "sizeChart";
+      id: string;
+      title: string;
+      figure: "women" | "men";
+      /** The how-to-measure notes, in the order the points run down the body. */
+      measures: { label: string; point: string; note: string }[];
+      sizes: string[];
+      /** One row per measurement; `inches[i]` and `cm[i]` belong to `sizes[i]`. */
+      rows: { label: string; inches: number[]; cm: number[] }[];
     }
   | {
       type: "pullQuote";
@@ -319,6 +343,13 @@ export type Section =
        * off the bottom.
        */
       ratio?: "1/1" | "4/5";
+      /**
+       * A 20px margin of the ground colour above and below the photograph.
+       *
+       * Only meaningful with `ground`. The first band on a campaign page
+       * carries one and the later bands run flush, so it is per band.
+       */
+      inset?: boolean;
       /** Both fields or neither — see the note on `richText`. */
       ctaLabel?: string;
       ctaHref?: string;
@@ -335,14 +366,19 @@ export type Section =
       id: string;
       art: ArtPair;
       /**
+       * Where the photograph goes when clicked. Optional: without it the band
+       * uses its caption's button, then the page's default in `PAGE_IMAGE_HREF`.
+       */
+      href?: string;
+      /**
        * Vertical padding, in the reference's own steps.
        *
        * Theirs varies per band and the variation is not decorative: the about
        * page's opening banner is flush (0/0) while its closing frame is 20/40,
        * which is what stops the page ending on a hard edge.
        */
-      padTop?: 0 | 20 | 25 | 30;
-      padBottom?: 0 | 20 | 30 | 40;
+      padTop?: 0 | 20 | 25 | 30 | 40 | 60 | 100;
+      padBottom?: 0 | 20 | 30 | 40 | 60;
       /**
        * Ratio of the desktop frame. Defaults to the 15:8 a closing image wants.
        *
@@ -401,6 +437,12 @@ export type Section =
         panel?: "solid" | "none";
         /** Caption colour when there is no panel to sit on. */
         ink?: "cream" | "deep" | "white";
+        /**
+         * Where the caption sits on a phone, where the frame is a different
+         * crop. Middle by default; `top` for a phone crop whose subject fills
+         * the middle and leaves clear ground above it.
+         */
+        mobileAlign?: "top" | "middle";
         /**
          * How the caption's own text sits, which is NOT the same as where the
          * panel sits.
@@ -703,18 +745,25 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
         title: "Womenswear",
         body: "Sarees, dupattas and stitched pieces, all off the same looms.",
         ctaLabel: "Explore",
-        ctaHref: "/collections/womenswear",
+        // Every piece in the catalogue is womenswear, so this is all of it.
+        ctaHref: "/collections/all",
         buttonVariant: "secondary",
         textAlign: "right",
       },
       {
         id: "slide-menswear",
         art: imagePair("black", "womens-mens/menswear.webp"),
-        eyebrow: "Menswear",
-        title: "Menswear",
-        body: "Kurtas, stoles and cloth by the metre, cut from handloom.",
+        /*
+         * There is no menswear in the catalogue, and /collections/menswear was
+         * a dead link. The frame is a man in a woven stole, and stoles are the
+         * one thing here that anyone wears — so that is where it goes, and the
+         * words say so rather than promising kurtas we do not sell.
+         */
+        eyebrow: "For him",
+        title: "Stoles",
+        body: "Handwoven stoles that sit as well over a kurta as over a saree.",
         ctaLabel: "Explore",
-        ctaHref: "/collections/menswear",
+        ctaHref: "/collections/stoles",
         buttonVariant: "secondary",
         textAlign: "right",
         verticalAlign: "center",
@@ -830,6 +879,37 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
  * The admin lists pages by kind, so that is a real misfiling, not a cosmetic
  * one.
  */
+/**
+ * Where a photograph on each editorial page goes when it has no link of its own.
+ *
+ * Every image on the site is clickable (asked for 24 Sep 2026), and the logical
+ * destination for a picture on a story page is almost always the thing the
+ * page is about — so a band that sets no `href` falls back to this. Keyed by
+ * slug rather than stored on the page, so pages edited in the admin keep it.
+ *
+ * A page with no photographs has no entry. Never point a page at itself.
+ */
+export const PAGE_IMAGE_HREF: Readonly<Record<string, string>> = {
+  nadi: "/collections/nadi",
+  antaraal: "/collections/antaraal",
+  kadhua: "/collections/kadhua",
+  handloom: "/collections/sarees",
+  kala: "/collections/kala",
+  katha: "/collections/katha",
+  awadh: "/collections/awadh",
+  // No metal in the catalogue yet: the page's own call is to ask what is in.
+  "art-collectibles": "/pages/contact",
+  // The pictures are of the looms and the people at them.
+  "our-story": "/pages/handloom",
+  // Pictures of the room; the logical next step is booking a visit to it.
+  "banaras-store":
+    "https://calendly.com/rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi",
+  contact: "/pages/banaras-store",
+  gifts: "/collections/gifts",
+  bridal: "/collections/bridal",
+  zarkashi: "/collections/zarkashi",
+};
+
 export const PAGES: Readonly<
   Record<
     string,
@@ -1064,6 +1144,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "kala-intro",
+        padTop: 20,
         asPageTitle: true,
         tone: "deep",
         measure: "content",
@@ -1082,6 +1163,7 @@ export const PAGES: Readonly<
         ratio: "4/5",
         fullWidth: true,
         ground: "deep",
+        inset: true,
         href: "/collections/kala",
         paragraphs: [
           "We asked four weavers what they had in front of them when they set the last piece they were proud of. None of them said a saree. One said a brass tray his father had beaten, one said the tilework on a gate he passes twice a day, and two said a photograph on a phone.",
@@ -1194,6 +1276,7 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "katha-intro",
+        padTop: 20,
         asPageTitle: true,
         tone: "brown",
         measure: "content",
@@ -1403,6 +1486,10 @@ export const PAGES: Readonly<
    *
    * Photography is theirs, staged in the gitignored `/public/homepage/craft/`.
    * Local mockup only; see HANDOFF §5.8.1.
+   *
+   * The `padTop`/`padBottom` values below were measured off their page at a
+   * 1905px window on 23 Sep 2026, on request, as placeholders to be revised:
+   * banners flush, 60/20 round the opening text, and so on.
    */
   "art-collectibles": {
     kind: "craft",
@@ -1413,6 +1500,8 @@ export const PAGES: Readonly<
       {
         type: "imageBand",
         id: "craft-hero",
+        padTop: 0,
+        padBottom: 0,
         art: imagePair(
           "gold",
           "craft/craft-hero.jpg",
@@ -1425,6 +1514,8 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "craft-opening",
+        padTop: 60,
+        padBottom: 20,
         measure: "content",
         /*
          * Their opening block is a 30px uppercase centred heading, a centred
@@ -1450,6 +1541,8 @@ export const PAGES: Readonly<
       {
         type: "imageBand",
         id: "craft-banner-01",
+        padTop: 0,
+        padBottom: 0,
         art: imagePair("black", "craft/craft-banner-01.jpg"),
         ratio: "2/1",
         bleed: true,
@@ -1457,6 +1550,8 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "craft-what",
+        padTop: 20,
+        padBottom: 70,
         measure: "content",
         heading: "What repoussé is",
         paragraphs: [
@@ -1487,6 +1582,8 @@ export const PAGES: Readonly<
       {
         type: "imageBand",
         id: "craft-banner-02",
+        padTop: 100,
+        padBottom: 40,
         art: imagePair(
           "gold",
           "craft/craft-banner-02.jpg",
@@ -1526,6 +1623,8 @@ export const PAGES: Readonly<
       {
         type: "richText",
         id: "craft-availability",
+        padTop: 40,
+        padBottom: 80,
         measure: "content",
         heading: "Buying one",
         paragraphs: [
@@ -1537,6 +1636,7 @@ export const PAGES: Readonly<
       {
         type: "imageBand",
         id: "craft-closing-image",
+        padTop: 0,
         art: imagePair(
           "black",
           "craft/craft-closing.jpg",
@@ -2045,11 +2145,9 @@ export const PAGES: Readonly<
           },
         ],
         socialIntro: "You can also find us and reach out to us on:",
-        socials: [
-          { label: "Facebook", href: "https://www.facebook.com/" },
-          { label: "Instagram", href: "https://www.instagram.com/" },
-          { label: "Pinterest", href: "https://www.pinterest.com/" },
-        ],
+        // BRAND.socials is the one list; empty until the real accounts exist,
+        // and the panel hides the line and the links while it is.
+        socials: [...BRAND.socials],
         visitHeading: "Visit Us",
         stores: [
           {
@@ -2323,42 +2421,53 @@ export const PAGES: Readonly<
     ],
   },
 
+  /*
+   * The size chart, laid out as the reference's /pages/size-chart is (asked for
+   * 24 Sep 2026): the page title and two charts, women then men, nothing else.
+   * The measurements are theirs — a size chart is a table of standard body
+   * measurements — but set as text rather than their images, with our own
+   * figures. The standfirst is empty because theirs shows only the title.
+   */
   "size-guide": {
     kind: "craft",
-    title: "Size Guide",
-    standfirst:
-      "Measurements for the cloth, and how a stitched piece is cut to you.",
+    title: "Size Chart",
+    standfirst: "",
     sections: [
       {
-        type: "richText",
-        id: "size-saree",
-        align: "left",
-        heading: "Sarees",
-        paragraphs: [
-          "A saree here is between 5.5 and 6.3 metres long, with the exact length on each product page, and around 46 inches wide. Where a blouse length is included it is roughly a metre and is stated separately.",
-          "Length varies by weave rather than by size — a heavier ground is woven shorter — so the figure on the page is the one to trust, not an average.",
+        type: "sizeChart",
+        id: "size-women",
+        title: "Size Guide – Women",
+        figure: "women",
+        measures: [
+          { label: "Bust", point: "BUST AROUND", note: "Measure around the fullest part of your bust" },
+          { label: "Waist", point: "WAIST AROUND", note: "Measure the narrowest part of your natural waist" },
+          { label: "Hip", point: "HIP AROUND", note: "Measure around the fullest part of your hip" },
+        ],
+        sizes: ["XXS", "XS", "S", "M", "L", "XL"],
+        rows: [
+          { label: "Bust", inches: [32, 34, 36, 38, 40, 42], cm: [82, 86, 92, 96, 100, 107] },
+          { label: "Waist", inches: [26, 28, 30, 32, 34, 36], cm: [67, 71, 76, 82, 86, 92] },
+          { label: "Hips", inches: [36, 38, 40, 42, 44, 46], cm: [92, 96, 100, 107, 112, 117] },
         ],
       },
       {
-        type: "richText",
-        id: "size-suits",
-        align: "left",
-        heading: "Suits and stitched pieces",
-        paragraphs: [
-          "Most are made to your measurements rather than to a size. After ordering we ask for bust, waist, hip, shoulder, sleeve length and the finished length you want, and our tailor in Banaras works to those.",
-          "If you would rather send a garment that already fits, post it and we will copy it. That is usually more accurate than a tape measure used once.",
+        type: "sizeChart",
+        id: "size-men",
+        title: "Size Guide – Men",
+        figure: "men",
+        measures: [
+          { label: "Chest", point: "CHEST AROUND", note: "Measure around the fullest part of your chest" },
+          { label: "Waist", point: "WAIST AROUND", note: "Measure the narrowest part of your natural waist" },
+          { label: "Lower waist", point: "LOWER WAIST", note: "Measure where your trousers sit, below the natural waist" },
+          { label: "Hip", point: "HIP AROUND", note: "Measure around the fullest part of your hip" },
         ],
-      },
-      {
-        type: "richText",
-        id: "size-help",
-        align: "left",
-        heading: "If you are unsure",
-        paragraphs: [
-          "Write to us with what you have. Somebody who has handled the piece will answer, and a five-minute exchange beforehand is worth more than a return afterwards — particularly on a piece cut to measure, which cannot come back.",
+        sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+        rows: [
+          { label: "Chest", inches: [36, 38, 40, 42, 44, 46], cm: [92, 96, 100, 107, 112, 117] },
+          { label: "Natural waist", inches: [34, 36, 38, 40, 42, 44], cm: [86, 92, 96, 100, 107, 112] },
+          { label: "Hips", inches: [36, 38, 40, 42, 44, 46], cm: [92, 96, 100, 107, 112, 117] },
+          { label: "Lower waist", inches: [32, 34, 36, 38, 40, 42], cm: [81, 86, 92, 96, 100, 107] },
         ],
-        ctaLabel: "Write to us",
-        ctaHref: "/pages/contact",
       },
     ],
   },
@@ -2476,10 +2585,17 @@ export const PAGES: Readonly<
         overlay: {
           title: "The joy of giving",
           body: "Something that outlasts the occasion it was bought for.",
-          align: "center",
+          /*
+           * Right, in dark ink, and at the top on a phone. Centred white type
+           * landed on the box lid and the pale grey backdrop and was barely
+           * legible on either; the right half of the desktop frame and the top
+           * of the phone crop are clear grey, which dark ink reads on.
+           */
+          align: "right",
           textAlign: "center",
           panel: "none",
-          ink: "white",
+          ink: "deep",
+          mobileAlign: "top",
         },
       },
     ],
@@ -2492,11 +2608,22 @@ export const PAGES: Readonly<
       "The heavy end of the catalogue, and the longest wait.",
     sections: [
       {
+        /*
+         * Amrita, the red organza odhani, as the opening frame. The files are
+         * crops of the product's own 2:3 shots, cut in `public/homepage/`
+         * (gitignored) so the face sits in a 9:8 desktop frame and a 4:5 phone
+         * frame without an object-position hack. Both crops stop short of the
+         * watermark in the bottom corner of the originals.
+         */
         type: "imageBand",
         id: "bridal-hero",
-        art: imagePair("maroon", "featured/bridal-01.jpg"),
+        art: imagePair(
+          "red",
+          "featured/bridal-amrita-hero.jpg",
+          "featured/bridal-amrita-hero-mob.jpg",
+        ),
         ratio: "9/8",
-        mobileRatio: "2/3",
+        mobileRatio: "4/5",
         bleed: true,
         padTop: 0,
         padBottom: 0,
@@ -2516,6 +2643,24 @@ export const PAGES: Readonly<
       },
       {
         type: "imageWithText",
+        id: "bridal-amrita",
+        art: imagePair("red", "featured/bridal-amrita-detail.jpg"),
+        imageSide: "left",
+        ratio: "4/5",
+        fullWidth: true,
+        ground: "deep",
+        inset: true,
+        href: "/products/amrita-red-embroidered-bridal-odhani",
+        heading: "Amrita",
+        paragraphs: [
+          "The veil is the piece every photograph of the day is taken through, and the one nobody looks at closely. This one is silk organza, embroidered by hand from the border inwards, so the weight gathers at the edge and the cloth falls straight instead of lifting in the first breeze.",
+          "Five people, fourteen weeks. Cut to go over the head rather than across the shoulder, which is a different length and a different drape — tell us which you mean before we start.",
+        ],
+        ctaLabel: "See Amrita",
+        ctaHref: "/products/amrita-red-embroidered-bridal-odhani",
+      },
+      {
+        type: "imageWithText",
         id: "bridal-band",
         art: imagePair("red", "featured/bridal-02.jpg"),
         imageSide: "right",
@@ -2527,6 +2672,13 @@ export const PAGES: Readonly<
         ],
       },
       {
+        type: "productRail",
+        id: "bridal-rail",
+        title: "The bridal pieces",
+        collectionHandle: "bridal",
+        ctaLabel: "See all",
+      },
+      {
         type: "richText",
         id: "bridal-fittings",
         measure: "content",
@@ -2535,6 +2687,16 @@ export const PAGES: Readonly<
         ],
         ctaLabel: "Arrange a visit",
         ctaHref: "/pages/banaras-store",
+      },
+      {
+        type: "imageBand",
+        id: "bridal-closing",
+        art: imagePair("maroon", "featured/bridal-01.jpg"),
+        ratio: "9/8",
+        mobileRatio: "2/3",
+        bleed: true,
+        padTop: 0,
+        padBottom: 0,
       },
     ],
   },

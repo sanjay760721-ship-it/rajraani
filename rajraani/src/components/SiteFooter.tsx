@@ -6,75 +6,50 @@ import { BRAND } from "@/lib/brand";
 /**
  * Footer.
  *
- * Four regions, on the sand surface, per design.md §5.7:
- * 1. Talk To Us
- * 2. Useful Information
- * 3. About
- * 4. Stay in Touch
+ * Laid out on the reference's footer (measured on request, 24 Sep 2026): a
+ * full-width light grey band with a white hairline above and below, holding
+ * three equal columns inside the 1200px container, and the copyright line
+ * underneath it on the page ground.
  *
- * The italic support hours are a small warmth cue the category gets right.
- * Social icons: 1px stroke outline, 20px.
+ *   1. Talk To Us — email, phone, WhatsApp, italic support hours, then the
+ *      four policies under their own heading in the same column.
+ *   2. About — the brand's own pages, with the social icons under the list.
+ *   3. Stay in touch — one line, then the email field and button side by side.
+ *
+ * Headings are the display serif at 18px; everything else the UI face at
+ * 13px, all in body ink. The words and destinations are ours: every link here
+ * goes to a page that exists — theirs lists a Mumbai store, press, careers and
+ * gift cards, none of which this business has.
  */
 
-type FooterLink = {
-  label: string;
-  href: string;
-  isText?: boolean;
-};
+type FooterLink = { label: string; href: string };
 
-type FooterColumn = {
-  heading: string;
-  links: FooterLink[];
-};
+const POLICY_LINKS: readonly FooterLink[] = [
+  { label: "Returns & Cancellation", href: "/pages/returns" },
+  { label: "Delivery & Shipping", href: "/pages/shipping" },
+  { label: "Privacy Policy", href: "/pages/privacy" },
+  { label: "Terms & Conditions", href: "/pages/terms" },
+];
 
-const FOOTER_COLUMNS: readonly FooterColumn[] = [
-  {
-    heading: "Talk To Us",
-    links: [
-      { label: "Email", href: `mailto:${BRAND.supportEmail}` },
-      { label: "Phone", href: `tel:${BRAND.supportPhone}` },
-      { label: "WhatsApp", href: `https://wa.me/${BRAND.supportPhone.replace(/[^0-9]/g, "")}` },
-      { label: BRAND.supportHours, href: "#", isText: true },
-    ],
-  },
-  {
-    heading: "Useful Information",
-    links: [
-      { label: "Returns & Cancellation", href: "/pages/returns" },
-      { label: "Delivery & Shipping", href: "/pages/shipping" },
-      { label: "Privacy Policy", href: "/pages/privacy" },
-      { label: "Terms & Conditions", href: "/pages/terms" },
-      { label: "FAQs", href: "/pages/faqs" },
-    ],
-  },
-  {
-    heading: "About",
-    links: [
-      { label: "Our Story / Our Heritage", href: "/pages/our-story" },
-      { label: "Banaras Store", href: "/pages/banaras-store" },
-      /*
-       * Lucknow Store, Press & Media and Careers removed 13 Sep 2026. There is
-       * one store, no press office and no open roles, and all three had been
-       * 404ing from the footer of every page on the site since it was written.
-       * A footer link is a promise like any other.
-       */
-      { label: "Size Guide", href: "/pages/size-guide" },
-      /*
-       * Was "Gift Cards" -> /pages/gift-cards, which 404d and would have been a
-       * lie if it had not: there is no gift-card product and no way to issue
-       * one. The gifting edit is the real thing this was reaching for.
-       */
-      { label: "Gifting", href: "/collections/gifts" },
-      { label: "Contact Us", href: "/pages/contact" },
-    ],
-  },
-] as const;
+const ABOUT_LINKS: readonly FooterLink[] = [
+  { label: "Our Story", href: "/pages/our-story" },
+  { label: "Our Banaras Store", href: "/pages/banaras-store" },
+  { label: "FAQs", href: "/pages/faqs" },
+  { label: "Size Guide", href: "/pages/size-guide" },
+  // Their "Gift Cards"; there is no gift-card product here, so the gifting edit.
+  { label: "Gifting", href: "/collections/gifts" },
+  { label: "Contact Us", href: "/pages/contact" },
+];
 
-const SOCIAL_LINKS = [
-  { label: "Facebook", href: "#", icon: "facebook" },
-  { label: "Instagram", href: "#", icon: "instagram" },
-  { label: "YouTube", href: "#", icon: "youtube" },
-] as const;
+// From BRAND, so the footer and the contact page cannot disagree. Empty until
+// the real accounts exist, in which case the row is not drawn at all.
+const SOCIAL_LINKS = BRAND.socials.map((social) => ({
+  ...social,
+  icon: social.label.toLowerCase(),
+}));
+
+const HEADING = "font-display text-[18px] leading-[1.5] font-normal text-ink-body";
+const LINK = "hover:underline";
 
 function SocialIcon({ name, className }: { name: string; className?: string }) {
   const icons: Record<string, ReactNode> = {
@@ -96,82 +71,132 @@ function SocialIcon({ name, className }: { name: string; className?: string }) {
         <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
       </svg>
     ),
+    pinterest: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} aria-hidden="true" className={className}>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M10.5 21l1.8-7.4M11 13.6c.5 1 1.4 1.4 2.4 1.4 2.3 0 3.6-2.2 3.6-4.6C17 8 15 6 12.1 6 8.9 6 7 8.2 7 10.6c0 1 .4 2 1.2 2.4" />
+      </svg>
+    ),
   };
   return icons[name] ?? null;
 }
 
 export function SiteFooter() {
-  return (
-    <footer className="mt-24 border-t border-rule bg-bg-sand">
-      <div className="wrap-wide py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {FOOTER_COLUMNS.map((column) => (
-            <div key={column.heading}>
-              <h2 className="font-display text-[18px] font-normal mb-2.5 text-ink">{column.heading}</h2>
-              <ul className="space-y-1 font-ui text-[13px] leading-[1.5] text-ink-body">
-                {column.links.map((link) => (
-                  <li key={link.href}>
-                    {link.isText ? (
-                      <span className="text-ink-muted italic">{link.label}</span>
-                    ) : (
-                      <Link href={link.href} className="hover:text-ink hover:underline">
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+  const whatsapp = `https://wa.me/${BRAND.supportPhone.replace(/[^0-9]/g, "")}`;
+  // "Weekdays … · Saturday …" — one line each, as the hours are set.
+  const hours = BRAND.supportHours.split(" · ");
 
-          {/* Stay in Touch — Column 4 */}
-          <div>
-            <h2 className="font-display text-[18px] font-normal mb-2.5 text-ink">Stay in touch</h2>
-            <p className="font-ui text-[13px] leading-[1.5] mb-4 text-ink-body">
-              Occasional letters about what has come off the loom.
+  return (
+    <footer className="mt-24">
+      <section className="border-y border-white bg-footer-band px-2.5 py-5">
+        <div className="mx-auto grid max-w-[1200px] font-ui text-[13px] leading-[1.5] text-ink-body md:grid-cols-3">
+          {/* 1 · Talk To Us, then the policies */}
+          <div className="px-5 py-2.5">
+            <h2 className={HEADING}>Talk To Us</h2>
+            <p className="mt-1">
+              Email:{" "}
+              <a href={`mailto:${BRAND.supportEmail}`} className={LINK}>
+                {BRAND.supportEmail}
+              </a>
+              <br />
+              Call us:{" "}
+              <a href={`tel:${BRAND.supportPhone.replace(/\s/g, "")}`} className={LINK}>
+                {BRAND.supportPhone}
+              </a>
+              <br />
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={LINK}>
+                Start a WhatsApp conversation
+              </a>
             </p>
-            <form className="flex flex-col gap-3" aria-label="Newsletter signup">
-              <div>
-                <label htmlFor="newsletter-email" className="eyebrow block text-ink-muted">
-                  Email
-                </label>
+            <p className="mt-5 italic">
+              Support hours:
+              {hours.map((line) => (
+                <span key={line}>
+                  <br />
+                  {line}
+                </span>
+              ))}
+            </p>
+
+            <h2 className={`${HEADING} mt-5`}>Useful Information</h2>
+            <ul className="mt-1">
+              {POLICY_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={LINK}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 2 · About, with the social icons under the list */}
+          <div className="px-5 py-2.5">
+            <h2 className={HEADING}>About</h2>
+            <ul className="mt-1">
+              {ABOUT_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={LINK}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {SOCIAL_LINKS.length > 0 ? (
+              <div className="mt-5 flex items-center gap-[5px]" aria-label="Social links">
+                {SOCIAL_LINKS.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-ink"
+                    aria-label={social.label}
+                  >
+                    <SocialIcon name={social.icon} className="h-[17px] w-[17px]" />
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          {/* 3 · Stay in touch */}
+          <div className="px-5 py-2.5">
+            <h2 className={HEADING}>Stay in touch</h2>
+            <p className="mt-1">Occasional letters about what has come off the loom.</p>
+            <form className="mt-2" aria-label="Newsletter signup">
+              <label htmlFor="newsletter-email" className="block text-[14px]">
+                Email<span aria-hidden="true">*</span>
+              </label>
+              <div className="mt-1 flex gap-3">
                 <input
                   id="newsletter-email"
                   type="email"
                   name="email"
                   autoComplete="email"
-                  className="w-full border-b border-rule-input bg-transparent py-2 text-ink outline-none focus:border-ink"
                   required
+                  className="h-[35px] min-w-0 flex-1 border border-footer-band bg-white px-3 text-[14px] text-ink outline-none focus:border-ink-body"
                 />
+                <button
+                  type="submit"
+                  className="h-[35px] shrink-0 border border-transparent bg-white/80 px-[17.5px] font-display text-[17px] tracking-[1px] text-black transition-colors hover:bg-white cursor-pointer"
+                >
+                  Sign Up
+                </button>
               </div>
-              <button type="submit" className="cta-primary">
-                Sign up
-              </button>
             </form>
           </div>
         </div>
+      </section>
 
-        {/* Social icons + copyright */}
-        <div className="mt-14 flex flex-col gap-6 border-t border-rule pt-6 md:flex-row md:items-center md:justify-between">
-          {/* Social icons */}
-          <div className="flex items-center gap-6" aria-label="Social links">
-            {SOCIAL_LINKS.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                className="text-ink-body hover:text-ink transition-colors"
-                aria-label={social.label}
-              >
-                <SocialIcon name={social.icon} className="w-5 h-5" />
-              </a>
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-1 text-caption text-ink-muted md:flex-row md:items-center md:justify-between md:gap-4">
-            <p>© {new Date().getFullYear()} {BRAND.legalName}</p>
-            <p className="italic">{BRAND.promise}</p>
-          </div>
-        </div>
+      <div className="mx-auto max-w-[1200px] px-5 py-3 font-ui text-[11.5px] text-ink-body">
+        <p>
+          © {new Date().getFullYear()}{" "}
+          <Link href="/" className="hover:underline">
+            {BRAND.legalName}
+          </Link>
+          .
+        </p>
       </div>
     </footer>
   );

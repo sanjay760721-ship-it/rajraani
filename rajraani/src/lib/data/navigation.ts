@@ -95,7 +95,7 @@ export const NAVIGATION: readonly NavPanel[] = [
       {
         heading: "New Arrivals",
         links: [
-          { label: "Fresh Off the Loom", href: "/collections/fresh-off-the-loom", emphasis: true },
+          { label: "Fresh Off the Loom", href: "/collections/fresh-off-the-loom" },
           { label: "Back in Stock", href: "/collections/back-in-stock" },
           { label: "Ready to Ship", href: "/collections/sarees?fulfilment=ready_to_ship" },
           { label: "Made to Order", href: "/collections/sarees?fulfilment=made_to_order" },
@@ -136,8 +136,8 @@ export const NAVIGATION: readonly NavPanel[] = [
       },
     ],
     tiles: [
-      { label: "Bridal", href: "/collections/bridal", tone: "pink", src: "/homepage/four-tiles/tile-01-bridal.webp" },
-      { label: "Gifting", href: "/collections/gifts", tone: "gold", src: "/homepage/four-tiles/tile-02-gifting.webp" },
+      { label: "Bridal", href: "/collections/bridal", tone: "pink", src: "/homepage/featured/bridal-amrita-hero-mob.jpg" },
+      { label: "Gifting", href: "/collections/gifts", tone: "gold", src: "/homepage/featured/gifts-hero-mob.jpg" },
     ],
   },
 
@@ -154,7 +154,7 @@ export const NAVIGATION: readonly NavPanel[] = [
       {
         heading: "Weaves & Patterns",
         links: [
-          { label: "Kadhua", href: "/collections/kadhua", emphasis: true },
+          { label: "Kadhua", href: "/collections/kadhua" },
           { label: "Kadiyal", href: facet("weave", "kadiyal") },
           { label: "Jangla", href: facet("weave", "jangla") },
           { label: "Jamawar", href: facet("weave", "jamawar") },
@@ -170,7 +170,7 @@ export const NAVIGATION: readonly NavPanel[] = [
       {
         heading: "Fabrics",
         links: [
-          { label: "Katan Silk", href: "/collections/katan-silk", emphasis: true },
+          { label: "Katan Silk", href: "/collections/katan-silk" },
           { label: "Kora Organza", href: facet("fabric", "kora-organza") },
           { label: "Khaddi Georgette", href: facet("fabric", "khaddi-georgette") },
           { label: "Georgette", href: facet("fabric", "georgette") },
@@ -183,8 +183,8 @@ export const NAVIGATION: readonly NavPanel[] = [
       },
     ],
     tiles: [
-      { label: "On kadhua", href: "/pages/kadhua", tone: "maroon", src: "/homepage/gallery/tile-03.webp" },
-      { label: "Katan Silk", href: "/collections/katan-silk", tone: "indigo", src: "/homepage/category/sarees.webp" },
+      { label: "On kadhua", href: "/pages/kadhua", tone: "gold", src: "/homepage/mega-menu/kadhua.jpg" },
+      { label: "Katan Silk", href: "/collections/katan-silk", tone: "maroon", src: "/homepage/mega-menu/katan-silk.jpg" },
     ],
   },
 
@@ -210,7 +210,7 @@ export const NAVIGATION: readonly NavPanel[] = [
          */
         heading: "Shop by Campaign",
         links: [
-          { label: "Nadi", href: "/collections/nadi", emphasis: true },
+          { label: "Nadi", href: "/collections/nadi" },
           { label: "Antaraal", href: "/collections/antaraal" },
           { label: "Awadh", href: "/collections/awadh" },
         ],
@@ -224,14 +224,14 @@ export const NAVIGATION: readonly NavPanel[] = [
          */
         heading: "Featured Campaign",
         links: [
-          { label: "Kala", href: "/pages/kala", emphasis: true },
+          { label: "Kala", href: "/pages/kala" },
           { label: "Katha", href: "/pages/katha" },
         ],
       },
     ],
     tiles: [
-      { label: "Nadi", href: "/pages/nadi", tone: "green", src: "/homepage/gallery/tile-01.webp" },
-      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/homepage/campaign/charbagh.webp" },
+      { label: "Nadi", href: "/pages/nadi", tone: "black", src: "/homepage/mega-menu/nadi.jpg" },
+      { label: "Antaraal", href: "/pages/antaraal", tone: "purple", src: "/homepage/mega-menu/antaraal.jpg" },
     ],
   },
 
@@ -245,13 +245,12 @@ export const NAVIGATION: readonly NavPanel[] = [
       {
         heading: "Metal",
         links: [
-          { label: "Art & Collectibles", href: "/pages/art-collectibles", emphasis: true },
+          { label: "Art & Collectibles", href: "/pages/art-collectibles" },
         ],
       },
     ],
     tiles: [
-      { label: "Art & Collectibles", href: "/pages/art-collectibles", tone: "gold", src: "/homepage/four-tiles/tile-04-art-collectibles.webp" },
-      { label: "Raised from one sheet", href: "/pages/art-collectibles", tone: "black", src: "/homepage/hero/slide-05-art-collectibles.webp" },
+      { label: "Art & Collectibles", href: "/pages/art-collectibles", tone: "gold", src: "/homepage/craft/craft-hero-mob.jpg" },
     ],
   },
 
@@ -268,14 +267,14 @@ export const NAVIGATION: readonly NavPanel[] = [
       {
         heading: "Spirit of Creation",
         links: [
-          { label: "Kala", href: "/pages/kala", emphasis: true },
+          { label: "Kala", href: "/pages/kala" },
           { label: "Katha", href: "/pages/katha" },
         ],
       },
     ],
     tiles: [
       { label: "Kala", href: "/pages/kala", tone: "maroon", src: "/homepage/campaign/kala.webp" },
-      { label: "Katha", href: "/pages/katha", tone: "indigo", src: "/homepage/category/suits-b.webp" },
+      { label: "Katha", href: "/pages/katha", tone: "green", src: "/homepage/campaigns/katha-band-01.jpg" },
     ],
   },
 
@@ -294,7 +293,7 @@ export const NAVIGATION: readonly NavPanel[] = [
       {
         heading: "About Us",
         links: [
-          { label: "Our story", href: "/pages/our-story", emphasis: true },
+          { label: "Our story", href: "/pages/our-story" },
           { label: "Our Banaras store", href: "/pages/banaras-store" },
           { label: "FAQs", href: "/pages/faqs" },
           { label: "Contact us", href: "/pages/contact" },
@@ -303,7 +302,7 @@ export const NAVIGATION: readonly NavPanel[] = [
     ],
     tiles: [
       { label: "Our Banaras store", href: "/pages/banaras-store", tone: "black", src: "/homepage/stores/varanasi.webp" },
-      { label: "Our story", href: "/pages/our-story", tone: "green", src: "/homepage/gallery/tile-02.webp" },
+      { label: "Our story", href: "/pages/our-story", tone: "maroon", src: "/homepage/about/story-band-02.jpg" },
     ],
   },
 ];

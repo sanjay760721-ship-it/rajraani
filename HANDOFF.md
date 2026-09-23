@@ -1,7 +1,7 @@
 # Project Handoff — Rajraani
 
-**Last updated:** 13 September 2026 (navigation, every editorial page, and the
-catalogue behind them)
+**Last updated:** 24 September 2026 (design pass against the reference, every photo a
+link, footer, size chart — §2.53)
 **Purpose:** Resume state. Read this first in any new session, then read the two documents it points to.
 
 > **Start at [§2.45](#245-audited-state-22-august-2026), then [§2.46](#246-progress-ledger--measured-against-git-22-august-2026) and [§2.47](#247-photography-integrated-and-the-three-blocking-decisions-taken--22-august-2026).**
@@ -11,11 +11,15 @@ catalogue behind them)
 > session, and §[2.50](#250-homepage-bands-measured-and-rebuilt--23-august-2026) the band-by-band
 > rebuild.
 >
+> **The 23–24 September design pass is [§2.53](#253-design-pass-against-the-reference-links-footer-size-chart--2324-september-2026)** —
+> header, mega menus, spacing, footer, size chart, and the rule that every photo is a link.
+> Read its "reverted — do not redo" list before touching the header.
+>
 > **The 10–13 September work is §5.8 and its four sub-sections** — the navigation rebuild,
 > the About Us pages, Shop/Collections/Campaigns/Stories, Crafts, and the measured
 > reference sweep. Start there for anything about pages or menus.
 >
-> `npm run verify` is green as of 13 September 2026 (269 tests), `check:originality`
+> `npm run verify` is green as of 24 September 2026 (403 tests), `check:originality`
 > included.
 > Sections 1–2.4 were written between 5 and 8 August and were not revised as the build
 > moved past them. Where they disagree with §2.45/§2.46, the later sections are the
@@ -388,7 +392,7 @@ Commerce is **~50% built and 0% trustworthy**. See the §2.45 checkout finding.
 | Workstream | Done | Remaining |
 |---|---|---|
 | Research and specs | ~95% | catalogue copy, photography commissioning |
-| Storefront UI | ~95% *(was ~85%; §5.8)* | no `/blogs` route, lost components |
+| Storefront UI | ~97% *(was ~95%; §2.53)* | no `/blogs` route; real contact details and social handles |
 | Navigation and pages | ~98% *(was ~50%; §5.8)* | admin editing, commissioned imagery |
 | Catalogue depth | ~60% *(was ~35%)* | 36 fixture products; real stock, SKUs and prices |
 | Design system | ~95% | dead `sm:` breakpoint across 10 files |
@@ -397,17 +401,18 @@ Commerce is **~50% built and 0% trustworthy**. See the §2.45 checkout finding.
 | Content and imagery | ~55% *(was ~40%; see §2.47)* | commissioned shoot, 7 unphotographed sarees, 9 tiles, no Banaras store photo, 822 MB video |
 | Launch hardening | ~10% | perf, SEO, a11y audit, load test, monitoring |
 
-**Overall: roughly 72% of the build is done** (62% on 22 August, 68% earlier on
-13 September). The remaining quarter is unevenly distributed and the
+**Overall: roughly 73% of the build is done** (72% on 13 September, 62% on 22 August).
+The 23–24 September session (§2.53) was storefront polish, so it moves the visible
+number and not the other two. The remaining quarter is unevenly distributed and the
 distribution is the point:
 
 - what a visitor **sees** is ~95% there
 - what **takes money** is ~40% built and 0% trustworthy
 - what you would **run the business from** is ~30%
 
-Measured 13 September 2026: 36 products, 19 collections, 20 editorial pages, 27
-section types, 402 tests, 93 prerendered routes, and no dead link reachable from
-the homepage, the navigation or the footer.
+Measured 24 September 2026: 36 products, 20 collections (`all` added), 20 editorial
+pages, 403 tests, and no dead internal link reachable from the homepage, the navigation
+or the footer — crawled, not assumed (§2.53). Every photo on the storefront is a link.
 
 **Nothing here is deployable today, and two separate things block it.**
 
@@ -1021,6 +1026,67 @@ The copy of `build.md` in this folder was the **pre-re-cut version** — it pred
 directly from measured data, which went further than the original revision could:
 §8 was *replaced with answers* rather than shrunk, and a new §9 captures sweep findings
 that never existed in any earlier version.
+
+---
+
+### 2.53 Design pass against the reference, links, footer, size chart — 23–24 September 2026
+
+A long owner-directed session on how the storefront looks and behaves, mostly
+comparing page by page with the reference site. **Commerce, admin and photography are
+untouched** — the three blockers in §6 are exactly where they were on 13 September.
+`npm run verify` is green: **403 tests**, originality gate included.
+
+**The owner authorised copying layout values from the reference on 23–24 Sep** —
+spacing, header/menu/footer layout, the size chart's measurements — "for now, I will
+change it later". That covers *layout and numbers only*: no copy, colours, logo or
+imagery were taken, and the `borrowed-copy` gate still passes. Every place a value was
+measured off their site says so in a comment. Treat those values as placeholders.
+
+#### What changed, by area
+
+| Area | Change | Where |
+|---|---|---|
+| Utility bar | 64px bar, 20px icons stacked over small captions; currency caret no longer drags "INR" off-centre | `UtilityBar.tsx`, `utility-styles.ts`, `CurrencySelector.tsx`, `WishlistButton.tsx` |
+| Menu row | 76px, wordmark in widely tracked gold capitals, labels in body ink; **no rule under the row** | `SiteHeader.tsx` |
+| Mega menus | Rebuilt on the reference template: 1200px white box, 200px link columns, **every tile 260×390**, 15px caption on a dark scrim, no bold links. Each tile's photo is taken from the page it links to (crops in gitignored `public/homepage/mega-menu/`) | `SiteHeader.tsx` `MegaMenuPanel`, `MegaMenuTile.tsx`, `navigation.ts` |
+| Section spacing | `section-pad-prose` token (48–80px) for text between photographs; stacked prose blocks keep 40px. Per-block `padTop`/`padBottom` on `richText`, more steps on `imageBand`, `inset` on `imageWithText` | `globals.css`, `SectionRenderer.tsx` |
+| Kala / Katha / Art & Collectibles | Gaps measured against the reference at 1905px and matched to within ~20px. Kala/Katha hero files carry a white strip in the image itself, hence `padTop: 20` under them | `sections.ts` |
+| Bridal | Amrita as the opening frame (cropped from the product shots, watermark excluded), an Amrita band, a product rail, the old hero moved to the close | `sections.ts`, crops in `public/homepage/featured/` |
+| Gifting | Closing caption moved right, dark ink, top-aligned on phones (`overlay.mobileAlign`) | `sections.ts`, `SectionRenderer.tsx` |
+| Hover zoom | Every grid tile and image-with-text photo zooms 110% / 0.3s, linked or not | `SectionRenderer.tsx` `HOVER_ZOOM` |
+| **Every photo is a link** | `ImageLink` wraps them. Slideshow/hero frames go where their button goes; editorial bands without an `href` fall back to `PAGE_IMAGE_HREF[slug]` (usually the page's own collection) | `ImageLink.tsx`, `sections.ts`, `pages/[slug]/page.tsx`, the four slideshow components |
+| Dead links | `/collections/womenswear` → new **`all`** collection; Menswear slide → Stoles ("For him"); `/collections/all` created for "continue shopping". Footer `#` social links and the contact page's generic social URLs hidden behind one empty `BRAND.socials` list | `fixtures.ts` (+ `db:seed`), `brand.ts`, `SiteFooter.tsx` |
+| Footer | Reference layout: grey band (`--color-footer-band`), three columns, copyright below. "Our Story" (not "Our Story / Our Heritage"). Their "Here to Help" is on the banned-phrase list, so ours stays "Talk To Us" | `SiteFooter.tsx` |
+| Size guide | Now titled **Size Chart**: two `sizeChart` sections (women XXS–XL, men XS–XXL), real HTML tables with the reference's measurements and **our own SVG croquis**. New section type, mirrored in `sanity/schemas/objects/sections.ts` | `SizeChart.tsx`, `sections.ts` |
+| Focus ring | 1px gold, keyboard only (`:focus:not(:focus-visible)` clears it). The old 2px ink ring read as a bug to the owner; the PDP thumbnail marker is now opacity, not an outline | `globals.css`, `Gallery.tsx` |
+
+#### Built and then reverted at the owner's request — do not redo unasked
+
+- A header restyle to the reference's exact type sizes, a compact bar that follows the
+  page down, and per-image `sizes` hints. All three reverted ("it was better previously").
+- Zarkashi and Gifting rebuilt like Bridal (product-shot heroes, extra bands, rails) —
+  reverted; only the Gifting caption fix was kept.
+- Replacing the Calendly booking links. **They 404 today**
+  (`calendly.com/rajraani-banaras/...`), but the owner chose to keep them; they work once
+  those booking pages exist.
+
+#### How "no dead links / every photo clickable" was verified
+
+A crawler seeded from `navigation.ts` and every `href` in `sections.ts` (the mega menu
+never appears in server HTML) found 0 broken internal links across 92 pages. Photos were
+checked in the browser with `elementFromPoint` at each image's centre on 16 pages — not
+by eye. Rerun both after any navigation or content change.
+
+#### Still placeholders — need real values from the owner
+
+`BRAND.supportEmail` (`orders@example.invalid`), `BRAND.supportPhone`
+(`+91 00000 00000`, which also drives the WhatsApp link), and `BRAND.socials` (empty,
+so no social links show anywhere).
+
+#### Photography count
+
+212 staged third-party files now (203 on 13 Sep): the Bridal/Amrita and mega-menu crops
+were added. Same status as before — gitignored, unlicensed, local mockup only.
 
 ---
 
@@ -1703,6 +1769,12 @@ edit and a deploy, which is not a workable arrangement for whoever writes the co
    title, an intro, and a facet or a product list; none has a facet that would back it
    today. The other 22 were closed on 12 September by trimming the menus to what the
    shop holds. This is merchandising, not engineering.
+10. **Send the real support email, phone number and social handles** (§2.53). The
+    footer shows `orders@example.invalid` and `+91 00000 00000`, and social links are
+    hidden until `BRAND.socials` in `src/lib/brand.ts` has entries.
+11. **Create the two Calendly booking pages** the store buttons point at
+    (`rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi` and
+    `.../visit-to-the-rajraani-store-lucknow`) — both 404 today.
 
 **For the next session:**
 

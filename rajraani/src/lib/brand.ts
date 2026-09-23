@@ -34,6 +34,20 @@ export const BRAND = {
   supportPhone: "+91 00000 00000",
   /** Mon–Fri and Saturday hours, rendered italic and muted in the footer. */
   supportHours: "Monday to Friday, 10:00–19:00 IST · Saturday, 10:00–16:00 IST",
+  /**
+   * The house's social accounts — the one list the footer and the contact
+   * page both read.
+   *
+   * EMPTY until the real handles exist. The footer icons used to point at
+   * "#" and the contact page at facebook.com's front door: links that looked
+   * finished and went nowhere. With nothing here, neither place shows social
+   * links at all. Add `{ label: "Instagram", href: "https://…" }` entries
+   * (Facebook, Instagram, YouTube or Pinterest) and both pick them up.
+   */
+  socials: [] as readonly {
+    label: "Facebook" | "Instagram" | "YouTube" | "Pinterest";
+    href: string;
+  }[],
 } as const;
 
 /**

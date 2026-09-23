@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SectionRenderer } from "@/components/sections/SectionRenderer";
+import { PAGE_IMAGE_HREF } from "@/lib/content/sections";
 import { content } from "@/lib/content/content";
 import { catalogue } from "@/lib/data/catalogue";
 
@@ -41,6 +42,8 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
   // Campaign lookup goes through the repository. The pairing is authored, so
   // the story page has to ask for it rather than infer it from the slug.
   const campaign = await catalogue.getCampaign(slug);
+  // Where a photograph without a link of its own goes; see PAGE_IMAGE_HREF.
+  const imageHref = PAGE_IMAGE_HREF[slug];
 
   // A campaign story opens on a hero, which carries the h1. A craft page opens
   // on prose and needs a title block of its own — otherwise the page ships with
@@ -113,7 +116,9 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
         * of any width — the band carries its own bottom padding (40px on the
         * about page) and that is the whole gap theirs leaves.
         */}
-      {opensWithBanner ? <SectionRenderer section={first} index={0} /> : null}
+      {opensWithBanner ? (
+        <SectionRenderer section={first} index={0} fallbackHref={imageHref} />
+      ) : null}
 
       {opensWithHero || opensWithContactPanel || sectionCarriesTitle ? null : (
         /*
@@ -131,7 +136,9 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
         >
           <h1 className="text-h1">{page.title}</h1>
           {/* Italic, as theirs is on both the about and FAQ pages. */}
-          <p className="text-body mt-4 text-ink-body italic">{page.standfirst}</p>
+          {page.standfirst ? (
+            <p className="text-body mt-4 text-ink-body italic">{page.standfirst}</p>
+          ) : null}
         </header>
       )}
 
@@ -146,6 +153,7 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
           key={section.id}
           section={section}
           index={opensWithBanner ? index + 1 : index}
+          fallbackHref={imageHref}
         />
       ))}
 

@@ -13,6 +13,7 @@ import {
   NAVIGATION,
   LEFT_NAVIGATION,
   RIGHT_NAVIGATION,
+  type NavColumn,
   type NavPanel,
 } from "@/lib/data/navigation";
 
@@ -90,14 +91,21 @@ export function SiteHeader() {
       {/* Tier 2: Utility Bar - always rendered */}
       <UtilityBar />
 
-      {/* Tier 3: Main Header - Desktop Single Row (≥1024px) - 65px */}
+      {/*
+        * Tier 3: Main Header - Desktop Single Row (≥1024px) - 76px.
+        *
+        * No rule under it. A page that opens on a banner sat the photograph
+        * under a hairline with a white strip between, which read as a gap in
+        * the page rather than as the edge of the header; the mega menu brings
+        * its own top border when it opens.
+        */}
       <nav
-        className="hidden lg:flex lg:items-center lg:justify-between border-b border-rule h-[65px] px-6 xl:px-14 select-none"
+        className="hidden lg:flex lg:items-center lg:justify-between h-[76px] px-6 xl:px-14 select-none"
         aria-label="Main navigation"
         onMouseLeave={scheduleClose}
       >
         {/* Left Navigation Group: Shop, Collections, Campaigns */}
-        <div className="flex items-center gap-1 flex-1 justify-end min-w-0">
+        <div className="flex items-center xl:gap-4 flex-1 justify-end min-w-0">
           {LEFT_NAVIGATION.map((panel) => (
             <CompactNavTrigger
               key={panel.id}
@@ -112,20 +120,25 @@ export function SiteHeader() {
         </div>
 
         {/* Center Brand Wordmark */}
-        <div className="shrink-0 px-7 xl:px-10">
+        <div className="shrink-0 px-5 xl:px-14">
           <Link
             href="/"
             aria-label={`${BRAND.name} home`}
             className="block group"
           >
-            <span className="font-display text-[25px] tracking-normal text-ink font-normal leading-tight group-hover:text-accent-hover transition-colors duration-300">
+            {/*
+              * Set in widely tracked capitals to echo the lettering of the
+              * house logo, and in the brand gold, so the name reads as a
+              * mark rather than as a seventh menu item in the same ink.
+              */}
+            <span className="font-display text-[24px] xl:text-[28px] uppercase tracking-[0.2em] mr-[-0.2em] text-accent font-normal leading-none group-hover:text-accent-hover transition-colors duration-300">
               {BRAND.name}
             </span>
           </Link>
         </div>
 
         {/* Right Navigation Group: Craft, Stories, About Us */}
-        <div className="flex items-center gap-1 flex-1 justify-start min-w-0">
+        <div className="flex items-center xl:gap-4 flex-1 justify-start min-w-0">
           {RIGHT_NAVIGATION.map((panel) => (
             <CompactNavTrigger
               key={panel.id}
@@ -253,17 +266,19 @@ function CompactNavTrigger({
         aria-expanded={isOpen}
         aria-controls={`${panelId}-dropdown-${panel.id}`}
         /*
-         * Type is measured from the reference: display serif, 14px, uppercase,
-         * 1px tracking. Spacing lives in the button's own padding rather than a
-         * gap on the row, so the caret has somewhere to sit and the hit target
+         * Display serif, 13.5px (12.5px below xl, so all six fit at 1024),
+         * uppercase, wide tracking, in body ink rather than heading ink: six
+         * labels at full weight crowded the wordmark.
+         * Spacing lives in the button's own padding rather than a gap on the
+         * row, so the caret has somewhere to sit and the hit target
          * covers the label plus its arrow.
          *
          * The open state was a 2px underline in brand gold, which shouted over
          * six items and fought the rule under the row. A colour shift plus the
          * rotated caret says the same thing and lets the row stay quiet.
          */
-        className={`font-display text-[14px] uppercase tracking-[1px] font-normal transition-colors duration-300 h-full flex items-center gap-1.5 pl-3 pr-2 cursor-pointer ${
-          isOpen ? "text-accent-hover" : "text-ink hover:text-accent-hover"
+        className={`font-display text-[12.5px] xl:text-[13.5px] uppercase tracking-[0.12em] xl:tracking-[0.14em] font-normal transition-colors duration-300 h-full flex items-center gap-1.5 xl:gap-2 px-2 xl:px-3 cursor-pointer ${
+          isOpen ? "text-accent-hover" : "text-ink-body hover:text-accent-hover"
         }`}
         onClick={() => setOpenPanel((curr) => (curr === panel.id ? null : panel.id))}
         onKeyDown={(e) => {
@@ -278,9 +293,9 @@ function CompactNavTrigger({
       >
         {panel.label}
         <svg
-          width="9"
-          height="6"
-          viewBox="0 0 9 6"
+          width="8"
+          height="5"
+          viewBox="0 0 8 5"
           fill="none"
           aria-hidden="true"
           className={`shrink-0 transition-transform duration-300 ${
@@ -288,9 +303,9 @@ function CompactNavTrigger({
           }`}
         >
           <path
-            d="M1 1L4.5 4.5L8 1"
+            d="M0.75 0.75L4 4L7.25 0.75"
             stroke="currentColor"
-            strokeWidth="1.1"
+            strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -301,6 +316,18 @@ function CompactNavTrigger({
   );
 }
 
+/*
+ * The dropdown, on the reference's mega-menu template (measured on request,
+ * 24 Sep 2026): a white box 1200px wide, centred under the row, no shadow and
+ * no border. Link columns fill from the left, photographs sit hard against the
+ * right, and the space between them stays empty.
+ *
+ * Every photograph is their large size, 260x390 inside 20px of padding.
+ * Their shorter panels drop to 200x300 tiles in a five-column grid, which
+ * read as thumbnails here; fixed 200px link columns leave room for two large
+ * tiles even beside Shop's three lists. Below 1200px the tiles give way first
+ * (`minmax(0, 300px)`), then the gap.
+ */
 function MegaMenuPanel({
   panel,
   id,
@@ -312,104 +339,40 @@ function MegaMenuPanel({
   onClose: () => void;
   onMouseEnter: () => void;
 }) {
-  const panelRef = useRef<HTMLDivElement>(null);
-
-  const hasColumns = panel.columns && panel.columns.length > 0;
-  const hasTiles = panel.tiles && panel.tiles.length > 0;
+  const columns: NavColumn[] =
+    panel.columns && panel.columns.length > 0
+      ? panel.columns
+      : [{ heading: panel.label, links: panel.links }];
+  const tiles = panel.tiles ?? [];
 
   return (
     <div
-      ref={panelRef}
       id={id}
       aria-label={panel.label}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
-      className="absolute top-full left-0 right-0 bg-white border-t border-rule shadow-[0_10px_28px_rgba(0,0,0,0.09)] z-50 animate-[fadeIn_120ms_ease-out]"
+      className="absolute top-full left-1/2 z-50 w-[1200px] max-w-[calc(100vw-40px)] -translate-x-1/2 bg-white animate-[fadeIn_120ms_ease-out]"
     >
-      <div className="mx-auto max-w-[1265px] px-8 xl:px-14 py-8">
-        {hasColumns ? (
-          /*
-            * Two bands: the link columns at the reading edge, the tiles hard
-            * against the right one.
-            *
-            * The columns used to be `flex-1 min-w-[180px] max-w-[280px]` in a
-            * wrapping row, which distributed the full 1265px across whatever
-            * happened to be there. That is fine for the three-column Shop panel
-            * and falls apart for the one-column ones: a single list of four
-            * links stretched to 280px and the tiles dragged in beside it,
-            * nowhere near the edge they belong on.
-            *
-            * Fixed-width columns and `ml-auto` on the tiles instead. Every
-            * panel is then the same shape whether it carries one column or
-            * three, and a short panel is simply a short panel — the space
-            * between the two bands is left empty rather than filled with copy
-            * nobody asked the menu for.
-            */
-          <div className="flex items-start gap-10 xl:gap-14">
-            {/* Link Columns */}
-            <div className="flex items-start gap-8 xl:gap-12">
-              {panel.columns!.map((column) => (
-                <div key={column.heading} className="w-[180px] shrink-0">
-                  <h4 className="font-ui text-[11px] uppercase tracking-[0.14em] text-ink-muted font-semibold mb-3 pb-2 border-b border-rule">
-                    {column.heading}
-                  </h4>
-                  <ul>
-                    {column.links.map((link) => (
-                      <li key={link.href + link.label}>
-                        <Link
-                          href={link.href}
-                          onClick={onClose}
-                          className={`block py-[5px] font-ui text-[13px] leading-[1.5] ${link.emphasis ? "font-semibold text-ink" : "font-normal text-ink-body"} hover:text-accent-hover transition-colors`}
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            {/* Image Tiles */}
-            {hasTiles && (
-              <div className="ml-auto flex shrink-0 gap-4">
-                {panel.tiles!.map((tile, index) => (
-                  /*
-                    * Only the first tile survives below 1280.
-                    *
-                    * A three-column panel plus two 200px tiles needs about
-                    * 1110px of content box and there is 960 at the 1024
-                    * breakpoint where this row first appears. The columns are
-                    * the menu; the tiles are decoration, so the tiles are what
-                    * gives way. Dropping one is quieter than letting the row
-                    * wrap, which pushed the art under the links and doubled the
-                    * panel height.
-                    */
-                  <div
-                    key={tile.href + tile.label}
-                    className={`w-[160px] xl:w-[200px] ${index > 0 ? "hidden xl:block" : ""}`}
-                  >
-                    <MegaMenuTile
-                      label={tile.label}
-                      tone={tile.tone}
-                      src={tile.src}
-                      href={tile.href}
-                      onClose={onClose}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="max-w-md">
-            <ul className="space-y-1">
-              {panel.links.map((link) => (
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: `repeat(${columns.length}, minmax(150px, 200px)) 1fr repeat(${tiles.length}, minmax(0, 300px))`,
+        }}
+      >
+        {columns.map((column) => (
+          <div key={column.heading} className="p-5">
+            <p className="mb-2 font-display text-[16px] font-bold leading-[1.2] tracking-[1px] text-ink-dark">
+              {column.heading}
+            </p>
+            <ul>
+              {column.links.map((link) => (
                 <li key={link.href + link.label}>
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="block px-4 py-2 font-ui text-[13px] leading-[1.5] text-ink-body hover:text-accent-hover hover:bg-surface-notice transition-colors"
+                    className={`block py-[6.5px] font-display text-[13px] leading-[13px] tracking-[1px] text-ink-dark transition-colors hover:text-accent-hover ${
+                      link.emphasis ? "font-bold" : "font-normal"
+                    }`}
                   >
                     {link.label}
                   </Link>
@@ -417,7 +380,23 @@ function MegaMenuPanel({
               ))}
             </ul>
           </div>
-        )}
+        ))}
+
+        {tiles.map((tile, index) => (
+          <div
+            key={tile.href + tile.label}
+            className="p-5"
+            style={{ gridColumnStart: columns.length + 2 + index }}
+          >
+            <MegaMenuTile
+              label={tile.label}
+              tone={tile.tone}
+              src={tile.src}
+              href={tile.href}
+              onClose={onClose}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

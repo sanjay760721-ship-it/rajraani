@@ -7,6 +7,7 @@ import Image from "next/image";
 import { toneFor } from "../Frame";
 import type { ArtPair } from "@/lib/content/sections";
 import type Flickity from "flickity";
+import { ImageLink } from "../ImageLink";
 
 declare global {
   interface Window {
@@ -121,14 +122,20 @@ export function StoresSlideshow({ slides }: StoresSlideshowProps) {
               )}
             </div>
 
+            {/*
+              * The whole frame goes where the button goes; the scrim and
+              * caption layers above let clicks through to it.
+              */}
+            <ImageLink href={slide.ctaHref} duplicate className="absolute inset-0" />
+
             {/* Scrim Overlay — stronger for stores */}
             <div
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent"
             />
 
             {/* Overlaid Content — centered */}
-            <div className="absolute inset-0 flex items-center justify-center px-4">
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
               <div className="max-w-[46ch] text-center">
                 <span className="eyebrow text-bg/80 block mb-3">
                   {slide.title}
@@ -139,9 +146,10 @@ export function StoresSlideshow({ slides }: StoresSlideshowProps) {
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href={slide.ctaHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cta-secondary"
+                    {...(/^https?:\/\//.test(slide.ctaHref)
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="cta-secondary pointer-events-auto"
                   >
                     {slide.ctaLabel}
                   </Link>

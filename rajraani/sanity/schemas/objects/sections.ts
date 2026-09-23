@@ -1002,6 +1002,56 @@ export const contactPanelSection = defineType({
 });
 
 /** Every section type, in the order they appear in the Studio's insert menu. */
+/*
+ * Size chart (24 Sep 2026): a figure with its measuring points beside a table.
+ * Mirrored from the storefront union so `schema.test.ts` holds both sides to
+ * the same set.
+ */
+export const sizeChartSection = defineType({
+  name: "sizeChart",
+  title: "Size chart",
+  type: "object",
+  fields: [
+    defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),
+    defineField({
+      name: "figure",
+      type: "string",
+      options: { list: ["women", "men"] },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "measures",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "label", type: "string" }),
+            defineField({ name: "point", type: "string" }),
+            defineField({ name: "note", type: "string" }),
+          ],
+        }),
+      ],
+    }),
+    defineField({ name: "sizes", type: "array", of: [defineArrayMember({ type: "string" })] }),
+    defineField({
+      name: "rows",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "label", type: "string" }),
+            defineField({ name: "inches", type: "array", of: [defineArrayMember({ type: "number" })] }),
+            defineField({ name: "cm", type: "array", of: [defineArrayMember({ type: "number" })] }),
+          ],
+        }),
+      ],
+    }),
+  ],
+  preview: { select: { title: "title" } },
+});
+
 export const sectionTypes = [
   heroSection,
   heroCarouselSection,
@@ -1027,6 +1077,7 @@ export const sectionTypes = [
   mapBandSection,
   galleryGridSection,
   contactPanelSection,
+  sizeChartSection,
 ];
 
 /** The array members for any document's `sections[]` field. */

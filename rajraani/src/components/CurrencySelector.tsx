@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 import { useCurrency } from "./currency-context";
+import { UTILITY_CAPTION, UTILITY_ICON, UTILITY_ITEM } from "./utility-styles";
 
 const CURRENCY_LABELS: Record<string, string> = {
   INR: "INR",
@@ -51,7 +52,7 @@ export function CurrencySelector() {
   }, [isOpen]);
 
   return (
-    <div className="relative">
+    <div className="relative h-full">
       <button
         ref={buttonRef}
         type="button"
@@ -59,16 +60,15 @@ export function CurrencySelector() {
         aria-expanded={isOpen}
         aria-controls={id}
         aria-label="Currency"
-        className="font-display text-[13px] tracking-wide text-ink hover:text-accent-hover flex items-center gap-1.5 py-1 transition-colors cursor-pointer"
+        className={UTILITY_ITEM}
         onClick={() => setIsOpen((open) => !open)}
       >
         <svg
-          width="14"
-          height="14"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.75"
+          strokeWidth="1.5"
+          className={UTILITY_ICON}
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
@@ -77,8 +77,24 @@ export function CurrencySelector() {
           <line x1="2" y1="12" x2="22" y2="12" />
           <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
         </svg>
-        <span>{CURRENCY_LABELS[currency] ?? currency}</span>
-        <span className="text-[10px] text-ink/70" aria-hidden>▾</span>
+        {/*
+          * The caret hangs off the caption rather than sitting in its flow, so
+          * "INR" centres under the globe exactly as "LOGIN" does under its
+          * icon. Inline, the caret dragged the word a few pixels left.
+          */}
+        <span className={`${UTILITY_CAPTION} relative`}>
+          {CURRENCY_LABELS[currency] ?? currency}
+          <svg
+            width="8"
+            height="5"
+            viewBox="0 0 8 5"
+            fill="none"
+            aria-hidden="true"
+            className={`absolute left-full top-1/2 ml-1 -translate-y-1/2 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+          >
+            <path d="M0.75 0.75L4 4L7.25 0.75" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
       </button>
 
       {isOpen && (
@@ -87,7 +103,7 @@ export function CurrencySelector() {
           id={id}
           role="listbox"
           aria-label="Select currency"
-          className="absolute right-0 top-full z-50 mt-1 min-w-[130px] bg-white border border-rule shadow-lg py-1.5 overflow-hidden"
+          className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[110px] bg-white border border-rule shadow-lg py-1.5 overflow-hidden"
           style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
         >
           {currencies.map((curr) => (

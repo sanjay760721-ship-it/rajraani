@@ -9,6 +9,11 @@
   --color-bg: #ffffff;
   --color-bg-alt: #fbf9f6;
   --color-bg-sand: #f1ece4;
+  /* The footer band, a flat light grey with a white hairline above and below —
+     the reference footer's treatment, taken on request (24 Sep 2026). */
+  --color-footer-band: #d3d3d3;
+  /* The warm cream of the size-chart figures and table headers. */
+  --color-figure: #f8eedc;
 
   /*
    * --- Palette: ink -------------------------------------------------------
@@ -112,6 +117,8 @@
   /* --- Section padding — 20px standard per reference -------------------- */
   --section-padding: 20px;
   --section-padding-lg: 40px;  /* for larger bands if needed */
+  /* Text set between photographs: 48px on a phone, 80px from ~1450px up. */
+  --section-padding-prose: clamp(48px, 5.5vw, 80px);
 
   /* --- Grid -------------------------------------------------------------- */
   --breakpoint-sm: initial;
@@ -175,9 +182,20 @@
     max-width: 100%;
   }
 
+  /*
+   * Keyboard focus only, and quiet: a 1px ring in the brand gold. It was 2px
+   * of heading ink at a 3px offset, which read as a black box or a bold ring
+   * left behind on whatever had been clicked — the gallery arrows, the footer
+   * links — rather than as a focus cue. Still visible enough to tab by.
+   */
   :focus-visible {
-    outline: 2px solid var(--color-ink);
-    outline-offset: 3px;
+    outline: 1px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* A pointer click never leaves a ring, in browsers that would otherwise. */
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -236,6 +254,42 @@
 
 @utility section-pad-lg {
   padding-block: var(--section-padding-lg);
+}
+
+/*
+ * A run of prose between two photographs.
+ *
+ * At the flat 20px of `section-pad` the call to action ended up a hand's width
+ * from the next image, and the heading sat just as close to the one above: the
+ * text read as a caption squeezed between pictures rather than a pause in the
+ * page. The block gets room on both sides instead.
+ *
+ * Where two of them follow each other — the policy pages run a dozen in a row —
+ * the room between them falls back to the ordinary 20px, so a long page of
+ * paragraphs does not open up into a column of gaps.
+ */
+@utility section-pad-prose {
+  padding-block: var(--section-padding-prose);
+}
+
+/*
+ * The stacking rule is written against the section's wrapper, not the section:
+ * `ScrollReveal` puts every block in a <div> of its own, so two prose blocks
+ * are never siblings and `.section-pad-prose + .section-pad-prose` matches
+ * nothing.
+ *
+ * Only the later block can be selected — trimming the earlier one's bottom
+ * would need `:has()` inside `:has()`, which CSS does not allow. So the later
+ * block takes the ordinary padding on top and its wrapper is pulled up over
+ * the earlier block's surplus. Net gap: 20 + 20, as before this token existed.
+ * Unlayered, so it outranks the utility above.
+ */
+:where(:has(> .section-pad-prose)) + :where(:has(> .section-pad-prose)) {
+  margin-top: calc(var(--section-padding) - var(--section-padding-prose));
+}
+
+:where(:has(> .section-pad-prose)) + :where(:has(> .section-pad-prose)) > .section-pad-prose {
+  padding-top: var(--section-padding);
 }
 
 /* ============================================================================

@@ -152,7 +152,12 @@ export function Gallery({
               type="button"
               onClick={() => setActiveIndex(index)}
               aria-current={index === activeIndex}
-              className="block w-full aria-[current=true]:outline aria-[current=true]:outline-2 aria-[current=true]:outline-offset-2 aria-[current=true]:outline-ink"
+              /*
+                * The current frame is marked by being the one at full
+                * strength, not by a 2px ink outline — that outline was clipped
+                * by the rail's overflow and showed as a stray black bar.
+                */
+              className="block w-full opacity-55 transition-opacity duration-300 hover:opacity-100 aria-[current=true]:opacity-100"
             >
               <Frame
                 image={image}

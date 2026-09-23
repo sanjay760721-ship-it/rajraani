@@ -7,6 +7,7 @@ import Image from "next/image";
 import { toneFor } from "../Frame";
 import type { ArtPair } from "@/lib/content/sections";
 import type Flickity from "flickity";
+import { ImageLink } from "../ImageLink";
 
 declare global {
   interface Window {
@@ -124,15 +125,21 @@ export function EditorialSlideshow({ slides }: EditorialSlideshowProps) {
               )}
             </div>
 
+            {/*
+              * The whole frame goes where the button goes; the scrim and
+              * caption layers above let clicks through to it.
+              */}
+            <ImageLink href={slide.ctaHref} duplicate className="absolute inset-0" />
+
             {/* Scrim Overlay — bottom gradient for text legibility */}
             <div
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
             />
 
             {/* Slide Content — text alignment varies per slide */}
             <div
-              className={`absolute inset-0 flex ${
+              className={`pointer-events-none absolute inset-0 flex ${
                 slide.verticalAlign === "center" ? "items-center" : "items-end"
               }`}
             >
@@ -163,7 +170,7 @@ export function EditorialSlideshow({ slides }: EditorialSlideshowProps) {
                   </p>
                   <Link
                     href={slide.ctaHref}
-                    className={`mt-8 inline-block ${
+                    className={`pointer-events-auto mt-8 inline-block ${
                       slide.buttonVariant === "primary"
                         ? "cta-primary"
                         : "cta-secondary"

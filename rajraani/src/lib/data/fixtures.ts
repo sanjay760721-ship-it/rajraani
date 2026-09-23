@@ -1647,6 +1647,19 @@ export const PRODUCTS: readonly Product[] = [
  */
 export const COLLECTIONS: readonly Collection[] = [
   {
+    /*
+     * Everything, as a facet collection with no facets selected. It is where
+     * "continue shopping" goes from an empty cart or wishlist, and where the
+     * homepage's womenswear frame goes — every piece here is womenswear.
+     */
+    kind: "facet",
+    handle: "all",
+    title: "All pieces",
+    seoIntro:
+      "Every piece in the catalogue, sarees and stitched alike, handwoven in Banaras. Narrow it by fabric, weave, colour or zari on the left.",
+    facets: {},
+  },
+  {
     kind: "facet",
     handle: "sarees",
     title: "Sarees",

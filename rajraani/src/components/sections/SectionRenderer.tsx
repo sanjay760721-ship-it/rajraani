@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ImageLink } from "../ImageLink";
+import { SizeChart } from "./SizeChart";
 import { Fragment } from "react";
 
 import { HeroCarousel } from "./HeroCarousel";
@@ -18,9 +20,16 @@ import type { ArtPair, Section } from "@/lib/content/sections";
 export async function SectionRenderer({
   section,
   index = 1,
+  fallbackHref,
 }: {
   section: Section;
   index?: number;
+  /**
+   * Where a photograph with no link of its own should go — the page's own
+   * collection, usually. Every image on the site is clickable; this is what
+   * makes that true without authoring a link on every band by hand.
+   */
+  fallbackHref?: string;
 }) {
   switch (section.type) {
     case "hero":
@@ -105,6 +114,8 @@ export async function SectionRenderer({
           <RichText section={section} />
         </ScrollReveal>
       );
+    case "sizeChart":
+      return <SizeChart section={section} />;
     case "pullQuote":
       return (
         <ScrollReveal>
@@ -114,13 +125,13 @@ export async function SectionRenderer({
     case "imageWithText":
       return (
         <ScrollReveal>
-          <ImageWithText section={section} />
+          <ImageWithText section={section} fallbackHref={fallbackHref} />
         </ScrollReveal>
       );
     case "imageBand":
       return (
         <ScrollReveal>
-          <ImageBand section={section} />
+          <ImageBand section={section} fallbackHref={fallbackHref} />
         </ScrollReveal>
       );
     case "faqAccordion":
@@ -138,7 +149,7 @@ export async function SectionRenderer({
     case "galleryGrid":
       return (
         <ScrollReveal>
-          <GalleryGrid section={section} />
+          <GalleryGrid section={section} fallbackHref={fallbackHref} />
         </ScrollReveal>
       );
     case "contactPanel":
@@ -216,11 +227,13 @@ function Hero({
         className="h-[82vh] max-h-[900px] min-h-[520px] w-full"
         priority
       />
+      {/* The frame goes where the button goes; the layers above let clicks through. */}
+      <ImageLink href={section.ctaHref} duplicate className="absolute inset-0" />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent"
       />
-      <div className="absolute inset-0 flex items-end">
+      <div className="pointer-events-none absolute inset-0 flex items-end">
         <div className="wrap-wide pb-16 md:pb-24">
           <div className="max-w-[46ch]">
             {section.eyebrow ? (
@@ -228,7 +241,7 @@ function Hero({
             ) : null}
             <Heading className="text-display mt-4 text-bg">{section.title}</Heading>
             <p className="text-prose mt-5 max-w-[38ch] text-bg/85">{section.body}</p>
-            <Link href={section.ctaHref} className="cta-primary mt-8 inline-block">
+            <Link href={section.ctaHref} className="cta-primary pointer-events-auto mt-8 inline-block">
               {section.ctaLabel}
             </Link>
           </div>
@@ -645,8 +658,14 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
      * elements in a column, disagreeing about their own axis.
      */
     <section
-      className={`section-pad ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"} ${section.tone ? CAMPAIGN_TONE[section.tone] : ""}`}
-      style={{ backgroundColor: "var(--color-bg)", backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))" }}
+      className={`section-pad-prose ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"} ${section.tone ? CAMPAIGN_TONE[section.tone] : ""}`}
+      style={{
+        backgroundColor: "var(--color-bg)",
+        backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))",
+        // Inline so it outranks the utility; see `padTop` on the type.
+        ...(section.padTop !== undefined ? { paddingTop: fluidPad(section.padTop) } : {}),
+        ...(section.padBottom !== undefined ? { paddingBottom: fluidPad(section.padBottom) } : {}),
+      }}
     >
       {section.heading ? (
         <Heading
@@ -718,9 +737,12 @@ function PullQuote({ section }: { section: Extract<Section, { type: "pullQuote" 
 
 function ImageWithText({
   section,
+  fallbackHref,
 }: {
   section: Extract<Section, { type: "imageWithText" }>;
+  fallbackHref?: string;
 }) {
+  const href = section.href ?? section.ctaHref ?? fallbackHref;
   /*
    * Order is set on the columns, not by swapping the JSX.
    *
@@ -746,7 +768,7 @@ function ImageWithText({
     <section
       className={`${section.fullWidth ? "" : "wrap section-pad"} ${
         section.ground ? GROUND[section.ground] : ""
-      }`}
+      } ${section.inset && section.ground ? "py-5" : ""}`}
     >
       <div
         className={
@@ -761,14 +783,22 @@ function ImageWithText({
             * wrap the photograph in an anchor to the collection, so the picture
             * is the shortest route to the thing it is a picture of.
             */}
-          {section.href ? (
-            // `overflow-hidden` so the zoom is clipped to the frame rather than
-            // spilling over the band beside it.
-            <Link href={section.href} className="group block overflow-hidden">
-              <BandArt section={section} zoom />
-            </Link>
+          {/*
+            * `overflow-hidden` so the zoom is clipped to the frame rather than
+            * spilling over the band beside it.
+            */}
+          {href ? (
+            <ImageLink
+              href={href}
+              label={section.heading ?? "See more"}
+              className="group block overflow-hidden"
+            >
+              <BandArt section={section} />
+            </ImageLink>
           ) : (
-            <BandArt section={section} />
+            <div className="group overflow-hidden">
+              <BandArt section={section} />
+            </div>
           )}
         </div>
 
@@ -827,7 +857,7 @@ function OverlayCta({ href, label }: { href: string; label: string }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="cta-primary mt-6 inline-block"
+        className="cta-primary pointer-events-auto mt-6 inline-block"
       >
         {label}
       </a>
@@ -835,7 +865,7 @@ function OverlayCta({ href, label }: { href: string; label: string }) {
   }
 
   return (
-    <Link href={href} className="cta-primary mt-6 inline-block">
+    <Link href={href} className="cta-primary pointer-events-auto mt-6 inline-block">
       {label}
     </Link>
   );
@@ -852,6 +882,9 @@ const PAD_TOP = {
   20: "pt-5",
   25: "pt-[25px]",
   30: "pt-[30px]",
+  40: "pt-10",
+  60: "pt-[min(60px,max(20px,3.15vw))]",
+  100: "pt-[min(100px,max(20px,5.25vw))]",
 } as const;
 
 const PAD_BOTTOM = {
@@ -859,41 +892,47 @@ const PAD_BOTTOM = {
   20: "pb-5",
   30: "pb-[30px]",
   40: "pb-10",
+  60: "pb-[min(60px,max(20px,3.15vw))]",
 } as const;
+
+/**
+ * A padding measured at a 1905px window, scaled with the viewport below that
+ * and floored at the base 20px so a phone does not get a desktop's gap.
+ */
+function fluidPad(px: number): string {
+  if (px <= 20) return `${px}px`;
+  return `min(${px}px, max(20px, ${((px / 1905) * 100).toFixed(2)}vw))`;
+}
 
 
 function BandArt({
   section,
-  zoom = false,
 }: {
   section: Extract<Section, { type: "imageWithText" }>;
-  zoom?: boolean;
 }) {
   return (
     <Art
       art={section.art}
-      className={`w-full ${section.ratio === "4/5" ? "aspect-4/5" : "aspect-square"}${
-        /*
-         * scale(1.1) over 0.3s ease-in-out, measured on their
-         *
-         * `ease-[ease-in-out]`, not Tailwind's `ease-in-out`: the utility is
-         * cubic-bezier(0.4, 0, 0.2, 1) while the CSS keyword theirs uses is
-         * (0.42, 0, 0.58, 1). Barely perceptible, but this is the one place
-         * where matching the curve costs nothing.
-         *
-         * `.image-with-text__link:hover .image-with-text__image`. Only the
-         * LINKED bands do this — their overlay banners hold still, and a
-         * photograph that moves under the cursor without being clickable is a
-         * promise the page does not keep.
-         */
-        zoom
-          ? " transition-transform duration-300 ease-[ease-in-out] group-hover:scale-110"
-          : ""
-      }`}
+      className={`w-full ${section.ratio === "4/5" ? "aspect-4/5" : "aspect-square"} ${HOVER_ZOOM}`}
       alt={section.heading ?? ""}
     />
   );
 }
+
+/**
+ * scale(1.1) over 0.3s ease-in-out, measured on their
+ * `.image-with-text__link:hover .image-with-text__image`.
+ *
+ * `ease-[ease-in-out]`, not Tailwind's `ease-in-out`: the utility is
+ * cubic-bezier(0.4, 0, 0.2, 1) while the CSS keyword theirs uses is
+ * (0.42, 0, 0.58, 1).
+ *
+ * Theirs zooms only the linked bands. Ours zooms every band and grid tile,
+ * linked or not, because that was asked for (23 Sep 2026); the parent must be
+ * a `group` with `overflow-hidden`.
+ */
+const HOVER_ZOOM =
+  "transition-transform duration-300 ease-[ease-in-out] group-hover:scale-110";
 
 
 /** Campaign rich-text inks; the colours live in globals.css. */
@@ -934,9 +973,12 @@ const IMAGE_BAND_MOBILE_RATIO = {
 
 function ImageBand({
   section,
+  fallbackHref,
 }: {
   section: Extract<Section, { type: "imageBand" }>;
+  fallbackHref?: string;
 }) {
+  const href = section.href ?? section.overlay?.ctaHref ?? fallbackHref;
   return (
     <section
       className={`${section.bleed ? "" : "wrap"} ${
@@ -958,6 +1000,17 @@ function ImageBand({
           className={`w-full ${IMAGE_BAND_MOBILE_RATIO[section.mobileRatio ?? "3/2"]} ${IMAGE_BAND_RATIO[section.ratio ?? "15/8"]}`}
           alt={section.caption ?? section.overlay?.title ?? ""}
         />
+        {/*
+          * The band is a link to `href`, laid over the photograph. A caption
+          * sits above it and lets clicks through, so the whole frame is one
+          * target; only a caption's own button takes its own clicks.
+          */}
+        <ImageLink
+          href={href}
+          label={section.overlay?.title ?? section.caption ?? "See more"}
+          duplicate={Boolean(section.overlay?.ctaHref && href === section.overlay.ctaHref)}
+          className="absolute inset-0"
+        />
         {section.overlay ? (
           /*
             * A translucent white caption panel, centred, with dark text — not a
@@ -970,9 +1023,11 @@ function ImageBand({
             * the photograph alone and puts the type on its own ground.
             */
           <div
-            className={`absolute inset-0 flex items-center px-5 ${
-              OVERLAY_ALIGN[section.overlay.align ?? "center"]
-            }`}
+            className={`pointer-events-none absolute inset-0 flex px-5 ${
+              section.overlay.mobileAlign === "top"
+                ? "items-start pt-[2%] md:items-center md:pt-0"
+                : "items-center"
+            } ${OVERLAY_ALIGN[section.overlay.align ?? "center"]}`}
           >
             {/*
               * 55% wide, min 350px — their numbers. A `max-w` cap was pulling
@@ -1213,7 +1268,7 @@ function ContactPanel({
                     * follows it, and a paragraph gap between them reads as a
                     * change of subject.
                     */}
-                  {index === 0 ? (
+                  {index === 0 && section.socials.length > 0 ? (
                     <>
                       <br />
                       {section.socialIntro}
@@ -1221,7 +1276,7 @@ function ContactPanel({
                   ) : null}
                 </p>
 
-                {index === 0 ? (
+                {index === 0 && section.socials.length > 0 ? (
                   <div className="space-y-3 pt-1">
                     {section.socials.map((social) => (
                       <p key={social.label} className="text-body">
@@ -1262,6 +1317,7 @@ function ContactPanel({
             ))}
           </div>
 
+          {section.socials.length > 0 ? (
           <ul className="mt-8 flex items-center gap-4">
             {section.socials.map((social) => (
               <li key={social.label}>
@@ -1277,6 +1333,7 @@ function ContactPanel({
               </li>
             ))}
           </ul>
+          ) : null}
         </div>
 
         {/*
@@ -1315,8 +1372,10 @@ const GALLERY_COLUMNS = {
 
 function GalleryGrid({
   section,
+  fallbackHref,
 }: {
   section: Extract<Section, { type: "galleryGrid" }>;
+  fallbackHref?: string;
 }) {
   return (
     <section className="wrap section-pad">
@@ -1344,11 +1403,13 @@ function GalleryGrid({
         {section.items.map((item, index) => {
           const frame = (
             <>
-              <Art
-                art={item.art}
-                className="aspect-square w-full"
-                alt={item.label ?? ""}
-              />
+              <div className="overflow-hidden">
+                <Art
+                  art={item.art}
+                  className={`aspect-square w-full ${HOVER_ZOOM}`}
+                  alt={item.label ?? ""}
+                />
+              </div>
               {item.label ? (
                 <span className="eyebrow mt-3 block text-ink">{item.label}</span>
               ) : null}
@@ -1360,12 +1421,18 @@ function GalleryGrid({
            * the making is photographs and nothing else — wrapping those in an
            * anchor to the same page is a keyboard tab stop that does nothing.
            */
-          return item.href ? (
-            <Link key={index} href={item.href} className="group block">
+          const href = item.href ?? fallbackHref;
+          return href ? (
+            <ImageLink
+              key={index}
+              href={href}
+              label={item.label ?? section.heading ?? "See more"}
+              className="group block"
+            >
               {frame}
-            </Link>
+            </ImageLink>
           ) : (
-            <div key={index}>{frame}</div>
+            <div key={index} className="group">{frame}</div>
           );
         })}
       </div>

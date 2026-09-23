@@ -8,6 +8,7 @@ import { toneFor } from "../Frame";
 import { BRAND } from "@/lib/brand";
 import type { ArtPair, HeroSlide } from "@/lib/content/sections";
 import type Flickity from "flickity";
+import { ImageLink } from "../ImageLink";
 
 /**
  * Hero Carousel — Flickity-based, matching reference exactly.
@@ -194,6 +195,13 @@ export function HeroCarousel({
           aria-hidden={index !== 0}
         >
             <SlideArt art={slide.art} alt={slide.title} priority={index === 0} />
+            {/*
+              * The whole frame goes where the button goes. The scrim and
+              * caption layers above are `pointer-events-none`, so a click
+              * anywhere on the photograph lands here; only the button itself
+              * takes its own clicks.
+              */}
+            <ImageLink href={slide.ctaHref} duplicate className="absolute inset-0" />
 
             {/*
               * Two caption treatments, and the default is the original one.
@@ -212,7 +220,7 @@ export function HeroCarousel({
               <>
                 <div
                   aria-hidden
-                  className={`absolute inset-0 ${
+                  className={`pointer-events-none absolute inset-0 ${
                     align === "right"
                       ? "bg-gradient-to-l from-black/60 via-black/20 to-transparent"
                       : align === "left"
@@ -221,7 +229,7 @@ export function HeroCarousel({
                   }`}
                 />
 
-                <div className="absolute inset-0 flex items-center">
+                <div className="pointer-events-none absolute inset-0 flex items-center">
                   <div className="wrap-wide w-full">
                     <div
                       className={`w-full max-w-[360px] text-center ${
@@ -250,7 +258,7 @@ export function HeroCarousel({
                         */}
                       <Link
                         href={slide.ctaHref}
-                        className="font-display text-[16px] tracking-[1px] mt-7 inline-block border border-black/15 bg-white/80 px-4 py-[5px] text-black transition-colors duration-300 hover:bg-white"
+                        className="pointer-events-auto font-display text-[16px] tracking-[1px] mt-7 inline-block border border-black/15 bg-white/80 px-4 py-[5px] text-black transition-colors duration-300 hover:bg-white"
                       >
                         {slide.ctaLabel}
                       </Link>
@@ -263,11 +271,11 @@ export function HeroCarousel({
                 {/* Scrim Overlay — bottom gradient for text legibility */}
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
                 />
 
                 {/* Slide Content \u2014 bottom-aligned, max-width 46ch */}
-                <div className="absolute inset-0 flex items-end">
+                <div className="pointer-events-none absolute inset-0 flex items-end">
                   <div className="wrap-wide pb-16 md:pb-24">
                     <div className="max-w-[46ch]">
                       {slide.eyebrow ? (
@@ -281,7 +289,7 @@ export function HeroCarousel({
                       </p>
                       <Link
                         href={slide.ctaHref}
-                        className="cta-primary mt-8 inline-block"
+                        className="cta-primary pointer-events-auto mt-8 inline-block"
                       >
                         {slide.ctaLabel}
                       </Link>

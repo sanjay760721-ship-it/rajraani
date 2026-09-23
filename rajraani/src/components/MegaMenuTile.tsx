@@ -55,19 +55,19 @@ export function MegaMenuTile({
          * original. `sizes` is fixed at the two column widths because the
          * column only has two.
          */
-        <div className="relative aspect-3/4 w-full overflow-hidden">
+        <div className="relative aspect-2/3 w-full overflow-hidden">
           <Image
             src={src}
             alt={alt ?? ""}
             fill
-            sizes="(min-width: 1280px) 200px, 160px"
+            sizes="260px"
             loading="lazy"
             className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
         </div>
       ) : (
         <div
-          className="aspect-3/4 w-full"
+          className="aspect-2/3 w-full"
           style={{
             backgroundColor: toneFor(tone),
             backgroundImage:
@@ -77,20 +77,16 @@ export function MegaMenuTile({
       )}
 
       {/*
-        * A permanent scrim under the caption rather than a hover-only one. The
-        * caption has to be legible before the pointer arrives — on a touch
-        * device it never does — and a gradient that only appears on hover is a
-        * label that is unreadable exactly when someone is deciding whether to
-        * click it.
+        * A permanent scrim under the caption rather than a hover-only one: the
+        * caption has to be legible before the pointer arrives, and on a touch
+        * device it never does. Deep enough at the foot of the frame that white
+        * type reads on a pale photograph as well as a dark one.
         */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/65 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/70 via-black/25 to-transparent" />
 
-      <div className="absolute inset-x-4 bottom-3 text-bg">
-        <span className="block font-ui text-[13px] font-semibold">{label}</span>
-        <span className="mt-0.5 block font-ui text-[10px] uppercase tracking-[0.14em] opacity-0 transition-opacity duration-300 group-hover:opacity-80">
-          Explore
-        </span>
-      </div>
+      <span className="absolute inset-x-3 bottom-[9%] text-center font-display text-[15px] uppercase leading-[1.3] tracking-[1.5px] text-white [text-shadow:0_1px_3px_rgb(0_0_0/0.45)]">
+        {label}
+      </span>
     </Link>
   );
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import { toneFor } from "../Frame";
 import type { ArtPair } from "@/lib/content/sections";
+import { ImageLink } from "../ImageLink";
 
 interface CampaignSlide {
   id: string;
@@ -133,9 +134,11 @@ export function CampaignSlideshow({ slides }: CampaignSlideshowProps) {
               </div>
             </div>
 
-            {/* Right: the photograph, flush to the edge. */}
-            <div
-              className="relative order-1 aspect-square w-full md:order-2 md:aspect-auto md:min-h-[800px]"
+            {/* Right: the photograph, flush to the edge, and a link to the same place as the words. */}
+            <ImageLink
+              href={slide.ctaHref}
+              duplicate
+              className="relative order-1 block aspect-square w-full md:order-2 md:aspect-auto md:min-h-[800px]"
               style={{ backgroundColor: toneFor(slide.art.desktop.tone) }}
             >
               {slide.art.desktop.src ? (
@@ -149,7 +152,7 @@ export function CampaignSlideshow({ slides }: CampaignSlideshowProps) {
                   className="object-cover object-center"
                 />
               ) : null}
-            </div>
+            </ImageLink>
           </div>
         );
       })}

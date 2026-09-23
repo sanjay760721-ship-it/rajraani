@@ -6,15 +6,19 @@ import { CurrencySelector } from "@/components/CurrencySelector";
 import { WishlistButton } from "@/components/WishlistButton";
 import { useCart } from "@/components/cart-context";
 import { BRAND } from "@/lib/brand";
+import {
+  UTILITY_BADGE,
+  UTILITY_CAPTION,
+  UTILITY_ICON,
+  UTILITY_ITEM,
+} from "@/components/utility-styles";
 
 /**
  * Utility / Secondary Top Bar — Desktop only.
  *
- * Spec:
- * - Height: 67px (homepagespec.md §1)
- * - Background: --color-bg, with a 1px --color-rule bottom border
+ * - Height: 64px, --color-surface-notice, 1px --color-rule bottom border
  * - Left corner: the house tagline from BRAND (italic display serif)
- * - Right side: Search | Currency Selector | Login | Wishlist (Red Heart) | Cart
+ * - Right side: Search | Currency | Login | Wishlist | Cart, icon over caption
  */
 export function UtilityBar() {
   const { open: openSearch } = useSearchModal();
@@ -24,101 +28,89 @@ export function UtilityBar() {
 
   return (
     <div
-      className="hidden lg:flex items-center justify-between h-[42px] border-b border-rule px-8 xl:px-14 w-full select-none"
+      className="hidden lg:flex items-center justify-between h-[64px] border-b border-rule px-8 xl:px-14 w-full select-none"
       style={{ backgroundColor: "var(--color-surface-notice)" }}
       aria-label="Utility navigation"
     >
       {/* Left Corner: Tagline */}
       <div className="flex items-center justify-start min-w-0">
-        <p className="font-display italic text-[13.5px] xl:text-[14px] text-ink font-normal tracking-wide">
+        <p className="font-display italic text-[15px] xl:text-[16px] text-ink font-normal tracking-[0.04em]">
           {BRAND.line}
         </p>
       </div>
 
       {/* Right Side: Search, Currency Selector, Login, Wishlist, Cart */}
-      <div className="flex items-center justify-end gap-6 xl:gap-8 min-w-0">
+      <div className="flex items-stretch justify-end gap-4 xl:gap-6 h-full min-w-0">
         {/* Search */}
         <button
           type="button"
           onClick={openSearch}
-          className="font-display flex items-center gap-1.5 text-ink hover:text-accent-hover transition-colors py-0.5 text-[13px] tracking-wide cursor-pointer group"
+          className={UTILITY_ITEM}
           aria-label="Search catalogue"
         >
           <svg
-            width="14"
-            height="14"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.75"
+            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-ink group-hover:text-accent-hover transition-colors"
+            className={UTILITY_ICON}
             aria-hidden="true"
           >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            <circle cx="11" cy="11" r="7.5" />
+            <line x1="20.5" y1="20.5" x2="16.4" y2="16.4" />
           </svg>
-          <span>Search</span>
+          <span className={UTILITY_CAPTION}>Search</span>
         </button>
 
         {/* Currency selector */}
         <CurrencySelector />
 
         {/* Login */}
-        <Link
-          href="/account"
-          className="font-display flex items-center gap-1.5 text-ink hover:text-accent-hover transition-colors text-[13px] tracking-wide"
-          aria-label="Login to account"
-        >
+        <Link href="/account" className={UTILITY_ITEM} aria-label="Login to account">
           <svg
-            width="14"
-            height="14"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.75"
+            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
+            className={UTILITY_ICON}
             aria-hidden="true"
           >
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="10" r="3.25" />
+            <path d="M6.2 18.6a6.5 6.5 0 0 1 11.6 0" />
           </svg>
-          <span>Login</span>
+          <span className={UTILITY_CAPTION}>Login</span>
         </Link>
 
         {/* Wishlist (with red heart) */}
-        <WishlistButton />
+        <WishlistButton variant="stacked" />
 
         {/* Cart */}
         <Link
           href="/cart"
-          className="font-display flex items-center gap-1.5 text-ink hover:text-accent-hover transition-colors text-[13px] tracking-wide cursor-pointer group"
+          className={UTILITY_ITEM}
           aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
         >
           <svg
-            width="15"
-            height="15"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.75"
+            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-ink group-hover:text-accent-hover transition-colors"
+            className={UTILITY_ICON}
             aria-hidden="true"
           >
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
             <line x1="3" y1="6" x2="21" y2="6" />
             <path d="M16 10a4 4 0 0 1-8 0" />
           </svg>
-          <span>Cart</span>
-          {itemCount > 0 && (
-            <span className="bg-accent-hover text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full font-mono leading-none">
-              {itemCount}
-            </span>
-          )}
+          <span className={UTILITY_CAPTION}>Cart</span>
+          {itemCount > 0 && <span className={UTILITY_BADGE}>{itemCount}</span>}
         </Link>
       </div>
     </div>
