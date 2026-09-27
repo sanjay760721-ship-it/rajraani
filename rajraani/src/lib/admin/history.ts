@@ -71,9 +71,16 @@ export function rawPage(slug: string): string | null {
   return row ? JSON.stringify(row) : null;
 }
 
+/** A collection's name, intro, filters and hand-picked pieces — everything the admin edits. */
 export function rawCollection(handle: string): string | null {
-  const row = db().prepare("SELECT title, seo_intro FROM collection WHERE handle = ?").get(handle);
-  return row ? JSON.stringify(row) : null;
+  const row = db()
+    .prepare("SELECT handle, title, seo_intro, kind, facets_json, campaign_slug, position FROM collection WHERE handle = ?")
+    .get(handle) as Record<string, unknown> | undefined;
+  if (!row) return null;
+  const pieces = (
+    db().prepare("SELECT product_id FROM collection_product WHERE collection_handle = ? ORDER BY position").all(handle) as { product_id: number }[]
+  ).map((piece) => piece.product_id);
+  return JSON.stringify({ ...row, pieces });
 }
 
 export function rawProduct(id: number): string | null {
@@ -225,6 +232,41 @@ function writeSetting(key: string, json: string | null) {
       .run(key, json);
 }
 
+/** Make a collection match a recorded state; null means it did not exist. */
+function writeCollection(handle: string, json: string | null) {
+  if (json === null) {
+    db().prepare("DELETE FROM collection WHERE handle = ?").run(handle);
+    return;
+  }
+  const value = JSON.parse(json) as {
+    title: string;
+    seo_intro: string;
+    kind?: string;
+    facets_json?: string | null;
+    campaign_slug?: string | null;
+    position?: number;
+    pieces?: number[];
+  };
+  const exists = db().prepare("SELECT 1 FROM collection WHERE handle = ?").get(handle);
+  if (exists) {
+    db().prepare("UPDATE collection SET title = ?, seo_intro = ? WHERE handle = ?").run(value.title, value.seo_intro, handle);
+    if (value.kind === "facet" && value.facets_json) {
+      db().prepare("UPDATE collection SET facets_json = ? WHERE handle = ?").run(value.facets_json, handle);
+    }
+  } else {
+    db()
+      .prepare("INSERT INTO collection (handle, title, seo_intro, kind, facets_json, campaign_slug, position) VALUES (?, ?, ?, ?, ?, ?, ?)")
+      .run(handle, value.title, value.seo_intro, value.kind ?? "edit", value.facets_json ?? null, value.campaign_slug ?? null, value.position ?? 0);
+  }
+  // Older log entries recorded only the name and intro; leave pieces alone then.
+  if (value.pieces && value.kind !== "facet") {
+    db().prepare("DELETE FROM collection_product WHERE collection_handle = ?").run(handle);
+    value.pieces.forEach((id, position) =>
+      db().prepare("INSERT OR IGNORE INTO collection_product (collection_handle, product_id, position) VALUES (?, ?, ?)").run(handle, id, position),
+    );
+  }
+}
+
 function writePage(slug: string, json: string | null) {
   if (json === null) {
     db().prepare("DELETE FROM page WHERE slug = ?").run(slug);
@@ -288,9 +330,8 @@ export function restoreChange(id: number, who: string): { ok: true; refresh: str
       break;
     case "collection": {
       now = rawCollection(target);
-      if (!before) return { ok: false, error: "Nothing to put back." };
-      const value = JSON.parse(before) as { title: string; seo_intro: string };
-      db().prepare("UPDATE collection SET title = ?, seo_intro = ? WHERE handle = ?").run(value.title, value.seo_intro, target);
+      writeCollection(target, before);
+      refresh = [`/collections/${target}`];
       break;
     }
     case "product": {

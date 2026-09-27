@@ -1,4 +1,11 @@
-import { CollectionsManager, type CollectionView } from "@/components/admin/CollectionsManager";
+import {
+  CollectionsManager,
+  type CollectionView,
+  type FilterGroup,
+  type PieceOption,
+} from "@/components/admin/CollectionsManager";
+import { formVocabulary } from "@/lib/admin/vocabulary";
+import { listProductsForAdmin } from "@/lib/data/admin-queries";
 import { catalogue } from "@/lib/data/catalogue";
 import { FACET_GROUP_LABELS, termsForGroup, type FacetGroup } from "@/lib/domain/taxonomy";
 
@@ -38,23 +45,54 @@ function describe(facets: Readonly<Record<string, readonly string[]>>): string {
 }
 
 export default async function AdminCollectionsRoute() {
-  const collections = await catalogue.listCollections();
+  const [collections, shopProducts] = await Promise.all([catalogue.listCollections(), catalogue.listProducts()]);
+  const rows = listProductsForAdmin();
+  const idByHandle = new Map(rows.map((row) => [row.handle, row.id]));
+  const thumbByHandle = new Map(shopProducts.map((product) => [product.handle, product.images[0]?.src]));
+
+  const pieces: PieceOption[] = rows
+    .map((row) => ({
+      id: row.id,
+      name: row.poetic_name,
+      title: row.title,
+      thumb: thumbByHandle.get(row.handle),
+      hidden: row.published !== 1,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const vocabulary = formVocabulary();
+  const filterGroups: FilterGroup[] = (
+    [
+      ["garment", "What it is", vocabulary.garment],
+      ["weave", "Weave", vocabulary.weave],
+      ["fabric", "Fabric", vocabulary.fabric],
+      ["colour", "Main colour", vocabulary.colour],
+      ["motif", "Motif", vocabulary.motif],
+      ["zari", "Zari & thread", vocabulary.zari],
+    ] as const
+  ).map(([group, label, options]) => ({ group, label, options: options.map((option) => ({ slug: option.slug, name: option.name })) }));
 
   const views: CollectionView[] = await Promise.all(
     collections.map(async (collection) => {
-      const pieces = await catalogue.productsInCollection(collection);
+      const inside = await catalogue.productsInCollection(collection);
       return {
         handle: collection.handle,
         title: collection.title,
         intro: collection.seoIntro,
+        kind: collection.kind,
         how:
           collection.kind === "facet"
             ? describe(collection.facets)
             : collection.kind === "campaign"
-              ? "The pieces of this campaign. A piece joins it when its Campaign is set on the product."
-              : "Hand-picked pieces.",
-        count: pieces.length,
-        thumbs: pieces
+              ? "This campaign's pieces, picked by hand."
+              : "Pieces picked by hand, in the order you choose.",
+        facets: collection.kind === "facet" ? Object.fromEntries(Object.entries(collection.facets).map(([k, v]) => [k, [...v]])) : {},
+        pieceIds:
+          collection.kind === "facet"
+            ? []
+            : collection.productHandles.map((handle) => idByHandle.get(handle)).filter((id): id is number => id !== undefined),
+        count: inside.length,
+        thumbs: inside
           .slice(0, 6)
           .map((piece) => ({ src: piece.images[0]?.src, name: piece.poeticName }))
           .filter((thumb): thumb is { src: string; name: string } => !!thumb.src),
@@ -62,5 +100,5 @@ export default async function AdminCollectionsRoute() {
     }),
   );
 
-  return <CollectionsManager collections={views} />;
+  return <CollectionsManager collections={views} pieces={pieces} filterGroups={filterGroups} />;
 }
