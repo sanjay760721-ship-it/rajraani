@@ -6,6 +6,8 @@ import { useState, useTransition } from "react";
 import { adjustStockAction, togglePublishedAction } from "@/lib/admin/product-actions";
 import type { AdminProductRow } from "@/lib/data/admin-queries";
 
+import { DuplicateButton, InlinePrice, SpreadsheetPanel } from "./CatalogueTools";
+
 /**
  * Products & stock, for the person who runs the shop floor.
  *
@@ -15,7 +17,6 @@ import type { AdminProductRow } from "@/lib/data/admin-queries";
  * it, open it to edit.
  */
 
-const rupees = (minor: number) => `₹${(minor / 100).toLocaleString("en-IN")}`;
 
 type Filter = "all" | "live" | "hidden" | "soldout" | "low";
 
@@ -107,8 +108,8 @@ export function ProductsBoard({
         <div>
           <h1 className="a-heading-lg">Products &amp; stock</h1>
           <p className="a-body-md mt-1" style={{ color: "var(--a-ink-variant)" }}>
-            Every piece in the shop. Use − and + to change how many you have; at zero it shows as
-            sold out.
+            Every piece in the shop. Click a price to change it; use − and + for stock — at zero a
+            piece shows as sold out.
           </p>
         </div>
         <Link href="/admin/products/new" className="a-btn-primary">
@@ -121,6 +122,8 @@ export function ProductsBoard({
           {notice}
         </p>
       ) : null}
+
+      <SpreadsheetPanel />
 
       <div className="flex flex-wrap items-center gap-2">
         {FILTERS.map((entry) => (
@@ -179,7 +182,7 @@ export function ProductsBoard({
                   {product.title}
                 </p>
                 <p className="a-label mt-1" style={{ color: "var(--a-outline)" }}>
-                  {rupees(product.price_minor)} ·{" "}
+                  <InlinePrice id={product.id} minor={product.price_minor} /> ·{" "}
                   {product.photo_count === 0
                     ? "No photos uploaded yet"
                     : `${product.photo_count} photo${product.photo_count === 1 ? "" : "s"}`}
@@ -200,6 +203,7 @@ export function ProductsBoard({
                     {product.published === 1 ? "Hide from shop" : "Show on shop"}
                   </button>
                 </form>
+                <DuplicateButton id={product.id} name={product.poetic_name} />
                 {product.published === 1 ? (
                   <a href={`/products/${product.handle}`} target="_blank" rel="noreferrer" className="a-btn-ghost">
                     See ↗
