@@ -31,6 +31,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/admin", label: "Start here", icon: "dashboard", exact: true, live: true },
       { href: "/admin/text", label: "Change text", icon: "editorials", live: true },
       { href: "/admin/menu", label: "Menu", icon: "collections", live: true },
+      { href: "/admin/footer", label: "Footer", icon: "collections", live: true },
       { href: "/admin/homepage", label: "Homepage", icon: "homepage", live: true },
       { href: "/admin/pages", label: "Pages", icon: "editorials", live: true },
       { href: "/admin/media", label: "Photos", icon: "media", live: true },

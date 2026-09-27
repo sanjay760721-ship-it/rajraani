@@ -39,6 +39,7 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
         action: "Edit the menu",
       },
       { title: "Contact details", what: "Email, phone and support hours in the footer", href: TEXT("Contact details (footer)"), action: "Change contact details" },
+      { title: "Footer", what: "The links at the bottom of every page, social links, the newsletter and its pop-up", href: "/admin/footer", action: "Edit the footer" },
     ],
   },
   {

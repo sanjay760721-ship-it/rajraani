@@ -13,6 +13,7 @@ import { SiteEditor } from "@/components/site-editor/SiteEditor";
 import { getSiteText } from "@/lib/content/site-text";
 import { MenuProvider } from "@/components/menu-context";
 import { getMenu } from "@/lib/content/menu";
+import { getFooter } from "@/lib/content/footer";
 
 /** The shop. Everything a customer sees is inside this layout. */
 export default async function StorefrontLayout({
@@ -23,6 +24,7 @@ export default async function StorefrontLayout({
   const siteText = await getSiteText();
   // The menu, as the owner last saved it in the admin.
   const menu = await getMenu();
+  const footer = await getFooter();
 
   return (
     <SiteTextProvider value={siteText}>
@@ -45,10 +47,10 @@ export default async function StorefrontLayout({
             <main id="main" className="flex-1">
               {children}
             </main>
-            <SiteFooter text={siteText} />
+            <SiteFooter text={siteText} footer={footer} />
             <CartDrawer />
             <SearchModal />
-            <NewsletterPopup />
+            <NewsletterPopup settings={footer} />
             {/* Invisible to visitors; the editing bar for a signed-in admin. */}
             <SiteEditor />
           </SearchProvider>

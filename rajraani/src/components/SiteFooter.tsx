@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { BRAND } from "@/lib/brand";
 import type { SiteText } from "@/lib/content/site-text-defs";
+import type { FooterSettings } from "@/lib/content/footer-defs";
+import { FooterNewsletterForm } from "./NewsletterForm";
 
 /**
  * Footer.
@@ -22,32 +23,6 @@ import type { SiteText } from "@/lib/content/site-text-defs";
  * goes to a page that exists — theirs lists a Mumbai store, press, careers and
  * gift cards, none of which this business has.
  */
-
-type FooterLink = { label: string; href: string };
-
-const POLICY_LINKS: readonly FooterLink[] = [
-  { label: "Returns & Cancellation", href: "/pages/returns" },
-  { label: "Delivery & Shipping", href: "/pages/shipping" },
-  { label: "Privacy Policy", href: "/pages/privacy" },
-  { label: "Terms & Conditions", href: "/pages/terms" },
-];
-
-const ABOUT_LINKS: readonly FooterLink[] = [
-  { label: "Our Story", href: "/pages/our-story" },
-  { label: "Our Banaras Store", href: "/pages/banaras-store" },
-  { label: "FAQs", href: "/pages/faqs" },
-  { label: "Size Guide", href: "/pages/size-guide" },
-  // Their "Gift Cards"; there is no gift-card product here, so the gifting edit.
-  { label: "Gifting", href: "/collections/gifts" },
-  { label: "Contact Us", href: "/pages/contact" },
-];
-
-// From BRAND, so the footer and the contact page cannot disagree. Empty until
-// the real accounts exist, in which case the row is not drawn at all.
-const SOCIAL_LINKS = BRAND.socials.map((social) => ({
-  ...social,
-  icon: social.label.toLowerCase(),
-}));
 
 const HEADING = "font-display text-[18px] leading-[1.5] font-normal text-ink-body";
 const LINK = "hover:underline";
@@ -83,7 +58,10 @@ function SocialIcon({ name, className }: { name: string; className?: string }) {
 }
 
 /** Contact details come from the admin (Site-wide text), via the layout. */
-export function SiteFooter({ text }: { text: SiteText }) {
+export function SiteFooter({ text, footer }: { text: SiteText; footer: FooterSettings }) {
+  // Edited in the admin under Footer; defaults in content/footer-defs.ts.
+  const socials = footer.socials.map((social) => ({ ...social, icon: social.label.toLowerCase() }));
+  const [usefulColumn, aboutColumn] = footer.columns;
   const email = text["contact.email"];
   const phone = text["contact.phone"];
   const whatsapp = `https://wa.me/${phone.replace(/[^0-9]/g, "")}`;
@@ -96,7 +74,7 @@ export function SiteFooter({ text }: { text: SiteText }) {
         <div className="mx-auto grid max-w-[1200px] font-ui text-[13px] leading-[1.5] text-ink-body md:grid-cols-3">
           {/* 1 · Talk To Us, then the policies */}
           <div className="px-5 py-2.5">
-            <h2 className={HEADING}>Talk To Us</h2>
+            <h2 className={HEADING}>{footer.talkHeading}</h2>
             <p className="mt-1">
               Email:{" "}
               <a href={`mailto:${email}`} className={LINK}>
@@ -109,11 +87,11 @@ export function SiteFooter({ text }: { text: SiteText }) {
               </a>
               <br />
               <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={LINK}>
-                Start a WhatsApp conversation
+                {footer.whatsappLabel}
               </a>
             </p>
             <p className="mt-5 italic">
-              Support hours:
+              {footer.hoursLabel}
               {hours.map((line) => (
                 <span key={line}>
                   <br />
@@ -122,10 +100,10 @@ export function SiteFooter({ text }: { text: SiteText }) {
               ))}
             </p>
 
-            <h2 className={`${HEADING} mt-5`}>Useful Information</h2>
+            <h2 className={`${HEADING} mt-5`}>{usefulColumn?.heading}</h2>
             <ul className="mt-1">
-              {POLICY_LINKS.map((link) => (
-                <li key={link.href}>
+              {(usefulColumn?.links ?? []).map((link) => (
+                <li key={`${link.href}:${link.label}`}>
                   <Link href={link.href} className={LINK}>
                     {link.label}
                   </Link>
@@ -136,19 +114,19 @@ export function SiteFooter({ text }: { text: SiteText }) {
 
           {/* 2 · About, with the social icons under the list */}
           <div className="px-5 py-2.5">
-            <h2 className={HEADING}>About</h2>
+            <h2 className={HEADING}>{aboutColumn?.heading}</h2>
             <ul className="mt-1">
-              {ABOUT_LINKS.map((link) => (
-                <li key={link.href}>
+              {(aboutColumn?.links ?? []).map((link) => (
+                <li key={`${link.href}:${link.label}`}>
                   <Link href={link.href} className={LINK}>
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            {SOCIAL_LINKS.length > 0 ? (
+            {socials.length > 0 ? (
               <div className="mt-5 flex items-center gap-[5px]" aria-label="Social links">
-                {SOCIAL_LINKS.map((social) => (
+                {socials.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
@@ -166,29 +144,9 @@ export function SiteFooter({ text }: { text: SiteText }) {
 
           {/* 3 · Stay in touch */}
           <div className="px-5 py-2.5">
-            <h2 className={HEADING}>Stay in touch</h2>
-            <p className="mt-1">Occasional letters about what has come off the loom.</p>
-            <form className="mt-2" aria-label="Newsletter signup">
-              <label htmlFor="newsletter-email" className="block text-[14px]">
-                Email<span aria-hidden="true">*</span>
-              </label>
-              <div className="mt-1 flex gap-3">
-                <input
-                  id="newsletter-email"
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  required
-                  className="h-[35px] min-w-0 flex-1 border border-footer-band bg-white px-3 text-[14px] text-ink outline-none focus:border-ink-body"
-                />
-                <button
-                  type="submit"
-                  className="h-[35px] shrink-0 border border-transparent bg-white/80 px-[17.5px] font-display text-[17px] tracking-[1px] text-ink transition-colors hover:bg-white cursor-pointer"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </form>
+            <h2 className={HEADING}>{footer.newsletterHeading}</h2>
+            <p className="mt-1">{footer.newsletterText}</p>
+            <FooterNewsletterForm button={footer.newsletterButton} />
           </div>
         </div>
       </section>
@@ -197,7 +155,7 @@ export function SiteFooter({ text }: { text: SiteText }) {
         <p>
           © {new Date().getFullYear()}{" "}
           <Link href="/" className="hover:underline">
-            {BRAND.legalName}
+            {footer.copyrightName}
           </Link>
           .
         </p>

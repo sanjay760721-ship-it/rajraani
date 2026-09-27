@@ -499,3 +499,12 @@ CREATE TABLE IF NOT EXISTS change_log (
 );
 
 CREATE INDEX IF NOT EXISTS change_log_target_idx ON change_log (kind, target, id);
+
+-- Newsletter sign-ups from the footer form and the pop-up. Also created on
+-- first use by lib/newsletter.ts.
+CREATE TABLE IF NOT EXISTS newsletter_subscriber (
+  id         INTEGER PRIMARY KEY,
+  email      TEXT NOT NULL UNIQUE,
+  source     TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);

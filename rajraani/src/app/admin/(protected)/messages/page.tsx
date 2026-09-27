@@ -1,4 +1,6 @@
+import { removeSubscriberAction } from "@/lib/admin/footer-actions";
 import { setMessageAnsweredAction } from "@/lib/admin/message-actions";
+import { listSubscribers } from "@/lib/newsletter";
 import { db } from "@/lib/db/client";
 
 export const metadata = { title: "Messages" };
@@ -12,6 +14,7 @@ type Message = { id: number; name: string; email: string; message: string; handl
  * so a customer who wrote in would never have been answered.
  */
 export default function AdminMessagesRoute() {
+  const subscribers = listSubscribers();
   const messages = db()
     .prepare("SELECT id, name, email, message, handled, created_at FROM enquiry ORDER BY handled ASC, created_at DESC LIMIT 300")
     .all() as unknown as Message[];
@@ -66,6 +69,41 @@ export default function AdminMessagesRoute() {
           ))}
         </ul>
       )}
+
+      <section className="a-card p-5" style={{ borderRadius: "var(--a-radius-md)" }}>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="a-heading-sm">Newsletter sign-ups</h2>
+            <p className="a-body-sm" style={{ color: "var(--a-ink-variant)" }}>
+              {subscribers.length === 0
+                ? "Nobody yet. Sign-ups from the footer and the pop-up appear here."
+                : `${subscribers.length} ${subscribers.length === 1 ? "person has" : "people have"} signed up. Download the list to send them a letter from any mailing service.`}
+            </p>
+          </div>
+          {subscribers.length ? (
+            <a href="/admin/api/subscribers" className="a-btn-secondary">
+              Download list
+            </a>
+          ) : null}
+        </div>
+        {subscribers.length ? (
+          <ul className="mt-3 divide-y" role="list">
+            {subscribers.slice(0, 100).map((subscriber) => (
+              <li key={subscriber.email} className="flex flex-wrap items-center gap-4 py-2" style={{ borderColor: "var(--a-outline-variant)" }}>
+                <span className="a-body-sm min-w-[12rem] flex-1">{subscriber.email}</span>
+                <span className="a-label" style={{ color: "var(--a-outline)" }}>
+                  {new Date(subscriber.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short" })} · {subscriber.source === "popup" ? "pop-up" : "footer"}
+                </span>
+                <form action={removeSubscriberAction.bind(null, subscriber.email)}>
+                  <button type="submit" className="a-label underline" style={{ color: "var(--a-negative)" }}>
+                    Remove
+                  </button>
+                </form>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </section>
     </div>
   );
 }
