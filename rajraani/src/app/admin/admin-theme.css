@@ -237,6 +237,25 @@
 }
 
 /* Buttons. */
+/*
+ * Every button style is a box, whether it is on a <button> or a link.
+ *
+ * Without a display rule a link styled as a button stays `inline`, and its
+ * vertical padding spills over the line above and below: a row of button-links
+ * that wraps onto a second line overlaps itself (seen on the Photos screen,
+ * 27 Sep 2026). In the components layer so a utility such as `justify-start`
+ * on one button can still override the centring.
+ */
+@layer components {
+  .admin-surface :where(.a-btn-primary, .a-btn-secondary, .a-btn-accent, .a-btn-ghost, .a-btn-icon) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
 .admin-surface .a-btn-primary {
   background-color: var(--a-ink);
   color: var(--a-surface-lowest);
