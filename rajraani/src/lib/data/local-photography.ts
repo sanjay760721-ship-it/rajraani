@@ -100,6 +100,9 @@ export const HAS_LOCAL_PHOTOGRAPHY = readStagedPhotography().size > 0;
 function withStagedImages(product: Product): Product {
   const files = staged().get(product.handle);
   if (!files || product.images.length === 0) return product;
+  // Real photographs uploaded in the admin always win. Once a piece has any,
+  // the stand-ins are dropped for it entirely rather than mixed in.
+  if (product.images.some((image) => image.src)) return product;
 
   const template = product.images;
   const last = template[template.length - 1] as ProductImage;

@@ -19,34 +19,41 @@ type NavGroup = { title: string; items: NavItem[] };
 
 const NAV_GROUPS: NavGroup[] = [
   {
+    // How the shop is doing, at a glance — first, because it is the question
+    // asked most often.
     title: "Overview",
-    items: [{ href: "/admin", label: "Dashboard", icon: "dashboard", exact: true, live: true }],
+    items: [{ href: "/admin/overview", label: "Overview", icon: "analytics", live: true }],
   },
   {
-    title: "Catalogue",
+    title: "Your website",
     items: [
+      { href: "/admin", label: "Start here", icon: "dashboard", exact: true, live: true },
+      { href: "/admin/text", label: "Change text", icon: "editorials", live: true },
+      { href: "/admin/menu", label: "Menu", icon: "collections", live: true },
+      { href: "/admin/homepage", label: "Homepage", icon: "homepage", live: true },
+      { href: "/admin/pages", label: "Pages", icon: "editorials", live: true },
+      { href: "/admin/media", label: "Photos", icon: "media", live: true },
+    ],
+  },
+  {
+    title: "Shop",
+    items: [
+      { href: "/admin/products", label: "Products & stock", icon: "collections", live: true },
       { href: "/admin/collections", label: "Collections", icon: "collections", live: true },
-      { href: "/admin/taxonomy", label: "Taxonomy", icon: "taxonomy", live: true },
-      { href: "/admin/artisans", label: "Artisans", icon: "artisans" },
+      { href: "/admin/taxonomy", label: "Weaves, colours, fabrics", icon: "taxonomy", live: true },
+      { href: "/admin/orders", label: "Orders", icon: "orders", live: true },
+      { href: "/admin/messages", label: "Messages", icon: "customers", live: true },
     ],
   },
   {
-    title: "Content",
+    // Screens that are still mock-ups. Kept visible so they are not forgotten,
+    // but set apart so nobody expects them to save.
+    title: "Not ready yet",
     items: [
-      { href: "/admin/homepage", label: "Homepage", icon: "homepage" },
-      { href: "/admin/media", label: "Media", icon: "media", live: true },
-      { href: "/admin/editorials", label: "Editorials", icon: "editorials" },
-      { href: "/admin/faqs", label: "FAQs", icon: "faqs" },
-    ],
-  },
-  {
-    title: "Operations",
-    items: [
-      { href: "/admin/orders", label: "Orders", icon: "orders" },
-      { href: "/admin/analytics", label: "Analytics", icon: "analytics" },
       { href: "/admin/customers", label: "Customers", icon: "customers" },
       { href: "/admin/appointments", label: "Appointments", icon: "appointments" },
       { href: "/admin/discounts", label: "Discounts", icon: "discounts" },
+      { href: "/admin/artisans", label: "Weavers", icon: "artisans" },
     ],
   },
 ];

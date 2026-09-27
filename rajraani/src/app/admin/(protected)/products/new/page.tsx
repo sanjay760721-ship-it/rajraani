@@ -9,11 +9,13 @@ export const metadata = { title: "Add a piece" };
 export default function NewProductPage() {
   return (
     <div className="space-y-8">
-      <Link href="/admin" className="a-btn-ghost inline-flex items-center gap-2">
-        <span className="material-symbols-outlined">arrow_back</span>
-        Pieces
+      <Link href="/admin/products" className="a-btn-ghost inline-flex items-center gap-2">
+        ← All products
       </Link>
       <h1 className="a-display-md">Add a piece</h1>
+      <p className="a-body-md" style={{ color: "var(--a-ink-variant)" }}>
+        Fill in the details and press Save. You can add photos straight after.
+      </p>
 
       <ProductForm vocabulary={formVocabulary()} campaigns={campaignOptions()} />
     </div>

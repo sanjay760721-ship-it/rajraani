@@ -51,8 +51,12 @@ export const content: ContentWriteRepository = {
   },
 
   async listPages(): Promise<readonly PageContent[]> {
+    // Per page, like getPage: a saved page replaces its seed, and seed pages
+    // nobody has edited yet stay listed. (This used to return the stored rows
+    // alone once any existed, so saving one page hid the other nineteen.)
     const stored = await inner.listPages();
-    return stored.length > 0 ? stored : seedPages();
+    const saved = new Set(stored.map((page) => page.slug));
+    return [...stored, ...seedPages().filter((page) => !saved.has(page.slug))];
   },
 
   async getPage(slug: string): Promise<PageContent | undefined> {

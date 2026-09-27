@@ -95,3 +95,43 @@ export async function deletePageAction(slug: string): Promise<SaveResult> {
   revalidatePath(`/pages/${slug}`);
   return { ok: true };
 }
+
+export type CreatePageResult = { ok: true; slug: string } | { ok: false; error: string };
+
+/**
+ * A new page, as a copy of an existing one — hidden until the owner publishes it.
+ *
+ * Starting from a copy rather than a blank page is deliberate: a new campaign
+ * page copied from Kala already has the right bands in the right order, and
+ * the owner only has to change the words and photos.
+ */
+export async function createPageAction(fromSlug: string, title: string): Promise<CreatePageResult> {
+  await requireAdmin();
+  const name = title.trim();
+  if (!name) return { ok: false, error: "Give the new page a name." };
+  if (name.length > 80) return { ok: false, error: "Keep the name under 80 characters." };
+
+  const source = await content.getPage(fromSlug);
+  if (!source) return { ok: false, error: "The page to copy no longer exists." };
+
+  const base =
+    name
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 60) || "page";
+  const taken = new Set((await content.listPages()).map((page) => page.slug));
+  let slug = base;
+  for (let n = 2; taken.has(slug); n++) slug = `${base}-${n}`;
+
+  await content.savePage({
+    slug,
+    kind: source.kind,
+    title: name,
+    standfirst: source.standfirst,
+    sections: structuredClone(source.sections),
+    published: false,
+  });
+  return { ok: true, slug };
+}

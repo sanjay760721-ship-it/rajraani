@@ -2,19 +2,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ProductForm } from "@/components/admin/ProductForm";
+import { ProductPhotos, type PhotoSlot } from "@/components/admin/ProductPhotos";
 import { deleteProductAction } from "@/lib/admin/product-actions";
 import { formVocabulary } from "@/lib/admin/vocabulary";
-import {
-  campaignOptions,
-  getProductForEdit,
-  listImages,
-} from "@/lib/data/admin-queries";
+import { catalogue } from "@/lib/data/catalogue";
+import { campaignOptions, getProductForEdit, listImages } from "@/lib/data/admin-queries";
+import { listMedia } from "@/lib/media/library";
 
 export const metadata = { title: "Edit piece" };
 
-export default async function EditProductPage(
-  props: PageProps<"/admin/products/[id]">,
-) {
+export default async function EditProductPage(props: PageProps<"/admin/products/[id]">) {
   const { id } = await props.params;
   const { saved } = await props.searchParams;
 
@@ -24,13 +21,19 @@ export default async function EditProductPage(
   const product = getProductForEdit(productId);
   if (!product) notFound();
 
-  const images = listImages(productId);
+  // What the shop shows today, so slots still on stand-in photos can say so.
+  const onShop = await catalogue.getProduct(product.handle);
+  const slots: PhotoSlot[] = listImages(productId).map((image, index) => ({
+    id: image.id,
+    alt: image.alt,
+    url: image.url,
+    standIn: image.url ? undefined : onShop?.images[index]?.src,
+  }));
 
   return (
-    <div className="space-y-8">
-      <Link href="/admin" className="a-btn-ghost inline-flex items-center gap-2">
-        <span className="material-symbols-outlined">arrow_back</span>
-        Pieces
+    <div className="space-y-10">
+      <Link href="/admin/products" className="a-btn-ghost inline-flex items-center gap-2">
+        ← All products
       </Link>
 
       <header className="flex flex-wrap items-baseline justify-between gap-4">
@@ -43,80 +46,44 @@ export default async function EditProductPage(
           </p>
         </div>
         {product.published ? (
-          <Link
-            href={`/products/${product.handle}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="a-btn-ghost"
-          >
-            View on the shop
-            <span className="material-symbols-outlined">external</span>
+          <Link href={`/products/${product.handle}`} target="_blank" rel="noopener noreferrer" className="a-btn-secondary">
+            See it on the shop ↗
           </Link>
-        ) : null}
+        ) : (
+          <span className="a-badge a-badge-draft">Hidden from the shop</span>
+        )}
       </header>
 
       {saved ? (
         <p
           role="status"
-          className="border px-4 py-3 a-label"
-          style={{
-            borderRadius: "var(--a-radius)",
-            borderColor: "var(--a-positive)",
-            color: "var(--a-positive)",
-            backgroundColor: "var(--a-positive-container)",
-          }}
+          className="a-body-sm px-4 py-3"
+          style={{ borderRadius: "var(--a-radius)", backgroundColor: "var(--a-positive-container)" }}
         >
-          Saved.
+          Saved — the shop is showing this now.
         </p>
       ) : null}
 
-      <ProductForm
-        product={product}
-        vocabulary={formVocabulary()}
-        campaigns={campaignOptions()}
-      />
+      <ProductPhotos productId={productId} slots={slots} media={listMedia()} />
 
-      <section className="mt-12 max-w-3xl border-t pt-8" style={{ borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)" }}>
-        <h2 className="a-heading-sm">Photographs</h2>
-        <p className="a-label mt-1" style={{ color: "var(--a-outline)" }}>
-          The template is five upright frames then one or two square detail
-          frames. {images.length} on file.
-        </p>
+      <ProductForm product={product} vocabulary={formVocabulary()} campaigns={campaignOptions()} />
 
-        {images.length === 0 ? (
-          <p className="a-body-sm mt-4" style={{ color: "var(--a-ink-variant)" }}>
-            None yet. Upload is not built — this piece renders schematic frames
-            until it is.
-          </p>
-        ) : (
-          <ul className="mt-4 space-y-2">
-            {images.map((image) => (
-              <li key={image.id} className="a-body-sm flex items-center gap-3" style={{ color: "var(--a-ink)" }}>
-                <span className="a-label shrink-0" style={{ color: "var(--a-outline)" }}>
-                  {image.position + 1} · {image.ratio}
-                </span>
-                <span>{image.alt}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <section className="mt-12 max-w-3xl border-t pt-8" style={{ borderColor: "var(--a-negative)" }}>
-        <h2 className="a-heading-sm" style={{ color: "var(--a-negative)" }}>
-          Delete
-        </h2>
-        <p className="a-body-sm mt-1" style={{ color: "var(--a-ink-variant)" }}>
-          Permanent, and takes the photographs with it. Unpublishing is usually
-          what you want instead — it hides the piece but keeps everything.
+      <details className="max-w-3xl border-t pt-6" style={{ borderColor: "var(--a-outline-variant)" }}>
+        <summary className="a-label cursor-pointer" style={{ color: "var(--a-outline)" }}>
+          Delete this piece forever
+        </summary>
+        <p className="a-body-sm mt-3" style={{ color: "var(--a-ink-variant)" }}>
+          This cannot be undone and removes its photos from the piece. If it is sold out or you
+          just don’t want it on the shop, untick <strong>Show this piece on the shop</strong>{" "}
+          above instead — that hides it but keeps everything.
         </p>
         <form action={deleteProductAction} className="mt-4">
           <input type="hidden" name="id" value={product.id} />
-          <button type="submit" className="a-btn-secondary border-error text-error" style={{ borderColor: "var(--a-negative)" }}>
-            <span className="a-label">Delete this piece</span>
+          <button type="submit" className="a-btn-secondary" style={{ borderColor: "var(--a-negative)", color: "var(--a-negative)" }}>
+            Yes, delete {product.poeticName} forever
           </button>
         </form>
-      </section>
+      </details>
     </div>
   );
 }

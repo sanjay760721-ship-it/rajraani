@@ -7,6 +7,7 @@ import { InfoPanels } from "@/components/InfoPanels";
 import { Price } from "@/components/Price";
 import { ProductCard } from "@/components/ProductCard";
 import { BRAND } from "@/lib/brand";
+import { getSiteText } from "@/lib/content/site-text";
 import { catalogue } from "@/lib/data/catalogue";
 import { COLOURS, findTerm } from "@/lib/domain/taxonomy";
 import { isAvailable, type Product } from "@/lib/domain/types";
@@ -45,6 +46,8 @@ export default async function ProductPage(props: PageProps<"/products/[handle]">
   const { handle } = await props.params;
   const product = await catalogue.getProduct(handle);
   if (!product) notFound();
+  // "Our promise" and the handwoven note — edited in the admin.
+  const siteText = await getSiteText();
 
   /**
    * Related pieces share the weave — the strongest craft signal on the page.
@@ -161,10 +164,10 @@ export default async function ProductPage(props: PageProps<"/products/[handle]">
           </h2>
           <p className="text-prose mt-3 text-ink-body">{product.narrative}</p>
 
-          <SpecList product={product} />
+          <SpecList product={product} promise={siteText["product.promise"]} />
 
           <p className="text-caption mt-6 text-ink-muted italic">
-            {BRAND.irregularityNote}
+            {siteText["product.handmadeNote"]}
           </p>
 
           <div className="mt-8">
@@ -247,7 +250,7 @@ function PrevNext({
  * Dispatch time is a row here rather than a separate paragraph, which is where
  * the reference puts it and where it is actually looked for.
  */
-function SpecList({ product }: { product: Product }) {
+function SpecList({ product, promise }: { product: Product; promise: string }) {
   const rows: [string, string | undefined][] = [
     ["Colour", product.spec.colour],
     ["Technique", product.spec.technique],
@@ -255,7 +258,7 @@ function SpecList({ product }: { product: Product }) {
     ["Speciality", product.spec.speciality],
     ["Collection note", product.spec.collectionNote],
     // Ours, never the reference's own phrasing of it — build.md §6.
-    ["Our promise", BRAND.promise],
+    ["Our promise", promise],
     [
       "Expected despatch",
       `${product.dispatchLeadDays[0]}–${product.dispatchLeadDays[1]} business days`,

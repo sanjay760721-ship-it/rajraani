@@ -459,3 +459,23 @@ CREATE TABLE IF NOT EXISTS admin_session (
 );
 
 CREATE INDEX IF NOT EXISTS admin_session_expiry_idx ON admin_session (expires_at);
+
+-- ---------------------------------------------------------------------------
+-- Media library
+--
+-- Every photograph the owner uploads. The file itself lives on disk under
+-- `data/media/` (gitignored, like the database, so uploads are never committed
+-- and survive deploys on a persistent disk); this row is what the admin lists
+-- and what `/media/<file>` is checked against before anything is served.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS media (
+  id            INTEGER PRIMARY KEY,
+  file          TEXT NOT NULL UNIQUE,   -- name under data/media, e.g. 12-kala-hero.webp
+  original_name TEXT NOT NULL,
+  width         INTEGER NOT NULL,
+  height        INTEGER NOT NULL,
+  bytes         INTEGER NOT NULL,
+  alt           TEXT NOT NULL DEFAULT '',
+  created_at    TEXT NOT NULL
+);

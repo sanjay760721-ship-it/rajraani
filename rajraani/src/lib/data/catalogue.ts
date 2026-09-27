@@ -78,9 +78,39 @@ function onlyIfPhotographed(product: Product | undefined): Product | undefined {
   return product && hasPhotograph(product) ? product : undefined;
 }
 
+/**
+ * A piece with real photographs shows only those.
+ *
+ * Photos are added one at a time in the admin, into planned slots. Until every
+ * slot is filled, the rest would render as blank colour frames beside real
+ * photographs — which reads as broken. Pieces with no real photos at all keep
+ * their placeholder frames, exactly as before.
+ */
+function realPhotosOnly(product: Product): Product {
+  if (!product.images.some((image) => image.src)) return product;
+  return { ...product, images: product.images.filter((image) => image.src) };
+}
+
+function withRealPhotosOnly(inner: CatalogueRepository): CatalogueRepository {
+  return {
+    listProducts: async () => (await inner.listProducts()).map(realPhotosOnly),
+    getProduct: async (handle) => {
+      const product = await inner.getProduct(handle);
+      return product && realPhotosOnly(product);
+    },
+    productsInCollection: async (collection) =>
+      (await inner.productsInCollection(collection)).map(realPhotosOnly),
+    listCollections: () => inner.listCollections(),
+    getCollection: (handle) => inner.getCollection(handle),
+    getCampaign: (slug) => inner.getCampaign(slug),
+  };
+}
+
 function createCatalogue(): CatalogueRepository {
-  return withPhotography(
-    hasDatabase ? new SqliteCatalogueRepository() : new MockCatalogueRepository(),
+  return withRealPhotosOnly(
+    withPhotography(
+      hasDatabase ? new SqliteCatalogueRepository() : new MockCatalogueRepository(),
+    ),
   );
 }
 

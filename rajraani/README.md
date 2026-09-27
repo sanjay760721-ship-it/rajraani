@@ -172,10 +172,10 @@ Checked in a real browser against the running app, not inferred:
 | Not built | Reason |
 |---|---|
 | Real photography | Not commissioned. Frames are schematic at exact capture ratios; `Frame.tsx` switches to `next/image` when `src` is populated. |
-| Photo upload in the admin | **The next piece.** The form manages everything except images. |
-| Admin for pages, navigation, campaigns | Still code-edited, so content changes need a deploy. |
+| Undo in the admin | Saves publish at once; revisions and "Put back" are next (`docs/admin-dashboard-plan.md`). |
+| New collections from the admin | Pages, menu, text, photos and products are all editable; creating a collection is not yet. |
 | Razorpay checkout | Needs an account with business KYC — start that early. |
-| Orders, confirmation emails, refunds | The operational half that Shopify used to provide. |
+| Confirmation emails, refunds | Orders are listed and can be marked sent/delivered in the admin; emails and refunds are not built. |
 | Algolia search | Deferred. The grouped result shape is built; at a few hundred products the SQLite scan is fine. |
 | 9 of 15 section types | Sprint 4. Adding one is a union member plus a registry case. |
 | Filter drawer below 1024px | Collapses to a disclosure instead. Same behaviour, less polish. |

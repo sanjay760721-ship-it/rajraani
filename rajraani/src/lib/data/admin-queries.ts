@@ -42,6 +42,8 @@ export type AdminProductRow = {
   published: number;
   updated_at: string;
   image_count: number;
+  /** Slots holding an uploaded photo, as opposed to planned-but-empty ones. */
+  photo_count: number;
 };
 
 export function listProductsForAdmin(): AdminProductRow[] {
@@ -51,7 +53,9 @@ export function listProductsForAdmin(): AdminProductRow[] {
         `SELECT p.id, p.handle, p.title, p.poetic_name, p.sku, p.price_minor,
                 p.inventory_quantity, p.fulfilment_mode, p.published, p.updated_at,
                 (SELECT COUNT(*) FROM product_image i WHERE i.product_id = p.id)
-                  AS image_count
+                  AS image_count,
+                (SELECT COUNT(*) FROM product_image i WHERE i.product_id = p.id AND i.url IS NOT NULL)
+                  AS photo_count
            FROM product p
           ORDER BY p.published ASC, p.updated_at DESC`,
       )

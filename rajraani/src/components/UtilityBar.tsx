@@ -5,7 +5,7 @@ import { useSearchModal } from "@/components/search-context";
 import { CurrencySelector } from "@/components/CurrencySelector";
 import { WishlistButton } from "@/components/WishlistButton";
 import { useCart } from "@/components/cart-context";
-import { BRAND } from "@/lib/brand";
+import { useSiteText } from "@/components/site-text-context";
 import {
   UTILITY_BADGE,
   UTILITY_CAPTION,
@@ -25,6 +25,8 @@ export function UtilityBar() {
   // The cart here navigates to /cart rather than opening the drawer, so the
   // drawer opener is deliberately not pulled off the context.
   const { itemCount } = useCart();
+  // Edited in the admin under Site-wide text.
+  const { tagline } = useSiteText();
 
   return (
     <div
@@ -35,7 +37,7 @@ export function UtilityBar() {
       {/* Left Corner: Tagline */}
       <div className="flex items-center justify-start min-w-0">
         <p className="font-display italic text-[15px] xl:text-[16px] text-ink font-normal tracking-[0.04em]">
-          {BRAND.line}
+          {tagline}
         </p>
       </div>
 

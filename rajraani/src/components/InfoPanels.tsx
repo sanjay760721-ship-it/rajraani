@@ -2,7 +2,8 @@
 
 import { useId, useState } from "react";
 
-import { INFO_TABS } from "@/lib/brand";
+import { useSiteText } from "@/components/site-text-context";
+import { productTabs } from "@/lib/content/site-text-defs";
 
 /**
  * Shipping · Dimensions · Care · Other.
@@ -22,6 +23,8 @@ import { INFO_TABS } from "@/lib/brand";
  * too — a screen reader is never offered the same four panels twice.
  */
 export function InfoPanels() {
+  // Edited in the admin under Site-wide text.
+  const INFO_TABS = productTabs(useSiteText());
   const [active, setActive] = useState(INFO_TABS[0]?.id);
   const id = useId();
 

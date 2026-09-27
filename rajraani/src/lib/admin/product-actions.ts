@@ -219,7 +219,7 @@ export async function deleteProductAction(form: FormData): Promise<void> {
 
   deleteProduct(id);
   revalidatePath("/", "layout");
-  redirect("/admin?deleted=1");
+  redirect("/admin/products?deleted=1");
 }
 
 export type AdjustStockResult =
@@ -267,5 +267,5 @@ export async function togglePublishedAction(form: FormData): Promise<void> {
 
   setPublished(id, form.get("publish") === "1");
   revalidatePath("/", "layout");
-  redirect("/admin");
+  redirect("/admin/products?saved=1");
 }

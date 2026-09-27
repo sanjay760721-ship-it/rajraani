@@ -21,6 +21,8 @@ import { verifyPassword } from "./password.ts";
  */
 
 const COOKIE = "rj_admin";
+/** Non-secret hint for the on-site editor; see signIn. */
+const EDIT_HINT = "rj_edit";
 const SESSION_DAYS = 7;
 
 export type AdminUser = { id: number; email: string };
@@ -116,6 +118,11 @@ export async function signIn(
     path: "/",
     expires,
   });
+  // A readable hint, carrying nothing secret: it only tells the storefront
+  // that an admin may be here, so it asks the server whether to show the
+  // editing bar. Ordinary visitors never make that request, and the server
+  // still checks the real session before sending anything.
+  store.set(EDIT_HINT, "1", { sameSite: "lax", path: "/", expires });
 
   return { id: row.id, email: row.email };
 }
@@ -127,6 +134,7 @@ export async function signOut(): Promise<void> {
     db().prepare(`DELETE FROM admin_session WHERE token = ?`).run(sha256(token));
   }
   store.delete(COOKIE);
+  store.delete(EDIT_HINT);
 }
 
 /** The signed-in admin, or undefined. Never throws. */

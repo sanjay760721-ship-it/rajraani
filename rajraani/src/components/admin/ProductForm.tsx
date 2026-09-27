@@ -79,23 +79,23 @@ export function ProductForm({
       ) : null}
 
       <Section
-        title="What it is"
-        note="The title describes the cloth. The name is what you call the piece."
+        title="Name"
+        note="A piece has a short name (Aparajita) and a longer description of the cloth."
       >
         <Field
           label="Name"
           name="poeticName"
           defaultValue={value.poeticName}
           error={errors.poeticName}
-          hint="Its proper name — Aparajita, not a description."
+          hint="The short name shoppers see first, e.g. Aparajita."
           required
         />
         <Field
-          label="Title"
+          label="Description of the cloth"
           name="title"
           defaultValue={value.title}
           error={errors.title}
-          hint="Colour, fabric, technique, garment. No mention of stock or dispatch."
+          hint="Colour, fabric, weave and garment, e.g. Blue Katan Silk Kadhua Saree."
           required
         />
         <Field
@@ -103,11 +103,11 @@ export function ProductForm({
           name="handle"
           defaultValue={value.handle}
           error={errors.handle}
-          hint="Lower case, hyphens. Becomes /products/…"
+          hint="Filled in for you. Changing it breaks old links to this piece."
           required
         />
         <Field
-          label="SKU"
+          label="Product code"
           name="sku"
           defaultValue={value.sku}
           error={errors.sku}
@@ -115,7 +115,7 @@ export function ProductForm({
         />
       </Section>
 
-      <Section title="Price and availability">
+      <Section title="Price and stock">
         <div className="grid gap-6 md:grid-cols-2">
           <Field
             label="Price (₹)"
@@ -123,25 +123,25 @@ export function ProductForm({
             type="number"
             defaultValue={value.priceRupees || ""}
             error={errors.priceRupees}
-            hint="Whole rupees."
+            hint="In rupees, no commas, e.g. 68000."
             required
           />
           <Field
-            label="How many"
+            label="How many in stock"
             name="inventoryQuantity"
             type="number"
             defaultValue={value.inventoryQuantity}
             error={errors.inventoryQuantity}
-            hint="Usually 1. Zero means sold out — the page still works."
+            hint="Usually 1. At 0 it shows as sold out."
             required
           />
           <Select
-            label="Dispatch"
+            label="Ready to send?"
             name="fulfilmentMode"
             options={vocabulary.fulfilment}
             defaultValue={value.fulfilmentMode}
             error={errors.fulfilmentMode}
-            hint="Shows as a badge. Never put this in the title."
+            hint="Whether it is ready to send, or woven after it is ordered."
           />
           <div className="grid grid-cols-2 gap-4">
             <Field
@@ -165,11 +165,11 @@ export function ProductForm({
       </Section>
 
       <Section
-        title="What it says"
-        note="The narrative is the moat. Around 90 words, specific to this piece."
+        title="The story and details"
+        note="A short story about this piece (about 90 words) and its details."
       >
         <TextArea
-          label="Narrative"
+          label="Story"
           name="narrative"
           rows={8}
           defaultValue={value.narrative}
@@ -177,7 +177,7 @@ export function ProductForm({
           required
         />
         <div className="grid gap-6 md:grid-cols-2">
-          <Field label="Colour" name="specColour" defaultValue={value.specColour} error={errors.specColour} hint="In words — 'Indigo blue'." required />
+          <Field label="Colour" name="specColour" defaultValue={value.specColour} error={errors.specColour} hint="In words, e.g. Indigo blue." required />
           <Field label="Technique" name="specTechnique" defaultValue={value.specTechnique} error={errors.specTechnique} required />
           <Field label="Fabric" name="specFabric" defaultValue={value.specFabric} error={errors.specFabric} required />
           <Field label="Speciality" name="specSpeciality" defaultValue={value.specSpeciality} hint="Optional." />
@@ -187,8 +187,8 @@ export function ProductForm({
       </Section>
 
       <Section
-        title="Where it came from"
-        note="This replaces reviews as the reason to trust the page."
+        title="Where it was made"
+        note="Who wove it and how long it took. Shoppers trust this."
       >
         <div className="grid gap-6 md:grid-cols-2">
           <Field label="Workshop" name="provenanceWorkshop" defaultValue={value.provenanceWorkshop} error={errors.provenanceWorkshop} required />
@@ -199,11 +199,11 @@ export function ProductForm({
       </Section>
 
       <Section
-        title="How it is classified"
-        note="These drive the filters. You can only choose from the agreed vocabulary — that is deliberate."
+        title="Filters"
+        note="Shoppers use these to find the piece. They also decide which collections it appears in."
       >
         <div className="grid gap-6 md:grid-cols-2">
-          <Select label="Garment" name="garmentType" options={vocabulary.garment} defaultValue={value.garmentType} error={errors.garmentType} />
+          <Select label="What it is" name="garmentType" options={vocabulary.garment} defaultValue={value.garmentType} error={errors.garmentType} />
           <Select
             label="Weave"
             name="weave"
@@ -211,10 +211,10 @@ export function ProductForm({
             defaultValue={value.weave}
             error={errors.weave}
             allowEmpty
-            hint="Leave blank for stitched garments — a suit is cut from cloth, not woven to shape."
+            hint="Leave as None for suits."
           />
           <Select label="Fabric" name="fabric" options={vocabulary.fabric} defaultValue={value.fabric} error={errors.fabric} />
-          <Select label="Colour family" name="colourFamily" options={vocabulary.colour} defaultValue={value.colourFamily} error={errors.colourFamily} />
+          <Select label="Main colour" name="colourFamily" options={vocabulary.colour} defaultValue={value.colourFamily} error={errors.colourFamily} />
         </div>
 
         <CheckboxGroup label="Motifs" name="motifs" options={vocabulary.motif} selected={value.motifs} error={errors.motifs} />
@@ -230,7 +230,7 @@ export function ProductForm({
         />
       </Section>
 
-      <Section title="Publishing">
+      <Section title="On the shop">
         <label className="flex items-center gap-3 a-body-sm" style={{ color: "var(--a-ink)" }}>
           <input
             type="checkbox"
@@ -238,10 +238,10 @@ export function ProductForm({
             defaultChecked={value.published}
             className="size-4 accent-ink"
           />
-          Show this piece on the site
+          Show this piece on the shop
         </label>
         <p className="a-label" style={{ color: "var(--a-outline)" }}>
-          Leave unticked to keep it as a draft while you finish the photographs.
+          Untick to hide it from shoppers — nothing is lost.
         </p>
       </Section>
 
@@ -253,7 +253,7 @@ export function ProductForm({
         >
           <span className="a-label">{pending ? "Saving…" : "Save"}</span>
         </button>
-        <Link href="/admin" className="a-btn-ghost">
+        <Link href="/admin/products" className="a-btn-ghost">
           Cancel
         </Link>
       </div>

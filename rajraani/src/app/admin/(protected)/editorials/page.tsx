@@ -1,7 +1,9 @@
-import { EditorialsManager } from "@/components/admin/EditorialsManager";
+import { redirect } from "next/navigation";
 
-export const metadata = { title: "Editorials Manager" };
-
+/**
+ * Editorials was a mock-up with no save. Every editorial page — campaign
+ * stories, craft, about, store — is now edited under Pages.
+ */
 export default function AdminEditorialsRoute() {
-  return <EditorialsManager />;
+  redirect("/admin/pages");
 }

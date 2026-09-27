@@ -1,68 +1,32 @@
-import { readdirSync, statSync } from "node:fs";
-import path from "node:path";
+import { MediaManager, type ReferenceUse } from "@/components/admin/MediaManager";
+import { countReferencePhotos } from "@/lib/admin/section-fields";
+import { content } from "@/lib/content/content";
+import { listMedia } from "@/lib/media/library";
 
-import { MediaManager, type MediaItem } from "@/components/admin/MediaManager";
-
-export const metadata = { title: "Media Manager" };
+export const metadata = { title: "Photos" };
 
 /**
- * The asset directory the storefront serves from.
+ * The photo library, plus where reference photos are still in use.
  *
- * Statically scoped to one folder on purpose — a dynamic path here makes
- * Turbopack trace the whole project into the server bundle (see the build
- * warning on `src/lib/data/catalogue.ts`).
+ * This used to list the files in `public/reference-only/` — the unlicensed
+ * mock-up photography — as if it were the library. The library is now what
+ * the owner uploads; the reference files appear only as a count of places
+ * still to be replaced.
  */
-const MEDIA_DIR = path.join(process.cwd(), "public", "reference-only");
+export default async function AdminMediaRoute() {
+  const [homepage, pages] = await Promise.all([
+    content.getHomepageSections(),
+    content.listPages(),
+  ]);
 
-const VIDEO_EXTENSIONS = new Set([".mp4", ".webm", ".mov"]);
+  const referenceUses: ReferenceUse[] = [
+    { where: "Homepage", href: "/admin/homepage", count: countReferencePhotos(homepage) },
+    ...pages.map((page) => ({
+      where: page.title,
+      href: `/admin/pages/${page.slug}`,
+      count: countReferencePhotos(page.sections),
+    })),
+  ].filter((use) => use.count > 0);
 
-/**
- * Aspect ratio is inferred from the naming convention rather than measured.
- * Reading real dimensions means decoding every file on each request, which is
- * not worth it for a label — and the convention is enforced by the seed script.
- */
-function ratioFor(name: string): MediaItem["ratio"] {
-  if (VIDEO_EXTENSIONS.has(path.extname(name).toLowerCase())) return "video";
-  if (/^(hero|stores|editorial)-/.test(name)) return "banner";
-  if (/^(category|tile|triptych)-/.test(name)) return "1:1";
-  return "2:3";
-}
-
-function formatSize(bytes: number): string {
-  return bytes >= 1024 * 1024
-    ? `${(bytes / (1024 * 1024)).toFixed(1)} MB`
-    : `${Math.round(bytes / 1024)} KB`;
-}
-
-/**
- * Lists what is actually committed under `public/reference-only`.
- *
- * This replaced a hardcoded sample list whose twelve entries named files that
- * had never existed, so every thumbnail on the page rendered broken. Reading
- * the directory means the page cannot drift from the assets again.
- */
-function listMedia(): MediaItem[] {
-  let entries: string[];
-  try {
-    entries = readdirSync(MEDIA_DIR);
-  } catch {
-    return [];
-  }
-
-  return entries
-    .filter((name) => !name.startsWith("."))
-    .sort()
-    .map((name) => ({
-      name,
-      path: `/reference-only/${name}`,
-      size: formatSize(statSync(path.join(MEDIA_DIR, name)).size),
-      type: VIDEO_EXTENSIONS.has(path.extname(name).toLowerCase())
-        ? ("video" as const)
-        : ("image" as const),
-      ratio: ratioFor(name),
-    }));
-}
-
-export default function AdminMediaRoute() {
-  return <MediaManager items={listMedia()} />;
+  return <MediaManager items={listMedia()} referenceUses={referenceUses} />;
 }

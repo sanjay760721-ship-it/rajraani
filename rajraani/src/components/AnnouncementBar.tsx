@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { ANNOUNCEMENT_PARTS } from "@/lib/brand";
+import { useSiteText } from "@/components/site-text-context";
+import { announcementParts } from "@/lib/content/site-text-defs";
 
 /**
  * Announcement bar — shipping and duty terms, above the utility row.
@@ -16,18 +17,20 @@ import { ANNOUNCEMENT_PARTS } from "@/lib/brand";
  * - Scrolls away with the page (not sticky)
  */
 export function AnnouncementBar() {
+  // Edited in the admin under Site-wide text.
+  const ANNOUNCEMENT_PARTS = announcementParts(useSiteText());
   const [dismissed, setDismissed] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-rotate messages on mobile viewport
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % ANNOUNCEMENT_PARTS.length);
+      setCurrentIndex((prev) => (prev + 1) % Math.max(1, ANNOUNCEMENT_PARTS.length));
     }, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [ANNOUNCEMENT_PARTS.length]);
 
-  if (dismissed) return null;
+  if (dismissed || ANNOUNCEMENT_PARTS.length === 0) return null;
 
   return (
     <aside
@@ -38,11 +41,14 @@ export function AnnouncementBar() {
       <div className="mx-auto flex min-h-[36px] max-w-[1680px] items-center justify-center px-8 sm:px-12 py-1.5">
         {/* Desktop view: 3-part pipe-delimited message */}
         <div className="hidden md:flex md:items-center md:justify-center md:gap-3 text-center text-[11.5px] lg:text-[12px] font-normal tracking-[0.06em] text-announce-ink leading-none">
-          <span>{ANNOUNCEMENT_PARTS[0]}</span>
-          <span className="text-announce-ink/40 select-none" aria-hidden="true">|</span>
-          <span>{ANNOUNCEMENT_PARTS[1]}</span>
-          <span className="text-announce-ink/40 select-none" aria-hidden="true">|</span>
-          <span className="italic">{ANNOUNCEMENT_PARTS[2]}</span>
+          {ANNOUNCEMENT_PARTS.map((part, index) => (
+            <span key={index} className="contents">
+              {index > 0 ? (
+                <span className="text-announce-ink/40 select-none" aria-hidden="true">|</span>
+              ) : null}
+              <span className={index === 2 ? "italic" : undefined}>{part}</span>
+            </span>
+          ))}
         </div>
 
         {/* Mobile view: rotating ticker with smooth fade */}
@@ -51,10 +57,10 @@ export function AnnouncementBar() {
             key={currentIndex}
             className="animate-[fadeIn_300ms_ease-in-out] inline-block transition-opacity duration-300"
           >
-            {currentIndex === 2 ? (
+            {currentIndex % ANNOUNCEMENT_PARTS.length === 2 ? (
               <span className="italic">{ANNOUNCEMENT_PARTS[2]}</span>
             ) : (
-              ANNOUNCEMENT_PARTS[currentIndex]
+              ANNOUNCEMENT_PARTS[currentIndex % ANNOUNCEMENT_PARTS.length]
             )}
           </span>
         </div>

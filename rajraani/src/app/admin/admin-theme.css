@@ -36,6 +36,13 @@
   --a-accent-dim: #e0c29f;
   --a-accent-fixed: #fdddb9;
   --a-accent-fixed-dim: #e0c29f;
+  /* The Overview charts' single series. The bronze accent is too grey to read
+     as data (OKLCH chroma 0.05); this step of the same family passes the
+     dataviz checks on white: chroma 0.10, contrast >= 3:1. Light only — the
+     admin has no dark theme. */
+  --a-chart: #a0662a;
+  /* Chart wash: bar tracks and empty plots. */
+  --a-chart-track: #f1e6d8;
 
   /* State. Greens and reds are for deltas and badges only. */
   --a-positive: #4caf50;

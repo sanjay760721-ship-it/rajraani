@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { BRAND } from "@/lib/brand";
+import type { SiteText } from "@/lib/content/site-text-defs";
 
 /**
  * Footer.
@@ -81,10 +82,13 @@ function SocialIcon({ name, className }: { name: string; className?: string }) {
   return icons[name] ?? null;
 }
 
-export function SiteFooter() {
-  const whatsapp = `https://wa.me/${BRAND.supportPhone.replace(/[^0-9]/g, "")}`;
-  // "Weekdays … · Saturday …" — one line each, as the hours are set.
-  const hours = BRAND.supportHours.split(" · ");
+/** Contact details come from the admin (Site-wide text), via the layout. */
+export function SiteFooter({ text }: { text: SiteText }) {
+  const email = text["contact.email"];
+  const phone = text["contact.phone"];
+  const whatsapp = `https://wa.me/${phone.replace(/[^0-9]/g, "")}`;
+  // One line per row, as the owner typed them.
+  const hours = text["contact.hours"].split("\n").map((line) => line.trim()).filter(Boolean);
 
   return (
     <footer className="mt-24">
@@ -95,13 +99,13 @@ export function SiteFooter() {
             <h2 className={HEADING}>Talk To Us</h2>
             <p className="mt-1">
               Email:{" "}
-              <a href={`mailto:${BRAND.supportEmail}`} className={LINK}>
-                {BRAND.supportEmail}
+              <a href={`mailto:${email}`} className={LINK}>
+                {email}
               </a>
               <br />
               Call us:{" "}
-              <a href={`tel:${BRAND.supportPhone.replace(/\s/g, "")}`} className={LINK}>
-                {BRAND.supportPhone}
+              <a href={`tel:${phone.replace(/\s/g, "")}`} className={LINK}>
+                {phone}
               </a>
               <br />
               <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={LINK}>
@@ -179,7 +183,7 @@ export function SiteFooter() {
                 />
                 <button
                   type="submit"
-                  className="h-[35px] shrink-0 border border-transparent bg-white/80 px-[17.5px] font-display text-[17px] tracking-[1px] text-black transition-colors hover:bg-white cursor-pointer"
+                  className="h-[35px] shrink-0 border border-transparent bg-white/80 px-[17.5px] font-display text-[17px] tracking-[1px] text-ink transition-colors hover:bg-white cursor-pointer"
                 >
                   Sign Up
                 </button>

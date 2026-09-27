@@ -9,13 +9,8 @@ import { UtilityBar } from "./UtilityBar";
 import { useCart } from "./cart-context";
 import { useSearchModal } from "./search-context";
 import { BRAND } from "@/lib/brand";
-import {
-  NAVIGATION,
-  LEFT_NAVIGATION,
-  RIGHT_NAVIGATION,
-  type NavColumn,
-  type NavPanel,
-} from "@/lib/data/navigation";
+import { useMenu } from "./menu-context";
+import type { NavColumn, NavPanel } from "@/lib/data/navigation";
 
 const HOVER_INTENT_MS = 120;
 
@@ -29,6 +24,10 @@ export function SiteHeader() {
 
   const { itemCount } = useCart();
   const { open: openSearch } = useSearchModal();
+  // The owner's menu, from the admin. Three items either side of the wordmark.
+  const NAVIGATION = useMenu();
+  const LEFT_NAVIGATION = NAVIGATION.slice(0, 3);
+  const RIGHT_NAVIGATION = NAVIGATION.slice(3, 6);
 
   useEffect(() => {
     return () => {
@@ -403,6 +402,7 @@ function MegaMenuPanel({
 }
 
 function MobileNav({ id, onNavigate }: { id: string; onNavigate: () => void }) {
+  const NAVIGATION = useMenu();
   return (
     <div id={id} className="border-t border-rule bg-white lg:hidden">
       <nav aria-label="Mobile navigation" className="px-6 py-6 max-h-[80vh] overflow-y-auto">

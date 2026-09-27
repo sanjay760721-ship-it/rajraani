@@ -1,28 +1,30 @@
 import { HomepageEditor } from "@/components/admin/HomepageEditor";
+import { siteLinks } from "@/lib/admin/site-links";
+import { sectionTemplates } from "@/lib/admin/templates";
 import { content, homepageIsSeed } from "@/lib/content/content";
-import { HOMEPAGE_SECTIONS } from "@/lib/content/sections";
+import { listMedia } from "@/lib/media/library";
 
 export const metadata = { title: "Homepage" };
 
 /**
  * Read on the server, edit on the client.
  *
- * The editor is a client component because reordering is interactive, but the
- * content it starts from is read here — so the screen opens on what the site is
- * actually serving rather than on a constant that may no longer match it.
+ * The editor opens on what the site is actually serving, with the media
+ * library and every linkable page loaded alongside it.
  */
 export default async function AdminHomepageRoute() {
-  const [sections, isSeed] = await Promise.all([
+  const [sections, isSeed, links] = await Promise.all([
     content.getHomepageSections(),
     homepageIsSeed(),
+    siteLinks(),
   ]);
 
   return (
     <HomepageEditor
       initialSections={sections}
-      // The seed doubles as the library of bands available to place. Once more
-      // section types can be authored from scratch this becomes a real palette.
-      library={HOMEPAGE_SECTIONS}
+      templates={sectionTemplates()}
+      media={listMedia()}
+      links={links}
       isSeed={isSeed}
     />
   );

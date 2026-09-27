@@ -1,94 +1,85 @@
-import { listTaxonomyTerms } from "@/lib/data/admin-queries";
+import Link from "next/link";
 
-export const metadata = { title: "Taxonomy & Controlled Vocabulary" };
+import { catalogue } from "@/lib/data/catalogue";
+import { COLOURS, termsForGroup, type FacetGroup } from "@/lib/domain/taxonomy";
+import type { Product } from "@/lib/domain/types";
+
+export const metadata = { title: "Weaves, colours & fabrics" };
+
+/**
+ * The fixed words used to describe pieces — and which are the shop's filters.
+ *
+ * Read-only on purpose. These words live in `taxonomy/` and are checked by
+ * `npm run taxonomy:check`; letting them be typed freely is how a shop ends up
+ * with "Katan", "katan silk" and "Katan Silk" as three filters. The old screen
+ * had an "+ Add vocabulary term" button that did nothing — worse than no button
+ * for someone who will press it and wait.
+ */
+
+const GROUPS: { group: FacetGroup; title: string; what: string; count: (p: Product, slug: string) => boolean }[] = [
+  { group: "garment", title: "What it is", what: "Saree, suit, dupatta…", count: (p, s) => p.garmentType === s },
+  { group: "weave", title: "Weaves", what: "How the pattern is woven.", count: (p, s) => p.weave === s },
+  { group: "fabric", title: "Fabrics", what: "What the cloth is.", count: (p, s) => p.fabric === s },
+  { group: "colour", title: "Colours", what: "The main colour, as shoppers filter by it.", count: (p, s) => p.colourFamily === s },
+  { group: "motif", title: "Motifs", what: "The patterns on the cloth.", count: (p, s) => p.motifs.includes(s) },
+  { group: "zari", title: "Zari & thread", what: "The metallic or silk thread work.", count: (p, s) => (p.zariTypes as readonly string[]).includes(s) },
+];
 
 export default async function TaxonomyAdminPage() {
-  const terms = listTaxonomyTerms();
-
-  // Group terms by facet
-  const facetsGrouped = terms.reduce<Record<string, typeof terms>>((acc, term) => {
-    acc[term.facet] = acc[term.facet] || [];
-    acc[term.facet]!.push(term);
-    return acc;
-  }, {});
-
-  const facetList = Object.keys(facetsGrouped);
+  const products = await catalogue.listProducts();
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-rule pb-6">
-        <div>
-          <h1 className="text-h2">Taxonomy & Controlled Vocabulary</h1>
-          <p className="text-caption mt-1 text-ink-muted">
-            The controlled vocabulary enforcing consistent weave, garment, fabric, zari, and motif tags site-wide.
-          </p>
-        </div>
-        <div className="flex gap-3">
-          <span className="eyebrow px-3 py-1 border border-rule bg-bg-alt text-ink">
-            {terms.length} Total Terms
-          </span>
-          <button
-            type="button"
-            className="bg-ink px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-bg hover:opacity-90"
-          >
-            + Add Vocabulary Term
-          </button>
-        </div>
-      </div>
+    <div className="space-y-10">
+      <header>
+        <h1 className="a-heading-lg">Weaves, colours &amp; fabrics</h1>
+        <p className="a-body-md mt-1 max-w-2xl" style={{ color: "var(--a-ink-variant)" }}>
+          The words you choose from when describing a piece. They are also the filters shoppers
+          use, so they are kept fixed and tidy. To add a new weave, colour or fabric, ask your
+          developer — it takes a few minutes.
+        </p>
+      </header>
 
-      {/* Facet Groups */}
-      <div className="space-y-8">
-        {facetList.map((facet) => {
-          const groupTerms = facetsGrouped[facet] || [];
-
-          return (
-            <div key={facet} className="border border-rule bg-bg p-6 space-y-4">
-              <div className="flex items-center justify-between border-b border-rule pb-3">
-                <div className="flex items-center gap-3">
-                  <h2 className="font-display text-xl font-semibold capitalize text-ink">
-                    {facet} Facet
-                  </h2>
-                  <span className="eyebrow text-[10px] px-2 py-0.5 border border-rule bg-bg-sand text-ink-muted">
-                    {groupTerms.length} Terms
-                  </span>
-                </div>
-              </div>
-
-              {/* Grid of Terms in Facet */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {groupTerms.map((term) => (
-                  <div
-                    key={term.slug}
-                    className="border border-rule/70 p-3 bg-bg-alt/30 hover:border-ink transition-colors flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-semibold text-ink text-sm">{term.label}</span>
-                        {term.hex ? (
-                          <span
-                            className="w-4 h-4 rounded-full border border-rule shrink-0 shadow-xs"
-                            style={{ backgroundColor: term.hex }}
-                            title={term.hex}
-                          />
-                        ) : null}
-                      </div>
-                      <span className="eyebrow text-[10px] text-ink-muted block mt-0.5 font-mono">
-                        slug: {term.slug}
-                      </span>
-                      {term.description ? (
-                        <p className="text-caption text-ink-body mt-2 text-xs line-clamp-2">
-                          {term.description}
-                        </p>
-                      ) : null}
-                    </div>
+      {GROUPS.map(({ group, title, what, count }) => (
+        <section key={group}>
+          <h2 className="a-heading-sm">{title}</h2>
+          <p className="a-body-sm" style={{ color: "var(--a-outline)" }}>{what}</p>
+          <ul className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3" role="list">
+            {termsForGroup(group).map((term) => {
+              const used = products.filter((product) => count(product, term.slug)).length;
+              const hex = group === "colour" ? COLOURS.find((colour) => colour.slug === term.slug)?.hex : undefined;
+              return (
+                <li key={term.slug} className="a-card flex gap-3 p-4" style={{ borderRadius: "var(--a-radius-md)" }}>
+                  {hex ? (
+                    <span
+                      aria-hidden="true"
+                      className="mt-1 h-5 w-5 shrink-0"
+                      style={{ backgroundColor: hex, borderRadius: "var(--a-radius-pill)", border: "1px solid var(--a-outline-variant)" }}
+                    />
+                  ) : null}
+                  <div className="min-w-0 flex-1">
+                    <p className="a-body-md">{term.name}</p>
+                    {term.description ? (
+                      <p className="a-body-sm mt-1" style={{ color: "var(--a-ink-variant)" }}>
+                        {/* First sentence only: later ones are notes for developers. */}
+                        {term.description.split(/(?<=\.)\s/)[0]}
+                      </p>
+                    ) : null}
+                    <p className="a-label mt-2" style={{ color: "var(--a-outline)" }}>
+                      {used === 0 ? (
+                        "No pieces yet"
+                      ) : (
+                        <Link href={`/collections/all?${group}=${term.slug}`} target="_blank" className="underline">
+                          {used} piece{used === 1 ? "" : "s"} — see them ↗
+                        </Link>
+                      )}
+                    </p>
                   </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
     </div>
   );
 }
