@@ -6,6 +6,7 @@ import { requireAdmin } from "../auth/session.ts";
 import { content } from "../content/content.ts";
 import type { PageContent, PageKind } from "../content/repository.ts";
 import type { Section } from "../content/sections.ts";
+import { describe, rawPage, rawSetting, recordChange } from "./history.ts";
 
 /**
  * Server actions for the content editors.
@@ -55,12 +56,23 @@ function malformed(sections: readonly Section[]): string | undefined {
 export async function saveHomepageAction(
   sections: readonly Section[],
 ): Promise<SaveResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
 
   const problem = malformed(sections);
   if (problem) return { ok: false, error: problem };
 
+  const before = rawSetting("homepage.sections");
+  const shownBefore = JSON.stringify(await content.getHomepageSections());
   await content.saveHomepageSections(sections);
+  recordChange({
+    kind: "setting",
+    target: "homepage.sections",
+    label: "Homepage",
+    who: admin.email,
+    before,
+    after: rawSetting("homepage.sections"),
+    summary: describe(shownBefore, JSON.stringify(sections)),
+  });
   // The homepage is ISR at 60s; without this an editor saves and then watches
   // the old page for a minute, which reads as the save having failed.
   revalidatePath("/");
@@ -75,7 +87,7 @@ export async function savePageAction(page: {
   sections: readonly Section[];
   published: boolean;
 }): Promise<SaveResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
 
   if (!SLUG.test(page.slug))
     return { ok: false, error: "Slug must be lowercase words joined by hyphens." };
@@ -84,7 +96,18 @@ export async function savePageAction(page: {
   const problem = malformed(page.sections);
   if (problem) return { ok: false, error: problem };
 
+  const before = rawPage(page.slug);
+  const shown = await content.getPage(page.slug);
   await content.savePage(page as PageContent);
+  recordChange({
+    kind: "page",
+    target: page.slug,
+    label: `Page: ${page.title}`,
+    who: admin.email,
+    before,
+    after: rawPage(page.slug),
+    summary: describe(JSON.stringify(shown ?? null), JSON.stringify(page)),
+  });
   revalidatePath(`/pages/${page.slug}`);
   return { ok: true };
 }
@@ -106,7 +129,7 @@ export type CreatePageResult = { ok: true; slug: string } | { ok: false; error: 
  * the owner only has to change the words and photos.
  */
 export async function createPageAction(fromSlug: string, title: string): Promise<CreatePageResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const name = title.trim();
   if (!name) return { ok: false, error: "Give the new page a name." };
   if (name.length > 80) return { ok: false, error: "Keep the name under 80 characters." };
@@ -132,6 +155,15 @@ export async function createPageAction(fromSlug: string, title: string): Promise
     standfirst: source.standfirst,
     sections: structuredClone(source.sections),
     published: false,
+  });
+  recordChange({
+    kind: "page",
+    target: slug,
+    label: `Page: ${name}`,
+    who: admin.email,
+    before: null,
+    after: rawPage(slug),
+    summary: `New page, copied from “${source.title}” (hidden until it is made live)`,
   });
   return { ok: true, slug };
 }

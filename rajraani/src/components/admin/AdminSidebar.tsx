@@ -33,6 +33,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/admin/homepage", label: "Homepage", icon: "homepage", live: true },
       { href: "/admin/pages", label: "Pages", icon: "editorials", live: true },
       { href: "/admin/media", label: "Photos", icon: "media", live: true },
+      { href: "/admin/history", label: "Recent changes", icon: "dashboard", live: true },
     ],
   },
   {

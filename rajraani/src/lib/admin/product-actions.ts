@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "../auth/session.ts";
+import { rawProduct, recordChange } from "./history.ts";
 import {
   adjustStock,
   deleteProduct,
@@ -181,7 +182,7 @@ export async function saveProductAction(
   _previous: FormState,
   form: FormData,
 ): Promise<FormState> {
-  await requireAdmin();
+  const admin = await requireAdmin();
 
   const rawId = String(form.get("id") ?? "");
   const id = rawId ? Number(rawId) : undefined;
@@ -194,6 +195,7 @@ export async function saveProductAction(
   }
 
   let savedId: number;
+  const before = id ? rawProduct(id) : null;
   try {
     savedId = saveProduct(input, id);
   } catch (error) {
@@ -205,6 +207,17 @@ export async function saveProductAction(
     };
   }
 
+  recordChange({
+    kind: "product",
+    target: String(savedId),
+    label: `Piece: ${input.poeticName}`,
+    who: admin.email,
+    before,
+    after: rawProduct(savedId),
+    // A brand-new piece is not "put back" — hide it instead.
+    restorable: before !== null,
+  });
+
   // The storefront prerenders these, so without this the edit would not appear
   // until the cache expired.
   revalidatePath("/", "layout");
@@ -213,11 +226,22 @@ export async function saveProductAction(
 }
 
 export async function deleteProductAction(form: FormData): Promise<void> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const id = Number(form.get("id"));
   if (!Number.isFinite(id)) return;
 
+  const before = rawProduct(id);
   deleteProduct(id);
+  recordChange({
+    kind: "product",
+    target: String(id),
+    label: `Piece: ${before ? (JSON.parse(before) as { poeticName: string }).poeticName : id}`,
+    who: admin.email,
+    before,
+    after: null,
+    summary: "Deleted",
+    restorable: false,
+  });
   revalidatePath("/", "layout");
   redirect("/admin/products?deleted=1");
 }
@@ -238,7 +262,7 @@ export async function adjustStockAction(
   id: number,
   delta: number,
 ): Promise<AdjustStockResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
 
   if (!Number.isInteger(id) || !Number.isInteger(delta)) {
     return { ok: false, error: "Invalid stock adjustment." };
@@ -254,6 +278,17 @@ export async function adjustStockAction(
   if (quantity === undefined) {
     return { ok: false, error: "That piece no longer exists." };
   }
+  const name = (JSON.parse(rawProduct(id) ?? "{}") as { poeticName?: string }).poeticName ?? String(id);
+  const was = Math.max(0, quantity - delta);
+  recordChange({
+    kind: "stock",
+    target: String(id),
+    label: `Piece: ${name}`,
+    who: admin.email,
+    before: JSON.stringify({ quantity: was }),
+    after: JSON.stringify({ quantity }),
+    summary: `Stock ${was} → ${quantity}${quantity === 0 ? " (sold out)" : ""}`,
+  });
 
   // Sold-out state is rendered on the storefront, so the change has to reach it.
   revalidatePath("/", "layout");
@@ -261,11 +296,22 @@ export async function adjustStockAction(
 }
 
 export async function togglePublishedAction(form: FormData): Promise<void> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const id = Number(form.get("id"));
   if (!Number.isFinite(id)) return;
 
-  setPublished(id, form.get("publish") === "1");
+  const publish = form.get("publish") === "1";
+  const name = (JSON.parse(rawProduct(id) ?? "{}") as { poeticName?: string }).poeticName ?? String(id);
+  setPublished(id, publish);
+  recordChange({
+    kind: "visibility",
+    target: String(id),
+    label: `Piece: ${name}`,
+    who: admin.email,
+    before: JSON.stringify({ published: !publish }),
+    after: JSON.stringify({ published: publish }),
+    summary: publish ? "Shown on the shop" : "Hidden from the shop",
+  });
   revalidatePath("/", "layout");
   redirect("/admin/products?saved=1");
 }

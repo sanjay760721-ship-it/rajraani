@@ -479,3 +479,23 @@ CREATE TABLE IF NOT EXISTS media (
   alt           TEXT NOT NULL DEFAULT '',
   created_at    TEXT NOT NULL
 );
+
+-- ---------------------------------------------------------------------------
+-- Change log: every admin save, with the value before it, so it can be put
+-- back. Also created on first use by lib/admin/history.ts.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS change_log (
+  id          INTEGER PRIMARY KEY,
+  kind        TEXT NOT NULL,
+  target      TEXT NOT NULL,
+  label       TEXT NOT NULL,
+  summary     TEXT NOT NULL,
+  before_json TEXT,
+  after_json  TEXT,
+  restorable  INTEGER NOT NULL DEFAULT 1,
+  who         TEXT NOT NULL,
+  created_at  TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS change_log_target_idx ON change_log (kind, target, id);

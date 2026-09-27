@@ -6,6 +6,7 @@ import { requireAdmin } from "../auth/session.ts";
 import { content } from "../content/content.ts";
 import { isSiteTextKey } from "../content/site-text-defs.ts";
 import { saveSiteText } from "../content/site-text.ts";
+import { rawPage, rawSetting, recordChange } from "./history.ts";
 import type { TextRef } from "./text-index.ts";
 
 /**
@@ -39,13 +40,16 @@ export async function changeTextAction(
   expected: string,
   next: string,
 ): Promise<ChangeResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   if (typeof next !== "string" || next.length > 5000) return { ok: false, error: "That text is too long." };
+  const summary = `Changed “${expected.length > 50 ? expected.slice(0, 50) + "…" : expected}” to “${next.length > 50 ? next.slice(0, 50) + "…" : next}”`;
 
   switch (ref.kind) {
     case "site": {
       if (!isSiteTextKey(ref.key)) return { ok: false, error: "Unknown text." };
+      const before = rawSetting("site.text");
       await saveSiteText({ [ref.key]: next });
+      recordChange({ kind: "setting", target: "site.text", label: "Site-wide text", who: admin.email, before, after: rawSetting("site.text"), summary });
       // Site-wide lines appear on every page.
       revalidatePath("/", "layout");
       return { ok: true };
@@ -53,7 +57,9 @@ export async function changeTextAction(
     case "home": {
       const sections = structuredClone(await content.getHomepageSections());
       if (!setAt(sections, ref.path, expected, next)) return { ok: false, error: STALE };
+      const before = rawSetting("homepage.sections");
       await content.saveHomepageSections(sections);
+      recordChange({ kind: "setting", target: "homepage.sections", label: "Homepage", who: admin.email, before, after: rawSetting("homepage.sections"), summary });
       revalidatePath("/");
       return { ok: true };
     }
@@ -69,7 +75,9 @@ export async function changeTextAction(
       } else if (!setAt(copy.sections, ref.path, expected, next)) {
         return { ok: false, error: STALE };
       }
+      const before = rawPage(ref.slug);
       await content.savePage(copy);
+      recordChange({ kind: "page", target: ref.slug, label: `Page: ${copy.title}`, who: admin.email, before, after: rawPage(ref.slug), summary });
       revalidatePath(`/pages/${ref.slug}`);
       return { ok: true };
     }
@@ -98,7 +106,7 @@ export async function changePhotoAction(
   expectedSrc: string | undefined,
   nextSrc: string,
 ): Promise<ChangeResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   if (!/^\/media\/[0-9]+-[a-z0-9-]+\.webp$/.test(nextSrc)) {
     return { ok: false, error: "Choose a photo from the library." };
   }
@@ -119,7 +127,9 @@ export async function changePhotoAction(
     const sections = structuredClone(await content.getHomepageSections());
     const failed = apply(sections);
     if (failed) return failed;
+    const before = rawSetting("homepage.sections");
     await content.saveHomepageSections(sections);
+    recordChange({ kind: "setting", target: "homepage.sections", label: "Homepage", who: admin.email, before, after: rawSetting("homepage.sections"), summary: "1 photo changed" });
     revalidatePath("/");
     return { ok: true };
   }
@@ -129,7 +139,9 @@ export async function changePhotoAction(
   const copy = structuredClone(page);
   const failed = apply(copy.sections);
   if (failed) return failed;
+  const before = rawPage(ref.slug);
   await content.savePage(copy);
+  recordChange({ kind: "page", target: ref.slug, label: `Page: ${copy.title}`, who: admin.email, before, after: rawPage(ref.slug), summary: "1 photo changed" });
   revalidatePath(`/pages/${ref.slug}`);
   return { ok: true };
 }
