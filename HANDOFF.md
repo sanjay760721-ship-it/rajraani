@@ -1,10 +1,10 @@
 # Project Handoff — Rajraani
 
-**Last updated:** 27 September 2026 (the admin rebuilt for a non-technical owner, folder
-reorganised, progress re-measured at ~78% — §2.54)
+**Last updated:** 27 September 2026, evening (admin and catalogue tools completed — every
+admin screen is real; progress re-measured at ~82% — §2.55)
 **Purpose:** Resume state. Read this first in any new session, then read the two documents it points to.
 
-> **Latest: [§2.54](#254-the-admin-rebuilt-for-a-non-technical-owner--27-september-2026)** — the admin, what is left, and how long it takes.
+> **Latest: [§2.55](#255-admin-and-catalogue-tools-completed--27-september-2026-evening)** — admin and catalogue tools completed, the ledger, and what is left. §2.54 is the morning's admin rebuild.
 >
 > **Start at [§2.45](#245-audited-state-22-august-2026), then [§2.46](#246-progress-ledger--measured-against-git-22-august-2026) and [§2.47](#247-photography-integrated-and-the-three-blocking-decisions-taken--22-august-2026).**
 > §[2.48](#248-originality-remediation--22-august-2026) records copy and palette taken from the
@@ -1202,6 +1202,72 @@ The cross-cutting pieces are:
 The shoot is the longest lead time on the whole project.
 
 
+### 2.55 Admin and catalogue tools completed — 27 September 2026 (evening)
+
+Nine pieces, each committed separately and tested end to end on the dev server. The
+database was returned to its pre-test state after every test.
+
+| # | Piece | What the owner gets |
+|---|---|---|
+| 1 | **Recent changes** (`/admin/history`) | Every save is listed with who and a plain-words summary ("Stock 1 → 2", "Changed 'X' to 'Y'"). **Put back** restores the exact stored value, and is itself logged. Putting back an older change warns that later ones go too. Covers pages, homepage, text, menu, footer, collections, products, stock and show/hide. Deletions, photo moves, orders and team changes are logged but can't be put back. |
+| 2 | **Admin on a phone** | Below 1024px the sidebar becomes a drawer behind a Menu button. All 24 screens were checked at 375px with no sideways scrolling. |
+| 3 | **+ New collection** | Hand-picked (choose pieces and their order) or fills itself (filters). Every card has "Which pieces". Fixed an earlier wrong hint: campaign collections are hand-picked. |
+| 4 | **Team** (`/admin/team`) | Add a person with a first password, remove one (never yourself, never the last account), change your own password (signs out other devices). Tested on a production build. |
+| 5 | **Catalogue tools** | Inline price, **Duplicate** a piece (hidden, empty photo slots), and **spreadsheet download and upload**. The upload is matched by product code, limited to name, description, price, stock and on/off, previewed with reasons for skipped rows, and applied in one transaction. |
+| 6 | **Customers**, **Weavers** | Customers are built from orders (grouped by email, spend, messages). Weavers are built from each piece's workshop. |
+| 7 | **Footer** + **real newsletter sign-ups** | Both sign-up forms were fake: the footer form had no action, and the pop-up "simulated" success. Sign-ups are now saved, listed on Messages and downloadable. The Footer screen edits the columns, links, social links, newsletter wording, pop-up wording (or switching it off) and the copyright name. |
+| 8 | **Discount codes** (`/admin/discounts`) | Percent or ₹ off, minimum order, dates, a limit on uses, and on/off. There's a code field in the cart, and **checkout re-checks the code on the server**. A use counts when the order is paid. `customer_order` gains `discount_code` and `discount_minor`, and the stored subtotal is after the discount because of the total CHECK. Tested with a real checkout. |
+| 9 | **Store visits** (was Appointments) | Visits stay on Calendly. The screen lists every booking address with where it is used, changes one everywhere at once, and has "Test the link" and a way into Calendly. |
+
+Also today:
+- **Login:** a limit on password guessing (5 per account / 20 per address in 15 minutes), the account-creation hint hidden on the live site, and forgotten-password guidance.
+- **Admin buttons:** as links, they overlapped when wrapping (they had no display rule).
+
+**The "Not ready yet" group is gone. Every admin screen is real.**
+
+**Found, not fixed, for the owner to decide:** the checkout panel claims "**Silk Mark
+Certified** pure natural Banarasi handloom" and "Complimentary Express Shipping". The
+first is a formal certification. Keep it only if the shop holds it (`CartDrawer.tsx`).
+
+#### Progress ledger — 27 September 2026, evening
+
+| Workstream | Done | Was (morning) | Remaining |
+|---|---|---|---|
+| Research and specs | ~95% | ~95% | catalogue copy, photography commissioning |
+| Storefront UI | ~97% | ~97% | `/blogs` journal; real contact details and socials |
+| Navigation and pages | ~100% | ~100% | — |
+| **Catalogue tools** | **~100%** | — | — |
+| Catalogue *data* | ~60% | ~60% | real product codes, stock and prices (now fast by spreadsheet); 7 unphotographed pieces |
+| Design system | ~95% | ~95% | dead `sm:` breakpoint |
+| **Admin** | **~92%** | ~65% | roles and a second factor; per-product SEO and share images; interface wording (cart labels); a separate draft step |
+| Commerce / payments | ~55% built, untrusted | ~50% | **signature verification, webhook, tests** (discounts are now built) |
+| Content and imagery | ~55% | ~55% | 87 stand-in photos, 36 pieces to shoot |
+| Launch hardening | ~15% | ~12% | hosting, backups, perf, SEO, a11y audit, monitoring |
+
+**Overall: roughly 82% of the build is done** (78% this morning, 73% on 24 September).
+
+| Lens | Morning | Evening |
+|---|---|---|
+| What a visitor **sees** | ~95% | ~95% (stand-in photos) |
+| What **takes money** | ~40%, untrusted | ~45%, untrusted: the payment signature is still the blocker |
+| What you **run the business from** | ~65% | **~92%** |
+
+#### What is left, with estimates (developer days)
+
+| # | Work | Days | Blocks launch? |
+|---|---|---|---|
+| 1 | **Payments:** create Razorpay orders server-side, verify the signature, webhook, tests (§6 A) | 3–4 | **Yes** |
+| 2 | **Hosting:** persistent disk for the DB and `data/media/`, nightly off-site backups, `ADMIN_AUTH`, **the first admin account** (Team screen or `create-admin.mjs`) | 2–3 | **Yes** |
+| 3 | Launch hardening: performance, SEO, accessibility audit, monitoring, error reporting | 5–8 | **Yes** |
+| 4 | Admin polish: roles and a second factor, per-product SEO and share images, interface wording, a draft step | 4–6 | No |
+| 5 | Visitor counting (once a tool is chosen), and `/blogs` | 3–4 | No |
+| | **Development total** | **≈ 17–25 days** | **launch line (1–3) ≈ 10–15 days** |
+
+The owner's side is unchanged and is the longer lead time: the photography shoot, real
+product codes, stock and prices (now loadable by spreadsheet), the Razorpay KYC, the
+domain, the real email and phone, the Calendly pages, and the Silk Mark decision.
+
+
 ---
 
 ## 3. How the folder is arranged
@@ -1903,13 +1969,13 @@ edit and a deploy, which is not a workable arrangement for whoever writes the co
 
 **For the next session:**
 
-1. Read this file's §2.54 (latest) and §2.46 (the ledger it updates).
+1. Read this file's §2.55 (latest), §2.54, and §2.46 (the ledger they update).
 2. Read `rajraani/docs/architecture-change-2026-08-06.md` — **Shopify and Sanity are
    out.** Do not rebuild either.
 3. Read `rajraani/README.md` — what exists, what does not, and why
 4. `cd rajraani && npm install && npm run db:reset && npm run verify` — confirm green
    before changing anything
-5. **Continue at §2.54 "What is left"** — payments (§6 A) first, then hosting.
+5. **Continue at §2.55 "What is left"** — payments (§6 A) first, then hosting.
 
 Taxonomy review is *not* a prerequisite for any of it — the vocabulary's shape is
 settled, and only the canonical spellings are open.

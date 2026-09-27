@@ -37,15 +37,16 @@ on a deployed build it always does.
 
 ## Progress at a glance — 27 September 2026
 
-**Roughly 78% of the build is done** (73% on 24 September). The admin moved from ~30% to
-~65%: every text, photo, page, menu, product, collection and order is now editable
-without a developer. What blocks going live is not the admin:
+**Roughly 82% of the build is done** (73% on 24 September). **The admin is complete for
+daily use (~92%)**: every word, photo, page, menu, footer, product, price, collection,
+order, customer, discount and sign-up is managed without a developer, every change can
+be put back, and it works on a phone. What blocks going live is not the admin:
 
 1. **Payments** — checkout does not verify Razorpay payments yet (HANDOFF §6 A).
 2. **Photography** — every photo is still a stand-in; 87 on pages, 36 pieces to shoot.
 3. **Hosting** — the database and uploaded photos need a server with a persistent disk.
 
-The full ledger, with what is left and how long it takes, is HANDOFF §2.54.
+The full ledger, with what is left and how long it takes, is HANDOFF §2.55.
 
 ---
 

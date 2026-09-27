@@ -1,6 +1,6 @@
 # Admin dashboard plan
 
-**Written:** 24 September 2026 · **Revised:** 27 September 2026 · **Status:** largely built — admin ~65% (see §7a Progress and HANDOFF §2.54); owner decisions in §8 still open
+**Written:** 24 September 2026 · **Revised:** 27 September 2026 · **Status:** built — admin ~92% (see §7a Progress and HANDOFF §2.55); owner decisions in §8 still open
 **Goal:** the owner can change everything a visitor sees, top to bottom, without a
 code change or a deploy — and cannot break the site by doing it.
 
@@ -399,6 +399,22 @@ right), titled cards with a hint line, and pick-one-then-edit:
 - **Pages list:** titled cards with hints, and "+ New page" in the header.
 - **Photos:** the stand-ins to replace, listed per page, then "Your photos".
 - The visible word "band" became "block" everywhere, and "reference" became "stand-in".
+
+**27 Sep 2026, evening: the admin completed (~92%).** These are built, each committed and tested
+end to end (HANDOFF §2.55):
+- Recent changes with Put back (`lib/admin/history.ts`)
+- phone layout
+- New collection and Which pieces
+- Team
+- catalogue tools: inline price, duplicate, spreadsheet in and out
+- Customers and Weavers
+- Footer editor, with real newsletter sign-ups
+- discount codes, checked at checkout
+- Store visits (the Calendly links)
+
+No screen is a mock-up any more. **Still open:** roles and a second factor, per-product
+SEO and share images, interface wording (cart labels), a separate draft step, and
+visitor counting.
 
 **Known limits, not bugs:**
 - Two tabs saving the same page means the last save wins. Change text is safe; the

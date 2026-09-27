@@ -7,8 +7,8 @@ Everything a visitor can read or see on the website can be changed from the admi
 words, photos, the menu, pages, pieces, prices, stock and orders. Nothing you do here
 can break the design, because the design is fixed and only the content changes.
 
-**Sign in** at `yourshop.com/admin`. The left-hand side is the sidebar. It is grouped
-into *Overview*, *Your website*, *Shop* and *Not ready yet*.
+**Sign in** at `yourshop.com/admin`. The sidebar is grouped into *Overview*, *Your
+website* and *Shop*. On a phone it is behind the **Menu** button at the top.
 
 ---
 
@@ -58,6 +58,18 @@ Or pick a place on the left (e.g. *Our Banaras store*) to see all of its text at
 | Send an order | **Orders** → *To send* → open it → add the tracking number → **Mark as sent** |
 | Answer a message from the contact form | **Messages** → **Reply by email** → **Mark as answered** |
 | See how the shop is doing | **Overview** |
+| Undo a mistake | **Recent changes** → **Put back** |
+| Change the footer links, social links or newsletter pop-up | **Footer** |
+| Make a new collection | **Collections** → **+ New collection** |
+| Choose which pieces are in a collection | **Collections** → **Which pieces** |
+| Change a price quickly | **Products & stock** → click the price |
+| Add a piece like an existing one | **Products & stock** → **Duplicate** |
+| Update many prices or stock at once | **Products & stock** → **Download spreadsheet**, edit, **Upload changed spreadsheet** |
+| Make a discount code | **Discount codes** → **+ New code** |
+| See a customer's orders | **Customers** |
+| Download newsletter sign-ups | **Messages** → **Download list** |
+| Fix a "Book a visit" link | **Store visits** |
+| Let someone else sign in, or change your password | **Team** |
 
 ---
 
@@ -96,21 +108,17 @@ green ✓ confirms the page exists, and an orange ⚠ means no page has that add
 - **New pages start hidden.** Tick **Live on the site** when a page is ready.
 - **The admin refuses mistakes it can see**, and says what to fix: a link with no
   text, a menu with too many columns, a headline too long for its space.
+- **Undo anything.** **Recent changes** lists every save with who made it. **Put back**
+  returns that thing to how it was, and a put-back can itself be put back.
 - **Two people editing the same page at once:** the last one to save wins. Agree who
-  is editing what. An undo button is planned (see below).
+  is editing what — and if it goes wrong, use Put back.
 
 ---
 
-## Not ready yet
+## Not possible yet
 
-These screens are placeholders and save nothing: **Customers**, **Appointments**,
-**Discounts**, **Weavers**. Each one says what it will do and what to use meanwhile.
+- seeing visitor numbers (a visitor-counting tool has to be chosen first)
+- per-person permissions: everyone on the Team can change everything
 
-Also not possible yet:
-- undoing a saved change
-- creating a new *collection* of pieces (new *pages* are fine)
-- changing the footer's list of links
-- seeing visitor numbers
-
-**Online payment is not switched on yet.** The Orders and Overview screens say so.
-Until it is, do not send anything for an order.
+**Online payment is not switched on yet.** The Orders, Overview and Discount codes
+screens say so. Until it is, do not send anything for an order.
