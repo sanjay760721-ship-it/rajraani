@@ -45,6 +45,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/admin/taxonomy", label: "Weaves, colours, fabrics", icon: "taxonomy", live: true },
       { href: "/admin/orders", label: "Orders", icon: "orders", live: true },
       { href: "/admin/messages", label: "Messages", icon: "customers", live: true },
+      { href: "/admin/team", label: "Team", icon: "artisans", live: true },
     ],
   },
   {
