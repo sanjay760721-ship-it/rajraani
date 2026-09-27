@@ -2,6 +2,7 @@ import "server-only";
 
 import { db, transaction } from "../db/client.ts";
 import type { Money } from "../domain/types.ts";
+import { ensureDiscountStorage, recordUse } from "../discounts.ts";
 
 /**
  * Orders.
@@ -46,6 +47,11 @@ export type PricedCart = {
   subtotalMinor: number;
   shippingMinor: number;
   totalMinor: number;
+  /**
+   * A discount code checked on the server (discounts.ts). When present, the
+   * order is written with the discount taken off (see createPendingOrder).
+   */
+  discount?: { code: string; minor: number };
 };
 
 export type PricingProblem =
@@ -199,6 +205,11 @@ export function createPendingOrder(
   cart: PricedCart,
   customer: CustomerDetails,
 ): DraftOrder {
+  ensureDiscountStorage();
+  // The orders table requires total = subtotal + shipping, so the stored
+  // subtotal is the one after the discount; the discount sits beside it.
+  const discountMinor = cart.discount?.minor ?? 0;
+  const storedSubtotal = cart.subtotalMinor - discountMinor;
   return transaction(() => {
     const reference = nextReference();
     const now = new Date().toISOString();
@@ -209,8 +220,8 @@ export function createPendingOrder(
            reference, email, phone, full_name,
            address_line1, address_line2, city, state, postcode, country,
            subtotal_minor, shipping_minor, total_minor, currency,
-           status, created_at
-         ) VALUES (?,?,?,?,?,?,?,?,?,'IN',?,?,?,'INR','pending',?)`,
+           status, created_at, discount_code, discount_minor
+         ) VALUES (?,?,?,?,?,?,?,?,?,'IN',?,?,?,'INR','pending',?,?,?)`,
       )
       .run(
         reference,
@@ -222,10 +233,12 @@ export function createPendingOrder(
         customer.city.trim(),
         customer.state.trim(),
         customer.postcode.trim(),
-        cart.subtotalMinor,
+        storedSubtotal,
         cart.shippingMinor,
-        cart.totalMinor,
+        storedSubtotal + cart.shippingMinor,
         now,
+        cart.discount?.code ?? null,
+        discountMinor,
       );
 
     const orderId = Number(result.lastInsertRowid);
@@ -251,7 +264,7 @@ export function createPendingOrder(
       );
     }
 
-    return { id: orderId, reference, totalMinor: cart.totalMinor };
+    return { id: orderId, reference, totalMinor: storedSubtotal + cart.shippingMinor };
   });
 }
 
@@ -341,6 +354,11 @@ export function markPaid(
           WHERE id = ?`,
       )
       .run(razorpayPaymentId, new Date().toISOString(), order.id);
+
+    // A discount use counts once the order is paid, not when checkout starts.
+    ensureDiscountStorage();
+    const used = db().prepare('SELECT discount_code FROM customer_order WHERE id = ?').get(order.id) as { discount_code: string | null } | undefined;
+    recordUse(used?.discount_code ?? null);
 
     return { ok: true, reference: order.reference, alreadyRecorded: false } as const;
   });

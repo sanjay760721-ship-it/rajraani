@@ -8,7 +8,7 @@ import { useCart } from "./cart-context";
 import { BASE_CURRENCY } from "@/lib/domain/types";
 import { formatMoney } from "@/lib/money";
 import { BRAND } from "@/lib/brand";
-import { createCheckoutAction, completePaymentAction } from "@/lib/checkout/actions";
+import { createCheckoutAction, completePaymentAction, checkDiscountAction, type DiscountCheck } from "@/lib/checkout/actions";
 
 /** What the gateway hands back to the success handler. */
 type RazorpayPaymentResponse = {
@@ -52,6 +52,30 @@ export function CartDrawer() {
   const [step, setStep] = useState<"cart" | "checkout">("cart");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Discount code. The server re-checks it at checkout; this is for display.
+  const [codeInput, setCodeInput] = useState("");
+  const [discount, setDiscount] = useState<(DiscountCheck & { ok: true; cartKey: string }) | null>(null);
+  const [codeError, setCodeError] = useState<string | null>(null);
+  const [checkingCode, setCheckingCode] = useState(false);
+  // A discount is only shown for the cart it was checked against.
+  const cartKey = lines.map((line) => `${line.handle}x${line.quantity}`).join(",");
+  const activeDiscount = discount && discount.cartKey === cartKey ? discount : null;
+  const applyCode = async () => {
+    setCheckingCode(true);
+    setCodeError(null);
+    const result = await checkDiscountAction(
+      lines.map((line) => ({ handle: line.handle, quantity: line.quantity })),
+      codeInput,
+    );
+    setCheckingCode(false);
+    if (!result.ok) {
+      setDiscount(null);
+      setCodeError(result.error);
+      return;
+    }
+    setDiscount({ ...result, cartKey });
+  };
 
   // Customer Shipping Details Form State
   const [customer, setCustomer] = useState({
@@ -126,7 +150,7 @@ export function CartDrawer() {
       quantity: l.quantity,
     }));
 
-    const initResult = await createCheckoutAction(cartRequestLines, customer);
+    const initResult = await createCheckoutAction(cartRequestLines, customer, activeDiscount?.code);
 
     if (!initResult.ok) {
       setErrorMsg(initResult.error);
@@ -456,12 +480,52 @@ export function CartDrawer() {
                 </div>
               </div>
 
+              {/* Discount code */}
+              <div className="border-t border-rule pt-4">
+                <label htmlFor="discount-code" className="eyebrow text-ink-muted">
+                  Have a discount code?
+                </label>
+                <div className="mt-2 flex gap-2">
+                  <input
+                    id="discount-code"
+                    value={codeInput}
+                    onChange={(e) => setCodeInput(e.target.value.toUpperCase())}
+                    className="min-w-0 flex-1 border border-rule-input bg-transparent px-3 py-2 text-sm uppercase tracking-wider text-ink outline-none focus:border-ink"
+                    autoComplete="off"
+                  />
+                  <button
+                    type="button"
+                    onClick={applyCode}
+                    disabled={checkingCode || !codeInput.trim()}
+                    className="cta-secondary shrink-0 disabled:opacity-50"
+                  >
+                    {checkingCode ? "Checking…" : "Apply"}
+                  </button>
+                </div>
+                {codeError ? (
+                  <p role="alert" className="text-caption mt-2 text-error">
+                    {codeError}
+                  </p>
+                ) : null}
+                {activeDiscount ? (
+                  <p role="status" className="text-caption mt-2 flex justify-between text-ink">
+                    <span>
+                      Discount ({activeDiscount.code}, {activeDiscount.label})
+                      <button type="button" className="ml-2 underline text-ink-muted" onClick={() => { setDiscount(null); setCodeInput(""); }}>
+                        remove
+                      </button>
+                    </span>
+                    <span>−{formatMoney({ minorUnits: activeDiscount.discountMinor, currency: subtotal.currency })}</span>
+                  </p>
+                ) : null}
+              </div>
+
               {/* Order Total & Submit Payment Button */}
               <div className="border-t border-rule pt-4 space-y-3">
                 <div className="flex justify-between items-baseline">
                   <span className="eyebrow text-ink-muted">Total Amount Payable</span>
                   <span className="font-display text-xl font-bold text-ink">
-                    {formatMoney(subtotal)}
+                    {formatMoney(activeDiscount ? { minorUnits: activeDiscount.totalMinor, currency: subtotal.currency } : subtotal)}
                   </span>
                 </div>
 

@@ -508,3 +508,22 @@ CREATE TABLE IF NOT EXISTS newsletter_subscriber (
   source     TEXT NOT NULL,
   created_at TEXT NOT NULL
 );
+
+-- Discount codes, checked on the server at checkout (lib/discounts.ts, which
+-- also creates this table and adds customer_order.discount_code and
+-- customer_order.discount_minor on first use). A use is counted when the order
+-- is paid.
+CREATE TABLE IF NOT EXISTS discount_code (
+  code            TEXT PRIMARY KEY,
+  kind            TEXT NOT NULL CHECK (kind IN ('percent', 'amount')),
+  value           INTEGER NOT NULL CHECK (value > 0),
+  min_order_minor INTEGER NOT NULL DEFAULT 0 CHECK (min_order_minor >= 0),
+  starts_at       TEXT,
+  ends_at         TEXT,
+  max_uses        INTEGER CHECK (max_uses IS NULL OR max_uses > 0),
+  used_count      INTEGER NOT NULL DEFAULT 0,
+  active          INTEGER NOT NULL DEFAULT 1,
+  note            TEXT NOT NULL DEFAULT '',
+  created_at      TEXT NOT NULL,
+  CHECK (kind <> 'percent' OR value <= 90)
+);

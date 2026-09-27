@@ -46,6 +46,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/admin/taxonomy", label: "Weaves, colours, fabrics", icon: "taxonomy", live: true },
       { href: "/admin/artisans", label: "Weavers", icon: "artisans", live: true },
       { href: "/admin/orders", label: "Orders", icon: "orders", live: true },
+      { href: "/admin/discounts", label: "Discount codes", icon: "discounts", live: true },
       { href: "/admin/customers", label: "Customers", icon: "customers", live: true },
       { href: "/admin/messages", label: "Messages", icon: "customers", live: true },
       { href: "/admin/team", label: "Team", icon: "artisans", live: true },
@@ -57,7 +58,6 @@ const NAV_GROUPS: NavGroup[] = [
     title: "Not ready yet",
     items: [
       { href: "/admin/appointments", label: "Appointments", icon: "appointments" },
-      { href: "/admin/discounts", label: "Discounts", icon: "discounts" },
     ],
   },
 ];

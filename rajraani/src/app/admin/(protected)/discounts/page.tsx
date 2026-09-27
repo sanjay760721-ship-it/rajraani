@@ -1,14 +1,9 @@
-import { ComingSoon } from "@/components/admin/ComingSoon";
+import { DiscountsManager } from "@/components/admin/DiscountsManager";
+import { PAYMENTS_LIVE } from "@/lib/admin/order-words";
+import { listDiscounts } from "@/lib/discounts";
 
-export const metadata = { title: "Discounts" };
+export const metadata = { title: "Discount codes" };
 
 export default function AdminDiscountsRoute() {
-  return (
-    <ComingSoon
-      title="Discount codes"
-      willDo="Create codes like FESTIVE10 for a percentage or amount off, with start and end dates."
-      meanwhile="to change a price, edit the piece itself."
-      link={{ href: "/admin/products", label: "Go to Products & stock" }}
-    />
-  );
+  return <DiscountsManager codes={listDiscounts()} paymentsLive={PAYMENTS_LIVE} />;
 }

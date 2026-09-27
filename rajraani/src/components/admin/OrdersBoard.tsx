@@ -81,6 +81,9 @@ function OrderDetail({ order }: { order: AdminOrder }) {
             </li>
           ))}
         </ul>
+        {order.discountMinor ? (
+          <p className="a-body-sm mt-2">Discount ({order.discountCode}): −{rupees(order.discountMinor)}</p>
+        ) : null}
         <p className="a-body-sm mt-2">Delivery: {order.shippingMinor ? rupees(order.shippingMinor) : "free"}</p>
         <p className="a-body-md mt-1"><strong>Total: {rupees(order.totalMinor)}</strong></p>
       </div>

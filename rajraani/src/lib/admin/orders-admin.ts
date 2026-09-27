@@ -1,6 +1,7 @@
 import "server-only";
 
 import { db } from "../db/client.ts";
+import { ensureDiscountStorage } from "../discounts.ts";
 
 /**
  * Orders, as the shop owner reads them.
@@ -30,6 +31,8 @@ export type AdminOrder = {
   dispatchedAt: string | null;
   tracking: string | null;
   notes: string | null;
+  discountCode: string | null;
+  discountMinor: number;
   items: { title: string; poeticName: string; handle: string; quantity: number; lineTotalMinor: number }[];
 };
 
@@ -52,6 +55,8 @@ type OrderRow = {
   dispatched_at: string | null;
   tracking: string | null;
   notes: string | null;
+  discount_code: string | null;
+  discount_minor: number;
 };
 
 type ItemRow = {
@@ -64,11 +69,12 @@ type ItemRow = {
 };
 
 export function listOrders(): AdminOrder[] {
+  ensureDiscountStorage();
   const orders = db()
     .prepare(
       `SELECT id, reference, status, full_name, email, phone, address_line1, address_line2,
               city, state, postcode, total_minor, shipping_minor, created_at, paid_at,
-              dispatched_at, tracking, notes
+              dispatched_at, tracking, notes, discount_code, discount_minor
          FROM customer_order ORDER BY created_at DESC LIMIT 500`,
     )
     .all() as unknown as OrderRow[];
@@ -98,6 +104,8 @@ export function listOrders(): AdminOrder[] {
     dispatchedAt: row.dispatched_at,
     tracking: row.tracking,
     notes: row.notes,
+    discountCode: row.discount_code,
+    discountMinor: row.discount_minor ?? 0,
     items: items
       .filter((item) => item.order_id === row.id)
       .map((item) => ({

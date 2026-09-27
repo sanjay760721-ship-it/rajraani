@@ -9,6 +9,7 @@ import {
   type CartRequestLine,
   type CustomerDetails,
 } from "../orders/orders";
+import { evaluate } from "../discounts";
 
 export type CheckoutInitResult =
   | {
@@ -31,9 +32,34 @@ export type CheckoutInitResult =
  * Prices cart directly from database, verifies stock, creates a pending order,
  * and initializes the Razorpay order handle.
  */
+export type DiscountCheck =
+  | { ok: true; code: string; label: string; discountMinor: number; totalMinor: number }
+  | { ok: false; error: string };
+
+/**
+ * Check a discount code against the cart as the server prices it, for the
+ * cart to show "−₹X". Checkout checks it again itself — this answer is only
+ * ever used for display.
+ */
+export async function checkDiscountAction(requestedLines: CartRequestLine[], code: string): Promise<DiscountCheck> {
+  if (!code.trim()) return { ok: false, error: "Enter a code." };
+  const priced = priceCart(requestedLines);
+  if (!priced.ok) return { ok: false, error: "Your cart could not be priced." };
+  const result = evaluate(code, priced.cart.subtotalMinor);
+  if (!result.ok) return result;
+  return {
+    ok: true,
+    code: result.code,
+    label: result.label,
+    discountMinor: result.discountMinor,
+    totalMinor: priced.cart.totalMinor - result.discountMinor,
+  };
+}
+
 export async function createCheckoutAction(
   requestedLines: CartRequestLine[],
   customer: CustomerDetails,
+  discountCode?: string,
 ): Promise<CheckoutInitResult> {
   try {
     const pricedResult = priceCart(requestedLines);
@@ -52,6 +78,14 @@ export async function createCheckoutAction(
     }
 
     const cart = pricedResult.cart;
+    // The code is checked again here, against the server's own prices; the
+    // browser's idea of the discount is never used.
+    if (discountCode?.trim()) {
+      const discount = evaluate(discountCode, cart.subtotalMinor);
+      if (!discount.ok) return { ok: false, error: discount.error };
+      cart.discount = { code: discount.code, minor: discount.discountMinor };
+      cart.totalMinor -= discount.discountMinor;
+    }
     const pending = createPendingOrder(cart, customer);
 
     // If real Razorpay key is present in environment, generate real gateway order.
