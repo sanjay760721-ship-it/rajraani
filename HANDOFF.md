@@ -1,9 +1,11 @@
 # Project Handoff — Rajraani
 
-**Last updated:** 24 September 2026 (design pass against the reference, every photo a
-link, footer, size chart — §2.53)
+**Last updated:** 27 September 2026 (the admin rebuilt for a non-technical owner, folder
+reorganised, progress re-measured at ~78% — §2.54)
 **Purpose:** Resume state. Read this first in any new session, then read the two documents it points to.
 
+> **Latest: [§2.54](#254-the-admin-rebuilt-for-a-non-technical-owner--27-september-2026)** — the admin, what is left, and how long it takes.
+>
 > **Start at [§2.45](#245-audited-state-22-august-2026), then [§2.46](#246-progress-ledger--measured-against-git-22-august-2026) and [§2.47](#247-photography-integrated-and-the-three-blocking-decisions-taken--22-august-2026).**
 > §[2.48](#248-originality-remediation--22-august-2026) records copy and palette taken from the
 > reference site and since rewritten — read it before adding any homepage copy.
@@ -401,7 +403,7 @@ Commerce is **~50% built and 0% trustworthy**. See the §2.45 checkout finding.
 | Content and imagery | ~55% *(was ~40%; see §2.47)* | commissioned shoot, 7 unphotographed sarees, 9 tiles, no Banaras store photo, 822 MB video |
 | Launch hardening | ~10% | perf, SEO, a11y audit, load test, monitoring |
 
-**Overall: roughly 73% of the build is done** (72% on 13 September, 62% on 22 August).
+**Overall: roughly 73% of the build is done** (72% on 13 September, 62% on 22 August). *Superseded by §2.54 — 78% on 27 September.*
 The 23–24 September session (§2.53) was storefront polish, so it moves the visible
 number and not the other two. The remaining quarter is unevenly distributed and the
 distribution is the point:
@@ -999,7 +1001,7 @@ sync, or move the repo out of OneDrive. There is no git remote — push somewher
 
 ### Prototype — what it proved
 
-*Historical. `archive/prototype.html` predates the real build and is not maintained.*
+*Historical. `docs/archive/prototype.html` predates the real build and is not maintained.*
 
 Open it in any browser. No server, no install, no external requests.
 
@@ -1088,19 +1090,140 @@ so no social links show anywhere).
 212 staged third-party files now (203 on 13 Sep): the Bridal/Amrita and mega-menu crops
 were added. Same status as before — gitignored, unlicensed, local mockup only.
 
+### 2.54 The admin rebuilt for a non-technical owner — 27 September 2026
+
+**Why.** The owner's instruction: once the site is live, *every text and every image
+will change*, and the person changing them does not build websites. The admin was ~30%
+real (4 of 14 screens), several "working-looking" screens were mock-ups full of invented
+data, and the menu, the site-wide lines and all 20 pages were code-only.
+
+The detailed log is `rajraani/docs/admin-dashboard-plan.md` §7a. In short:
+
+| Area | Before | Now |
+|---|---|---|
+| **Words anywhere** | Code only | **Change text** (`/admin/text`): search the words you see, or pick a place. Every text on the homepage, all pages and the site-wide lines, saved in place. It warns when the old wording survives elsewhere. |
+| **Edit on the site** | — | Signed in, **✏️ Edit this page** on the live shop: click words or a photo, change, save. Visitors download none of it. |
+| **Site-wide lines** | `brand.ts` constants | Announcement strip, top-bar line, footer contact details, "Our promise", the handwoven note and the product tabs, stored in the `site.text` setting. |
+| **Menu** | `navigation.ts` constant | **Menu** (`/admin/menu`): the six top items, and every column, link and photo tile in their dropdowns, with an "also on phones" tick. Stored in the `site.menu` setting. |
+| **Homepage & pages** | Homepage text only | Every block editable (photos, words, buttons, slides, tiles, questions), with add, reorder, duplicate, remove and preview. **+ New page** copies an existing page, hidden until Live. |
+| **Photos** | No upload | Upload (camera-size, resized to WebP ≤3000px) to `data/media/`, served by `/media/[file]`. Pick from any photo slot. Stand-ins are counted and flagged. |
+| **Products** | Real, no photo upload | Products & stock (`/admin/products`): thumbnails, −/+ stock, hide/show, search. The product editor has photo slots (upload, replace, reorder, remove, describe) and plain labels. Uploaded photos beat stand-ins. |
+| **Collections** | **Mock-up** (jewellery collections) | The real 20, with photos and counts; name and introduction editable. |
+| **Orders** | **Mock-up** ("₹24.5M", invented customers) | Real orders: To send / Sent / Delivered, mark as sent with tracking, notes. A banner says payments aren't live. |
+| **Messages** | Saved, never shown | **Messages**: contact-form enquiries, reply by email, mark answered. |
+| **Overview** | "Executive overview" of catalogue value | **Overview** (`/admin/overview`, first in the sidebar): 30-day sales vs previous, weekly sales chart, orders to send, stock, messages, best sellers, launch readiness. Real figures only. |
+| **Other mock-ups** | Customers, Appointments, Discounts, Analytics, Artisans had invented data | Honest "Not ready yet" pages. |
+
+**Design language.** The Menu screen was the owner's reference. Every "Your website"
+screen now shares its shape:
+- a header with a title, a one-line intro and **Save & publish**
+- titled cards with a hint line
+- pick one thing, then edit it
+- "+ Add…" at the end of each group
+
+The visible words are "block", not "band", and "stand-in photo", not "reference".
+
+**Verified.**
+- Crawled 23 admin routes, 20 page editors, 36 product editors and 60 storefront URLs:
+  no errors, no broken links.
+- On a **production build**, a stranger is redirected to sign-in from every admin
+  screen, both admin APIs return 401, and a visitor's browser makes no editor request.
+- Every write path (orders, stock, photos, text, menu, new page) was exercised end to
+  end and reverted. The database was audited back to its pre-test state.
+- `npm run verify` is green, with 403 tests.
+
+**Not verified: how it looks.** The browser pane would not render screenshots this
+session, so the new screens have been checked as text and data only. A human
+click-through is owed before handover.
+
+**Owner-facing guide:** [`docs/admin-guide.md`](docs/admin-guide.md).
+
+#### Progress ledger — 27 September 2026
+
+Same yardstick as §2.46 (scope built, not effort remaining).
+
+| Workstream | Done | Was | Remaining |
+|---|---|---|---|
+| Research and specs | ~95% | ~95% | catalogue copy, photography commissioning |
+| Storefront UI | ~97% | ~97% | no `/blogs` route; real contact details and social handles |
+| Navigation and pages | ~100% | ~98% | editable now; only imagery remains, counted under Content |
+| Catalogue depth | ~60% | ~60% | real stock, SKUs, prices; 7 unphotographed pieces |
+| Design system | ~95% | ~95% | dead `sm:` breakpoint across 10 files |
+| **Admin** | **~65%** | ~30% | see below |
+| Commerce / payments | ~50% built, untrusted | same | signature check, webhook, tests |
+| Content and imagery | ~55% | ~55% | 87 stand-in photos on pages, 36 pieces to shoot, 822 MB video |
+| Launch hardening | ~12% | ~10% | hosting, backups, perf, SEO, a11y audit, monitoring |
+
+**Overall: roughly 78% of the build is done** (73% on 24 September).
+
+Looked at through the same three lenses as §2.46:
+
+| Lens | 24 Sep | Now |
+|---|---|---|
+| What a visitor **sees** | ~95% | ~95% (unchanged: stand-in photos) |
+| What **takes money** | ~40% built, 0% trustworthy | same (untouched this session) |
+| What you **run the business from** | ~30% | **~65%** |
+
+**Admin, measured.** Of the 21 screens in the admin plan §3:
+- **13 are done:** Overview, Products, Taxonomy, Homepage, Pages, Menus, Media, Orders,
+  Messages, Change text, Start here, Photos, and the on-site editor.
+- **6 are partial:** Collections (no create), Campaigns (pages + menu, no campaign
+  record), Footer (contact only), Announcements (strip only, not the newsletter popup),
+  Store details, Shipping.
+- **5 are not started:** Customers, Appointments, Discounts, Team/roles, Activity log.
+
+The cross-cutting pieces are:
+- **built:** the link picker, the media library, the section editor and preview
+- **not built:** drafts and revisions
+
+#### What is left, with estimates (developer days)
+
+| # | Work | Days | Blocks launch? |
+|---|---|---|---|
+| 1 | **Payments:** create Razorpay orders server-side, verify the signature, webhook, tests (§6 A) | 3–4 | **Yes** |
+| 2 | **Hosting:** a server with a persistent disk for the DB and `data/media/`, nightly off-site backups, `ADMIN_AUTH`, first real admin account | 2–3 | **Yes** |
+| 3 | **Undo:** revisions and "Recent changes / Put back" on every save, plus an activity log | 3–4 | Strongly advised |
+| 4 | **Admin gaps:** + New collection, footer links, newsletter popup, UI wording (cart, buttons), SEO fields per page | 4–6 | No |
+| 5 | Team accounts and roles, and a second factor for the owner | 2–3 | Advised |
+| 6 | Customers, Appointments, Discounts screens | 5–7 | No |
+| 7 | Phone-friendly admin pass, and a visitor-count tool once chosen | 2–3 | No |
+| 8 | Launch hardening: performance, SEO, accessibility audit, monitoring, error reporting | 5–8 | **Yes** |
+| 9 | `/blogs` journal route (lost 22 Aug) | 2–3 | No |
+| | **Development total** | **≈ 28–41 days** | **the launch line (1, 2, 8) is ≈ 10–15 days** |
+
+**Not developer work, and on the critical path:**
+- the photography shoot (every image)
+- real SKUs, stock and prices
+- the support email, phone and socials
+- the Calendly pages
+- the Razorpay KYC
+- the domain
+
+The shoot is the longest lead time on the whole project.
+
+
 ---
 
 ## 3. How the folder is arranged
 
-Reorganised 6 August. [`README.md`](README.md) at the root is the front door.
+Reorganised 6 August and 27 September. [`README.md`](README.md) at the root is the front door.
 
 ```
 README.md          Front door — what is here and where to start
 HANDOFF.md         This file. Where the project stands, and what is next.
 rajraani/          The site. Everything that runs.
-docs/research/     The six analysis documents
-archive/           Superseded artefacts
+docs/admin-guide.md  How the shop owner changes the site (plain language)
+docs/research/     The analysis documents
+docs/specs/        Page specifications (homepage)
+docs/design/       The Stitch design-system export
+docs/brand/        The logo
+docs/archive/      Superseded artefacts
+pics/              Local stand-in photography — gitignored, never committed
 ```
+
+Reorganised again on 27 September 2026: `homepagespec.md`, `admin/`, `archive/`,
+`stitch_rajraani_design_system/` and `logo.jpeg` moved under `docs/`; the empty
+`images/` folder was removed.
 
 | Path | What it is |
 |---|---|
@@ -1111,7 +1234,7 @@ archive/           Superseded artefacts
 | `docs/research/photography-brief.md` | Sendable studio brief. Needs SKU counts at §1. |
 | `docs/research/sweep-findings.md` | Imagery forensics, PDP anatomy, facets, cart, search, performance. Measured, not estimated. |
 | `docs/research/design.md` · `design-addendum.md` · `pre-build-gaps.md` | The rest of the research |
-| `archive/prototype.html` | Superseded. Still says "Tantu". Kept as a record. |
+| `docs/archive/prototype.html` | Superseded. Still says "Tantu". Kept as a record. |
 
 Note: the research documents name the competitor throughout — correctly, since they
 *are* the competitive research. The originality rule applies to the build, not the
@@ -1742,7 +1865,9 @@ them, and none of it is licensed. This is now the largest single blocker by
 volume, and it is a commissioning and scheduling problem rather than an
 engineering one, so it wants starting early: `docs/research/photography-brief.md`.
 
-**C. Build the editorial-page editor** (§5.9 item 1). Twenty pages of content now live in
+**C. ~~Build the editorial-page editor~~ — done 27 September 2026 (§2.54).** Every page, the homepage, the menu and the site-wide lines are now edited in the admin.
+
+*Original note:* (§5.9 item 1). Twenty pages of content now live in
 `sections.ts` as seed constants. The content seam and `savePage`/`deletePage` already
 exist and are used by nothing. Until this screen lands, changing any page copy is a code
 edit and a deploy, which is not a workable arrangement for whoever writes the copy.
@@ -1778,13 +1903,13 @@ edit and a deploy, which is not a workable arrangement for whoever writes the co
 
 **For the next session:**
 
-1. Read this file's §2.0 → §2.4. That is the whole resume state.
+1. Read this file's §2.54 (latest) and §2.46 (the ledger it updates).
 2. Read `rajraani/docs/architecture-change-2026-08-06.md` — **Shopify and Sanity are
    out.** Do not rebuild either.
 3. Read `rajraani/README.md` — what exists, what does not, and why
 4. `cd rajraani && npm install && npm run db:reset && npm run verify` — confirm green
    before changing anything
-5. **Continue at §2.4 item 1:** point the storefront at the database.
+5. **Continue at §2.54 "What is left"** — payments (§6 A) first, then hosting.
 
 Taxonomy review is *not* a prerequisite for any of it — the vocabulary's shape is
 settled, and only the canonical spellings are open.

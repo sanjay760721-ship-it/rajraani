@@ -23,7 +23,7 @@ Thumbs.db
 
 # Stitch design export — mockup HTML and docs are tracked; the PNG renders are
 # not. They are 9.5MB of the 9.7MB and the HTML reproduces them exactly.
-stitch_rajraani_design_system/**/*.png
+docs/design/stitch-design-system/**/*.png
 
 # Raw reference-photo drop. Same category as /images/ — unlicensed third-party
 # photography kept for local mockups, plus an 822MB video that exceeds GitHub's
