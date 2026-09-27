@@ -205,7 +205,7 @@ export function TextFinder({
       <header>
         <h1 className="a-heading-lg">Change text</h1>
         <p className="a-body-md mt-1 max-w-2xl" style={{ color: "var(--a-ink-variant)" }}>
-          Type any words you can see on your website, or pick a place on the left. Change the words
+          Type any words you can see on your website, or pick a place from the list. Change the words
           and press <strong>Save</strong> — each one goes live on its own.
         </p>
       </header>
@@ -250,7 +250,7 @@ export function TextFinder({
         </div>
       ) : null}
 
-      <div className="grid items-start gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
         {/* Places, grouped like the site. */}
         <nav aria-label="Places on the site" className="a-card p-3 lg:sticky lg:top-28" style={{ borderRadius: "var(--a-radius-md)" }}>
           {placeGroups.map((group) => (
@@ -287,7 +287,7 @@ export function TextFinder({
             <div className="a-card px-6 py-12 text-center" style={{ borderRadius: "var(--a-radius-md)" }}>
               <p className="a-heading-sm">What would you like to change?</p>
               <p className="a-body-md mt-2" style={{ color: "var(--a-ink-variant)" }}>
-                Type a few words from the site in the box above, or pick a place on the left to see all
+                Type a few words from the site in the box above, or pick a place from the list to see all
                 of its text.
               </p>
             </div>

@@ -216,7 +216,7 @@ export function SectionListEditor({
               </div>
             </section>
           ) : (
-            <div className="grid items-start gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
+            <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-6 lg:grid-cols-[240px_minmax(0,1fr)] xl:grid-cols-[300px_minmax(0,1fr)]">
               {/* The page, top to bottom. */}
               <nav aria-label="Blocks on this page" className="a-card p-3 lg:sticky lg:top-4" style={{ borderRadius: "var(--a-radius-md)" }}>
                 <p className="a-label px-2 pb-2" style={{ color: "var(--a-outline)" }}>
@@ -302,7 +302,7 @@ export function SectionListEditor({
                 ) : current ? (
                   <>
                     <div className="flex flex-wrap items-center gap-3">
-                      <div className="min-w-0 flex-1">
+                      <div className="min-w-[14rem] flex-1">
                         <p className="a-label" style={{ color: "var(--a-outline)" }}>
                           Block {index + 1} of {sections.length}
                         </p>

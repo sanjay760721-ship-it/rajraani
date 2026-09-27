@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { AdminIcon, type AdminIconName } from "./AdminIcon";
 import { BRAND } from "@/lib/brand";
@@ -67,12 +68,44 @@ export function AdminSidebar({
   signOutAction: () => Promise<void>;
 }) {
   const pathname = usePathname();
+  // Phones and small tablets: the sidebar is a drawer behind a Menu button.
+  const [open, setOpen] = useState(false);
+  const [shownFor, setShownFor] = useState(pathname);
+  // Close the drawer when a link in it is followed.
+  if (shownFor !== pathname) {
+    setShownFor(pathname);
+    setOpen(false);
+  }
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
+    <>
+    {/* Phone top bar */}
+    <div
+      className="sticky top-0 z-30 flex items-center justify-between border-b px-4 py-3 a-glass lg:hidden"
+      style={{ borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)" }}
+    >
+      <Link href="/admin" className="a-heading-sm" style={{ color: "var(--a-ink)" }}>
+        {BRAND.name} <span className="a-label" style={{ color: "var(--a-accent)" }}>Admin</span>
+      </Link>
+      <button type="button" className="a-btn-secondary" aria-expanded={open} aria-controls="admin-sidebar" onClick={() => setOpen(!open)}>
+        {open ? "Close" : "Menu"}
+      </button>
+    </div>
+    {open ? (
+      <div aria-hidden="true" className="fixed inset-0 z-40 lg:hidden" style={{ backgroundColor: "rgb(27 28 28 / 0.35)" }} onClick={() => setOpen(false)} />
+    ) : null}
     <aside
-      className="sticky top-0 flex h-screen w-64 shrink-0 flex-col justify-between overflow-y-auto border-r a-glass"
+      id="admin-sidebar"
+      className={`${open ? "fixed inset-y-0 left-0 z-50 flex" : "hidden"} h-screen w-72 shrink-0 flex-col justify-between overflow-y-auto border-r a-glass lg:sticky lg:top-0 lg:z-auto lg:flex lg:w-64`}
       style={{
         borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)",
+        backgroundColor: open ? "var(--a-surface)" : undefined,
       }}
     >
       <div className="flex flex-col">
@@ -179,5 +212,6 @@ export function AdminSidebar({
         </form>
       </div>
     </aside>
+    </>
   );
 }

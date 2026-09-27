@@ -44,7 +44,7 @@ export function HomepageEditor({
       title="Homepage"
       intro={
         <>
-          Pick a block on the left to change its photos, words and button. Nothing changes on the
+          Pick a block from the list to change its photos, words and button. Nothing changes on the
           site until you press <strong>Save &amp; publish</strong>.
           {isSeed ? " (This is still the starting layout — your first save replaces it.)" : null}
         </>

@@ -51,7 +51,7 @@ export function PageEditor({
       title={title || "Untitled page"}
       intro={
         <>
-          Pick a block on the left to change its photos, words and button. The page lives at{" "}
+          Pick a block from the list to change its photos, words and button. The page lives at{" "}
           <a href={`/pages/${page.slug}`} target="_blank" rel="noreferrer" className="underline">
             /pages/{page.slug}
           </a>

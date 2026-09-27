@@ -26,11 +26,11 @@ export default async function AdminLayout({ children }: LayoutProps<"/admin">) {
     // `admin-surface` is what switches design systems. Every token the admin
     // uses is scoped under it in globals.css, so the storefront's contract-
     // tested palette is untouched and nothing here can leak out of this tree.
-    <div className="admin-surface flex min-h-screen">
+    <div className="admin-surface flex min-h-screen flex-col lg:flex-row">
       <AdminSidebar adminEmail={admin.email} signOutAction={endSession} />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <main className="mx-auto w-full max-w-[1280px] flex-1 px-10 py-12">
+        <main className="mx-auto w-full max-w-[1280px] flex-1 px-4 py-6 sm:px-6 lg:px-10 lg:py-12">
           {children}
         </main>
       </div>
