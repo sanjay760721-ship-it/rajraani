@@ -1,13 +1,9 @@
-import { ComingSoon } from "@/components/admin/ComingSoon";
+import { BookingLinks } from "@/components/admin/BookingLinks";
+import { bookingLinks } from "@/lib/admin/booking-links";
 
-export const metadata = { title: "Appointments" };
+export const metadata = { title: "Store visits" };
 
-export default function AdminAppointmentsRoute() {
-  return (
-    <ComingSoon
-      title="Store appointments"
-      willDo="Requests to visit the store, so you can confirm or suggest another time."
-      meanwhile="visit bookings go through the “Book an appointment” links on the website."
-    />
-  );
+/** Store-visit booking: the Calendly links on the site, managed in one place. */
+export default async function AdminAppointmentsRoute() {
+  return <BookingLinks links={await bookingLinks()} />;
 }

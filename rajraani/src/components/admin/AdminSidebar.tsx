@@ -48,16 +48,9 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/admin/orders", label: "Orders", icon: "orders", live: true },
       { href: "/admin/discounts", label: "Discount codes", icon: "discounts", live: true },
       { href: "/admin/customers", label: "Customers", icon: "customers", live: true },
+      { href: "/admin/appointments", label: "Store visits", icon: "appointments", live: true },
       { href: "/admin/messages", label: "Messages", icon: "customers", live: true },
       { href: "/admin/team", label: "Team", icon: "artisans", live: true },
-    ],
-  },
-  {
-    // Screens that are still mock-ups. Kept visible so they are not forgotten,
-    // but set apart so nobody expects them to save.
-    title: "Not ready yet",
-    items: [
-      { href: "/admin/appointments", label: "Appointments", icon: "appointments" },
     ],
   },
 ];
