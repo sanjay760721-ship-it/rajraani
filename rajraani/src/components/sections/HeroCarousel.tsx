@@ -221,15 +221,21 @@ export function HeroCarousel({
                 <div
                   aria-hidden
                   className={`pointer-events-none absolute inset-0 ${
+                    slide.ink === "dark" ? "hidden" : ""
+                  } ${
                     align === "right"
-                      ? "bg-gradient-to-l from-black/60 via-black/20 to-transparent"
+                      ? "bg-gradient-to-l from-black/55 via-black/15 to-transparent"
                       : align === "left"
-                        ? "bg-gradient-to-r from-black/60 via-black/20 to-transparent"
-                        : "bg-gradient-to-t from-black/60 via-black/25 to-transparent"
+                        ? "bg-gradient-to-r from-black/55 via-black/15 to-transparent"
+                        : "bg-gradient-to-t from-black/55 via-black/15 to-transparent"
                   }`}
                 />
 
-                <div className="pointer-events-none absolute inset-0 flex items-center">
+                <div
+                  className={`pointer-events-none absolute inset-0 flex items-center ${
+                    slide.ink === "dark" ? "caption-dark" : ""
+                  }`}
+                >
                   <div className="wrap-wide w-full">
                     <div
                       className={`w-full max-w-[360px] text-center ${
@@ -258,7 +264,7 @@ export function HeroCarousel({
                         */}
                       <Link
                         href={slide.ctaHref}
-                        className="pointer-events-auto font-display text-[16px] tracking-[1px] mt-7 inline-block border border-black/15 bg-white/80 px-4 py-[5px] text-black transition-colors duration-300 hover:bg-white"
+                        className="cta-secondary pointer-events-auto mt-7"
                       >
                         {slide.ctaLabel}
                       </Link>
@@ -271,11 +277,17 @@ export function HeroCarousel({
                 {/* Scrim Overlay — bottom gradient for text legibility */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent ${
+                    slide.ink === "dark" ? "hidden" : ""
+                  }`}
                 />
 
                 {/* Slide Content \u2014 bottom-aligned, max-width 46ch */}
-                <div className="pointer-events-none absolute inset-0 flex items-end">
+                <div
+                  className={`pointer-events-none absolute inset-0 flex items-end ${
+                    slide.ink === "dark" ? "caption-dark" : ""
+                  }`}
+                >
                   <div className="wrap-wide pb-16 md:pb-24">
                     <div className="max-w-[46ch]">
                       {slide.eyebrow ? (

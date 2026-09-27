@@ -358,18 +358,30 @@
   color: var(--color-ink-muted);
 }
 
+/*
+ * The button family (design audit, 24 Sep 2026).
+ *
+ * Seven button treatments had grown up across the site — ink with caps, gold
+ * with caps, translucent white in the serif, ink in the serif, an outlined
+ * serif, two underline styles. One job, one look: the same small capitals on
+ * the same 44px target (Apple's minimum), in ink on paper and in white on a
+ * photograph. Colour says which ground it sits on, nothing else.
+ */
 @utility cta-primary {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   font-family: var(--font-ui);
   font-size: var(--text-eyebrow);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-bg);
   background: var(--color-ink);
-  padding: 12px 24px;
-  transition: opacity var(--t-fast) var(--ease-brand);
+  padding: 13px 32px;
+  transition: background-color var(--t-fast) var(--ease-brand);
 }
-.cta-primary:hover { opacity: 0.85; }
+.cta-primary:hover { background: var(--color-ink-body); }
 
 /*
  * The over-image button.
@@ -379,25 +391,41 @@
  * darkened frame is dark on dark and effectively invisible.
  */
 @utility cta-secondary {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   font-family: var(--font-ui);
   font-size: var(--text-eyebrow);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  background: var(--color-gold-on-image);
+  /* White on the photograph, not gold: a saturated fill competed with the
+     picture it sat on. Filled at rest so it never needs a pointer to show. */
+  background: rgb(255 255 255 / 0.92);
   color: var(--color-ink);
-  border: 1px solid var(--color-gold-on-image);
-  padding: 12px 24px;
-  transition: all var(--t-fast) var(--ease-brand);
+  padding: 13px 32px;
+  transition: background-color var(--t-fast) var(--ease-brand);
 }
-/* Filled at rest, deepening on hover — the button never relies on a pointer
-   to become visible, which is also the only behaviour a touch screen has. */
 .cta-secondary:hover,
 .cta-secondary:focus-visible {
-  background: #c9a227;
-  border-color: #c9a227;
-  color: var(--color-ink);
+  background: var(--color-bg);
 }
+
+/*
+ * A slide caption set in ink on a light photograph (`ink: "dark"`). Overrides
+ * the white type the slide components assume, and turns their white button
+ * into the ink one. Unlayered, so it outranks the utilities on the elements.
+ */
+.caption-dark :where(h1, h2, p) {
+  color: var(--color-ink);
+  filter: none;
+}
+.caption-dark :where(p:first-child) { color: var(--color-ink-muted); }
+.caption-dark .cta-secondary {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+.caption-dark .cta-secondary:hover { background: var(--color-ink-body); }
 
 @utility cta-link {
   display: inline-block;
@@ -752,7 +780,10 @@ body:has([data-ends-full-bleed]) footer {
 
 .campaign-deep :where(h1, h2, h3),
 .campaign-brown :where(h1, h2, h3) {
-  font-weight: 700;
+  /* Regular, like every other display heading here. The reference sets these
+     bold; one bold serif among dozens of regular ones read as an error, and
+     the serif carries hierarchy by size alone. */
+  font-weight: 400;
   /*
    * 25px, measured on their campaign intro block — larger than the site's
    * `text-h3`, which was rendering these at 20px. Their CLOSING block is 20px,

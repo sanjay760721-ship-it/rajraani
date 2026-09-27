@@ -65,7 +65,7 @@ export function ContactForm({ submitLabel }: { submitLabel: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="font-display w-full border border-rule bg-bg py-3 text-[15px] text-ink transition-colors hover:bg-bg-alt disabled:opacity-60"
+        className="cta-primary w-full disabled:opacity-60"
       >
         {pending ? "Sending…" : submitLabel}
       </button>

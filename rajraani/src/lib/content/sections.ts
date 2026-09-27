@@ -49,6 +49,13 @@ export type HeroSlide = {
    * Vertically the caption is always centred; only the horizontal edge moves.
    */
   align?: "left" | "center" | "right";
+  /**
+   * `dark` for a light photograph: the caption is set in ink straight on the
+   * picture, with no scrim. A dark wash over a pale frame to keep white type
+   * legible greys the photograph out; dark type leaves it alone (measured 10–14:1
+   * on the three light slides, against under 3:1 for white).
+   */
+  ink?: "dark";
 };
 
 export type Section =
@@ -139,6 +146,13 @@ export type Section =
          * one slide cannot quietly move the others.
          */
         verticalAlign?: "bottom" | "center";
+        /**
+         * `dark` for a light photograph: the caption is set in ink straight on the
+         * picture, with no scrim. A dark wash over a pale frame to keep white type
+         * legible greys the photograph out; dark type leaves it alone (measured 10–14:1
+         * on the three light slides, against under 3:1 for white).
+         */
+        ink?: "dark";
       }[];
     }
   | {
@@ -655,6 +669,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       },
       {
         id: "slide-kadhua",
+        ink: "dark",
         art: imagePair("gold", "hero/slide-03-kadhua.webp"),
         eyebrow: "Seasonal Edit",
         title: "Kadhua",
@@ -664,6 +679,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
       },
       {
         id: "slide-gifting",
+        ink: "dark",
         align: "right",
         art: imagePair("pink", "hero/slide-04-gifting.webp"),
         eyebrow: "Curated Edits",
@@ -740,6 +756,7 @@ export const HOMEPAGE_SECTIONS: readonly Section[] = [
     slides: [
       {
         id: "slide-womenswear",
+        ink: "dark",
         art: imagePair("purple", "womens-mens/womenswear.webp"),
         eyebrow: "Womenswear",
         title: "Womenswear",

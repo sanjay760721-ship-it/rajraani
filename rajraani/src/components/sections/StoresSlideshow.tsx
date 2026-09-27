@@ -131,7 +131,7 @@ export function StoresSlideshow({ slides }: StoresSlideshowProps) {
             {/* Scrim Overlay — stronger for stores */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent"
             />
 
             {/* Overlaid Content — centered */}

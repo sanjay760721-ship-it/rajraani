@@ -26,6 +26,8 @@ interface EditorialSlide {
   buttonVariant: "primary" | "secondary";
   textAlign: "left" | "right" | "center";
   verticalAlign?: "bottom" | "center";
+  /** Caption in ink with no scrim, for a light photograph. */
+  ink?: "dark";
 }
 
 interface EditorialSlideshowProps {
@@ -134,12 +136,16 @@ export function EditorialSlideshow({ slides }: EditorialSlideshowProps) {
             {/* Scrim Overlay — bottom gradient for text legibility */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              className={`pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent ${
+                slide.ink === "dark" ? "hidden" : ""
+              }`}
             />
 
             {/* Slide Content — text alignment varies per slide */}
             <div
               className={`pointer-events-none absolute inset-0 flex ${
+                slide.ink === "dark" ? "caption-dark" : ""
+              } ${
                 slide.verticalAlign === "center" ? "items-center" : "items-end"
               }`}
             >

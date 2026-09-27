@@ -231,7 +231,7 @@ function Hero({
       <ImageLink href={section.ctaHref} duplicate className="absolute inset-0" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent"
       />
       <div className="pointer-events-none absolute inset-0 flex items-end">
         <div className="wrap-wide pb-16 md:pb-24">
