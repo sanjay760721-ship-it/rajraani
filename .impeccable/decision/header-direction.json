@@ -1,0 +1,129 @@
+{
+  "title": "Rajraani header: choose the visual world",
+  "question": "For the announcement strip and top bar. The roll assigned The Haveli Gateway. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Haveli Gateway",
+      "kicker": "THE ROLL",
+      "lineage": "Banaras havelis: carved lintels, lime walls, brass-studded doors",
+      "thesis": "Arriving at Rajraani is stepping through a haveli door: a lacquered lintel, a lime wall, brass studs on the door.",
+      "palette": ["#f6f3ee", "#1f2433", "#7d1a1d", "#a8894a"],
+      "materials": ["lime plaster", "sindoor lacquer", "hand-beaten brass"],
+      "viewport": "A thin sindoor-lacquer lintel carries one engraved message; below it a lime-white wall with the house line set like a doorway plaque, and the five actions as small brass studs.",
+      "risk": "Becomes theme-park if the lintel is carved or ornamented; it must stay a flat band of colour and metal.",
+      "raised": [
+        { "from": "challenger-azulejo", "raise": "Two inks only, indigo and sindoor, on lime white; brass appears only as metal (rules and rings), never as fill." },
+        { "from": "challenger-depot-blind", "raise": "The announcement changes by one short roll upward and settles, like a blind stepping one course; no fades, no tickers." },
+        { "from": "challenger-film-bench", "raise": "State is a mark, not a colour: the active or hovered action gains a brass ring, it does not change hue." },
+        { "from": "challenger-pc98", "raise": "Fixed regions: lintel, wall and studs never move or resize between pages; only their contents change." }
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "The Saree Box",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Banarasi saree boxes: dyed card, gold-foil stamping, tissue",
+      "thesis": "The header is the lid of a Rajraani box: one deep colour, the name foil-stamped, opened by the visitor.",
+      "palette": ["#2a1630", "#d9bf7a", "#f4efe6"],
+      "materials": ["dyed board", "gold foil", "tissue paper"],
+      "viewport": "Announcement and top bar merge into one aubergine lid band with foil-gold type and icons, a single tissue-white edge beneath.",
+      "risk": "Closest to the dark-and-gold look most heritage sites ship, and to the brocade bar you already turned down."
+    },
+    {
+      "id": "challenger-secession",
+      "label": "Kinari Border",
+      "verdict": "competitive",
+      "lineage": "fused from a Secession folk-flower page: the saree's own border",
+      "thesis": "The header is edged like a saree: a woven kinari grows in from both margins and stops where the words begin.",
+      "palette": ["#f6f3ee", "#2f4a3a", "#b7646b", "#2b2f3a"],
+      "materials": ["woven border", "flat ornament with fine outline"],
+      "viewport": "A plain bar whose lower edge carries a narrow kinari that draws in from left and right once on load, leaving the middle clear.",
+      "case": "Buyers know a kinari instantly (strong identification), but ornament competes with the cloth the site is selling.",
+      "risk": "Ornament on chrome is the brocade bar again in a different stitch.",
+      "hero": "https://impeccable.style/worlds/cards/design-canon-mloda-polska-secession-page-hero.webp"
+    },
+    {
+      "id": "challenger-azulejo",
+      "label": "Azulejo Hall",
+      "verdict": "declined",
+      "lineage": "cobalt tin-glazed tile halls",
+      "thesis": "Cobalt narrative panels on milk-white tile.",
+      "palette": ["#f7f7f2", "#1f3c88", "#d9a93a"],
+      "materials": ["tin glaze", "cobalt wash"],
+      "viewport": "A tiled lintel band painted in cobalt.",
+      "case": "Portuguese, not Banarasi; buyers would not recognise it as theirs.",
+      "risk": "Reads as another country's craft.",
+      "kept": "Total two-ink colour discipline.",
+      "hero": "https://impeccable.style/worlds/cards/architecture-places-azulejo-station-hall-hero.webp"
+    },
+    {
+      "id": "challenger-depot-blind",
+      "label": "Depot Blind",
+      "verdict": "declined",
+      "lineage": "bus destination blinds",
+      "thesis": "Messages on a roll of cloth stepping under a window.",
+      "palette": ["#1f4a2e", "#f2c230", "#f1ede2"],
+      "materials": ["dyed duck cloth"],
+      "viewport": "The strip as a stepping cloth blind.",
+      "case": "A transit object; no link to heritage textile buyers.",
+      "risk": "Industrial, not royal.",
+      "kept": "The one-course step as the only motion.",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-depot-blind-courses-hero.webp"
+    },
+    {
+      "id": "challenger-film-bench",
+      "label": "Cutting Bench",
+      "verdict": "declined",
+      "lineage": "film editing bench",
+      "thesis": "A perforated rail with marked frames.",
+      "palette": ["#111111", "#e8742c", "#ffffff"],
+      "materials": ["film grain", "tape flags"],
+      "viewport": "A rail of frames across the header.",
+      "case": "Editing-room language; meaningless to a bride or collector.",
+      "risk": "Cold and technical.",
+      "kept": "State shown by a mark rather than a colour change.",
+      "hero": "https://impeccable.style/worlds/cards/operate-a-cutting-bench-select-rail-hero.webp"
+    },
+    {
+      "id": "challenger-pc98",
+      "label": "Sixteen-Colour Screen",
+      "verdict": "declined",
+      "lineage": "1980s Japanese PC graphics",
+      "thesis": "Dithered pixel artwork in fixed regions.",
+      "palette": ["#000088", "#ff5555", "#55ffff", "#ffffff"],
+      "materials": ["pixel dither"],
+      "viewport": "A pixel-art header band.",
+      "case": "Retro computing; contradicts a five-figure handloom piece.",
+      "risk": "Novelty.",
+      "kept": "Regions that never move between pages.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-pc98-sixteen-color-field-hero.webp"
+    },
+    {
+      "id": "challenger-cloud",
+      "label": "Iridescent Cloud",
+      "verdict": "declined",
+      "lineage": "cloud iridescence",
+      "thesis": "White field with a hairline spectral edge.",
+      "palette": ["#ffffff", "#5b6470", "#9be3c9", "#e7a1c4"],
+      "materials": ["diffracted light"],
+      "viewport": "A white bar with a pastel hairline.",
+      "case": "Weather science; no tie to Banaras or cloth.",
+      "risk": "Generic and cold.",
+      "kept": "Colour confined to one hairline edge.",
+      "hero": "https://impeccable.style/worlds/cards/clouds-storms-auroras-iridescent-cloud-edge-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": false },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "What luxury fashion headers ship: a slim plain bar, black icons, nothing else.",
+    "palette": ["#ffffff", "#111111", "#8a8a8a"],
+    "materials": ["clean type", "hairline rule"],
+    "viewport": "A white bar, one line of small text, five black icons, a hairline.",
+    "risk": "Indistinguishable from every other fashion site by design."
+  },
+  "steer": true
+}

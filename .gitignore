@@ -33,3 +33,14 @@ docs/design/stitch-design-system/**/*.png
 # Per-machine Claude Code permission allowlist. Machine-specific absolute paths,
 # no value to anyone else on the repo.
 .claude/settings.local.json
+
+# Impeccable working files: review captures show the stand-in photography, and
+# questions/ is a local decision-page server's state.
+.impeccable/review/
+.impeccable/questions/
+
+# Redesign before/after screenshots: they show the unlicensed stand-in photos.
+docs/redesign/baseline/
+docs/redesign/after/
+# Browser-automation logs.
+.playwright-mcp/
