@@ -1,0 +1,4 @@
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+rajraani/.next/dev/cache/turbopack/v16.3.6-a758ffcf/00000273.sst filter=lfs diff=lfs merge=lfs -text
+rajraani/node_modules/@next/.swc-win32-x64-msvc-iJFcgsp6/next-swc.win32-x64-msvc.node filter=lfs diff=lfs merge=lfs -text
+rajraani/node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,27 @@
+{
+  "node": {
+    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+      "workers": {
+        "app/admin/(protected)/appointments/page": {
+          "moduleId": 40750,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "606447f53fb1172edbe75e06d02c833f5e55852ad9": {
+      "workers": {
+        "app/admin/(protected)/appointments/page": {
+          "moduleId": 40750,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "replaceBookingLinkAction",
+      "filename": "src/lib/admin/booking-actions.ts"
+    }
+  },
+  "edge": {}
+}

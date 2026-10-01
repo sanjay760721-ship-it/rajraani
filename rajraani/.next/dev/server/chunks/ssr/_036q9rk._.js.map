@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 17, "column": 0}, "map": {"version":3,"sources":["file:///C:/TILFI_COPY/rajraani/.next-internal/server/app/admin/(protected)/messages/page/actions.js%20(server%20actions%20loader)"],"sourcesContent":["export {$$RSC_SERVER_ACTION_0 as '0097ce86dad8aae1c05d70f65885cbfc1a7ae7900b'} from 'ACTIONS_MODULE0'\nexport {setMessageAnsweredAction as '6033907ffa809525859850eddaf1d462bc626e6e4a'} from 'ACTIONS_MODULE1'\n"],"names":[],"mappings":";AAAA;AACA"}},
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///C:/TILFI_COPY/rajraani/src/lib/admin/message-actions.ts"],"sourcesContent":["\"use server\";\n\nimport { revalidatePath } from \"next/cache\";\n\nimport { requireAdmin } from \"../auth/session.ts\";\nimport { db } from \"../db/client.ts\";\n\n/** Mark a contact-form message answered (or not). */\nexport async function setMessageAnsweredAction(id: number, answered: boolean): Promise<void> {\n  await requireAdmin();\n  db().prepare(\"UPDATE enquiry SET handled = ? WHERE id = ?\").run(answered ? 1 : 0, id);\n  revalidatePath(\"/admin/messages\");\n  revalidatePath(\"/admin/overview\");\n}\n"],"names":["setMessageAnsweredAction","id","answered","prepare","run"],"mappings":";;;;;AAEA;AAEA;AACA;;;;;;AAGO,eAAeA,yBAAyBC,EAAU,EAAEC,QAAiB;IAC1E,MAAM,IAAA,6IAAY;IAClB,IAAA,gIAAE,IAAGC,OAAO,CAAC,+CAA+CC,GAAG,CAACF,WAAW,IAAI,GAAGD;IAClF,IAAA,+IAAc,EAAC;IACf,IAAA,+IAAc,EAAC;AACjB;;;IALsBD;;AAAAA,+OAAAA"}}]
+}

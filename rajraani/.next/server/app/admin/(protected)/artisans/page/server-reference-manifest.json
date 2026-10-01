@@ -1,0 +1,16 @@
+{
+  "node": {
+    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+      "workers": {
+        "app/admin/(protected)/artisans/page": {
+          "moduleId": 5692,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    }
+  },
+  "edge": {}
+}

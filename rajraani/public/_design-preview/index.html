@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Rajraani admin mockups — local preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root { --ink:#1b1c1c; --muted:#444748; --rule:#c4c7c7; --bg:#fbf9f8; --card:#fff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:Manrope,system-ui,sans-serif; }
+  header { padding:48px 64px 24px; border-bottom:1px solid var(--rule); }
+  h1 { font-family:"Playfair Display",serif; font-size:40px; margin:0 0 8px; }
+  p  { margin:0; color:var(--muted); max-width:60ch; line-height:1.6; }
+  .note { margin-top:16px; padding:12px 16px; border:1px solid #e0c29f; background:#fdddb9; font-size:13px; color:#584329; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:24px; padding:32px 64px 64px; }
+  a.card { display:block; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--rule); }
+  a.card:hover { border-color:var(--ink); }
+  a.card img { display:block; width:100%; height:200px; object-fit:cover; object-position:top; border-bottom:1px solid var(--rule); }
+  .meta { padding:16px; }
+  .name { font-weight:600; font-size:14px; }
+  .group { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Admin mockups</h1>
+  <p>Sixteen Stitch screens across eight types. Click any card to open the full HTML mockup.</p>
+  <div class="note">
+    Local preview only. These are static mockups &mdash; not wired to data, not part of the build,
+    and gitignored. Nothing here is served in production.
+  </div>
+</header>
+<div class="grid" id="grid"></div>
+<script>
+  const screens = [
+    "executive_overview_1","executive_overview_2","executive_overview_3","executive_overview_4",
+    "order_vault_1","order_vault_2","order_management_1","order_management_2",
+    "curated_catalog_1","curated_catalog_2","product_catalog_1","product_catalog_2",
+    "analytics_intelligence_1","analytics_intelligence_2","analytics_deep_dive_1","analytics_deep_dive_2"
+  ];
+  document.getElementById("grid").innerHTML = screens.map(function (s) {
+    const group = s.replace(/_\d+$/, "").replace(/_/g, " ");
+    const variant = (s.match(/_(\d+)$/) || [,"1"])[1];
+    return '<a class="card" href="' + s + '/code.html">' +
+             '<img src="' + s + '/screen.png" alt="' + group + ' variant ' + variant + '" loading="lazy"/>' +
+             '<div class="meta"><div class="group">' + group + '</div>' +
+             '<div class="name">Variant ' + variant + '</div></div>' +
+           '</a>';
+  }).join("");
+</script>
+</body>
+</html>

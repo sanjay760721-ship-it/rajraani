@@ -15,6 +15,10 @@
 
 set -e
 
+# Git passes the refs being pushed on stdin. Keep them for Git LFS (below)
+# before anything else can read stdin.
+REFS=$(cat)
+
 echo "Running the verify gate before push…"
 echo
 
@@ -32,3 +36,8 @@ fi
 
 echo
 echo "Gate passed. Pushing."
+
+# Upload large files tracked by Git LFS (.gitattributes). This hook replaces
+# LFS's own pre-push hook, so it has to make the call itself.
+command -v git-lfs >/dev/null 2>&1 || { echo "Git LFS is required to push this repository (git lfs install)." >&2; exit 2; }
+printf '%s\n' "$REFS" | git lfs pre-push "$@"

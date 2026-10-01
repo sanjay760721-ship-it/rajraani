@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/TILFI_COPY/rajraani/src/app/admin/(protected)/editorials/page.tsx"],"sourcesContent":["import { redirect } from \"next/navigation\";\n\n/**\n * Editorials was a mock-up with no save. Every editorial page — campaign\n * stories, craft, about, store — is now edited under Pages.\n */\nexport default function AdminEditorialsRoute() {\n  redirect(\"/admin/pages\");\n}\n"],"names":["AdminEditorialsRoute"],"mappings":";;;;AAAA;AAAA;;AAMe,SAASA;IACtB,IAAA,iMAAQ,EAAC;AACX"}},
+    {"offset": {"line": 31, "column": 0}, "map": {"version":3,"sources":["file:///C:/TILFI_COPY/rajraani/src/app/favicon.ico.mjs%20(structured%20image%20object)"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":["src","width","height"],"mappings":";;;;AAAA;;uCACe;IAAEA,KAAAA,0IAAG;IAAEC,OAAO;IAAKC,QAAQ;AAAI"}}]
+}

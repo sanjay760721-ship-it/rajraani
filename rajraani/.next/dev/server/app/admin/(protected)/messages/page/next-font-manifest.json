@@ -1,0 +1,13 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/src/app/admin/(protected)/messages/page": [
+      "static/media/3a17eb8ee29221c2-s.p.2e9pgab930yj9.woff2",
+      "static/media/8f50c616ff21aafd-s.p.0fsj6-3l7otv3.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

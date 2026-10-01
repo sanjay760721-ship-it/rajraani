@@ -1,0 +1,60 @@
+{
+  "node": {
+    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+      "workers": {
+        "app/admin/(protected)/collections/page": {
+          "moduleId": 55979,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "40cc99b1d4179822ac2399a9cf093c3073b5468edb": {
+      "workers": {
+        "app/admin/(protected)/collections/page": {
+          "moduleId": 55979,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "createCollectionAction",
+      "filename": "src/lib/admin/collection-actions.ts"
+    },
+    "70882bc9a22b3be8375623e32a19a73a6c034739c0": {
+      "workers": {
+        "app/admin/(protected)/collections/page": {
+          "moduleId": 55979,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveCollectionAction",
+      "filename": "src/lib/admin/collection-actions.ts"
+    },
+    "60a5d6e75d61a7142eba874cc803a5469105863fa7": {
+      "workers": {
+        "app/admin/(protected)/collections/page": {
+          "moduleId": 55979,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "setCollectionFiltersAction",
+      "filename": "src/lib/admin/collection-actions.ts"
+    },
+    "6024566fc723fde24cb716c5d694f8be139399f990": {
+      "workers": {
+        "app/admin/(protected)/collections/page": {
+          "moduleId": 55979,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "setCollectionPiecesAction",
+      "filename": "src/lib/admin/collection-actions.ts"
+    }
+  },
+  "edge": {}
+}

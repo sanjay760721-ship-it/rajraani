@@ -1,0 +1,115 @@
+{
+  "node": {
+    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "60197c3020a99ff42c5a6f4b379a7a2fcc2e559065": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveProductAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    },
+    "60703d270b502787dd4439cde578c4833a21657390": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "addProductPhotoAction",
+      "filename": "src/lib/admin/product-photo-actions.ts"
+    },
+    "602ecd5736bec1a843a63a75e10a76d86daae47bcd": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "describeProductPhotoAction",
+      "filename": "src/lib/admin/product-photo-actions.ts"
+    },
+    "604555560b8cb52087bae2e0d6d62b147e6a7665d6": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "moveProductPhotoAction",
+      "filename": "src/lib/admin/product-photo-actions.ts"
+    },
+    "40d9264945b9a3271756daf76aaf003aa63fe9648f": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "removeProductPhotoAction",
+      "filename": "src/lib/admin/product-photo-actions.ts"
+    },
+    "6081d02158e9cc9e8b616e30127f895dbec9fd45ea": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "replaceProductPhotoAction",
+      "filename": "src/lib/admin/product-photo-actions.ts"
+    },
+    "403d110187ed00f0b873f7e316dbd18c469c013686": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "togglePublishedAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    },
+    "4048cbcabf7ff01616f4d80417fa9da583ff67741e": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "deleteProductAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    },
+    "60a6504be1cb692789b0c8c89307da3770ef73d92d": {
+      "workers": {
+        "app/admin/(protected)/products/[id]/page": {
+          "moduleId": 80308,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "adjustStockAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    }
+  },
+  "edge": {}
+}

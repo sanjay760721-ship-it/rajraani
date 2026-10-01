@@ -1336,6 +1336,17 @@ reference's sentence with the name swapped.
 **Next:** get the owner's reference for the top bar, or move to the main menu or the hero
 and come back to it later.
 
+**Whole directory committed, at the owner's explicit instruction (1 Oct 2026, after being
+warned).** Both `.gitignore` files were removed and everything was committed: `node_modules/`,
+`.next/`, the live database `rajraani/data/`, the stand-in photography in `pics/` and
+`rajraani/public/reference-only/`, and the redesign and review screenshots. Files over
+GitHub's 100 MB limit (the 785 MB loom video in three places, a Turbopack cache file and the
+Next SWC binary) go through **Git LFS** (`.gitattributes`). `.githooks/pre-push` now calls
+`git lfs pre-push` after the verify gate, so Git LFS must be installed to push. The
+repository is private. **The unlicensed photos are now in history:** keep the repository
+private, and do not deploy from it with `public/reference-only/` in place. Earlier notes
+that say this photography is "never committed" no longer hold.
+
 ---
 
 ## 3. How the folder is arranged

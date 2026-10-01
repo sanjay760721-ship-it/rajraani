@@ -1,0 +1,24 @@
+1:"$Sreact.fragment"
+2:I[47257,["/_next/static/chunks/0h2qsuyze9ds1.js"],"ClientPageRoot"]
+3:I[78832,["/_next/static/chunks/0h2qsuyze9ds1.js","/_next/static/chunks/1feppmd8c05ft.js","/_next/static/chunks/2re9_vw8iag2w.js","/_next/static/chunks/3x4qwqb8jzeza.js","/_next/static/chunks/445_4dpfhaye7.js","/_next/static/chunks/079aeyvmgzbc0.js"],"default"]
+6:I[97367,["/_next/static/chunks/0h2qsuyze9ds1.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+b:I[97367,["/_next/static/chunks/0h2qsuyze9ds1.js"],"ViewportBoundary"]
+c:I[97367,["/_next/static/chunks/0h2qsuyze9ds1.js"],"MetadataBoundary"]
+d:I[27201,["/_next/static/chunks/0h2qsuyze9ds1.js"],"IconMark"]
+f:I[39756,["/_next/static/chunks/0h2qsuyze9ds1.js"],"default"]
+10:I[37457,["/_next/static/chunks/0h2qsuyze9ds1.js"],"default"]
+a:X
+12:X
+12:C
+0:{"buildId":"WuYlqIPgbNFHtIV9-Tf5W","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/079aeyvmgzbc0.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":"$@9","staleTime":"$a","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$Lb",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$Lc",null,{"children":["$","$7",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Rajraani — handwoven Banarasi textiles"}],["$","meta","1",{"name":"description","content":"Handwoven Banarasi sarees, dupattas and stoles, made one at a time on pit looms in Varanasi."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$Ld","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@e","staleTime":"$a","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lf",null,{"parallelRouterKey":"children","template":["$","$L10",null,{}]}]]}],"isPartial":"$@11","staleTime":"$a","varyParams":"$12"}],"isUpgradeableISRFallback":false,"a":"$@13","rootVaryParams":null,"needsRuntimeRequest":"$@14"}
+4:{}
+5:"$0:data:0:rsc:props:children:0:props:serverProvidedParams:params"
+8:null
+14:true
+a:300
+a:C
+13:0
+e:"$undefined"
+11:"$undefined"
+9:"$undefined"

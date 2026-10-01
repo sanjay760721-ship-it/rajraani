@@ -1,0 +1,82 @@
+{
+  "node": {
+    "0097ce86dad8aae1c05d70f65885cbfc1a7ae7900b": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/product-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/catalogue-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "4015cb5d413ca44e5f2fa5f32b877ce6e51abf16ba": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/product-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/catalogue-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "togglePublishedAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    },
+    "603f58fa4ca8220b5957bcbeac373bbaed959d3537": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/product-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/catalogue-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "adjustStockAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    },
+    "601589e8c45b311192856cf1d591b6681ebe8584da": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/product-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/catalogue-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "setPriceAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    },
+    "4021c6f6046fc99fe57fa023d2b89c66e07bbd4cf2": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/product-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/catalogue-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "previewSheetAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    },
+    "40c401aeb5377ce645ab457fc64bd9ea0d255d9b8f": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/product-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/catalogue-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "duplicateProductAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    },
+    "404af3f5549128ad4c9bb23a82cbcc4dd48f0966f6": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/products/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/product-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/catalogue-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "applySheetAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    }
+  },
+  "edge": {}
+}

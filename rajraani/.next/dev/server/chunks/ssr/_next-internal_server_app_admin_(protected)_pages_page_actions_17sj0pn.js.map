@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///C:/TILFI_COPY/rajraani/.next-internal/server/app/admin/(protected)/pages/page/actions.js%20(server%20actions%20loader)"],"sourcesContent":["export {$$RSC_SERVER_ACTION_0 as '0097ce86dad8aae1c05d70f65885cbfc1a7ae7900b'} from 'ACTIONS_MODULE0'\n"],"names":[],"mappings":";AAAA"}}]
+}

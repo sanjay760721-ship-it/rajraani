@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(Get-ChildItem -Recurse -File \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\tantu\" | Where-Object { $_.FullName -notmatch 'node_modules' } | Select-Object -ExpandProperty FullName; Write-Output \"----\"; Get-Content \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\tantu\\\\package.json\")",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\tantu\"; Set-Content -Path \".next\\\\server\\\\app\\\\zz-lint-probe.html\" -Value \"<h1>A</h1><h3>skips a level</h3>\" -Encoding utf8; npm run lint:headings; Write-Output \"exit=$LASTEXITCODE\"; Remove-Item \".next\\\\server\\\\app\\\\zz-lint-probe.html\" -Force)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\"; Get-ChildItem | Select-Object Mode, LastWriteTime, Length, Name | Format-Table -AutoSize; Write-Output \"--- rajraani? ---\"; if \\(Test-Path \"rajraani\"\\) { Get-ChildItem -Recurse rajraani -File | Where-Object { $_.FullName -notmatch 'node_modules' } | Select-Object -ExpandProperty FullName } else { Write-Output \"NOT PRESENT\" })",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\rajraani\\\\scripts\\\\check-taxonomy.mjs\" \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\rajraani-storefront\\\\scripts\\\\check-taxonomy.mjs\")",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\rajraani-storefront\"; npm run check:originality 2>&1 | Select-String -Pattern \"✓|✗\"; Write-Output \"EXIT=$LASTEXITCODE\")",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\rajraani\"; npm run verify 2>&1 | Select-String -Pattern \"^✓|^✗|pass \\\\d+|fail \\\\d+|Heading order|Error\" | Select-Object -Last 12; Write-Output \"VERIFY_EXIT=$LASTEXITCODE\")",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\sanju\\\\OneDrive\\\\Documents\\\\TILFI_COPY\\\\rajraani\"; npm run verify 2>&1 | Select-String -Pattern \"^✓|^✗|pass \\\\d+|fail \\\\d+|Heading order|Error\" | Select-Object -Last 10; Write-Output \"VERIFY_EXIT=$LASTEXITCODE\")"
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "/(storefront)/collections/[handle]/page": "app/(storefront)/collections/[handle]/page.js"
+}

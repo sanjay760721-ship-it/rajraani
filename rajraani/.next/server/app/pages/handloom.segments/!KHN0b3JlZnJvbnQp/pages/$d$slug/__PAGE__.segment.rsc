@@ -1,0 +1,22 @@
+1:"$Sreact.fragment"
+2:I[93529,["/_next/static/chunks/0h2qsuyze9ds1.js","/_next/static/chunks/1feppmd8c05ft.js","/_next/static/chunks/2re9_vw8iag2w.js","/_next/static/chunks/3x4qwqb8jzeza.js","/_next/static/chunks/445_4dpfhaye7.js","/_next/static/chunks/251hl9wif2y5b.js","/_next/static/chunks/0qmvwws_s12e_.js"],"ScrollReveal"]
+3:I[97367,["/_next/static/chunks/0h2qsuyze9ds1.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/_next/static/chunks/0h2qsuyze9ds1.js"],"ViewportBoundary"]
+9:I[97367,["/_next/static/chunks/0h2qsuyze9ds1.js"],"MetadataBoundary"]
+a:I[27201,["/_next/static/chunks/0h2qsuyze9ds1.js"],"IconMark"]
+c:I[39756,["/_next/static/chunks/0h2qsuyze9ds1.js"],"default"]
+d:I[37457,["/_next/static/chunks/0h2qsuyze9ds1.js"],"default"]
+7:X
+f:X
+f:C
+0:{"buildId":"WuYlqIPgbNFHtIV9-Tf5W","data":[{"rsc":["$","$1","c",{"children":[["$","article",null,{"children":[null,["$","header",null,{"className":"wrap-prose section-pad text-center","children":[["$","h1",null,{"className":"text-h1","children":"Handloom, or not"}],["$","p",null,{"className":"text-body mt-4 text-ink-body italic","children":"Four tests you can run in a shop, in under a minute, without any special knowledge."}]]}],[["$","$L2","handloom-tests",{"children":["$","section",null,{"className":"section-pad-prose wrap-prose text-center ","style":{"backgroundColor":"var(--color-bg)","backgroundImage":"linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))"},"children":[["$","h2",null,{"className":"text-h3 mb-5","children":"The tests"}],["$","div",null,{"className":"space-y-5","children":[["$","p","0",{"className":"text-body text-ink-body","children":"Look at the reverse first. A handloom piece has small irregularities in the float lengths that a powerloom cannot produce, because a powerloom is more consistent than a person."}],["$","p","1",{"className":"text-body text-ink-body","children":"Then look for the pinhole. Handloom weavers pin the selvedge to keep the width even, and the pin leaves a line of small holes down both edges. A powerloom uses a temple and leaves nothing."}],["$","p","2",{"className":"text-body text-ink-body","children":"Third, hold it to the light and look at the ground rather than the motif. Handspun yarn varies in thickness along its length, so the ground has a faint unevenness that reads as depth."}],["$","p","3",{"className":"text-body text-ink-body","children":"Fourth, ask the price and then ask how long it took. Anyone who knows the piece can answer the second question in weeks. If the answer is a shrug, the first answer is unreliable too."}]]}],null]}]}],["$","$L2","handloom-quote",{"children":["$","figure",null,{"className":"wrap-prose section-pad text-center","children":[["$","blockquote",null,{"className":"font-display text-h2 text-ink italic","children":"A powerloom is not a fake. It is a different thing, priced as if it were not."}],null]}]}]],null]}],[["$","script","script-0",{"src":"/_next/static/chunks/251hl9wif2y5b.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/0qmvwws_s12e_.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Handloom, or not — Rajraani"}],["$","meta","1",{"name":"description","content":"Four tests you can run in a shop, in under a minute, without any special knowledge."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$La","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@b","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@e","staleTime":"$7","varyParams":"$f"},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@10","staleTime":"$7","varyParams":"$f"}],"isUpgradeableISRFallback":false,"a":"$@11","rootVaryParams":null,"needsRuntimeRequest":"$@12"}
+5:null
+12:true
+7:300
+7:C
+11:0
+b:"$undefined"
+e:"$undefined"
+10:"$undefined"
+6:"$undefined"

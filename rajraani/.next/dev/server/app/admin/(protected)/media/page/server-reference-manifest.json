@@ -1,0 +1,27 @@
+{
+  "node": {
+    "0097ce86dad8aae1c05d70f65885cbfc1a7ae7900b": {
+      "workers": {
+        "app/admin/(protected)/media/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/media/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/media-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "60aff9346a1fc1b409eee8eccdcbb2fa3dfaca7f83": {
+      "workers": {
+        "app/admin/(protected)/media/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/media/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/media-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveMediaAltAction",
+      "filename": "src/lib/admin/media-actions.ts"
+    }
+  },
+  "edge": {}
+}

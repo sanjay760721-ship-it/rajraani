@@ -1,0 +1,82 @@
+{
+  "node": {
+    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": 34687,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "60a6504be1cb692789b0c8c89307da3770ef73d92d": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": 34687,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "adjustStockAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    },
+    "403d110187ed00f0b873f7e316dbd18c469c013686": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": 34687,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "togglePublishedAction",
+      "filename": "src/lib/admin/product-actions.ts"
+    },
+    "40a5f2663126401b44596558603d5ba09c9a83e135": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": 34687,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "applySheetAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    },
+    "40fa0d7d05899b9daf4a6d2b4270567a8437710f84": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": 34687,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "duplicateProductAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    },
+    "40209c7658aabb35f65024ad505a104bcbe9bef6ce": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": 34687,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "previewSheetAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    },
+    "60dca38a338404d65dce264232120dd9ac47e33fec": {
+      "workers": {
+        "app/admin/(protected)/products/page": {
+          "moduleId": 34687,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "setPriceAction",
+      "filename": "src/lib/admin/catalogue-actions.ts"
+    }
+  },
+  "edge": {}
+}

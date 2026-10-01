@@ -1,0 +1,49 @@
+{
+  "node": {
+    "0097ce86dad8aae1c05d70f65885cbfc1a7ae7900b": {
+      "workers": {
+        "app/admin/(protected)/messages/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/messages/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/message-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/footer-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "6033907ffa809525859850eddaf1d462bc626e6e4a": {
+      "workers": {
+        "app/admin/(protected)/messages/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/messages/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/message-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/footer-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "setMessageAnsweredAction",
+      "filename": "src/lib/admin/message-actions.ts"
+    },
+    "400800ddf55dc8abf02269ecd100f5bad9f137567d": {
+      "workers": {
+        "app/admin/(protected)/messages/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/messages/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/message-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/footer-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "removeSubscriberAction",
+      "filename": "src/lib/admin/footer-actions.ts"
+    },
+    "4040d0cbaf5bce6b464545416c98e52a1cea0a4aef": {
+      "workers": {
+        "app/admin/(protected)/messages/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/messages/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/admin/message-actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/admin/footer-actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveFooterAction",
+      "filename": "src/lib/admin/footer-actions.ts"
+    }
+  },
+  "edge": {}
+}

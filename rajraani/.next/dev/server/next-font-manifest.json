@@ -1,0 +1,51 @@
+{
+  "app": {
+    "[project]/src/app/(storefront)/collections/[handle]/page": [
+      "static/media/3a17eb8ee29221c2-s.p.2e9pgab930yj9.woff2",
+      "static/media/8f50c616ff21aafd-s.p.0fsj6-3l7otv3.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ],
+    "[project]/src/app/(storefront)/page": [
+      "static/media/3a17eb8ee29221c2-s.p.2e9pgab930yj9.woff2",
+      "static/media/8f50c616ff21aafd-s.p.0fsj6-3l7otv3.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ],
+    "[project]/src/app/(storefront)/pages/[slug]/page": [
+      "static/media/3a17eb8ee29221c2-s.p.2e9pgab930yj9.woff2",
+      "static/media/8f50c616ff21aafd-s.p.0fsj6-3l7otv3.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ],
+    "[project]/src/app/(storefront)/products/[handle]/page": [
+      "static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2",
+      "static/media/9433d1a810498265-s.p.1hij5ex6k3v9q.woff2",
+      "static/media/5f402bd2d8eef81a-s.p.40bho2kviej2o.woff2",
+      "static/media/f06bf9da926bae75-s.p.2874ccu1_u7jf.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ],
+    "[project]/src/app/(storefront)/search/page": [
+      "static/media/3a17eb8ee29221c2-s.p.2e9pgab930yj9.woff2",
+      "static/media/8f50c616ff21aafd-s.p.0fsj6-3l7otv3.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ],
+    "[project]/src/app/_not-found/page": [
+      "static/media/3a17eb8ee29221c2-s.p.2e9pgab930yj9.woff2",
+      "static/media/8f50c616ff21aafd-s.p.0fsj6-3l7otv3.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ],
+    "[project]/src/app/admin/(protected)/page": [
+      "static/media/3a17eb8ee29221c2-s.p.2e9pgab930yj9.woff2",
+      "static/media/8f50c616ff21aafd-s.p.0fsj6-3l7otv3.woff2",
+      "static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2",
+      "static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

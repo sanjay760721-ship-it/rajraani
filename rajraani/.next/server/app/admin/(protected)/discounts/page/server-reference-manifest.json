@@ -1,0 +1,27 @@
+{
+  "node": {
+    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+      "workers": {
+        "app/admin/(protected)/discounts/page": {
+          "moduleId": 95240,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    },
+    "607382c94c927a85b84c75ca35551b6552c8de3fd1": {
+      "workers": {
+        "app/admin/(protected)/discounts/page": {
+          "moduleId": 95240,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveDiscountAction",
+      "filename": "src/lib/admin/discount-actions.ts"
+    }
+  },
+  "edge": {}
+}

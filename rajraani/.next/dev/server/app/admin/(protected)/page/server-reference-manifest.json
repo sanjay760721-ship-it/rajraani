@@ -1,0 +1,16 @@
+{
+  "node": {
+    "0097ce86dad8aae1c05d70f65885cbfc1a7ae7900b": {
+      "workers": {
+        "app/admin/(protected)/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/(protected)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/admin/(protected)/layout.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "src/app/admin/(protected)/layout.tsx"
+    }
+  },
+  "edge": {}
+}
