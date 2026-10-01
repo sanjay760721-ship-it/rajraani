@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Manrope, Marcellus, Newsreader, Playfair_Display } from "next/font/google";
+import { Cardo, Manrope, Open_Sans, Playfair_Display } from "next/font/google";
 
 import { BRAND } from "@/lib/brand";
 
@@ -16,39 +16,36 @@ import "./globals.css";
  */
 
 /**
- * Three families, chosen for Rajraani (redesign, 1 Oct 2026).
+ * Two families, matching reference exactly: Cardo for display, Open Sans for UI.
  *
- * **Marcellus** for display: flared classical capitals in the spirit of the
- * lettering in the house logo. One weight; hierarchy comes from size.
+ * **Cardo** for display. Classic, elegant, weight 400 only — matches reference.
  *
- * **Newsreader** for the book voice: statements, stories and the product
- * narrative, where a reader settles in. Optical sizes keep it crisp small.
+ * **Open Sans** for UI. Weight 400 only — the category standard at small sizes.
  *
- * **Instrument Sans** for shopping: prices, filters, forms and buttons. Clean
- * at 12-15px, and with a 500 weight so a button label holds its own.
- *
- * next/font self-hosts all three at build time: no request to Google at
- * runtime, no layout shift, text visible while they load.
+ * `next/font` self-hosts both at build time, no runtime request to Google,
+ * no third-party script, no layout shift. `display: swap` keeps text visible.
  */
-const display = Marcellus({
+const display = Cardo({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-marcellus",
+  variable: "--font-cardo",
   display: "swap",
 });
 
-const book = Newsreader({
+/*
+ * Open Sans, not Lato.
+ *
+ * The category standard pairs a display serif with Open Sans at 400, and the
+ * difference is not subtle at small sizes: Lato's narrower apertures and higher
+ * contrast read as a different voice in a dense link list, which is exactly
+ * where most of the UI face appears on this site.
+ *
+ * One weight only. Everything in the UI face is either 400 or a size change.
+ */
+const ui = Open_Sans({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-
-const ui = Instrument_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-instrument",
+  weight: "400",
+  variable: "--font-open-sans",
   display: "swap",
 });
 
@@ -89,7 +86,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${display.variable} ${book.variable} ${ui.variable} ${adminDisplay.variable} ${adminUi.variable} h-full antialiased`}
+      className={`${display.variable} ${ui.variable} ${adminDisplay.variable} ${adminUi.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>

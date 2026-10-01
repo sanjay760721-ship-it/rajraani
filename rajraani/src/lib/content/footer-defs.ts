@@ -33,12 +33,12 @@ export type FooterSettings = {
 export const SOCIAL_NAMES: readonly SocialName[] = ["Instagram", "Facebook", "YouTube", "Pinterest"];
 
 export const FOOTER_DEFAULTS: FooterSettings = {
-  talkHeading: "Write to us",
+  talkHeading: "Talk To Us",
   whatsappLabel: "Start a WhatsApp conversation",
-  hoursLabel: "We answer",
+  hoursLabel: "Support hours:",
   columns: [
     {
-      heading: "Care & policies",
+      heading: "Useful Information",
       links: [
         { label: "Returns & Cancellation", href: "/pages/returns" },
         { label: "Delivery & Shipping", href: "/pages/shipping" },
@@ -47,7 +47,7 @@ export const FOOTER_DEFAULTS: FooterSettings = {
       ],
     },
     {
-      heading: "The house",
+      heading: "About",
       links: [
         { label: "Our Story", href: "/pages/our-story" },
         { label: "Our Banaras Store", href: "/pages/banaras-store" },
@@ -59,9 +59,9 @@ export const FOOTER_DEFAULTS: FooterSettings = {
     },
   ],
   socials: BRAND.socials.map((social) => ({ label: social.label, href: social.href })),
-  newsletterHeading: "Letters from the loom",
-  newsletterText: "A few times a season: new pieces as they come off the loom, and the weavers who made them.",
-  newsletterButton: "Subscribe",
+  newsletterHeading: "Stay in touch",
+  newsletterText: "Occasional letters about what has come off the loom.",
+  newsletterButton: "Sign Up",
   popupEnabled: true,
   popupSideTitle: "Woven in Banaras",
   popupSideText: "Occasional letters about what has come off the loom. No spam, ever.",

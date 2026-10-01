@@ -17,18 +17,18 @@
 
 /** Hex values mirroring the @theme block in src/app/globals.css. */
 export const PALETTE = {
-  bg: "#faf6ee",
-  bgAlt: "#f3ecdf",
-  bgSand: "#e9dfcc",
-  ink: "#1e1a2b",
-  inkBody: "#3b3547",
-  inkMuted: "#625a6a",
-  rule: "#e2d7c3",
-  ruleInput: "#7d7463",
-  ruleStrong: "#1e1a2b",
-  accent: "#7a5a12",
-  error: "#a3261f",
-  success: "#3f6646",
+  bg: "#ffffff",
+  bgAlt: "#fbf9f6",
+  bgSand: "#f1ece4",
+  ink: "#301e1d",
+  inkBody: "#533e2d",
+  inkMuted: "#6b6055",
+  rule: "#e7e0d6",
+  ruleInput: "#8b8072",
+  ruleStrong: "#301e1d",
+  accent: "#7d5f2a",
+  error: "#9c3b30",
+  success: "#4a6b48",
 } as const;
 
 export type PaletteToken = keyof typeof PALETTE;

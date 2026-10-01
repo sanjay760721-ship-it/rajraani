@@ -3,10 +3,29 @@ import type { ReactNode } from "react";
 
 import type { SiteText } from "@/lib/content/site-text-defs";
 import type { FooterSettings } from "@/lib/content/footer-defs";
-import { BRAND } from "@/lib/brand";
-import { LotusMark } from "./LotusMark";
 import { FooterNewsletterForm } from "./NewsletterForm";
 
+/**
+ * Footer.
+ *
+ * Laid out on the reference's footer (measured on request, 24 Sep 2026): a
+ * full-width light grey band with a white hairline above and below, holding
+ * three equal columns inside the 1200px container, and the copyright line
+ * underneath it on the page ground.
+ *
+ *   1. Talk To Us — email, phone, WhatsApp, italic support hours, then the
+ *      four policies under their own heading in the same column.
+ *   2. About — the brand's own pages, with the social icons under the list.
+ *   3. Stay in touch — one line, then the email field and button side by side.
+ *
+ * Headings are the display serif at 18px; everything else the UI face at
+ * 13px, all in body ink. The words and destinations are ours: every link here
+ * goes to a page that exists — theirs lists a Mumbai store, press, careers and
+ * gift cards, none of which this business has.
+ */
+
+const HEADING = "font-display text-[18px] leading-[1.5] font-normal text-ink-body";
+const LINK = "hover:underline";
 
 function SocialIcon({ name, className }: { name: string; className?: string }) {
   const icons: Record<string, ReactNode> = {
@@ -38,26 +57,6 @@ function SocialIcon({ name, className }: { name: string; className?: string }) {
   return icons[name] ?? null;
 }
 
-/**
- * The footer (redesign, 1 Oct 2026).
- *
- * The page ends at night. A Kashi-indigo ground with a faint booti weave, in
- * three movements:
- *
- *   1. The invitation: "Letters from the loom" set large, with the sign-up as
- *      one pill-shaped field beside it.
- *   2. The house: how to reach us, then the owner's two link columns and the
- *      social links, under a zari rule.
- *   3. The signature: the lotus and the name drawn very large in gold
- *      outline, the house line under it, and the legal line at the foot.
- *
- * Every word and link is the owner's, from the admin's Footer screen and
- * Change text.
- */
-
-const KICKER = "eyebrow text-gold-soft/90";
-const LINK = "transition-colors hover:text-gold-soft";
-
 /** Contact details come from the admin (Site-wide text), via the layout. */
 export function SiteFooter({ text, footer }: { text: SiteText; footer: FooterSettings }) {
   // Edited in the admin under Footer; defaults in content/footer-defs.ts.
@@ -70,111 +69,97 @@ export function SiteFooter({ text, footer }: { text: SiteText; footer: FooterSet
   const hours = text["contact.hours"].split("\n").map((line) => line.trim()).filter(Boolean);
 
   return (
-    <footer className="booti-ground mt-24 overflow-hidden bg-night text-on-night-muted">
-      {/* 1 · The invitation */}
-      <section className="wrap-wide grid gap-10 pt-20 pb-16 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-20 lg:pt-28">
-        <div>
-          <LotusMark className="mb-6 h-7 w-9 text-gold" />
-          <h2 className="font-display text-[clamp(2rem,1.3rem+2.6vw,3.5rem)] leading-[1.05] text-on-night">
-            {footer.newsletterHeading}
-          </h2>
-          <p className="mt-4 max-w-[44ch] font-serif text-[18px] leading-relaxed text-on-night-muted">
-            {footer.newsletterText}
-          </p>
-        </div>
-        <FooterNewsletterForm button={footer.newsletterButton} />
-      </section>
-
-      <div className="wrap-wide">
-        <div className="zari-rule text-gold/50"><span className="zari-rule__knot" /></div>
-      </div>
-
-      {/* 2 · The house */}
-      <section className="wrap-wide grid gap-12 py-16 font-ui text-[14px] leading-[1.75] md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <h2 className={KICKER}>{footer.talkHeading}</h2>
-          <ul className="mt-4 space-y-1 text-on-night">
-            <li>
-              <a href={`mailto:${email}`} className={LINK}>{email}</a>
-            </li>
-            <li>
-              <a href={`tel:${phone.replace(/\s/g, "")}`} className={LINK}>{phone}</a>
-            </li>
-            <li>
-              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={`${LINK} underline decoration-gold/50 underline-offset-4`}>
+    <footer className="mt-24">
+      <section className="border-y border-white bg-footer-band px-2.5 py-5">
+        <div className="mx-auto grid max-w-[1200px] font-ui text-[13px] leading-[1.5] text-ink-body md:grid-cols-3">
+          {/* 1 · Talk To Us, then the policies */}
+          <div className="px-5 py-2.5">
+            <h2 className={HEADING}>{footer.talkHeading}</h2>
+            <p className="mt-1">
+              Email:{" "}
+              <a href={`mailto:${email}`} className={LINK}>
+                {email}
+              </a>
+              <br />
+              Call us:{" "}
+              <a href={`tel:${phone.replace(/\s/g, "")}`} className={LINK}>
+                {phone}
+              </a>
+              <br />
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={LINK}>
                 {footer.whatsappLabel}
               </a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 className={KICKER}>{footer.hoursLabel}</h2>
-          <ul className="mt-4 space-y-1">
-            {hours.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h2 className={KICKER}>{aboutColumn?.heading}</h2>
-          <ul className="mt-4 space-y-1">
-            {(aboutColumn?.links ?? []).map((link) => (
-              <li key={`${link.href}:${link.label}`}>
-                <Link href={link.href} className={LINK}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h2 className={KICKER}>{usefulColumn?.heading}</h2>
-          <ul className="mt-4 space-y-1">
-            {(usefulColumn?.links ?? []).map((link) => (
-              <li key={`${link.href}:${link.label}`}>
-                <Link href={link.href} className={LINK}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-          {socials.length > 0 ? (
-            <div className="mt-6 flex items-center gap-2" aria-label="Social links">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-on-night/20 text-on-night transition-colors hover:border-gold-soft hover:text-gold-soft"
-                  aria-label={social.label}
-                >
-                  <SocialIcon name={social.icon} className="size-[17px]" />
-                </a>
+            </p>
+            <p className="mt-5 italic">
+              {footer.hoursLabel}
+              {hours.map((line) => (
+                <span key={line}>
+                  <br />
+                  {line}
+                </span>
               ))}
-            </div>
-          ) : null}
+            </p>
+
+            <h2 className={`${HEADING} mt-5`}>{usefulColumn?.heading}</h2>
+            <ul className="mt-1">
+              {(usefulColumn?.links ?? []).map((link) => (
+                <li key={`${link.href}:${link.label}`}>
+                  <Link href={link.href} className={LINK}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 2 · About, with the social icons under the list */}
+          <div className="px-5 py-2.5">
+            <h2 className={HEADING}>{aboutColumn?.heading}</h2>
+            <ul className="mt-1">
+              {(aboutColumn?.links ?? []).map((link) => (
+                <li key={`${link.href}:${link.label}`}>
+                  <Link href={link.href} className={LINK}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {socials.length > 0 ? (
+              <div className="mt-5 flex items-center gap-[5px]" aria-label="Social links">
+                {socials.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-ink"
+                    aria-label={social.label}
+                  >
+                    <SocialIcon name={social.icon} className="h-[17px] w-[17px]" />
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          {/* 3 · Stay in touch */}
+          <div className="px-5 py-2.5">
+            <h2 className={HEADING}>{footer.newsletterHeading}</h2>
+            <p className="mt-1">{footer.newsletterText}</p>
+            <FooterNewsletterForm button={footer.newsletterButton} />
+          </div>
         </div>
       </section>
 
-      {/* 3 · The signature */}
-      <section className="wrap-wide pb-8">
-        <p
-          aria-hidden="true"
-          className="select-none text-center font-display text-[clamp(3.5rem,15vw,15rem)] uppercase leading-[0.85] tracking-[0.06em] text-transparent [-webkit-text-stroke:1px_var(--color-gold)] opacity-70"
-        >
-          {BRAND.name}
+      <div className="mx-auto max-w-[1200px] px-5 py-3 font-ui text-[11.5px] text-ink-body">
+        <p>
+          © {new Date().getFullYear()}{" "}
+          <Link href="/" className="hover:underline">
+            {footer.copyrightName}
+          </Link>
+          .
         </p>
-        <p className="mt-12 text-center font-serif text-[17px] italic text-on-night-muted">{text.tagline}</p>
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-on-night/10 pt-6 font-ui text-[12px] tracking-[0.02em] md:flex-row">
-          <p>
-            © {new Date().getFullYear()}{" "}
-            <Link href="/" className={LINK}>
-              {footer.copyrightName}
-            </Link>
-          </p>
-          <p className="tracking-[0.2em] uppercase text-[10.5px] text-gold-soft/70">Varanasi · India</p>
-        </div>
-      </section>
+      </div>
     </footer>
   );
 }

@@ -3,37 +3,20 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
-import { CurrencySelector } from "./CurrencySelector";
-import { LotusMark } from "./LotusMark";
 import { MegaMenuTile } from "./MegaMenuTile";
 import { WishlistButton } from "./WishlistButton";
+import { UtilityBar } from "./UtilityBar";
 import { useCart } from "./cart-context";
 import { useSearchModal } from "./search-context";
-import { useSiteText } from "./site-text-context";
-import { UTILITY_BADGE, UTILITY_CAPTION, UTILITY_ICON, UTILITY_ITEM } from "./utility-styles";
 import { BRAND } from "@/lib/brand";
 import { useMenu } from "./menu-context";
 import type { NavColumn, NavPanel } from "@/lib/data/navigation";
 
 const HOVER_INTENT_MS = 120;
 
-/**
- * The site header (redesign, 1 Oct 2026).
- *
- * One row that stays with the reader: the lotus and the name at the left, the
- * owner's six menu items in a single centred line, and a compact cluster of
- * actions at the right. It settles from 84px to 64px once the page scrolls,
- * and the BANARAS line under the name folds away with it.
- *
- * A dropdown is a full-width sheet of ivory paper that unrolls from under the
- * row, with the page dimmed behind it; the phone menu is a full-screen panel
- * on the night ground. All of the menu's words and photographs come from the
- * admin (`useMenu`).
- */
 export function SiteHeader() {
   const [openPanel, setOpenPanel] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const openTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const navRef = useRef<HTMLDivElement>(null);
@@ -41,14 +24,10 @@ export function SiteHeader() {
 
   const { itemCount } = useCart();
   const { open: openSearch } = useSearchModal();
+  // The owner's menu, from the admin. Three items either side of the wordmark.
   const NAVIGATION = useMenu();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const LEFT_NAVIGATION = NAVIGATION.slice(0, 3);
+  const RIGHT_NAVIGATION = NAVIGATION.slice(3, 6);
 
   useEffect(() => {
     return () => {
@@ -80,24 +59,19 @@ export function SiteHeader() {
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [openPanel]);
 
-  // The phone menu covers the page, so the page must not scroll beneath it.
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previous;
-    };
-  }, [mobileOpen]);
-
   const scheduleOpen = (id: string) => {
     clearTimeout(closeTimer.current);
     openTimer.current = setTimeout(() => setOpenPanel(id), HOVER_INTENT_MS);
   };
 
-  /*
-   * The pointer has to leave a trigger on its way into the sheet below it,
-   * which schedules a close; landing inside the sheet calls that off.
+  /**
+   * Cancel a pending dismissal.
+   *
+   * The panel sits below the trigger with a hairline between them, so the
+   * pointer necessarily leaves the button on its way into the menu and
+   * `scheduleClose` fires. Something has to call this off once the pointer
+   * lands inside the panel, or the menu closes underneath the cursor and no
+   * link in it is ever clickable.
    */
   const cancelClose = () => {
     clearTimeout(closeTimer.current);
@@ -108,194 +82,250 @@ export function SiteHeader() {
     closeTimer.current = setTimeout(() => setOpenPanel(null), HOVER_INTENT_MS);
   };
 
-  const compact = scrolled || openPanel !== null;
-
   return (
-    <>
-      <header
-        ref={navRef}
-        data-compact={compact || undefined}
-        className={`sticky top-0 z-50 border-b transition-[background-color,border-color] duration-500 ${
-          compact ? "border-rule bg-paper/95 backdrop-blur-md" : "border-transparent bg-bg"
-        }`}
+    <header
+      ref={navRef}
+      className="relative z-50 bg-white"
+    >
+      {/* Tier 2: Utility Bar - always rendered */}
+      <UtilityBar />
+
+      {/*
+        * Tier 3: Main Header - Desktop Single Row (≥1024px) - 76px.
+        *
+        * No rule under it. A page that opens on a banner sat the photograph
+        * under a hairline with a white strip between, which read as a gap in
+        * the page rather than as the edge of the header; the mega menu brings
+        * its own top border when it opens.
+        */}
+      <nav
+        className="hidden lg:flex lg:items-center lg:justify-between h-[76px] px-6 xl:px-14 select-none"
+        aria-label="Main navigation"
+        onMouseLeave={scheduleClose}
       >
-        {/* ── Computers (≥1024px) ─────────────────────────────────────── */}
-        <nav
-          className={`wrap-wide hidden grid-cols-[1fr_auto_1fr] items-center transition-[height] duration-500 ease-[var(--ease-brand)] lg:grid ${
-            compact ? "h-16" : "h-[84px]"
-          }`}
-          aria-label="Main navigation"
-          onMouseLeave={scheduleClose}
-        >
-          <BrandMark compact={compact} />
-
-          <ul className="flex items-center">
-            {NAVIGATION.map((panel) => (
-              <li key={panel.id}>
-                <NavTrigger
-                  panel={panel}
-                  isOpen={openPanel === panel.id}
-                  setOpenPanel={setOpenPanel}
-                  panelId={panelId}
-                  scheduleOpen={scheduleOpen}
-                  scheduleClose={scheduleClose}
-                />
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex items-center justify-end gap-0.5">
-            <button
-              type="button"
-              onClick={openSearch}
-              className="mr-2 hidden h-10 cursor-pointer items-center gap-2.5 whitespace-nowrap rounded-full border border-rule px-4 font-ui text-[13px] text-ink-muted transition-colors hover:border-ink hover:text-ink xl:inline-flex"
-              aria-label="Search the collection"
-            >
-              <SearchIcon className="size-4" />
-              <span>Search sarees, weaves…</span>
-            </button>
-            <button type="button" onClick={openSearch} className={`${UTILITY_ITEM} xl:hidden`} aria-label="Search">
-              <SearchIcon className={UTILITY_ICON} />
-              <span className={UTILITY_CAPTION} aria-hidden="true">Search</span>
-            </button>
-            <CurrencySelector />
-            <Link href="/account" className={UTILITY_ITEM} aria-label="Account">
-              <AccountIcon className={UTILITY_ICON} />
-              <span className={UTILITY_CAPTION} aria-hidden="true">Account</span>
-            </Link>
-            <WishlistButton />
-            <Link
-              href="/cart"
-              className={UTILITY_ITEM}
-              aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
-            >
-              <BagIcon className={UTILITY_ICON} />
-              <span className={UTILITY_CAPTION} aria-hidden="true">Cart</span>
-              {itemCount > 0 && <span className={UTILITY_BADGE}>{itemCount}</span>}
-            </Link>
-          </div>
-
-          {openPanel && (
-            <MegaMenuPanel
-              panel={NAVIGATION.find((p) => p.id === openPanel)!}
-              id={`${panelId}-dropdown-${openPanel}`}
-              onClose={() => setOpenPanel(() => null)}
-              onMouseEnter={cancelClose}
+        {/* Left Navigation Group: Shop, Collections, Campaigns */}
+        <div className="flex items-center xl:gap-4 flex-1 justify-end min-w-0">
+          {LEFT_NAVIGATION.map((panel) => (
+            <CompactNavTrigger
+              key={panel.id}
+              panel={panel}
+              openPanel={openPanel}
+              setOpenPanel={setOpenPanel}
+              panelId={panelId}
+              scheduleOpen={scheduleOpen}
+              scheduleClose={scheduleClose}
             />
-          )}
-        </nav>
-
-        {/* ── Phones and tablets (<1024px) ────────────────────────────── */}
-        <div className="flex h-16 items-center justify-between gap-2 pl-4 pr-2 lg:hidden">
-          <BrandMark compact />
-          <div className="flex items-center">
-            <button type="button" onClick={openSearch} className={UTILITY_ITEM} aria-label="Search">
-              <SearchIcon className={UTILITY_ICON} />
-            </button>
-            <Link
-              href="/cart"
-              className={UTILITY_ITEM}
-              aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
-            >
-              <BagIcon className={UTILITY_ICON} />
-              {itemCount > 0 && <span className={UTILITY_BADGE}>{itemCount}</span>}
-            </Link>
-            <button
-              type="button"
-              onClick={() => setMobileOpen(true)}
-              className={UTILITY_ITEM}
-              aria-label="Open menu"
-              aria-expanded={mobileOpen}
-              aria-controls={`${panelId}-mobile`}
-            >
-              <svg className="h-[14px] w-[22px]" viewBox="0 0 22 14" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
-                <line x1="0" y1="1" x2="22" y2="1" />
-                <line x1="6" y1="7" x2="22" y2="7" />
-                <line x1="0" y1="13" x2="22" y2="13" />
-              </svg>
-            </button>
-          </div>
+          ))}
         </div>
-      </header>
 
-      {/* The page dims behind an open dropdown, so the sheet reads as in front. */}
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none fixed inset-0 z-40 bg-night/30 transition-opacity duration-500 ${
-          openPanel ? "opacity-100" : "opacity-0"
-        }`}
-      />
+        {/* Center Brand Wordmark */}
+        <div className="shrink-0 px-5 xl:px-14">
+          <Link
+            href="/"
+            aria-label={`${BRAND.name} home`}
+            className="block group"
+          >
+            {/*
+              * Set in widely tracked capitals to echo the lettering of the
+              * house logo, and in the brand gold, so the name reads as a
+              * mark rather than as a seventh menu item in the same ink.
+              */}
+            <span className="font-display text-[24px] xl:text-[28px] uppercase tracking-[0.2em] mr-[-0.2em] text-accent font-normal leading-none group-hover:text-accent-hover transition-colors duration-300">
+              {BRAND.name}
+            </span>
+          </Link>
+        </div>
 
-      {mobileOpen && <MobileNav id={`${panelId}-mobile`} onClose={() => setMobileOpen(false)} />}
-    </>
-  );
-}
+        {/* Right Navigation Group: Craft, Stories, About Us */}
+        <div className="flex items-center xl:gap-4 flex-1 justify-start min-w-0">
+          {RIGHT_NAVIGATION.map((panel) => (
+            <CompactNavTrigger
+              key={panel.id}
+              panel={panel}
+              openPanel={openPanel}
+              setOpenPanel={setOpenPanel}
+              panelId={panelId}
+              scheduleOpen={scheduleOpen}
+              scheduleClose={scheduleClose}
+            />
+          ))}
+        </div>
 
-/** The lotus over the name, echoing the logo; BANARAS folds away on scroll. */
-function BrandMark({ compact }: { compact: boolean }) {
-  return (
-    <Link href="/" aria-label={`${BRAND.name} home`} className="group flex items-center gap-3 justify-self-start">
-      <LotusMark className="h-[26px] w-[34px] text-gold transition-transform duration-700 ease-[var(--ease-brand)] group-hover:-translate-y-0.5" />
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-[21px] uppercase tracking-[0.2em] text-ink lg:text-[23px]">
-          {BRAND.name}
-        </span>
-        <span
-          className={`overflow-hidden font-ui text-[8.5px] font-medium uppercase tracking-[0.62em] text-accent transition-all duration-500 ease-[var(--ease-brand)] ${
-            compact ? "mt-0 max-h-0 opacity-0" : "mt-1.5 max-h-3 opacity-100"
-          }`}
+        {/*
+          * The one and only dropdown.
+          *
+          * It renders here, as a child of <nav>, because that is the element it
+          * is positioned against — `absolute top-full left-0 right-0` needs the
+          * full-width row as its containing block to span the header. Rendering
+          * it per-trigger as well put two identical panels on top of each other.
+          */}
+        {openPanel && (
+          <MegaMenuPanel
+            panel={NAVIGATION.find((p) => p.id === openPanel)!}
+            id={`${panelId}-dropdown-${openPanel}`}
+            onClose={() => setOpenPanel(() => null)}
+            onMouseEnter={cancelClose}
+          />
+        )}
+      </nav>
+
+      {/* Mobile ≤768px: 77px bar */}
+      <div className="lg:hidden h-[77px] flex items-center justify-between border-b border-rule px-4 bg-white">
+        <button
+          type="button"
+          onClick={() => setMobileOpen((prev) => !prev)}
+          className="p-2 text-ink hover:text-accent-hover transition-colors cursor-pointer"
+          aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={mobileOpen}
         >
-          Banaras
-        </span>
-      </span>
-    </Link>
+          {mobileOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="13" x2="21" y2="13" />
+              <line x1="3" y1="20" x2="21" y2="20" />
+            </svg>
+          )}
+        </button>
+
+        <Link href="/" className="flex-1 text-center" aria-label={`${BRAND.name} home`}>
+          <span className="font-display text-[22px] tracking-normal text-ink font-normal">
+            {BRAND.name}
+          </span>
+        </Link>
+
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={openSearch}
+            className="p-2 text-ink hover:text-accent-hover transition-colors cursor-pointer"
+            aria-label="Search"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
+          <WishlistButton />
+          <Link
+            href="/cart"
+            className="p-2 text-ink hover:text-accent-hover transition-colors relative block cursor-pointer"
+            aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            {itemCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 bg-ink text-bg text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-mono">
+                {itemCount}
+              </span>
+            )}
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <MobileNav id={`${panelId}-mobile`} onNavigate={() => setMobileOpen(false)} />
+      )}
+    </header>
   );
 }
 
-interface NavTriggerProps {
+interface CompactNavTriggerProps {
   panel: NavPanel;
-  isOpen: boolean;
+  openPanel: string | null;
   setOpenPanel: (id: string | ((curr: string | null) => string | null)) => void;
   panelId: string;
   scheduleOpen: (id: string) => void;
   scheduleClose: () => void;
 }
 
-/**
- * A menu item: the display face in title case, with a gold thread that draws
- * out from the centre beneath it while its sheet is open.
- */
-function NavTrigger({ panel, isOpen, setOpenPanel, panelId, scheduleOpen, scheduleClose }: NavTriggerProps) {
+function CompactNavTrigger({
+  panel,
+  openPanel,
+  setOpenPanel,
+  panelId,
+  scheduleOpen,
+  scheduleClose,
+}: CompactNavTriggerProps) {
+  const isOpen = openPanel === panel.id;
+
   return (
-    <button
-      type="button"
-      id={`${panelId}-trigger-${panel.id}`}
-      aria-expanded={isOpen}
-      aria-controls={`${panelId}-dropdown-${panel.id}`}
-      className={`group relative flex h-11 cursor-pointer items-center px-3 font-display text-[15.5px] tracking-[0.04em] transition-colors duration-300 xl:px-4 xl:text-[16.5px] ${
-        isOpen ? "text-sindoor" : "text-ink hover:text-sindoor"
-      }`}
-      onClick={() => setOpenPanel((curr) => (curr === panel.id ? null : panel.id))}
-      onMouseEnter={() => scheduleOpen(panel.id)}
-      onMouseLeave={scheduleClose}
-      onFocus={() => setOpenPanel(panel.id)}
-    >
-      {panel.label}
-      <span
-        aria-hidden="true"
-        className={`absolute inset-x-3 bottom-1.5 h-px origin-center bg-gold transition-transform duration-500 ease-[var(--ease-brand)] xl:inset-x-4 ${
-          isOpen ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+    <>
+      <button
+        type="button"
+        id={`${panelId}-trigger-${panel.id}`}
+        aria-expanded={isOpen}
+        aria-controls={`${panelId}-dropdown-${panel.id}`}
+        /*
+         * Display serif, 13.5px (12.5px below xl, so all six fit at 1024),
+         * uppercase, wide tracking, in body ink rather than heading ink: six
+         * labels at full weight crowded the wordmark.
+         * Spacing lives in the button's own padding rather than a gap on the
+         * row, so the caret has somewhere to sit and the hit target
+         * covers the label plus its arrow.
+         *
+         * The open state was a 2px underline in brand gold, which shouted over
+         * six items and fought the rule under the row. A colour shift plus the
+         * rotated caret says the same thing and lets the row stay quiet.
+         */
+        className={`font-display text-[12.5px] xl:text-[13.5px] uppercase tracking-[0.12em] xl:tracking-[0.14em] font-normal transition-colors duration-300 h-full flex items-center gap-1.5 xl:gap-2 px-2 xl:px-3 cursor-pointer ${
+          isOpen ? "text-accent-hover" : "text-ink-body hover:text-accent-hover"
         }`}
-      />
-    </button>
+        onClick={() => setOpenPanel((curr) => (curr === panel.id ? null : panel.id))}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setOpenPanel((curr) => (curr === panel.id ? null : panel.id));
+          }
+        }}
+        onMouseEnter={() => scheduleOpen(panel.id)}
+        onMouseLeave={scheduleClose}
+        onFocus={() => setOpenPanel(panel.id)}
+      >
+        {panel.label}
+        <svg
+          width="8"
+          height="5"
+          viewBox="0 0 8 5"
+          fill="none"
+          aria-hidden="true"
+          className={`shrink-0 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        >
+          <path
+            d="M0.75 0.75L4 4L7.25 0.75"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+    </>
   );
 }
 
 /*
- * The dropdown sheet. Link columns on the left under small gold kickers, the
- * panel's photographs on the right in arch frames, the first one larger as the
- * panel's lead story. It unrolls from the top edge like cloth let down from a
- * rod, and its links rise in one after another.
+ * The dropdown, on the reference's mega-menu template (measured on request,
+ * 24 Sep 2026): a white box 1200px wide, centred under the row, no shadow and
+ * no border. Link columns fill from the left, photographs sit hard against the
+ * right, and the space between them stays empty.
+ *
+ * Every photograph is their large size, 260x390 inside 20px of padding.
+ * Their shorter panels drop to 200x300 tiles in a five-column grid, which
+ * read as thumbnails here; fixed 200px link columns leave room for two large
+ * tiles even beside Shop's three lists. Below 1200px the tiles give way first
+ * (`minmax(0, 300px)`), then the gap.
  */
 function MegaMenuPanel({
   panel,
@@ -312,8 +342,7 @@ function MegaMenuPanel({
     panel.columns && panel.columns.length > 0
       ? panel.columns
       : [{ heading: panel.label, links: panel.links }];
-  const tiles = (panel.tiles ?? []).slice(0, 3);
-  let linkIndex = 0;
+  const tiles = panel.tiles ?? [];
 
   return (
     <div
@@ -321,119 +350,75 @@ function MegaMenuPanel({
       aria-label={panel.label}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
-      className="absolute inset-x-0 top-full z-50 border-y border-rule bg-paper animate-[unroll_520ms_var(--ease-brand)]"
+      className="absolute top-full left-1/2 z-50 w-[1200px] max-w-[calc(100vw-40px)] -translate-x-1/2 bg-white animate-[fadeIn_120ms_ease-out]"
     >
-      <div className="wrap-wide grid grid-cols-[minmax(0,1fr)_auto] gap-12 py-10">
-        <div className="flex flex-col">
-          <div className="grid auto-cols-[minmax(160px,220px)] grid-flow-col gap-10">
-            {columns.map((column) => (
-              <div key={column.heading}>
-                <p className="eyebrow mb-4">{column.heading}</p>
-                <ul className="space-y-0.5">
-                  {column.links.map((link) => {
-                    const delay = 60 + linkIndex++ * 28;
-                    return (
-                      <li
-                        key={link.href + link.label}
-                        className="animate-[riseIn_480ms_var(--ease-out)_both]"
-                        style={{ animationDelay: `${delay}ms` }}
-                      >
-                        <Link
-                          href={link.href}
-                          onClick={onClose}
-                          className="group/l flex items-center gap-2 py-1.5 font-serif text-[17px] leading-snug text-ink transition-colors hover:text-sindoor"
-                        >
-                          {link.emphasis && <span className="size-1 rotate-45 bg-gold" aria-hidden="true" />}
-                          <span className="transition-transform duration-300 ease-[var(--ease-brand)] group-hover/l:translate-x-1">
-                            {link.label}
-                          </span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: `repeat(${columns.length}, minmax(150px, 200px)) 1fr repeat(${tiles.length}, minmax(0, 300px))`,
+        }}
+      >
+        {columns.map((column) => (
+          <div key={column.heading} className="p-5">
+            <p className="mb-2 font-display text-[16px] font-bold leading-[1.2] tracking-[1px] text-ink-dark">
+              {column.heading}
+            </p>
+            <ul>
+              {column.links.map((link) => (
+                <li key={link.href + link.label}>
+                  <Link
+                    href={link.href}
+                    onClick={onClose}
+                    className={`block py-[6.5px] font-display text-[13px] leading-[13px] tracking-[1px] text-ink-dark transition-colors hover:text-accent-hover ${
+                      link.emphasis ? "font-bold" : "font-normal"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <Link href={panel.href} onClick={onClose} className="cta-link mt-auto self-start pt-8">
-            All of {panel.label.toLowerCase()}
-          </Link>
-        </div>
+        ))}
 
-        {tiles.length > 0 && (
-          <div className="flex items-start gap-5">
-            {tiles.map((tile, index) => (
-              <div
-                key={tile.href + tile.label}
-                className={`animate-[riseIn_640ms_var(--ease-out)_both] ${index === 0 ? "w-[260px]" : "w-[200px] pt-10"}`}
-                style={{ animationDelay: `${120 + index * 90}ms` }}
-              >
-                <MegaMenuTile label={tile.label} tone={tile.tone} src={tile.src} href={tile.href} onClose={onClose} />
-              </div>
-            ))}
+        {tiles.map((tile, index) => (
+          <div
+            key={tile.href + tile.label}
+            className="p-5"
+            style={{ gridColumnStart: columns.length + 2 + index }}
+          >
+            <MegaMenuTile
+              label={tile.label}
+              tone={tile.tone}
+              src={tile.src}
+              href={tile.href}
+              onClose={onClose}
+            />
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
 }
 
-/**
- * The phone menu: a full-screen panel on the night ground. Each menu item is
- * a large display line that opens to its links; the actions sit at the foot.
- */
-function MobileNav({ id, onClose }: { id: string; onClose: () => void }) {
+function MobileNav({ id, onNavigate }: { id: string; onNavigate: () => void }) {
   const NAVIGATION = useMenu();
-  const { tagline } = useSiteText();
-
   return (
-    <div
-      id={id}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Menu"
-      className="booti-ground fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-night text-on-night animate-[fadeIn_300ms_ease-out] lg:hidden"
-    >
-      <div className="flex h-16 shrink-0 items-center justify-between pl-4 pr-2">
-        <Link href="/" onClick={onClose} className="flex items-center gap-3" aria-label={`${BRAND.name} home`}>
-          <LotusMark className="h-[24px] w-[32px] text-gold-soft" />
-          <span className="font-display text-[20px] uppercase tracking-[0.2em] text-on-night">{BRAND.name}</span>
-        </Link>
-        <button
-          type="button"
-          onClick={onClose}
-          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full text-on-night hover:bg-night-soft"
-          aria-label="Close menu"
-          autoFocus
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      </div>
-
-      <nav aria-label="Mobile navigation" className="flex-1 px-6 pt-6 pb-10">
-        {NAVIGATION.map((panel, index) => (
-          <details
-            key={panel.id}
-            className="group border-b border-on-night/10 animate-[riseIn_500ms_var(--ease-out)_both]"
-            style={{ animationDelay: `${80 + index * 50}ms` }}
-          >
-            <summary className="flex cursor-pointer list-none items-center justify-between py-4 font-display text-[28px] leading-none text-on-night">
+    <div id={id} className="border-t border-rule bg-white lg:hidden">
+      <nav aria-label="Mobile navigation" className="px-6 py-6 max-h-[80vh] overflow-y-auto">
+        {NAVIGATION.map((panel) => (
+          <details key={panel.id} className="border-b border-rule py-3 group">
+            <summary className="font-display text-xs uppercase tracking-wider text-ink font-medium cursor-pointer flex justify-between items-center list-none">
               <span>{panel.label}</span>
-              <span
-                aria-hidden="true"
-                className="relative size-3 before:absolute before:inset-x-0 before:top-1/2 before:h-px before:bg-gold-soft after:absolute after:inset-y-0 after:left-1/2 after:w-px after:bg-gold-soft after:transition-transform group-open:after:scale-y-0"
-              />
+              <span className="text-ink-muted text-sm transition-transform group-open:rotate-180">▾</span>
             </summary>
-            <ul className="pb-5">
+            <ul className="mt-2 space-y-1 pb-2 pl-2">
               {panel.links.map((link) => (
                 <li key={link.href + link.label}>
                   <Link
                     href={link.href}
-                    onClick={onClose}
-                    className="block py-2 font-serif text-[18px] text-on-night-muted transition-colors hover:text-gold-soft"
+                    onClick={onNavigate}
+                    className="text-xs text-ink/85 hover:text-accent-hover block py-1.5"
                   >
                     {link.label}
                   </Link>
@@ -442,60 +427,18 @@ function MobileNav({ id, onClose }: { id: string; onClose: () => void }) {
             </ul>
           </details>
         ))}
-
-        <div className="mt-8 grid grid-cols-3 gap-2 font-ui text-[13px]">
-          {(
-            [
-              ["/account", "Account"],
-              ["/wishlist", "Wishlist"],
-              ["/cart", "Cart"],
-            ] as const
-          ).map(([href, label]) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={onClose}
-              className="flex h-12 items-center justify-center rounded-full border border-on-night/20 text-on-night transition-colors hover:border-gold-soft hover:text-gold-soft"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-10">
-          <div className="zari-rule text-gold/60"><span className="zari-rule__knot" /></div>
-          <p className="mt-4 text-center font-serif text-[16px] italic text-on-night-muted">{tagline}</p>
+        <div className="mt-6 pt-4 border-t border-rule space-y-3">
+          <Link href="/account" onClick={onNavigate} className="font-display text-xs tracking-wider text-ink uppercase block">
+            Account / Login
+          </Link>
+          <Link href="/wishlist" onClick={onNavigate} className="font-display text-xs tracking-wider text-ink uppercase block">
+            Wishlist
+          </Link>
+          <Link href="/cart" onClick={onNavigate} className="font-display text-xs tracking-wider text-ink uppercase block">
+            Shopping Cart
+          </Link>
         </div>
       </nav>
     </div>
-  );
-}
-
-function SearchIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" className={className} aria-hidden="true">
-      <circle cx="10.5" cy="10.5" r="6.75" />
-      <line x1="20" y1="20" x2="15.4" y2="15.4" />
-    </svg>
-  );
-}
-
-function AccountIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" className={className} aria-hidden="true">
-      <circle cx="12" cy="8.5" r="3.75" />
-      <path d="M4.5 20.5c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5" />
-    </svg>
-  );
-}
-
-/** A potli bag rather than a generic shopping bag: drawn cord, round body. */
-function BagIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M8.5 7.5c-3 2-4.5 5-4.5 8 0 3.5 3.5 5.5 8 5.5s8-2 8-5.5c0-3-1.5-6-4.5-8" />
-      <path d="M8 7.5h8" />
-      <path d="M9.5 7.5 8 3.5c1.3.6 2.6.9 4 .9s2.7-.3 4-.9l-1.5 4" />
-    </svg>
   );
 }

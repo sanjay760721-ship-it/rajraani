@@ -33,8 +33,3 @@ docs/design/stitch-design-system/**/*.png
 # Per-machine Claude Code permission allowlist. Machine-specific absolute paths,
 # no value to anyone else on the repo.
 .claude/settings.local.json
-
-# Redesign before/after screenshots: they show unlicensed stand-in photos
-docs/redesign/baseline/
-docs/redesign/after/
-.playwright-mcp/
