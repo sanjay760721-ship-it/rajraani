@@ -31,7 +31,7 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
         href: TEXT("Announcement strip (the dark line at the very top)"),
         action: "Change the messages",
       },
-      { title: "Top bar", what: "The line beside the lotus, above the menu — “Pure handloom, from Varanasi”", href: TEXT("Top bar"), action: "Change the line" },
+      { title: "Top bar", what: "The line on the left above the menu — “Made in Banaras…”", href: TEXT("Top bar"), action: "Change the line" },
       {
         title: "Menu",
         what: "Shop, Collections, Campaigns, Crafts, Stories, About Us — and everything in their dropdowns",

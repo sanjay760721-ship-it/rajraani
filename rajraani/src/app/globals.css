@@ -51,15 +51,6 @@
   /* The announcement strip: Banarasi maroon with zari-gold capitals. */
   --color-announce-bg: #5a0f1c;
   --color-announce-ink: #ecd08a;
-
-  /* The top bar: warm ivory over a gold rule, maroon ink, a zari-gold lotus. */
-  --color-topbar-bg: #fbf6ea;
-  --color-topbar-rule: #e6d6ae;
-  --color-topbar-ink: #3a1a1f;
-  --color-topbar-accent: #5a0f1c;
-  --color-topbar-field: #fffdf8;
-  --color-topbar-field-rule: #d9c79c;
-  --color-zari: #b08a32;
   --color-surface-notice: #faf0f0; /* empty-state and notice panels */
   --color-danger: #e02424;         /* remove / delete affordances */
   /*

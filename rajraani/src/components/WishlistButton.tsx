@@ -31,7 +31,7 @@ export function WishlistButton({ variant = "inline" }: { variant?: "inline" | "s
       }
     >
       <svg
-        className={`${stacked ? `${UTILITY_ICON} stroke-current fill-transparent group-hover:fill-topbar-accent/15` : "w-[15px] h-[15px] text-danger stroke-danger fill-transparent group-hover:fill-danger/20"} transition-colors`}
+        className={`${stacked ? UTILITY_ICON : "w-[15px] h-[15px]"} text-danger stroke-danger fill-transparent group-hover:fill-danger/20 transition-colors`}
         viewBox="0 0 24 24"
         aria-hidden="true"
       >
