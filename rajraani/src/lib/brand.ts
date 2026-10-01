@@ -18,8 +18,8 @@ import { BRAND_NAME } from "./brand-name.ts";
 
 export const BRAND = {
   name: BRAND_NAME,
-  /** Sits in the utility bar, italic. */
-  line: `Made in Banaras. Made by ${BRAND_NAME}.`,
+  /** Sits on the left of the top bar, italic, beside the gold lotus. */
+  line: "Pure handloom, from Varanasi",
   /** Rendered verbatim on every handloom product, as a global constant. */
   promise: "Pure. Handloom. Banaras.",
   /**
