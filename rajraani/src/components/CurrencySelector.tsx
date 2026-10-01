@@ -3,19 +3,11 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 import { useCurrency } from "./currency-context";
-import { UTILITY_CAPTION, UTILITY_ICON, UTILITY_ITEM } from "./utility-styles";
 
-const CURRENCY_LABELS: Record<string, string> = {
-  INR: "INR",
-  USD: "USD",
-  CAD: "CAD",
-  GBP: "GBP",
-  AUD: "AUD",
-  EUR: "EUR",
-  JPY: "JPY",
-  SGD: "SGD",
-};
-
+/**
+ * Currency picker for the header's action cluster: the code as a small text
+ * pill, opening a short list on ivory paper.
+ */
 export function CurrencySelector() {
   const { currency, setCurrency, currencies } = useCurrency();
   const [isOpen, setIsOpen] = useState(false);
@@ -52,49 +44,28 @@ export function CurrencySelector() {
   }, [isOpen]);
 
   return (
-    <div className="relative h-full">
+    <div className="relative">
       <button
         ref={buttonRef}
         type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={id}
-        aria-label="Currency"
-        className={UTILITY_ITEM}
+        aria-label={`Currency, ${currency}`}
+        className="inline-flex h-11 cursor-pointer items-center gap-1.5 rounded-full px-3 font-ui text-[12.5px] font-medium tracking-[0.06em] text-ink transition-colors hover:bg-bg-alt hover:text-sindoor"
         onClick={() => setIsOpen((open) => !open)}
       >
+        {currency}
         <svg
-          viewBox="0 0 24 24"
+          width="8"
+          height="5"
+          viewBox="0 0 8 5"
           fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          className={UTILITY_ICON}
-          strokeLinecap="round"
-          strokeLinejoin="round"
           aria-hidden="true"
+          className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
         >
-          <circle cx="12" cy="12" r="10" />
-          <line x1="2" y1="12" x2="22" y2="12" />
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          <path d="M0.75 0.75L4 4L7.25 0.75" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        {/*
-          * The caret hangs off the caption rather than sitting in its flow, so
-          * "INR" centres under the globe exactly as "LOGIN" does under its
-          * icon. Inline, the caret dragged the word a few pixels left.
-          */}
-        <span className={`${UTILITY_CAPTION} relative`}>
-          {CURRENCY_LABELS[currency] ?? currency}
-          <svg
-            width="8"
-            height="5"
-            viewBox="0 0 8 5"
-            fill="none"
-            aria-hidden="true"
-            className={`absolute left-full top-1/2 ml-1 -translate-y-1/2 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-          >
-            <path d="M0.75 0.75L4 4L7.25 0.75" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </span>
       </button>
 
       {isOpen && (
@@ -103,8 +74,7 @@ export function CurrencySelector() {
           id={id}
           role="listbox"
           aria-label="Select currency"
-          className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[110px] bg-white border border-rule shadow-lg py-1.5 overflow-hidden"
-          style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
+          className="absolute left-1/2 top-full z-50 mt-2 min-w-[112px] -translate-x-1/2 overflow-hidden rounded-[var(--radius-soft)] border border-rule bg-paper py-1.5 animate-[riseIn_200ms_var(--ease-out)]"
         >
           {currencies.map((curr) => (
             <li key={curr}>
@@ -113,10 +83,10 @@ export function CurrencySelector() {
                 role="option"
                 aria-selected={curr === currency}
                 data-currency={curr}
-                className={`w-full text-left px-4 py-1.5 font-display text-[12.5px] tracking-wide transition-colors ${
+                className={`w-full px-4 py-2 text-left font-ui text-[13px] tracking-[0.04em] transition-colors ${
                   curr === currency
-                    ? "bg-surface-notice text-accent-hover font-semibold"
-                    : "text-ink/80 hover:bg-surface-notice/60 hover:text-accent-hover"
+                    ? "bg-bg-alt font-medium text-sindoor"
+                    : "text-ink-body hover:bg-bg-alt hover:text-ink"
                 }`}
                 onClick={() => {
                   setCurrency(curr);

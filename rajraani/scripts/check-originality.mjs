@@ -202,11 +202,11 @@ const RULES = [
   {
     id: "border-radius",
     declaration: /border-radius\s*:\s*([^;]+)/i,
-    allow: (value) => /^(0(px|rem|%)?|var\(--radius-none\))$/i.test(value.trim()),
+    allow: (value) => /^(0(px|rem|%)?|var\(--radius-[a-z]+\))$/i.test(value.trim()),
     only: [".css", ".ts", ".tsx", ".js", ".jsx"],
     why:
-      "Square corners, no exceptions (build.md §2.5 Elevation). 891 of 900 " +
-      "sampled elements in this category measure `border-radius: 0`.",
+      "Corners are a design decision, so they come from the named radius tokens in " +
+      "globals.css (--radius-none, -soft, -pill, -arch), never a one-off value.",
     exempt: ADMIN_SURFACE,
   },
   {
@@ -341,5 +341,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  "✓ No competitor references, no fulfilment state in titles, no shadows, no radius, no stray hexes.\n",
+  "✓ No competitor references, no fulfilment state in titles, no shadows, no stray radii, no stray hexes.\n",
 );

@@ -27,11 +27,11 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
     parts: [
       {
         title: "Announcement strip",
-        what: "The dark line at the very top — “Free shipping in India | …”",
+        what: "The thin line at the very top — “Complimentary shipping across India …”",
         href: TEXT("Announcement strip (the dark line at the very top)"),
         action: "Change the messages",
       },
-      { title: "Top bar", what: "The line on the left above the menu — “Made in Banaras…”", href: TEXT("Top bar"), action: "Change the line" },
+      { title: "House line", what: "The line under the name in the footer — “Woven slowly, by hand…”", href: TEXT("House line"), action: "Change the line" },
       {
         title: "Menu",
         what: "Shop, Collections, Campaigns, Crafts, Stories, About Us — and everything in their dropdowns",
