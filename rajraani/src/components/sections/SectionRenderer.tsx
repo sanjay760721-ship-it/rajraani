@@ -221,10 +221,10 @@ function Hero({
 }) {
   const Heading = isPageTitle ? "h1" : "h2";
   return (
-    <section className="relative">
+    <section className="ed-hero relative">
       <Art
         art={section.art}
-        className="h-[82vh] max-h-[900px] min-h-[520px] w-full"
+        className="ed-hero__art h-[82vh] max-h-[900px] min-h-[520px] w-full"
         priority
       />
       {/* The frame goes where the button goes; the layers above let clicks through. */}
@@ -234,14 +234,14 @@ function Hero({
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent"
       />
       <div className="pointer-events-none absolute inset-0 flex items-end">
-        <div className="wrap-wide pb-16 md:pb-24">
+        <div className="ed-hero__copy wrap-wide pb-16 md:pb-24">
           <div className="max-w-[46ch]">
             {section.eyebrow ? (
-              <p className="eyebrow text-bg/75">{section.eyebrow}</p>
+              <p className="ed-kicker eyebrow text-white/75">{section.eyebrow}</p>
             ) : null}
-            <Heading className="text-display mt-4 text-bg">{section.title}</Heading>
-            <p className="text-prose mt-5 max-w-[38ch] text-bg/85">{section.body}</p>
-            <Link href={section.ctaHref} className="cta-primary pointer-events-auto mt-8 inline-block">
+            <Heading className="ed-hero__title text-display mt-4 text-white">{section.title}</Heading>
+            <p className="ed-hero__body text-prose mt-5 max-w-[38ch] text-white/85">{section.body}</p>
+            <Link href={section.ctaHref} className="ed-hero__cta cta-primary pointer-events-auto mt-8 inline-block">
               {section.ctaLabel}
             </Link>
           </div>
@@ -358,12 +358,12 @@ function VideoBand({
         />
         <div className="pointer-events-none absolute inset-0 flex items-end p-8 md:p-14">
           <div className="max-w-[44ch] pointer-events-auto">
-            <span className="eyebrow block text-bg/80">HANDLOOM HERITAGE</span>
-            <h2 className="text-display mt-2 text-bg">{section.title}</h2>
-            <p className="text-prose mt-3 text-bg/90">{section.body}</p>
+            <span className="eyebrow block text-white/80">HANDLOOM HERITAGE</span>
+            <h2 className="text-display mt-2 text-white">{section.title}</h2>
+            <p className="text-prose mt-3 text-white/90">{section.body}</p>
             <Link
               href={section.ctaHref}
-              className="cta-link mt-6 inline-block text-bg border-b border-bg/50 hover:border-bg"
+              className="cta-link mt-6 inline-block text-white border-b border-white/50 hover:border-white"
             >
               {section.ctaLabel}
             </Link>
@@ -607,9 +607,9 @@ function PoetryBand({
   section: Extract<Section, { type: "poetryBand" }>;
 }) {
   return (
-    <section className="wrap-prose section-pad text-center" style={{ backgroundColor: "var(--color-bg-alt)" }}>
-      <h2 className="text-h2">{section.heading}</h2>
-      <p className="text-body mt-4 text-ink-body">{section.body}</p>
+    <section className="ed-poetry wrap-prose section-pad text-center" style={{ backgroundColor: "var(--color-bg-alt)" }}>
+      <h2 className="ed-title text-h2">{section.heading}</h2>
+      <p className="ed-lead text-body mt-4 text-ink-body">{section.body}</p>
     </section>
   );
 }
@@ -658,10 +658,10 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
      * elements in a column, disagreeing about their own axis.
      */
     <section
-      className={`section-pad-prose ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"} ${section.tone ? CAMPAIGN_TONE[section.tone] : ""}`}
+      className={`ed-rich section-pad-prose ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"} ${section.tone ? CAMPAIGN_TONE[section.tone] : ""}`}
       style={{
         backgroundColor: "var(--color-bg)",
-        backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))",
+        backgroundImage: "linear-gradient(180deg, transparent, var(--color-bg))",
         // Inline so it outranks the utility; see `padTop` on the type.
         ...(section.padTop !== undefined ? { paddingTop: fluidPad(section.padTop) } : {}),
         ...(section.padBottom !== undefined ? { paddingBottom: fluidPad(section.padBottom) } : {}),
@@ -671,8 +671,8 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
         <Heading
           className={
             section.uppercase
-              ? "text-h1 mb-5 uppercase tracking-[0.06em]"
-              : "text-h3 mb-5"
+              ? "ed-title text-h1 mb-5 uppercase tracking-[0.06em]"
+              : "ed-title ed-title--sm text-h3 mb-5"
           }
         >
           {section.heading}
@@ -684,7 +684,7 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
         * it — margins collapse oddly across a column break — so the spacing
         * goes on the paragraphs instead.
         */}
-      <div className={section.columns === 2 ? "md:columns-2 md:gap-16" : "space-y-5"}>
+      <div className={section.columns === 2 ? "ed-body md:columns-2 md:gap-16" : `ed-body space-y-5 ${section.heading ? "" : "ed-body--statement"}`}>
         {section.paragraphs.map((paragraph, index) => (
           <p
             key={index}
@@ -713,11 +713,11 @@ function RichText({ section }: { section: Extract<Section, { type: "richText" }>
 function PullQuote({ section }: { section: Extract<Section, { type: "pullQuote" }> }) {
   return (
     <figure className="wrap-prose section-pad text-center">
-      <blockquote className="font-display text-h2 text-ink italic">
+      <blockquote className="ed-quote font-display text-h2 text-ink italic">
         {section.quote}
       </blockquote>
       {section.attribution ? (
-        <figcaption className="eyebrow mt-5 text-ink-muted">
+        <figcaption className="ed-kicker ed-kicker--center eyebrow mt-5 text-ink-muted">
           {section.attribution}
         </figcaption>
       ) : null}
@@ -777,7 +777,7 @@ function ImageWithText({
             : "grid items-center gap-10 md:grid-cols-2 md:gap-16"
         }
       >
-        <div className={imageLeft ? "md:order-1" : "md:order-2"}>
+        <div className={`ed-media ${imageLeft ? "md:order-1" : "md:order-2"}`}>
           {/*
             * Linked when the band has somewhere to go. Their campaign bands
             * wrap the photograph in an anchor to the collection, so the picture
@@ -803,7 +803,7 @@ function ImageWithText({
         </div>
 
         <div
-          className={`${imageLeft ? "md:order-2" : "md:order-1"}${
+          className={`ed-text ${imageLeft ? "md:order-2" : "md:order-1"}${
             /*
              * A full-width band has no container gutter, so the prose would
              * otherwise start at the viewport edge. 30px is their
@@ -814,12 +814,13 @@ function ImageWithText({
           }`}
         >
           {section.eyebrow ? (
-            <p className="eyebrow text-ink-muted">{section.eyebrow}</p>
+            <p className="ed-kicker eyebrow text-ink-muted">{section.eyebrow}</p>
           ) : null}
           {section.heading ? (
-            <h2 className="text-h2 mt-3">{section.heading}</h2>
+            <h2 className="ed-title text-h2 mt-3">{section.heading}</h2>
           ) : null}
-          <div className={section.heading || section.eyebrow ? "mt-5 space-y-4" : "space-y-4"}>
+          {/* The first paragraph leads, set large; the rest read at body size. */}
+          <div className={`ed-body ed-body--lead ${section.heading || section.eyebrow ? "mt-5 space-y-4" : "space-y-4"}`}>
             {section.paragraphs.map((paragraph, index) => (
               <p
                 key={index}
@@ -1040,7 +1041,7 @@ function ImageBand({
               } ${
                 section.overlay.panel === "none"
                   ? CAPTION_INK[section.overlay.ink ?? "white"]
-                  : "bg-white/[0.77]"
+                  : "bg-bg/[0.77]"
               }`}
             >
               <h2
@@ -1101,7 +1102,7 @@ function FaqAccordion({
             * which reads as a table label rather than as the start of a
             * section.
             */}
-          <h2 className="text-h1 mb-2 text-ink">{group.heading}</h2>
+          <h2 className="text-h3 mb-3 text-ink">{group.heading}</h2>
 
           <dl>
             {group.items.map((item) => (

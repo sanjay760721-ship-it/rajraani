@@ -1347,6 +1347,118 @@ repository is private. **The unlicensed photos are now in history:** keep the re
 private, and do not deploy from it with `public/reference-only/` in place. Earlier notes
 that say this photography is "never committed" no longer hold.
 
+### 2.57 The redesign that stuck: a cinematic homepage and a white shop — 1–2 October 2026
+
+After the seven rejected directions in §2.56, the owner liked a **SpaceX-style cinematic
+homepage**. It was refined step by step, then carried across the whole storefront. The
+owner approved each step on the running site.
+
+**Homepage** (`src/app/(home)`, `src/components/cinematic/`, commit `40ed44f6`):
+- Full-screen scenes built from the admin's homepage blocks by `scenes.ts` (`toScenes`):
+  - hero slides
+  - "Every piece is one piece" pulling back into the Antaraal triptych (pinned, GSAP)
+  - the loom film at full width with its controls, pausing when off screen
+  - tall shop strips
+  - the curated-edits gallery sliding sideways
+  - campaigns
+  - "Cloth that keeps time"
+  - the stores
+- Smooth scrolling with Lenis. Barlow Condensed for display and Barlow for reading.
+- A dark **kohl** ground (`rgb(16 11 18)`), zari gold on the fine rules, and a gold jaal
+  behind the footer.
+- The announcement strip was retired from the top. Its messages are now the line of
+  promises in the footer, and the top-bar tagline signs off under the large RAJRAANI.
+
+**Every other storefront page** (2 Oct): `CineFrame` gives every page the homepage's header,
+menu and footer (`CineHeader`, `CineMenu`, `CineFooter`, `frame-css.ts`). The old
+`SiteHeader`, `SiteFooter`, `AnnouncementBar` and `UtilityBar` are no longer rendered.
+They are kept, not deleted.
+
+The direction changed during the day:
+
+| Step | Owner's verdict |
+|---|---|
+| Dark kohl shop pages, neutral (not aubergine) behind sarees so colour stays true | kept for a few hours |
+| "Dawn at the ghats" palette from a Varanasi photo: sky gradient, sandstone blocks | "bad", mock-up only, nothing written |
+| White cards on the dark page | "revert it" |
+| **White pages, black condensed capitals, gold accents** | **kept** |
+
+**The shop theme as built:**
+- **Tokens.** A `:root:has(.cine)` block at the end of `globals.css` re-points the site
+  tokens: white ground, ink `#111013`, body `#2b282e`, muted `#5a5560` and zari accent
+  `#7e6029`. It is mirrored in `SHOP_PALETTE` (`src/lib/tokens/contrast.ts`), with tests:
+  every pairing meets WCAG and the CSS stays in sync. The admin has no `.cine`, so it
+  keeps its own look.
+- **Type scale.** Eight steps: 13 labels · 15 small · 17 body · 22 names · 28 leads · 48
+  section titles · 64 working-page titles · 96 openings. Capitals are for titles, names,
+  labels and buttons only. Breadcrumbs and references are in sentence case, and nothing is
+  under 13px.
+- **`PageHead`.** Every page opens the same way: a gold-ruled label, a title that rises out
+  of a mask, and the intro beneath.
+- **Editorial blocks.** The story and campaign blocks (`ed-*` classes in
+  `SectionRenderer`) follow one grammar:
+  - large titles, a lead paragraph set big, then body copy
+  - long passages read from a left edge
+  - links in tracked capitals over a gold rule
+  - text rises and photos unveil as you scroll
+- **Product page:** the piece's name leads (SINDOOR), the full title sits beneath, and the
+  specifications are a two-column table.
+- **Buttons and cards:** black buttons that turn gold on hover; a light-grey Quick View; a
+  soft rose wishlist heart that is always visible and blooms when tapped.
+- **True-colour view:** product photos open full screen on a neutral grey, labelled
+  "True-colour view".
+
+**Fixed along the way:**
+- **Menu:** an invisible hover bridge was covering the menu words. Each word is now also a
+  link (Shop → `/collections/sarees`), the header and dropdown are solid, and moving across
+  a neighbouring word no longer switches the panel.
+- **Invisible text:**
+  - campaign inks made for cream paper vanished on kohl
+  - maroon-ground blocks lost their cream type
+  - Kala's "The making of it" was maroon text on a maroon texture; it is now cream
+- **Wishlist:**
+  - the heart is now always shown (it used to appear only on hover)
+  - product pages have a "Save to wishlist" button
+  - the wishlist page shows real photographs (`WishlistItem.src`)
+  - "Move to cart" now removes the piece from the wishlist
+- **Phones:** the product page no longer scrolls sideways, and the admin edit bar is shorter
+  on phones.
+
+**Admin, after the redesign:**
+- **Homepage screen.** It offers only the 10 block types the cinematic homepage renders
+  (`HOMEPAGE_TYPES`). Other types used to save and then silently never appear.
+- **Homepage words.** The homepage's own labels are now owner-editable site text: `home.*`
+  keys under three "Homepage — …" groups in Change text. These are the film facts, "Curated
+  edits", "Handloom heritage", "Book a visit" and others.
+- **Change text labels.** The old "Announcement strip" and "Top bar" groups now read
+  "Promises (the line of three in the footer)" and "Footer signature".
+- **On-site editor.** It can match all 61 pieces of homepage text (was 51). Headline words
+  now carry real spaces, and the editor accepts a shortened lead ("Banaras" from "Banaras
+  Store").
+- **Unchanged:** all 24 admin screens load without errors. Catalogue text on collection and
+  product pages is still edited on the Products screen, as before.
+
+**Checks:** 439 tests, the originality gate, typecheck, lint, the build, and heading order
+across 54 pages all pass. A readability crawl of 29 pages found every word at ≥ 4.5:1
+contrast, and no page scrolls sideways at 390px.
+
+**Dev server note.** On Windows, Turbopack sometimes freezes on a locked cache file
+(`os error 1224`), and every page returns 500. Stop all `next dev` processes and start one
+again. Only one dev server may run per folder. `.claude/launch.json` uses port 8081.
+
+#### Progress, 2 October 2026 (not counting photography)
+
+| Area | Done | Left before launch |
+|---|---|---|
+| What visitors see | ~95% | the owner's real email, phone and socials; the Calendly pages (404 today) |
+| Admin | ~92% | roles and a second factor, a draft step (not launch-blocking) |
+| **Payments** | **~45%** | **still a facade**, re-checked today. `createCheckoutAction` invents the Razorpay order id, and `completePaymentAction` marks an order paid with no signature check. Needs server-side order creation, signature verification, a webhook and tests: 3–5 days, **blocks launch** |
+| Launch hardening | ~15% | hosting with a persistent disk, domain, HTTPS, backups, performance and SEO, monitoring: 1–2 weeks |
+| Owner decisions | — | 11 taxonomy questions, policy texts, the "Silk Mark Certified" claim |
+
+**Overall, photography aside: about 75% done, roughly 2½–4 weeks of work to launch.**
+**Next: payments.**
+
 ---
 
 ## 3. How the folder is arranged

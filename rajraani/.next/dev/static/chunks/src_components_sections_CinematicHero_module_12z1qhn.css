@@ -1,0 +1,375 @@
+/* [project]/src/components/sections/CinematicHero.module.css [app-client] (css) */
+.CinematicHero-module__xpNtKW__hero {
+  background: var(--color-ink);
+  height: clamp(540px, 100svh - 190px, 900px);
+  min-height: 540px;
+  font-family: var(--font-manrope),sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.CinematicHero-module__xpNtKW__scene {
+  opacity: 0;
+  visibility: hidden;
+  color: var(--color-bg-alt);
+  transition: opacity .85s, visibility .85s;
+  position: absolute;
+  inset: 0;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-active="true"] {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.CinematicHero-module__xpNtKW__photo {
+  touch-action: pan-y;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.CinematicHero-module__xpNtKW__photo img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 7s linear;
+  transform: scale(1.035);
+}
+
+.CinematicHero-module__xpNtKW__scene[data-active="true"] .CinematicHero-module__xpNtKW__photo img {
+  transform: scale(1);
+}
+
+.CinematicHero-module__xpNtKW__mobile {
+  display: none;
+}
+
+.CinematicHero-module__xpNtKW__scrim {
+  pointer-events: none;
+  background: linear-gradient(90deg, #0000008c, #0000 75%), linear-gradient(0deg, #00000080, #0000 30%);
+  position: absolute;
+  inset: 0;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-align="right"] .CinematicHero-module__xpNtKW__scrim {
+  background: linear-gradient(270deg, #0009, #0000 75%), linear-gradient(0deg, #00000080, #0000 30%);
+}
+
+.CinematicHero-module__xpNtKW__scene[data-ink="dark"] {
+  color: var(--color-ink);
+}
+
+.CinematicHero-module__xpNtKW__scene[data-ink="dark"] .CinematicHero-module__xpNtKW__scrim {
+  background: linear-gradient(0deg, #0006, #0000 25%);
+}
+
+.CinematicHero-module__xpNtKW__caption {
+  pointer-events: none;
+  width: 42%;
+  max-width: 580px;
+  position: absolute;
+  bottom: 23%;
+  left: 6%;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-align="right"] .CinematicHero-module__xpNtKW__caption {
+  left: auto;
+  right: 6%;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-align="center"] .CinematicHero-module__xpNtKW__caption {
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.CinematicHero-module__xpNtKW__caption > * {
+  opacity: 0;
+  transition: opacity .7s, translate .7s;
+  translate: 0 22px;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-active="true"] .CinematicHero-module__xpNtKW__caption > * {
+  opacity: 1;
+  translate: 0;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-active="true"] .CinematicHero-module__xpNtKW__caption h2 {
+  transition-delay: .1s;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-active="true"] .CinematicHero-module__xpNtKW__description {
+  transition-delay: .17s;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-active="true"] .CinematicHero-module__xpNtKW__cta {
+  transition-delay: .23s;
+}
+
+.CinematicHero-module__xpNtKW__caption h2 {
+  font-family: var(--font-playfair),Georgia,serif;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+  margin: 17px 0 23px;
+  font-size: clamp(48px, 6.5vw, 96px);
+  font-weight: 500;
+  line-height: 1.02;
+}
+
+.CinematicHero-module__xpNtKW__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .24em;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.CinematicHero-module__xpNtKW__description {
+  text-wrap: pretty;
+  max-width: 38ch;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.CinematicHero-module__xpNtKW__scene[data-align="center"] .CinematicHero-module__xpNtKW__description {
+  margin-inline: auto;
+}
+
+.CinematicHero-module__xpNtKW__cta {
+  pointer-events: auto;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid;
+  align-items: center;
+  gap: 38px;
+  margin-top: 26px;
+  padding: 15px 22px;
+  font-size: 10px;
+  transition: background .25s, color .25s, opacity .7s, translate .7s;
+  display: inline-flex;
+}
+
+.CinematicHero-module__xpNtKW__cta span {
+  font-size: 20px;
+}
+
+.CinematicHero-module__xpNtKW__cta:hover {
+  background: var(--color-announce-bg);
+  border-color: var(--color-announce-bg);
+  color: var(--color-bg-alt);
+}
+
+.CinematicHero-module__xpNtKW__topline {
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  color: var(--color-bg-alt);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  justify-content: space-between;
+  font-size: 8px;
+  display: flex;
+  position: absolute;
+  top: 27px;
+  left: 6%;
+  right: 6%;
+}
+
+.CinematicHero-module__xpNtKW__controls {
+  z-index: 3;
+  color: var(--color-bg-alt);
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  display: flex;
+  position: absolute;
+  bottom: 30px;
+  left: 6%;
+  right: 6%;
+}
+
+.CinematicHero-module__xpNtKW__selectors {
+  gap: 18px;
+  display: flex;
+}
+
+.CinematicHero-module__xpNtKW__selector {
+  text-align: left;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 13px;
+  width: 55px;
+  min-height: 44px;
+  font-size: 9px;
+  display: flex;
+}
+
+.CinematicHero-module__xpNtKW__track {
+  background: #ffffff59;
+  width: 100%;
+  height: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.CinematicHero-module__xpNtKW__selector[aria-pressed="true"] {
+  color: var(--color-announce-ink);
+}
+
+.CinematicHero-module__xpNtKW__selector[aria-pressed="true"] .CinematicHero-module__xpNtKW__track:after {
+  content: "";
+  background: var(--color-announce-ink);
+  transform-origin: 0;
+  animation: 7s linear both paused CinematicHero-module__xpNtKW__progress;
+  position: absolute;
+  inset: 0;
+}
+
+.CinematicHero-module__xpNtKW__controls[data-playing="true"] .CinematicHero-module__xpNtKW__track:after {
+  animation-play-state: running;
+}
+
+.CinematicHero-module__xpNtKW__arrows {
+  gap: 8px;
+  display: flex;
+}
+
+.CinematicHero-module__xpNtKW__arrows button {
+  background: color-mix(in srgb,var(--color-announce-bg) 70%,transparent);
+  cursor: pointer;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-size: 21px;
+  transition: background .2s;
+  display: grid;
+}
+
+.CinematicHero-module__xpNtKW__arrows button:hover {
+  background: var(--color-announce-bg);
+}
+
+.CinematicHero-module__xpNtKW__hero :is(a, button):focus-visible {
+  outline: 2px solid var(--color-announce-ink);
+  outline-offset: 5px;
+}
+
+@keyframes CinematicHero-module__xpNtKW__progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 767px) {
+  .CinematicHero-module__xpNtKW__hero {
+    height: min(760px, 100svh - 95px);
+    min-height: 590px;
+  }
+
+  .CinematicHero-module__xpNtKW__desktop {
+    display: none;
+  }
+
+  .CinematicHero-module__xpNtKW__mobile {
+    display: block;
+  }
+
+  .CinematicHero-module__xpNtKW__photo img {
+    object-position: 35% center;
+  }
+
+  .CinematicHero-module__xpNtKW__caption, .CinematicHero-module__xpNtKW__scene[data-align="right"] .CinematicHero-module__xpNtKW__caption, .CinematicHero-module__xpNtKW__scene[data-align="center"] .CinematicHero-module__xpNtKW__caption {
+    text-align: left;
+    width: auto;
+    max-width: none;
+    bottom: 125px;
+    left: 24px;
+    right: 24px;
+    transform: none;
+  }
+
+  .CinematicHero-module__xpNtKW__caption h2 {
+    margin: 12px 0 16px;
+    font-size: clamp(44px, 12vw, 62px);
+  }
+
+  .CinematicHero-module__xpNtKW__description {
+    max-width: 36ch;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .CinematicHero-module__xpNtKW__scene[data-align="center"] .CinematicHero-module__xpNtKW__description {
+    margin-inline: 0;
+  }
+
+  .CinematicHero-module__xpNtKW__scrim, .CinematicHero-module__xpNtKW__scene[data-align="right"] .CinematicHero-module__xpNtKW__scrim {
+    background: linear-gradient(0deg, #000000d1, #0000 85%);
+  }
+
+  .CinematicHero-module__xpNtKW__scene[data-ink="dark"] .CinematicHero-module__xpNtKW__caption {
+    background: color-mix(in srgb,var(--color-bg-alt) 88%,transparent);
+    padding: 18px;
+  }
+
+  .CinematicHero-module__xpNtKW__eyebrow {
+    font-size: 8px;
+  }
+
+  .CinematicHero-module__xpNtKW__cta {
+    margin-top: 18px;
+    padding: 12px 18px;
+  }
+
+  .CinematicHero-module__xpNtKW__topline {
+    font-size: 7px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .CinematicHero-module__xpNtKW__controls {
+    align-items: center;
+    bottom: 25px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .CinematicHero-module__xpNtKW__selectors {
+    gap: 8px;
+  }
+
+  .CinematicHero-module__xpNtKW__selector {
+    width: 27px;
+  }
+
+  .CinematicHero-module__xpNtKW__arrows {
+    gap: 4px;
+  }
+
+  .CinematicHero-module__xpNtKW__arrows button {
+    width: 36px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .CinematicHero-module__xpNtKW__hero *, .CinematicHero-module__xpNtKW__hero :after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .CinematicHero-module__xpNtKW__photo img {
+    transform: none;
+  }
+}
+
+.CinematicHero-module__xpNtKW__hero .CinematicHero-module__xpNtKW__caption h2 {
+  color: inherit;
+}
+
+/*# sourceMappingURL=src_components_sections_CinematicHero_module_12z1qhn.css.map*/

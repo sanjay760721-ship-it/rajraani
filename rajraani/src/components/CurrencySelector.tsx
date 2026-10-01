@@ -103,7 +103,7 @@ export function CurrencySelector() {
           id={id}
           role="listbox"
           aria-label="Select currency"
-          className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[110px] bg-white border border-rule shadow-lg py-1.5 overflow-hidden"
+          className="absolute left-1/2 -translate-x-1/2 top-full z-50 min-w-[110px] bg-bg border border-rule shadow-lg py-1.5 overflow-hidden"
           style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
         >
           {currencies.map((curr) => (

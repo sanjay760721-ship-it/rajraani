@@ -5,6 +5,7 @@ import { SectionRenderer } from "@/components/sections/SectionRenderer";
 import { PAGE_IMAGE_HREF } from "@/lib/content/sections";
 import { content } from "@/lib/content/content";
 import { catalogue } from "@/lib/data/catalogue";
+import { PageHead } from "@/components/cinematic/PageHead";
 
 /**
  * Editorial pages — campaign stories and craft pages.
@@ -134,11 +135,11 @@ export default async function EditorialPage(props: PageProps<"/pages/[slug]">) {
               : "wrap-prose section-pad text-center"
           }
         >
-          <h1 className="text-h1">{page.title}</h1>
-          {/* Italic, as theirs is on both the about and FAQ pages. */}
-          {page.standfirst ? (
-            <p className="text-body mt-4 text-ink-body italic">{page.standfirst}</p>
-          ) : null}
+          <PageHead
+            title={page.title}
+            align={opensWithFaq ? "left" : "center"}
+            intro={page.standfirst ? <p>{page.standfirst}</p> : undefined}
+          />
         </header>
       )}
 

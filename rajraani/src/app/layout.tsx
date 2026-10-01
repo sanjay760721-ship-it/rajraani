@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cardo, Manrope, Open_Sans, Playfair_Display } from "next/font/google";
+import { Barlow, Barlow_Condensed, Cardo, Manrope, Open_Sans, Playfair_Display } from "next/font/google";
 
 import { BRAND } from "@/lib/brand";
 
@@ -50,6 +50,15 @@ const ui = Open_Sans({
 });
 
 /**
+ * The storefront's faces since the redesign (1-2 Oct 2026): Barlow Condensed
+ * for display and Barlow for reading. Every storefront page sets them through
+ * the shop theme in globals.css; Cardo and Open Sans remain for the admin's
+ * sign-in page, which keeps the old look.
+ */
+const cineDisplay = Barlow_Condensed({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-cine-display", display: "swap" });
+const cineText = Barlow({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-cine-text", display: "swap" });
+
+/**
  * Two more families, for the admin only.
  *
  * The admin runs its own design system ("Ethos & Elegance") — Playfair Display
@@ -86,7 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${display.variable} ${ui.variable} ${adminDisplay.variable} ${adminUi.variable} h-full antialiased`}
+      className={`${display.variable} ${ui.variable} ${cineDisplay.variable} ${cineText.variable} ${adminDisplay.variable} ${adminUi.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>

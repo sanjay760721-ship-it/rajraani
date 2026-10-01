@@ -33,6 +33,26 @@ export const PALETTE = {
 
 export type PaletteToken = keyof typeof PALETTE;
 
+/**
+ * The shop theme (redesign, 2 Oct 2026): white pages with black ink and zari
+ * gold, for every page inside the cinematic frame. Mirrors the
+ * `:root:has(.cine)` block at the end of globals.css.
+ */
+export const SHOP_PALETTE: Record<PaletteToken, string> = {
+  bg: "#ffffff",
+  bgAlt: "#f6f5f3",
+  bgSand: "#efece7",
+  ink: "#111013",
+  inkBody: "#2b282e",
+  inkMuted: "#5a5560",
+  rule: "#e6e2dc",
+  ruleInput: "#857e74",
+  ruleStrong: "#111013",
+  accent: "#7e6029",
+  error: "#a8392a",
+  success: "#3f6b4a",
+};
+
 /** The CSS custom property each palette key corresponds to. */
 export const CSS_VARIABLE: Record<PaletteToken, string> = {
   bg: "--color-bg",
@@ -173,12 +193,14 @@ export type ContrastResult = ContrastRequirement & {
 
 export function evaluateContrast(
   requirement: ContrastRequirement,
+  palette: Record<PaletteToken, string> = PALETTE,
+  label = "#ffffff",
 ): ContrastResult {
   const foreground =
     requirement.foreground === "white"
-      ? "#ffffff"
-      : PALETTE[requirement.foreground];
-  const ratio = contrastRatio(foreground, PALETTE[requirement.background]);
+      ? label
+      : palette[requirement.foreground];
+  const ratio = contrastRatio(foreground, palette[requirement.background]);
   return {
     ...requirement,
     ratio,
@@ -189,5 +211,10 @@ export function evaluateContrast(
 }
 
 export function evaluateContrastContract(): ContrastResult[] {
-  return CONTRAST_CONTRACT.map(evaluateContrast);
+  return CONTRAST_CONTRACT.map((requirement) => evaluateContrast(requirement));
+}
+
+/** The same contract on the shop theme (white pages, black ink). */
+export function evaluateShopContrastContract(): ContrastResult[] {
+  return CONTRAST_CONTRACT.map((requirement) => evaluateContrast(requirement, SHOP_PALETTE));
 }

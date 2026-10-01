@@ -96,17 +96,17 @@ function FacetSidebar({ selection, counts, sort, collection }) {
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                        className: "mt-3 space-y-2",
+                        className: "mt-4 space-y-2.5",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "text-caption flex items-center gap-3 text-ink",
+                                className: "flex items-center gap-3 text-[0.9375rem] text-ink",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         type: "radio",
                                         checked: true,
                                         readOnly: true,
                                         disabled: true,
-                                        className: "size-3.5 accent-ink"
+                                        className: "size-4 accent-[var(--color-accent)]"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/FacetSidebar.tsx",
                                         lineNumber: 100,
@@ -174,13 +174,13 @@ function FacetSidebar({ selection, counts, sort, collection }) {
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                            className: "mt-3 space-y-2",
+                            className: "mt-4 space-y-2.5",
                             children: options.map((term)=>{
                                 const count = counts[group][term.slug] ?? 0;
                                 const checked = isSelected(selection, group, term.slug);
                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: `flex cursor-pointer items-center gap-3 text-caption text-ink-body ${count === 0 ? "opacity-40" : ""}`,
+                                        className: `flex cursor-pointer items-center gap-3 text-[0.9375rem] text-ink-body ${count === 0 ? "opacity-40" : ""}`,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "checkbox",
@@ -189,7 +189,7 @@ function FacetSidebar({ selection, counts, sort, collection }) {
                                                 // radios. The reference site cannot express Red AND
                                                 // Maroon.
                                                 onChange: ()=>navigate((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$facets$2f$engine$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toggleFacet"])(selection, group, term.slug)),
-                                                className: "size-3.5 accent-ink"
+                                                className: "size-4 accent-[var(--color-accent)]"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/FacetSidebar.tsx",
                                                 lineNumber: 151,
@@ -204,7 +204,7 @@ function FacetSidebar({ selection, counts, sort, collection }) {
                                                 columnNumber: 23
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-eyebrow tabular-nums text-ink-muted",
+                                                className: "text-caption tabular-nums text-ink-muted",
                                                 children: count
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/FacetSidebar.tsx",

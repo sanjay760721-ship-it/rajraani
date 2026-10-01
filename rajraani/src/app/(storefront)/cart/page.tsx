@@ -5,20 +5,14 @@ import { useCart } from "@/components/cart-context";
 import { formatMoney } from "@/lib/money";
 import { BASE_CURRENCY } from "@/lib/domain/types";
 import { PLACEHOLDER_WASH, toneFor } from "@/components/Frame";
+import { PageHead } from "@/components/cinematic/PageHead";
 
 export default function CartPage() {
   const { lines, setQuantity, remove, subtotal, itemCount, open: openCartDrawer } = useCart();
 
   return (
-    <div className="min-h-[70vh] bg-bg py-12 px-4 sm:px-8 max-w-[1280px] mx-auto">
-      <div className="text-center max-w-xl mx-auto mb-10">
-        <h1 className="font-display text-3xl sm:text-4xl text-ink font-normal mb-3">
-          Shopping Cart
-        </h1>
-        <p className="text-caption text-ink-muted">
-          Complimentary shipping in India. Duties included worldwide.
-        </p>
-      </div>
+    <div className="min-h-[70vh] bg-bg pb-16 px-4 sm:px-8 max-w-[1280px] mx-auto">
+      <PageHead kicker="Your bag" title="Shopping cart" size="md" intro="Complimentary shipping in India. Duties included worldwide." />
 
       {itemCount === 0 ? (
         <div className="text-center py-20 bg-surface-notice border border-rule max-w-xl mx-auto p-8">
@@ -37,7 +31,7 @@ export default function CartPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Item List */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="border border-rule bg-white divide-y divide-rule">
+            <div className="border border-rule bg-bg-alt divide-y divide-rule">
               {lines.map((line) => (
                 <div key={line.handle} className="p-6 flex gap-6 items-center">
                   <div
@@ -48,10 +42,10 @@ export default function CartPage() {
                     }}
                   />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-display text-base text-ink mb-1">
+                    <h3 className="font-display text-[1.375rem] leading-none tracking-[0.06em] text-ink mb-1">
                       {line.poeticName || line.title}
                     </h3>
-                    <p className="text-xs text-ink-muted font-mono mb-3">
+                    <p className="text-xs text-ink-muted tabular-nums mb-3">
                       {formatMoney({ minorUnits: line.priceMinorUnits, currency: BASE_CURRENCY })}
                     </p>
                     <div className="flex items-center gap-3">
@@ -63,7 +57,7 @@ export default function CartPage() {
                         >
                           -
                         </button>
-                        <span className="px-3 py-1 text-xs font-mono text-ink">
+                        <span className="px-3 py-1 text-xs tabular-nums text-ink">
                           {line.quantity}
                         </span>
                         <button
@@ -84,7 +78,7 @@ export default function CartPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-mono text-ink font-semibold">
+                    <p className="text-sm tabular-nums text-ink font-semibold">
                       {formatMoney({ minorUnits: line.priceMinorUnits * line.quantity, currency: BASE_CURRENCY })}
                     </p>
                   </div>
@@ -95,18 +89,18 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="border border-rule bg-white p-6 sticky top-28">
-              <h2 className="font-display text-lg text-ink mb-4 pb-3 border-b border-rule font-medium">
+            <div className="border border-rule bg-bg-alt p-6 sticky top-28">
+              <h2 className="font-display text-h3 text-ink mb-4 pb-3 border-b border-rule font-medium">
                 Order Summary
               </h2>
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-xs text-ink-body">
                   <span>Subtotal</span>
-                  <span className="font-mono font-medium">{formatMoney(subtotal)}</span>
+                  <span className="tabular-nums font-medium">{formatMoney(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-xs text-ink-body">
                   <span>Shipping</span>
-                  <span className="text-emerald-700 font-medium">Free</span>
+                  <span className="font-medium text-ink">Free</span>
                 </div>
                 <div className="flex justify-between text-xs text-ink-body">
                   <span>Duties & Taxes</span>
@@ -114,7 +108,7 @@ export default function CartPage() {
                 </div>
                 <div className="pt-3 border-t border-rule flex justify-between text-sm font-semibold text-ink">
                   <span>Total</span>
-                  <span className="font-mono">{formatMoney(subtotal)}</span>
+                  <span className="tabular-nums">{formatMoney(subtotal)}</span>
                 </div>
               </div>
 
@@ -126,7 +120,7 @@ export default function CartPage() {
                 Proceed to Checkout
               </button>
 
-              <p className="text-[11px] text-center text-ink-muted">
+              <p className="text-xs text-center text-ink-muted">
                 100% Genuine Handloom · Dispatched from Banaras
               </p>
             </div>

@@ -1,0 +1,1136 @@
+[    1143ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1247ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   26903ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   27124ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   27231ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  177483ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  178627ms] [LOG] [Fast Refresh] done in 1155ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  193190ms] [LOG] [Fast Refresh] done in 1155ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  194319ms] [LOG] [Fast Refresh] done in 1155ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  194411ms] [LOG] [Fast Refresh] done in 1155ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  194470ms] [LOG] [Fast Refresh] done in 1155ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  296490ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  298021ms] [LOG] [Fast Refresh] done in 723ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  329946ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  330995ms] [LOG] [Fast Refresh] done in 1075ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  345282ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  345359ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  348939ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  348983ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  354713ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  354753ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  354882ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/01.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  359890ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  359951ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  361133ms] [WARNING] Image with src "/homepage/about/story-banner.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  363869ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  363911ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  365048ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  399542ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  399592ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  400734ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  400825ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  401997ms] [WARNING] Image with src "/homepage/craft/craft-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  402448ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  402578ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  403042ms] [WARNING] Image with src "/homepage/campaigns/awadh-hero-mob.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  403836ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  403883ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  404983ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  405045ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  406144ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  406192ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  407331ms] [WARNING] Image with src "/homepage/about/contact-band.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  407908ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  407963ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  409112ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  409200ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  410324ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  410373ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  411500ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  411587ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  412671ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  412730ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413043ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413124ms] [WARNING] Image with src "/homepage/campaigns/kala-band-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413204ms] [WARNING] Image with src "/homepage/campaigns/kala-band-02.png" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413275ms] [WARNING] Image with src "/homepage/campaigns/kala-banner-03.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413321ms] [WARNING] Image with src "/homepage/campaigns/kala-closing.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413792ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413852ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  414920ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  414985ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  415984ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  416042ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  417045ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  417101ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  418123ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  418178ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  419224ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  419273ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  420414ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  420568ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  421478ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  421501ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  422435ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  422466ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  422815ms] [WARNING] Image with src "/homepage/featured/zarkashi-01.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  424007ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  424053ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  425274ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  425354ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  426276ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  426320ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  428235ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  428280ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  429339ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  429391ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  430135ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  430161ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  431006ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  431032ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  431884ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ http://localhost:8080/account:0
+[  431901ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  431931ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  433163ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  433202ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  434550ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  434589ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  435506ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  435552ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  436238ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  436238ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  460162ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  460214ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  461402ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  461451ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  462529ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  462737ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  462771ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  483831ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  485164ms] [LOG] [Fast Refresh] done in 1371ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  501901ms] [LOG] [Fast Refresh] done in 1371ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  502250ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  502283ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  503269ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  503344ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  503622ms] [WARNING] Image with src "/homepage/campaigns/awadh-hero-mob.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  504260ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  504306ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  505322ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  505351ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506281ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506334ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506971ms] [LOG] Running with experiment IDs: [106288167] @ https://maps.googleapis.com/maps-api-v3/api/js/66/7/main.js:311
+[  507413ms] [WARNING] Image with src "/homepage/about/contact-band.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  507870ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  507908ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  508898ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  508948ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  509232ms] [WARNING] Image with src "/homepage/featured/gifts-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  509784ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  509819ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  510773ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  510830ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  511714ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  511760ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  512679ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  512723ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  513913ms] [WARNING] Image with src "/homepage/campaigns/katha-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  514324ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  514626ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  515880ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  515965ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  516908ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  516978ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  518097ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  518176ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  519240ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  519307ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  520233ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  520362ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  521307ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  521357ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  522513ms] [WARNING] Image with src "/homepage/featured/zarkashi-01.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  523234ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  523426ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  525072ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  525129ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  527024ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  527100ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  527973ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  528019ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  528881ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  528974ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  529808ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ http://localhost:8080/account:0
+[  529844ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  529900ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  531343ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  531377ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  532692ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  532730ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  557077ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  557259ms] [LOG] [Fast Refresh] done in 257ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  570815ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  570872ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  574181ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  574217ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  577745ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  577817ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  581282ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  581346ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  582514ms] [WARNING] Image with src "/homepage/about/story-banner.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  585038ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  585088ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  586179ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  589116ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  589152ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  592030ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  592085ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  595240ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  595279ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  615826ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  615898ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  618436ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  618534ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  620594ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/02.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  622138ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  622191ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  622305ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/01.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  624033ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  624058ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  695774ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  695878ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  696065ms] [LOG] [Fast Refresh] done in 230ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  696741ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  696801ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  705025ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  705207ms] [LOG] [Fast Refresh] done in 149ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  705409ms] [LOG] [Fast Refresh] done in 149ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  724409ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  725007ms] [LOG] [Fast Refresh] done in 583ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  732792ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  732916ms] [LOG] [Fast Refresh] done in 225ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  763259ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  763359ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  765861ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  765897ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  770216ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  770255ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  773578ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  773604ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  773994ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/01.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  799923ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  800511ms] [LOG] [Fast Refresh] done in 623ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  839170ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  839234ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  841163ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  841194ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  842755ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  842788ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  844364ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  844403ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  845473ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  845911ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  845947ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  847451ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  847477ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  849619ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  849668ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  889976ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  890216ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  890379ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  891710ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  891837ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  898001ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  898163ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  899779ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  899912ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  902656ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  902699ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1011721ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1011778ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1013345ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1013398ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1014481ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1014565ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1015985ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1016034ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1017170ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1017323ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1017365ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1018517ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1018546ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1020811ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1020881ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1022323ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1022392ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1045833ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1045901ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1047452ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1047508ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1047671ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/01.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1048590ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1048616ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1049753ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1049806ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1050833ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1050858ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1064472ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1064506ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1065710ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1065748ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1067244ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1067291ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1083256ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1083298ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1086554ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1086598ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1086745ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/01.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1089958ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1089995ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1091153ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1093475ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1093545ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1264798ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1266039ms] [LOG] [Fast Refresh] done in 1274ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1266342ms] [LOG] [Fast Refresh] done in 1274ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1270931ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1271068ms] [LOG] [Fast Refresh] done in 252ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1300042ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1300182ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1301897ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1301951ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1303027ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1303063ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1304253ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1304313ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1305538ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1305605ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1306674ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1306705ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1308248ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1308282ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1309456ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1309538ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1327862ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1327900ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1328996ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1329030ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1329216ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1329254ms] [WARNING] Image with src "/homepage/campaigns/kala-band-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1329290ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1330239ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1330294ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1331605ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1331670ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1354847ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1357555ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1358090ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1358267ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1358266ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1358855ms] [LOG] [Fast Refresh] done in 460ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1358924ms] [LOG] [Fast Refresh] done in 460ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1358951ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1359045ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1359080ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1359079ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1359986ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1360082ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1360103ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1360113ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1360997ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1361086ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1361114ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1361112ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1362005ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1362086ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1362106ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1362124ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1363007ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1363100ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1363126ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1363135ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1364018ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1364088ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1364102ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1364103ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1365020ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1365098ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1365124ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1365122ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1366031ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1366112ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1366135ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1366139ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1367057ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1367149ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1367172ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1367189ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1368133ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1368232ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1368253ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1368261ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1369151ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1369239ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1369259ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1369274ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1370169ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1370278ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1370311ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1370311ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1370734ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1370840ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1370865ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1370871ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1371144ms] [LOG] [Fast Refresh] done in 12ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1371238ms] [LOG] [Fast Refresh] done in 12ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1371273ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1371341ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1371358ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1371374ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1372230ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1372322ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1372338ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1372340ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1373232ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1373308ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1373322ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1373325ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1374239ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1374309ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1374327ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1374340ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1375294ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1375364ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1375384ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1375384ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1376315ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1376386ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1376401ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1376402ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1377348ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1377418ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1377428ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1377435ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1378361ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1378449ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1378464ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1378464ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1379358ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1379420ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1379434ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1379435ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1380375ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1380432ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1380445ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1380451ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1381384ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1381465ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1381487ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1381492ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1382425ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1382471ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1382489ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1382488ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1383433ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1383519ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1383539ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1383547ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1384445ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1384537ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1384553ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1384555ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1385443ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1385501ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1385519ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1385518ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1386482ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1386554ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1386568ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1386572ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1387487ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1387585ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1387607ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1387608ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1388502ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1388565ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1388579ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1388588ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1389538ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1389630ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1389644ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1389646ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1390532ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1390602ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1390622ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1390621ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1391564ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1391634ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1391646ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1391648ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1392566ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1392629ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1392648ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1392650ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1393603ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1393671ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1393691ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1393691ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1394604ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1394690ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1394710ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1394710ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1395648ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1395723ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1395734ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1395779ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1396642ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1396718ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1396734ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1396739ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1397652ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1397736ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1397758ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1397758ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1398745ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1398833ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1398857ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1398855ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1399645ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1399716ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1399738ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1399738ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1400663ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1400734ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1400754ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1400753ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1401681ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1401748ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1401768ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1401781ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1402708ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1402790ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1402810ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1402808ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1403712ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1403767ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1403780ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1403792ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1404748ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1404822ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1404837ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1404840ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1405748ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1405812ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1405835ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1405834ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1406848ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1406944ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1406968ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1406969ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1407862ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1407955ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1407973ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1407977ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1408875ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1408962ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1408986ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1408988ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1409924ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1410030ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1410063ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1410061ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1410905ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1411005ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1411027ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1411044ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1411905ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1411964ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1411979ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1411980ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1412919ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1412993ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1413009ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1413009ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1413952ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1414021ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1414048ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1414052ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1414982ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1415061ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1415073ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1415077ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1415938ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1415992ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1416004ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1416013ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1417001ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1417085ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1417100ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1417100ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1418008ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1418059ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1418076ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1418075ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1419029ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1419101ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1419115ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1419122ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1420049ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1420145ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1420160ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1420160ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1421056ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1421139ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1421154ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1421154ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1422064ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1422119ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1422135ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1422136ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1423104ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1423176ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1423190ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1423201ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1424059ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1424112ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1424133ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1424133ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1425128ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1425215ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1425233ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1425234ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1426142ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1426205ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1426218ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1426220ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1427150ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1427214ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1427227ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1427237ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1428308ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1428430ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1428453ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1428476ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1429207ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1429325ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1429348ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1429371ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1430269ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1430371ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1430383ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1430396ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1431264ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1431366ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1431382ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1431394ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1432255ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1432352ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1432372ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1432379ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1433257ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1433381ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1433405ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1433415ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1434272ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1434350ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1434363ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1434379ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1435245ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1435318ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1435342ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1435342ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1436299ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1436358ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1436371ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1436370ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1437299ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1437351ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1437363ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1437364ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1438309ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1438367ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1438391ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1438392ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1439379ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1439466ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1439484ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1439488ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1440335ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1440418ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1440442ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1440441ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1441356ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1441445ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1441468ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1441472ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1442361ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1442454ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1442472ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1442496ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1443376ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1443464ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1443485ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1443490ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1444488ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1444639ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1444679ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1444758ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1445501ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1445780ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1445814ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1445892ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1446537ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1446647ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1446675ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1446690ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1447451ms] [LOG] [Fast Refresh] done in 578ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1447525ms] [LOG] [Fast Refresh] done in 578ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1447776ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1448058ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1448091ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1448141ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1448684ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1448787ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1448826ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1448831ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1449611ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1449727ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1449760ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1449796ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1450625ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1450712ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1450740ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1450742ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1451644ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1451735ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1451756ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1451759ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1452647ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1452738ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1452759ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1452759ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1453653ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1453725ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1453745ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1453765ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1454711ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1454815ms] [LOG] [Fast Refresh] done in 63ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1454843ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1454920ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1454935ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1454937ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1455886ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1455962ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1455981ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1455982ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1456882ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1456952ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1456968ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1456970ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1457887ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/pages/kala:0
+[ 1457970ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 1457998ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2086:27
+[ 1458000ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 1459437ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1460443ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1461460ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1462467ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1463485ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1468497ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1473517ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1478534ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1483541ms] [ERROR] WebSocket connection to 'ws://localhost:8080/_next/hmr' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:1009
+[ 1486859ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1487036ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1487940ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1487941ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1488465ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1488530ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1488985ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1489022ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1490345ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1490390ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1491514ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1495773ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1495822ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1495910ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/01.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1497895ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1497932ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1527835ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1527883ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1529012ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1594384ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1595549ms] [LOG] [Fast Refresh] done in 1240ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606021ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606059ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606251ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606291ms] [WARNING] Image with src "/homepage/campaigns/kala-band-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606340ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606351ms] [WARNING] Image with src "/homepage/campaigns/kala-band-02.png" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606392ms] [WARNING] Image with src "/homepage/campaigns/kala-banner-03.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1606418ms] [WARNING] Image with src "/homepage/campaigns/kala-closing.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1678929ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1678952ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1680128ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1681051ms] [LOG] [Fast Refresh] done in 1027ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1681136ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1681154ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1682309ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1682701ms] [LOG] [Fast Refresh] done in 498ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1682933ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1682946ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1684100ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1684655ms] [LOG] [Fast Refresh] done in 657ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1684701ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1684720ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1685877ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1686286ms] [LOG] [Fast Refresh] done in 509ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1686344ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1686361ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1687532ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1688648ms] [LOG] [Fast Refresh] done in 1217ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1688889ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1688958ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1690094ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1690361ms] [LOG] [Fast Refresh] done in 367ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1690441ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1690457ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1691627ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1691973ms] [LOG] [Fast Refresh] done in 462ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1692027ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1692040ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1693209ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1693534ms] [LOG] [Fast Refresh] done in 440ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1693760ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1694167ms] [LOG] [Fast Refresh] done in 507ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1694262ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1694274ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1695442ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1695720ms] [LOG] [Fast Refresh] done in 392ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1695958ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1696392ms] [LOG] [Fast Refresh] done in 548ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1697307ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1697329ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1698507ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1699097ms] [LOG] [Fast Refresh] done in 705ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1699186ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1699206ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1700361ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1700744ms] [LOG] [Fast Refresh] done in 484ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1700823ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1700835ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1702008ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1702574ms] [LOG] [Fast Refresh] done in 679ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1702647ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1702662ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1703842ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1704225ms] [LOG] [Fast Refresh] done in 498ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1704307ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1704318ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1705477ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1706068ms] [LOG] [Fast Refresh] done in 693ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1706196ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1706214ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1707377ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1707796ms] [LOG] [Fast Refresh] done in 520ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1707872ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1707886ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1709044ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1709480ms] [LOG] [Fast Refresh] done in 537ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1709572ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1709586ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1710737ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1710753ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1712100ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1712119ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1713292ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1713848ms] [LOG] [Fast Refresh] done in 671ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1714119ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1714133ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1715293ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1715733ms] [LOG] [Fast Refresh] done in 541ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1715840ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1715852ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717024ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717578ms] [LOG] [Fast Refresh] done in 668ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717669ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717687ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1718843ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719257ms] [LOG] [Fast Refresh] done in 514ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719296ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://localhost:8081/admin/team:0
+[ 1719297ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://localhost:8081/admin/team:0
+[ 1719298ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://localhost:8081/admin/team:0
+[ 1719298ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://localhost:8081/admin/team:0
+[ 1719354ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719368ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1720541ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1720987ms] [LOG] [Fast Refresh] done in 561ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1721132ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1721152ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1776251ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1776284ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1776880ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1776880ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1778828ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1778918ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1780956ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1781006ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1782091ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1783272ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1783325ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1783448ms] [WARNING] Image with src "/reference-only/products/sindoor-red-katan-silk-kadiyal-saree/01.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1985067ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1985891ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1986247ms] [LOG] [Fast Refresh] done in 1012ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1988236ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1988314ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2015004ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2015983ms] [LOG] [Fast Refresh] done in 466ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2048652ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2048869ms] [LOG] [Fast Refresh] done in 183ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2055501ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2055604ms] [LOG] [Fast Refresh] done in 217ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

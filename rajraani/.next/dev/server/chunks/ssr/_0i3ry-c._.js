@@ -1181,7 +1181,7 @@ const PAGES = {
                     align: "center",
                     textAlign: "center",
                     panel: "none",
-                    ink: "deep"
+                    ink: "cream"
                 }
             },
             {

@@ -22,9 +22,8 @@ export function WishlistHeart({
   return (
     <button
       type="button"
-      className={`absolute top-3 right-3 z-10 p-1.5 bg-bg/90 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-none border border-rule ${
-        inWishlist ? "text-ink" : "text-ink-muted"
-      } ${className}`}
+      data-on={inWishlist ? "" : undefined}
+      className={`wish-heart absolute top-3 right-3 z-10 flex size-10 items-center justify-center ${className}`}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -36,13 +35,14 @@ export function WishlistHeart({
           priceMinorUnits: product.price.minorUnits,
           colourSlug: product.colourFamily,
           alt: product.images[0]?.alt ?? product.title,
+          src: product.images[0]?.src,
         });
       }}
       aria-label={inWishlist ? `Remove ${product.poeticName} from wishlist` : `Add ${product.poeticName} to wishlist`}
       aria-pressed={inWishlist}
     >
       <svg
-        className="w-5 h-5 stroke-current"
+        className="wish-heart__icon h-[22px] w-[22px] stroke-current"
         fill={inWishlist ? "currentColor" : "none"}
         viewBox="0 0 24 24"
         aria-hidden="true"

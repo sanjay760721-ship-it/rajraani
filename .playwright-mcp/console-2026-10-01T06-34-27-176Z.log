@@ -375,3 +375,334 @@ Fast Refresh requires at least one parent function component in your React tree.
 [ 7837800ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [ 7837826ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [ 7837847ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10051549ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10052473ms] [ERROR] ./src/app/layout.tsx:9:1
+Error: Module not found: Can't resolve './theme-apple.css'
+   7 | // Trial: the Apple design language (DESIGN.md, from `npx getdesign add apple`).
+   8 | // Remove this one import to go back to the house design.
+>  9 | import "./theme-apple.css";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 |
+  11 | /**
+  12 |  * Root layout — deliberately almost empty.
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[10089475ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10092210ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10093506ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10093551ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10094039ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10094235ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10094218ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10094643ms] [LOG] [Fast Refresh] done in 317ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10094669ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10094763ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10094803ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10094792ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10095642ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10095695ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10095711ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10095709ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10096739ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10096839ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10096877ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10096883ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10097708ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10097772ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10097796ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10097789ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10098718ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10098786ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10098811ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10098801ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10099757ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10099816ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10099841ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10099833ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10099948ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10100009ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10100030ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10100026ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10100734ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10100806ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10100828ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10100824ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10101755ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10101806ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10101825ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10101825ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10102733ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10102788ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10102811ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10102810ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10103879ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10104006ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10104051ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10104047ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10104827ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10104944ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10104979ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10105004ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10105949ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10106065ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10106087ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10106111ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10106884ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10106961ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10107004ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10106983ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10108023ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10108150ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10108171ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10108180ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10108957ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10109069ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10109117ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10109100ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10109961ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10110049ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10110073ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10110069ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10110949ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10111002ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10111026ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10111020ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10111953ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10112029ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10112045ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10112043ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10112986ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10113047ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10113064ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10113061ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10113978ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10114081ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10114106ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10114116ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10114993ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10115077ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10115114ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10115103ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10116022ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10116102ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10116133ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10116180ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10117103ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10117166ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10117194ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10117203ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10118091ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10118153ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10118181ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10118170ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10119099ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10119186ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10119201ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10119206ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10120096ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10120157ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10120179ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10120179ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10121123ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10121212ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10121224ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10121223ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10122135ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10122208ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10122225ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10122223ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10123152ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10123233ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10123256ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10123251ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10124163ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10124222ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10124234ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10124238ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10125160ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10125230ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10125245ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10125244ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10126172ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10126226ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10126246ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10126244ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10127209ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10127275ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10127296ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10127294ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10128221ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10128288ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10128303ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10128301ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10129232ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10129297ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10129320ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10129317ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10130249ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10130304ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10130315ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10130318ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10131269ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10131362ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10131389ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10131381ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10132281ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10132360ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10132384ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10132380ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10133272ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10133348ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10133370ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10133368ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10134303ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10134363ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10134383ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10134382ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10135318ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10135389ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10135423ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10135411ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10136339ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10136405ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10136422ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10136430ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10137388ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8080/:0
+[10137454ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[10137472ms] Error: An unexpected Turbopack error occurred. Please see the output of `next dev` for more details.
+    at getServerError (http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1996:62)
+    at http://localhost:8080/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2894:27
+[10137477ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[10150847ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10150998ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10174502ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10174770ms] [LOG] [Fast Refresh] done in 233ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10184135ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10184368ms] [LOG] [Fast Refresh] done in 224ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10199749ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10199838ms] [LOG] [Fast Refresh] done in 204ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200096ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200166ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200754ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200755ms] [WARNING] Image with src "/homepage/gallery/tile-02.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200776ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200809ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200837ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200927ms] [WARNING] Image with src "/homepage/four-tiles/tile-01-bridal.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200943ms] [WARNING] Image with src "/homepage/four-tiles/tile-02-gifting.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200959ms] [WARNING] Image with src "/homepage/four-tiles/tile-03-zarkashi.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10200973ms] [WARNING] Image with src "/homepage/four-tiles/tile-04-art-collectibles.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203024ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203084ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203483ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203484ms] [WARNING] Image with src "/homepage/gallery/tile-02.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203488ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203488ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203490ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203492ms] [WARNING] Image with src "/homepage/four-tiles/tile-01-bridal.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203581ms] [WARNING] Image with src "/homepage/four-tiles/tile-02-gifting.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203594ms] [WARNING] Image with src "/homepage/four-tiles/tile-03-zarkashi.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10203595ms] [WARNING] Image with src "/homepage/four-tiles/tile-04-art-collectibles.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10219546ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10219692ms] [LOG] [Fast Refresh] done in 257ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220011ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220040ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220468ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220478ms] [WARNING] Image with src "/homepage/gallery/tile-02.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220525ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220545ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220571ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220633ms] [WARNING] Image with src "/homepage/four-tiles/tile-01-bridal.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220642ms] [WARNING] Image with src "/homepage/four-tiles/tile-02-gifting.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220654ms] [WARNING] Image with src "/homepage/four-tiles/tile-03-zarkashi.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10220666ms] [WARNING] Image with src "/homepage/four-tiles/tile-04-art-collectibles.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10316564ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[10316865ms] [LOG] [Fast Refresh] done in 246ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

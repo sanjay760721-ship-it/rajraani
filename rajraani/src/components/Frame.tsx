@@ -145,7 +145,7 @@ export function ToneTile({
         backgroundImage: PLACEHOLDER_WASH,
       }}
     >
-      <span className="eyebrow absolute bottom-3 left-3 text-bg">{label}</span>
+      <span className="eyebrow absolute bottom-3 left-3 text-white">{label}</span>
     </div>
   );
 }

@@ -71,7 +71,7 @@ export function ProductCard({
     : "Sold out";
 
   return (
-    <article className="group relative">
+    <article className="product-card group relative">
       <div className="relative">
         <Frame
           image={primary}
@@ -114,15 +114,15 @@ export function ProductCard({
           the price, and a left-aligned column of names under centred images
           reads as a different grid entirely. */}
       <div className="mt-4 text-center">
-        <Heading className="font-display text-[1.375rem] leading-tight tracking-tight text-ink">
+        <Heading className="font-display text-[1.375rem] leading-none tracking-[0.06em] text-ink">
           {/* Stretched link: the whole card is one target, without nesting
               anchors inside an anchor. */}
           <Link href={`/products/${product.handle}`} className="after:absolute after:inset-0">
             {product.poeticName}
           </Link>
         </Heading>
-        <p className="text-caption mt-1.5 line-clamp-2 text-ink-muted">{product.title}</p>
-        <p className="mt-2.5 text-caption text-ink">
+        <p className="text-caption mx-auto mt-2 line-clamp-2 max-w-[34ch] text-ink-muted">{product.title}</p>
+        <p className="mt-2.5 text-[0.9375rem] tabular-nums tracking-[0.02em] text-ink">
           <Price value={product.price} />
         </p>
       </div>

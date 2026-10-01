@@ -125,7 +125,7 @@ export function CampaignSlideshow({ slides }: CampaignSlideshowProps) {
                         aria-current={dotIndex === active}
                         onClick={() => setActive(dotIndex)}
                         className={`h-2 w-2 rounded-full transition-colors ${
-                          dotIndex === active ? "bg-ink" : "bg-ink/25"
+                          dotIndex === active ? "bg-ink" : "bg-scrim"
                         }`}
                       />
                     ))}

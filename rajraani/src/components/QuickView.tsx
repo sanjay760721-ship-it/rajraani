@@ -37,7 +37,7 @@ export function QuickView({ product }: { product: Product }) {
         type="button"
         // z-10 clears the card's stretched link, which otherwise covers the
         // whole image and would swallow this click.
-        className="absolute inset-x-0 top-1/2 z-10 -translate-y-1/2 bg-bg/75 py-3 font-display text-[1.0625rem] text-ink opacity-0 transition-opacity duration-200 hover:bg-bg/90 focus-visible:opacity-100 group-hover:opacity-100"
+        className="quick-view-bar absolute inset-x-0 top-1/2 z-10 -translate-y-1/2 bg-bg/75 py-3 font-display text-[1.0625rem] text-ink opacity-0 transition-opacity duration-200 hover:bg-bg/90 focus-visible:opacity-100 group-hover:opacity-100"
         onClick={(event) => {
           event.preventDefault();
           setOpen(true);
@@ -91,7 +91,7 @@ function QuickViewModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-scrim-strong p-4"
       onClick={(event) => {
         if (event.target === event.currentTarget) close();
       }}

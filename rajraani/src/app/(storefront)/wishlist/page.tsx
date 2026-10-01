@@ -1,26 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useWishlist } from "@/components/wishlist-context";
 import { useCart } from "@/components/cart-context";
 import { formatMoney } from "@/lib/money";
 import { BASE_CURRENCY } from "@/lib/domain/types";
 import { PLACEHOLDER_WASH, toneFor } from "@/components/Frame";
+import { PageHead } from "@/components/cinematic/PageHead";
 
 export default function WishlistPage() {
   const { items, remove, itemCount } = useWishlist();
   const { add } = useCart();
 
   return (
-    <div className="min-h-[70vh] bg-bg py-12 px-4 sm:px-8 max-w-[1400px] mx-auto">
-      <div className="text-center max-w-xl mx-auto mb-12">
-        <h1 className="font-display text-3xl sm:text-4xl text-ink font-normal mb-3">
-          My Wishlist
-        </h1>
-        <p className="text-caption text-ink-muted">
-          Your saved handloom heirlooms and favorite pieces.
-        </p>
-      </div>
+    <div className="min-h-[70vh] bg-bg pb-16 px-4 sm:px-8 max-w-[1400px] mx-auto">
+      <PageHead kicker="Saved for later" title="My wishlist" size="md" intro="Your saved handloom heirlooms and favourite pieces." />
 
       {itemCount === 0 ? (
         <div className="text-center py-20 bg-surface-notice border border-rule max-w-xl mx-auto p-8">
@@ -50,21 +45,24 @@ export default function WishlistPage() {
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {items.map((item) => (
-            <div key={item.handle} className="group relative bg-white border border-rule flex flex-col justify-between">
+            <div key={item.handle} className="product-card group relative bg-bg-alt border border-rule flex flex-col justify-between">
               <div>
                 <div className="aspect-[2/3] bg-bg-alt relative overflow-hidden">
                   <Link
                     href={`/products/${item.handle}`}
-                    className="block w-full h-full"
+                    aria-label={item.poeticName || item.title}
+                    className="relative block w-full h-full"
                     style={{
                       backgroundColor: toneFor(item.colourSlug),
-                      backgroundImage: PLACEHOLDER_WASH,
+                      backgroundImage: item.src ? undefined : PLACEHOLDER_WASH,
                     }}
-                  />
+                  >
+                    {item.src ? <Image src={item.src} alt={item.alt} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" /> : null}
+                  </Link>
                   <button
                     type="button"
                     onClick={() => remove(item.handle)}
-                    className="absolute top-2 right-2 bg-white/90 p-1.5 rounded-full text-ink hover:text-danger transition-colors"
+                    className="absolute top-2 right-2 bg-bg/90 p-1.5 rounded-full text-ink hover:text-danger transition-colors"
                     aria-label="Remove from wishlist"
                   >
                     ✕
@@ -74,7 +72,7 @@ export default function WishlistPage() {
                   <h3 className="font-display text-sm text-ink mb-1 line-clamp-1">
                     <Link href={`/products/${item.handle}`}>{item.poeticName || item.title}</Link>
                   </h3>
-                  <p className="text-xs text-ink-muted font-mono">
+                  <p className="text-xs text-ink-muted tabular-nums">
                     {formatMoney({ minorUnits: item.priceMinorUnits, currency: BASE_CURRENCY })}
                   </p>
                 </div>
@@ -93,6 +91,7 @@ export default function WishlistPage() {
                       alt: item.alt,
                       maxQuantity: 1,
                     });
+                    remove(item.handle);
                   }}
                   className="w-full bg-ink text-bg py-2.5 text-[11px] uppercase tracking-[0.12em] hover:bg-ink-dark transition-colors text-center block cursor-pointer"
                 >

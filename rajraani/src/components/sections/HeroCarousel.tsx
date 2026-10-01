@@ -162,7 +162,7 @@ export function HeroCarousel({
        * `h-full`, so without a height on an ancestor they resolve to 0 and the
        * whole hero collapses behind `overflow-hidden`.
        */
-      className="relative w-full min-h-[520px] overflow-hidden bg-bg text-bg"
+      className="relative w-full min-h-[520px] overflow-hidden bg-bg text-white"
       aria-label="Featured collections"
       aria-roledescription="carousel"
     >
@@ -247,15 +247,15 @@ export function HeroCarousel({
                       }`}
                     >
                       {slide.eyebrow ? (
-                        <p className="font-ui text-[11px] uppercase tracking-[0.16em] text-bg/85">
+                        <p className="font-ui text-[11px] uppercase tracking-[0.16em] text-white/85">
                           {slide.eyebrow}
                         </p>
                       ) : null}
                       {/* Cardo 35px / 39.4px, white, no tracking \u2014 measured. */}
-                      <h2 className="font-display text-[28px] md:text-[35px] leading-[1.125] mt-3 text-bg font-normal">
+                      <h2 className="font-display text-[28px] md:text-[35px] leading-[1.125] mt-3 text-white font-normal">
                         {slide.title}
                       </h2>
-                      <p className="font-ui text-[14px] leading-[1.6] mt-4 text-bg/90">
+                      <p className="font-ui text-[14px] leading-[1.6] mt-4 text-white/90">
                         {slide.body}
                       </p>
                       {/*
@@ -291,12 +291,12 @@ export function HeroCarousel({
                   <div className="wrap-wide pb-16 md:pb-24">
                     <div className="max-w-[46ch]">
                       {slide.eyebrow ? (
-                        <p className="eyebrow text-bg/80">{slide.eyebrow}</p>
+                        <p className="eyebrow text-white/80">{slide.eyebrow}</p>
                       ) : null}
-                      <h2 className="text-display mt-3 text-bg drop-shadow-sm">
+                      <h2 className="text-display mt-3 text-white drop-shadow-sm">
                         {slide.title}
                       </h2>
-                      <p className="text-prose mt-4 max-w-[38ch] text-bg/90">
+                      <p className="text-prose mt-4 max-w-[38ch] text-white/90">
                         {slide.body}
                       </p>
                       <Link

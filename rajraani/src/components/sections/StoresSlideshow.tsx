@@ -137,10 +137,10 @@ export function StoresSlideshow({ slides }: StoresSlideshowProps) {
             {/* Overlaid Content — centered */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
               <div className="max-w-[46ch] text-center">
-                <span className="eyebrow text-bg/80 block mb-3">
+                <span className="eyebrow text-white/80 block mb-3">
                   {slide.title}
                 </span>
-                <p className="text-prose mt-4 max-w-[38ch] text-bg/90 mx-auto">
+                <p className="text-prose mt-4 max-w-[38ch] text-white/90 mx-auto">
                   {slide.body}
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">

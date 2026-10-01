@@ -88,7 +88,7 @@ export function FacetSidebar({
               clear
             </Link>
           </summary>
-          <ul className="mt-3 space-y-2">
+          <ul className="mt-4 space-y-2.5">
             <li>
               {/*
                 * A radio, not a checkbox: the rest of this column is
@@ -96,13 +96,13 @@ export function FacetSidebar({
                 * authored collection at a time. Disabled because the only move
                 * available is clearing it, which the link above does.
                 */}
-              <label className="text-caption flex items-center gap-3 text-ink">
+              <label className="flex items-center gap-3 text-[0.9375rem] text-ink">
                 <input
                   type="radio"
                   checked
                   readOnly
                   disabled
-                  className="size-3.5 accent-ink"
+                  className="size-4 accent-[var(--color-accent)]"
                 />
                 <span className="flex-1 font-semibold">{collection.title}</span>
               </label>
@@ -137,14 +137,14 @@ export function FacetSidebar({
               ) : null}
             </summary>
 
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-4 space-y-2.5">
               {options.map((term) => {
                 const count = counts[group][term.slug] ?? 0;
                 const checked = isSelected(selection, group, term.slug);
                 return (
                   <li key={term.slug}>
                     <label
-                      className={`flex cursor-pointer items-center gap-3 text-caption text-ink-body ${
+                      className={`flex cursor-pointer items-center gap-3 text-[0.9375rem] text-ink-body ${
                         count === 0 ? "opacity-40" : ""
                       }`}
                     >
@@ -155,10 +155,10 @@ export function FacetSidebar({
                         // radios. The reference site cannot express Red AND
                         // Maroon.
                         onChange={() => navigate(toggleFacet(selection, group, term.slug))}
-                        className="size-3.5 accent-ink"
+                        className="size-4 accent-[var(--color-accent)]"
                       />
                       <span className="flex-1">{term.name}</span>
-                      <span className="text-eyebrow tabular-nums text-ink-muted">
+                      <span className="text-caption tabular-nums text-ink-muted">
                         {count}
                       </span>
                     </label>

@@ -139,7 +139,7 @@ export function Gallery({
       <ul
         ref={railRef}
         aria-label="Frames"
-        className="scrollbar-none grid snap-x snap-mandatory grid-flow-col gap-3 overflow-x-auto"
+        className="scrollbar-none relative grid snap-x snap-mandatory grid-flow-col gap-3 overflow-x-auto"
         style={{
           gridAutoColumns: `calc((100% - ${
             (THUMBS_PER_VIEW - 1) * THUMB_GAP
@@ -271,7 +271,7 @@ function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label="Frame viewer"
-      className="fixed inset-0 z-50 flex flex-col bg-ink/92 p-4 md:p-8"
+      className="frame-viewer fixed inset-0 z-50 flex flex-col bg-ink/92 p-4 md:p-8"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -279,6 +279,7 @@ function Lightbox({
       <div className="flex shrink-0 items-center justify-between">
         <p className="eyebrow text-bg">
           {index + 1} / {images.length}
+          <span className="frame-viewer__note"> · True-colour view</span>
         </p>
         <button
           ref={closeRef}

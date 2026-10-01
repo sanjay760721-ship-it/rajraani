@@ -107,7 +107,7 @@ export default async function ProductPage(props: PageProps<"/products/[handle]">
       {/* Breadcrumb left, prev/next right, on one row (design.md §6.3). */}
       <div className="flex flex-wrap items-baseline justify-between gap-4 py-5">
         <nav aria-label="Breadcrumb">
-          <ol className="eyebrow flex flex-wrap gap-2 text-ink-muted">
+          <ol className="crumbs flex flex-wrap gap-2 text-ink-muted">
             <li>
               <Link href="/" className="hover:text-ink">
                 Home
@@ -142,31 +142,34 @@ export default async function ProductPage(props: PageProps<"/products/[handle]">
           (design-addendum §A5.2). The details column does not stick; the
           reference's is `position: static` and the two columns run to roughly
           the same depth, so there is nothing for it to stick against. */}
-      <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-5">
+      <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-5 [&>*]:min-w-0">
         <Gallery images={product.images} colourSlug={product.colourFamily} />
 
-        <div>
+        <div className="pdp-details">
           <FulfilmentBadge product={product} />
-          <h1 className="text-h2">{product.title}</h1>
-          <p className="eyebrow mt-2 text-ink-muted">{product.sku}</p>
+          {/* The piece's name leads, large, in the homepage's voice; the full
+              descriptive title follows as the h1. The DOM keeps h1 before h2
+              for the heading outline (§5); only the order on screen changes. */}
+          <div className="pdp-names">
+            <h1 className="pdp-title">{product.title}</h1>
+            <h2 className="pdp-name">{product.poeticName}</h2>
+            <p className="cine-kicker pdp-kicker">
+              <span aria-hidden="true" className="cine-kicker__rule" />
+              {garmentCollection?.title ?? "Handwoven"} · Banaras
+            </p>
+          </div>
+          <p className="crumbs mt-3 text-ink-muted">Ref. {product.sku}</p>
 
-          <p className="mt-5 text-h3 text-ink">
+          <p className="pdp-price">
             <Price value={product.price} />
           </p>
-          <p className="text-caption text-ink-muted italic">MRP inclusive of taxes</p>
+          <p className="text-caption text-ink-muted">MRP inclusive of taxes</p>
 
-          {/* The named piece. The reference sets this as a bold run inside the
-              body copy rather than a heading (§A5.2 item 5) — matched here,
-              except that it keeps a heading role so the page outline still
-              names the piece. §5's heading-order rule is not negotiable. */}
-          <h2 className="mt-8 font-display text-[1.1875rem] font-semibold text-ink">
-            {product.poeticName}
-          </h2>
-          <p className="text-prose mt-3 text-ink-body">{product.narrative}</p>
+          <p className="text-prose mt-8 text-ink-body">{product.narrative}</p>
 
           <SpecList product={product} promise={siteText["product.promise"]} />
 
-          <p className="text-caption mt-6 text-ink-muted italic">
+          <p className="text-caption mt-6 text-ink-muted">
             {siteText["product.handmadeNote"]}
           </p>
 
@@ -182,7 +185,8 @@ export default async function ProductPage(props: PageProps<"/products/[handle]">
 
       {related.length > 0 ? (
         <section className="mt-20">
-          <h2 className="mb-10 text-center font-display text-h2 text-ink">
+          <h2 className="pdp-related-title">
+            <span aria-hidden="true" className="cine-kicker__rule" />
             You may also like
           </h2>
           {/* Three across, not four — measured on the reference rail. */}
@@ -220,7 +224,7 @@ function PrevNext({
   if (!previous && !next) return null;
 
   return (
-    <nav aria-label="Adjacent pieces" className="eyebrow flex gap-5 text-ink-muted">
+    <nav aria-label="Adjacent pieces" className="crumbs flex gap-5 text-ink-muted">
       {previous ? (
         <Link
           href={`/products/${previous.handle}`}
@@ -267,19 +271,19 @@ function SpecList({ product, promise }: { product: Product; promise: string }) {
   ];
 
   return (
-    <ul className="mt-6 list-disc space-y-2 pl-5 text-caption marker:text-ink-muted">
+    // A quiet two-column table: the label in small capitals, the value in
+    // reading type, a hairline between rows.
+    <dl className="mt-8 border-t border-rule">
       {rows.map(([label, value]) =>
         value ? (
-          <li key={label} className="text-ink-body">
-            <span className="font-semibold text-ink italic">{label}</span>
-            {" - "}
-            {/* The Note row is set in italic on the reference — it is an
-                aside about styling, not an attribute of the cloth. */}
-            <span className={label === "Note" ? "italic" : undefined}>{value}</span>
-          </li>
+          <div key={label} className="grid grid-cols-[7rem_1fr] gap-4 border-b border-rule py-3 sm:grid-cols-[minmax(0,10.5rem)_1fr]">
+            <dt className="eyebrow pt-0.5 text-ink-muted">{label}</dt>
+            {/* The Note row is an aside about styling, not an attribute of the cloth. */}
+            <dd className={`text-[0.9375rem] leading-relaxed text-ink-body ${label === "Note" ? "italic" : ""}`}>{value}</dd>
+          </div>
         ) : null,
       )}
-    </ul>
+    </dl>
   );
 }
 

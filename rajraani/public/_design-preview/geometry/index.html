@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Homepage geometry: today vs proposed</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e7e5e1; font: 13px/1.4 system-ui, "Segoe UI", sans-serif; color: #222; }
+  .top { padding: 24px 32px 8px; }
+  .top h1 { margin: 0; font-size: 22px; font-weight: 600; }
+  .top p { margin: 6px 0 0; color: #555; max-width: 1100px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 20px 32px 60px; align-items: start; }
+  .col h2 { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
+  .col h2 span { font-weight: 400; color: #666; }
+  /* Each page is drawn at true 1440px and scaled to the column. */
+  .scaler { width: 720px; overflow: hidden; background: #fff; outline: 1px solid #c9c5be; }
+  .page { width: 1440px; transform: scale(.5); transform-origin: 0 0; background: #fff; }
+  .wrap { margin-bottom: calc(var(--h) * -0.5px); }
+  .b { position: relative; background: #d8d5cf; border: 2px solid #fff; display: flex; align-items: center; justify-content: center; text-align: center; color: #3a3632; font-size: 22px; line-height: 1.25; padding: 8px; }
+  .b small { display: block; font-size: 17px; color: #6b655e; margin-top: 4px; }
+  .img { background: #b9b4ab; }
+  .dark { background: #3b3835; color: #eee; }
+  .dark small { color: #bbb; }
+  .txt { background: #f1efeb; }
+  .label { position: absolute; left: 0; top: 0; background: #222; color: #fff; font-size: 18px; padding: 4px 10px; z-index: 2; }
+  .gap { height: 120px; background: repeating-linear-gradient(45deg,#fff 0 10px,#f6f4f1 10px 20px); display:flex;align-items:center;justify-content:center;color:#a39d94;font-size:16px; }
+  .c { margin: 0 64px; } /* the 1312px container */
+  .g12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+  .legend { display:flex; gap:16px; flex-wrap:wrap; padding: 0 32px; color:#555; }
+  .legend i { display:inline-block; width:14px; height:14px; vertical-align:-2px; margin-right:6px; }
+  .note { background:#fff; margin: 0 32px; padding: 14px 18px; border-left: 4px solid #3b3835; max-width: 1400px; }
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Homepage geometry: today vs proposed</h1>
+  <p>Grey boxes only: no fonts, colours or photos. Both pages are drawn at a real 1440px width and shown at half size. Numbers are real pixel sizes. Left is what the site does now, which is the reference site's geometry; right is the proposed Rajraani geometry.</p>
+</div>
+<div class="legend"><span><i style="background:#b9b4ab"></i>photo or video</span><span><i style="background:#f1efeb"></i>text</span><span><i style="background:#3b3835"></i>dark band</span><span><i style="background:repeating-linear-gradient(45deg,#fff 0 4px,#f6f4f1 4px 8px)"></i>breathing space (120px)</span></div>
+
+<div class="cols">
+
+<!-- ══════════════ TODAY ══════════════ -->
+<div class="col">
+<h2>Today <span>(the reference site's geometry) · page 7,054px tall · 14 blocks, edge to edge</span></h2>
+<div class="scaler" id="today"><div class="page">
+  <div class="b txt" style="height:42px"><span class="label">1</span>Strip 42</div>
+  <div class="b txt" style="height:89px"><span class="label">2</span>Top bar 89 · tagline left, 5 stacked icons right</div>
+  <div class="b txt" style="height:76px"><span class="label">3</span>Menu 76 · 3 items | CENTRED NAME | 3 items</div>
+  <div class="b img" style="height:738px"><span class="label">4</span>Hero carousel, full bleed 1440 × 738 (2:1), 5 slides<small>caption: narrow 360px column, centred right</small></div>
+  <div class="b txt" style="height:117px"><span class="label">5</span>Centred quote 117</div>
+  <div style="height:711px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;background:#fff">
+    <div style="display:flex;gap:20px"><div class="b img" style="width:380px;height:501px"><span class="label">6</span>380×501</div><div class="b img" style="width:380px;height:501px">380×501</div><div class="b img" style="width:380px;height:501px">380×501</div></div>
+    <div class="b txt" style="width:720px;height:150px">Centred title, text, link</div>
+  </div>
+  <div class="b dark" style="height:822px"><span class="label">7</span>Film, full bleed 1440 × 822 (16:9)<small>text overlaid bottom-left · currently a black box</small></div>
+  <div style="display:flex;gap:24px;height:905px;padding-top:39px;background:#fff"><div class="b img" style="flex:1;height:846px"><span class="label">8</span>Sarees 701×846</div><div class="b img" style="flex:1;height:846px">Suits 701×846</div></div>
+  <div class="b img" style="height:738px"><span class="label">9</span>Womenswear / Stoles carousel, full bleed 1440 × 738<small>caption right</small></div>
+  <div style="display:flex;gap:20px;padding:32px 10px;background:#fff"><div class="b img" style="flex:1;height:443px"><span class="label">10</span>336×443</div><div class="b img" style="flex:1;height:443px">336×443</div><div class="b img" style="flex:1;height:443px">336×443</div><div class="b img" style="flex:1;height:443px">336×443</div></div>
+  <div style="display:grid;grid-template-columns:40.6% 59.4%;height:800px"><div class="b txt"><span class="label">11</span>Campaign text 40.6%</div><div class="b img">Campaign photo 59.4% × 800, slides</div></div>
+  <div class="b txt" style="height:274px"><span class="label">12</span>Centred closing paragraph 274</div>
+  <div class="b img" style="height:738px"><span class="label">13</span>Stores carousel, full bleed 1440 × 738<small>"VISIT OUR STORES" centred on the photo</small></div>
+  <div class="b" style="height:401px;background:#cfcfcf"><span class="label">14</span>Grey footer band 401 · 3 equal columns</div>
+</div></div>
+</div>
+
+<!-- ══════════════ PROPOSED ══════════════ -->
+<div class="col">
+<h2>Proposed <span>(Rajraani) · about 6,700px · 11 blocks, 1312px container, 120px rhythm</span></h2>
+<div class="scaler" id="proposed"><div class="page">
+  <div class="b txt" style="height:36px"><span class="label">1</span>Strip 36</div>
+  <div class="b txt" style="height:80px;justify-content:space-between;padding:0 64px"><span class="label">2</span><span>NAME left</span><span>6 menu items, one line</span><span>4 actions right</span></div>
+  <div class="b" style="height:0;padding:0;border:0"></div>
+  <!-- Hero: asymmetric split -->
+  <div class="g12" style="gap:0;height:760px;margin-left:64px">
+    <div class="b txt" style="grid-column:span 5;flex-direction:column;align-items:flex-start;text-align:left;padding:0 56px 0 0"><span class="label">3</span>Hero words, left 5/12<small>title 64 · line · button<br>below: up to 3 slide chips</small></div>
+    <div class="b img" style="grid-column:span 7">Hero photo 7/12, 822 × 760, bleeds to right edge<small>portrait-leaning crop, one image at a time</small></div>
+  </div>
+  <div class="gap">120</div>
+  <!-- Shop by category: bento -->
+  <div class="c g12" style="grid-template-rows:308px 308px">
+    <div class="b img" style="grid-column:span 6;grid-row:span 2"><span class="label">4</span>Sarees 644 × 640 (large)</div>
+    <div class="b img" style="grid-column:span 6">Bridal 644 × 308</div>
+    <div class="b img" style="grid-column:span 3">Suits 310 × 308</div>
+    <div class="b img" style="grid-column:span 3">Dupattas & stoles 310 × 308</div>
+  </div>
+  <div class="c b txt" style="height:40px;margin-top:4px">labels sit inside a quiet band at the foot of each tile, never printed into the photo</div>
+  <div class="gap">120</div>
+  <!-- New from the loom -->
+  <div class="c">
+    <div class="b txt" style="height:64px;justify-content:space-between;padding:0 8px"><span class="label">5</span><span>Title left</span><span>"See all" right</span></div>
+    <div class="g12" style="margin-top:24px">
+      <div style="grid-column:span 3"><div class="b img" style="height:385px">Piece 308 × 385 (4:5)</div><div class="b txt" style="height:96px">name · price<br>12 weeks · Lohta</div></div>
+      <div style="grid-column:span 3"><div class="b img" style="height:385px">4:5</div><div class="b txt" style="height:96px">name · price · provenance</div></div>
+      <div style="grid-column:span 3"><div class="b img" style="height:385px">4:5</div><div class="b txt" style="height:96px">name · price · provenance</div></div>
+      <div style="grid-column:span 3"><div class="b img" style="height:385px">4:5</div><div class="b txt" style="height:96px">name · price · provenance</div></div>
+    </div>
+  </div>
+  <div class="gap">120</div>
+  <!-- House promise -->
+  <div class="c g12" style="height:300px">
+    <div class="b txt" style="grid-column:span 5;justify-content:flex-start;text-align:left"><span class="label">6</span>Promise, left-aligned, large<small>"Every piece is one piece."</small></div>
+    <div class="b txt" style="grid-column:span 7"> three short truths side by side<small>direct from weavers · one of a kind · provenance</small></div>
+  </div>
+  <div class="gap">120</div>
+  <!-- Shop by weave -->
+  <div class="c g12" style="height:520px">
+    <div class="b txt" style="grid-column:span 7;flex-direction:column;align-items:stretch;padding:0;gap:0;background:#fff">
+      <span class="label">7</span>
+      <div class="b txt" style="height:86px;justify-content:flex-start;padding-left:24px">Kadhua · row 86 high</div>
+      <div class="b txt" style="height:86px;justify-content:flex-start;padding-left:24px">Jangla</div>
+      <div class="b txt" style="height:86px;justify-content:flex-start;padding-left:24px">Tanchoi</div>
+      <div class="b txt" style="height:86px;justify-content:flex-start;padding-left:24px">Rangkat</div>
+      <div class="b txt" style="height:86px;justify-content:flex-start;padding-left:24px">Jamdani</div>
+      <div class="b txt" style="height:86px;justify-content:flex-start;padding-left:24px">Shikargah</div>
+    </div>
+    <div class="b img" style="grid-column:span 5">Weave close-up 524 × 520<small>changes as you hover each row</small></div>
+  </div>
+  <div class="gap">120</div>
+  <!-- Stories -->
+  <div class="c g12" style="height:560px">
+    <div class="b img" style="grid-column:span 8"><span class="label">8</span>Lead story 860 × 484 (16:9) + title below</div>
+    <div style="grid-column:span 4;display:grid;grid-template-rows:1fr 1fr;gap:24px"><div class="b img">Story 412 × 232</div><div class="b img">Story 412 × 232</div></div>
+  </div>
+  <div class="gap">120</div>
+  <!-- The making -->
+  <div class="dark" style="padding:96px 0">
+    <div class="c g12" style="height:476px">
+      <div class="b dark" style="grid-column:span 5;border-color:#3b3835;flex-direction:column;align-items:flex-start;text-align:left"><span class="label">9</span>Three real facts, stacked<small>6–26 weeks · pit looms · Varanasi</small></div>
+      <div class="b img" style="grid-column:span 7;border-color:#3b3835">Film 762 × 476 (16:10), framed, not full bleed</div>
+    </div>
+  </div>
+  <div class="gap">120</div>
+  <!-- Visit -->
+  <div class="c g12">
+    <div style="grid-column:span 6"><div class="b img" style="height:421px"><span class="label">10</span>Banaras room 644 × 421 (3:2)</div><div class="b txt" style="height:120px">name · line · Book a visit (below the photo)</div></div>
+    <div style="grid-column:span 6"><div class="b img" style="height:421px">Lucknow room 644 × 421</div><div class="b txt" style="height:120px">name · line · Book a visit</div></div>
+  </div>
+  <div class="gap">120</div>
+  <div class="b dark" style="height:120px"><span class="label">11</span>Footer · newsletter row across the top</div>
+  <div class="dark" style="padding:0 64px"><div class="g12" style="height:240px"><div class="b dark" style="grid-column:span 3;border-color:#3b3835">Contact</div><div class="b dark" style="grid-column:span 3;border-color:#3b3835">The house</div><div class="b dark" style="grid-column:span 3;border-color:#3b3835">Care</div><div class="b dark" style="grid-column:span 3;border-color:#3b3835">Visit</div></div></div>
+  <div class="b dark" style="height:60px">legal line</div>
+</div></div>
+</div>
+
+</div>
+<script>
+  // Fit each scaled page's outer box to its real height.
+  for (const s of document.querySelectorAll('.scaler')) {
+    const p = s.querySelector('.page');
+    s.style.height = (p.scrollHeight * 0.5) + 'px';
+  }
+</script>
+</body>
+</html>

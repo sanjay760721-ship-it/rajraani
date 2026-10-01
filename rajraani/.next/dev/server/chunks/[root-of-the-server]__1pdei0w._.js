@@ -3614,7 +3614,7 @@ const PAGES = {
                     align: "center",
                     textAlign: "center",
                     panel: "none",
-                    ink: "deep"
+                    ink: "cream"
                 }
             },
             {
@@ -5217,6 +5217,21 @@ const SITE_TEXT_DEFAULTS = {
     "contact.email": __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["BRAND"].supportEmail,
     "contact.phone": __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["BRAND"].supportPhone,
     "contact.hours": __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["BRAND"].supportHours.split(" · ").join("\n"),
+    "home.storyKicker": "The collection",
+    "home.shopThePieces": "Shop the pieces",
+    "home.filmKicker": "Handloom heritage",
+    "home.fact1.figure": "6–26",
+    "home.fact1.label": "Weeks on the loom",
+    "home.fact2.figure": "By hand",
+    "home.fact2.label": "Every thread",
+    "home.fact3.figure": "Varanasi",
+    "home.fact3.label": "Where it is woven",
+    "home.shopKicker": "Shop",
+    "home.editsKicker": "For the occasion",
+    "home.editsTitle": "Curated edits",
+    "home.editsNote": "Bridal, gifting, real zari and repoussé, each chosen piece by piece.",
+    "home.campaignKicker": "Campaign",
+    "home.visitButton": "Book a visit",
     "product.promise": __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["BRAND"].promise,
     "product.handmadeNote": __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["BRAND"].irregularityNote,
     "product.tab.shipping.label": tab("shipping").label,
@@ -5231,25 +5246,101 @@ const SITE_TEXT_DEFAULTS = {
 const SITE_TEXT_FIELDS = [
     {
         key: "announce.1",
-        group: "Announcement strip (the dark line at the very top)",
-        label: "First message"
+        group: "Promises (the line of three in the footer)",
+        label: "First promise"
     },
     {
         key: "announce.2",
-        group: "Announcement strip (the dark line at the very top)",
-        label: "Second message"
+        group: "Promises (the line of three in the footer)",
+        label: "Second promise"
     },
     {
         key: "announce.3",
-        group: "Announcement strip (the dark line at the very top)",
-        label: "Third message",
-        hint: "The messages take turns, one at a time."
+        group: "Promises (the line of three in the footer)",
+        label: "Third promise",
+        hint: "Leave one empty to show only two."
     },
     {
         key: "tagline",
-        group: "Top bar",
-        label: "Line on the left of the top bar",
-        hint: "Computers only."
+        group: "Footer signature",
+        label: "Line under the large RAJRAANI in the footer"
+    },
+    {
+        key: "home.storyKicker",
+        group: "Homepage — small words",
+        label: "Label above the three photographs",
+        hint: "The scene that pulls back from one photo to three."
+    },
+    {
+        key: "home.shopThePieces",
+        group: "Homepage — small words",
+        label: "Second link on the campaign and photo scenes"
+    },
+    {
+        key: "home.filmKicker",
+        group: "Homepage — small words",
+        label: "Label above the loom film's title"
+    },
+    {
+        key: "home.fact1.figure",
+        group: "Homepage — the loom film's three facts",
+        label: "Fact 1 — large figure"
+    },
+    {
+        key: "home.fact1.label",
+        group: "Homepage — the loom film's three facts",
+        label: "Fact 1 — words under it"
+    },
+    {
+        key: "home.fact2.figure",
+        group: "Homepage — the loom film's three facts",
+        label: "Fact 2 — large figure"
+    },
+    {
+        key: "home.fact2.label",
+        group: "Homepage — the loom film's three facts",
+        label: "Fact 2 — words under it"
+    },
+    {
+        key: "home.fact3.figure",
+        group: "Homepage — the loom film's three facts",
+        label: "Fact 3 — large figure"
+    },
+    {
+        key: "home.fact3.label",
+        group: "Homepage — the loom film's three facts",
+        label: "Fact 3 — words under it"
+    },
+    {
+        key: "home.shopKicker",
+        group: "Homepage — small words",
+        label: "Label on the tall shop strips"
+    },
+    {
+        key: "home.editsKicker",
+        group: "Homepage — curated edits (the sliding row of four)",
+        label: "Small label"
+    },
+    {
+        key: "home.editsTitle",
+        group: "Homepage — curated edits (the sliding row of four)",
+        label: "Title"
+    },
+    {
+        key: "home.editsNote",
+        group: "Homepage — curated edits (the sliding row of four)",
+        label: "Line under the title",
+        lines: true
+    },
+    {
+        key: "home.campaignKicker",
+        group: "Homepage — small words",
+        label: "Label on the campaign slides"
+    },
+    {
+        key: "home.visitButton",
+        group: "Homepage — small words",
+        label: "Button on the store slides"
     },
     {
         key: "contact.email",

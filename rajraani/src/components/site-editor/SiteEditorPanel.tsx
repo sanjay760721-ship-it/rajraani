@@ -97,7 +97,9 @@ function findText(start: HTMLElement, texts: TextEntry[]): { element: HTMLElemen
         const value = normalise(entry.value);
         const wraps = value.length >= 4 && text.includes(value) && text.length <= value.length + 6;
         const part = text.length >= 12 && value.includes(text);
-        return wraps || part;
+        // A shortened form on the page: "Banaras" drawn from "Banaras Store".
+        const lead = text.length >= 5 && value.startsWith(text + " ");
+        return wraps || part || lead;
       })
       .sort((a, b) => b.value.length - a.value.length);
     if (inside.length) return { element, entries: [inside[0]!] };
@@ -526,7 +528,7 @@ export function SiteEditorPanel({ context }: { context: EditContext }) {
           maxWidth: "calc(100vw - 24px)",
         }}
       >
-        <span style={{ font: `14px ${FONT}` }}>
+        <span className="site-editor-bar__label" style={{ font: `14px ${FONT}` }}>
           {on ? "✏️ Click any words or photo to change them" : "You’re signed in as the shop admin"}
         </span>
         <button

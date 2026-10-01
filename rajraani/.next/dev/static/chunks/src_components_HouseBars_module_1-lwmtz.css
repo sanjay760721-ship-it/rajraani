@@ -1,0 +1,320 @@
+/* [project]/src/components/HouseBars.module.css [app-client] (css) */
+.HouseBars-module__a1ZN_a__announcement {
+  z-index: 30;
+  background: color-mix(in srgb, var(--color-announce-bg) 85%, var(--color-ink));
+  color: color-mix(in srgb, var(--color-announce-ink) 78%, var(--color-bg));
+  font-family: var(--font-manrope), sans-serif;
+  position: relative;
+}
+
+.HouseBars-module__a1ZN_a__announcementInner {
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: 24px;
+  max-width: 1680px;
+  min-height: 42px;
+  margin: auto;
+  padding: 0 48px;
+  display: grid;
+}
+
+.HouseBars-module__a1ZN_a__houseNote {
+  letter-spacing: .22em;
+  white-space: nowrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  font-weight: 500;
+  display: flex;
+}
+
+.HouseBars-module__a1ZN_a__smallStar {
+  font-size: 23px;
+  line-height: 1;
+}
+
+.HouseBars-module__a1ZN_a__message {
+  text-align: center;
+  letter-spacing: .065em;
+  padding: 10px 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.HouseBars-module__a1ZN_a__messageText {
+  animation: .5s both HouseBars-module__a1ZN_a__houseMessage;
+  display: inline-block;
+}
+
+.HouseBars-module__a1ZN_a__announcementControls {
+  justify-content: flex-end;
+  align-items: center;
+  gap: 22px;
+  display: flex;
+}
+
+.HouseBars-module__a1ZN_a__dots {
+  display: flex;
+}
+
+.HouseBars-module__a1ZN_a__dot {
+  cursor: pointer;
+  place-items: center;
+  width: 24px;
+  height: 32px;
+  display: grid;
+}
+
+.HouseBars-module__a1ZN_a__dot:after {
+  content: "";
+  opacity: .4;
+  background: currentColor;
+  width: 4px;
+  height: 4px;
+  transition: opacity .2s, width .2s;
+}
+
+.HouseBars-module__a1ZN_a__dot[aria-pressed="true"]:after {
+  opacity: 1;
+  width: 15px;
+}
+
+.HouseBars-module__a1ZN_a__close {
+  cursor: pointer;
+  opacity: .8;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  transition: opacity .2s;
+  display: grid;
+}
+
+.HouseBars-module__a1ZN_a__close:hover {
+  opacity: 1;
+}
+
+.HouseBars-module__a1ZN_a__announcement button:focus-visible {
+  outline-color: var(--color-announce-ink);
+}
+
+.HouseBars-module__a1ZN_a__toolbar {
+  background: color-mix(in srgb, var(--color-bg-alt) 90%, var(--color-announce-ink));
+  color: var(--color-ink);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-rule) 80%, var(--color-accent));
+  display: none;
+}
+
+.HouseBars-module__a1ZN_a__toolbarInner {
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  max-width: 1680px;
+  min-height: 88px;
+  margin: auto;
+  padding: 0 48px;
+  display: flex;
+}
+
+.HouseBars-module__a1ZN_a__signature {
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  display: flex;
+}
+
+.HouseBars-module__a1ZN_a__emblem {
+  width: 36px;
+  height: 36px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.HouseBars-module__a1ZN_a__signatureLabel {
+  font-family: var(--font-manrope), sans-serif;
+  letter-spacing: .25em;
+  color: var(--color-accent);
+  margin-bottom: 7px;
+  font-size: 8px;
+  font-weight: 500;
+  display: block;
+}
+
+.HouseBars-module__a1ZN_a__tagline {
+  font-family: var(--font-playfair), Georgia, serif;
+  letter-spacing: -.025em;
+  color: var(--color-announce-bg);
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.HouseBars-module__a1ZN_a__actions {
+  flex-shrink: 0;
+  align-items: center;
+  gap: 25px;
+  height: 52px;
+  display: flex;
+}
+
+.HouseBars-module__a1ZN_a__search {
+  border-bottom: 1px solid var(--color-rule-input);
+  min-width: 185px;
+  height: 44px;
+  font-family: var(--font-manrope), sans-serif;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  align-items: center;
+  gap: 12px;
+  padding: 0 0 0 3px;
+  font-size: 11px;
+  transition: color .2s, border-color .2s;
+  display: flex;
+}
+
+.HouseBars-module__a1ZN_a__search:hover {
+  color: var(--color-ink);
+  border-color: var(--color-accent);
+}
+
+.HouseBars-module__a1ZN_a__searchArrow {
+  margin-left: auto;
+  font-size: 17px;
+}
+
+.HouseBars-module__a1ZN_a__divider {
+  background: var(--color-rule);
+  width: 1px;
+  height: 22px;
+}
+
+.HouseBars-module__a1ZN_a__currency {
+  height: 100%;
+}
+
+.HouseBars-module__a1ZN_a__actions .group {
+  min-width: auto;
+  color: var(--color-ink);
+  flex-direction: row;
+  gap: 8px;
+}
+
+.HouseBars-module__a1ZN_a__actions .group:hover {
+  color: var(--color-accent);
+}
+
+.HouseBars-module__a1ZN_a__actions .group > span.font-ui {
+  font-family: var(--font-manrope), sans-serif;
+  text-transform: none;
+  letter-spacing: .035em;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.HouseBars-module__a1ZN_a__actions .group > svg {
+  stroke: currentColor;
+  width: 18px;
+  height: 18px;
+  color: inherit;
+}
+
+.HouseBars-module__a1ZN_a__actions .group > span.font-mono {
+  background: var(--color-ink);
+  border-radius: 0;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 3px;
+  font-size: 9px;
+  line-height: 17px;
+  position: static;
+}
+
+.HouseBars-module__a1ZN_a__currency ul {
+  background: var(--color-bg-alt);
+  border-color: var(--color-rule);
+  padding: 8px 0;
+}
+
+.HouseBars-module__a1ZN_a__currency button[role="option"] {
+  font-family: var(--font-manrope), sans-serif;
+}
+
+@keyframes HouseBars-module__a1ZN_a__houseMessage {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  .HouseBars-module__a1ZN_a__toolbar {
+    display: block;
+  }
+}
+
+@media (max-width: 1199px) {
+  .HouseBars-module__a1ZN_a__toolbarInner {
+    gap: 20px;
+    padding: 0 28px;
+  }
+
+  .HouseBars-module__a1ZN_a__actions {
+    gap: 18px;
+  }
+
+  .HouseBars-module__a1ZN_a__search {
+    min-width: 140px;
+  }
+
+  .HouseBars-module__a1ZN_a__signature {
+    gap: 10px;
+  }
+
+  .HouseBars-module__a1ZN_a__tagline {
+    max-width: 230px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .HouseBars-module__a1ZN_a__announcementInner {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px 0 24px;
+  }
+
+  .HouseBars-module__a1ZN_a__houseNote {
+    display: none;
+  }
+
+  .HouseBars-module__a1ZN_a__message {
+    font-size: 10px;
+  }
+
+  .HouseBars-module__a1ZN_a__announcementControls {
+    gap: 4px;
+  }
+
+  .HouseBars-module__a1ZN_a__dots {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .HouseBars-module__a1ZN_a__messageText {
+    animation: none;
+  }
+
+  .HouseBars-module__a1ZN_a__announcement *, .HouseBars-module__a1ZN_a__toolbar * {
+    transition: none !important;
+  }
+}
+
+/*# sourceMappingURL=src_components_HouseBars_module_1-lwmtz.css.map*/

@@ -66,7 +66,9 @@ function findText(start, texts) {
             const value = normalise(entry.value);
             const wraps = value.length >= 4 && text.includes(value) && text.length <= value.length + 6;
             const part = text.length >= 12 && value.includes(text);
-            return wraps || part;
+            // A shortened form on the page: "Banaras" drawn from "Banaras Store".
+            const lead = text.length >= 5 && value.startsWith(text + " ");
+            return wraps || part || lead;
         }).sort((a, b)=>b.value.length - a.value.length);
         if (inside.length) return {
             element,
@@ -106,7 +108,7 @@ function Button({ children, onClick, primary, disabled }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-        lineNumber: 132,
+        lineNumber: 134,
         columnNumber: 5
     }, this);
 }
@@ -126,14 +128,14 @@ function Where({ place, trail }) {
                 children: place
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 155,
+                lineNumber: 157,
                 columnNumber: 7
             }, this),
             trail.length ? ` › ${trail.join(" › ")}` : ""
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-        lineNumber: 154,
+        lineNumber: 156,
         columnNumber: 5
     }, this);
 }
@@ -161,7 +163,7 @@ function TextPanel({ entry, onDone }) {
                 children: "Change these words"
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 179,
+                lineNumber: 181,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Where, {
@@ -169,7 +171,7 @@ function TextPanel({ entry, onDone }) {
                 trail: entry.trail
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 180,
+                lineNumber: 182,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -191,7 +193,7 @@ function TextPanel({ entry, onDone }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 181,
+                lineNumber: 183,
                 columnNumber: 7
             }, this),
             error ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -203,7 +205,7 @@ function TextPanel({ entry, onDone }) {
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 199,
+                lineNumber: 201,
                 columnNumber: 16
             }, this) : null,
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -220,7 +222,7 @@ function TextPanel({ entry, onDone }) {
                         children: pending ? "Saving…" : "Save"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 201,
+                        lineNumber: 203,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Button, {
@@ -228,13 +230,13 @@ function TextPanel({ entry, onDone }) {
                         children: "Cancel"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 204,
+                        lineNumber: 206,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 200,
+                lineNumber: 202,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -246,13 +248,13 @@ function TextPanel({ entry, onDone }) {
                 children: "Saving changes the live website straight away."
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 206,
+                lineNumber: 208,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-        lineNumber: 178,
+        lineNumber: 180,
         columnNumber: 5
     }, this);
 }
@@ -313,7 +315,7 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                 children: "Change this photo"
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 262,
+                lineNumber: 264,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Where, {
@@ -321,7 +323,7 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                 trail: entry.trail
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 263,
+                lineNumber: 265,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -344,12 +346,12 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                    lineNumber: 268,
+                    lineNumber: 270,
                     columnNumber: 11
                 }, this) : null
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 265,
+                lineNumber: 267,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -361,7 +363,7 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                 children: chosen ? "New photo — press Save to use it." : "The photo on the website now."
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 271,
+                lineNumber: 273,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -374,7 +376,7 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                 onChange: (event)=>upload(event.target.files)
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 275,
+                lineNumber: 277,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -387,12 +389,12 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                     children: uploading ? "Uploading…" : "📷 Upload a new photo"
                 }, void 0, false, {
                     fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                    lineNumber: 283,
+                    lineNumber: 285,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 282,
+                lineNumber: 284,
                 columnNumber: 7
             }, this),
             media.length ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -406,7 +408,7 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                         children: "Or pick one you uploaded before"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 290,
+                        lineNumber: 292,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -440,23 +442,23 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                                    lineNumber: 309,
+                                    lineNumber: 311,
                                     columnNumber: 17
                                 }, this)
                             }, item.id, false, {
                                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                                lineNumber: 293,
+                                lineNumber: 295,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 291,
+                        lineNumber: 293,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 289,
+                lineNumber: 291,
                 columnNumber: 9
             }, this) : null,
             error ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -468,7 +470,7 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 316,
+                lineNumber: 318,
                 columnNumber: 16
             }, this) : null,
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -485,7 +487,7 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                         children: pending ? "Saving…" : "Save"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 318,
+                        lineNumber: 320,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Button, {
@@ -493,13 +495,13 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                         children: "Cancel"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 321,
+                        lineNumber: 323,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 317,
+                lineNumber: 319,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -511,13 +513,13 @@ function PhotoPanel({ entry, media: initialMedia, onDone }) {
                 children: "The phone version of the page uses the same photo, cropped to fit."
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 323,
+                lineNumber: 325,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-        lineNumber: 261,
+        lineNumber: 263,
         columnNumber: 5
     }, this);
 }
@@ -538,7 +540,7 @@ function ChoosePanel({ entries, describe, onPick, onCancel }) {
                 children: "This appears in more than one place"
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 343,
+                lineNumber: 345,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -549,7 +551,7 @@ function ChoosePanel({ entries, describe, onPick, onCancel }) {
                 children: "Which one do you want to change?"
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 344,
+                lineNumber: 346,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -575,7 +577,7 @@ function ChoosePanel({ entries, describe, onPick, onCancel }) {
                                 trail: entry.trail
                             }, void 0, false, {
                                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                                lineNumber: 353,
+                                lineNumber: 355,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -586,18 +588,18 @@ function ChoosePanel({ entries, describe, onPick, onCancel }) {
                                 children: describe(entry)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                                lineNumber: 354,
+                                lineNumber: 356,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, entry.id, true, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 347,
+                        lineNumber: 349,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 345,
+                lineNumber: 347,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -609,18 +611,18 @@ function ChoosePanel({ entries, describe, onPick, onCancel }) {
                     children: "Cancel"
                 }, void 0, false, {
                     fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                    lineNumber: 359,
+                    lineNumber: 361,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 358,
+                lineNumber: 360,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-        lineNumber: 342,
+        lineNumber: 344,
         columnNumber: 5
     }, this);
 }
@@ -636,7 +638,7 @@ function NotHerePanel({ productEditHref, inMenu, onClose }) {
                 children: inMenu ? "This is the menu" : "This can’t be changed from here yet"
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 376,
+                lineNumber: 378,
                 columnNumber: 7
             }, this),
             inMenu ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -656,13 +658,13 @@ function NotHerePanel({ productEditHref, inMenu, onClose }) {
                         children: "Edit the menu →"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 381,
+                        lineNumber: 383,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 378,
+                lineNumber: 380,
                 columnNumber: 9
             }, this) : productEditHref ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 style: {
@@ -681,13 +683,13 @@ function NotHerePanel({ productEditHref, inMenu, onClose }) {
                         children: "Edit this product →"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 388,
+                        lineNumber: 390,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 386,
+                lineNumber: 388,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 style: {
@@ -706,7 +708,7 @@ function NotHerePanel({ productEditHref, inMenu, onClose }) {
                         children: "Change text"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 396,
+                        lineNumber: 398,
                         columnNumber: 11
                     }, this),
                     " ",
@@ -714,7 +716,7 @@ function NotHerePanel({ productEditHref, inMenu, onClose }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 393,
+                lineNumber: 395,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -726,18 +728,18 @@ function NotHerePanel({ productEditHref, inMenu, onClose }) {
                     children: "OK"
                 }, void 0, false, {
                     fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                    lineNumber: 403,
+                    lineNumber: 405,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 402,
+                lineNumber: 404,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-        lineNumber: 375,
+        lineNumber: 377,
         columnNumber: 5
     }, this);
 }
@@ -891,13 +893,14 @@ function SiteEditorPanel({ context }) {
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "site-editor-bar__label",
                         style: {
                             font: `14px ${FONT}`
                         },
                         children: on ? "✏️ Click any words or photo to change them" : "You’re signed in as the shop admin"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 529,
+                        lineNumber: 531,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -916,7 +919,7 @@ function SiteEditorPanel({ context }) {
                         children: on ? "Done editing" : "✏️ Edit this page"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 532,
+                        lineNumber: 534,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -930,13 +933,13 @@ function SiteEditorPanel({ context }) {
                         children: "Admin"
                     }, void 0, false, {
                         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                        lineNumber: 548,
+                        lineNumber: 550,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 511,
+                lineNumber: 513,
                 columnNumber: 7
             }, this),
             open ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -969,7 +972,7 @@ function SiteEditorPanel({ context }) {
                             onDone: done
                         }, void 0, false, {
                             fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                            lineNumber: 576,
+                            lineNumber: 578,
                             columnNumber: 37
                         }, this) : null,
                         open.kind === "photo" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(PhotoPanel, {
@@ -978,7 +981,7 @@ function SiteEditorPanel({ context }) {
                             onDone: done
                         }, void 0, false, {
                             fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                            lineNumber: 577,
+                            lineNumber: 579,
                             columnNumber: 38
                         }, this) : null,
                         open.kind === "chooseText" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ChoosePanel, {
@@ -991,7 +994,7 @@ function SiteEditorPanel({ context }) {
                             onCancel: ()=>setOpen(null)
                         }, void 0, false, {
                             fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                            lineNumber: 579,
+                            lineNumber: 581,
                             columnNumber: 15
                         }, this) : null,
                         open.kind === "choosePhoto" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ChoosePanel, {
@@ -1004,7 +1007,7 @@ function SiteEditorPanel({ context }) {
                             onCancel: ()=>setOpen(null)
                         }, void 0, false, {
                             fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                            lineNumber: 587,
+                            lineNumber: 589,
                             columnNumber: 15
                         }, this) : null,
                         open.kind === "none" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(NotHerePanel, {
@@ -1013,24 +1016,24 @@ function SiteEditorPanel({ context }) {
                             onClose: ()=>setOpen(null)
                         }, void 0, false, {
                             fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                            lineNumber: 595,
+                            lineNumber: 597,
                             columnNumber: 15
                         }, this) : null
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                    lineNumber: 561,
+                    lineNumber: 563,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-                lineNumber: 555,
+                lineNumber: 557,
                 columnNumber: 9
             }, this) : null
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/site-editor/SiteEditorPanel.tsx",
-        lineNumber: 509,
+        lineNumber: 511,
         columnNumber: 5
     }, this);
 }

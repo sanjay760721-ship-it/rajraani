@@ -25,29 +25,14 @@ function WishlistPage() {
     const { items, remove, itemCount } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$wishlist$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useWishlist"])();
     const { add } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cart$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCart"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "min-h-[70vh] bg-bg py-12 px-4 sm:px-8 max-w-[1400px] mx-auto",
+        className: "min-h-[70vh] bg-bg pb-16 px-4 sm:px-8 max-w-[1400px] mx-auto",
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "text-center max-w-xl mx-auto mb-12",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        className: "font-display text-3xl sm:text-4xl text-ink font-normal mb-3",
-                        children: "My Wishlist"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                        lineNumber: 17,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-caption text-ink-muted",
-                        children: "Your saved handloom heirlooms and favorite pieces."
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                        lineNumber: 20,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(PageHead, {
+                kicker: "Saved for later",
+                title: "My wishlist",
+                size: "md",
+                intro: "Your saved handloom heirlooms and favourite pieces."
+            }, void 0, false, {
                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
                 lineNumber: 16,
                 columnNumber: 7
@@ -66,12 +51,12 @@ function WishlistPage() {
                             d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                            lineNumber: 32,
+                            lineNumber: 25,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                        lineNumber: 27,
+                        lineNumber: 20,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -79,7 +64,7 @@ function WishlistPage() {
                         children: "Your wishlist is empty"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                        lineNumber: 39,
+                        lineNumber: 32,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -87,7 +72,7 @@ function WishlistPage() {
                         children: "Explore our handcrafted collections and save the pieces that speak to you."
                     }, void 0, false, {
                         fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                        lineNumber: 40,
+                        lineNumber: 33,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -96,18 +81,18 @@ function WishlistPage() {
                         children: "Explore Collections"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                        lineNumber: 43,
+                        lineNumber: 36,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                lineNumber: 26,
+                lineNumber: 19,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6",
                 children: items.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "group relative bg-white border border-rule flex flex-col justify-between",
+                        className: "group relative bg-bg-alt border border-rule flex flex-col justify-between",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
@@ -123,24 +108,24 @@ function WishlistPage() {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                                lineNumber: 56,
+                                                lineNumber: 49,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 type: "button",
                                                 onClick: ()=>remove(item.handle),
-                                                className: "absolute top-2 right-2 bg-white/90 p-1.5 rounded-full text-ink hover:text-danger transition-colors",
+                                                className: "absolute top-2 right-2 bg-bg/90 p-1.5 rounded-full text-ink hover:text-danger transition-colors",
                                                 "aria-label": "Remove from wishlist",
                                                 children: "✕"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                                lineNumber: 64,
+                                                lineNumber: 57,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                        lineNumber: 55,
+                                        lineNumber: 48,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -153,12 +138,12 @@ function WishlistPage() {
                                                     children: item.poeticName || item.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                                    lineNumber: 75,
+                                                    lineNumber: 68,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                                lineNumber: 74,
+                                                lineNumber: 67,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -169,19 +154,19 @@ function WishlistPage() {
                                                 })
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                                lineNumber: 77,
+                                                lineNumber: 70,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                        lineNumber: 73,
+                                        lineNumber: 66,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                lineNumber: 54,
+                                lineNumber: 47,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -204,23 +189,23 @@ function WishlistPage() {
                                     children: "Move to Cart"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                    lineNumber: 83,
+                                    lineNumber: 76,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                                lineNumber: 82,
+                                lineNumber: 75,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, item.handle, true, {
                         fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                        lineNumber: 53,
+                        lineNumber: 46,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/app/(storefront)/wishlist/page.tsx",
-                lineNumber: 51,
+                lineNumber: 44,
                 columnNumber: 9
             }, this)
         ]

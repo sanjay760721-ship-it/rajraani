@@ -25,6 +25,8 @@ export type WishlistItem = {
   priceMinorUnits: number;
   colourSlug: string;
   alt: string;
+  /** The piece's first photograph, so the wishlist can show it. */
+  src?: string;
 };
 
 const wishlistStore = createLocalStore<WishlistItem[]>(

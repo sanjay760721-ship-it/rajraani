@@ -437,7 +437,7 @@ function CampaignSlideshow({ slides }) {
                                                 "aria-label": `Show ${dot.title}`,
                                                 "aria-current": dotIndex === active,
                                                 onClick: ()=>setActive(dotIndex),
-                                                className: `h-2 w-2 rounded-full transition-colors ${dotIndex === active ? "bg-ink" : "bg-ink/25"}`
+                                                className: `h-2 w-2 rounded-full transition-colors ${dotIndex === active ? "bg-ink" : "bg-scrim"}`
                                             }, dot.id, false, {
                                                 fileName: "[project]/src/components/sections/CampaignSlideshow.tsx",
                                                 lineNumber: 121,
@@ -644,7 +644,7 @@ function EditorialSlideshow({ slides }) {
                                 className: `max-w-[46ch] ${slide.textAlign === "left" ? "" : slide.textAlign === "right" ? "ml-auto" : "mx-auto"}`,
                                 children: [
                                     slide.eyebrow ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "eyebrow mb-2 text-bg/80",
+                                        className: "eyebrow mb-2 text-white/80",
                                         children: slide.eyebrow
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/sections/EditorialSlideshow.tsx",
@@ -652,7 +652,7 @@ function EditorialSlideshow({ slides }) {
                                         columnNumber: 21
                                     }, this) : null,
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                        className: "text-display text-bg drop-shadow-sm",
+                                        className: "text-display text-white drop-shadow-sm",
                                         children: slide.title
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/sections/EditorialSlideshow.tsx",
@@ -660,7 +660,7 @@ function EditorialSlideshow({ slides }) {
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-prose mt-4 max-w-[38ch] text-bg/90",
+                                        className: "text-prose mt-4 max-w-[38ch] text-white/90",
                                         children: slide.body
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/sections/EditorialSlideshow.tsx",
@@ -877,7 +877,7 @@ function HeroCarousel({ slides, isPageTitle = true }) {
        * library has initialised. The `min-h` is the safety net: cells are
        * `h-full`, so without a height on an ancestor they resolve to 0 and the
        * whole hero collapses behind `overflow-hidden`.
-       */ className: "relative w-full min-h-[520px] overflow-hidden bg-bg text-bg",
+       */ className: "relative w-full min-h-[520px] overflow-hidden bg-bg text-white",
         "aria-label": "Featured collections",
         "aria-roledescription": "carousel",
         children: [
@@ -934,7 +934,7 @@ function HeroCarousel({ slides, isPageTitle = true }) {
                                             className: `w-full max-w-[360px] text-center ${align === "right" ? "ml-auto" : align === "left" ? "mr-auto" : "mx-auto"}`,
                                             children: [
                                                 slide.eyebrow ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "font-ui text-[11px] uppercase tracking-[0.16em] text-bg/85",
+                                                    className: "font-ui text-[11px] uppercase tracking-[0.16em] text-white/85",
                                                     children: slide.eyebrow
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/sections/HeroCarousel.tsx",
@@ -942,7 +942,7 @@ function HeroCarousel({ slides, isPageTitle = true }) {
                                                     columnNumber: 25
                                                 }, this) : null,
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                    className: "font-display text-[28px] md:text-[35px] leading-[1.125] mt-3 text-bg font-normal",
+                                                    className: "font-display text-[28px] md:text-[35px] leading-[1.125] mt-3 text-white font-normal",
                                                     children: slide.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/sections/HeroCarousel.tsx",
@@ -950,7 +950,7 @@ function HeroCarousel({ slides, isPageTitle = true }) {
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "font-ui text-[14px] leading-[1.6] mt-4 text-bg/90",
+                                                    className: "font-ui text-[14px] leading-[1.6] mt-4 text-white/90",
                                                     children: slide.body
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/sections/HeroCarousel.tsx",
@@ -1005,7 +1005,7 @@ function HeroCarousel({ slides, isPageTitle = true }) {
                                             className: "max-w-[46ch]",
                                             children: [
                                                 slide.eyebrow ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "eyebrow text-bg/80",
+                                                    className: "eyebrow text-white/80",
                                                     children: slide.eyebrow
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/sections/HeroCarousel.tsx",
@@ -1013,7 +1013,7 @@ function HeroCarousel({ slides, isPageTitle = true }) {
                                                     columnNumber: 25
                                                 }, this) : null,
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                    className: "text-display mt-3 text-bg drop-shadow-sm",
+                                                    className: "text-display mt-3 text-white drop-shadow-sm",
                                                     children: slide.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/sections/HeroCarousel.tsx",
@@ -1021,7 +1021,7 @@ function HeroCarousel({ slides, isPageTitle = true }) {
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-prose mt-4 max-w-[38ch] text-bg/90",
+                                                    className: "text-prose mt-4 max-w-[38ch] text-white/90",
                                                     children: slide.body
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/sections/HeroCarousel.tsx",
@@ -1214,7 +1214,7 @@ function StoresSlideshow({ slides }) {
                             className: "max-w-[46ch] text-center",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "eyebrow text-bg/80 block mb-3",
+                                    className: "eyebrow text-white/80 block mb-3",
                                     children: slide.title
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/StoresSlideshow.tsx",
@@ -1222,7 +1222,7 @@ function StoresSlideshow({ slides }) {
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-prose mt-4 max-w-[38ch] text-bg/90 mx-auto",
+                                    className: "text-prose mt-4 max-w-[38ch] text-white/90 mx-auto",
                                     children: slide.body
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/StoresSlideshow.tsx",

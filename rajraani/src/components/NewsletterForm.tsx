@@ -39,12 +39,12 @@ export function FooterNewsletterForm({ button }: { button: string }) {
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          className="h-[35px] min-w-0 flex-1 border border-footer-band bg-white px-3 text-[14px] text-ink outline-none focus:border-ink-body"
+          className="h-[35px] min-w-0 flex-1 border border-footer-band bg-bg px-3 text-[14px] text-ink outline-none focus:border-ink-body"
         />
         <button
           type="submit"
           disabled={pending}
-          className="h-[35px] shrink-0 border border-transparent bg-white/80 px-[17.5px] font-display text-[17px] tracking-[1px] text-ink transition-colors hover:bg-white cursor-pointer"
+          className="h-[35px] shrink-0 border border-transparent bg-bg/80 px-[17.5px] font-display text-[17px] tracking-[1px] text-ink transition-colors hover:bg-white cursor-pointer"
         >
           {pending ? "…" : button}
         </button>

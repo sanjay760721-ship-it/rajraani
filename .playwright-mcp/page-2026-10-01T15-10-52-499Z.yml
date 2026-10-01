@@ -1,0 +1,204 @@
+- generic [active] [ref=f50e1]:
+  - generic [ref=f50e2]:
+    - link "Skip to content" [ref=f50e3] [cursor=pointer]:
+      - /url: "#main"
+    - generic [ref=f50e4]:
+      - banner [ref=f50e5]:
+        - complementary "Store announcement" [ref=f50e6]:
+          - paragraph [ref=f50e7]: Complimentary shipping across India
+          - button "Close announcement" [ref=f50e8] [cursor=pointer]
+        - generic [ref=f50e11]:
+          - link "Rajraani home" [ref=f50e12] [cursor=pointer]:
+            - /url: /
+            - text: RAJRAANI
+          - navigation "Main" [ref=f50e14]:
+            - button "Shop" [ref=f50e15] [cursor=pointer]
+            - button "Collections" [ref=f50e16] [cursor=pointer]
+            - button "Campaigns" [ref=f50e17] [cursor=pointer]
+            - button "Crafts" [ref=f50e18] [cursor=pointer]
+            - button "Stories" [ref=f50e19] [cursor=pointer]
+            - button "About Us" [ref=f50e20] [cursor=pointer]
+          - generic [ref=f50e21]:
+            - button "Search" [ref=f50e22] [cursor=pointer]
+            - generic [ref=f50e23]:
+              - generic [ref=f50e24]: Currency
+              - combobox "Currency" [ref=f50e25] [cursor=pointer]:
+                - option "INR" [selected]
+                - option "USD"
+                - option "CAD"
+                - option "GBP"
+                - option "AUD"
+                - option "EUR"
+                - option "JPY"
+                - option "SGD"
+            - link "Wishlist" [ref=f50e26] [cursor=pointer]:
+              - /url: /wishlist
+            - button "Bag" [ref=f50e27] [cursor=pointer]
+      - main [ref=f50e28]:
+        - region "Antaraal, Nadi, Kadhua, The Art of Gifting, Art & Collectibles" [ref=f50e29]:
+          - generic [ref=f50e41]:
+            - paragraph [ref=f50e42]: Roman Frescoes
+            - heading "Antaraal" [level=1] [ref=f50e44]:
+              - generic [ref=f50e46]: Antaraal
+            - paragraph [ref=f50e47]: Gheecha silk worked against a katan ground, so the surface takes light unevenly and never twice the same way.
+            - link "Discover" [ref=f50e49] [cursor=pointer]:
+              - /url: /collections/antaraal
+        - region "Antaraal" [ref=f50e51]:
+          - generic [ref=f50e52]:
+            - generic [ref=f50e53]:
+              - link "Antaraal, piece 2" [ref=f50e54] [cursor=pointer]:
+                - /url: /products/chandrika-ivory-tissue-silk-jangla-saree
+              - link "Antaraal, piece 1" [ref=f50e55] [cursor=pointer]:
+                - /url: /products/sindoor-red-katan-silk-kadiyal-saree
+              - link "Antaraal, piece 3" [ref=f50e56] [cursor=pointer]:
+                - /url: /products/padmini-pink-moonga-silk-anarkali-suit
+            - generic:
+              - paragraph: Every piece is one piece.
+              - paragraph: We buy directly from weavers in and around Varanasi, and we make one of a thing. When it sells, it is rewoven or it is not made again.
+            - generic [ref=f50e57]:
+              - generic [ref=f50e58]:
+                - paragraph [ref=f50e59]: The collection
+                - heading "Antaraal" [level=2] [ref=f50e61]
+              - generic [ref=f50e62]:
+                - paragraph [ref=f50e63]: Gheecha is spun from the short, uneven fibres left after the reel, which is why it will not lie flat and why the light never settles on it. Woven into a katan ground it gives a surface with grain in it.
+                - generic [ref=f50e64]:
+                  - link "Discover" [ref=f50e65] [cursor=pointer]:
+                    - /url: /collections/antaraal
+                  - link "Shop the pieces" [ref=f50e67] [cursor=pointer]:
+                    - /url: /collections/antaraal
+        - generic [ref=f50e68]:
+          - generic [ref=f50e70]:
+            - generic [ref=f50e71] [cursor=pointer]
+            - generic [ref=f50e72]:
+              - button "Play video" [ref=f50e73]
+              - button "Unmute video" [ref=f50e76]
+              - button "Full screen" [ref=f50e81]
+          - generic [ref=f50e84]:
+            - paragraph [ref=f50e85]: On the loom
+            - heading "The Motion of the Loom" [level=2] [ref=f50e87]:
+              - generic [ref=f50e89]: The
+              - generic [ref=f50e91]: Motion
+              - generic [ref=f50e93]: of
+              - generic [ref=f50e95]: the
+              - generic [ref=f50e97]: Loom
+            - paragraph [ref=f50e98]: Between six and twenty-six weeks on a pit loom in Varanasi. Every thread guided by human hand.
+            - generic [ref=f50e99]:
+              - generic [ref=f50e100]:
+                - term [ref=f50e101]: Weeks on the loom
+                - definition [ref=f50e102]: 6–26
+              - generic [ref=f50e103]:
+                - term [ref=f50e104]: Every thread
+                - definition [ref=f50e105]: By hand
+              - generic [ref=f50e106]:
+                - term [ref=f50e107]: Where it is woven
+                - definition [ref=f50e108]: Varanasi
+            - link "Watch Our Process" [ref=f50e110] [cursor=pointer]:
+              - /url: /pages/handloom
+          - link [aria-hidden]:
+            - /url: /pages/handloom
+            - text: Watch Our Process
+        - region "Shop" [ref=f50e112]:
+          - generic [ref=f50e113]:
+            - link "Shop Sarees Shop sarees" [ref=f50e114] [cursor=pointer]:
+              - /url: /collections/sarees
+              - generic [ref=f50e116]:
+                - paragraph [ref=f50e117]: Shop
+                - heading "Sarees" [level=2] [ref=f50e119]:
+                  - generic [ref=f50e121]: Sarees
+                - generic [ref=f50e122]: Shop sarees
+            - link "Shop Suits Shop suits" [ref=f50e123] [cursor=pointer]:
+              - /url: /collections/suits
+              - generic [ref=f50e125]:
+                - paragraph [ref=f50e126]: Shop
+                - heading "Suits" [level=2] [ref=f50e128]:
+                  - generic [ref=f50e130]: Suits
+                - generic [ref=f50e131]: Shop suits
+            - link "The collection All pieces Shop all pieces" [ref=f50e132] [cursor=pointer]:
+              - /url: /collections/all
+              - generic [ref=f50e134]:
+                - paragraph [ref=f50e135]: The collection
+                - heading "All pieces" [level=2] [ref=f50e137]:
+                  - generic [ref=f50e139]: All
+                  - generic [ref=f50e141]: pieces
+                - generic [ref=f50e142]: Shop all pieces
+            - link "Shop Stoles Shop stoles" [ref=f50e143] [cursor=pointer]:
+              - /url: /collections/stoles
+              - generic [ref=f50e145]:
+                - paragraph [ref=f50e146]: Shop
+                - heading "Stoles" [level=2] [ref=f50e148]:
+                  - generic [ref=f50e150]: Stoles
+                - generic [ref=f50e151]: Shop stoles
+        - region "Curated edits" [ref=f50e152]:
+          - generic [ref=f50e153]:
+            - generic [ref=f50e154]:
+              - paragraph [ref=f50e155]: For the occasion
+              - heading "Curated edits" [level=2] [ref=f50e157]
+              - paragraph [ref=f50e158]: Bridal, gifting, real zari and repoussé, each chosen piece by piece.
+            - link "Bridal" [ref=f50e159] [cursor=pointer]:
+              - /url: /collections/bridal
+            - link "Gifting" [ref=f50e161] [cursor=pointer]:
+              - /url: /collections/gifts
+            - link "Zarkashi" [ref=f50e163] [cursor=pointer]:
+              - /url: /collections/sarees?zari=real_zari
+            - link "Repoussé" [ref=f50e165] [cursor=pointer]:
+              - /url: /pages/art-collectibles
+        - region "Kala, Awadh" [ref=f50e167]:
+          - generic [ref=f50e173]:
+            - paragraph [ref=f50e174]: Campaign
+            - heading "Kala" [level=2] [ref=f50e176]:
+              - generic [ref=f50e178]: Kala
+            - paragraph [ref=f50e179]: Kala is craft with nothing ranked above anything else — the loom, the brush and the chisel under one word.
+            - generic [ref=f50e180]:
+              - link "Discover" [ref=f50e181] [cursor=pointer]:
+                - /url: /pages/kala
+              - link "Shop the pieces" [ref=f50e183] [cursor=pointer]:
+                - /url: /collections/all
+        - region "Cloth that keeps time" [ref=f50e184]:
+          - paragraph [ref=f50e185]: Cloth that keeps time
+          - paragraph [ref=f50e187]: A saree outlives the season it was bought for, and often the person who chose it. That is the argument for weaving slowly and for buying once — a cupboard in this country is a form of archive, and what goes into it should still be worth taking out in twenty years.
+        - region "Banaras, Lucknow" [ref=f50e188]:
+          - generic [ref=f50e194]:
+            - paragraph [ref=f50e195]: Visit, by appointment
+            - heading "Banaras" [level=2] [ref=f50e197]:
+              - generic [ref=f50e199]: Banaras
+            - paragraph [ref=f50e200]: The Banaras room is ten minutes from the looms we buy from. Come and see cloth in daylight, over a shoulder, before deciding anything.
+            - link "Book a visit" [ref=f50e202] [cursor=pointer]:
+              - /url: https://calendly.com/rajraani-banaras/visit-to-the-rajraani-experience-centre-varanasi
+      - contentinfo [ref=f50e204]:
+        - paragraph [aria-hidden] [ref=f50e205]: RAJRAANI
+        - region [ref=f50e206]:
+          - generic [ref=f50e207]:
+            - heading "Stay in touch" [level=2] [ref=f50e208]
+            - paragraph [ref=f50e209]: Occasional letters about what has come off the loom.
+          - generic [ref=f50e210]:
+            - generic [ref=f50e211]: Your email
+            - generic [ref=f50e212]:
+              - textbox "Your email" [ref=f50e213]:
+                - /placeholder: name@example.com
+              - button "Sign Up" [ref=f50e214] [cursor=pointer]
+        - region "Contact" [ref=f50e216]:
+          - generic [ref=f50e217]:
+            - link "orders@example.invalid" [ref=f50e218] [cursor=pointer]:
+              - /url: mailto:orders@example.invalid
+            - link "+91 00000 00000" [ref=f50e219] [cursor=pointer]:
+              - /url: tel:+910000000000
+            - link "Chat on WhatsApp" [ref=f50e220] [cursor=pointer]:
+              - /url: https://wa.me/910000000000
+          - paragraph [ref=f50e221]:
+            - generic [ref=f50e222]: Monday to Friday, 10:00–19:00 IST
+            - generic [ref=f50e223]: Saturday, 10:00–16:00 IST
+        - navigation "Footer" [ref=f50e224]:
+          - link "Our story" [ref=f50e225] [cursor=pointer]:
+            - /url: /pages/our-story
+          - link "Shipping" [ref=f50e226] [cursor=pointer]:
+            - /url: /pages/shipping
+          - link "Returns" [ref=f50e227] [cursor=pointer]:
+            - /url: /pages/returns
+          - link "Size guide" [ref=f50e228] [cursor=pointer]:
+            - /url: /pages/size-guide
+          - link "Privacy" [ref=f50e229] [cursor=pointer]:
+            - /url: /pages/privacy
+          - link "Contact" [ref=f50e230] [cursor=pointer]:
+            - /url: /pages/contact
+        - paragraph [ref=f50e231]: © 2026 Rajraani Handloom Private Limited
+  - button "Open Next.js Dev Tools" [ref=f50e237] [cursor=pointer]

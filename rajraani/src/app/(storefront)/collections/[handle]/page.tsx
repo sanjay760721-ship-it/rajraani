@@ -15,6 +15,7 @@ import {
   sortProducts,
 } from "@/lib/facets/engine";
 import { buildFacetHref, parseFacetUrlState } from "@/lib/facets/url";
+import { PageHead } from "@/components/cinematic/PageHead";
 
 /**
  * Product listing.
@@ -85,9 +86,9 @@ export default async function CollectionPage(
   );
 
   return (
-    <div className="wrap">
-      <nav aria-label="Breadcrumb" className="py-5">
-        <ol className="eyebrow flex gap-2 text-ink-muted">
+    <div className="wrap-wide lg:px-[max(24px,4vw)]">
+      <nav aria-label="Breadcrumb" className="pt-8">
+        <ol className="crumbs flex gap-2 text-ink-muted">
           <li>
             <Link href="/" className="hover:text-ink">
               Home
@@ -98,16 +99,11 @@ export default async function CollectionPage(
         </ol>
       </nav>
 
-      <header className="pb-10">
-        <h1 className="text-h1">{collection.title}</h1>
-        {/* Meaningful organic-traffic infrastructure — keep it on every
-            major collection (design.md §6.2). It reads as a paragraph, not as a
-            narrow caption column: 65ch at 14px broke this into four stub lines
-            under a full-width h1, which looked like a layout accident. */}
-        <p className="text-prose mt-5 max-w-[var(--container-content)] text-ink-body">
-          {collection.seoIntro}
-        </p>
-      </header>
+      {/* The homepage's voice: a zari-ruled label, the name in tall condensed
+          capitals, and the introduction directly beneath it. The introduction is
+          meaningful organic-traffic infrastructure: keep it on every major
+          collection (design.md §6.2). */}
+      <PageHead kicker="The collection" title={collection.title} intro={collection.seoIntro} />
 
       <div className="grid gap-8 pb-20 lg:grid-cols-[236px_1fr] lg:gap-12">
         {/* Mobile filter button - opens slide-in drawer */}
@@ -182,10 +178,11 @@ export default async function CollectionPage(
               )}
             </div>
           ) : (
-            /* Two to a row at every width. A saree is a full-length garment;
-               at four across the drape stops being legible and the grid reads
-               as a contact sheet. The reference site shows them large. */
-            <ul className="grid grid-cols-2 gap-x-6 gap-y-12 lg:gap-x-8">
+            /* Two to a row, three on wide screens, where each card still stands
+               about 370px across. A saree is a full-length garment; at four
+               across the drape stops being legible and the grid reads as a
+               contact sheet. */
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-14 lg:gap-x-8 xl:grid-cols-3">
               {visible.map((product, index) => (
                 <li key={product.handle}>
                   {/* First row is the LCP candidate — two cards wide now, so
@@ -195,7 +192,7 @@ export default async function CollectionPage(
                     product={product}
                     priority={index < 2}
                     headingLevel={2}
-                    sizes="(min-width: 1024px) 460px, 50vw"
+                    sizes="(min-width: 1280px) 380px, (min-width: 1024px) 460px, 50vw"
                     quickView
                   />
                 </li>

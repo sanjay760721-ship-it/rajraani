@@ -274,7 +274,7 @@ export function CartDrawer() {
                         {line.poeticName}
                       </p>
                       <p className="text-caption text-ink-body text-xs">{line.title}</p>
-                      <p className="eyebrow mt-1 text-ink-muted text-[10px] font-mono">{line.sku}</p>
+                      <p className="crumbs mt-1 text-ink-muted">Ref. {line.sku}</p>
                       <p className="mt-2 tabular-nums text-ink font-semibold">
                         {formatMoney({
                           minorUnits: line.priceMinorUnits * line.quantity,
@@ -572,6 +572,7 @@ export function QuantityStepper({
 
   return (
     <div
+      data-stepper
       className={`flex items-center border border-rule-input ${
         wide ? "w-[250px] justify-between bg-bg" : ""
       }`}

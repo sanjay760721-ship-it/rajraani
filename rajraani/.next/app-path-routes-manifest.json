@@ -1,10 +1,10 @@
 {
+  "/(home)/page": "/",
   "/(storefront)/account/page": "/account",
   "/(storefront)/cart/page": "/cart",
   "/(storefront)/collections/[handle]/page": "/collections/[handle]",
   "/(storefront)/login/page": "/login",
   "/(storefront)/order-confirmation/page": "/order-confirmation",
-  "/(storefront)/page": "/",
   "/(storefront)/pages/[slug]/page": "/pages/[slug]",
   "/(storefront)/products/[handle]/page": "/products/[handle]",
   "/(storefront)/search/page": "/search",

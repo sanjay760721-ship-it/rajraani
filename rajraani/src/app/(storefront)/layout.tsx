@@ -1,11 +1,10 @@
-import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CurrencyProvider } from "@/components/currency-context";
 import { NewsletterPopup } from "@/components/NewsletterPopup";
 import { SearchModal } from "@/components/SearchModal";
 import { SearchProvider } from "@/components/search-context";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { CineFrame } from "@/components/cinematic/CineFrame";
+import { toFooterData } from "@/components/cinematic/footer-data";
 import { CartProvider } from "@/components/cart-context";
 import { WishlistProvider } from "@/components/wishlist-context";
 import { SiteTextProvider } from "@/components/site-text-context";
@@ -15,7 +14,10 @@ import { MenuProvider } from "@/components/menu-context";
 import { getMenu } from "@/lib/content/menu";
 import { getFooter } from "@/lib/content/footer";
 
-/** The shop. Everything a customer sees is inside this layout. */
+/**
+ * The shop. Everything a customer sees is inside this layout, framed by the
+ * same header, menu and footer as the homepage (CineFrame).
+ */
 export default async function StorefrontLayout({
   children,
 }: LayoutProps<"/">) {
@@ -42,12 +44,9 @@ export default async function StorefrontLayout({
               Skip to content
             </a>
 
-            <AnnouncementBar />
-            <SiteHeader />
-            <main id="main" className="flex-1">
+            <CineFrame menu={menu} footer={toFooterData(footer, siteText)}>
               {children}
-            </main>
-            <SiteFooter text={siteText} footer={footer} />
+            </CineFrame>
             <CartDrawer />
             <SearchModal />
             <NewsletterPopup settings={footer} />

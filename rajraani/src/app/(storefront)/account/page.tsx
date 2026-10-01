@@ -17,10 +17,10 @@ export default function AccountPage() {
 
   return (
     <div className="min-h-[70vh] bg-bg py-16 px-4 flex items-center justify-center">
-      <div className="w-full max-w-md bg-white border border-rule p-8 sm:p-12 shadow-xs">
+      <div className="w-full max-w-md bg-bg-alt border border-rule p-8 sm:p-12 shadow-xs">
         {isForgot ? (
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl text-center text-ink mb-3 font-normal">
+            <h1 className="cine-card-title mb-3 text-center text-ink">
               Reset your password
             </h1>
             <p className="text-caption text-ink-muted text-center mb-8">
@@ -73,7 +73,7 @@ export default function AccountPage() {
           </div>
         ) : isRegister ? (
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl text-center text-ink mb-3 font-normal">
+            <h1 className="cine-card-title mb-3 text-center text-ink">
               Create Account
             </h1>
             <p className="text-caption text-ink-muted text-center mb-8">
@@ -142,7 +142,7 @@ export default function AccountPage() {
           </div>
         ) : (
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl text-center text-ink mb-3 font-normal">
+            <h1 className="cine-card-title mb-3 text-center text-ink">
               Login
             </h1>
             <p className="text-caption text-ink-muted text-center mb-8">
@@ -172,7 +172,7 @@ export default function AccountPage() {
                   <button
                     type="button"
                     onClick={() => setIsForgot(true)}
-                    className="text-[11px] text-ink-muted hover:text-ink underline cursor-pointer"
+                    className="text-[13px] text-ink-muted hover:text-ink underline cursor-pointer"
                   >
                     Forgot password?
                   </button>

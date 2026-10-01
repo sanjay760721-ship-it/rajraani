@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 
 import { QuantityStepper } from "./CartDrawer";
 import { useCart } from "./cart-context";
+import { useWishlist } from "./wishlist-context";
 import { isAvailable, type Product } from "@/lib/domain/types";
 
 /**
@@ -139,6 +140,7 @@ function AddToCart({ product }: { product: Product }) {
       >
         {label}
       </button>
+      <WishlistSave product={product} />
       {blocked ? (
         <p id="preorder-consent" className="text-caption mt-2 text-ink-muted">
           Tick the box above to continue.
@@ -260,5 +262,36 @@ function NotifyWhenRewoven({ product }: { product: Product }) {
         </form>
       )}
     </div>
+  );
+}
+
+/** Save the piece for later, beside Add to cart; the heart fills once saved. */
+function WishlistSave({ product }: { product: Product }) {
+  const { isInWishlist, toggle } = useWishlist();
+  const saved = isInWishlist(product.handle);
+  return (
+    <button
+      type="button"
+      data-on={saved ? "" : undefined}
+      aria-pressed={saved}
+      onClick={() =>
+        toggle({
+          handle: product.handle,
+          title: product.title,
+          poeticName: product.poeticName,
+          sku: product.sku,
+          priceMinorUnits: product.price.minorUnits,
+          colourSlug: product.colourFamily,
+          alt: product.images[0]?.alt ?? product.title,
+          src: product.images[0]?.src,
+        })
+      }
+      className="wish-save"
+    >
+      <svg className="wish-heart__icon h-5 w-5 stroke-current" fill={saved ? "currentColor" : "none"} viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+      {saved ? "Saved to wishlist" : "Save to wishlist"}
+    </button>
   );
 }

@@ -133,25 +133,23 @@ async function EditorialPage(props) {
          * about their own axis.
          */ /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
                 className: opensWithFaq ? "wrap section-pad" : "wrap-prose section-pad text-center",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        className: "text-h1",
-                        children: page.title
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/(storefront)/pages/[slug]/page.tsx",
-                        lineNumber: 137,
-                        columnNumber: 11
-                    }, this),
-                    page.standfirst ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-body mt-4 text-ink-body italic",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(PageHead, {
+                    title: page.title,
+                    align: opensWithFaq ? "left" : "center",
+                    intro: page.standfirst ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "italic",
                         children: page.standfirst
                     }, void 0, false, {
                         fileName: "[project]/src/app/(storefront)/pages/[slug]/page.tsx",
                         lineNumber: 140,
-                        columnNumber: 13
-                    }, this) : null
-                ]
-            }, void 0, true, {
+                        columnNumber: 38
+                    }, this) : undefined
+                }, void 0, false, {
+                    fileName: "[project]/src/app/(storefront)/pages/[slug]/page.tsx",
+                    lineNumber: 137,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
                 fileName: "[project]/src/app/(storefront)/pages/[slug]/page.tsx",
                 lineNumber: 130,
                 columnNumber: 9
@@ -390,7 +388,7 @@ function ToneTile({ label, tone, ratio = "portrait" }) {
             backgroundImage: PLACEHOLDER_WASH
         },
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-            className: "eyebrow absolute bottom-3 left-3 text-bg",
+            className: "eyebrow absolute bottom-3 left-3 text-white",
             children: label
         }, void 0, false, {
             fileName: "[project]/src/components/Frame.tsx",
@@ -593,7 +591,7 @@ function ProductCard({ product, priority = false, headingLevel = 3, sizes = RAIL
                 className: "mt-4 text-center",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(Heading, {
-                        className: "font-display text-[1.375rem] leading-tight tracking-tight text-ink",
+                        className: "font-display text-[1.375rem] leading-none tracking-[0.06em] text-ink",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                             href: `/products/${product.handle}`,
                             className: "after:absolute after:inset-0",
@@ -609,7 +607,7 @@ function ProductCard({ product, priority = false, headingLevel = 3, sizes = RAIL
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-caption mt-1.5 line-clamp-2 text-ink-muted",
+                        className: "text-caption mx-auto mt-2 line-clamp-2 max-w-[34ch] text-ink-muted",
                         children: product.title
                     }, void 0, false, {
                         fileName: "[project]/src/components/ProductCard.tsx",
@@ -617,7 +615,7 @@ function ProductCard({ product, priority = false, headingLevel = 3, sizes = RAIL
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "mt-2.5 text-caption text-ink",
+                        className: "mt-2.5 text-[0.9375rem] tabular-nums tracking-[0.02em] text-ink",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Price$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Price"], {
                             value: product.price
                         }, void 0, false, {
@@ -1310,7 +1308,7 @@ function Hero({ section, isPageTitle }) {
                         className: "max-w-[46ch]",
                         children: [
                             section.eyebrow ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "eyebrow text-bg/75",
+                                className: "eyebrow text-white/75",
                                 children: section.eyebrow
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SectionRenderer.tsx",
@@ -1318,7 +1316,7 @@ function Hero({ section, isPageTitle }) {
                                 columnNumber: 15
                             }, this) : null,
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(Heading, {
-                                className: "text-display mt-4 text-bg",
+                                className: "text-display mt-4 text-white",
                                 children: section.title
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SectionRenderer.tsx",
@@ -1326,7 +1324,7 @@ function Hero({ section, isPageTitle }) {
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-prose mt-5 max-w-[38ch] text-bg/85",
+                                className: "text-prose mt-5 max-w-[38ch] text-white/85",
                                 children: section.body
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SectionRenderer.tsx",
@@ -1506,7 +1504,7 @@ function VideoBand({ section }) {
                         className: "max-w-[44ch] pointer-events-auto",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "eyebrow block text-bg/80",
+                                className: "eyebrow block text-white/80",
                                 children: "HANDLOOM HERITAGE"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SectionRenderer.tsx",
@@ -1514,7 +1512,7 @@ function VideoBand({ section }) {
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                className: "text-display mt-2 text-bg",
+                                className: "text-display mt-2 text-white",
                                 children: section.title
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SectionRenderer.tsx",
@@ -1522,7 +1520,7 @@ function VideoBand({ section }) {
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-prose mt-3 text-bg/90",
+                                className: "text-prose mt-3 text-white/90",
                                 children: section.body
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SectionRenderer.tsx",
@@ -1531,7 +1529,7 @@ function VideoBand({ section }) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                                 href: section.ctaHref,
-                                className: "cta-link mt-6 inline-block text-bg border-b border-bg/50 hover:border-bg",
+                                className: "cta-link mt-6 inline-block text-white border-b border-white/50 hover:border-white",
                                 children: section.ctaLabel
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SectionRenderer.tsx",
@@ -2089,7 +2087,7 @@ function RichText({ section }) {
         className: `section-pad-prose ${section.measure === "content" ? "wrap" : "wrap-prose"} ${section.align === "left" ? "text-left" : "text-center"} ${section.tone ? CAMPAIGN_TONE[section.tone] : ""}`,
         style: {
             backgroundColor: "var(--color-bg)",
-            backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0), var(--color-bg))",
+            backgroundImage: "linear-gradient(180deg, transparent, var(--color-bg))",
             // Inline so it outranks the utility; see `padTop` on the type.
             ...section.padTop !== undefined ? {
                 paddingTop: fluidPad(section.padTop)
@@ -2462,7 +2460,7 @@ function ImageBand({ section, fallbackHref }) {
             */ /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: `pointer-events-none absolute inset-0 flex px-5 ${section.overlay.mobileAlign === "top" ? "items-start pt-[2%] md:items-center md:pt-0" : "items-center"} ${OVERLAY_ALIGN[section.overlay.align ?? "center"]}`,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: `w-full min-w-[350px] p-[30px] md:w-[55%] ${section.overlay.textAlign === "left" ? "text-left" : "text-center"} ${section.overlay.panel === "none" ? CAPTION_INK[section.overlay.ink ?? "white"] : "bg-white/[0.77]"}`,
+                            className: `w-full min-w-[350px] p-[30px] md:w-[55%] ${section.overlay.textAlign === "left" ? "text-left" : "text-center"} ${section.overlay.panel === "none" ? CAPTION_INK[section.overlay.ink ?? "white"] : "bg-bg/[0.77]"}`,
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: `text-h1 ${section.overlay.panel === "none" ? "" : "text-ink"}`,
@@ -2534,7 +2532,7 @@ function FaqAccordion({ section }) {
                 className: "mb-12 last:mb-0",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                        className: "text-h1 mb-2 text-ink",
+                        className: "text-h3 mb-3 text-ink",
                         children: group.heading
                     }, void 0, false, {
                         fileName: "[project]/src/components/sections/SectionRenderer.tsx",

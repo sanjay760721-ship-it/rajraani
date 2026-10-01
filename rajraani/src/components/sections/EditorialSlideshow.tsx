@@ -164,14 +164,14 @@ export function EditorialSlideshow({ slides }: EditorialSlideshowProps) {
                   }`}
                 >
                   {slide.eyebrow ? (
-                    <p className="eyebrow mb-2 text-bg/80">
+                    <p className="eyebrow mb-2 text-white/80">
                       {slide.eyebrow}
                     </p>
                   ) : null}
-                  <h2 className="text-display text-bg drop-shadow-sm">
+                  <h2 className="text-display text-white drop-shadow-sm">
                     {slide.title}
                   </h2>
-                  <p className="text-prose mt-4 max-w-[38ch] text-bg/90">
+                  <p className="text-prose mt-4 max-w-[38ch] text-white/90">
                     {slide.body}
                   </p>
                   <Link

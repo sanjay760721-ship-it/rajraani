@@ -6,8 +6,10 @@ import { describe, it } from "node:test";
 import {
   CSS_VARIABLE,
   PALETTE,
+  SHOP_PALETTE,
   contrastRatio,
   evaluateContrastContract,
+  evaluateShopContrastContract,
   parseHex,
   relativeLuminance,
   type PaletteToken,
@@ -81,6 +83,46 @@ describe("token values stay in sync with globals.css", () => {
         PALETTE[token].toLowerCase(),
         `${variable} in globals.css does not match PALETTE.${token} in contrast.ts`,
       );
+    });
+  }
+});
+
+describe("shop theme contrast contract (redesign, 2 Oct 2026)", () => {
+  const results = evaluateShopContrastContract();
+
+  it("covers the same combinations as the base palette", () => {
+    assert.equal(results.length, 22);
+  });
+
+  for (const result of results) {
+    const label = `${String(result.foreground)} on ${String(result.background)} — ${result.usage}`;
+    it(`shop: ${label} meets ${result.minimum}:1`, () => {
+      assert.ok(
+        result.passes,
+        `shop: ${label}
+  required ${result.minimum}:1
+  measured ${result.ratio.toFixed(2)}:1
+` +
+          `  Fix the value in BOTH the :root:has(.cine) block of globals.css and SHOP_PALETTE.`,
+      );
+    });
+  }
+});
+
+describe("shop theme values stay in sync with globals.css", () => {
+  const cssPath = fileURLToPath(new URL("../../app/globals.css", import.meta.url));
+  const css = readFileSync(cssPath, "utf8");
+  const block = /:root:has\(\.cine\)\s*\{([^}]*)\}/.exec(css)?.[1] ?? "";
+
+  it("globals.css has the shop theme block", () => {
+    assert.ok(block.length > 0, "the :root:has(.cine) block was not found in globals.css");
+  });
+
+  for (const [token, variable] of Object.entries(CSS_VARIABLE) as [PaletteToken, string][]) {
+    it(`shop ${variable} matches SHOP_PALETTE.${token}`, () => {
+      const match = new RegExp(`${variable}:\\s*(#[0-9a-fA-F]{6})\\s*;`).exec(block);
+      assert.ok(match, `${variable} was not found in the shop theme block`);
+      assert.equal(match[1]?.toLowerCase(), SHOP_PALETTE[token].toLowerCase());
     });
   }
 });

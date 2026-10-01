@@ -1,0 +1,866 @@
+[     500ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     592ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  431185ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/homepage/video/loom-poster.webp:0
+[  431378ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  431424ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  463356ms] [WARNING] Image with src "/homepage/stores/varanasi.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  463589ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/homepage/video/loom-poster.webp:0
+[  463646ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  463678ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  496050ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  496154ms] [LOG] [Fast Refresh] done in 54ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  496467ms] [LOG] [Fast Refresh] done in 54ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  496759ms] [LOG] [Fast Refresh] done in 54ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506072ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506143ms] [LOG] [Fast Refresh] done in 69ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506208ms] [LOG] [Fast Refresh] done in 69ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506269ms] [LOG] [Fast Refresh] done in 69ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506407ms] [LOG] [Fast Refresh] done in 69ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  506556ms] [LOG] [Fast Refresh] done in 69ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  956068ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  956286ms] [LOG] [Fast Refresh] done in 73ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  956397ms] [LOG] [Fast Refresh] done in 73ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  956597ms] [LOG] [Fast Refresh] done in 73ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  956783ms] TypeError: Cannot read properties of undefined (reading 'map')
+    at Cinematic (http://localhost:8081/_next/static/chunks/src_app_preview_cinematic_Cinematic_tsx_04cgzn-._.js?id=%255Bproject%255D/src/app/preview/cinematic/Cinematic.tsx+%255Bapp-client%255D+(ecmascript):242:34)
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14894:24)
+    at renderWithHooks (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4425:24)
+    at updateFunctionComponent (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:5892:21)
+    at beginWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6518:24)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at performUnitOfWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9385:97)
+    at workLoopSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9279:40)
+    at renderRootSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9263:13)
+    at performWorkOnRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8928:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10085:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+[  957044ms] [LOG] [Fast Refresh] done in 73ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1058410ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1058426ms] [LOG] [Fast Refresh] done in 117ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1162101ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1162154ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1162457ms] [LOG] [Fast Refresh] done in 97ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1163658ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1163899ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1164568ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1164569ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1164570ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1164570ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1185712ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1185754ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1186118ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1186118ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1186119ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1186119ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1218095ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1218308ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1262684ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1262888ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1263680ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1263680ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1263680ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1263681ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1293941ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1294790ms] [LOG] [Fast Refresh] done in 954ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1294934ms] [LOG] [Fast Refresh] done in 954ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1294945ms] [LOG] [Fast Refresh] done in 954ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1295482ms] [LOG] [Fast Refresh] done in 954ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1295704ms] [LOG] [Fast Refresh] done in 954ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1295837ms] [LOG] [Fast Refresh] done in 954ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1295983ms] [LOG] [Fast Refresh] done in 954ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1300786ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1300940ms] [LOG] [Fast Refresh] done in 262ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1307953ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1308009ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1598659ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1598730ms] [LOG] [Fast Refresh] done in 175ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1631918ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1633378ms] TypeError: Cannot read properties of undefined (reading 'find')
+    at CineMenu (http://localhost:8081/_next/static/chunks/src_app_preview_cinematic_1s8ntvs._.js?id=%255Bproject%255D/src/app/preview/cinematic/CineMenu.tsx+%255Bapp-client%255D+(ecmascript):99:28)
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14894:24)
+    at renderWithHooks (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4425:24)
+    at updateFunctionComponent (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:5892:21)
+    at beginWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6518:24)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at performUnitOfWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9385:97)
+    at workLoopSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9279:40)
+    at renderRootSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9263:13)
+    at performWorkOnRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8928:47)
+    at performSyncWorkOnRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10093:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10009:316)
+    at flushSyncWork$1 (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9060:86)
+    at Object.scheduleRefresh (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:82:13)
+    at http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:589:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:582:38)
+    at applyUpdate (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:137:31)
+    at http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:145:13
+[ 1633458ms] [LOG] [Fast Refresh] done in 1581ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1633845ms] [LOG] [Fast Refresh] done in 1581ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1634357ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1634783ms] [LOG] [Fast Refresh] done in 532ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1637380ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1637630ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1638277ms] [ERROR] %s must not return anything besides a function, which is used for clean-up.%s useEffect  You returned: false @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1638360ms] [ERROR] %s must not return anything besides a function, which is used for clean-up.%s useEffect  You returned: false @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1638411ms] TypeError: destroy is not a function
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14950:17)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at commitHookEffectListUnmount (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7107:166)
+    at commitHookPassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7120:60)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8764:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+[ 1638445ms] TypeError: destroy is not a function
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14950:17)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at commitHookEffectListUnmount (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7107:166)
+    at commitHookPassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7120:60)
+    at commitPassiveUnmountEffectsInsideOfDeletedTree_begin (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8787:21)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8704:17)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8723:17)
+    at flushPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9826:13)
+    at flushPendingEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9791:16)
+    at flushSpawnedWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9764:48)
+    at commitRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9576:441)
+    at completeRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9541:13)
+[ 1642433ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1642772ms] [LOG] [Fast Refresh] done in 445ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1658456ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1658515ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1658695ms] [ERROR] %s must not return anything besides a function, which is used for clean-up.%s useEffect  You returned: false @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1658764ms] [ERROR] %s must not return anything besides a function, which is used for clean-up.%s useEffect  You returned: false @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1658795ms] TypeError: destroy is not a function
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14950:17)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at commitHookEffectListUnmount (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7107:166)
+    at commitHookPassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7120:60)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8764:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+[ 1658829ms] TypeError: destroy is not a function
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14950:17)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at commitHookEffectListUnmount (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7107:166)
+    at commitHookPassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7120:60)
+    at commitPassiveUnmountEffectsInsideOfDeletedTree_begin (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8787:21)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8704:17)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8723:17)
+    at flushPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9826:13)
+    at flushPendingEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9791:16)
+    at flushSpawnedWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9764:48)
+    at commitRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9576:441)
+    at completeRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9541:13)
+[ 1697097ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1697130ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1697336ms] [ERROR] %s must not return anything besides a function, which is used for clean-up.%s useEffect  You returned: false @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1697386ms] [ERROR] %s must not return anything besides a function, which is used for clean-up.%s useEffect  You returned: false @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1697405ms] TypeError: destroy is not a function
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14950:17)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at commitHookEffectListUnmount (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7107:166)
+    at commitHookPassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7120:60)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8764:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8772:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+    at disconnectPassiveEffect (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8765:17)
+    at recursivelyTraverseDisconnectPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8756:68)
+[ 1697423ms] TypeError: destroy is not a function
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14950:17)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at commitHookEffectListUnmount (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7107:166)
+    at commitHookPassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:7120:60)
+    at commitPassiveUnmountEffectsInsideOfDeletedTree_begin (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8787:21)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8704:17)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8718:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8736:17)
+    at recursivelyTraversePassiveUnmountEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8710:106)
+    at commitPassiveUnmountOnFiber (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8723:17)
+    at flushPassiveEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9826:13)
+    at flushPendingEffects (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9791:16)
+    at flushSpawnedWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9764:48)
+    at commitRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9576:441)
+    at completeRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9541:13)
+[ 1717125ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717149ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717250ms] [LOG] [Fast Refresh] done in 25ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717496ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1717518ms] [LOG] [Fast Refresh] done in 129ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1718505ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719061ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719682ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719683ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719684ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1719684ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1724197ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1724198ms] [LOG] [Fast Refresh] done in 117ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1730194ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1730280ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1730640ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1730641ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1730641ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1730641ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1734351ms] [WARNING] Image with src "/homepage/featured/bridal-amrita-hero-mob.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1735845ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1735868ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1756590ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1756762ms] [LOG] [Fast Refresh] done in 37ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1780488ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1780615ms] [LOG] [Fast Refresh] done in 22ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1780754ms] [LOG] [Fast Refresh] done in 22ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1789085ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1789110ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1807915ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1808404ms] [LOG] [Fast Refresh] done in 558ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1817248ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1817575ms] [LOG] [Fast Refresh] done in 439ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1829892ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1829974ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1935645ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1935971ms] [LOG] [Fast Refresh] done in 374ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1936244ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1936339ms] [LOG] [Fast Refresh] done in 196ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1942153ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1942234ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1942878ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1942879ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1942886ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1942889ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1944999ms] [WARNING] Image with src "/homepage/featured/bridal-amrita-hero-mob.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2089007ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2089548ms] [LOG] [Fast Refresh] done in 244ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2089862ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2089887ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2097593ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2098023ms] [LOG] [Fast Refresh] done in 545ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2098310ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2098357ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2098751ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2098783ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2098816ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2098856ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2241741ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2241861ms] [LOG] [Fast Refresh] done in 223ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2242474ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2243964ms] [ERROR] ./src/app/preview/cinematic/page.tsx:158:1
+Error: Unterminated string constant
+  156 |           whatsappLabel: "Chat on WhatsApp",
+  157 |           hours: text["contact.hours"].split("
+> 158 | ").map((line) => line.trim()).filter(Boolean),
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  159 |           legalName: footer.copyrightName,
+  160 |         }}
+  161 |       />
+
+Parsing ecmascript source code failed @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2251086ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2251172ms] [ERROR] ./src/app/preview/cinematic/page.tsx:158:1
+Error: Unterminated string constant
+  156 |           whatsappLabel: "Chat on WhatsApp",
+  157 |           hours: text["contact.hours"].split("
+> 158 | ").map((line) => line.trim()).filter(Boolean),
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  159 |           legalName: footer.copyrightName,
+  160 |         }}
+  161 |       />
+
+Parsing ecmascript source code failed @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2270398ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2270737ms] [LOG] [Fast Refresh] done in 275ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2271123ms] TypeError: Cannot read properties of undefined (reading 'phone')
+    at CineFooter (http://localhost:8081/_next/static/chunks/src_20l3_sx._.js?id=%255Bproject%255D/src/app/preview/cinematic/CineFooter.tsx+%255Bapp-client%255D+(ecmascript):26:30)
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14894:24)
+    at renderWithHooks (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4425:24)
+    at updateFunctionComponent (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:5892:21)
+    at beginWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6518:24)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at performUnitOfWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9385:97)
+    at workLoopSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9279:40)
+    at renderRootSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9263:13)
+    at performWorkOnRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8928:47)
+    at performSyncWorkOnRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10093:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10009:316)
+    at processRootScheduleInMicrotask (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10030:106)
+    at http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10104:158
+[ 2292705ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2292820ms] [LOG] [Fast Refresh] done in 107ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2293071ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2293165ms] [LOG] [Fast Refresh] done in 207ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2294171ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2294232ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2294859ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2294886ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2294915ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2294952ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2297788ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2297913ms] [LOG] [Fast Refresh] done in 225ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2307798ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2307847ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2308250ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2308278ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2308312ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2308355ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2312769ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2312809ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2315658ms] [WARNING] Image with src "/homepage/stores/varanasi.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2335402ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2335672ms] [LOG] [Fast Refresh] done in 202ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2340502ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2340588ms] [LOG] [Fast Refresh] done in 202ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2345157ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2345227ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2348094ms] [WARNING] Image with src "/homepage/stores/varanasi.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2505917ms] TypeError: Cannot read properties of undefined (reading 'map')
+    at ShopScene (http://localhost:8081/_next/static/chunks/src_20l3_sx._.js:1488:35)
+    at Object.react_stack_bottom_frame (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:14894:24)
+    at renderWithHooks (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4425:24)
+    at updateFunctionComponent (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:5892:21)
+    at beginWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6518:24)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at performUnitOfWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9385:97)
+    at workLoopSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9279:40)
+    at renderRootSync (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9263:13)
+    at performWorkOnRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8928:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10085:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+[ 2539087ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2539159ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2539182ms] [LOG] [Fast Refresh] done in 69ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2539399ms] [LOG] [Fast Refresh] done in 69ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2540565ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2540632ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2545411ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2545426ms] [LOG] [Fast Refresh] done in 116ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2562487ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2562547ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2567062ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2567090ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2567116ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2567143ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2760101ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2760320ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2760633ms] Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/preview/c..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
++                     <div hidden={true}>
+-                     <video
+-                       id="v"
+-                       src="/homepage/video/loom.mp4"
+-                       muted=""
+-                       preload="auto"
+-                       style={{width:"1440px",height:"810px",object-fit:"contain",background-image:"initial",background-position-x:"in...", ...}}
+-                     >
+                    ...
+                  ...
+
+    at throwOnHydrationMismatch (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3120:56)
+    at beginWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6585:918)
+    at runWithFiberInDEV (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:761:74)
+    at performUnitOfWork (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9385:97)
+    at workLoopConcurrentByScheduler (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9381:58)
+    at renderRootConcurrent (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9364:71)
+    at performWorkOnRoot (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:8891:150)
+    at performWorkOnRootViaSchedulerTask (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10085:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:8081/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+[ 2771016ms] [ERROR] Access to video at 'http://localhost:8081/homepage/video/loom.mp4' from origin 'null' has been blocked by CORS policy: The request client is not a secure context and the resource is in more-private address space `loopback`. @ about:blank:0
+[ 2771017ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8081/homepage/video/loom.mp4:0
+[ 3060267ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3060314ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3062408ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3062416ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3062416ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3062417ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3201283ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3201809ms] [LOG] [Fast Refresh] done in 370ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3208901ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3209022ms] [LOG] [Fast Refresh] done in 236ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3214381ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3214428ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3214909ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3214935ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3214960ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3214995ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3334394ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3335133ms] [LOG] [Fast Refresh] done in 840ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3335286ms] [LOG] [Fast Refresh] done in 840ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3335291ms] [LOG] [Fast Refresh] done in 840ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3335720ms] [LOG] [Fast Refresh] done in 840ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3336003ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3336110ms] [LOG] [Fast Refresh] done in 209ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3341731ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3341885ms] [LOG] [Fast Refresh] done in 254ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3361053ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3361111ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3361542ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3361570ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3361593ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3361622ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3391139ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3391388ms] [LOG] [Fast Refresh] done in 182ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3391928ms] [LOG] [Fast Refresh] done in 182ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3392692ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3392710ms] [LOG] [Fast Refresh] done in 125ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3396228ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3396298ms] [LOG] [Fast Refresh] done in 172ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3516260ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3516545ms] [LOG] [Fast Refresh] done in 219ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3517115ms] [LOG] [Fast Refresh] done in 219ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3517118ms] [LOG] [Fast Refresh] done in 219ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3521673ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3521799ms] [LOG] [Fast Refresh] done in 232ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3526858ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3526991ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3527607ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3527644ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3527685ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3527733ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3529000ms] [WARNING] Image with src "/homepage/campaign/kala.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3552722ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3552761ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3553037ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3553057ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3553072ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3553100ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3554845ms] [WARNING] Image with src "/homepage/campaign/kala.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3577310ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3577744ms] [LOG] [Fast Refresh] done in 324ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3578117ms] [LOG] [Fast Refresh] done in 324ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3578120ms] [LOG] [Fast Refresh] done in 324ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3578471ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3578702ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3578717ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3578841ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3579008ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3579278ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3579308ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3584209ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3584280ms] [LOG] [Fast Refresh] done in 184ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3600041ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3600092ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3600577ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3600614ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3600647ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3600679ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3602178ms] [WARNING] Image with src "/homepage/campaign/kala.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3604284ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3604311ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3622006ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3622232ms] [LOG] [Fast Refresh] done in 59ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3731974ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3732342ms] [LOG] [Fast Refresh] done in 468ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3733046ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3733152ms] [LOG] [Fast Refresh] done in 207ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3737940ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3738022ms] [LOG] [Fast Refresh] done in 184ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3754482ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3754509ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3754834ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3754834ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3754836ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3754853ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3792767ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3792791ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3814469ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3814659ms] [LOG] [Fast Refresh] done in 76ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3972685ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3973108ms] [LOG] [Fast Refresh] done in 377ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3977394ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3977660ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3977765ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3978011ms] [LOG] [Fast Refresh] done in 349ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3978483ms] [WARNING] Image with src "/homepage/gallery/tile-02.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3980500ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3980623ms] [LOG] [Fast Refresh] done in 228ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3998878ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3998937ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3999464ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3999464ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3999465ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3999465ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3999467ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 3999491ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4029716ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4029754ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4050453ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4050670ms] [LOG] [Fast Refresh] done in 83ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4050726ms] [WARNING] Image with src "/homepage/gallery/tile-02.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4050727ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4050780ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4050835ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4050855ms] [LOG] [Fast Refresh] done in 125ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4062727ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4062763ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066443ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066476ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066863ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066863ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066864ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066864ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066865ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4066868ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4326897ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4327169ms] [ERROR] ./src/app/preview/cinematic/page.tsx:9:1
+Error: Module not found: Can't resolve './Cinematic'
+   7 | import { getSiteText } from "@/lib/content/site-text";
+   8 | import type { Section } from "@/lib/content/sections";
+>  9 | import { Cinematic, type Scene, type Slide } from "./Cinematic";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 |
+  11 | /*
+  12 |  * PREVIEW ONLY: a cinematic, full-screen take on the homepage, in the manner
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4337662ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4338226ms] [LOG] [Fast Refresh] done in 661ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4338962ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4339157ms] [LOG] [Fast Refresh] done in 301ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4339345ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/preview/cinematic?_rsc=ODm-rDaMjWSeYPRP:0
+[ 4340596ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4340685ms] [LOG] [Fast Refresh] done in 190ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4341017ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/preview/cinematic?_rsc=ODm-rDaMjWSeYPRP:0
+[ 4341449ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4341455ms] [LOG] [Fast Refresh] done in 107ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4341676ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/preview/cinematic:0
+[ 4342035ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4342199ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4358063ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4359577ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4360007ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4360015ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4360077ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4360100ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4360107ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4360123ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4360178ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/preview/cinematic:0
+[ 4361786ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4361844ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4363512ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4363542ms] [LOG] [Fast Refresh] done in 131ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4415130ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4415427ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4415595ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4415601ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4415923ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/preview/cinematic?_rsc=7TmJZH1YHwSue7fr:0
+[ 4415936ms] [LOG] [Fast Refresh] done in 384ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4417061ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8081/preview/cinematic:0
+[ 4417571ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4417638ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4431246ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4431352ms] [LOG] [Fast Refresh] done in 220ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4451844ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4451971ms] [LOG] [Fast Refresh] done in 241ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4465785ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4465827ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4466337ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4466337ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4473660ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4473680ms] [LOG] [Fast Refresh] done in 132ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4475325ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4475433ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4501099ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4501339ms] [LOG] [Fast Refresh] done in 335ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4502398ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4502610ms] [LOG] [Fast Refresh] done in 313ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4508211ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4508364ms] [LOG] [Fast Refresh] done in 263ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4513792ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4513841ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4514537ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4514537ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4516163ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4516203ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4516732ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4516733ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4518691ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4518735ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4519218ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4519218ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4570376ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4570869ms] [LOG] [Fast Refresh] done in 394ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4577760ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4577895ms] [LOG] [Fast Refresh] done in 239ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4661034ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4661068ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4661492ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4661492ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4678893ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4678925ms] [LOG] [HMR] connected @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4679388ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4679388ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4683975ms] [WARNING] Image with src "/homepage/category/sarees.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4684018ms] [WARNING] Image with src "/homepage/category/suits-b.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4684067ms] [WARNING] Image with src "/homepage/womens-mens/womenswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4684118ms] [WARNING] Image with src "/homepage/womens-mens/menswear.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4837324ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4837598ms] [LOG] [Fast Refresh] done in 367ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4843358ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4843546ms] [LOG] [Fast Refresh] done in 302ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4869092ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4869885ms] [LOG] [Fast Refresh] done in 896ms @ http://localhost:8081/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

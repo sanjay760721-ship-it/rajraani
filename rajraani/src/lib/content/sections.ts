@@ -1250,7 +1250,7 @@ export const PAGES: Readonly<
           align: "center",
           textAlign: "center",
           panel: "none",
-          ink: "deep",
+          ink: "cream",
         },
       },
       {

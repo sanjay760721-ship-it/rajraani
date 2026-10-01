@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ProductCard } from "@/components/ProductCard";
 import { search } from "@/lib/search";
+import { PageHead } from "@/components/cinematic/PageHead";
 
 /**
  * Search results, grouped.
@@ -24,7 +25,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
   return (
     <div className="wrap-wide pb-24">
       <div className="mx-auto max-w-prose py-16">
-        <h1 className="text-h1 text-center">What are you looking for?</h1>
+        <PageHead kicker="Search" title="What are you looking for?" size="md" align="center" />
         <form action="/search" className="mt-8">
           <label htmlFor="q" className="sr-only">
             Search

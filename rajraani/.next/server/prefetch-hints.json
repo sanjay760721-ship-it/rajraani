@@ -22,6 +22,20 @@
       }
     }
   },
+  "/": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 32,
+        "slots": {
+          "children": {
+            "hints": 128,
+            "slots": null
+          }
+        }
+      }
+    }
+  },
   "/account": {
     "hints": 64,
     "slots": {
@@ -74,20 +88,6 @@
                 "slots": null
               }
             }
-          }
-        }
-      }
-    }
-  },
-  "/": {
-    "hints": 64,
-    "slots": {
-      "children": {
-        "hints": 32,
-        "slots": {
-          "children": {
-            "hints": 128,
-            "slots": null
           }
         }
       }

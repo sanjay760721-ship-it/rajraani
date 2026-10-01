@@ -2,6 +2,11 @@
   "node": {
     "70d1544382f899c929b3fb503ac4603e417b103f91": {
       "workers": {
+        "app/(home)/page": {
+          "moduleId": 48761,
+          "async": false,
+          "codeHash": null
+        },
         "app/(storefront)/account/page": {
           "moduleId": 7878,
           "async": false,
@@ -24,11 +29,6 @@
         },
         "app/(storefront)/order-confirmation/page": {
           "moduleId": 37579,
-          "async": false,
-          "codeHash": null
-        },
-        "app/(storefront)/page": {
-          "moduleId": 41775,
           "async": false,
           "codeHash": null
         },
@@ -58,6 +58,11 @@
     },
     "7038e11c4be7d8fc4fb7900e117290adfc3317427a": {
       "workers": {
+        "app/(home)/page": {
+          "moduleId": 48761,
+          "async": false,
+          "codeHash": null
+        },
         "app/(storefront)/account/page": {
           "moduleId": 7878,
           "async": false,
@@ -80,11 +85,6 @@
         },
         "app/(storefront)/order-confirmation/page": {
           "moduleId": 37579,
-          "async": false,
-          "codeHash": null
-        },
-        "app/(storefront)/page": {
-          "moduleId": 41775,
           "async": false,
           "codeHash": null
         },
@@ -114,6 +114,11 @@
     },
     "604de8aa087f48399310d7d0a9c09ef6af92cd7902": {
       "workers": {
+        "app/(home)/page": {
+          "moduleId": 48761,
+          "async": false,
+          "codeHash": null
+        },
         "app/(storefront)/account/page": {
           "moduleId": 7878,
           "async": false,
@@ -136,11 +141,6 @@
         },
         "app/(storefront)/order-confirmation/page": {
           "moduleId": 37579,
-          "async": false,
-          "codeHash": null
-        },
-        "app/(storefront)/page": {
-          "moduleId": 41775,
           "async": false,
           "codeHash": null
         },
@@ -170,6 +170,11 @@
     },
     "60e6b8f9384acb095ae3e6d1ce2ff1f4554abf81fe": {
       "workers": {
+        "app/(home)/page": {
+          "moduleId": 48761,
+          "async": false,
+          "codeHash": null
+        },
         "app/(storefront)/account/page": {
           "moduleId": 7878,
           "async": false,
@@ -192,11 +197,6 @@
         },
         "app/(storefront)/order-confirmation/page": {
           "moduleId": 37579,
-          "async": false,
-          "codeHash": null
-        },
-        "app/(storefront)/page": {
-          "moduleId": 41775,
           "async": false,
           "codeHash": null
         },
@@ -226,6 +226,11 @@
     },
     "707af2f66b9d09f0459ac62c900a06edb02d58725d": {
       "workers": {
+        "app/(home)/page": {
+          "moduleId": 48761,
+          "async": false,
+          "codeHash": null
+        },
         "app/(storefront)/account/page": {
           "moduleId": 7878,
           "async": false,
@@ -248,11 +253,6 @@
         },
         "app/(storefront)/order-confirmation/page": {
           "moduleId": 37579,
-          "async": false,
-          "codeHash": null
-        },
-        "app/(storefront)/page": {
-          "moduleId": 41775,
           "async": false,
           "codeHash": null
         },
@@ -282,6 +282,11 @@
     },
     "7072aeb260e41d5a508a7a3ef926d30baaaa7d596d": {
       "workers": {
+        "app/(home)/page": {
+          "moduleId": 48761,
+          "async": false,
+          "codeHash": null
+        },
         "app/(storefront)/account/page": {
           "moduleId": 7878,
           "async": false,
@@ -304,11 +309,6 @@
         },
         "app/(storefront)/order-confirmation/page": {
           "moduleId": 37579,
-          "async": false,
-          "codeHash": null
-        },
-        "app/(storefront)/page": {
-          "moduleId": 41775,
           "async": false,
           "codeHash": null
         },
@@ -343,11 +343,6 @@
     },
     "608f012328232eefb1d53cf6b7afbe8c9b8d185d6b": {
       "workers": {
-        "app/(storefront)/page": {
-          "moduleId": 41775,
-          "async": false,
-          "codeHash": null
-        },
         "app/(storefront)/pages/[slug]/page": {
           "moduleId": 37,
           "async": false,

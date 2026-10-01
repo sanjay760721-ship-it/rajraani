@@ -1,10 +1,14 @@
 {
+  "/(home)/page": "app/(home)/page.js",
+  "/(storefront)/account/page": "app/(storefront)/account/page.js",
+  "/(storefront)/cart/page": "app/(storefront)/cart/page.js",
   "/(storefront)/collections/[handle]/page": "app/(storefront)/collections/[handle]/page.js",
-  "/(storefront)/page": "app/(storefront)/page.js",
+  "/(storefront)/login/page": "app/(storefront)/login/page.js",
   "/(storefront)/pages/[slug]/page": "app/(storefront)/pages/[slug]/page.js",
   "/(storefront)/products/[handle]/page": "app/(storefront)/products/[handle]/page.js",
   "/(storefront)/search/page": "app/(storefront)/search/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
+  "/(storefront)/wishlist/page": "app/(storefront)/wishlist/page.js",
   "/admin/(protected)/page": "app/admin/(protected)/page.js",
+  "/admin/(protected)/text/page": "app/admin/(protected)/text/page.js",
   "/admin/api/edit-context/route": "app/admin/api/edit-context/route.js"
 }

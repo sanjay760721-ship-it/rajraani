@@ -31,6 +31,22 @@ var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
 ;
 ;
 ;
+/*
+ * The block types the cinematic homepage turns into scenes
+ * (components/cinematic/scenes.ts). Any other type would save and then never
+ * appear, so the Homepage screen does not offer it.
+ */ const HOMEPAGE_TYPES = new Set([
+    "heroCarousel",
+    "brandStatement",
+    "collectionTriptych",
+    "videoBand",
+    "categorySplit",
+    "editorialSlideshow",
+    "tileRow",
+    "campaignSlideshow",
+    "richText",
+    "storesSlideshow"
+]);
 const metadata = {
     title: "Homepage"
 };
@@ -42,13 +58,13 @@ async function AdminHomepageRoute() {
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$admin$2f$HomepageEditor$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["HomepageEditor"], {
         initialSections: sections,
-        templates: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$admin$2f$templates$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["sectionTemplates"])(),
+        templates: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$admin$2f$templates$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["sectionTemplates"])().filter((template)=>HOMEPAGE_TYPES.has(template.type)),
         media: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$media$2f$library$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["listMedia"])(),
         links: links,
         isSeed: isSeed
     }, void 0, false, {
         fileName: "[project]/src/app/admin/(protected)/homepage/page.tsx",
-        lineNumber: 23,
+        lineNumber: 33,
         columnNumber: 5
     }, this);
 }

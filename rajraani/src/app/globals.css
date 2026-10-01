@@ -403,7 +403,7 @@
   text-transform: uppercase;
   /* White on the photograph, not gold: a saturated fill competed with the
      picture it sat on. Filled at rest so it never needs a pointer to show. */
-  background: rgb(255 255 255 / 0.92);
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
   color: var(--color-ink);
   padding: 13px 32px;
   transition: background-color var(--t-fast) var(--ease-brand);
@@ -811,3 +811,293 @@ body:has([data-ends-full-bleed]) footer {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ============================================================================
+   SHOP THEME — the redesign (2 Oct 2026)
+
+   Every page inside the cinematic frame (the homepage's `.cine` and the shop's
+   CineFrame) re-points the tokens above at a neutral kohl ground, warm-white
+   ink and zari gold, and at the homepage's faces. Scoped with :has() so the
+   admin, which has none of that frame, keeps its own look. The colour values
+   are mirrored in SHOP_PALETTE (src/lib/tokens/contrast.ts) and tested there.
+
+   The ground is neutral on purpose: no tint behind the sarees, so nothing
+   shifts the colour of the cloth.
+   ============================================================================ */
+:root:has(.cine) {
+  --color-bg: #ffffff;
+  --color-bg-alt: #f6f5f3;
+  --color-bg-sand: #efece7;
+  --color-ink: #111013;
+  --color-ink-dark: #111013;
+  --color-ink-body: #2b282e;
+  --color-ink-muted: #5a5560;
+  --color-rule: #e6e2dc;
+  --color-rule-input: #857e74;
+  --color-rule-strong: #111013;
+  --color-accent: #7e6029;
+  --color-accent-hover: #5f4719;
+  --color-error: #a8392a;
+  --color-success: #3f6b4a;
+  --color-footer-band: #f6f5f3;
+  --color-figure: #efece7;
+  --color-surface-notice: #f8eeec;
+  --color-danger: #b42318;
+  --color-scrim: rgb(17 16 19 / 0.35);
+  --color-scrim-strong: rgb(17 16 19 / 0.55);
+
+  --font-display: var(--font-cine-display), "Barlow Condensed", "Noto Sans Devanagari", sans-serif;
+  --font-ui: var(--font-cine-text), "Barlow", ui-sans-serif, system-ui, "Noto Sans Devanagari", sans-serif;
+  /*
+   * The shop's type scale. Display capitals (Barlow Condensed) for titles,
+   * names, labels and buttons only; everything read in sentences is Barlow at
+   * 15-17px. Nothing below 12px.
+   */
+  --text-display: clamp(3rem, 1.6rem + 4.4vw, 6rem);
+  --text-display--line-height: 1;
+  --text-h1: clamp(2.5rem, 1.6rem + 2.6vw, 4rem);
+  --text-h1--line-height: 1.02;
+  --text-h2: clamp(2rem, 1.4rem + 1.6vw, 3rem);
+  --text-h2--line-height: 1.08;
+  --text-h3: 1.375rem;
+  --text-h3--line-height: 1.15;
+  --text-h4: 1.0625rem;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-prose: 1.0625rem;
+  --text-prose--line-height: 1.75;
+  --text-caption: 0.9375rem;
+  --text-caption--line-height: 1.55;
+  --text-quicklink: 1.375rem;
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--letter-spacing: 0.22em;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  color-scheme: light;
+}
+
+/* Headings in the homepage's voice: condensed capitals. In the base layer, so a
+   page's own utility (normal-case, a weight) still wins where it needs to. */
+@layer base {
+  :root:has(.cine) :is(h1, h2, h3, h4) {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+}
+@layer utilities {
+  :root:has(.cine) :is(.text-display, .text-h1, .text-h2, .text-h3) { font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; }
+  :root:has(.cine) .text-quicklink { font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  /* Hard-coded tiny sizes from the old design: nothing under 12px on the shop. */
+  :root:has(.cine) :is(.text-[9px], .text-[10px], .text-[10.5px], .text-[11px], .text-[11.5px]) { font-size: 0.75rem; }
+  :root:has(.cine) :is(.text-[12.5px], .text-[13px], .text-[13.5px]) { font-size: 0.875rem; }
+  /* Long reading stays at a comfortable measure. */
+  :root:has(.cine) .text-prose { max-width: 68ch; }
+  :root:has(.cine) :is(.eyebrow, .cta-primary, .cta-secondary, .cta-link) { font-family: var(--font-display); font-weight: 500; }
+}
+:root:has(.cine) ::selection { background: #c9a96e; color: #111013; }
+
+/*
+ * The frame viewer is the shop's viewing table: on the shop theme the pieces
+ * open on a neutral daylight grey (no warm or violet cast), so a colour is
+ * judged against nothing that tints it. On the light theme the note is hidden
+ * and the viewer keeps its dark ground.
+ */
+.frame-viewer__note { display: none; }
+:root:has(.cine) .frame-viewer { background: rgb(204 203 201); }
+:root:has(.cine) .frame-viewer__note { display: inline; }
+
+/*
+ * Buttons on the shop theme, in the homepage's voice. A filled ink button is
+ * the primary action (Add to cart, Checkout, Sign in): it becomes solid zari
+ * with kohl capitals. Its label inherits the button's colour even where the
+ * label carries the muted eyebrow style. The quantity stepper's ends go quiet,
+ * outlined rather than filled.
+ */
+:root:has(.cine) :is(button, a, input[type="submit"]).bg-ink {
+  background: var(--color-ink);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.9375rem;
+}
+:root:has(.cine) :is(button, a).bg-ink:hover:not(:disabled) { background: #c9a96e; color: #111013; opacity: 1; }
+:root:has(.cine) .bg-ink :where(.eyebrow) { color: inherit; }
+:root:has(.cine) [data-stepper] button,
+:root:has(.cine) [data-stepper] button.bg-ink { background: transparent; color: var(--color-ink); font-family: inherit; letter-spacing: 0; }
+:root:has(.cine) [data-stepper] button:disabled { opacity: 0.35; }
+
+/* The admin's edit bar: on a phone its sentence wrapped into a tall pill over
+   the page. The buttons say enough on their own there. */
+@media (max-width: 520px) { .site-editor-bar__label { display: none; } }
+
+
+
+/*
+ * A caption set dark on a light photograph keeps its dark type on the shop
+ * theme too: the photograph did not change, only the page around it did.
+ */
+:root:has(.cine) .caption-dark :where(h1, h2, p) { color: #1d1a20; }
+:root:has(.cine) .caption-dark :where(p:first-child) { color: #4a444f; }
+:root:has(.cine) .caption-dark .cta-secondary { background: #1d1a20; color: #f3eee7; }
+:root:has(.cine) .caption-dark .cta-secondary:hover { background: #3a353f; }
+
+/* ============================================================================
+   EDITORIAL BLOCKS, CINEMATIC (redesign, 2 Oct 2026)
+
+   The story and campaign pages, in the homepage's voice. Every block the
+   pages are built from (photo with text, rich text, quotes, poetry) shares one
+   grammar: a zari-ruled label, a title in tall condensed capitals, a lead
+   paragraph set large, body copy at a reading measure, and links in tracked
+   capitals over a zari rule. As the page scrolls, text rises into place and
+   photographs unveil from a soft crop (scroll-driven, where the browser
+   supports it; otherwise everything is simply present).
+   ============================================================================ */
+:where(:root:has(.cine--shop)) .ed-kicker {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-display); font-weight: 500; font-size: 0.8125rem;
+  letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-ink-muted);
+}
+:where(:root:has(.cine--shop)) .ed-kicker::before { content: ""; flex: none; width: 36px; height: 1px; background: var(--color-accent); }
+:where(:root:has(.cine--shop)) .ed-kicker--center { justify-content: center; }
+:root:has(.cine--shop) .ed-title {
+  font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
+  font-size: clamp(2.25rem, 1.4rem + 2.6vw, 4rem); line-height: 0.95;
+  letter-spacing: 0.005em; color: var(--color-ink); text-wrap: balance;
+}
+:root:has(.cine--shop) .ed-title--sm { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); }
+:root:has(.cine--shop) .ed-body p { font-size: 1.0625rem; line-height: 1.75; max-width: 60ch; }
+:root:has(.cine--shop) .text-center .ed-body p { margin-left: auto; margin-right: auto; }
+/* The lead: the first paragraph beside a photograph, or a block that is a
+   single statement, set large in the reading face. */
+:root:has(.cine--shop) .ed-body--lead > p:first-child,
+:root:has(.cine--shop) .ed-body--statement > p,
+:root:has(.cine--shop) .ed-poetry .ed-lead {
+  font-size: clamp(1.3rem, 1rem + 0.9vw, 1.75rem); line-height: 1.45;
+  max-width: 34ch; color: var(--color-ink); text-wrap: pretty;
+}
+:root:has(.cine--shop) .ed-body--statement > p { max-width: 40ch; }
+/* Text beside a photograph sits centred against it, with room to breathe. */
+:root:has(.cine--shop) .ed-text { padding-block: clamp(24px, 4vw, 72px); }
+@media (min-width: 768px) { :root:has(.cine--shop) .ed-text { padding-inline: clamp(8px, 3vw, 56px); } }
+/* Quotes: the homepage's promise, in capitals, under a zari quotation mark. */
+:root:has(.cine--shop) .ed-quote {
+  font-family: var(--font-display); font-weight: 600; font-style: normal; text-transform: uppercase;
+  font-size: clamp(2.25rem, 1.3rem + 3.4vw, 5rem); line-height: 0.95; letter-spacing: 0.005em; text-wrap: balance;
+}
+:root:has(.cine--shop) .ed-quote::before {
+  content: "\201C"; display: block; margin: 0 auto 8px;
+  font-size: 1.4em; line-height: 0.6; color: var(--color-accent);
+}
+/* Links: tracked capitals over a zari rule that draws away on hover. */
+:root:has(.cine--shop) main :is(.cta-link, .campaign-cta) {
+  font-family: var(--font-display); font-weight: 500; font-size: 0.9375rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-ink);
+  text-decoration: none; border: 0; padding-bottom: 6px;
+  background: linear-gradient(var(--color-accent), var(--color-accent)) 0 100% / 100% 1px no-repeat;
+  transition: background-size 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+:root:has(.cine--shop) main :is(.cta-link, .campaign-cta)::after { display: none; }
+:root:has(.cine--shop) main :is(.cta-link, .campaign-cta):hover { background-size: 0 1px; background-position: 100% 100%; }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root:has(.cine--shop) :is(.ed-text, .ed-rich, .ed-poetry, figure:has(.ed-quote), .cine-page-head ~ * .text-h2) {
+      animation: edRise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 45%;
+    }
+    :root:has(.cine--shop) .ed-media {
+      animation: edUnveil linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+  }
+}
+@keyframes edRise { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+@keyframes edUnveil { from { clip-path: inset(10% 6% 10% 6%); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+
+/* A page's opening photograph, as the homepage opens: the whole screen below
+   the header, the copy on the logo's left edge, the title in the homepage's
+   largest capitals, and the gold-outlined button. */
+:root:has(.cine--shop) .ed-hero__art { height: calc(100svh - 92px); max-height: none; }
+:root:has(.cine--shop) .ed-hero__copy { max-width: none; padding-inline: max(24px, 4vw); }
+:root:has(.cine--shop) .ed-hero .ed-kicker { color: rgb(255 255 255 / 0.85); }
+:root:has(.cine--shop) .ed-hero__title { font-size: clamp(3.4rem, 1.6rem + 6vw, 8.5rem) !important; line-height: 0.9 !important; }
+:root:has(.cine--shop) .ed-hero__body { font-size: 1.125rem; line-height: 1.55; }
+:root:has(.cine--shop) .ed-hero__cta {
+  background: transparent; color: #fff; border: 1px solid #c9a96e;
+  padding: 17px 42px; font-family: var(--font-display); font-weight: 600; font-size: 0.9375rem;
+  letter-spacing: 0.22em; text-transform: uppercase; transition: background-color 400ms ease, color 400ms ease;
+}
+:root:has(.cine--shop) .ed-hero__cta:hover { background: #c9a96e; color: #111013; }
+@media (max-width: 767px) { :root:has(.cine--shop) .ed-hero__art { height: calc(100svh - 72px); } }
+
+/* Shop cards: Quick View in light grey, the wishlist heart in dark red. */
+:root:has(.cine--shop) .quick-view-bar { background: rgb(236 234 231 / 0.92); color: #111013; font-family: var(--font-display); font-weight: 500; font-size: 0.875rem; letter-spacing: 0.24em; text-transform: uppercase; }
+:root:has(.cine--shop) .quick-view-bar:hover { background: rgb(226 223 219 / 0.97); }
+/* The wishlist heart: a soft rose, always visible on a photograph, filling
+   with a small bloom when a piece is saved. */
+:root:has(.cine--shop) .wish-heart { color: #e0737b; background: rgb(255 255 255 / 0.86); border: 0; opacity: 1; transition: background-color 200ms ease, color 200ms ease, transform 160ms ease; }
+:root:has(.cine--shop) .wish-heart:hover { color: #d65a64; background: #fff; }
+:root:has(.cine--shop) .wish-heart:active { transform: scale(0.92); }
+:root:has(.cine--shop) .wish-heart[data-on] { color: #e0737b; }
+:root:has(.cine--shop) [data-on] .wish-heart__icon { animation: wishBloom 420ms cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes wishBloom { 0% { transform: scale(0.7); } 55% { transform: scale(1.18); } 100% { transform: scale(1); } }
+:root:has(.cine--shop) .wish-save { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; margin-left: 20px; padding: 12px 0; background: none; border: 0; cursor: pointer; font-family: var(--font-display); font-weight: 500; font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-ink); }
+:root:has(.cine--shop) .wish-save .wish-heart__icon { color: #e0737b; }
+@media (prefers-reduced-motion: reduce) { :root:has(.cine--shop) [data-on] .wish-heart__icon { animation: none; } }
+
+/*
+ * Readability on white (2 Oct 2026). Body copy a near-black rather than grey;
+ * small spaced capitals never under 13px and never in the faintest grey when
+ * they carry meaning (filter names, sort, counts); reading text at 16-18px.
+ */
+:root:has(.cine--shop) .eyebrow { font-size: 0.8125rem; letter-spacing: 0.2em; color: var(--color-ink); }
+:root:has(.cine--shop) .text-caption { color: var(--color-ink-muted); }
+:root:has(.cine--shop) .cine-page-head__intro { font-size: 1.125rem; line-height: 1.7; color: var(--color-ink-body); }
+:root:has(.cine--shop) .cine-page-head .cine-kicker { color: var(--color-ink); }
+:root:has(.cine--shop) main :is(p, li, dd, label) { -webkit-font-smoothing: antialiased; }
+/* Blocks on the deep maroon ground keep their cream type. */
+:root:has(.cine--shop) .ground-deep :is(.ed-title, .ed-body p, .ed-kicker, h1, h2, h3, p, .cta-link) { color: #fbe9c4; }
+:root:has(.cine--shop) .ground-deep .ed-kicker::before { background: #c9a96e; }
+:root:has(.cine--shop) .ground-deep .cta-link { background-image: linear-gradient(#c9a96e, #c9a96e); }
+
+/* ============================================================================
+   TYPE AND COLOUR, REVIEWED (2 Oct 2026)
+
+   One scale for the shop pages, eight steps: 13 labels · 15 small · 17 body ·
+   22 names · 28 leads · 48 section titles · 64 page titles · 96 the largest
+   openings. Black or near-black for every word; zari gold only in rules and
+   hovers; maroon only as a ground, never as text on white.
+   ============================================================================ */
+/* Breadcrumbs, references, previous/next: quiet sentence case, not capitals. */
+:root:has(.cine--shop) .crumbs { font-family: var(--font-ui); font-size: 0.9375rem; letter-spacing: 0; text-transform: none; }
+:root:has(.cine--shop) .crumbs [aria-current] { color: var(--color-ink); }
+/* Labels: one size. */
+:root:has(.cine--shop) :is(.cine-kicker, .pdp-related-title) { font-size: 0.8125rem; }
+/* Section titles: one size (48). */
+:root:has(.cine--shop) :is(.ed-title, .ed-title--sm, .cine-letters__title) { font-size: clamp(2rem, 1.4rem + 1.6vw, 3rem); }
+/* The page's own titles: 96 for the openings, 64 for the working pages. */
+:root:has(.cine--shop) .cine-page-title--lg { font-size: clamp(3rem, 1.6rem + 4.4vw, 6rem); }
+:root:has(.cine--shop) :is(.cine-page-title--md, .pdp-name, .ed-quote) { font-size: clamp(2.5rem, 1.6rem + 2.6vw, 4rem); }
+:root:has(.cine--shop) .cine--shop main :is(h1.text-h1, h1.text-display) { font-size: clamp(3rem, 1.6rem + 4.4vw, 6rem); }
+/* Leads 28, body 17, page intros at body size in near-black. */
+:root:has(.cine--shop) :is(.ed-body--lead > p:first-child, .ed-body--statement > p, .ed-poetry .ed-lead) { font-size: clamp(1.375rem, 1.1rem + 0.7vw, 1.75rem); }
+:root:has(.cine--shop) :is(.ed-body p, .cine-page-head__intro, .cine-letters__text) { font-size: 1.0625rem; }
+/* Prices: black everywhere, in the reading face with even figures. */
+:root:has(.cine--shop) .pdp-price { color: var(--color-ink); font-variant-numeric: tabular-nums; }
+:root:has(.cine--shop) .tabular-nums { font-family: var(--font-ui); }
+/* Campaign text on white is ink, not maroon or brown. */
+:root:has(.cine--shop) :is(.campaign-deep, .campaign-brown) { color: var(--color-ink-body); }
+:root:has(.cine--shop) :is(.campaign-deep, .campaign-brown) :where(h1, h2, h3) { color: var(--color-ink); }
+/* Long passages read from a straight left edge; short statements stay centred. */
+:root:has(.cine--shop) .ed-rich.text-center:has(.ed-title) { text-align: left; }
+:root:has(.cine--shop) .ed-rich.text-center:has(.ed-title) .ed-body p { margin-left: 0; }
+/* The smallest text on the site: 13px. */
+:root:has(.cine--shop) .cine-footer__legal { font-size: 0.8125rem; }
+:root:has(.cine--shop) :is(.cine-promises, .quick-view-bar) { font-size: 0.8125rem; }
+:root:has(.cine--shop) .cine-foot-grid__list { font-size: 0.9375rem; }
+:root:has(.cine--shop) .pdp-title { font-size: 1.0625rem; }

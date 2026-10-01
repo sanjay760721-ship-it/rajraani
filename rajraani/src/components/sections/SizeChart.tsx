@@ -16,14 +16,14 @@ type SizeChartSection = Extract<Section, { type: "sizeChart" }>;
 export function SizeChart({ section }: { section: SizeChartSection }) {
   return (
     <section className="mx-auto max-w-[1024px] px-5 pb-10">
-      <h2 className="py-8 font-display text-[20px] font-bold uppercase tracking-[0.02em] text-ink md:px-[46px]">
+      <h2 className="py-8 font-display text-h3 font-bold uppercase tracking-[0.02em] text-ink md:px-[46px]">
         {section.title}
       </h2>
 
       <div className="grid items-center gap-10 md:grid-cols-[2fr_3fr] md:gap-8 md:px-[46px]">
         <div className="flex min-w-0 flex-col items-center gap-4 sm:flex-row sm:items-end">
           <Figure kind={section.figure} labels={section.measures.map((m) => m.point)} />
-          <dl className="w-[150px] shrink-0 font-ui text-[10.5px] leading-[1.35] text-ink-body">
+          <dl className="w-[180px] shrink-0 font-ui text-[13px] leading-[1.45] text-ink-body">
             {section.measures.map((measure) => (
               <div key={measure.label} className="border-b border-ink-muted/60 py-2.5 last:border-b-0">
                 <dt className="uppercase">{measure.label}</dt>
@@ -53,7 +53,7 @@ export function SizeChart({ section }: { section: SizeChartSection }) {
                     {row.label}
                   </th>
                   {row.inches.map((inch, index) => (
-                    <td key={index} className="border border-ink-muted/70 px-1 font-ui text-[12.5px] leading-[1.35] text-ink-body">
+                    <td key={index} className="border border-ink-muted/70 px-1 font-ui text-[14px] leading-[1.4] text-ink-body">
                       {inch}″
                       <br />
                       {row.cm[index]} cm
@@ -146,7 +146,7 @@ function Figure({ kind, labels }: { kind: "women" | "men"; labels: readonly stri
             strokeDasharray="1.2 1.8"
           />
           <line x1={CENTRE + point.rx} y1={point.y} x2="168" y2={point.y} stroke="var(--color-ink-muted)" strokeWidth="0.6" />
-          <text x="171" y={point.y + 3} fontSize="8" fill="var(--color-ink-body)" fontFamily="var(--font-ui)">
+          <text x="171" y={point.y + 3} fontSize="10" fill="var(--color-ink-body)" fontFamily="var(--font-ui)">
             {labels[index]}
           </text>
         </g>
