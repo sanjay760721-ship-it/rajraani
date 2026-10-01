@@ -1268,6 +1268,74 @@ product codes, stock and prices (now loadable by spreadsheet), the Razorpay KYC,
 domain, the real email and phone, the Calendly pages, and the Silk Mark decision.
 
 
+### 2.56 Redesign begun: one element kept, the rest tried and reverted — 1 October 2026
+
+The owner's instruction: the site still looks like a copy of tilfi.com from a visitor's
+point of view, and must be redesigned to something much better while keeping the royal
+Banarasi feel. Plan and avoid list: `docs/redesign/redesign-brief.md` and
+`docs/redesign/reference-fingerprint.md`.
+
+**Kept and live (commit `f47a4b7`): the announcement strip.** Maroon `#5a0f1c` with zari
+gold `#ecd08a`, one message at a time, rotating every 4 seconds (paused on hover, still
+for reduced motion), wrapping onto two balanced lines on phones at a fixed 46px. The
+wording was also wrong: it promised "Free worldwide shipping above ₹25,000" and "all
+duties included", but the shop ships within India only. It now reads "Complimentary
+shipping across India", "Handwoven in Varanasi, one piece at a time" and "Visit us in
+Banaras by appointment" (editable under Change text).
+
+**Tried and rejected by the owner, all reverted** (the commits stay in history):
+
+| # | Attempt | How it ended |
+|---|---|---|
+| 1 | Whole site frame, "Royal Ivory": ivory, indigo, gold and sindoor tokens; Marcellus, Newsreader and Instrument Sans; sticky one-row header, unrolling menus, night footer (`a949bfe`) | "Looks bad", reverted (`91afe32`), along with a half-built homepage block rewrite |
+| 2 | Three homepage mockups in a canvas artifact (Darbar, Ghat at Dawn, Zari Night) | "It's bad". They used photo placeholders, not real photos |
+| 3 | Top bar: ivory with a centred search box (`f970748`) | "Looks bad", reverted (`67060ad`) |
+| 4 | Top bar: brocade, jhalar and ivory-zari pattern options | All three "look bad" |
+| 5 | Top bar "Loom": React Bits Threads, StrokeText, Magnet, ClickSpark on night plum | "Really bad… be classy" |
+| 6 | Top bar: plain white, gold rule, small spaced caps, fine charcoal icons | "Bad" |
+| 7 | Top bar "Haveli Gateway", via Impeccable: sindoor lintel, lime wall with a brass-framed plaque, brass-ring studs. The owner picked this card, then saw it built | "Revert it" |
+
+**What to learn from it.** Seven directions, ranging from rich to plain and from still to
+animated, all failed, and the owner gave no reason for any of them even when asked. Choosing
+a card on a decision page did not mean the build would be liked. **Do not generate an eighth
+variant.** Get a concrete reference first: a screenshot or a site whose header the owner
+likes. The owner named **Sabyasachi** as the level of class they mean.
+
+**Process the owner agreed to:** redesign one homepage element at a time, top to bottom
+(the list of 14 elements is in this session's notes: announcement, top bar, menu, hero,
+statement, triptych, film, sarees/suits, womenswear slideshow, four tiles, campaigns,
+closing thought, stores, footer). Options are previewed on the local dev server under
+`rajraani/public/_design-preview/<element>/`, which is gitignored and so may use the
+stand-in photos. Nothing is committed until the owner has seen it on the site and said keep.
+
+**Tooling added today** (committed, none of it used by the site yet):
+- `PRODUCT.md` (repo root): the Impeccable product brief from the owner's answers. All three
+  customer types equally (brides and families, collectors, everyday luxury); the feeling is
+  "a royal house"; Sabyasachi is the classy reference, for level only, never to copy.
+- Anthropic's **frontend-design** skill, alongside the existing Impeccable, Taste
+  (design-taste-frontend, high-end-visual-design, minimalist-ui, redesign-existing-projects)
+  and Emil Kowalski skills. Load them before any design work. They name the AI tells that
+  sank attempts 1–6: cream plus serif, all-caps spaced labels, middle-dot strings, "→"
+  arrows, scattered motion.
+- **React Bits** components in `rajraani/src/components/react-bits/` (StrokeText, Threads,
+  Magnet, ClickSpark), each with an origin note (licence MIT + Commons Clause), plus the
+  `ogl` dependency for Threads. Local changes: colour defaults `currentColor`, ClickSpark
+  accepts CSS variables, and strict-TypeScript and React 19 hook-lint fixes.
+- `.impeccable/decision/`: the Haveli direction cards and brief, kept as a record of a
+  rejected direction. The surface brief was removed so future runs do not inherit it.
+- `.gitignore`: `docs/redesign/baseline/` and `after/`, `.impeccable/review/` and
+  `.impeccable/questions/` (all contain stand-in photography or server state), and
+  `.playwright-mcp/`.
+
+**Redesign meter** (`npm run check:redesign`): **63 lines** of the reference site's design
+left (67 at the start of the day). Only the announcement fingerprint is cleared. Type,
+colours, measured spacing, the top-bar tagline, the stores heading and the collection grid
+remain. The pink top bar still carries "Made in Banaras. Made by Rajraani.", the
+reference's sentence with the name swapped.
+
+**Next:** get the owner's reference for the top bar, or move to the main menu or the hero
+and come back to it later.
+
 ---
 
 ## 3. How the folder is arranged

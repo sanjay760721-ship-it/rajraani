@@ -8,7 +8,7 @@ Handloom Banarasi saree e-commerce. Own brand, category architecture.
 
 | If you want to… | Read |
 |---|---|
-| **Know where the project stands** | [HANDOFF.md](HANDOFF.md) — resume state, kept current (§2.54 is the latest) |
+| **Know where the project stands** | [HANDOFF.md](HANDOFF.md) — resume state, kept current (§2.56 is the latest) |
 | **Use the admin (shop owner)** | [docs/admin-guide.md](docs/admin-guide.md) — plain-language guide to changing the site |
 | **Know how the admin is built, and what is left** | [rajraani/docs/admin-dashboard-plan.md](rajraani/docs/admin-dashboard-plan.md) |
 | **Run the site** | [rajraani/README.md](rajraani/README.md) |
@@ -47,6 +47,10 @@ be put back, and it works on a phone. What blocks going live is not the admin:
 3. **Hosting** — the database and uploaded photos need a server with a persistent disk.
 
 The full ledger, with what is left and how long it takes, is HANDOFF §2.55.
+
+**Redesign, 1 October 2026:** replacing everything a visitor would recognise from tilfi.com
+has begun, one homepage element at a time. The announcement strip is done; seven top-bar
+designs were tried and turned down. Status and lessons: HANDOFF §2.56.
 
 ---
 

@@ -4,6 +4,14 @@
 so the site no longer looks like a copy, and the result must be **better than tilfi.com**,
 without losing any functionality or the aesthetic of Banaras.*
 
+
+> **Status, 1 October 2026.** The owner chose to redesign one homepage element at a time
+> instead of the phased plan below. The announcement strip is done (maroon and zari gold,
+> true wording). The site frame, three homepage mockups and seven top-bar designs were
+> turned down and reverted; the owner gave no reasons. Get a concrete visual reference before
+> the next attempt. The owner names Sabyasachi as the level of class wanted. §6 decisions 1-2 are now
+> answered in `PRODUCT.md`: a royal house, for all three customer types equally. Full
+> account: HANDOFF §2.56.
 ---
 
 ## 1. The rule
