@@ -1101,3 +1101,7 @@ body:has([data-ends-full-bleed]) footer {
 :root:has(.cine--shop) :is(.cine-promises, .quick-view-bar) { font-size: 0.8125rem; }
 :root:has(.cine--shop) .cine-foot-grid__list { font-size: 0.9375rem; }
 :root:has(.cine--shop) .pdp-title { font-size: 1.0625rem; }
+
+/* A label inside a filled button takes the button's colour (white on black,
+   black on the gold hover), whatever the general label rule says. */
+:root:has(.cine--shop) :is(button, a).bg-ink .eyebrow { color: inherit; }
