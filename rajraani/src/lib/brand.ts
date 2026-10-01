@@ -51,18 +51,18 @@ export const BRAND = {
 } as const;
 
 /**
- * Announcement bar — shipping and duty terms, above the utility row.
+ * Announcement strip: three short, true lines that take turns.
  *
- * Three-part message with shipping and duty-paid reassurance.
+ * Shipping is India-only today (the Shipping tab below says so), so nothing
+ * here promises more than that.
  */
 export const ANNOUNCEMENT_PARTS = [
-  "Free shipping in India",
-  "Free worldwide shipping above ₹25,000",
-  "Rest assured - all duties are included, with no extra fees upon delivery",
+  "Complimentary shipping across India",
+  "Handwoven in Varanasi, one piece at a time",
+  "Visit us in Banaras by appointment",
 ] as const;
 
-export const ANNOUNCEMENT_MESSAGE =
-  "Free shipping in India | Free worldwide shipping above ₹25,000 | Rest assured - all duties are included, with no extra fees upon delivery";
+export const ANNOUNCEMENT_MESSAGE = ANNOUNCEMENT_PARTS.join(" · ");
 
 /**
  * Global PDP tab content.

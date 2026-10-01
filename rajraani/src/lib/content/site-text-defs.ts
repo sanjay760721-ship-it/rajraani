@@ -48,7 +48,7 @@ export const SITE_TEXT_FIELDS: readonly {
 }[] = [
   { key: "announce.1", group: "Announcement strip (the dark line at the very top)", label: "First message" },
   { key: "announce.2", group: "Announcement strip (the dark line at the very top)", label: "Second message" },
-  { key: "announce.3", group: "Announcement strip (the dark line at the very top)", label: "Third message", hint: "Shown in italics." },
+  { key: "announce.3", group: "Announcement strip (the dark line at the very top)", label: "Third message", hint: "The messages take turns, one at a time." },
   { key: "tagline", group: "Top bar", label: "Line on the left of the top bar", hint: "Computers only." },
   { key: "contact.email", group: "Contact details (footer)", label: "Email address" },
   { key: "contact.phone", group: "Contact details (footer)", label: "Phone number", hint: "Also used for the WhatsApp link." },

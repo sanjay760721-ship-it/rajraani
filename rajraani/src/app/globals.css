@@ -48,7 +48,9 @@
    * catch — the gate exists because a stray hex is how a palette drifts.
    */
   --color-accent-hover: #ae7922;   /* link and nav hover */
-  --color-announce-ink: #fbe9c4;   /* cream on the announcement bar */
+  /* The announcement strip: Banarasi maroon with zari-gold capitals. */
+  --color-announce-bg: #5a0f1c;
+  --color-announce-ink: #ecd08a;
   --color-surface-notice: #faf0f0; /* empty-state and notice panels */
   --color-danger: #e02424;         /* remove / delete affordances */
   /*
@@ -802,4 +804,10 @@ body:has([data-ends-full-bleed]) footer {
   border-bottom: 1px solid currentColor;
   padding-bottom: 4px;
   color: inherit;
+}
+
+/* Announcement strip: each message rises gently into place. */
+@keyframes announceIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }

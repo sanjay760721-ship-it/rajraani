@@ -27,7 +27,7 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
     parts: [
       {
         title: "Announcement strip",
-        what: "The dark line at the very top — “Free shipping in India | …”",
+        what: "The maroon line at the very top — “Complimentary shipping across India …”",
         href: TEXT("Announcement strip (the dark line at the very top)"),
         action: "Change the messages",
       },

@@ -6,84 +6,55 @@ import { useSiteText } from "@/components/site-text-context";
 import { announcementParts } from "@/lib/content/site-text-defs";
 
 /**
- * Announcement bar — shipping and duty terms, above the utility row.
+ * Announcement strip: deep Banarasi maroon with zari-gold capitals, one
+ * message at a time between two small gold diamonds.
  *
- * Structure & Design tokens (design.md §5.1):
- * - Height: 36px
- * - Background: bg-bg-alt with 1px bottom border
- * - Desktop: 3-part pipe-delimited with italic reassurance clause
- * - Mobile: smooth rotating ticker between the 3 messages
- * - Closable: dismissible for the current session/view (reappears on fresh page load/refresh)
- * - Scrolls away with the page (not sticky)
+ * The messages take turns every 4 seconds, fading up into place. The rotation
+ * pauses while the pointer is over the strip and never runs for
+ * reduced-motion users, who see the first message only. The strip can be
+ * closed for the current page view and scrolls away with the page.
  */
 export function AnnouncementBar() {
   // Edited in the admin under Site-wide text.
-  const ANNOUNCEMENT_PARTS = announcementParts(useSiteText());
+  const parts = announcementParts(useSiteText());
   const [dismissed, setDismissed] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  // Auto-rotate messages on mobile viewport
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % Math.max(1, ANNOUNCEMENT_PARTS.length));
-    }, 4000);
+    if (paused || parts.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = setInterval(() => setIndex((i) => (i + 1) % parts.length), 4000);
     return () => clearInterval(timer);
-  }, [ANNOUNCEMENT_PARTS.length]);
+  }, [paused, parts.length]);
 
-  if (dismissed || ANNOUNCEMENT_PARTS.length === 0) return null;
+  if (dismissed || parts.length === 0) return null;
 
   return (
     <aside
       aria-label="Store announcement"
-      className="relative z-30 w-full min-h-[36px] transition-all duration-300"
-      style={{ backgroundColor: "var(--color-ink)", color: "var(--color-announce-ink)" }}
+      className="relative z-30 w-full bg-announce-bg text-announce-ink"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
-      <div className="mx-auto flex min-h-[36px] max-w-[1680px] items-center justify-center px-8 sm:px-12 py-1.5">
-        {/* Desktop view: 3-part pipe-delimited message */}
-        <div className="hidden md:flex md:items-center md:justify-center md:gap-3 text-center text-[11.5px] lg:text-[12px] font-normal tracking-[0.06em] text-announce-ink leading-none">
-          {ANNOUNCEMENT_PARTS.map((part, index) => (
-            <span key={index} className="contents">
-              {index > 0 ? (
-                <span className="text-announce-ink/40 select-none" aria-hidden="true">|</span>
-              ) : null}
-              <span className={index === 2 ? "italic" : undefined}>{part}</span>
-            </span>
-          ))}
-        </div>
+      <div className="mx-auto flex min-h-[46px] max-w-[1680px] items-center justify-center px-10 py-2 md:min-h-10 md:px-12">
+        <p
+          key={index}
+          aria-live="polite"
+          className="flex items-center gap-3.5 text-center font-ui text-[10.5px] uppercase leading-snug tracking-[0.1em] animate-[announceIn_600ms_ease-out] md:text-[12.5px] md:tracking-[0.14em]"
+        >
+          <span className="hidden size-[5px] shrink-0 rotate-45 bg-announce-ink md:inline-block" aria-hidden="true" />
+          <span className="text-balance">{parts[index % parts.length]}</span>
+          <span className="hidden size-[5px] shrink-0 rotate-45 bg-announce-ink md:inline-block" aria-hidden="true" />
+        </p>
 
-        {/* Mobile view: rotating ticker with smooth fade */}
-        <div className="flex md:hidden items-center justify-center text-center text-[11px] font-normal tracking-[0.05em] text-announce-ink leading-snug px-2">
-          <span
-            key={currentIndex}
-            className="animate-[fadeIn_300ms_ease-in-out] inline-block transition-opacity duration-300"
-          >
-            {currentIndex % ANNOUNCEMENT_PARTS.length === 2 ? (
-              <span className="italic">{ANNOUNCEMENT_PARTS[2]}</span>
-            ) : (
-              ANNOUNCEMENT_PARTS[currentIndex % ANNOUNCEMENT_PARTS.length]
-            )}
-          </span>
-        </div>
-
-        {/* Close Button */}
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-announce-ink hover:bg-announce-ink/15 active:bg-announce-ink/25 transition-colors"
-          aria-label="Close announcement bar"
-          title="Close announcement"
+          className="absolute right-2 top-1/2 inline-flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-announce-ink/80 transition-colors hover:bg-announce-ink/15 hover:text-announce-ink"
+          aria-label="Close announcement"
         >
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" aria-hidden="true">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
