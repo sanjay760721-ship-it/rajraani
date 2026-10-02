@@ -407,6 +407,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../src/app/api/payments/webhook/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/payments/webhook">> = Specific
+  const handler = {} as typeof import("../../src/app/api/payments/webhook/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/media/[file]/route.ts
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/media/[file]">> = Specific

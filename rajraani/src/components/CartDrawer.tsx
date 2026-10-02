@@ -27,6 +27,7 @@ type RazorpayOptions = {
   handler: (response: RazorpayPaymentResponse) => void;
   prefill?: { name?: string; email?: string; contact?: string };
   theme?: { color?: string };
+  modal?: { ondismiss: () => void };
 };
 
 type RazorpayInstance = { open: () => void };
@@ -35,6 +36,32 @@ declare global {
   interface Window {
     Razorpay?: new (options: RazorpayOptions) => RazorpayInstance;
   }
+}
+
+let gatewayLoading: Promise<boolean> | undefined;
+function loadGateway(): Promise<boolean> {
+  if (window.Razorpay) return Promise.resolve(true);
+  if (gatewayLoading) return gatewayLoading;
+  gatewayLoading = new Promise<boolean>((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    const finish = (ok: boolean) => {
+      clearTimeout(timer);
+      script.onload = null;
+      script.onerror = null;
+      if (!ok) script.remove();
+      resolve(ok);
+    };
+    const timer = setTimeout(() => finish(false), 15_000);
+    script.onload = () => finish(Boolean(window.Razorpay));
+    script.onerror = () => finish(false);
+    document.head.appendChild(script);
+  }).then((ok) => {
+    gatewayLoading = undefined;
+    return ok;
+  });
+  return gatewayLoading;
 }
 
 /**
@@ -142,8 +169,16 @@ export function CartDrawer() {
 
   const handleCheckoutSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     setErrorMsg(null);
+    if (!(await loadGateway())) {
+      setErrorMsg("The payment window could not load. Please refresh and try again.");
+      setLoading(false);
+      return;
+    }
+
+    try {
 
     const cartRequestLines = lines.map((l) => ({
       handle: l.handle,
@@ -170,10 +205,11 @@ export function CartDrawer() {
         description: `Order ${reference}`,
         order_id: razorpayOrderId,
         handler: async function (response: RazorpayPaymentResponse) {
+          try {
           const paymentResult = await completePaymentAction(
-            response.razorpay_order_id || razorpayOrderId,
-            response.razorpay_payment_id || `pay_rr_${Date.now()}`,
-            amountMinor,
+            response.razorpay_order_id || "",
+            response.razorpay_payment_id || "",
+            response.razorpay_signature || "",
           );
 
           if (paymentResult.ok) {
@@ -184,6 +220,10 @@ export function CartDrawer() {
             setErrorMsg(paymentResult.error);
             setLoading(false);
           }
+          } catch {
+            setErrorMsg("Payment confirmation was interrupted. Please contact us with your payment reference before retrying.");
+            setLoading(false);
+          }
         },
         prefill: {
           name: customer.fullName,
@@ -191,30 +231,20 @@ export function CartDrawer() {
           contact: customer.phone,
         },
         theme: {
-          color: "var(--color-ink)",
+          color: getComputedStyle(panelRef.current ?? document.documentElement).getPropertyValue("--color-ink").trim(),
         },
+        modal: { ondismiss: () => setLoading(false) },
       };
 
       const rzp = new window.Razorpay(options);
       rzp.open();
-      setLoading(false);
     } else {
-      // Fallback for test/demo mode when Razorpay JS script is not loaded:
-      // Instantly confirm test payment, decrement stock, and navigate to confirmation receipt!
-      const paymentResult = await completePaymentAction(
-        razorpayOrderId,
-        `pay_rr_demo_${Date.now()}`,
-        amountMinor,
-      );
-
-      if (paymentResult.ok) {
-        clear();
-        close();
-        router.push(`/order-confirmation?ref=${paymentResult.reference}`);
-      } else {
-        setErrorMsg(paymentResult.error);
-        setLoading(false);
-      }
+      setErrorMsg("The payment window could not load. Please refresh and try again.");
+      setLoading(false);
+    }
+    } catch {
+      setErrorMsg("Checkout was interrupted. Please try again.");
+      setLoading(false);
     }
   };
 

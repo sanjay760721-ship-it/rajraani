@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { serializeJsonLd } from "@/lib/json-ld";
 
 import {
   ActiveFilterChips,
@@ -290,7 +291,7 @@ function ItemListJsonLd({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }

@@ -1,6 +1,10 @@
 "use server";
 
 import { db } from "../db/client.ts";
+import { headers } from "next/headers";
+import { createRateLimit } from "../rate-limit";
+
+const permit = createRateLimit(5, 10 * 60 * 1000);
 
 /**
  * The contact form's submit.
@@ -43,6 +47,9 @@ export async function submitEnquiryAction(
   _previous: EnquiryResult,
   formData: FormData,
 ): Promise<EnquiryResult> {
+  const list = await headers();
+  const address = list.get("x-forwarded-for")?.split(",")[0]?.trim() || list.get("x-real-ip") || "unknown";
+  if (!permit(address)) return { status: "error", message: "Please wait a few minutes before sending another message." };
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();

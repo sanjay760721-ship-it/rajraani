@@ -1,6 +1,7 @@
 import "server-only";
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import sharp from "sharp";
@@ -27,7 +28,7 @@ import { db } from "../db/client.ts";
  */
 
 export const MEDIA_DIR =
-  process.env.MEDIA_PATH ?? path.join(process.cwd(), "data", "media");
+  process.env.MEDIA_PATH || path.join(process.cwd(), "data", "media");
 
 /** Served-name pattern; the route refuses anything else, so no path tricks. */
 export const MEDIA_FILE = /^[0-9]+-[a-z0-9-]{1,60}\.webp$/;
@@ -144,7 +145,7 @@ export async function saveUpload(
 
   let output: { data: Buffer; info: { width: number; height: number } };
   try {
-    output = await sharp(input, { failOn: "error" })
+    output = await sharp(input, { failOn: "error", limitInputPixels: 40_000_000 })
       .rotate()
       .resize({
         width: MAX_EDGE,
@@ -204,11 +205,12 @@ export function setMediaAlt(id: number, alt: string): void {
 }
 
 /** Read a served file. Undefined for anything the library does not own. */
-export function readMediaFile(file: string): Buffer | undefined {
+export async function readMediaFile(file: string): Promise<Buffer | undefined> {
   if (!MEDIA_FILE.test(file)) return undefined;
   if (!getMediaByFile(file)) return undefined;
   try {
-    return readFileSync(path.join(MEDIA_DIR, file));
+    // Runtime uploads live on persistent storage, not in a traced deployment.
+    return await readFile(/* turbopackIgnore: true */ path.join(/* turbopackIgnore: true */ MEDIA_DIR, file));
   } catch {
     return undefined;
   }

@@ -24,9 +24,10 @@ import { SqliteCatalogueRepository } from "./sqlite-repository.ts";
  */
 
 const DB_PATH =
-  process.env.DATABASE_PATH ?? path.join(process.cwd(), "data", "rajraani.db");
+  process.env.DATABASE_PATH || path.join(process.cwd(), "data", "rajraani.db");
 
-const hasDatabase = existsSync(DB_PATH);
+// The database is provisioned on persistent storage, outside the code bundle.
+const hasDatabase = existsSync(/* turbopackIgnore: true */ DB_PATH);
 
 /**
  * Wraps a repository so staged local photography reaches the pages.

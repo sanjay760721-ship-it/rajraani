@@ -26,6 +26,7 @@ import "./globals.css";
  * no third-party script, no layout shift. `display: swap` keeps text visible.
  */
 const display = Cardo({
+  preload: false,
   subsets: ["latin"],
   weight: "400",
   variable: "--font-cardo",
@@ -43,6 +44,7 @@ const display = Cardo({
  * One weight only. Everything in the UI face is either 400 or a size change.
  */
 const ui = Open_Sans({
+  preload: false,
   subsets: ["latin"],
   weight: "400",
   variable: "--font-open-sans",
@@ -64,10 +66,11 @@ const cineText = Barlow({ subsets: ["latin"], weight: ["400", "500"], variable: 
  * The admin runs its own design system ("Ethos & Elegance") — Playfair Display
  * for headings, Manrope for interface and data. They are declared here because
  * `next/font` has to be called at module scope in a layout, but nothing on the
- * storefront references these variables, and the weights are self-hosted the
- * same way, so the shop pays no download cost for them.
+ * storefront references these variables. Disable preload so customer pages
+ * do not download the admin fonts before their own content.
  */
 const adminDisplay = Playfair_Display({
+  preload: false,
   subsets: ["latin"],
   weight: ["600", "700"],
   variable: "--font-playfair",
@@ -75,6 +78,7 @@ const adminDisplay = Playfair_Display({
 });
 
 const adminUi = Manrope({
+  preload: false,
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-manrope",

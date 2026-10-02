@@ -16,7 +16,7 @@ import path from "node:path";
  */
 
 const DB_PATH =
-  process.env.DATABASE_PATH ?? path.join(process.cwd(), "data", "rajraani.db");
+  process.env.DATABASE_PATH || path.join(process.cwd(), "data", "rajraani.db");
 
 let instance: DatabaseSync | undefined;
 
@@ -31,6 +31,7 @@ export function db(): DatabaseSync {
   // WAL lets reads proceed during a write, which matters once the admin is
   // saving a product while the storefront is serving pages.
   instance.exec("PRAGMA journal_mode = WAL");
+  instance.exec("PRAGMA busy_timeout = 5000");
   return instance;
 }
 

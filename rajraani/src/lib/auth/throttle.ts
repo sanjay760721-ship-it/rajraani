@@ -19,16 +19,26 @@ const PER_ACCOUNT = 5;
 const PER_ADDRESS = 20;
 
 const failures = new Map<string, number[]>();
+let lastSweep = 0;
 
 function recent(key: string, now: number): number[] {
+  if (now - lastSweep > 60_000) {
+    for (const [storedKey, attempts] of failures) {
+      if (!attempts.some((at) => now - at < WINDOW_MS)) failures.delete(storedKey);
+    }
+    lastSweep = now;
+  }
+  if (!failures.has(key) && failures.size >= 10_000) {
+    failures.delete(failures.keys().next().value!);
+  }
   const kept = (failures.get(key) ?? []).filter((at) => now - at < WINDOW_MS);
   if (kept.length) failures.set(key, kept);
   else failures.delete(key);
   return kept;
 }
 
-const accountKey = (email: string) => `account:${email.trim().toLowerCase()}`;
-const addressKey = (address: string) => `address:${address}`;
+const accountKey = (email: string) => `account:${email.trim().toLowerCase().slice(0, 250)}`;
+const addressKey = (address: string) => `address:${address.slice(0, 128)}`;
 
 /** Minutes until this account or address may try again, or 0 if it may now. */
 export function lockedFor(email: string, address: string, now = Date.now()): number {

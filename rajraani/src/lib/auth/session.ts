@@ -80,6 +80,7 @@ export async function signIn(
   email: string,
   password: string,
 ): Promise<AdminUser | undefined> {
+  if (typeof email !== "string" || typeof password !== "string" || email.length > 250 || password.length > 1024) return undefined;
   const row = db()
     .prepare(`SELECT id, email, password_hash FROM admin_user WHERE email = ?`)
     .get(email.trim().toLowerCase()) as unknown as

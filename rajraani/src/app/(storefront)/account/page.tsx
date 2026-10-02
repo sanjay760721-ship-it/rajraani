@@ -12,25 +12,30 @@ export default function AccountPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setPassword("");
     setSubmitted(true);
   };
 
   return (
     <div className="min-h-[70vh] bg-bg py-16 px-4 flex items-center justify-center">
       <div className="w-full max-w-md bg-bg-alt border border-rule p-8 sm:p-12 shadow-xs">
+        <p role="status" className="text-caption text-ink-muted text-center mb-6">
+          Customer accounts are not available yet. You can shop and check out as a guest.
+        </p>
+        {submitted && !isForgot ? <p role="alert" className="text-caption text-ink mb-6">Accounts are not enabled yet. No account has been created or signed in.</p> : null}
         {isForgot ? (
           <div>
             <h1 className="cine-card-title mb-3 text-center text-ink">
               Reset your password
             </h1>
             <p className="text-caption text-ink-muted text-center mb-8">
-              We will send you an email to reset your password.
+              Password reset is not available yet.
             </p>
 
             {submitted ? (
               <div className="text-center p-4 bg-surface-notice border border-rule mb-6">
                 <p className="text-caption text-ink">
-                  If an account exists for {email}, you will receive a reset link shortly.
+                  Password reset is not enabled. No reset email has been sent.
                 </p>
               </div>
             ) : (

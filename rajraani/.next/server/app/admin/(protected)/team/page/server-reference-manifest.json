@@ -1,6 +1,6 @@
 {
   "node": {
-    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+    "00b688c82ea21feee0b13faf607e904a7d74b74b26": {
       "workers": {
         "app/admin/(protected)/team/page": {
           "moduleId": 27870,
@@ -11,7 +11,7 @@
       "exportedName": "$$RSC_SERVER_ACTION_0",
       "filename": "src/app/admin/(protected)/layout.tsx"
     },
-    "6015fc2ff6508a9becf2490f271ac316422aacc0e9": {
+    "60066376dfc4033212c209a00a4d5a3b37c47dbfea": {
       "workers": {
         "app/admin/(protected)/team/page": {
           "moduleId": 27870,
@@ -22,7 +22,7 @@
       "exportedName": "addAdminAction",
       "filename": "src/lib/admin/team-actions.ts"
     },
-    "7089ccf09aedf3feb3f532484c54a49fbb8eed5e35": {
+    "7025c8875cd3c55dc4b345dbab5a0092ea34a78095": {
       "workers": {
         "app/admin/(protected)/team/page": {
           "moduleId": 27870,
@@ -33,7 +33,7 @@
       "exportedName": "changeMyPasswordAction",
       "filename": "src/lib/admin/team-actions.ts"
     },
-    "407554851680c7d6327983aff86b8ac147dc8d3c57": {
+    "4064df0974925dc021aed027f57fd5656e701e03f7": {
       "workers": {
         "app/admin/(protected)/team/page": {
           "moduleId": 27870,

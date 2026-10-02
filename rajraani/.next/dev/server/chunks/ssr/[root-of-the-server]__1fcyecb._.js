@@ -882,7 +882,6 @@ function Frame({ image, colourSlug, priority = false, sizes = "(min-width: 1024p
                 fill: true,
                 sizes: sizes,
                 priority: priority,
-                unoptimized: true,
                 className: fitClass
             }, void 0, false, {
                 fileName: "[project]/src/components/Frame.tsx",
@@ -911,12 +910,12 @@ function Frame({ image, colourSlug, priority = false, sizes = "(min-width: 1024p
             children: image.shot.replace(/_/g, " ")
         }, void 0, false, {
             fileName: "[project]/src/components/Frame.tsx",
-            lineNumber: 121,
+            lineNumber: 120,
             columnNumber: 9
         }, this) : null
     }, void 0, false, {
         fileName: "[project]/src/components/Frame.tsx",
-        lineNumber: 109,
+        lineNumber: 108,
         columnNumber: 5
     }, this);
 }
@@ -932,12 +931,12 @@ function ToneTile({ label, tone, ratio = "portrait" }) {
             children: label
         }, void 0, false, {
             fileName: "[project]/src/components/Frame.tsx",
-            lineNumber: 148,
+            lineNumber: 147,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/Frame.tsx",
-        lineNumber: 141,
+        lineNumber: 140,
         columnNumber: 5
     }, this);
 }
@@ -1298,8 +1297,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$data$2f$sqlite
  * `npm run db:seed`, and failing the build for that would be hostile — so the
  * fixtures remain as a fallback and the site says so in a banner. That is the
  * difference between "not set up yet" and "broken".
- */ const DB_PATH = process.env.DATABASE_PATH ?? __TURBOPACK__imported__module__$5b$externals$5d2f$node$3a$path__$5b$external$5d$__$28$node$3a$path$2c$__cjs$29$__["default"].join(process.cwd(), "data", "rajraani.db");
-const hasDatabase = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$node$3a$fs__$5b$external$5d$__$28$node$3a$fs$2c$__cjs$29$__["existsSync"])(DB_PATH);
+ */ const DB_PATH = process.env.DATABASE_PATH || __TURBOPACK__imported__module__$5b$externals$5d2f$node$3a$path__$5b$external$5d$__$28$node$3a$path$2c$__cjs$29$__["default"].join(process.cwd(), "data", "rajraani.db");
+// The database is provisioned on persistent storage, outside the code bundle.
+const hasDatabase = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$node$3a$fs__$5b$external$5d$__$28$node$3a$fs$2c$__cjs$29$__["existsSync"])(/* turbopackIgnore: true */ DB_PATH);
 /**
  * Wraps a repository so staged local photography reaches the pages.
  *

@@ -5876,6 +5876,7 @@ function db() {
     // WAL lets reads proceed during a write, which matters once the admin is
     // saving a product while the storefront is serving pages.
     instance.exec("PRAGMA journal_mode = WAL");
+    instance.exec("PRAGMA busy_timeout = 5000");
     return instance;
 }
 function migrate(target = db()) {
@@ -6007,7 +6008,8 @@ async function saveUpload(input, originalName) {
     let output;
     try {
         output = await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$sharp__$5b$external$5d$__$28$sharp$2c$__esm_import$2c$__$5b$project$5d2f$node_modules$2f$sharp$29$__["default"])(input, {
-            failOn: "error"
+            failOn: "error",
+            limitInputPixels: 40_000_000
         }).rotate().resize({
             width: MAX_EDGE,
             height: MAX_EDGE,

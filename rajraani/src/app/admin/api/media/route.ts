@@ -21,9 +21,32 @@ export async function POST(request: Request) {
     return Response.json({ error: "Sign in again to upload." }, { status: 401 });
   }
 
+  const origin = request.headers.get("origin");
+  if (!origin || origin !== new URL(request.url).origin) {
+    return Response.json({ error: "Upload from the site editor only." }, { status: 403 });
+  }
+  const maxBody = MAX_UPLOAD_BYTES + 1024 * 1024;
+  // Count bytes while reading; Content-Length alone can be omitted or forged.
+  const reader = request.body?.getReader();
+  if (!reader) return Response.json({ error: "No photo was attached." }, { status: 400 });
+  const chunks: Uint8Array[] = [];
+  let bytes = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    bytes += value.byteLength;
+    if (bytes > maxBody) {
+      await reader.cancel();
+      return Response.json({ error: "Upload one photo at a time, up to 30 MB." }, { status: 413 });
+    }
+    chunks.push(value);
+  }
+
   let form: FormData;
   try {
-    form = await request.formData();
+    form = await new Response(Buffer.concat(chunks), {
+      headers: { "Content-Type": request.headers.get("content-type") ?? "" },
+    }).formData();
   } catch {
     return Response.json({ error: "The upload did not arrive whole. Try again." }, { status: 400 });
   }

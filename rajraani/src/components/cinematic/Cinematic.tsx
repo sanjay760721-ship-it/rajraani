@@ -68,9 +68,18 @@ function useInView<T extends HTMLElement>(threshold = 0.45) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([entry]) => setInView(Boolean(entry?.isIntersecting)), { threshold });
+    let visible = false;
+    const update = () => setInView(visible && !document.hidden);
+    const io = new IntersectionObserver(([entry]) => {
+      visible = Boolean(entry?.isIntersecting);
+      update();
+    }, { threshold });
     io.observe(el);
-    return () => io.disconnect();
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", update);
+    };
   }, [threshold]);
   return [ref, inView] as const;
 }
@@ -101,6 +110,7 @@ export function Cinematic({ scenes, menu, footer }: { scenes: Scene[]; menu: rea
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    const mm = gsap.matchMedia();
     const ctx = gsap.context(() => {
       // Paragraphs rise into view once, whole. (The zoom scene's promise is
       // part of its own pinned sequence on computers.)
@@ -122,7 +132,6 @@ export function Cinematic({ scenes, menu, footer }: { scenes: Scene[]; menu: rea
         );
       });
       // Computers only: the pinned scenes. Phones keep plain swipe rows.
-      const mm = gsap.matchMedia();
       mm.add("(min-width: 768px)", () => {
         // zoomOut: one photograph full screen pulls back, two more glide in.
         root.querySelectorAll<HTMLElement>("[data-zoom]").forEach((section) => {
@@ -195,6 +204,7 @@ export function Cinematic({ scenes, menu, footer }: { scenes: Scene[]; menu: rea
     }, root);
 
     return () => {
+      mm.revert();
       ctx.revert();
       gsap.ticker.remove(raf);
       lenis.destroy();

@@ -1732,7 +1732,7 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$node$3a$path__$5b$external
  *
  * `server-only` is a real guard: importing this into a client component must
  * fail the build rather than attempt to bundle a database driver for a browser.
- */ const DB_PATH = process.env.DATABASE_PATH ?? __TURBOPACK__imported__module__$5b$externals$5d2f$node$3a$path__$5b$external$5d$__$28$node$3a$path$2c$__cjs$29$__["default"].join(process.cwd(), "data", "rajraani.db");
+ */ const DB_PATH = process.env.DATABASE_PATH || __TURBOPACK__imported__module__$5b$externals$5d2f$node$3a$path__$5b$external$5d$__$28$node$3a$path$2c$__cjs$29$__["default"].join(process.cwd(), "data", "rajraani.db");
 let instance;
 function db() {
     if (instance) return instance;
@@ -1744,6 +1744,7 @@ function db() {
     // WAL lets reads proceed during a write, which matters once the admin is
     // saving a product while the storefront is serving pages.
     instance.exec("PRAGMA journal_mode = WAL");
+    instance.exec("PRAGMA busy_timeout = 5000");
     return instance;
 }
 function migrate(target = db()) {

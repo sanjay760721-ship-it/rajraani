@@ -96,7 +96,6 @@ export function Frame({
           fill
           sizes={sizes}
           priority={priority}
-          unoptimized
           className={fitClass}
         />
       </div>

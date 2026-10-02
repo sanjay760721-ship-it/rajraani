@@ -83,7 +83,6 @@ export function ZoomFrame({
         fill
         sizes="(min-width: 1024px) 580px, 100vw"
         priority
-        unoptimized
         // `contain`, not `cover`: the box's shape is forced, and a square
         // detail cropped into a 2:3 hole loses the detail it was shot for.
         className="object-contain transition-transform duration-200 ease-out"

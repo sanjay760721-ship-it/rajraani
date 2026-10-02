@@ -1,4 +1,5 @@
 import "server-only";
+import { randomBytes } from "node:crypto";
 
 import { db, transaction } from "../db/client.ts";
 import type { Money } from "../domain/types.ts";
@@ -76,7 +77,14 @@ const MAX_QUANTITY_PER_LINE = 20;
 export function priceCart(requested: readonly CartRequestLine[]): PricingResult {
   const problems: PricingProblem[] = [];
 
-  if (requested.length === 0) return { ok: false, problems: [{ kind: "empty" }] };
+  if (!Array.isArray(requested) || requested.length === 0 || requested.length > 50 || requested.some(
+    (item) => !item || typeof item.handle !== "string" || item.handle.length > 200 || !Number.isSafeInteger(item.quantity) || item.quantity < 1 || item.quantity > MAX_QUANTITY_PER_LINE,
+  )) return { ok: false, problems: [{ kind: "empty" }] };
+
+  // Merge duplicate handles before checking stock. Separate lines must not
+  // each pass the same inventory check while their combined quantity exceeds it.
+  const merged = new Map<string, number>();
+  for (const item of requested) merged.set(item.handle, (merged.get(item.handle) ?? 0) + item.quantity);
 
   const lookup = db().prepare(
     `SELECT id, handle, title, poetic_name, sku, price_minor, inventory_quantity
@@ -85,13 +93,11 @@ export function priceCart(requested: readonly CartRequestLine[]): PricingResult 
 
   const lines: PricedLine[] = [];
 
-  for (const item of requested) {
-    // Clamp rather than trust. A negative quantity would produce a negative
-    // line total and a cheaper order.
-    const quantity = Math.min(
-      Math.max(Math.trunc(Number(item.quantity) || 0), 1),
-      MAX_QUANTITY_PER_LINE,
-    );
+  for (const [handle, requestedQuantity] of merged) {
+    const item = { handle, quantity: requestedQuantity };
+    // Quantities were validated and duplicate handles combined above.
+    const quantity = item.quantity;
+    if (quantity > MAX_QUANTITY_PER_LINE) return { ok: false, problems: [{ kind: "empty" }] };
 
     const row = lookup.get(item.handle) as unknown as
       | {
@@ -180,19 +186,13 @@ export type DraftOrder = {
 };
 
 /**
- * A human-facing reference: RJ-2026-0007.
+ * A human-facing reference with a random, unguessable suffix.
  *
- * Not the row id. A sequential public identifier tells any customer exactly how
- * many orders the business has ever taken, which is nobody's business but yours.
+ * Avoid exposing the row id or order count in customer URLs.
  */
 function nextReference(): string {
   const year = new Date().getFullYear();
-  const row = db()
-    .prepare(
-      `SELECT COUNT(*) AS n FROM customer_order WHERE reference LIKE ?`,
-    )
-    .get(`RJ-${year}-%`) as unknown as { n: number };
-  return `RJ-${year}-${String(row.n + 1).padStart(4, "0")}`;
+  return `RJ-${year}-${randomBytes(12).toString("hex").toUpperCase()}`;
 }
 
 /**

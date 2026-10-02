@@ -1,6 +1,6 @@
 {
   "node": {
-    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+    "00b688c82ea21feee0b13faf607e904a7d74b74b26": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -11,7 +11,7 @@
       "exportedName": "$$RSC_SERVER_ACTION_0",
       "filename": "src/app/admin/(protected)/layout.tsx"
     },
-    "60197c3020a99ff42c5a6f4b379a7a2fcc2e559065": {
+    "60f18b0e3e0cebc748363f8d80dad0824ff2072f50": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -22,7 +22,7 @@
       "exportedName": "saveProductAction",
       "filename": "src/lib/admin/product-actions.ts"
     },
-    "60703d270b502787dd4439cde578c4833a21657390": {
+    "6061db21ed1e6520cd0d69f49c68bf3234d38af0de": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -33,7 +33,7 @@
       "exportedName": "addProductPhotoAction",
       "filename": "src/lib/admin/product-photo-actions.ts"
     },
-    "602ecd5736bec1a843a63a75e10a76d86daae47bcd": {
+    "605ada9b089d3403fbb80f18e33bf5fbf699f6b47c": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -44,7 +44,7 @@
       "exportedName": "describeProductPhotoAction",
       "filename": "src/lib/admin/product-photo-actions.ts"
     },
-    "604555560b8cb52087bae2e0d6d62b147e6a7665d6": {
+    "600b1babd77b86ad5971cc6e6124b6f42697a0ce7a": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -55,7 +55,7 @@
       "exportedName": "moveProductPhotoAction",
       "filename": "src/lib/admin/product-photo-actions.ts"
     },
-    "40d9264945b9a3271756daf76aaf003aa63fe9648f": {
+    "407eb775f65e27f584a932f93c30cccd6a5d56aa81": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -66,7 +66,7 @@
       "exportedName": "removeProductPhotoAction",
       "filename": "src/lib/admin/product-photo-actions.ts"
     },
-    "6081d02158e9cc9e8b616e30127f895dbec9fd45ea": {
+    "609264d0d653928ab72328db1a31f7ebb7d2afcb85": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -77,7 +77,7 @@
       "exportedName": "replaceProductPhotoAction",
       "filename": "src/lib/admin/product-photo-actions.ts"
     },
-    "403d110187ed00f0b873f7e316dbd18c469c013686": {
+    "40005bc69249e05389ea7aec303deb4a1d2f66ef90": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -88,7 +88,7 @@
       "exportedName": "togglePublishedAction",
       "filename": "src/lib/admin/product-actions.ts"
     },
-    "4048cbcabf7ff01616f4d80417fa9da583ff67741e": {
+    "40909a4a5fb019fd817e618907111f525bc2138f16": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,
@@ -99,7 +99,7 @@
       "exportedName": "deleteProductAction",
       "filename": "src/lib/admin/product-actions.ts"
     },
-    "60a6504be1cb692789b0c8c89307da3770ef73d92d": {
+    "60d3f4c27173d33535c59b77c5c0c26e5176ec3675": {
       "workers": {
         "app/admin/(protected)/products/[id]/page": {
           "moduleId": 80308,

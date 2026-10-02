@@ -25,8 +25,8 @@ interface VideoPlayerProps {
  *
  * 3. **`preload="metadata"`, never `auto`.** `auto` invites the browser to
  *    buffer the whole file before anyone has scrolled to it. The source here is
- *    822 MB, so that is the difference between a page that loads and one that
- *    does not. Only the dimensions and duration are fetched up front.
+ *    a full nine-minute film, so buffering it all would waste data. Only the
+ *    dimensions and duration are requested up front.
  *
  * Reduced-motion is honoured: the video loads and is playable, but nothing
  * starts on its own.
@@ -62,17 +62,18 @@ export function VideoPlayer({ src, poster, className }: VideoPlayerProps) {
     video.muted = true;
     video.playsInline = true;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let visible = false;
+    const updatePlayback = () => {
+      if (visible && !document.hidden && !pausedByUser.current && !motion.matches) play();
+      else video.pause();
+    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry) return;
-        if (entry.isIntersecting) {
-          if (!pausedByUser.current && !reduced) play();
-        } else if (!video.paused) {
-          // Not a user pause: the flag stays clear so it resumes on return.
-          video.pause();
-        }
+        visible = entry.isIntersecting;
+        updatePlayback();
       },
       // A quarter visible is enough to be worth playing, and the same figure
       // going the other way stops it flickering on and off at the boundary.
@@ -80,7 +81,14 @@ export function VideoPlayer({ src, poster, className }: VideoPlayerProps) {
     );
 
     observer.observe(shell);
-    return () => observer.disconnect();
+    document.addEventListener("visibilitychange", updatePlayback);
+    motion.addEventListener("change", updatePlayback);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", updatePlayback);
+      motion.removeEventListener("change", updatePlayback);
+      video.pause();
+    };
   }, [play]);
 
   /* --- Keep React in step with the element ------------------------------ */

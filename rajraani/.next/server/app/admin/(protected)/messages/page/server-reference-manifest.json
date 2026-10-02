@@ -1,6 +1,6 @@
 {
   "node": {
-    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+    "00b688c82ea21feee0b13faf607e904a7d74b74b26": {
       "workers": {
         "app/admin/(protected)/messages/page": {
           "moduleId": 88237,
@@ -11,18 +11,7 @@
       "exportedName": "$$RSC_SERVER_ACTION_0",
       "filename": "src/app/admin/(protected)/layout.tsx"
     },
-    "403b3872283f39abf6c53157d8c86e74f6bf963619": {
-      "workers": {
-        "app/admin/(protected)/messages/page": {
-          "moduleId": 88237,
-          "async": false,
-          "codeHash": null
-        }
-      },
-      "exportedName": "saveFooterAction",
-      "filename": "src/lib/admin/footer-actions.ts"
-    },
-    "4086e26ffa694c351a5ee2110f0cd0e8eecc530cfb": {
+    "40a7ff7a8eb7c3a3ea395db2b5e9bd22a140920752": {
       "workers": {
         "app/admin/(protected)/messages/page": {
           "moduleId": 88237,
@@ -33,7 +22,18 @@
       "exportedName": "removeSubscriberAction",
       "filename": "src/lib/admin/footer-actions.ts"
     },
-    "60b3169f29344dfe79e1e3aef2e9677f68f2f52754": {
+    "40c2a90048ea0aa14a1d052d0fcc7d67cca4071f25": {
+      "workers": {
+        "app/admin/(protected)/messages/page": {
+          "moduleId": 88237,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveFooterAction",
+      "filename": "src/lib/admin/footer-actions.ts"
+    },
+    "60d21e79dded59ab4e658862fafc45f96fa6052fce": {
       "workers": {
         "app/admin/(protected)/messages/page": {
           "moduleId": 88237,

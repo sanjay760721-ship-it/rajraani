@@ -13,7 +13,7 @@ export async function GET(
   { params }: { params: Promise<{ file: string }> },
 ) {
   const { file } = await params;
-  const body = readMediaFile(file);
+  const body = await readMediaFile(file);
   if (!body) return new Response("Not found", { status: 404 });
 
   return new Response(new Uint8Array(body), {

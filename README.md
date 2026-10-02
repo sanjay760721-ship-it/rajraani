@@ -8,7 +8,7 @@ Handloom Banarasi saree e-commerce. Own brand, category architecture.
 
 | If you want to… | Read |
 |---|---|
-| **Know where the project stands** | [HANDOFF.md](HANDOFF.md) — resume state, kept current (§2.57 is the latest) |
+| **Know where the project stands** | [HANDOFF.md](HANDOFF.md) — resume state, kept current (§2.58 is the latest) |
 | **Use the admin (shop owner)** | [docs/admin-guide.md](docs/admin-guide.md) — plain-language guide to changing the site |
 | **Know how the admin is built, and what is left** | [rajraani/docs/admin-dashboard-plan.md](rajraani/docs/admin-dashboard-plan.md) |
 | **Run the site** | [rajraani/README.md](rajraani/README.md) |
@@ -42,7 +42,7 @@ daily use (~92%)**: every word, photo, page, menu, footer, product, price, colle
 order, customer, discount and sign-up is managed without a developer, every change can
 be put back, and it works on a phone. What blocks going live is not the admin:
 
-1. **Payments** — checkout does not verify Razorpay payments yet (HANDOFF §6 A).
+1. **Payments** — real Razorpay orders, signature checks and a webhook are built (HANDOFF §2.58); keys, hosting and staging tests remain ([rajraani/LAUNCH_READINESS.md](rajraani/LAUNCH_READINESS.md)).
 2. **Photography** — every photo is still a stand-in; 87 on pages, 36 pieces to shoot.
 3. **Hosting** — the database and uploaded photos need a server with a persistent disk.
 

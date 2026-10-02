@@ -3,6 +3,7 @@
 import { headers } from "next/headers";
 
 import { EMAIL, subscribe } from "./newsletter.ts";
+import { createRateLimit } from "./rate-limit.ts";
 
 /**
  * The public sign-up, used by the footer form and the pop-up.
@@ -14,9 +15,7 @@ import { EMAIL, subscribe } from "./newsletter.ts";
 
 export type SubscribeResult = { ok: true } | { ok: false; error: string };
 
-const recent = new Map<string, number[]>();
-const WINDOW_MS = 10 * 60 * 1000;
-const LIMIT = 10;
+const permit = createRateLimit(10, 10 * 60 * 1000);
 
 export async function subscribeAction(email: string, source: "footer" | "popup"): Promise<SubscribeResult> {
   if (typeof email !== "string" || !EMAIL.test(email.trim()) || email.length > 200) {
@@ -24,10 +23,7 @@ export async function subscribeAction(email: string, source: "footer" | "popup")
   }
   const list = await headers();
   const address = list.get("x-forwarded-for")?.split(",")[0]?.trim() || list.get("x-real-ip") || "unknown";
-  const now = Date.now();
-  const times = (recent.get(address) ?? []).filter((at) => now - at < WINDOW_MS);
-  if (times.length >= LIMIT) return { ok: false, error: "Please try again in a few minutes." };
-  recent.set(address, [...times, now]);
+  if (!permit(address)) return { ok: false, error: "Please try again in a few minutes." };
 
   subscribe(email, source === "popup" ? "popup" : "footer");
   return { ok: true };

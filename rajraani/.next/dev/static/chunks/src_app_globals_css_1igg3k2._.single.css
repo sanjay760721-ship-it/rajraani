@@ -6108,6 +6108,10 @@ body:has([data-ends-full-bleed]) footer {
   font-size: 1.0625rem;
 }
 
+:root:has(.cine--shop) :is(button, a).bg-ink .eyebrow {
+  color: inherit;
+}
+
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

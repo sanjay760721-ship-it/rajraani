@@ -1,27 +1,29 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { BRAND } from "@/lib/brand";
+import { getSiteText } from "@/lib/content/site-text";
 import { getOrderByReference } from "@/lib/orders/orders";
+import { canReadReceipt } from "@/lib/checkout/receipt";
 import { formatMoney } from "@/lib/money";
 import { BASE_CURRENCY } from "@/lib/domain/types";
 
-export const metadata = { title: "Order Confirmation" };
+export const metadata = { title: "Order Confirmation", robots: { index: false, follow: false } };
 
 export default async function OrderConfirmationPage(props: {
   searchParams: Promise<{ ref?: string }>;
 }) {
   const { ref } = await props.searchParams;
 
-  if (!ref) {
+  if (!ref || !(await canReadReceipt(ref))) {
     notFound();
   }
 
   const order = getOrderByReference(ref);
 
-  if (!order) {
+  if (!order || !["paid", "dispatched", "delivered", "refunded"].includes(order.status)) {
     notFound();
   }
+  const siteText = await getSiteText();
 
   return (
     <div className="wrap-narrow py-16 space-y-12">
@@ -32,7 +34,7 @@ export default async function OrderConfirmationPage(props: {
         </span>
         <h1 className="font-display text-h1 text-ink">Thank you, {order.fullName}</h1>
         <p className="text-body text-ink-body max-w-prose mx-auto text-sm">
-          Your order <strong className="font-mono text-ink">{order.reference}</strong> has been received and confirmed. A confirmation receipt has been issued for <span className="text-ink font-semibold">{order.email}</span>.
+          Your order <strong className="font-mono text-ink">{order.reference}</strong> has been received and confirmed. Your contact email is <span className="text-ink font-semibold">{order.email}</span>.
         </p>
       </div>
 
@@ -97,7 +99,7 @@ export default async function OrderConfirmationPage(props: {
       <div className="border border-rule/70 bg-bg-sand/40 p-6 space-y-2 text-xs text-center">
         <h3 className="font-display text-lg font-semibold text-ink">Need assistance with your order?</h3>
         <p className="text-caption text-ink-muted max-w-prose mx-auto">
-          Our Varanasi artisan team is preparing your piece for dispatch. For any inquiries regarding care instructions or tracking, reach out to our concierge team at <a href={`mailto:${BRAND.supportEmail}`} className="underline text-ink">{BRAND.supportEmail}</a> or WhatsApp us directly.
+          Our Varanasi artisan team is preparing your piece for dispatch. For any inquiries regarding care instructions or tracking, reach out to our concierge team at <a href={`mailto:${siteText["contact.email"]}`} className="underline text-ink">{siteText["contact.email"]}</a> or WhatsApp us directly.
         </p>
         <div className="pt-4">
           <Link href="/" className="bg-ink px-6 py-3 text-bg text-xs eyebrow uppercase hover:opacity-90">

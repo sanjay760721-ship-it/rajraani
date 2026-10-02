@@ -1459,6 +1459,61 @@ again. Only one dev server may run per folder. `.claude/launch.json` uses port 8
 **Overall, photography aside: about 75% done, roughly 2½–4 weeks of work to launch.**
 **Next: payments.**
 
+### 2.58 Launch hardening and real payments (Codex) — 2 October 2026
+
+A separate review pass, made with Codex outside the design sessions, hardened the code for
+launch. The full write-up, with the launch checklist, is
+**[rajraani/LAUNCH_READINESS.md](rajraani/LAUNCH_READINESS.md)**. In short:
+
+- **Payments are no longer a facade.**
+  - Orders are created through Razorpay's server-side Orders API (`src/lib/checkout/gateway.ts`).
+  - Confirmation requires a valid HMAC signature and a captured INR payment fetched from
+    Razorpay, with the amount checked against the saved order.
+  - `/api/payments/webhook` records `payment.captured` and `order.paid` even if the shopper
+    closes the browser.
+  - With the keys missing, checkout switches itself off safely. The demo-payment fallback
+    is gone.
+- **Receipts.** Order references are random. A receipt can only be opened by the browser
+  that paid (signed HttpOnly cookie, `src/lib/checkout/receipt.ts`), and it is never cached.
+- **Abuse limits and input checks.**
+  - Rate limits on checkout, the newsletter and contact (`src/lib/rate-limit.ts`).
+  - Validated delivery details and cart lines. Duplicate lines are merged before the stock
+    check.
+  - Bounded admin uploads, protected spreadsheet exports, escaped JSON-LD, and security
+    response headers (`next.config.ts`).
+- **Video.** The homepage film went from 784 MiB to 266 MiB, with the same 8:53, 1080p and
+  sound. The originals are backed up outside the repo, and the unused copy in
+  `public/reference-only/` was removed.
+- **Tooling.** `npm run check:launch` reports missing production settings without printing
+  secrets. Node ≥ 22.13 is required. There are new tests for forged signatures, payment
+  mismatches, idempotency, stock rollback, rate limits and injection.
+- **`rajraani/.gitignore` is back.** It covers `node_modules/`, `.next/`, `.env*`, `data/`
+  and the launch-audit videos. This reverses the "commit everything" choice of §2.56 for
+  NEW files only; everything already tracked stays tracked. It is kept because `.env*`
+  will hold the Razorpay secrets, which must never reach GitHub.
+
+**Still open before launch** (LAUNCH_READINESS §"Required before launch"):
+- hosting with persistent storage, HTTPS and a reverse proxy
+- the Razorpay keys, the webhook secret and automatic capture
+- a real admin account, and real contact details
+- backups with a tested restore
+- full test-mode checkout runs on staging
+- no customer accounts yet (guest checkout works)
+- no order emails
+
+#### Progress, 2 October 2026, after the hardening (photography aside)
+
+| Area | Done | Left |
+|---|---|---|
+| What visitors see | ~95% | real contact details, socials, the Calendly pages |
+| Admin | ~92% | roles, a second factor, a draft step |
+| **Payments (code)** | **~85%** | staging tests with Razorpay test keys; refunds and stock reservations are manual |
+| Launch setup | ~35% | the host, persistent storage, HTTPS, keys, backups, monitoring, an order-email service |
+| Owner decisions | — | 11 taxonomy questions, policy texts, the Silk Mark claim, accounts vs guest-only |
+
+**Overall, photography aside: about 85% done. Roughly 1½–2½ weeks to launch, most of it
+hosting, configuration and staging checks rather than new code.**
+
 ---
 
 ## 3. How the folder is arranged

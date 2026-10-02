@@ -10,6 +10,12 @@ import {
   type CustomerDetails,
 } from "../orders/orders";
 import { evaluate } from "../discounts";
+import { gatewayRequest, isCapturedPayment, validSignature } from "./gateway";
+import { allowReceipt, canReadReceipt } from "./receipt";
+import { headers } from "next/headers";
+import { createRateLimit } from "../rate-limit";
+
+const permitCheckout = createRateLimit(10, 10 * 60 * 1000);
 
 export type CheckoutInitResult =
   | {
@@ -42,7 +48,7 @@ export type DiscountCheck =
  * ever used for display.
  */
 export async function checkDiscountAction(requestedLines: CartRequestLine[], code: string): Promise<DiscountCheck> {
-  if (!code.trim()) return { ok: false, error: "Enter a code." };
+  if (typeof code !== "string" || code.length > 100 || !code.trim()) return { ok: false, error: "Enter a code." };
   const priced = priceCart(requestedLines);
   if (!priced.ok) return { ok: false, error: "Your cart could not be priced." };
   const result = evaluate(code, priced.cart.subtotalMinor);
@@ -62,6 +68,19 @@ export async function createCheckoutAction(
   discountCode?: string,
 ): Promise<CheckoutInitResult> {
   try {
+    const list = await headers();
+    const address = list.get("x-forwarded-for")?.split(",")[0]?.trim() || list.get("x-real-ip") || "unknown";
+    if (!permitCheckout(address)) return { ok: false, error: "Please wait a few minutes before trying checkout again." };
+    if (discountCode !== undefined && (typeof discountCode !== "string" || discountCode.length > 100)) return { ok: false, error: "Invalid discount code." };
+    const keyId = process.env.RAZORPAY_KEY_ID;
+    const secret = process.env.RAZORPAY_KEY_SECRET;
+    if (!keyId || !secret) return { ok: false, error: "Checkout is temporarily unavailable. Please contact us to order." };
+    if (!customer || ["email", "phone", "fullName", "addressLine1", "city", "state", "postcode"].some(
+      (key) => typeof customer[key as keyof CustomerDetails] !== "string" || !customer[key as keyof CustomerDetails]!.trim() || customer[key as keyof CustomerDetails]!.length > 250,
+    ) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email) || !/^\d{6}$/.test(customer.postcode) ||
+      (customer.addressLine2 !== undefined && (typeof customer.addressLine2 !== "string" || customer.addressLine2.length > 250))) {
+      return { ok: false, error: "Please enter valid contact and delivery details." };
+    }
     const pricedResult = priceCart(requestedLines);
     if (!pricedResult.ok) {
       const firstProblem = pricedResult.problems[0];
@@ -88,10 +107,13 @@ export async function createCheckoutAction(
     }
     const pending = createPendingOrder(cart, customer);
 
-    // If real Razorpay key is present in environment, generate real gateway order.
-    // Otherwise fallback to test gateway order ID for test environment verification.
-    const keyId = process.env.RAZORPAY_KEY_ID || "rzp_test_rajraani2026";
-    const razorpayOrderId = `order_rr_${pending.reference.replace(/[^a-zA-Z0-9]/g, "")}_${Date.now()}`;
+    const gateway = await gatewayRequest({ keyId, secret }, "orders", {
+      amount: pending.totalMinor, currency: "INR", receipt: pending.reference,
+    });
+    if (typeof gateway.id !== "string" || !/^order_[a-zA-Z0-9]+$/.test(gateway.id) || gateway.amount !== pending.totalMinor || gateway.currency !== "INR") {
+      throw new Error("Could not initialize payment. Please try again.");
+    }
+    const razorpayOrderId: string = gateway.id;
 
     attachGatewayOrder(pending.id, razorpayOrderId);
 
@@ -105,8 +127,8 @@ export async function createCheckoutAction(
       keyId,
     };
   } catch (err) {
-    const message = err instanceof Error ? err.message : "";
-    return { ok: false, error: message || "Failed to initialize checkout." };
+    console.error("[checkout] initialization failed", err);
+    return { ok: false, error: "Could not initialize checkout. Please try again or contact us." };
   }
 }
 
@@ -115,15 +137,24 @@ export type ConfirmPaymentResult =
   | { ok: false; error: string };
 
 /**
- * Mark order as paid upon successful Razorpay gateway callback or test checkout completion.
+ * Verify the signed gateway callback and captured amount before recording payment.
  */
 export async function completePaymentAction(
   razorpayOrderId: string,
   razorpayPaymentId: string,
-  amountPaidMinor: number,
+  signature: string,
 ): Promise<ConfirmPaymentResult> {
   try {
-    const result = markPaid(razorpayOrderId, razorpayPaymentId, amountPaidMinor);
+    const keyId = process.env.RAZORPAY_KEY_ID;
+    const secret = process.env.RAZORPAY_KEY_SECRET;
+    if (!keyId || !secret || typeof razorpayOrderId !== "string" || typeof razorpayPaymentId !== "string" || typeof signature !== "string" ||
+      !/^order_[a-zA-Z0-9]+$/.test(razorpayOrderId) || !/^pay_[a-zA-Z0-9]+$/.test(razorpayPaymentId) ||
+      !validSignature(`${razorpayOrderId}|${razorpayPaymentId}`, signature, secret)) {
+      return { ok: false, error: "Payment verification failed." };
+    }
+    const payment = await gatewayRequest({ keyId, secret }, `payments/${razorpayPaymentId}`);
+    if (!isCapturedPayment(payment, razorpayOrderId)) return { ok: false, error: "Payment is not confirmed yet. Please contact us with your payment reference." };
+    const result = markPaid(razorpayOrderId, razorpayPaymentId, payment.amount);
     if (!result.ok) {
       if (result.reason === "out_of_stock") {
         return {
@@ -134,10 +165,11 @@ export async function completePaymentAction(
       return { ok: false, error: "Payment verification failed." };
     }
 
+    await allowReceipt(result.reference);
     return { ok: true, reference: result.reference };
   } catch (err) {
-    const message = err instanceof Error ? err.message : "";
-    return { ok: false, error: message || "Failed to verify payment." };
+    console.error("[checkout] payment confirmation failed", err);
+    return { ok: false, error: "Payment could not be confirmed. Please contact us with your payment reference before retrying." };
   }
 }
 
@@ -145,5 +177,6 @@ export async function completePaymentAction(
  * Fetch Order details for Order Confirmation Receipt page.
  */
 export async function fetchOrderReceiptAction(reference: string) {
+  if (typeof reference !== "string" || !(await canReadReceipt(reference))) return undefined;
   return getOrderByReference(reference);
 }

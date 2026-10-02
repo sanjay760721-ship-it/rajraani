@@ -14,7 +14,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/brand.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$site$2d$text$2d$context$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/site-text-context.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2f$site$2d$text$2d$defs$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/content/site-text-defs.ts [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$data$3a$9b11a8__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__ = __turbopack_context__.i("[project]/src/lib/data:9b11a8 [app-ssr] (ecmascript) <text/javascript>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$data$3a$beb8b5__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__ = __turbopack_context__.i("[project]/src/lib/data:beb8b5 [app-ssr] (ecmascript) <text/javascript>");
 "use client";
 ;
 ;
@@ -109,7 +109,7 @@ function CineFooter({ data }) {
                         onSubmit: (event)=>{
                             event.preventDefault();
                             startTransition(async ()=>{
-                                const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$data$3a$9b11a8__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["subscribeAction"])(email, "footer");
+                                const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$data$3a$beb8b5__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$text$2f$javascript$3e$__["subscribeAction"])(email, "footer");
                                 setState(result.ok ? {
                                     ok: true,
                                     text: "Thank you. You are on the list."
@@ -1208,11 +1208,20 @@ const SLIDE_MS = 7000;
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const el = ref.current;
         if (!el) return;
-        const io = new IntersectionObserver(([entry])=>setInView(Boolean(entry?.isIntersecting)), {
+        let visible = false;
+        const update = ()=>setInView(visible && !document.hidden);
+        const io = new IntersectionObserver(([entry])=>{
+            visible = Boolean(entry?.isIntersecting);
+            update();
+        }, {
             threshold
         });
         io.observe(el);
-        return ()=>io.disconnect();
+        document.addEventListener("visibilitychange", update);
+        return ()=>{
+            io.disconnect();
+            document.removeEventListener("visibilitychange", update);
+        };
     }, [
         threshold
     ]);
@@ -1242,6 +1251,7 @@ function Cinematic({ scenes, menu, footer }) {
         lenis.on("scroll", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$ScrollTrigger$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ScrollTrigger"].update);
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].ticker.add(raf);
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].ticker.lagSmoothing(0);
+        const mm = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].matchMedia();
         const ctx = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].context(()=>{
             // Paragraphs rise into view once, whole. (The zoom scene's promise is
             // part of its own pinned sequence on computers.)
@@ -1279,7 +1289,6 @@ function Cinematic({ scenes, menu, footer }) {
                 });
             });
             // Computers only: the pinned scenes. Phones keep plain swipe rows.
-            const mm = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].matchMedia();
             mm.add("(min-width: 768px)", ()=>{
                 // zoomOut: one photograph full screen pulls back, two more glide in.
                 root.querySelectorAll("[data-zoom]").forEach((section)=>{
@@ -1404,6 +1413,7 @@ function Cinematic({ scenes, menu, footer }) {
             });
         }, root);
         return ()=>{
+            mm.revert();
             ctx.revert();
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].ticker.remove(raf);
             lenis.destroy();
@@ -1417,7 +1427,7 @@ function Cinematic({ scenes, menu, footer }) {
                 children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cinematic$2f$frame$2d$css$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CINE_FRAME_CSS"] + CSS + __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cinematic$2f$CineMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CINE_MENU_CSS"] + __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cinematic$2f$CineFooter$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CINE_FOOTER_CSS"]
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 206,
+                lineNumber: 216,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cinematic$2f$CineHeader$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CineHeader"], {
@@ -1425,7 +1435,7 @@ function Cinematic({ scenes, menu, footer }) {
                 mode: "overlay"
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 208,
+                lineNumber: 218,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -1434,55 +1444,55 @@ function Cinematic({ scenes, menu, footer }) {
                         scene: scene
                     }, scene.id, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 213,
+                        lineNumber: 223,
                         columnNumber: 13
                     }, this) : scene.kind === "film" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(FilmScene, {
                         scene: scene
                     }, scene.id, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 215,
+                        lineNumber: 225,
                         columnNumber: 13
                     }, this) : scene.kind === "story" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(StoryScene, {
                         scene: scene
                     }, scene.id, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 217,
+                        lineNumber: 227,
                         columnNumber: 13
                     }, this) : scene.kind === "words" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(WordsScene, {
                         scene: scene
                     }, scene.id, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 219,
+                        lineNumber: 229,
                         columnNumber: 13
                     }, this) : scene.kind === "edits" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(EditsScene, {
                         scene: scene
                     }, scene.id, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 221,
+                        lineNumber: 231,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ShopScene, {
                         scene: scene
                     }, scene.id, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 223,
+                        lineNumber: 233,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 210,
+                lineNumber: 220,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cinematic$2f$CineFooter$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CineFooter"], {
                 data: footer
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 228,
+                lineNumber: 238,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 205,
+        lineNumber: 215,
         columnNumber: 5
     }, this);
 }
@@ -1502,24 +1512,24 @@ function Cinematic({ scenes, menu, footer }) {
                             children: word
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 241,
+                            lineNumber: 251,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 240,
+                        lineNumber: 250,
                         columnNumber: 11
                     }, this),
                     i < words.length - 1 ? " " : null
                 ]
             }, i, true, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 239,
+                lineNumber: 249,
                 columnNumber: 9
             }, this))
     }, void 0, false, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 237,
+        lineNumber: 247,
         columnNumber: 5
     }, this);
 }
@@ -1533,14 +1543,14 @@ function Kicker({ text }) {
                 className: "cine-kicker__rule"
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 254,
+                lineNumber: 264,
                 columnNumber: 7
             }, this),
             text
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 253,
+        lineNumber: 263,
         columnNumber: 5
     }, this);
 }
@@ -1558,12 +1568,12 @@ function Actions({ cta, secondary }) {
                     children: cta.label
                 }, void 0, false, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 266,
+                    lineNumber: 276,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 265,
+                lineNumber: 275,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 href: cta.href,
@@ -1572,12 +1582,12 @@ function Actions({ cta, secondary }) {
                     children: cta.label
                 }, void 0, false, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 270,
+                    lineNumber: 280,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 269,
+                lineNumber: 279,
                 columnNumber: 9
             }, this),
             secondary ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1586,13 +1596,13 @@ function Actions({ cta, secondary }) {
                 children: secondary.label
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 274,
+                lineNumber: 284,
                 columnNumber: 9
             }, this) : null
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 263,
+        lineNumber: 273,
         columnNumber: 5
     }, this);
 }
@@ -1610,7 +1620,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                 className: `object-cover ${focus === "right" ? "object-[72%_50%]" : "object-[28%_50%]"} md:object-center ${split ? "hidden md:block" : ""} ${className}`
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 287,
+                lineNumber: 297,
                 columnNumber: 7
             }, this),
             split ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1622,13 +1632,13 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                 className: `object-cover md:hidden ${className}`
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 288,
+                lineNumber: 298,
                 columnNumber: 16
             }, this) : null
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 286,
+        lineNumber: 296,
         columnNumber: 5
     }, this);
 }
@@ -1686,22 +1696,22 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                 focus: s.align === "right" ? "left" : "right"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                lineNumber: 342,
+                                lineNumber: 352,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 341,
+                            lineNumber: 351,
                             columnNumber: 13
                         }, this)
                     }, s.id, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 335,
+                        lineNumber: 345,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 333,
+                lineNumber: 343,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1709,7 +1719,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                 className: `cine-scrim ${right ? "cine-scrim--right" : ""}`
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 347,
+                lineNumber: 357,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1719,7 +1729,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                         text: slide.kicker
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 350,
+                        lineNumber: 360,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Headline, {
@@ -1728,7 +1738,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                         live: inView
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 351,
+                        lineNumber: 361,
                         columnNumber: 9
                     }, this),
                     slide.body ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1736,7 +1746,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                         children: slide.body
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 352,
+                        lineNumber: 362,
                         columnNumber: 23
                     }, this) : null,
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Actions, {
@@ -1744,19 +1754,19 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                         secondary: slide.secondary
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 353,
+                        lineNumber: 363,
                         columnNumber: 9
                     }, this)
                 ]
             }, slide.id, true, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 349,
+                lineNumber: 359,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 324,
+        lineNumber: 334,
         columnNumber: 5
     }, this);
 }
@@ -1767,7 +1777,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
         children: text
     }, void 0, false, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 365,
+        lineNumber: 375,
         columnNumber: 5
     }, this);
 }
@@ -1809,18 +1819,18 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                 className: "object-cover"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                lineNumber: 399,
+                                lineNumber: 409,
                                 columnNumber: 30
                             }, this) : null
                         }, i, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 392,
+                            lineNumber: 402,
                             columnNumber: 13
                         }, this);
                     })
                 }, void 0, false, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 388,
+                    lineNumber: 398,
                     columnNumber: 9
                 }, this),
                 scene.statement ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1832,7 +1842,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                             className: "cine-zoom__veil"
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 407,
+                            lineNumber: 417,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ScrubText, {
@@ -1840,7 +1850,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                             className: "cine-story__quote"
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 408,
+                            lineNumber: 418,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ScrubText, {
@@ -1848,13 +1858,13 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                             className: "cine-story__lead"
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 409,
+                            lineNumber: 419,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 406,
+                    lineNumber: 416,
                     columnNumber: 11
                 }, this) : null,
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1871,14 +1881,14 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                             className: "cine-kicker__rule"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                            lineNumber: 415,
+                                            lineNumber: 425,
                                             columnNumber: 40
                                         }, this),
                                         scene.kicker
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 415,
+                                    lineNumber: 425,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1886,13 +1896,13 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                     children: scene.title
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 416,
+                                    lineNumber: 426,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 414,
+                            lineNumber: 424,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1902,7 +1912,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                     children: scene.body
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 419,
+                                    lineNumber: 429,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Actions, {
@@ -1910,30 +1920,30 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                     secondary: scene.secondary
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 420,
+                                    lineNumber: 430,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 418,
+                            lineNumber: 428,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 413,
+                    lineNumber: 423,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-            lineNumber: 386,
+            lineNumber: 396,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 385,
+        lineNumber: 395,
         columnNumber: 5
     }, this);
 }
@@ -1964,14 +1974,14 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                     className: "cine-kicker__rule"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 443,
+                                    lineNumber: 453,
                                     columnNumber: 38
                                 }, this),
                                 scene.kicker
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 443,
+                            lineNumber: 453,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1979,7 +1989,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                             children: scene.title
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 444,
+                            lineNumber: 454,
                             columnNumber: 11
                         }, this),
                         scene.note ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1987,13 +1997,13 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                             children: scene.note
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 445,
+                            lineNumber: 455,
                             columnNumber: 25
                         }, this) : null
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 442,
+                    lineNumber: 452,
                     columnNumber: 9
                 }, this),
                 scene.items.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2014,17 +2024,17 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                         className: "object-cover object-top"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                        lineNumber: 451,
+                                        lineNumber: 461,
                                         columnNumber: 31
                                     }, this) : null
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 450,
+                                    lineNumber: 460,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                lineNumber: 449,
+                                lineNumber: 459,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2035,7 +2045,7 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                         children: item.label
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                        lineNumber: 455,
+                                        lineNumber: 465,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2044,30 +2054,30 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                                         children: "Explore"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                        lineNumber: 456,
+                                        lineNumber: 466,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                lineNumber: 454,
+                                lineNumber: 464,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, item.href + item.label, true, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 448,
+                        lineNumber: 458,
                         columnNumber: 11
                     }, this))
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-            lineNumber: 441,
+            lineNumber: 451,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 440,
+        lineNumber: 450,
         columnNumber: 5
     }, this);
 }
@@ -2084,14 +2094,14 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                         className: "cine-kicker__rule"
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 470,
+                        lineNumber: 480,
                         columnNumber: 54
                     }, this),
                     scene.title
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 470,
+                lineNumber: 480,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ScrubText, {
@@ -2099,13 +2109,13 @@ function Photo({ src, mobileSrc, priority, className = "", focus = "left" }) {
                 className: "cine-words__text"
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 471,
+                lineNumber: 481,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 469,
+        lineNumber: 479,
         columnNumber: 5
     }, this);
 }
@@ -2153,18 +2163,18 @@ function FilmScene({ scene }) {
                     className: "h-full w-full object-contain"
                 }, void 0, false, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 520,
+                    lineNumber: 530,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Photo, {
                     src: scene.image
                 }, void 0, false, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 522,
+                    lineNumber: 532,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 514,
+                lineNumber: 524,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2172,7 +2182,7 @@ function FilmScene({ scene }) {
                 className: "cine-scrim cine-scrim--film"
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 525,
+                lineNumber: 535,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2182,7 +2192,7 @@ function FilmScene({ scene }) {
                         text: scene.kicker
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 527,
+                        lineNumber: 537,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Headline, {
@@ -2190,7 +2200,7 @@ function FilmScene({ scene }) {
                         live: inView
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 528,
+                        lineNumber: 538,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2198,7 +2208,7 @@ function FilmScene({ scene }) {
                         children: scene.body
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 529,
+                        lineNumber: 539,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("dl", {
@@ -2209,38 +2219,38 @@ function FilmScene({ scene }) {
                                         children: fact.label
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                        lineNumber: 533,
+                                        lineNumber: 543,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("dd", {
                                         children: fact.figure
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                        lineNumber: 534,
+                                        lineNumber: 544,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, fact.label, true, {
                                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                lineNumber: 532,
+                                lineNumber: 542,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 530,
+                        lineNumber: 540,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Actions, {
                         cta: scene.cta
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                        lineNumber: 538,
+                        lineNumber: 548,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 526,
+                lineNumber: 536,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2251,13 +2261,13 @@ function FilmScene({ scene }) {
                 children: scene.cta.label
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                lineNumber: 540,
+                lineNumber: 550,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 513,
+        lineNumber: 523,
         columnNumber: 5
     }, this);
 }
@@ -2291,12 +2301,12 @@ function FilmScene({ scene }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                lineNumber: 564,
+                                lineNumber: 574,
                                 columnNumber: 29
                             }, this) : null
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 563,
+                            lineNumber: 573,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2304,7 +2314,7 @@ function FilmScene({ scene }) {
                             className: "cine-scrim"
                         }, void 0, false, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 566,
+                            lineNumber: 576,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2314,7 +2324,7 @@ function FilmScene({ scene }) {
                                     text: item.kicker
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 568,
+                                    lineNumber: 578,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Headline, {
@@ -2322,7 +2332,7 @@ function FilmScene({ scene }) {
                                     live: inView
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 569,
+                                    lineNumber: 579,
                                     columnNumber: 15
                                 }, this),
                                 item.body ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2330,7 +2340,7 @@ function FilmScene({ scene }) {
                                     children: item.body
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 570,
+                                    lineNumber: 580,
                                     columnNumber: 28
                                 }, this) : null,
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2341,29 +2351,29 @@ function FilmScene({ scene }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                                    lineNumber: 571,
+                                    lineNumber: 581,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                            lineNumber: 567,
+                            lineNumber: 577,
                             columnNumber: 13
                         }, this)
                     ]
                 }, item.id, true, {
                     fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-                    lineNumber: 556,
+                    lineNumber: 566,
                     columnNumber: 11
                 }, this))
         }, void 0, false, {
             fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-            lineNumber: 554,
+            lineNumber: 564,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/cinematic/Cinematic.tsx",
-        lineNumber: 553,
+        lineNumber: 563,
         columnNumber: 5
     }, this);
 }
@@ -2688,22 +2698,30 @@ function VideoPlayer({ src, poster, className }) {
         video.defaultMuted = true;
         video.muted = true;
         video.playsInline = true;
-        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let visible = false;
+        const updatePlayback = ()=>{
+            if (visible && !document.hidden && !pausedByUser.current && !motion.matches) play();
+            else video.pause();
+        };
         const observer = new IntersectionObserver(([entry])=>{
             if (!entry) return;
-            if (entry.isIntersecting) {
-                if (!pausedByUser.current && !reduced) play();
-            } else if (!video.paused) {
-                // Not a user pause: the flag stays clear so it resumes on return.
-                video.pause();
-            }
+            visible = entry.isIntersecting;
+            updatePlayback();
         }, // A quarter visible is enough to be worth playing, and the same figure
         // going the other way stops it flickering on and off at the boundary.
         {
             threshold: 0.25
         });
         observer.observe(shell);
-        return ()=>observer.disconnect();
+        document.addEventListener("visibilitychange", updatePlayback);
+        motion.addEventListener("change", updatePlayback);
+        return ()=>{
+            observer.disconnect();
+            document.removeEventListener("visibilitychange", updatePlayback);
+            motion.removeEventListener("change", updatePlayback);
+            video.pause();
+        };
     }, [
         play
     ]);
@@ -2780,7 +2798,7 @@ function VideoPlayer({ src, poster, className }) {
                 className: `${className ?? ""} cursor-pointer`
             }, void 0, false, {
                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                lineNumber: 161,
+                lineNumber: 169,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2806,7 +2824,7 @@ function VideoPlayer({ src, poster, className }) {
                                         rx: "1"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                        lineNumber: 182,
+                                        lineNumber: 190,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
@@ -2817,13 +2835,13 @@ function VideoPlayer({ src, poster, className }) {
                                         rx: "1"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                        lineNumber: 183,
+                                        lineNumber: 191,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                lineNumber: 181,
+                                lineNumber: 189,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                 className: "h-3.5 w-3.5 translate-x-0.5",
@@ -2834,12 +2852,12 @@ function VideoPlayer({ src, poster, className }) {
                                     d: "M8 5v14l11-7z"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                    lineNumber: 187,
+                                    lineNumber: 195,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                lineNumber: 186,
+                                lineNumber: 194,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2847,13 +2865,13 @@ function VideoPlayer({ src, poster, className }) {
                                 children: isPlaying ? "Pause" : "Play"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                lineNumber: 190,
+                                lineNumber: 198,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                        lineNumber: 174,
+                        lineNumber: 182,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2877,7 +2895,7 @@ function VideoPlayer({ src, poster, className }) {
                                         fill: "currentColor"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                        lineNumber: 209,
+                                        lineNumber: 217,
                                         columnNumber: 13
                                     }, this),
                                     isMuted ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -2889,7 +2907,7 @@ function VideoPlayer({ src, poster, className }) {
                                                 y2: "15"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                                lineNumber: 212,
+                                                lineNumber: 220,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -2899,25 +2917,25 @@ function VideoPlayer({ src, poster, className }) {
                                                 y2: "15"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                                lineNumber: 213,
+                                                lineNumber: 221,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                        lineNumber: 211,
+                                        lineNumber: 219,
                                         columnNumber: 15
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                         d: "M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                        lineNumber: 216,
+                                        lineNumber: 224,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                lineNumber: 199,
+                                lineNumber: 207,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2925,13 +2943,13 @@ function VideoPlayer({ src, poster, className }) {
                                 children: isMuted ? "Unmute" : "Mute"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                lineNumber: 219,
+                                lineNumber: 227,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                        lineNumber: 193,
+                        lineNumber: 201,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2953,18 +2971,18 @@ function VideoPlayer({ src, poster, className }) {
                                     d: "M9 3v6H3M15 3v6h6M9 21v-6H3M15 21v-6h6"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                    lineNumber: 239,
+                                    lineNumber: 247,
                                     columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                     d: "M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                    lineNumber: 241,
+                                    lineNumber: 249,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                lineNumber: 228,
+                                lineNumber: 236,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2972,25 +2990,25 @@ function VideoPlayer({ src, poster, className }) {
                                 children: isFullscreen ? "Exit" : "Full"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                                lineNumber: 244,
+                                lineNumber: 252,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                        lineNumber: 222,
+                        lineNumber: 230,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-                lineNumber: 173,
+                lineNumber: 181,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/sections/VideoPlayer.tsx",
-        lineNumber: 160,
+        lineNumber: 168,
         columnNumber: 5
     }, this);
 }

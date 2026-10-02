@@ -1,6 +1,6 @@
 {
   "node": {
-    "008077104cf3fe063afa6d75c96d01278bcddc5be8": {
+    "00b688c82ea21feee0b13faf607e904a7d74b74b26": {
       "workers": {
         "app/admin/(protected)/collections/page": {
           "moduleId": 55979,
@@ -11,7 +11,7 @@
       "exportedName": "$$RSC_SERVER_ACTION_0",
       "filename": "src/app/admin/(protected)/layout.tsx"
     },
-    "40cc99b1d4179822ac2399a9cf093c3073b5468edb": {
+    "4093c90a2832c902f93f50faca19ac050a105f7842": {
       "workers": {
         "app/admin/(protected)/collections/page": {
           "moduleId": 55979,
@@ -22,7 +22,7 @@
       "exportedName": "createCollectionAction",
       "filename": "src/lib/admin/collection-actions.ts"
     },
-    "70882bc9a22b3be8375623e32a19a73a6c034739c0": {
+    "7033f0ce02eb8646410c590c29db52812dd2c029d4": {
       "workers": {
         "app/admin/(protected)/collections/page": {
           "moduleId": 55979,
@@ -33,7 +33,7 @@
       "exportedName": "saveCollectionAction",
       "filename": "src/lib/admin/collection-actions.ts"
     },
-    "60a5d6e75d61a7142eba874cc803a5469105863fa7": {
+    "60f5ec3a89b2feb7ac94ab2f75761a3434d6a5ac66": {
       "workers": {
         "app/admin/(protected)/collections/page": {
           "moduleId": 55979,
@@ -44,7 +44,7 @@
       "exportedName": "setCollectionFiltersAction",
       "filename": "src/lib/admin/collection-actions.ts"
     },
-    "6024566fc723fde24cb716c5d694f8be139399f990": {
+    "60dd439a61ed8cb6123fc98d943699954ec6535c78": {
       "workers": {
         "app/admin/(protected)/collections/page": {
           "moduleId": 55979,

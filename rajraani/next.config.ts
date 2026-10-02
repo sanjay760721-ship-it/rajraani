@@ -3,6 +3,18 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  async headers() {
+    return [{ source: "/:path*", headers: [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+    ] }, { source: "/order-confirmation", headers: [
+      { key: "Cache-Control", value: "private, no-store" },
+      { key: "Referrer-Policy", value: "no-referrer" },
+    ] }];
+  },
   turbopack: {
     /*
      * Pin the workspace root to this package.

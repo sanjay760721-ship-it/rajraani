@@ -41,6 +41,7 @@
   "/admin/api/media/route": "/admin/api/media",
   "/admin/api/subscribers/route": "/admin/api/subscribers",
   "/admin/login/page": "/admin/login",
+  "/api/payments/webhook/route": "/api/payments/webhook",
   "/favicon.ico/route": "/favicon.ico",
   "/media/[file]/route": "/media/[file]"
 }

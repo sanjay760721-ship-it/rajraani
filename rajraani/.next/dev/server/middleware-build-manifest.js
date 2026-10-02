@@ -50,45 +50,6 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/turbopack-_08bm286._.js",
       "static/chunks/_11mhfkw._.js"
     ],
-    "/admin/(protected)/page": [
-      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
-      "static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
-      "static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
-      "static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
-      "static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
-      "static/chunks/node_modules_next_dist_client_0_90u2t._.js",
-      "static/chunks/node_modules_next_dist_1e8vcs8._.js",
-      "static/chunks/node_modules_@swc_helpers_cjs_1r9vbqw._.js",
-      "static/chunks/_1anvha4._.js",
-      "static/chunks/turbopack-_08bm286._.js",
-      "static/chunks/_15ih947._.js"
-    ],
-    "/admin/(protected)/text/page": [
-      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
-      "static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
-      "static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
-      "static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
-      "static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
-      "static/chunks/node_modules_next_dist_client_0_90u2t._.js",
-      "static/chunks/node_modules_next_dist_1e8vcs8._.js",
-      "static/chunks/node_modules_@swc_helpers_cjs_1r9vbqw._.js",
-      "static/chunks/_1anvha4._.js",
-      "static/chunks/turbopack-_08bm286._.js",
-      "static/chunks/_1duu87l._.js"
-    ],
-    "/(storefront)/pages/[slug]/page": [
-      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
-      "static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
-      "static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
-      "static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
-      "static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
-      "static/chunks/node_modules_next_dist_client_0_90u2t._.js",
-      "static/chunks/node_modules_next_dist_1e8vcs8._.js",
-      "static/chunks/node_modules_@swc_helpers_cjs_1r9vbqw._.js",
-      "static/chunks/_1anvha4._.js",
-      "static/chunks/turbopack-_08bm286._.js",
-      "static/chunks/_0-pnk0s._.js"
-    ],
     "/(storefront)/products/[handle]/page": [
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
       "static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
@@ -102,7 +63,7 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/turbopack-_08bm286._.js",
       "static/chunks/_081ooi7._.js"
     ],
-    "/(storefront)/search/page": [
+    "/(storefront)/cart/page": [
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
       "static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
       "static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
@@ -113,7 +74,7 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/node_modules_@swc_helpers_cjs_1r9vbqw._.js",
       "static/chunks/_1anvha4._.js",
       "static/chunks/turbopack-_08bm286._.js",
-      "static/chunks/_0lzjtq6._.js"
+      "static/chunks/_0wtppyw._.js"
     ],
     "/(storefront)/account/page": [
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
@@ -141,7 +102,7 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/turbopack-_08bm286._.js",
       "static/chunks/_1w2bk5m._.js"
     ],
-    "/(storefront)/cart/page": [
+    "/(storefront)/pages/[slug]/page": [
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
       "static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
       "static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
@@ -152,20 +113,7 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/node_modules_@swc_helpers_cjs_1r9vbqw._.js",
       "static/chunks/_1anvha4._.js",
       "static/chunks/turbopack-_08bm286._.js",
-      "static/chunks/_0wtppyw._.js"
-    ],
-    "/(storefront)/login/page": [
-      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
-      "static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
-      "static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
-      "static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
-      "static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
-      "static/chunks/node_modules_next_dist_client_0_90u2t._.js",
-      "static/chunks/node_modules_next_dist_1e8vcs8._.js",
-      "static/chunks/node_modules_@swc_helpers_cjs_1r9vbqw._.js",
-      "static/chunks/_1anvha4._.js",
-      "static/chunks/turbopack-_08bm286._.js",
-      "static/chunks/_0tn88m2._.js"
+      "static/chunks/_0-pnk0s._.js"
     ]
   },
   "pagesChunkGroupBootstrapParams": {},

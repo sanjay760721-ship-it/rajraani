@@ -29,7 +29,9 @@ export const EDITABLE_COLUMNS = ["Name", "Description", "Price (₹)", "In stock
 
 /** One CSV field, quoted when it needs to be. */
 export function csvField(value: string | number): string {
-  const text = String(value);
+  // CSV quoting alone does not stop spreadsheet formulas from executing.
+  const raw = String(value);
+  const text = typeof value === "string" && /^[\s]*[=+@-]/.test(raw) ? `'${raw}` : raw;
   return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
 
