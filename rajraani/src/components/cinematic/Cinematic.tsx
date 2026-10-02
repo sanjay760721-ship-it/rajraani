@@ -406,7 +406,8 @@ function StoryScene({ scene }: { scene: Extract<Scene, { kind: "story" }> }) {
               className={`cine-zoom__card cine-zoom__card--${i === 1 ? "center" : i === 0 ? "left" : "right"}`}
               aria-label={`${scene.title}, piece ${i + 1}`}
             >
-              {photo.image ? <Image src={photo.image} alt="" fill sizes="100vw" className="object-cover" /> : null}
+              {/* The centre photograph opens full screen, then settles to a card; the side two are only ever cards. */}
+              {photo.image ? <Image src={photo.image} alt="" fill sizes={i === 1 ? "100vw" : "(min-width: 768px) 26vw, 76vw"} className="object-cover" /> : null}
             </Link>
           );
         })}

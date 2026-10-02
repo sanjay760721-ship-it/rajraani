@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { ImageLink } from "../ImageLink";
 import { SizeChart } from "./SizeChart";
@@ -166,12 +166,49 @@ function Art({
   className = "",
   alt = "",
   priority = false,
+  contained = false,
 }: {
   art: ArtPair;
   className?: string;
   alt?: string;
   priority?: boolean;
+  /** Inside the 1200px content width rather than edge to edge: download sizes follow. */
+  contained?: boolean;
 }) {
+  const desktopSizes = contained ? "(min-width: 1240px) 1200px, 100vw" : "(min-width: 1440px) 1600px, 100vw";
+
+  /*
+   * One image element per photograph. Each crop used to be its own <Image>,
+   * one hidden on phones and the other on computers, so a priority photograph
+   * was fetched twice and the hidden copy was measured at zero width. Now the
+   * same crop is a single image, and two different crops share a <picture>
+   * that lets the browser fetch only the one it shows (art direction,
+   * `getImageProps`). The container keeps the caller's sizing classes.
+   */
+  if (art.desktop.src && art.mobile.src) {
+    const frame = `relative ${className}`;
+    const tone = { backgroundColor: toneFor(art.desktop.tone) };
+    if (art.desktop.src === art.mobile.src) {
+      return (
+        <div className={frame} style={tone}>
+          <Image src={art.desktop.src} alt={alt} fill sizes={desktopSizes} priority={priority} quality={90} className="object-cover object-center" />
+        </div>
+      );
+    }
+    const common = { alt, fill: true, quality: 90, priority } as const;
+    const { props: { srcSet: desktop } } = getImageProps({ ...common, src: art.desktop.src, sizes: desktopSizes });
+    const { props: { srcSet: mobile, ...rest } } = getImageProps({ ...common, src: art.mobile.src, sizes: "100vw" });
+    return (
+      <div className={frame} style={tone}>
+        <picture>
+          <source media="(min-width: 768px)" srcSet={desktop} sizes={desktopSizes} />
+          <source srcSet={mobile} sizes="100vw" />
+          <img {...rest} alt={alt} className="object-cover object-center" />
+        </picture>
+      </div>
+    );
+  }
+
   const crop = (
     side: ArtPair["desktop"],
     visibility: string,
@@ -207,7 +244,7 @@ function Art({
   return (
     <>
       {crop(art.mobile, "md:hidden", "100vw", priority)}
-      {crop(art.desktop, "hidden md:block", "(min-width: 1440px) 1600px, 100vw", priority)}
+      {crop(art.desktop, "hidden md:block", desktopSizes, priority)}
     </>
   );
 }
@@ -1004,6 +1041,7 @@ function ImageBand({
           className={`w-full ${IMAGE_BAND_MOBILE_RATIO[section.mobileRatio ?? "3/2"]} ${IMAGE_BAND_RATIO[section.ratio ?? "15/8"]}`}
           alt={section.caption ?? section.overlay?.title ?? ""}
           priority={priority}
+          contained={!section.bleed}
         />
         {/*
           * The band is a link to `href`, laid over the photograph. A caption

@@ -186,12 +186,12 @@ export default async function CollectionPage(
             <ul className="grid grid-cols-2 gap-x-6 gap-y-14 lg:gap-x-8 xl:grid-cols-3">
               {visible.map((product, index) => (
                 <li key={product.handle}>
-                  {/* First row is the LCP candidate — two cards wide now, so
-                      two get priority. The grid sits directly under the page
+                  {/* First row is the LCP candidate — up to three cards wide,
+                      so three get priority. The grid sits directly under the page
                       h1, so cards are h2 here. */}
                   <ProductCard
                     product={product}
-                    priority={index < 2}
+                    priority={index < 3}
                     headingLevel={2}
                     sizes="(min-width: 1280px) 380px, (min-width: 1024px) 460px, 50vw"
                     quickView
