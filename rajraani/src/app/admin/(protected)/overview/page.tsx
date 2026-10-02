@@ -5,7 +5,7 @@ import { rupees } from "@/lib/admin/format";
 import { PAYMENTS_LIVE } from "@/lib/admin/order-words";
 import { overview } from "@/lib/admin/overview-data";
 
-export const metadata = { title: "Overview" };
+export const metadata = { title: "Reports" };
 
 
 /**
@@ -46,7 +46,7 @@ export default async function AdminOverviewRoute() {
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="a-heading-lg">Overview</h1>
+        <h1 className="a-heading-lg">Reports</h1>
         <p className="a-body-md mt-1" style={{ color: "var(--a-ink-variant)" }}>
           How the shop is doing, from your own orders, stock and messages.
         </p>
@@ -57,8 +57,8 @@ export default async function AdminOverviewRoute() {
           className="a-body-sm px-4 py-3"
           style={{ backgroundColor: "color-mix(in srgb, var(--a-status-waiting) 12%, transparent)", borderRadius: "var(--a-radius)" }}
         >
-          <strong>Online payment is not switched on yet</strong>, so sales will stay at ₹0 until it
-          is. Everything else on this page is already live.
+          <strong>Online payment is not switched on yet</strong>: the Razorpay keys have not been added
+          on this server, so checkout is closed and sales stay at ₹0. Everything else on this page is live.
         </p>
       ) : null}
 

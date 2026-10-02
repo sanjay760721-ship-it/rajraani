@@ -29,11 +29,21 @@ export type AdminIconName =
   | "help"
   | "download"
   | "trendUp"
-  | "trendDown";
+  | "trendDown"
+  | "menu"
+  | "footer"
+  | "mail"
+  | "history"
+  | "team";
 
 /** 24x24 viewBox, 1.5 stroke, round caps — one visual weight across the set. */
 const PATHS: Record<AdminIconName, string> = {
   dashboard: "M3 3h7v7H3zM14 3h7v4h-7zM14 11h7v10h-7zM3 14h7v7H3z",
+  menu: "M4 6h16M4 12h16M4 18h10",
+  footer: "M3 4h18v16H3zM3 15h18M7 18h4",
+  mail: "M3 5h18v14H3zM3 6l9 7 9-7",
+  history: "M3 12a9 9 0 1 0 2.64-6.36L3 8M3 3v5h5M12 7v5l3 2",
+  team: "M15 19a6 6 0 0 0-12 0M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M19 8v6M22 11h-6",
   orders: "M6 2h12l1 5H5zM5 7v13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7M9 11a3 3 0 0 0 6 0",
   catalog: "M3 7h18M3 7l1.5-4h15L21 7M5 7v13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7M9 12h6",
   analytics: "M3 20h18M6 16l4-5 3 3 5-7",

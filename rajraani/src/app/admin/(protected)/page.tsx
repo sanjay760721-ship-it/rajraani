@@ -4,8 +4,9 @@ import { countReferencePhotos } from "@/lib/admin/section-fields";
 import { listOrders } from "@/lib/admin/orders-admin";
 import { content } from "@/lib/content/content";
 import { listProductsForAdmin } from "@/lib/data/admin-queries";
+import { adminBadges } from "@/lib/admin/badges";
 
-export const metadata = { title: "Your website" };
+export const metadata = { title: "Home" };
 
 /**
  * The admin's front door.
@@ -26,12 +27,12 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
     hint: "The top and bottom of the site — change them once and every page follows.",
     parts: [
       {
-        title: "Announcement strip",
-        what: "The maroon line at the very top — “Complimentary shipping across India …”",
-        href: TEXT("Announcement strip (the dark line at the very top)"),
-        action: "Change the messages",
+        title: "Promises",
+        what: "The line of three in the footer — “Complimentary shipping across India …”",
+        href: TEXT("Promises (the line of three in the footer)"),
+        action: "Change the promises",
       },
-      { title: "Top bar", what: "The line on the left above the menu — “Made in Banaras…”", href: TEXT("Top bar"), action: "Change the line" },
+      { title: "Footer signature", what: "The line under the large RAJRAANI in the footer — “Made in Banaras…”", href: TEXT("Footer signature"), action: "Change the line" },
       {
         title: "Menu",
         what: "Shop, Collections, Campaigns, Crafts, Stories, About Us — and everything in their dropdowns",
@@ -47,6 +48,7 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
     hint: "Each page is a stack of blocks — photos, words and buttons you can change, move, add or remove.",
     parts: [
       { title: "Homepage", what: "The slideshow, photos, stories and store slides on the first page", href: "/admin/homepage", action: "Edit the homepage" },
+      { title: "Homepage small words", what: "Labels such as “Handloom heritage”, the loom film’s three facts, “Curated edits”", href: TEXT("Homepage — small words"), action: "Change the labels" },
       { title: "Campaign pages", what: "Kala, Katha, Awadh, Antaraal, Nadi — and new ones", href: "/admin/pages#campaigns", action: "Edit a campaign" },
       { title: "Store page", what: "Our Banaras store — photos, text, address and map", href: "/admin/pages/banaras-store", action: "Edit the store page" },
       { title: "All other pages", what: "Our story, Bridal, Gifting, FAQs, Size chart, Shipping, Returns, Privacy… or add a new page", href: "/admin/pages", action: "See all pages" },
@@ -73,6 +75,7 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
 export default async function AdminHome() {
   const [homepage, pages] = await Promise.all([content.getHomepageSections(), content.listPages()]);
   const toSend = listOrders().filter((order) => order.status === "paid").length;
+  const { openMessages } = adminBadges();
   const soldOut = listProductsForAdmin().filter((product) => product.published === 1 && product.inventory_quantity === 0).length;
   const toReplace =
     countReferencePhotos(homepage) + pages.reduce((sum, page) => sum + countReferencePhotos(page.sections), 0);
@@ -80,16 +83,20 @@ export default async function AdminHome() {
   return (
     <div className="mx-auto max-w-4xl space-y-8">
       <header>
-        <h1 className="a-heading-lg">Your website</h1>
+        <h1 className="a-heading-lg">Home</h1>
         <p className="a-body-md mt-1" style={{ color: "var(--a-ink-variant)" }}>
-          What would you like to change today?
+          What needs you today, then everything you can change on the website.
         </p>
       </header>
 
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Link href="/admin/orders" className="a-card px-5 py-4" style={{ borderRadius: "var(--a-radius-md)" }}>
           <span className="a-heading-sm block">{toSend === 0 ? "No orders to send" : `${toSend} order${toSend === 1 ? "" : "s"} to send`}</span>
           <span className="a-body-sm" style={{ color: "var(--a-ink-variant)" }}>Orders →</span>
+        </Link>
+        <Link href="/admin/messages" className="a-card px-5 py-4" style={{ borderRadius: "var(--a-radius-md)" }}>
+          <span className="a-heading-sm block">{openMessages === 0 ? "No messages waiting" : `${openMessages} message${openMessages === 1 ? "" : "s"} to answer`}</span>
+          <span className="a-body-sm" style={{ color: "var(--a-ink-variant)" }}>Messages →</span>
         </Link>
         <Link href="/admin/products" className="a-card px-5 py-4" style={{ borderRadius: "var(--a-radius-md)" }}>
           <span className="a-heading-sm block">{soldOut === 0 ? "Nothing sold out" : `${soldOut} piece${soldOut === 1 ? "" : "s"} sold out`}</span>

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { requireAdmin, signOut } from "@/lib/auth/session";
+import { adminBadges } from "@/lib/admin/badges";
 
 // The admin's own design system, kept out of globals.css so the storefront's
 // contract-tested palette and the admin's tokens can never collide.
@@ -15,6 +16,7 @@ import "../admin-theme.css";
  */
 export default async function AdminLayout({ children }: LayoutProps<"/admin">) {
   const admin = await requireAdmin();
+  const badges = adminBadges();
 
   async function endSession() {
     "use server";
@@ -27,7 +29,7 @@ export default async function AdminLayout({ children }: LayoutProps<"/admin">) {
     // uses is scoped under it in globals.css, so the storefront's contract-
     // tested palette is untouched and nothing here can leak out of this tree.
     <div className="admin-surface flex min-h-screen flex-col lg:flex-row">
-      <AdminSidebar adminEmail={admin.email} signOutAction={endSession} />
+      <AdminSidebar adminEmail={admin.email} signOutAction={endSession} badges={badges} />
 
       <div className="flex min-w-0 flex-1 flex-col">
         <main className="mx-auto w-full max-w-[1280px] flex-1 px-4 py-6 sm:px-6 lg:px-10 lg:py-12">

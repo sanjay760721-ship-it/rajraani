@@ -14,43 +14,54 @@ type NavItem = {
   target?: string;
   exact?: boolean;
   live?: boolean;
+  badge?: "ordersToSend" | "openMessages";
 };
 
 type NavGroup = { title: string; items: NavItem[] };
 
+/*
+ * Grouped by how often the job comes up, most often first: the day's work
+ * (orders, messages, visits), then the catalogue, then the website's words
+ * and pictures, then the rarely visited settings. Each item has its own icon.
+ */
 const NAV_GROUPS: NavGroup[] = [
   {
-    // How the shop is doing, at a glance — first, because it is the question
-    // asked most often.
-    title: "Overview",
-    items: [{ href: "/admin/overview", label: "Overview", icon: "analytics", live: true }],
-  },
-  {
-    title: "Your website",
+    title: "Today",
     items: [
-      { href: "/admin", label: "Start here", icon: "dashboard", exact: true, live: true },
-      { href: "/admin/text", label: "Change text", icon: "editorials", live: true },
-      { href: "/admin/menu", label: "Menu", icon: "collections", live: true },
-      { href: "/admin/footer", label: "Footer", icon: "collections", live: true },
-      { href: "/admin/homepage", label: "Homepage", icon: "homepage", live: true },
-      { href: "/admin/pages", label: "Pages", icon: "editorials", live: true },
-      { href: "/admin/media", label: "Photos", icon: "media", live: true },
-      { href: "/admin/history", label: "Recent changes", icon: "dashboard", live: true },
+      { href: "/admin", label: "Home", icon: "dashboard", exact: true, live: true },
+      { href: "/admin/orders", label: "Orders", icon: "orders", live: true, badge: "ordersToSend" },
+      { href: "/admin/messages", label: "Messages", icon: "mail", live: true, badge: "openMessages" },
+      { href: "/admin/appointments", label: "Store visits", icon: "appointments", live: true },
+      { href: "/admin/customers", label: "Customers", icon: "customers", live: true },
+      { href: "/admin/overview", label: "Reports", icon: "analytics", live: true },
     ],
   },
   {
-    title: "Shop",
+    title: "Catalogue",
     items: [
-      { href: "/admin/products", label: "Products & stock", icon: "collections", live: true },
+      { href: "/admin/products", label: "Products & stock", icon: "catalog", live: true },
       { href: "/admin/collections", label: "Collections", icon: "collections", live: true },
-      { href: "/admin/taxonomy", label: "Weaves, colours, fabrics", icon: "taxonomy", live: true },
+      { href: "/admin/taxonomy", label: "Weaves, colours & fabrics", icon: "taxonomy", live: true },
       { href: "/admin/artisans", label: "Weavers", icon: "artisans", live: true },
-      { href: "/admin/orders", label: "Orders", icon: "orders", live: true },
       { href: "/admin/discounts", label: "Discount codes", icon: "discounts", live: true },
-      { href: "/admin/customers", label: "Customers", icon: "customers", live: true },
-      { href: "/admin/appointments", label: "Store visits", icon: "appointments", live: true },
-      { href: "/admin/messages", label: "Messages", icon: "customers", live: true },
-      { href: "/admin/team", label: "Team", icon: "artisans", live: true },
+    ],
+  },
+  {
+    title: "Website",
+    items: [
+      { href: "/admin/text", label: "Change text", icon: "search", live: true },
+      { href: "/admin/homepage", label: "Homepage", icon: "homepage", live: true },
+      { href: "/admin/pages", label: "Pages", icon: "editorials", live: true },
+      { href: "/admin/menu", label: "Menu", icon: "menu", live: true },
+      { href: "/admin/footer", label: "Footer", icon: "footer", live: true },
+      { href: "/admin/media", label: "Photos", icon: "media", live: true },
+    ],
+  },
+  {
+    title: "Settings",
+    items: [
+      { href: "/admin/history", label: "Recent changes", icon: "history", live: true },
+      { href: "/admin/team", label: "Team", icon: "team", live: true },
     ],
   },
 ];
@@ -58,9 +69,11 @@ const NAV_GROUPS: NavGroup[] = [
 export function AdminSidebar({
   adminEmail,
   signOutAction,
+  badges,
 }: {
   adminEmail: string;
   signOutAction: () => Promise<void>;
+  badges: { ordersToSend: number; openMessages: number };
 }) {
   const pathname = usePathname();
   // Phones and small tablets: the sidebar is a drawer behind a Menu button.
@@ -103,8 +116,8 @@ export function AdminSidebar({
         backgroundColor: open ? "var(--a-surface)" : undefined,
       }}
     >
-      <div className="flex flex-col">
-        <div className="p-6 pb-8">
+      <div className="flex min-h-0 flex-1 flex-col">
+        <div className="p-6 pb-6">
           <Link href="/admin" className="block" aria-label={`${BRAND.name} Admin Home`}>
             <span className="a-label block" style={{ color: "var(--a-accent)" }}>
               Admin
@@ -118,16 +131,16 @@ export function AdminSidebar({
           </Link>
         </div>
 
-        <nav className="flex-1 px-3 pb-8 overflow-y-auto" aria-label="Admin navigation">
+        <nav className="min-h-0 flex-1 overflow-y-auto px-3 pb-6" aria-label="Admin navigation">
           {NAV_GROUPS.map((group) => (
-            <div key={group.title} className="mb-6">
+            <div key={group.title} className="mb-5">
               <span
                 className="a-label block px-3 pb-2"
                 style={{ color: "var(--a-outline)" }}
               >
                 {group.title}
               </span>
-              <ul className="space-y-1" role="list">
+              <ul className="space-y-0.5" role="list">
                 {group.items.map((item) => {
                   const isActive = item.exact
                     ? pathname === item.href
@@ -147,6 +160,15 @@ export function AdminSidebar({
                           aria-hidden="true"
                         />
                         <span className="truncate">{item.label}</span>
+                        {item.badge && badges[item.badge] > 0 ? (
+                          <span
+                            className="ml-auto shrink-0 px-2 text-[11px] font-semibold leading-5"
+                            style={{ borderRadius: "var(--a-radius-pill)", backgroundColor: "var(--a-accent)", color: "white" }}
+                            aria-label={`${badges[item.badge]} waiting`}
+                          >
+                            {badges[item.badge]}
+                          </span>
+                        ) : null}
                         {!item.live ? (
                           <span
                             title="Static shell — not reading from the database yet"
@@ -169,7 +191,7 @@ export function AdminSidebar({
       </div>
 
       <div
-        className="border-t p-4"
+        className="shrink-0 border-t p-4"
         style={{
           borderColor: "color-mix(in srgb, var(--a-outline-variant) 30%, transparent)",
         }}

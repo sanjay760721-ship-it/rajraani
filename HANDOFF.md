@@ -1568,6 +1568,38 @@ What changed:
 
 Total client chunks went from 1.8 MB to 1.6 MB.
 
+### 2.60 The admin reorganised after the redesign — 3 October 2026
+
+The owner found the dashboard illogically arranged. What an audit of all 19 screens found,
+and what changed:
+
+- **Sidebar order** (`AdminSidebar.tsx`). It was "Overview / Your website / Shop", where Shop
+  mixed ten unrelated items and Orders sat below the fold. It is now grouped by how often
+  each job comes up:
+  - **Today:** Home, Orders, Messages, Store visits, Customers, Reports
+  - **Catalogue:** Products & stock, Collections, Weaves, colours & fabrics, Weavers,
+    Discount codes
+  - **Website:** Change text, Homepage, Pages, Menu, Footer, Photos
+  - **Settings:** Recent changes, Team
+- **Live counts.** Orders and Messages show a count of paid orders to send and unanswered
+  messages (`src/lib/admin/badges.ts`, read in the admin layout).
+- **Icons.** Every item has its own icon; Menu, Footer, Messages, Recent changes and Team
+  are new in `AdminIcon`.
+- **Sidebar layout.** The list scrolls inside the sidebar, so View shop and Sign out stay in
+  view on a laptop screen.
+- **Two "home" screens, clearly named.** `/admin` is **Home**: four to-do cards (orders,
+  messages, sold-out pieces, stand-in photos), find-any-words, and the map of what can be
+  changed. `/admin/overview` is **Reports**: sales and stock figures.
+- **Broken links on Home.** Its shortcuts still described the retired announcement strip and
+  top bar, and both links pointed to Change-text groups renamed in §2.57. They now read
+  Promises (in the footer) and Footer signature, and a "Homepage small words" shortcut was
+  added.
+- **The Footer screen** now points to Promises and Footer signature as well as Contact
+  details.
+- **`PAYMENTS_LIVE` follows reality.** It is true once `RAZORPAY_KEY_ID` and
+  `RAZORPAY_KEY_SECRET` are set on the server (it was hard-coded false), and the warnings on
+  Reports, Orders and Discount codes say that adding the keys is what is missing.
+
 ---
 
 ## 3. How the folder is arranged

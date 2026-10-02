@@ -24,8 +24,9 @@ export const STATUS_WORDS: Record<OrderStatus, { label: string; hint: string; to
  * Whether online payment really takes money. The one switch for every admin
  * screen that warns about it (Orders, Overview).
  *
- * Stays false until checkout verifies the Razorpay payment signature
- * (HANDOFF §6 A). Until then `completePaymentAction` can mark an order paid
- * without any money moving, and the owner must be told so where they act.
+ * Checkout creates real Razorpay orders and verifies every payment's signature
+ * (HANDOFF §2.58), and it switches itself off when the keys are missing. So
+ * online payment is live exactly when both keys are set on this server. Read
+ * on the server; the screens receive it as a prop.
  */
-export const PAYMENTS_LIVE = false;
+export const PAYMENTS_LIVE = Boolean(process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET);

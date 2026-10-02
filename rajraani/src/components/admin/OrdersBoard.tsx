@@ -161,7 +161,8 @@ export function OrdersBoard({ orders, paymentsLive }: { orders: AdminOrder[]; pa
           className="a-body-sm px-4 py-3"
           style={{ backgroundColor: "color-mix(in srgb, var(--a-status-waiting) 12%, transparent)", borderRadius: "var(--a-radius)" }}
         >
-          <strong>Online payment is not switched on yet.</strong> Until it is, any order here is a
+          <strong>Online payment is not switched on yet.</strong> The Razorpay keys have not been
+          added on this server, so the shop cannot take orders. Any order already listed here was a
           test and no money was taken. Do not send anything for these.
         </p>
       ) : null}

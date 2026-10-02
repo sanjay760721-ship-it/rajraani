@@ -129,8 +129,8 @@ export function DiscountsManager({ codes, paymentsLive }: { codes: DiscountCode[
 
       {!paymentsLive ? (
         <p className="a-body-sm px-4 py-3" style={{ backgroundColor: "color-mix(in srgb, var(--a-status-waiting) 12%, transparent)", borderRadius: "var(--a-radius)" }}>
-          Codes already work in the cart, but online payment is not switched on yet — so no real
-          order can use one until it is.
+          Codes already work in the cart, but online payment is not switched on yet (the Razorpay
+          keys have not been added on this server), so no real order can use one until it is.
         </p>
       ) : null}
 

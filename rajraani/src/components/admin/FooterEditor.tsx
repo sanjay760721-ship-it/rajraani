@@ -110,7 +110,9 @@ export function FooterEditor({ initial, links }: { initial: FooterSettings; link
             <h1 className="a-heading-lg">Footer</h1>
             <p className="a-body-md mt-1 max-w-2xl" style={{ color: "var(--a-ink-variant)" }}>
               The bottom of every page, and the newsletter pop-up. The email, phone and hours in the
-              footer are changed under <a className="underline" href="/admin/text?place=Contact%20details%20(footer)">Contact details</a>.
+              footer are changed under <a className="underline" href="/admin/text?place=Contact%20details%20(footer)">Contact details</a>;
+              the line of three promises under <a className="underline" href="/admin/text?place=Promises%20(the%20line%20of%20three%20in%20the%20footer)">Promises</a>,
+              and the line under the logo under <a className="underline" href="/admin/text?place=Footer%20signature">Footer signature</a>.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
