@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState, useTransition } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { useSiteText } from "@/components/site-text-context";
@@ -42,6 +43,11 @@ export function CineFooter({ data }: { data: CineFooterData }) {
   return (
     <footer className="cine-footer">
       <div className="cine-footer__sign">
+        {/* The brand logo in full (pics/logo), its paper faded into the light
+            footer; shown on the shop pages. On the dark homepage the lotus
+            alone sits over the large name instead. */}
+        <Image src="/brand/logo-full.webp" alt={`${BRAND.name}, Banaras`} width={900} height={552} sizes="(min-width: 768px) 420px, 80vw" className="cine-footer__logo" />
+        <Image src="/brand/lotus.png" alt="" width={184} height={135} className="cine-footer__lotus" />
         <p className="cine-footer__name" aria-hidden="true">{BRAND.name.toUpperCase()}</p>
         {/* The top-bar line (Change text → Top bar), signed under the name. */}
         {siteText.tagline ? <p className="cine-footer__tagline">{siteText.tagline}</p> : null}
@@ -143,6 +149,10 @@ export const CINE_FOOTER_CSS = `
 .cine-footer { position: relative; isolation: isolate; }
 .cine-footer::before { content: ""; position: absolute; inset: 0 0 auto; height: min(560px, 70%); z-index: -1; pointer-events: none; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'60'%20height%3D'60'%3E%3Cpath%20d%3D'M30%200C36%2010%2050%2016%2060%2030%2050%2044%2036%2050%2030%2060%2024%2050%2010%2044%200%2030%2010%2016%2024%2010%2030%200Z'%20fill%3D'none'%20stroke%3D'rgb(201%2C169%2C110)'%20stroke-width%3D'.8'%2F%3E%3Cpath%20d%3D'M30%2021C24.5%2025.5%2023.5%2033%2027.5%2038%2029.5%2040.2%2033%2039.4%2034%2036.2%2035%2032.4%2032%2031%2031%2028.8%2030.2%2026.8%2030.8%2024%2030%2021Z'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'0'%20cy%3D'0'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'60'%20cy%3D'0'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'0'%20cy%3D'60'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'60'%20cy%3D'60'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3C%2Fsvg%3E") repeat 50% 0 / 60px 60px; opacity: 0.16; -webkit-mask-image: radial-gradient(ellipse 70% 85% at 50% 0%, black 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 85% at 50% 0%, black 30%, transparent 75%); }
 .cine-footer__sign { display: flex; flex-direction: column; align-items: center; }
+.cine-footer__logo { display: none; width: min(420px, 80vw); height: auto; }
+.cine-footer__lotus { width: 72px; height: auto; margin-bottom: 18px; }
+.cine--shop .cine-footer__logo { display: block; }
+.cine--shop :is(.cine-footer__lotus, .cine-footer__name) { display: none; }
 .cine-footer__tagline { margin: 4px 0 0; font-size: 17px; letter-spacing: 0.02em; color: rgb(255 255 255 / 0.62); }
 .cine-promises { list-style: none; margin: 0 0 56px; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 0; font-family: var(--font-cine-display); font-weight: 500; font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(255 255 255 / 0.62); }
 .cine-promises li { padding: 0 22px; }

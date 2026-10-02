@@ -7,6 +7,7 @@ import { CineHeader } from "./CineHeader";
 import { CINE_MENU_CSS } from "./CineMenu";
 import { CINE_FOOTER_CSS, CineFooter, type CineFooterData } from "./CineFooter";
 import { CINE_FRAME_CSS } from "./frame-css";
+import { CineMotion } from "./CineMotion";
 
 /**
  * Every storefront page except the homepage: the same header, menu and footer
@@ -24,6 +25,7 @@ export function CineFrame({ menu, footer, children }: { menu: readonly NavPanel[
         {children}
       </main>
       <CineFooter data={footer} />
+      <CineMotion />
     </div>
   );
 }
@@ -49,6 +51,12 @@ html:has(.cine--shop), body:has(.cine--shop) { background: #fff; }
 .cine--shop :is(.cine-mobile__close, .cine-mobile__group summary, .cine-mobile__currency, .cine-mobile__currency select, .cine-mobile__actions a) { color: var(--color-ink); }
 .cine--shop .cine-mobile__group a { color: rgb(17 16 19 / 0.78); }
 .cine--shop :is(.cine-mobile__group, .cine-mobile__actions a, .cine-mobile__currency) { border-color: var(--color-rule); }
+/* Lenis owns smooth scrolling; the browser's own would stack on top of it. */
+html.lenis { scroll-behavior: auto !important; }
+.motion-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.06em; }
+.motion-word > span { display: inline-block; }
+/* The name gathers in from wide spacing; keep that inside the screen. */
+.cine--shop .cine-footer { overflow-x: clip; }
 .cine--shop .cine-footer { background: var(--color-bg-alt); }
 .cine--shop .cine-footer::before { opacity: 0.22; }
 .cine--shop .cine-footer__name { color: rgb(17 16 19 / 0.09); }

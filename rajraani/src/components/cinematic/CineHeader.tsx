@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 
@@ -51,7 +52,9 @@ export function CineHeader({ menu, mode }: { menu: readonly NavPanel[]; mode: "o
     <header ref={ref} className="cine-header" data-solid={mode === "solid" ? "" : undefined}>
       <div className="cine-header__row">
         <Link href="/" className="cine-logo" aria-label={`${BRAND.name} home`}>
-          {BRAND.name.toUpperCase()}
+          {/* The lotus from the brand logo (pics/logo), lifted off its paper. */}
+          <Image src="/brand/lotus.png" alt="" width={184} height={135} priority className="cine-logo__mark" />
+          <span>{BRAND.name.toUpperCase()}</span>
         </Link>
         <CineMenu panels={menu} onOpenChange={(isOpen) => ref.current?.toggleAttribute("data-menu", isOpen)}>
           <CineActions />

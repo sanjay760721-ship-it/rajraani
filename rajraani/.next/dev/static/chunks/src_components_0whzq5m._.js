@@ -10,6 +10,7 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/brand.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$site$2d$text$2d$context$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/site-text-context.tsx [app-client] (ecmascript)");
@@ -18,6 +19,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$data$3a$beb8b5
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -39,13 +41,36 @@ function CineFooter({ data }) {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "cine-footer__sign",
                 children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        src: "/brand/logo-full.webp",
+                        alt: `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRAND"].name}, Banaras`,
+                        width: 900,
+                        height: 552,
+                        sizes: "(min-width: 768px) 420px, 80vw",
+                        className: "cine-footer__logo"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/cinematic/CineFooter.tsx",
+                        lineNumber: 49,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        src: "/brand/lotus.png",
+                        alt: "",
+                        width: 184,
+                        height: 135,
+                        className: "cine-footer__lotus"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/cinematic/CineFooter.tsx",
+                        lineNumber: 50,
+                        columnNumber: 9
+                    }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "cine-footer__name",
                         "aria-hidden": "true",
                         children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRAND"].name.toUpperCase()
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                        lineNumber: 45,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, this),
                     siteText.tagline ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -53,13 +78,13 @@ function CineFooter({ data }) {
                         children: siteText.tagline
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                        lineNumber: 47,
+                        lineNumber: 53,
                         columnNumber: 29
                     }, this) : null
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                lineNumber: 44,
+                lineNumber: 45,
                 columnNumber: 7
             }, this),
             promises.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -69,12 +94,12 @@ function CineFooter({ data }) {
                         children: line
                     }, line, false, {
                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                        lineNumber: 56,
+                        lineNumber: 62,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                lineNumber: 54,
+                lineNumber: 60,
                 columnNumber: 9
             }, this) : null,
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -89,7 +114,7 @@ function CineFooter({ data }) {
                                 children: data.newsletterHeading
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 63,
+                                lineNumber: 69,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -97,13 +122,13 @@ function CineFooter({ data }) {
                                 children: data.newsletterText
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 64,
+                                lineNumber: 70,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                        lineNumber: 62,
+                        lineNumber: 68,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -129,7 +154,7 @@ function CineFooter({ data }) {
                                 children: "Your email"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 77,
+                                lineNumber: 83,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -145,7 +170,7 @@ function CineFooter({ data }) {
                                         onChange: (event)=>setEmail(event.target.value)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                        lineNumber: 79,
+                                        lineNumber: 85,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -156,18 +181,18 @@ function CineFooter({ data }) {
                                             children: pending ? "Sending" : data.newsletterButton
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                            lineNumber: 89,
+                                            lineNumber: 95,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                        lineNumber: 88,
+                                        lineNumber: 94,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 78,
+                                lineNumber: 84,
                                 columnNumber: 11
                             }, this),
                             state ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -176,19 +201,19 @@ function CineFooter({ data }) {
                                 children: state.text
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 93,
+                                lineNumber: 99,
                                 columnNumber: 13
                             }, this) : null
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                        lineNumber: 66,
+                        lineNumber: 72,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                lineNumber: 61,
+                lineNumber: 67,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -203,7 +228,7 @@ function CineFooter({ data }) {
                                 children: data.talkHeading
                             }, void 0, false, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 102,
+                                lineNumber: 108,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -215,12 +240,12 @@ function CineFooter({ data }) {
                                             children: data.email
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                            lineNumber: 104,
+                                            lineNumber: 110,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                        lineNumber: 104,
+                                        lineNumber: 110,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -231,13 +256,13 @@ function CineFooter({ data }) {
                                                 children: data.phone
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                                lineNumber: 105,
+                                                lineNumber: 111,
                                                 columnNumber: 26
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                        lineNumber: 105,
+                                        lineNumber: 111,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -248,18 +273,18 @@ function CineFooter({ data }) {
                                             children: data.whatsappLabel
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                            lineNumber: 106,
+                                            lineNumber: 112,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                        lineNumber: 106,
+                                        lineNumber: 112,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 103,
+                                lineNumber: 109,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -269,26 +294,26 @@ function CineFooter({ data }) {
                                         children: data.hoursLabel
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                        lineNumber: 109,
+                                        lineNumber: 115,
                                         columnNumber: 13
                                     }, this),
                                     data.hours.map((line)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: line
                                         }, line, false, {
                                             fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                            lineNumber: 111,
+                                            lineNumber: 117,
                                             columnNumber: 15
                                         }, this))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                lineNumber: 108,
+                                lineNumber: 114,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                        lineNumber: 101,
+                        lineNumber: 107,
                         columnNumber: 9
                     }, this),
                     data.columns.map((column, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -299,7 +324,7 @@ function CineFooter({ data }) {
                                     children: column.heading
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                    lineNumber: 117,
+                                    lineNumber: 123,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -310,17 +335,17 @@ function CineFooter({ data }) {
                                                 children: link.label
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                                lineNumber: 121,
+                                                lineNumber: 127,
                                                 columnNumber: 19
                                             }, this)
                                         }, link.href + link.label, false, {
                                             fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                            lineNumber: 120,
+                                            lineNumber: 126,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                    lineNumber: 118,
+                                    lineNumber: 124,
                                     columnNumber: 13
                                 }, this),
                                 i === data.columns.length - 1 && data.socials.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -334,29 +359,29 @@ function CineFooter({ data }) {
                                                 children: social.label
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                                lineNumber: 129,
+                                                lineNumber: 135,
                                                 columnNumber: 21
                                             }, this)
                                         }, social.label, false, {
                                             fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                            lineNumber: 128,
+                                            lineNumber: 134,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                                    lineNumber: 126,
+                                    lineNumber: 132,
                                     columnNumber: 15
                                 }, this) : null
                             ]
                         }, column.heading + i, true, {
                             fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                            lineNumber: 116,
+                            lineNumber: 122,
                             columnNumber: 11
                         }, this))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                lineNumber: 100,
+                lineNumber: 106,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -370,20 +395,20 @@ function CineFooter({ data }) {
                         children: data.legalName
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                        lineNumber: 137,
+                        lineNumber: 143,
                         columnNumber: 70
                     }, this),
                     "."
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-                lineNumber: 137,
+                lineNumber: 143,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/CineFooter.tsx",
-        lineNumber: 43,
+        lineNumber: 44,
         columnNumber: 5
     }, this);
 }
@@ -399,6 +424,10 @@ const CINE_FOOTER_CSS = `
 .cine-footer { position: relative; isolation: isolate; }
 .cine-footer::before { content: ""; position: absolute; inset: 0 0 auto; height: min(560px, 70%); z-index: -1; pointer-events: none; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'60'%20height%3D'60'%3E%3Cpath%20d%3D'M30%200C36%2010%2050%2016%2060%2030%2050%2044%2036%2050%2030%2060%2024%2050%2010%2044%200%2030%2010%2016%2024%2010%2030%200Z'%20fill%3D'none'%20stroke%3D'rgb(201%2C169%2C110)'%20stroke-width%3D'.8'%2F%3E%3Cpath%20d%3D'M30%2021C24.5%2025.5%2023.5%2033%2027.5%2038%2029.5%2040.2%2033%2039.4%2034%2036.2%2035%2032.4%2032%2031%2031%2028.8%2030.2%2026.8%2030.8%2024%2030%2021Z'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'0'%20cy%3D'0'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'60'%20cy%3D'0'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'0'%20cy%3D'60'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3Ccircle%20cx%3D'60'%20cy%3D'60'%20r%3D'2'%20fill%3D'rgb(201%2C169%2C110)'%2F%3E%3C%2Fsvg%3E") repeat 50% 0 / 60px 60px; opacity: 0.16; -webkit-mask-image: radial-gradient(ellipse 70% 85% at 50% 0%, black 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 85% at 50% 0%, black 30%, transparent 75%); }
 .cine-footer__sign { display: flex; flex-direction: column; align-items: center; }
+.cine-footer__logo { display: none; width: min(420px, 80vw); height: auto; }
+.cine-footer__lotus { width: 72px; height: auto; margin-bottom: 18px; }
+.cine--shop .cine-footer__logo { display: block; }
+.cine--shop :is(.cine-footer__lotus, .cine-footer__name) { display: none; }
 .cine-footer__tagline { margin: 4px 0 0; font-size: 17px; letter-spacing: 0.02em; color: rgb(255 255 255 / 0.62); }
 .cine-promises { list-style: none; margin: 0 0 56px; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 0; font-family: var(--font-cine-display); font-weight: 500; font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(255 255 255 / 0.62); }
 .cine-promises li { padding: 0 22px; }
@@ -457,6 +486,7 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/brand.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cart$2d$context$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/cart-context.tsx [app-client] (ecmascript)");
@@ -467,6 +497,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cinemat
 ;
 var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -525,10 +556,30 @@ function CineHeader({ menu, mode }) {
                     href: "/",
                     className: "cine-logo",
                     "aria-label": `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRAND"].name} home`,
-                    children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRAND"].name.toUpperCase()
-                }, void 0, false, {
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                            src: "/brand/lotus.png",
+                            alt: "",
+                            width: 184,
+                            height: 135,
+                            priority: true,
+                            className: "cine-logo__mark"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/cinematic/CineHeader.tsx",
+                            lineNumber: 56,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$brand$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BRAND"].name.toUpperCase()
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/cinematic/CineHeader.tsx",
+                            lineNumber: 57,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
                     fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                    lineNumber: 53,
+                    lineNumber: 54,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$cinematic$2f$CineMenu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CineMenu"], {
@@ -536,23 +587,23 @@ function CineHeader({ menu, mode }) {
                     onOpenChange: (isOpen)=>ref.current?.toggleAttribute("data-menu", isOpen),
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CineActions, {}, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                        lineNumber: 57,
+                        lineNumber: 60,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                    lineNumber: 56,
+                    lineNumber: 59,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-            lineNumber: 52,
+            lineNumber: 53,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-        lineNumber: 51,
+        lineNumber: 52,
         columnNumber: 5
     }, this);
 }
@@ -576,7 +627,7 @@ _c = CineHeader;
                 children: "Search"
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                lineNumber: 76,
+                lineNumber: 79,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -587,7 +638,7 @@ _c = CineHeader;
                         children: "Currency"
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                        lineNumber: 80,
+                        lineNumber: 83,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -599,18 +650,18 @@ _c = CineHeader;
                                 children: code
                             }, code, false, {
                                 fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                                lineNumber: 83,
+                                lineNumber: 86,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                        lineNumber: 81,
+                        lineNumber: 84,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                lineNumber: 79,
+                lineNumber: 82,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -619,7 +670,7 @@ _c = CineHeader;
                 children: "Account"
             }, void 0, false, {
                 fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                lineNumber: 89,
+                lineNumber: 92,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -633,13 +684,13 @@ _c = CineHeader;
                         children: saved
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                        lineNumber: 93,
+                        lineNumber: 96,
                         columnNumber: 30
                     }, this) : null
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                lineNumber: 92,
+                lineNumber: 95,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -654,19 +705,19 @@ _c = CineHeader;
                         children: itemCount
                     }, void 0, false, {
                         fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                        lineNumber: 96,
+                        lineNumber: 99,
                         columnNumber: 29
                     }, this) : null
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-                lineNumber: 95,
+                lineNumber: 98,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/cinematic/CineHeader.tsx",
-        lineNumber: 75,
+        lineNumber: 78,
         columnNumber: 5
     }, this);
 }
@@ -2806,8 +2857,11 @@ const CINE_FRAME_CSS = `
 .cine-header__end { display: flex; justify-content: flex-end; align-items: center; gap: clamp(18px, 1.8vw, 28px); }
 @media (max-width: 1359px) { .cine-header__row { display: flex; justify-content: space-between; } }
 @media (max-width: 767px) { .cine-header__row { height: 72px; } .cine-logo { font-size: 19px; letter-spacing: 0.3em; margin-right: 0; } .cine-header__end { gap: 20px; } }
+.cine-logo { display: inline-flex; align-items: center; gap: 14px; }
+.cine-logo__mark { width: auto; height: 34px; }
+@media (max-width: 767px) { .cine-logo__mark { height: 26px; } .cine-logo { gap: 10px; } }
 .cine-logo { font-family: var(--font-cine-display); font-weight: 600; font-size: 24px; letter-spacing: 0.42em; margin-right: -0.42em; color: #fff; justify-self: start; }
-.cine-nav { font-family: var(--font-cine-display); font-weight: 500; font-size: 16px; letter-spacing: 0.17em; text-transform: uppercase; color: #fff; opacity: 0.82; transition: opacity 200ms ease; }
+.cine-nav { white-space: nowrap; font-family: var(--font-cine-display); font-weight: 500; font-size: 16px; letter-spacing: 0.17em; text-transform: uppercase; color: #fff; opacity: 0.82; transition: opacity 200ms ease; }
 .cine-nav:hover { opacity: 1; }
 .cine-hide-sm { display: none; }
 .cine-hide-lg { display: none; }

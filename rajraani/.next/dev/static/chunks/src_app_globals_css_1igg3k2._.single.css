@@ -5823,46 +5823,6 @@ body:has([data-ends-full-bleed]) footer {
   background-size: 0 1px;
 }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    :root:has(.cine--shop) :is(.ed-text, .ed-rich, .ed-poetry, figure:has(.ed-quote), .cine-page-head ~ * .text-h2) {
-      animation: linear both edRise;
-      animation-timeline: view();
-      animation-range: entry 5% entry 45%;
-    }
-
-    :root:has(.cine--shop) .ed-media {
-      animation: linear both edUnveil;
-      animation-timeline: view();
-      animation-range: entry cover 35%;
-    }
-  }
-}
-
-@keyframes edRise {
-  from {
-    opacity: 0;
-    transform: translateY(48px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes edUnveil {
-  from {
-    clip-path: inset(10% 6%);
-    opacity: .4;
-  }
-
-  to {
-    clip-path: inset(0);
-    opacity: 1;
-  }
-}
-
 :root:has(.cine--shop) .ed-hero__art {
   height: calc(100svh - 92px);
   max-height: none;

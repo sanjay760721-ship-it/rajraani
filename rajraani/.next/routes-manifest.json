@@ -308,16 +308,22 @@
       "namedRegex": "^/api/payments/webhook(?:/)?$"
     },
     {
+      "page": "/apple-icon.png",
+      "regex": "^/apple\\-icon\\.png(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/apple\\-icon\\.png(?:/)?$"
+    },
+    {
       "page": "/cart",
       "regex": "^/cart(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/cart(?:/)?$"
     },
     {
-      "page": "/favicon.ico",
-      "regex": "^/favicon\\.ico(?:/)?$",
+      "page": "/icon.png",
+      "regex": "^/icon\\.png(?:/)?$",
       "routeKeys": {},
-      "namedRegex": "^/favicon\\.ico(?:/)?$"
+      "namedRegex": "^/icon\\.png(?:/)?$"
     },
     {
       "page": "/login",

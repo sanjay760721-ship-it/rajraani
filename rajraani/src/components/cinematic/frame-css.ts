@@ -17,8 +17,11 @@ export const CINE_FRAME_CSS = `
 .cine-header__end { display: flex; justify-content: flex-end; align-items: center; gap: clamp(18px, 1.8vw, 28px); }
 @media (max-width: 1359px) { .cine-header__row { display: flex; justify-content: space-between; } }
 @media (max-width: 767px) { .cine-header__row { height: 72px; } .cine-logo { font-size: 19px; letter-spacing: 0.3em; margin-right: 0; } .cine-header__end { gap: 20px; } }
+.cine-logo { display: inline-flex; align-items: center; gap: 14px; }
+.cine-logo__mark { width: auto; height: 34px; }
+@media (max-width: 767px) { .cine-logo__mark { height: 26px; } .cine-logo { gap: 10px; } }
 .cine-logo { font-family: var(--font-cine-display); font-weight: 600; font-size: 24px; letter-spacing: 0.42em; margin-right: -0.42em; color: #fff; justify-self: start; }
-.cine-nav { font-family: var(--font-cine-display); font-weight: 500; font-size: 16px; letter-spacing: 0.17em; text-transform: uppercase; color: #fff; opacity: 0.82; transition: opacity 200ms ease; }
+.cine-nav { white-space: nowrap; font-family: var(--font-cine-display); font-weight: 500; font-size: 16px; letter-spacing: 0.17em; text-transform: uppercase; color: #fff; opacity: 0.82; transition: opacity 200ms ease; }
 .cine-nav:hover { opacity: 1; }
 .cine-hide-sm { display: none; }
 .cine-hide-lg { display: none; }

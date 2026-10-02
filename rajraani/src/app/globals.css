@@ -1002,22 +1002,7 @@ body:has([data-ends-full-bleed]) footer {
 :root:has(.cine--shop) main :is(.cta-link, .campaign-cta)::after { display: none; }
 :root:has(.cine--shop) main :is(.cta-link, .campaign-cta):hover { background-size: 0 1px; background-position: 100% 100%; }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    :root:has(.cine--shop) :is(.ed-text, .ed-rich, .ed-poetry, figure:has(.ed-quote), .cine-page-head ~ * .text-h2) {
-      animation: edRise linear both;
-      animation-timeline: view();
-      animation-range: entry 5% entry 45%;
-    }
-    :root:has(.cine--shop) .ed-media {
-      animation: edUnveil linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 35%;
-    }
-  }
-}
-@keyframes edRise { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
-@keyframes edUnveil { from { clip-path: inset(10% 6% 10% 6%); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+/* Scroll motion for these blocks lives in CineMotion (GSAP). */
 
 /* A page's opening photograph, as the homepage opens: the whole screen below
    the header, the copy on the logo's left edge, the title in the homepage's

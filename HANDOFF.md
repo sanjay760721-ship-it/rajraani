@@ -1514,6 +1514,60 @@ launch. The full write-up, with the launch checklist, is
 **Overall, photography aside: about 85% done. Roughly 1½–2½ weeks to launch, most of it
 hosting, configuration and staging checks rather than new code.**
 
+### 2.59 Motion on every page, the brand logo, and a performance pass — 2 October 2026
+
+**Motion on the shop pages** (`src/components/cinematic/CineMotion.tsx`, mounted by
+`CineFrame`). It uses GSAP and Lenis, as the homepage does, but quieter: nothing pins, and
+every move finishes within about a second.
+- smooth scrolling
+- gold rules that draw in
+- product cards that rise in a wave
+- the product details arriving in sequence, with the "Where this came from" figures
+  counting up
+- the opening photo drifting slower than the page, and other photos revealed behind a
+  curtain
+- pull quotes rising word by word
+- the footer name gathering in
+
+None of it runs when the visitor's device is set to reduce motion. It re-runs on every
+client navigation and cleans up after itself.
+
+**Brand logo** (from `pics/logo/logo.jpeg`):
+- **Header:** the gold lotus sits beside RAJRAANI on every page.
+- **Shop footer:** the full logo, with its paper faded into the footer.
+- **Homepage footer:** the lotus above the large name.
+- **Icons:** the lotus is the browser and home-screen icon (`src/app/icon.png`,
+  `apple-icon.png`; the default `favicon.ico` is removed).
+
+The assets are in `public/brand/`. The logo is a single raster picture, and its gold
+lettering sits on a cream drape of nearly the same colour, so the lettering cannot be
+lifted out cleanly. **Ask the owner for the vector or transparent-PNG original** to use
+the logo's own lettering in the header.
+
+**Performance, measured on a production build (`next start`) at 1440×900:**
+
+| Page | First content / main photo | Layout shift | JS transferred |
+|---|---|---|---|
+| Home | 0.31 s | 0 | 275 KB |
+| Collection | 0.40 s | 0 | 279 KB |
+| Product | 0.23 s | 0 | 275 KB |
+| Our Story | **0.34 s** (was 1.40 s) | 0 | 273 KB |
+| Kala | **0.18 s** (was 1.27 s) | 0 | 273 KB |
+
+- **Scrolling:** a median frame of 16.7 ms (60 fps) on all pages, with no frames over 50 ms
+  on the shop pages.
+- **Memory:** the JS heap settles at about 8 MB and stays flat after 40 client
+  navigations, so there is no leak.
+
+What changed:
+- `ScrollReveal` is now a plain wrapper. It used to start every block at opacity 0 in the
+  server HTML (with framer-motion), so nothing showed until JavaScript loaded, and the
+  blocks were also animated a second time by CineMotion. `framer-motion` is no longer
+  imported anywhere; it remains in `package.json` and can be removed later.
+- The first image band on a page is now fetched with priority instead of lazily.
+
+Total client chunks went from 1.8 MB to 1.6 MB.
+
 ---
 
 ## 3. How the folder is arranged

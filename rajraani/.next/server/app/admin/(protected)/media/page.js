@@ -1,8 +1,8 @@
 var R=require("../../../../chunks/ssr/[turbopack]_runtime.js")("server/app/admin/(protected)/media/page.js")
-R.c("server/chunks/ssr/[root-of-the-server]__0k7_hmx._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__1zd4_e_._.js")
 R.c("server/chunks/ssr/src_lib_admin_section-fields_ts_11dym9n._.js")
-R.c("server/chunks/ssr/src_lib_content_sections_ts_00ddvhq._.js")
 R.c("server/chunks/ssr/node_modules_next_dist_1n3w9lb._.js")
+R.c("server/chunks/ssr/src_lib_content_sections_ts_00ddvhq._.js")
 R.c("server/chunks/ssr/[root-of-the-server]__1klcjq8._.js")
 R.c("server/chunks/ssr/[root-of-the-server]__15ypo8t._.js")
 R.c("server/chunks/ssr/node_modules_next_dist_compiled_@opentelemetry_api_index_1oy1nwh.js")
@@ -15,5 +15,5 @@ R.c("server/chunks/ssr/[root-of-the-server]__099k17d._.js")
 R.c("server/chunks/ssr/node_modules_next_dist_0drixxt._.js")
 R.c("server/chunks/ssr/node_modules_next_17sz44y._.js")
 R.c("server/chunks/ssr/[root-of-the-server]__0168nkp._.js")
-R.m(82834)
-module.exports=R.m(82834).exports
+R.m(1962)
+module.exports=R.m(1962).exports

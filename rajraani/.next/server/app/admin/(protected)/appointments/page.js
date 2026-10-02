@@ -1,5 +1,5 @@
 var R=require("../../../../chunks/ssr/[turbopack]_runtime.js")("server/app/admin/(protected)/appointments/page.js")
-R.c("server/chunks/ssr/[root-of-the-server]__0f-ms-m._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__09cf1cz._.js")
 R.c("server/chunks/ssr/node_modules_next_dist_1n3w9lb._.js")
 R.c("server/chunks/ssr/[root-of-the-server]__1klcjq8._.js")
 R.c("server/chunks/ssr/[root-of-the-server]__15ypo8t._.js")
@@ -17,5 +17,5 @@ R.c("server/chunks/ssr/_0au-vrg._.js")
 R.c("server/chunks/ssr/node_modules_next_0n5dn-n._.js")
 R.c("server/chunks/ssr/src_lib_content_sections_ts_00ddvhq._.js")
 R.c("server/chunks/ssr/src_lib_admin_section-fields_ts_11dym9n._.js")
-R.m(21968)
-module.exports=R.m(21968).exports
+R.m(64979)
+module.exports=R.m(64979).exports

@@ -42,6 +42,7 @@
   "/admin/api/subscribers/route": "/admin/api/subscribers",
   "/admin/login/page": "/admin/login",
   "/api/payments/webhook/route": "/api/payments/webhook",
-  "/favicon.ico/route": "/favicon.ico",
+  "/apple-icon.png/route": "/apple-icon.png",
+  "/icon.png/route": "/icon.png",
   "/media/[file]/route": "/media/[file]"
 }

@@ -131,7 +131,7 @@ export async function SectionRenderer({
     case "imageBand":
       return (
         <ScrollReveal>
-          <ImageBand section={section} fallbackHref={fallbackHref} />
+          <ImageBand section={section} fallbackHref={fallbackHref} priority={index === 0} />
         </ScrollReveal>
       );
     case "faqAccordion":
@@ -975,9 +975,12 @@ const IMAGE_BAND_MOBILE_RATIO = {
 function ImageBand({
   section,
   fallbackHref,
+  priority = false,
 }: {
   section: Extract<Section, { type: "imageBand" }>;
   fallbackHref?: string;
+  /** The page's opening photograph: fetched at once, not lazily. */
+  priority?: boolean;
 }) {
   const href = section.href ?? section.overlay?.ctaHref ?? fallbackHref;
   return (
@@ -1000,6 +1003,7 @@ function ImageBand({
           art={section.art}
           className={`w-full ${IMAGE_BAND_MOBILE_RATIO[section.mobileRatio ?? "3/2"]} ${IMAGE_BAND_RATIO[section.ratio ?? "15/8"]}`}
           alt={section.caption ?? section.overlay?.title ?? ""}
+          priority={priority}
         />
         {/*
           * The band is a link to `href`, laid over the photograph. A caption

@@ -8,7 +8,7 @@ Handloom Banarasi saree e-commerce. Own brand, category architecture.
 
 | If you want to… | Read |
 |---|---|
-| **Know where the project stands** | [HANDOFF.md](HANDOFF.md) — resume state, kept current (§2.58 is the latest) |
+| **Know where the project stands** | [HANDOFF.md](HANDOFF.md) — resume state, kept current (§2.59 is the latest) |
 | **Use the admin (shop owner)** | [docs/admin-guide.md](docs/admin-guide.md) — plain-language guide to changing the site |
 | **Know how the admin is built, and what is left** | [rajraani/docs/admin-dashboard-plan.md](rajraani/docs/admin-dashboard-plan.md) |
 | **Run the site** | [rajraani/README.md](rajraani/README.md) |

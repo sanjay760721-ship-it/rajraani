@@ -113,3 +113,133 @@ Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ 
 [29916863ms] [LOG] [Fast Refresh] done in 795ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [29917301ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [29920215ms] [LOG] [Fast Refresh] done in 3020ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30384756ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30384773ms] [LOG] [Fast Refresh] done in 124ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30504871ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30505037ms] [LOG] [Fast Refresh] done in 267ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30528869ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30530586ms] [LOG] [Fast Refresh] done in 1821ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30530616ms] [LOG] [Fast Refresh] done in 1821ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30530691ms] [LOG] [Fast Refresh] done in 1821ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30533789ms] [LOG] [Fast Refresh] done in 1821ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30557725ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30557831ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30564660ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30564713ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30570908ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30570955ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30575858ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30575931ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30577258ms] [WARNING] Image with src "/homepage/about/story-banner.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30582792ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30582856ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30618185ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30618942ms] [LOG] [Fast Refresh] done in 366ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30619278ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30619342ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30625484ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30625525ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30627190ms] [WARNING] Image with src "/reference-only/products/rohini-rose-katan-silk-jangla-saree/01.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30627278ms] [WARNING] Image with src "/reference-only/products/mrinalini-rosewood-katan-silk-shikargah-saree/01.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30649474ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30649562ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30651510ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30651549ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30652935ms] [WARNING] Image with src "/homepage/about/story-banner.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30657110ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30657165ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30716198ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30716244ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30736167ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30736335ms] [LOG] [Fast Refresh] done in 254ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30736732ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30736770ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30738186ms] [WARNING] Image with src "/homepage/about/story-banner.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30741954ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30742001ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30743608ms] [WARNING] Image with src "/reference-only/products/rohini-rose-katan-silk-jangla-saree/01.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30743691ms] [WARNING] Image with src "/reference-only/products/mrinalini-rosewood-katan-silk-shikargah-saree/01.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30753643ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30753708ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30754319ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30754532ms] [LOG] [Fast Refresh] done in 272ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30802611ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30802658ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30810136ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30810185ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30815720ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30815791ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30816435ms] [WARNING] Image with src "/homepage/campaigns/kala-hero.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30818284ms] [WARNING] Image with src "/homepage/campaigns/kala-banner-02-mob.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30821117ms] [WARNING] Image with src "/homepage/campaigns/kala-banner-03.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30821199ms] [WARNING] Image with src "/homepage/campaigns/kala-closing.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30830907ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30830999ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30844332ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30844523ms] [LOG] [Fast Refresh] done in 269ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30845631ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30845706ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30850980ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[30851039ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31283924ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31284926ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31284935ms] [LOG] [Fast Refresh] done in 1114ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31285676ms] [LOG] [Fast Refresh] done in 1114ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31285837ms] [LOG] [Fast Refresh] done in 1114ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31286866ms] [LOG] [Fast Refresh] done in 1114ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31288232ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31288358ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31347205ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31348519ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31348592ms] [LOG] [Fast Refresh] done in 1490ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31349284ms] [LOG] [Fast Refresh] done in 1490ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31352607ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31352764ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31380367ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31380427ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31381154ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31381155ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31387512ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31387580ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31393521ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31393550ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31411940ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31412013ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31417062ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31417096ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31417637ms] [WARNING] Image with src "/homepage/gallery/tile-01.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31417638ms] [WARNING] Image with src "/homepage/gallery/tile-03.webp" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31443705ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31443990ms] [LOG] [Fast Refresh] done in 390ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31445066ms] [LOG] [Fast Refresh] done in 390ms @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31445355ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31445442ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31451399ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31451447ms] [LOG] [HMR] connected @ http://localhost:8080/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[31732327ms] [WARNING] Deprecated API for given entry type. @ :2
+[31732327ms] [WARNING] Deprecated API for given entry type. @ :4
