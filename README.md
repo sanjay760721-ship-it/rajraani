@@ -35,6 +35,29 @@ on a deployed build it always does.
 
 ---
 
+## Run it on another computer
+
+The whole site, its photos and its database are in git. Installed packages and build
+output are not: each computer makes its own, so nothing built for one machine breaks on
+another.
+
+1. Install **Node.js 22.13 or newer** (24 LTS recommended), **Git**, and **Git LFS**
+   (`git lfs install`, once). Without Git LFS the homepage film downloads as a small
+   placeholder file and will not play; everything else still works.
+2. Download the project. `main` is the current version:
+   `git clone https://github.com/sanjay760721-ship-it/rajraani.git`
+3. `cd rajraani/rajraani` — the website is in the inner `rajraani/` folder.
+4. `npm ci` installs the exact package versions in `package-lock.json`. Use `npm ci`,
+   not `npm install`, which can upgrade packages and cause the errors that look like
+   problems with `package.json`.
+5. `npm run dev`, then open http://localhost:8080. For a production run:
+   `npm run build`, then `npm start`.
+
+Checked on 2 October 2026 from a clean copy: it installed with no errors and built, and
+every page showed its photos.
+
+---
+
 ## Progress at a glance — 27 September 2026
 
 **Roughly 82% of the build is done** (73% on 24 September). **The admin is complete for
