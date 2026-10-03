@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { ProductCard } from "./ProductCard";
 import { useSearchModal } from "./search-context";
-import { search } from "@/lib/search";
+import { EMPTY_RESULTS, type SearchResults } from "@/lib/search";
 
 /**
  * Search Modal Overlay.
@@ -23,29 +23,13 @@ export function SearchModal() {
   // opens this, and it has no other way to reach in here.
   const { isOpen, close: closeSearch } = useSearchModal();
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState(search(""));
+  const [results, setResults] = useState<SearchResults>(EMPTY_RESULTS);
+  const pending = useRef<AbortController | null>(null);
+  const router = useRouter();
   const modalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const id = useId();
-  const router = useRouter();
-
-  // Read initial query from URL on client side (avoids useSearchParams Suspense requirement).
-  //
-  // This is a genuine read *from* an external system (the address bar) that
-  // cannot happen during render — the server has no `window`, and a lazy
-  // initialiser would hydrate a `?q=` deep link mismatched against the server's
-  // empty string. The modal is closed at mount, so nothing is visible until the
-  // user opens it and no cascading render is observable.
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlQuery = params.get("q");
-    if (urlQuery) {
-      /* eslint-disable-next-line react-hooks/set-state-in-effect */
-      setQuery(urlQuery);
-      setResults(search(urlQuery));
-    }
-  }, []);
 
   // Lock scroll, remember what had focus, and focus the input while open.
   useEffect(() => {
@@ -65,22 +49,33 @@ export function SearchModal() {
 
   const close = useCallback(() => {
     closeSearch();
+    pending.current?.abort();
     setQuery("");
-    setResults(search(""));
+    setResults(EMPTY_RESULTS);
   }, [closeSearch]);
 
-  // Handle query change
+  /*
+   * Ask the server as the shopper types (the live catalogue, see
+   * search-index.ts). Each keystroke cancels the previous request, so a slow
+   * answer never replaces a newer one. The page behind the overlay stays where
+   * it is: this used to push /search?q=… on every keystroke, navigating the
+   * whole site and filling the back button with one entry per letter.
+   */
   const handleQueryChange = (value: string) => {
     setQuery(value);
-    setResults(search(value));
-    // Update URL without navigation
-    const params = new URLSearchParams(window.location.search);
-    if (value) {
-      params.set("q", value);
-    } else {
-      params.delete("q");
+    pending.current?.abort();
+    if (value.trim().length < 2) {
+      setResults({ ...EMPTY_RESULTS, query: value });
+      return;
     }
-    router.push(`/search?${params.toString()}`, { scroll: false });
+    const controller = new AbortController();
+    pending.current = controller;
+    fetch(`/api/search?q=${encodeURIComponent(value)}`, { signal: controller.signal })
+      .then((response) => (response.ok ? (response.json() as Promise<SearchResults>) : null))
+      .then((data) => {
+        if (data && !controller.signal.aborted) setResults(data);
+      })
+      .catch(() => {});
   };
 
   // Escape closes
@@ -174,6 +169,14 @@ export function SearchModal() {
             type="search"
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
+            onKeyDown={(e) => {
+              // Enter opens every result on the full search page.
+              if (e.key === "Enter" && query.trim().length >= 2) {
+                const target = `/search?q=${encodeURIComponent(query.trim())}`;
+                close();
+                router.push(target);
+              }
+            }}
             placeholder="A colour, a weave, a name"
             className="w-full border-b border-rule-input bg-transparent py-4 text-center text-h4 text-ink outline-none focus:border-ink"
             autoComplete="off"

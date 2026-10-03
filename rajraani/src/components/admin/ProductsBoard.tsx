@@ -18,11 +18,19 @@ import { DuplicateButton, InlinePrice, SpreadsheetPanel } from "./CatalogueTools
  */
 
 
-type Filter = "all" | "live" | "hidden" | "soldout" | "low";
+type Filter = "all" | "live" | "needsPhoto" | "hidden" | "soldout" | "low";
 
-const FILTERS: { id: Filter; label: string; test: (p: AdminProductRow) => boolean }[] = [
+/*
+ * "On the shop" means a shopper can actually see it: switched on AND with at
+ * least one photograph, because the shop leaves out pieces with no photo yet
+ * (catalogue.ts). Switched-on pieces still waiting for a photo get their own
+ * filter, so the counts here match what the shop shows. `onShop` is whether
+ * the catalogue returned the piece.
+ */
+const FILTERS: { id: Filter; label: string; test: (p: AdminProductRow, onShop: boolean) => boolean }[] = [
   { id: "all", label: "All", test: () => true },
-  { id: "live", label: "On the shop", test: (p) => p.published === 1 },
+  { id: "live", label: "On the shop", test: (p, onShop) => p.published === 1 && onShop },
+  { id: "needsPhoto", label: "Waiting for a photo", test: (p, onShop) => p.published === 1 && !onShop },
   { id: "hidden", label: "Hidden", test: (p) => p.published !== 1 },
   { id: "soldout", label: "Sold out", test: (p) => p.inventory_quantity === 0 },
   { id: "low", label: "Only 1 or 2 left", test: (p) => p.inventory_quantity > 0 && p.inventory_quantity <= 2 },
@@ -98,7 +106,7 @@ export function ProductsBoard({
   const test = FILTERS.find((entry) => entry.id === filter)!.test;
   const shown = products.filter(
     (product) =>
-      test(product) &&
+      test(product, Boolean(thumbs[product.handle])) &&
       (!q || `${product.poetic_name} ${product.title} ${product.sku}`.toLowerCase().includes(q)),
   );
 
@@ -134,7 +142,7 @@ export function ProductsBoard({
             className={filter === entry.id ? "a-btn-primary" : "a-btn-secondary"}
             onClick={() => setFilter(entry.id)}
           >
-            {entry.label} ({products.filter(entry.test).length})
+            {entry.label} ({products.filter((product) => entry.test(product, Boolean(thumbs[product.handle]))).length})
           </button>
         ))}
         <input
@@ -186,7 +194,11 @@ export function ProductsBoard({
                   {product.photo_count === 0
                     ? "No photos uploaded yet"
                     : `${product.photo_count} photo${product.photo_count === 1 ? "" : "s"}`}
-                  {product.published === 1 ? "" : " · Hidden from the shop"}
+                  {product.published !== 1
+                    ? " · Hidden from the shop"
+                    : thumbs[product.handle]
+                      ? ""
+                      : " · Not on the shop until it has a photo"}
                 </p>
               </div>
 

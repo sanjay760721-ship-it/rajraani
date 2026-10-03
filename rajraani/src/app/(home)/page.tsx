@@ -3,6 +3,7 @@ import { toScenes } from "@/components/cinematic/scenes";
 import { toFooterData } from "@/components/cinematic/footer-data";
 import { content } from "@/lib/content/content";
 import { getMenu } from "@/lib/content/menu";
+import { shownMenu } from "@/lib/content/menu-shown";
 import { getFooter } from "@/lib/content/footer";
 import { getSiteText } from "@/lib/content/site-text";
 
@@ -17,7 +18,7 @@ export const revalidate = 60;
 export default async function HomePage() {
   const [sections, menu, footer, siteText] = await Promise.all([
     content.getHomepageSections(),
-    getMenu(),
+    getMenu().then(shownMenu),
     getFooter(),
     getSiteText(),
   ]);

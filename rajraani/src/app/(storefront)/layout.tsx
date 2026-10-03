@@ -12,6 +12,7 @@ import { SiteEditor } from "@/components/site-editor/SiteEditor";
 import { getSiteText } from "@/lib/content/site-text";
 import { MenuProvider } from "@/components/menu-context";
 import { getMenu } from "@/lib/content/menu";
+import { shownMenu } from "@/lib/content/menu-shown";
 import { getFooter } from "@/lib/content/footer";
 
 /**
@@ -25,7 +26,7 @@ export default async function StorefrontLayout({
   // product tabs), read once here for every page.
   const siteText = await getSiteText();
   // The menu, as the owner last saved it in the admin.
-  const menu = await getMenu();
+  const menu = await shownMenu(await getMenu());
   const footer = await getFooter();
 
   return (

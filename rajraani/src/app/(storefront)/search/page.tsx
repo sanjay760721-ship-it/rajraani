@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { ProductCard } from "@/components/ProductCard";
-import { search } from "@/lib/search";
+import { searchSite } from "@/lib/search-index";
 import { PageHead } from "@/components/cinematic/PageHead";
 
 /**
@@ -17,7 +17,7 @@ export default async function SearchPage(props: PageProps<"/search">) {
   const params = await props.searchParams;
   const raw = params.q;
   const query = Array.isArray(raw) ? (raw[0] ?? "") : (raw ?? "");
-  const results = search(query);
+  const results = await searchSite(query);
 
   const total =
     results.products.length + results.collections.length + results.pages.length;

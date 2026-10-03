@@ -86,7 +86,7 @@ export default async function AdminOverviewRoute() {
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
         <Tile label="Orders to send" value={String(data.ordersToSend)} href="/admin/orders" note={data.ordersToSend ? "Paid, waiting to go out" : "All caught up"} />
-        <Tile label="Pieces on the shop" value={String(pieces.live)} href="/admin/products" note={pieces.hidden ? `${pieces.hidden} hidden` : undefined} />
+        <Tile label="Pieces on the shop" value={String(pieces.live)} href="/admin/products" note={[pieces.needsPhoto ? `${pieces.needsPhoto} waiting for a photo` : "", pieces.hidden ? `${pieces.hidden} hidden` : ""].filter(Boolean).join(" · ") || undefined} />
         <Tile label="Sold out" value={String(pieces.soldOut)} href="/admin/products" note="Still on the shop, marked sold out" />
         <Tile label="Only 1 or 2 left" value={String(pieces.low)} href="/admin/products" />
         <Tile label="Messages to answer" value={String(data.enquiries.open)} href="/admin/messages" note={`${data.enquiries.last30} in the last 30 days`} />

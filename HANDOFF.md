@@ -1600,6 +1600,35 @@ and what changed:
   `RAZORPAY_KEY_SECRET` are set on the server (it was hard-coded false), and the warnings on
   Reports, Orders and Discount codes say that adding the keys is what is missing.
 
+### 2.61 Logic audit of the shop and admin — 3 October 2026
+
+The whole site was crawled: 58 pages, 36 products, every menu and footer link, the facet
+counts, sorting, cart limits and pagination. No broken links were found. These logic bugs
+were found and fixed:
+
+- **Menu links that opened an empty grid.** Pre-Order, Jamawar, Rangkat, Georgette,
+  Tussar silk and Silk Wool had no piece behind them. `lib/content/menu-shown.ts` drops any
+  filtered collection link with no matching piece, and any column left empty. Each link
+  comes back by itself when stock arrives. The shop and homepage menus use it. The admin
+  Menu screen still lists every link.
+- **The currency picker did nothing.** `Price` was a server component that always showed
+  rupees. It now follows the header choice and shows "≈ $936" (at the fixed rates), with a
+  note that payment is in rupees. The cart and checkout stay in rupees.
+- **Search ignored the real catalogue.** It read the built-in fixtures, so it listed pieces
+  hidden for having no photo (their links went to 404 pages), ignored admin edits, and
+  included draft pages. `lib/search.ts` is now a pure function, and `lib/search-index.ts`
+  builds the index from the live catalogue and published pages. The search page uses it,
+  and the search box queries a new `/api/search`.
+- **The search box changed the URL on every key press.** It now fetches results in place,
+  cancels any request still running, and **Enter** opens the full `/search` page.
+- **Admin counts included pieces shoppers cannot see.** On Products, "On the shop" now
+  means switched on *and* has a photo. A new filter, **Waiting for a photo**, lists pieces
+  that are switched on but have no photo yet. The Reports tile counts the same way (29 on
+  the shop · 7 waiting for a photo).
+
+Still open: the checkout fields have no `name` or `autocomplete` attributes, so browsers
+cannot fill in the address for the shopper.
+
 ---
 
 ## 3. How the folder is arranged

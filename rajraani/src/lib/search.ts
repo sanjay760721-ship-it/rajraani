@@ -6,16 +6,17 @@
  * only to a product, which is exactly right for a deep catalogue with a heavy
  * editorial layer. That grouping is copied here.
  *
- * This is a linear scan over fixtures. Sprint 3 replaces it with Algolia; the
- * grouped result shape is the part that should survive.
+ * A linear scan over a search index: the live catalogue (photographed,
+ * published pieces, with the admin's edits), its collections and the
+ * published pages, built on the server by search-index.ts. It used to scan
+ * the committed fixtures, so it listed pieces the shop hides (their pages
+ * 404) and ignored every edit made in the admin.
  *
  * Alias resolution is wired in, so a shopper typing "kadwa" finds kadhua
  * pieces — the runtime payoff of recording transliteration forks in the
  * vocabulary rather than letting them fork the catalogue.
  */
 
-import { PAGES } from "./content/sections";
-import { COLLECTIONS, PRODUCTS } from "./data/fixtures";
 import { FACET_GROUPS, resolveTerm } from "./domain/taxonomy";
 import type { Collection, Product } from "./domain/types";
 
@@ -28,10 +29,19 @@ export type SearchResults = {
   pages: { slug: string; title: string; standfirst: string }[];
 };
 
-export function search(rawQuery: string): SearchResults {
+/** What search looks through: built from live data on the server. */
+export type SearchIndex = {
+  products: readonly Product[];
+  collections: readonly Collection[];
+  pages: readonly { slug: string; title: string; standfirst: string }[];
+};
+
+export const EMPTY_RESULTS: SearchResults = { query: "", matchedTerms: [], products: [], collections: [], pages: [] };
+
+export function search(index: SearchIndex, rawQuery: string): SearchResults {
   const query = rawQuery.trim().toLowerCase();
   if (query.length < 2) {
-    return { query: rawQuery, matchedTerms: [], products: [], collections: [], pages: [] };
+    return { ...EMPTY_RESULTS, query: rawQuery };
   }
 
   const matchedTerms = FACET_GROUPS.flatMap((group) => {
@@ -41,7 +51,7 @@ export function search(rawQuery: string): SearchResults {
 
   const matchedSlugs = new Set(matchedTerms.map((term) => term.slug));
 
-  const products = PRODUCTS.filter((product) => {
+  const products = index.products.filter((product) => {
     if (
       (product.weave !== undefined && matchedSlugs.has(product.weave)) ||
       matchedSlugs.has(product.fabric) ||
@@ -56,25 +66,19 @@ export function search(rawQuery: string): SearchResults {
       .includes(query);
   });
 
-  const collections = COLLECTIONS.filter((collection) =>
+  const collections = index.collections.filter((collection) =>
     `${collection.title} ${collection.seoIntro}`.toLowerCase().includes(query),
   );
 
-  const pages = Object.entries(PAGES)
-    .filter(([slug, page]) =>
-      `${slug} ${page.title} ${page.standfirst}`.toLowerCase().includes(query),
-    )
-    .map(([slug, page]) => ({
-      slug,
-      title: page.title,
-      standfirst: page.standfirst,
-    }));
+  const pages = index.pages.filter((page) =>
+    `${page.slug} ${page.title} ${page.standfirst}`.toLowerCase().includes(query),
+  );
 
   return {
     query: rawQuery,
     matchedTerms: matchedTerms.map(({ group, name }) => ({ group, name })),
-    products,
-    collections,
-    pages,
+    products: [...products],
+    collections: [...collections],
+    pages: [...pages],
   };
 }

@@ -10,6 +10,7 @@ import { SiteEditor } from "@/components/site-editor/SiteEditor";
 import { MenuProvider } from "@/components/menu-context";
 import { getSiteText } from "@/lib/content/site-text";
 import { getMenu } from "@/lib/content/menu";
+import { shownMenu } from "@/lib/content/menu-shown";
 import { getFooter } from "@/lib/content/footer";
 
 /*
@@ -23,7 +24,7 @@ import { getFooter } from "@/lib/content/footer";
  */
 
 export default async function HomeLayout({ children }: LayoutProps<"/">) {
-  const [siteText, menu, footer] = await Promise.all([getSiteText(), getMenu(), getFooter()]);
+  const [siteText, menu, footer] = await Promise.all([getSiteText(), getMenu().then(shownMenu), getFooter()]);
 
   return (
     <SiteTextProvider value={siteText}>

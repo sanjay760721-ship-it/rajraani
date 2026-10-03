@@ -4,6 +4,7 @@ import { content } from "../content/content.ts";
 import { db } from "../db/client.ts";
 import { termsForGroup } from "../domain/taxonomy.ts";
 import { listProductsForAdmin } from "../data/admin-queries.ts";
+import { catalogue } from "../data/catalogue.ts";
 import { countReferencePhotos } from "./section-fields.ts";
 
 /**
@@ -23,7 +24,7 @@ export type Overview = {
   weekly: { label: string; start: string; minor: number; orders: number }[];
   ordersToSend: number;
   bestSellers: { name: string; handle: string; units: number; minor: number }[];
-  pieces: { live: number; hidden: number; soldOut: number; low: number; total: number };
+  pieces: { live: number; needsPhoto: number; hidden: number; soldOut: number; low: number; total: number };
   byType: { name: string; count: number }[];
   ownPhotos: { withPhotos: number; total: number };
   standInPhotosOnPages: number;
@@ -84,7 +85,11 @@ export async function overview(now = new Date()): Promise<Overview> {
   ).map((row) => ({ ...row }));
 
   const products = listProductsForAdmin();
-  const live = products.filter((product) => product.published === 1);
+  // "On the shop" is what a shopper can see: switched on and photographed
+  // (the catalogue leaves out pieces with no photo yet).
+  const visible = new Set((await catalogue.listProducts()).map((product) => product.handle));
+  const switchedOn = products.filter((product) => product.published === 1);
+  const live = switchedOn.filter((product) => visible.has(product.handle));
 
   const garmentRows = d
     .prepare(`SELECT garment_type AS slug, COUNT(*) AS count FROM product WHERE published = 1 GROUP BY garment_type`)
@@ -110,7 +115,8 @@ export async function overview(now = new Date()): Promise<Overview> {
     bestSellers,
     pieces: {
       live: live.length,
-      hidden: products.length - live.length,
+      needsPhoto: switchedOn.length - live.length,
+      hidden: products.length - switchedOn.length,
       soldOut: live.filter((product) => product.inventory_quantity === 0).length,
       low: live.filter((product) => product.inventory_quantity > 0 && product.inventory_quantity <= 2).length,
       total: products.length,
