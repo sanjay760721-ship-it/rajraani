@@ -4,6 +4,7 @@ import { Barlow, Barlow_Condensed, Cardo, Manrope, Open_Sans, Playfair_Display }
 import { BRAND } from "@/lib/brand";
 
 import "./globals.css";
+import { SITE_URL } from "@/lib/site-url";
 
 /**
  * Root layout — deliberately almost empty.
@@ -86,6 +87,8 @@ const adminUi = Manrope({
 });
 
 export const metadata: Metadata = {
+  // Full addresses for share previews and structured data (SITE_URL).
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${BRAND.name} — handwoven Banarasi textiles`,
     template: `%s — ${BRAND.name}`,

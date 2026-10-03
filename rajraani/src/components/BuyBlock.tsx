@@ -69,7 +69,7 @@ function AddToCart({ product }: { product: Product }) {
         <div className="mt-4 border border-rule p-4">
           <p className="text-caption text-ink-body">
             Pre-order — despatch in {product.dispatchLeadDays[0]}–
-            {product.dispatchLeadDays[1]} business days.
+            {product.dispatchLeadDays[1]} working days.
           </p>
           <label className="text-caption mt-3 flex items-start gap-2 text-ink-body">
             <input
@@ -98,7 +98,7 @@ function AddToCart({ product }: { product: Product }) {
 
       <p className="text-caption mt-4 text-ink-muted">
         Despatch in {product.dispatchLeadDays[0] + extraDays(finishing)}–
-        {product.dispatchLeadDays[1] + extraDays(finishing)} business days.
+        {product.dispatchLeadDays[1] + extraDays(finishing)} working days.
       </p>
 
       {/* Qty on its own row above the button, not inline beside it (§A5.2
@@ -132,6 +132,7 @@ function AddToCart({ product }: { product: Product }) {
               priceMinorUnits: product.price.minorUnits,
               colourSlug: product.colourFamily,
               alt: primary?.alt ?? product.title,
+              src: primary?.src,
               maxQuantity: product.inventoryQuantity,
             },
             quantity,

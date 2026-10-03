@@ -1,6 +1,7 @@
 import { ProductsBoard } from "@/components/admin/ProductsBoard";
 import { catalogue } from "@/lib/data/catalogue";
 import { listProductsForAdmin } from "@/lib/data/admin-queries";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Products & stock" };
 
@@ -10,6 +11,9 @@ export const metadata = { title: "Products & stock" };
  * developer's questions rather than a shopkeeper's.
  */
 export default async function AdminProductsRoute(props: PageProps<"/admin/products">) {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const { saved, deleted } = await props.searchParams;
   const products = listProductsForAdmin();
 

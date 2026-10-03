@@ -8,10 +8,14 @@ import { formVocabulary } from "@/lib/admin/vocabulary";
 import { catalogue } from "@/lib/data/catalogue";
 import { campaignOptions, getProductForEdit, listImages } from "@/lib/data/admin-queries";
 import { listMedia } from "@/lib/media/library";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Edit piece" };
 
 export default async function EditProductPage(props: PageProps<"/admin/products/[id]">) {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const { id } = await props.params;
   const { saved } = await props.searchParams;
 

@@ -12,10 +12,12 @@ import {
 import { evaluate } from "../discounts";
 import { gatewayRequest, isCapturedPayment, validSignature } from "./gateway";
 import { allowReceipt, canReadReceipt } from "./receipt";
-import { headers } from "next/headers";
 import { createRateLimit } from "../rate-limit";
+import { clientAddress } from "../client-address";
 
 const permitCheckout = createRateLimit(10, 10 * 60 * 1000);
+// Generous for a shopper trying a code or two; slow for a script guessing codes.
+const permitDiscount = createRateLimit(20, 10 * 60 * 1000);
 
 export type CheckoutInitResult =
   | {
@@ -49,6 +51,7 @@ export type DiscountCheck =
  */
 export async function checkDiscountAction(requestedLines: CartRequestLine[], code: string): Promise<DiscountCheck> {
   if (typeof code !== "string" || code.length > 100 || !code.trim()) return { ok: false, error: "Enter a code." };
+  if (!permitDiscount(await clientAddress())) return { ok: false, error: "Too many tries. Please wait a few minutes." };
   const priced = priceCart(requestedLines);
   if (!priced.ok) return { ok: false, error: "Your cart could not be priced." };
   const result = evaluate(code, priced.cart.subtotalMinor);
@@ -68,8 +71,7 @@ export async function createCheckoutAction(
   discountCode?: string,
 ): Promise<CheckoutInitResult> {
   try {
-    const list = await headers();
-    const address = list.get("x-forwarded-for")?.split(",")[0]?.trim() || list.get("x-real-ip") || "unknown";
+    const address = await clientAddress();
     if (!permitCheckout(address)) return { ok: false, error: "Please wait a few minutes before trying checkout again." };
     if (discountCode !== undefined && (typeof discountCode !== "string" || discountCode.length > 100)) return { ok: false, error: "Invalid discount code." };
     const keyId = process.env.RAZORPAY_KEY_ID;

@@ -3,6 +3,7 @@ import { siteLinks } from "@/lib/admin/site-links";
 import { sectionTemplates } from "@/lib/admin/templates";
 import { content, homepageIsSeed } from "@/lib/content/content";
 import { listMedia } from "@/lib/media/library";
+import { requireAdmin } from "@/lib/auth/session";
 
 /*
  * The block types the cinematic homepage turns into scenes
@@ -23,6 +24,9 @@ export const metadata = { title: "Homepage" };
  * library and every linkable page loaded alongside it.
  */
 export default async function AdminHomepageRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const [sections, isSeed, links] = await Promise.all([
     content.getHomepageSections(),
     homepageIsSeed(),

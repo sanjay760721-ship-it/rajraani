@@ -6,6 +6,7 @@ import { siteLinks } from "@/lib/admin/site-links";
 import { sectionTemplates } from "@/lib/admin/templates";
 import { content } from "@/lib/content/content";
 import { listMedia } from "@/lib/media/library";
+import { requireAdmin } from "@/lib/auth/session";
 
 export async function generateMetadata(props: PageProps<"/admin/pages/[slug]">) {
   const { slug } = await props.params;
@@ -14,6 +15,9 @@ export async function generateMetadata(props: PageProps<"/admin/pages/[slug]">) 
 }
 
 export default async function AdminPageEditRoute(props: PageProps<"/admin/pages/[slug]">) {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const { slug } = await props.params;
   const { created } = await props.searchParams;
   const [page, links] = await Promise.all([content.getPage(slug), siteLinks()]);

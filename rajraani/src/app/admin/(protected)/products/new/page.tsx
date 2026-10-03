@@ -3,10 +3,14 @@ import Link from "next/link";
 import { ProductForm } from "@/components/admin/ProductForm";
 import { formVocabulary } from "@/lib/admin/vocabulary";
 import { campaignOptions } from "@/lib/data/admin-queries";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Add a piece" };
 
-export default function NewProductPage() {
+export default async function NewProductPage() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   return (
     <div className="space-y-8">
       <Link href="/admin/products" className="a-btn-ghost inline-flex items-center gap-2">

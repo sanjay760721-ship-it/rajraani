@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { clientAddress } from "@/lib/client-address";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -7,16 +7,6 @@ import { currentAdmin, signIn } from "@/lib/auth/session";
 import { lockedFor, recordFailure, recordSuccess } from "@/lib/auth/throttle";
 
 export const metadata = { title: "Sign in" };
-
-/** The address a sign-in attempt came from, for the guess limit. */
-async function clientAddress(): Promise<string> {
-  const list = await headers();
-  return (
-    list.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    list.get("x-real-ip") ||
-    "unknown"
-  );
-}
 
 /**
  * Admin sign-in.

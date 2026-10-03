@@ -932,6 +932,9 @@ body:has([data-ends-full-bleed]) footer {
 /* The admin's edit bar: on a phone its sentence wrapped into a tall pill over
    the page. The buttons say enough on their own there. */
 @media (max-width: 520px) { .site-editor-bar__label { display: none; } }
+/* The admin edit bar steps aside while the cart, Quick View, search or the
+   phone menu is open. It sat on top of the cart's checkout button. */
+body:has([aria-modal="true"]:not([data-site-editor] *)) .site-editor-bar { display: none !important; }
 
 
 

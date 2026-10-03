@@ -266,7 +266,7 @@ function SpecList({ product, promise }: { product: Product; promise: string }) {
     ["Our promise", promise],
     [
       "Expected despatch",
-      `${product.dispatchLeadDays[0]}–${product.dispatchLeadDays[1]} business days`,
+      `${product.dispatchLeadDays[0]}–${product.dispatchLeadDays[1]} working days`,
     ],
     ["Note", product.spec.note],
   ];

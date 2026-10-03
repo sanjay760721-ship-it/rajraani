@@ -76,7 +76,7 @@ export const INFO_TABS: readonly { id: string; label: string; items: readonly st
     id: "shipping",
     label: "Shipping",
     items: [
-      "Dispatched from Varanasi with a tracking number sent on despatch.",
+      "Dispatched from Varanasi, with a tracking number sent the day it leaves.",
       "Delivery within India takes 3–5 working days.",
       "Shipping within India is complimentary, with no minimum.",
       // Honest about the current limit rather than silent about it. An overseas

@@ -33,6 +33,8 @@ export type CartLine = {
   priceMinorUnits: number;
   colourSlug: string;
   alt: string;
+  /** The first photograph, for the drawer and the cart page. */
+  src?: string;
   quantity: number;
   /** Inventory of 1 is the norm for unique pieces — the stepper caps here. */
   maxQuantity: number;

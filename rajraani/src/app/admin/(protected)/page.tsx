@@ -5,6 +5,7 @@ import { listOrders } from "@/lib/admin/orders-admin";
 import { content } from "@/lib/content/content";
 import { listProductsForAdmin } from "@/lib/data/admin-queries";
 import { adminBadges } from "@/lib/admin/badges";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Home" };
 
@@ -73,6 +74,9 @@ const GROUPS: { title: string; hint: string; parts: Part[] }[] = [
 ];
 
 export default async function AdminHome() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const [homepage, pages] = await Promise.all([content.getHomepageSections(), content.listPages()]);
   const toSend = listOrders().filter((order) => order.status === "paid").length;
   const { openMessages } = adminBadges();

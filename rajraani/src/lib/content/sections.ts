@@ -1982,9 +1982,9 @@ export const PAGES: Readonly<
             heading: "Payment",
             items: [
               {
-                question: "Checkout sends me to another site. Is that normal?",
+                question: "Checkout opens a payment window. Is that normal?",
                 answer:
-                  "Yes. Payment is handled by our payment provider rather than by us, which means your card details are never on our servers. You are returned here once it completes.",
+                  "Yes. Payment is handled by Razorpay, our payment provider, in a secure window over this page, so your card details never reach our servers. The window closes and you see your order once it completes.",
               },
               {
                 question: "My payment failed. What now?",
@@ -1994,7 +1994,7 @@ export const PAGES: Readonly<
               {
                 question: "Are there extra duties or taxes?",
                 answer:
-                  "Within India the price shown includes tax and shipping, with nothing added on delivery. Overseas, duties are included in the price, which is why the international figure is not a straight conversion.",
+                  "No. The price shown includes tax and shipping, with nothing added on delivery. We ship within India only at present.",
               },
               {
                 question: "Can I reserve a piece and pay later?",
@@ -2014,17 +2014,12 @@ export const PAGES: Readonly<
               {
                 question: "Do you ship outside India?",
                 answer:
-                  "Yes, with duties included in the price. If your country is not offered at checkout, write to us before assuming we cannot reach it.",
+                  "Not yet. We ship within India only at present. If you are abroad, write to us and we will tell you what we can arrange.",
               },
               {
                 question: "Who do you ship with?",
                 answer:
-                  "A tracked courier for everything, and an insured service for anything above the threshold shown at checkout. Metal pieces go crated.",
-              },
-              {
-                question: "How long does international delivery take?",
-                answer:
-                  "Usually five to ten working days from dispatch, plus customs. Shipping is free above the value shown in the announcement bar and quoted at checkout below it.",
+                  "A tracked courier for everything, with the tracking number sent the day your piece leaves. Metal pieces go crated.",
               },
               {
                 question: "How long does delivery take within India?",
@@ -2301,7 +2296,7 @@ export const PAGES: Readonly<
         align: "left",
         heading: "Within India",
         paragraphs: [
-          "Shipping is free with no minimum. Orders are dispatched from Varanasi with a tracked courier and a tracking number is emailed on despatch.",
+          "Shipping is free with no minimum. Orders are dispatched from Varanasi with a tracked courier, and the tracking number is sent the day your piece leaves.",
           "Delivery takes three to five working days from dispatch. A ready-to-ship piece leaves within two or three working days of the order; a made-to-order piece is dispatched when it is finished, on the week stated on its product page.",
         ],
       },
@@ -2311,9 +2306,7 @@ export const PAGES: Readonly<
         align: "left",
         heading: "Outside India",
         paragraphs: [
-          "We ship worldwide. Shipping is free above ₹25,000 and quoted at checkout below that.",
-          "Duties are included in the price, so nothing further is asked for on delivery — which is why an international price is not a straight conversion of the rupee one. Delivery usually takes five to ten working days from dispatch, plus whatever customs adds.",
-          "If your country is not offered at checkout, write to us before assuming we cannot reach it.",
+          "We ship within India only at present. If you are abroad, write to us and we will tell you what we can arrange.",
         ],
       },
       {

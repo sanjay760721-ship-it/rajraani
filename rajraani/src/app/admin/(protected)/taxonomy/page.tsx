@@ -3,6 +3,7 @@ import Link from "next/link";
 import { catalogue } from "@/lib/data/catalogue";
 import { COLOURS, termsForGroup, type FacetGroup } from "@/lib/domain/taxonomy";
 import type { Product } from "@/lib/domain/types";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Weaves, colours & fabrics" };
 
@@ -26,6 +27,9 @@ const GROUPS: { group: FacetGroup; title: string; what: string; count: (p: Produ
 ];
 
 export default async function TaxonomyAdminPage() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const products = await catalogue.listProducts();
 
   return (

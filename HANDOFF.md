@@ -1626,8 +1626,79 @@ were found and fixed:
   that are switched on but have no photo yet. The Reports tile counts the same way (29 on
   the shop · 7 waiting for a photo).
 
-Still open: the checkout fields have no `name` or `autocomplete` attributes, so browsers
-cannot fill in the address for the shopper.
+### 2.62 Five-pass review: logic, text, design, performance, security — 3 October 2026
+
+**Security (the serious one).** Admin pages were guarded only by the protected *layout*.
+On an in-app move between admin screens, Next.js renders the new page without the layout,
+so a request crafted to look like one returned admin data with no sign-in. Customer
+messages (with email addresses), orders and customers were all reachable. Confirmed
+against the production build, then fixed in two layers:
+- every admin page now calls `requireAdmin()` itself;
+- `src/proxy.ts` (Next 16's middleware) sends any `/admin` request without a session
+  cookie to the sign-in page (admin API calls get 401). This also covers screens added
+  later. The proxy keeps the same development bypass as `session.ts`.
+
+Re-tested: no cookie → sent to sign-in; forged cookie → the page itself redirects; no data
+either way.
+
+**Rate limits could be dodged.** Every limiter (sign-in, contact, newsletter, checkout)
+keyed on the *first* `X-Forwarded-For` entry, which the visitor writes. A script could pick
+a new "address" per request. Because a full table refuses new keys, it could also lock
+real shoppers out for ten minutes. `lib/client-address.ts` now trusts only `X-Real-IP` or
+the last entry, which is the one our proxy adds. The discount-code check, which was
+unlimited, is now limited to 20 tries per 10 minutes. The reverse proxy must set
+`X-Real-IP` or append to `X-Forwarded-For`. `Strict-Transport-Security` was added to the
+headers.
+
+**Checkout form.** Labels are now tied to their inputs. Each field has a `name` and an
+`autocomplete` value, so phones can fill in a saved address. The PIN code accepts digits
+only, six at most, matching the server's check. City, State and PIN wrap on a phone. The
+emoji badges, the amber gradient pay button, "Silk Mark Certified" (wrong for cotton and
+linen pieces) and the Amex/EMI promises are gone. In their place is a plain Payment /
+Delivery note. The admin edit bar now hides while the cart, Quick View, search or the
+phone menu is open; it used to cover the checkout button.
+
+**Cart shows photographs.** Cart lines now carry the first photo (`src`), and the drawer and
+cart page draw it through `CartThumb`. They used to show a colour block for every piece.
+Older saved carts fall back to that block.
+
+**Text.**
+- The cart page promised "Duties included worldwide". The FAQ said "Yes, we ship outside
+  India", gave international delivery times, and mentioned the announcement bar, which is
+  gone. The Shipping page said "We ship worldwide". Checkout only takes Indian addresses,
+  so all of these now say "within India only at present".
+- The FAQ said checkout "sends me to another site". Razorpay opens as a window over the
+  page, so it now says that.
+- Photo descriptions for kurta, suit and lehenga sets no longer talk about drape, border
+  and pallu. This is fixed in `fixtures.ts` and in 40 rows of `data/rajraani.db`; rows the
+  owner had edited were left alone.
+- The product pages now say "working days" (they mixed in "business days"). The shipping
+  line no longer mixes "dispatched" and "despatch" in one sentence.
+- Cart, wishlist, account, sign-in and 404 now have their own tab titles.
+
+**Not found.** There was no custom 404, so unknown addresses showed Next's bare default
+page. `(storefront)/not-found.tsx` gives a branded page inside the shop frame, and
+`(storefront)/[...missing]` sends every unknown address there with a real 404 status.
+ESLint's `no-html-link-for-pages` is off, because with a catch-all it flags every plain
+link.
+
+**robots.txt, sitemap, metadataBase.** None existed. `robots.ts` blocks every crawler
+until `SITE_LIVE=1`, because the stand-in photos must not be indexed. After that it
+allows the shop and points to `sitemap.ts`, which lists only what shoppers can see.
+`SITE_URL` sets `metadataBase`. Both are documented in `.env.example`.
+
+**Checked and fine.**
+- 56 pages crawled at phone and computer widths: no errors, no sideways scroll, no broken
+  images, one `h1` each.
+- Production build: main content shows in under 1.5 s, CLS 0, pages weigh 400–720 KB, no
+  duplicate downloads. In dev every image is requested twice; that is React's
+  development mode only.
+- No memory leak: 36 in-app page changes leave listener counts flat and memory levelling
+  off at about 9–10 MB.
+- The server reprices the cart, discount codes and payments itself and never trusts the
+  browser.
+- The webhook checks its signature. Cookies are httpOnly and SameSite. The only raw HTML
+  is JSON-LD, which goes through `serializeJsonLd`.
 
 ---
 

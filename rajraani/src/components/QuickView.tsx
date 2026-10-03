@@ -143,7 +143,7 @@ function QuickViewModal({
                 </p>
                 <p className="text-caption mt-1 text-ink-muted">
                   Dispatched in {product.dispatchLeadDays[0]}–
-                  {product.dispatchLeadDays[1]} business days.
+                  {product.dispatchLeadDays[1]} working days.
                 </p>
                 <button
                   type="button"
@@ -158,6 +158,7 @@ function QuickViewModal({
                         priceMinorUnits: product.price.minorUnits,
                         colourSlug: product.colourFamily,
                         alt: primary?.alt ?? product.title,
+                        src: primary?.src,
                         maxQuantity: product.inventoryQuantity,
                       },
                       1,

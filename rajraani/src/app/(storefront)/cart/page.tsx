@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCart } from "@/components/cart-context";
 import { formatMoney } from "@/lib/money";
 import { BASE_CURRENCY } from "@/lib/domain/types";
-import { PLACEHOLDER_WASH, toneFor } from "@/components/Frame";
+import { CartThumb } from "@/components/CartThumb";
 import { PageHead } from "@/components/cinematic/PageHead";
 
 export default function CartPage() {
@@ -12,7 +12,7 @@ export default function CartPage() {
 
   return (
     <div className="min-h-[70vh] bg-bg pb-16 px-4 sm:px-8 max-w-[1280px] mx-auto">
-      <PageHead kicker="Your bag" title="Shopping cart" size="md" intro="Complimentary shipping in India. Duties included worldwide." />
+      <PageHead kicker="Your bag" title="Shopping cart" size="md" intro="Complimentary shipping across India. Taxes included." />
 
       {itemCount === 0 ? (
         <div className="text-center py-20 bg-surface-notice border border-rule max-w-xl mx-auto p-8">
@@ -34,13 +34,7 @@ export default function CartPage() {
             <div className="border border-rule bg-bg-alt divide-y divide-rule">
               {lines.map((line) => (
                 <div key={line.handle} className="p-6 flex gap-6 items-center">
-                  <div
-                    className="w-20 h-28 shrink-0 overflow-hidden border border-rule"
-                    style={{
-                      backgroundColor: toneFor(line.colourSlug),
-                      backgroundImage: PLACEHOLDER_WASH,
-                    }}
-                  />
+                  <CartThumb line={line} className="h-28 w-20" />
                   <div className="flex-1 min-w-0">
                     <h3 className="font-display text-[1.375rem] leading-none tracking-[0.06em] text-ink mb-1">
                       {line.poeticName || line.title}
@@ -103,7 +97,7 @@ export default function CartPage() {
                   <span className="font-medium text-ink">Free</span>
                 </div>
                 <div className="flex justify-between text-xs text-ink-body">
-                  <span>Duties & Taxes</span>
+                  <span>Taxes</span>
                   <span className="text-ink-muted">Included</span>
                 </div>
                 <div className="pt-3 border-t border-rule flex justify-between text-sm font-semibold text-ink">

@@ -4,6 +4,7 @@ import { rupees } from "@/lib/admin/format";
 import { STATUS_WORDS } from "@/lib/admin/order-words";
 import { listOrders } from "@/lib/admin/orders-admin";
 import { db } from "@/lib/db/client";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Customers" };
 
@@ -19,7 +20,10 @@ export const metadata = { title: "Customers" };
 const SOLD = new Set(["paid", "dispatched", "delivered"]);
 const day = (iso: string) => new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 
-export default function AdminCustomersRoute() {
+export default async function AdminCustomersRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const orders = listOrders();
   const messages = db()
     .prepare("SELECT LOWER(email) AS email, COUNT(*) AS n FROM enquiry GROUP BY LOWER(email)")

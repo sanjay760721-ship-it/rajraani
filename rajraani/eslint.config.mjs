@@ -5,6 +5,14 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  {
+    rules: {
+      // A rule for the old pages/ router. With the shop's catch-all "not found"
+      // route ((storefront)/[...missing]) it reads every address as a page and
+      // flags the admin's deliberate plain links (CSV downloads, full reloads).
+      "@next/next/no-html-link-for-pages": "off",
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

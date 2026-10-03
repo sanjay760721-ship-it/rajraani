@@ -4,6 +4,7 @@ import { BarList, Meter, WeeklySales } from "@/components/admin/OverviewCharts";
 import { rupees } from "@/lib/admin/format";
 import { PAYMENTS_LIVE } from "@/lib/admin/order-words";
 import { overview } from "@/lib/admin/overview-data";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Reports" };
 
@@ -37,6 +38,9 @@ function Card({ title, note, children }: { title: string; note?: string; childre
 }
 
 export default async function AdminOverviewRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const data = await overview();
   const { sales30, salesPrev30, pieces } = data;
 

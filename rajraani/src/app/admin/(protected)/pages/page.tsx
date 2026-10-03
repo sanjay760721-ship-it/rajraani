@@ -4,6 +4,7 @@ import { NewPageButton } from "@/components/admin/NewPageButton";
 import { countReferencePhotos } from "@/lib/admin/section-fields";
 import { content } from "@/lib/content/content";
 import { PAGE_KINDS, type PageKind } from "@/lib/content/repository";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Pages" };
 
@@ -14,6 +15,9 @@ export const metadata = { title: "Pages" };
  * about pages, then journal entries.
  */
 export default async function AdminPagesRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const pages = await content.listPages();
   const groups = PAGE_KINDS.map((kind) => ({
     ...kind,

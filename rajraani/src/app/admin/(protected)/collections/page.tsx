@@ -8,6 +8,7 @@ import { formVocabulary } from "@/lib/admin/vocabulary";
 import { listProductsForAdmin } from "@/lib/data/admin-queries";
 import { catalogue } from "@/lib/data/catalogue";
 import { FACET_GROUP_LABELS, termsForGroup, type FacetGroup } from "@/lib/domain/taxonomy";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Collections" };
 
@@ -45,6 +46,9 @@ function describe(facets: Readonly<Record<string, readonly string[]>>): string {
 }
 
 export default async function AdminCollectionsRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const [collections, shopProducts] = await Promise.all([catalogue.listCollections(), catalogue.listProducts()]);
   const rows = listProductsForAdmin();
   const idByHandle = new Map(rows.map((row) => [row.handle, row.id]));

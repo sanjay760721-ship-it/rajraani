@@ -89,6 +89,7 @@ export default function WishlistPage() {
                       priceMinorUnits: item.priceMinorUnits,
                       colourSlug: item.colourSlug,
                       alt: item.alt,
+                      src: item.src,
                       maxQuantity: 1,
                     });
                     remove(item.handle);

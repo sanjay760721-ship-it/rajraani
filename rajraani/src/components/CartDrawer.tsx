@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { PLACEHOLDER_WASH, toneFor } from "./Frame";
 import { useCart } from "./cart-context";
+import { CartThumb } from "./CartThumb";
 import { BASE_CURRENCY } from "@/lib/domain/types";
 import { formatMoney } from "@/lib/money";
 import { BRAND } from "@/lib/brand";
@@ -290,15 +290,7 @@ export function CartDrawer() {
               <ul className="flex-1 divide-y divide-rule overflow-y-auto px-6">
                 {lines.map((line) => (
                   <li key={line.handle} className="flex gap-4 py-5">
-                    <div
-                      role="img"
-                      aria-label={line.alt}
-                      className="aspect-portrait w-20 shrink-0 border border-rule"
-                      style={{
-                        backgroundColor: toneFor(line.colourSlug),
-                        backgroundImage: PLACEHOLDER_WASH,
-                      }}
-                    />
+                    <CartThumb line={line} className="aspect-portrait w-20" />
                     <div className="flex-1">
                       <p className="font-display font-semibold text-ink text-base">
                         {line.poeticName}
@@ -372,143 +364,50 @@ export function CartDrawer() {
 
               {errorMsg ? (
                 <div className="border border-error bg-error/5 p-3 text-caption text-error">
-                  ⚠️ {errorMsg}
+                  {errorMsg}
                 </div>
               ) : null}
 
-              <div>
-                <label className="eyebrow block text-ink-muted text-[10px] uppercase mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Radhika Sharma"
-                  value={customer.fullName}
-                  onChange={(e) => setCustomer({ ...customer, fullName: e.target.value })}
-                  className="w-full border border-rule bg-bg p-2 text-ink focus:outline-none focus:border-ink"
-                />
+              {/* Each field is labelled, named and tagged for autofill, so the browser
+                  can fill in a saved address on a phone instead of six fields typed by hand. */}
+              <CheckoutField id="co-name" label="Full name" autoComplete="name" placeholder="e.g. Radhika Sharma"
+                value={customer.fullName} onChange={(v) => setCustomer({ ...customer, fullName: v })} />
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                <CheckoutField id="co-email" label="Email address" type="email" autoComplete="email" placeholder="radhika@example.com"
+                  value={customer.email} onChange={(v) => setCustomer({ ...customer, email: v })} />
+                <CheckoutField id="co-phone" label="Mobile phone" type="tel" autoComplete="tel" placeholder="+91 98765 43210"
+                  value={customer.phone} onChange={(v) => setCustomer({ ...customer, phone: v })} />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px] uppercase mb-1">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="radhika@example.com"
-                    value={customer.email}
-                    onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
-                    className="w-full border border-rule bg-bg p-2 text-ink focus:outline-none focus:border-ink"
-                  />
-                </div>
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px] uppercase mb-1">
-                    Mobile Phone *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={customer.phone}
-                    onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
-                    className="w-full border border-rule bg-bg p-2 text-ink focus:outline-none focus:border-ink"
-                  />
-                </div>
-              </div>
+              <CheckoutField id="co-address" label="Delivery address" autoComplete="street-address" placeholder="House/Flat No., Building, Street Name"
+                value={customer.addressLine1} onChange={(v) => setCustomer({ ...customer, addressLine1: v })} />
 
-              <div>
-                <label className="eyebrow block text-ink-muted text-[10px] uppercase mb-1">
-                  Delivery Address *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="House/Flat No., Building, Street Name"
-                  value={customer.addressLine1}
-                  onChange={(e) => setCustomer({ ...customer, addressLine1: e.target.value })}
-                  className="w-full border border-rule bg-bg p-2 text-ink focus:outline-none focus:border-ink"
-                />
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px] uppercase mb-1">
-                    City *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Varanasi"
-                    value={customer.city}
-                    onChange={(e) => setCustomer({ ...customer, city: e.target.value })}
-                    className="w-full border border-rule bg-bg p-2 text-ink focus:outline-none focus:border-ink"
-                  />
-                </div>
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px] uppercase mb-1">
-                    State *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Uttar Pradesh"
-                    value={customer.state}
-                    onChange={(e) => setCustomer({ ...customer, state: e.target.value })}
-                    className="w-full border border-rule bg-bg p-2 text-ink focus:outline-none focus:border-ink"
-                  />
-                </div>
-                <div>
-                  <label className="eyebrow block text-ink-muted text-[10px] uppercase mb-1">
-                    PIN Code *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="221001"
-                    value={customer.postcode}
-                    onChange={(e) => setCustomer({ ...customer, postcode: e.target.value })}
-                    className="w-full border border-rule bg-bg p-2 text-ink focus:outline-none focus:border-ink"
-                  />
-                </div>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                <CheckoutField id="co-city" label="City" autoComplete="address-level2" placeholder="Varanasi"
+                  value={customer.city} onChange={(v) => setCustomer({ ...customer, city: v })} />
+                <CheckoutField id="co-state" label="State" autoComplete="address-level1" placeholder="Uttar Pradesh"
+                  value={customer.state} onChange={(v) => setCustomer({ ...customer, state: v })} />
+                <CheckoutField id="co-pin" label="PIN code" autoComplete="postal-code" placeholder="221001" inputMode="numeric"
+                  pattern="[0-9]{6}" maxLength={6} title="Six digits"
+                  value={customer.postcode} onChange={(v) => setCustomer({ ...customer, postcode: v.replace(/\D/g, "") })} />
               </div>
             </div>
 
-              {/* Payment Methods & Trust Badges */}
-              <div className="border border-rule/70 bg-bg-sand/30 p-3.5 space-y-2 text-[11px]">
-                <span className="eyebrow text-ink-muted text-[9px] uppercase tracking-wider block font-semibold">
-                  Accepted Payment Methods
-                </span>
-                <div className="flex flex-wrap items-center gap-1.5 text-ink">
-                  <span className="px-2 py-1 border border-rule bg-bg font-semibold rounded-xs">
-                    📱 UPI (GPay, PhonePe, Paytm)
-                  </span>
-                  <span className="px-2 py-1 border border-rule bg-bg font-semibold rounded-xs">
-                    💳 Cards (Visa, MC, Amex)
-                  </span>
-                  <span className="px-2 py-1 border border-rule bg-bg font-semibold rounded-xs">
-                    🏦 Netbanking & EMI
-                  </span>
+              {/* How payment works, in plain words. Only what is true for every piece
+                  and every Razorpay account: no "Silk Mark" (silk only, and half the
+                  shop is cotton or linen), and no card brands or EMI that depend on
+                  what Razorpay has switched on for this account. */}
+              <dl className="space-y-2 border-t border-rule pt-4 text-caption text-ink-muted">
+                <div>
+                  <dt className="eyebrow text-ink">Payment</dt>
+                  <dd className="mt-1">UPI, cards and netbanking, through Razorpay&rsquo;s secure checkout.</dd>
                 </div>
-              </div>
-
-              {/* Handloom & Security Guarantees */}
-              <div className="space-y-1.5 text-[11px] text-ink-muted border-t border-rule/50 pt-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-emerald-700">🔒</span>
-                  <span><strong>100% Encrypted & Secure Checkout</strong> powered by Razorpay.</span>
+                <div>
+                  <dt className="eyebrow text-ink">Delivery</dt>
+                  <dd className="mt-1">Complimentary express shipping across India. Taxes included.</dd>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-amber-800">🔖</span>
-                  <span><strong>Silk Mark Certified</strong> pure natural Banarasi handloom.</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-accent">🚚</span>
-                  <span><strong>Complimentary Express Shipping</strong> across India. Taxes included.</span>
-                </div>
-              </div>
+              </dl>
 
               {/* Discount code */}
               <div className="border-t border-rule pt-4">
@@ -553,7 +452,7 @@ export function CartDrawer() {
               {/* Order Total & Submit Payment Button */}
               <div className="border-t border-rule pt-4 space-y-3">
                 <div className="flex justify-between items-baseline">
-                  <span className="eyebrow text-ink-muted">Total Amount Payable</span>
+                  <span className="eyebrow text-ink-muted">To pay</span>
                   <span className="font-display text-xl font-bold text-ink">
                     {formatMoney(activeDiscount ? { minorUnits: activeDiscount.totalMinor, currency: subtotal.currency } : subtotal)}
                   </span>
@@ -562,9 +461,9 @@ export function CartDrawer() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-amber-900 to-ink px-6 py-4 text-bg hover:opacity-95 font-semibold text-xs tracking-widest uppercase transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full cursor-pointer bg-ink px-6 py-4 font-semibold text-bg transition-opacity hover:opacity-90 disabled:opacity-50"
                 >
-                  {loading ? "Initializing Secure Gateway..." : "🔒 Pay with Razorpay (UPI / Cards)"}
+                  {loading ? "Opening secure payment…" : "Pay securely"}
                 </button>
               </div>
           </form>
@@ -631,6 +530,40 @@ export function QuantityStepper({
       >
         +
       </button>
+    </div>
+  );
+}
+
+/** One labelled checkout field. Every field is required. */
+function CheckoutField({
+  id,
+  label,
+  value,
+  onChange,
+  type = "text",
+  ...rest
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  type?: "text" | "email" | "tel";
+} & Pick<React.InputHTMLAttributes<HTMLInputElement>, "autoComplete" | "placeholder" | "inputMode" | "pattern" | "maxLength" | "title">) {
+  return (
+    <div>
+      <label htmlFor={id} className="eyebrow mb-1 block text-[10px] uppercase text-ink-muted">
+        {label} *
+      </label>
+      <input
+        id={id}
+        name={id.slice(3)}
+        type={type}
+        required
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full border border-rule bg-bg p-2 text-ink focus:border-ink focus:outline-none"
+        {...rest}
+      />
     </div>
   );
 }

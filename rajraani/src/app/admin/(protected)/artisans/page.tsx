@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { db } from "@/lib/db/client";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Weavers" };
 
@@ -22,7 +23,10 @@ type Row = {
   published: number;
 };
 
-export default function AdminWeaversRoute() {
+export default async function AdminWeaversRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const rows = db()
     .prepare(
       `SELECT id, poetic_name, provenance_workshop, provenance_loom, provenance_weeks, provenance_artisans, published

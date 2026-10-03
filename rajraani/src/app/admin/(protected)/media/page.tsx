@@ -2,6 +2,7 @@ import { MediaManager, type ReferenceUse } from "@/components/admin/MediaManager
 import { countReferencePhotos } from "@/lib/admin/section-fields";
 import { content } from "@/lib/content/content";
 import { listMedia } from "@/lib/media/library";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Photos" };
 
@@ -14,6 +15,9 @@ export const metadata = { title: "Photos" };
  * still to be replaced.
  */
 export default async function AdminMediaRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const [homepage, pages] = await Promise.all([
     content.getHomepageSections(),
     content.listPages(),

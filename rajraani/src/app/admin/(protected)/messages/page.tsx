@@ -2,6 +2,7 @@ import { removeSubscriberAction } from "@/lib/admin/footer-actions";
 import { setMessageAnsweredAction } from "@/lib/admin/message-actions";
 import { listSubscribers } from "@/lib/newsletter";
 import { db } from "@/lib/db/client";
+import { requireAdmin } from "@/lib/auth/session";
 
 export const metadata = { title: "Messages" };
 
@@ -13,7 +14,10 @@ type Message = { id: number; name: string; email: string; message: string; handl
  * They were being saved (see the `enquiry` table) with no screen to read them,
  * so a customer who wrote in would never have been answered.
  */
-export default function AdminMessagesRoute() {
+export default async function AdminMessagesRoute() {
+  // The layout is skipped on in-app moves between admin screens, so each
+  // page checks the session itself (see src/proxy.ts).
+  await requireAdmin();
   const subscribers = listSubscribers();
   const messages = db()
     .prepare("SELECT id, name, email, message, handled, created_at FROM enquiry ORDER BY handled ASC, created_at DESC LIMIT 300")

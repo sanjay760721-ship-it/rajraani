@@ -1,9 +1,9 @@
 "use server";
 
-import { headers } from "next/headers";
 
 import { EMAIL, subscribe } from "./newsletter.ts";
 import { createRateLimit } from "./rate-limit.ts";
+import { clientAddress } from "./client-address";
 
 /**
  * The public sign-up, used by the footer form and the pop-up.
@@ -21,8 +21,7 @@ export async function subscribeAction(email: string, source: "footer" | "popup")
   if (typeof email !== "string" || !EMAIL.test(email.trim()) || email.length > 200) {
     return { ok: false, error: "Please enter a valid email address." };
   }
-  const list = await headers();
-  const address = list.get("x-forwarded-for")?.split(",")[0]?.trim() || list.get("x-real-ip") || "unknown";
+  const address = await clientAddress();
   if (!permit(address)) return { ok: false, error: "Please try again in a few minutes." };
 
   subscribe(email, source === "popup" ? "popup" : "footer");

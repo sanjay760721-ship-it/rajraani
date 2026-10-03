@@ -45,6 +45,18 @@ const SHOT_DESCRIPTIONS: Record<ShotType, string> = {
 };
 
 /**
+ * The same frames, described for a stitched set. A kurta or lehenga set is
+ * worn, not draped, and has no border or pallu to show; the drape frame is the
+ * dupatta.
+ */
+const STITCHED_SHOT_DESCRIPTIONS: Partial<Record<ShotType, string>> = {
+  on_model_full: "Full-length view, worn",
+  on_model_drape: "Three-quarter view with the dupatta",
+  on_model_detail: "Close view of the work, worn",
+  flat_lay: "The set laid flat, every piece shown",
+};
+
+/**
  * The shot template, locked from SKU #1 (build.md §9.11).
  *
  * Five 2:3 on-model frames then one or two 1:1 detail frames — the sequence
@@ -145,7 +157,7 @@ function stitchedShotTemplate(input: {
       shot,
       // Names the cloth rather than a weave, because a stitched garment has
       // none — see the `weave` field on Product.
-      alt: `${SHOT_DESCRIPTIONS[shot]}: ${input.colour} ${input.garment} in ${input.cloth} with ${input.motif} motifs`,
+      alt: `${(/\b(suit|set|lehenga|kurta)\b/.test(input.garment) && STITCHED_SHOT_DESCRIPTIONS[shot]) || SHOT_DESCRIPTIONS[shot]}: ${input.colour} ${input.garment} in ${input.cloth} with ${input.motif} motifs`,
       ...(square ? SQUARE : PORTRAIT),
     };
   });

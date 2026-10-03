@@ -511,6 +511,7 @@ export function SiteEditorPanel({ context }: { context: EditContext }) {
     <div data-site-editor style={{ font: `14px ${FONT}`, color: INK }}>
       {/* The bar */}
       <div
+        className="site-editor-bar"
         style={{
           position: "fixed",
           left: "50%",
